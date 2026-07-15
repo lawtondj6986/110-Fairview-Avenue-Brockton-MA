@@ -1,0 +1,271 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { SITE } from '../config';
+
+const caseStudies = (await getCollection('case-studies', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const title = 'Innovative Commercial Strategies | Commercial Real Estate + AI Systems, South Shore MA';
+const description =
+  "The South Shore's AI-powered commercial real estate firm. We help contractors, retailers, and medical practices buy, sell, and lease commercial property — then install the marketing and automation systems that grow the business inside it.";
+---
+
+<Base title={title} description={description}>
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-navy-900">
+    <!-- circuit-meets-floorplan background motif -->
+    <svg
+      class="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-1/2 opacity-[0.12] lg:block"
+      viewBox="0 0 600 600"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path d="M120 520V220l160-110v410" stroke="#2DD4BF" stroke-width="3" stroke-linejoin="round"></path>
+      <path d="M280 520V300l160 55v165" stroke="#2DD4BF" stroke-width="3" stroke-linejoin="round"></path>
+      <path d="M440 340h90m0 0V190" stroke="#2DD4BF" stroke-width="3" stroke-linecap="round"></path>
+      <circle cx="530" cy="160" r="14" fill="#2DD4BF"></circle>
+      <circle cx="560" cy="420" r="14" fill="#2DD4BF"></circle>
+      <path d="M530 340l30 80" stroke="#2DD4BF" stroke-width="3" stroke-linecap="round"></path>
+      <path d="M60 520h480" stroke="#2DD4BF" stroke-width="3" stroke-linecap="round"></path>
+    </svg>
+
+    <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">
+        Commercial Real Estate Advisory + AI Systems · Brockton &amp; the South Shore
+      </p>
+      <h1 class="mt-5 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+        Your broker shouldn't hand you the keys and disappear.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100/90">
+        ICS is the only South Shore firm where the advisor who negotiates your commercial building also builds the AI
+        systems, marketing engine, and workflows that make it produce revenue from day one.
+      </p>
+      <div class="mt-9 flex flex-wrap gap-4">
+        <a
+          href="/contact/"
+          class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-lg transition-colors hover:bg-teal-500"
+        >
+          Book a Free Strategy Call
+        </a>
+        <a
+          href="/case-studies/"
+          class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400"
+        >
+          See Client Results
+        </a>
+      </div>
+      <p class="mt-8 text-sm text-navy-100/60">
+        Serving {SITE.serviceAreas.slice(0, 6).join(', ')} and the greater South Shore · {SITE.license}
+      </p>
+    </div>
+  </section>
+
+  <!-- TWO ENGINES -->
+  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    <SectionHeading
+      eyebrow="Two engines, one advisor"
+      heading="Most firms do one side of this. We do both — on purpose."
+      body="A building is a means to an end: more revenue, more room to operate, less chaos. So we handle the transaction and the systems that come after it."
+      align="center"
+    />
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      <div class="rounded-xl border border-navy-100 bg-white p-8 shadow-sm">
+        <p class="text-xs font-semibold uppercase tracking-widest text-brass-600">Engine 1</p>
+        <h3 class="mt-2 text-2xl font-bold text-navy-900">Commercial Real Estate Advisory</h3>
+        <p class="mt-3 leading-relaxed text-ink-500">
+          Buyer, seller, tenant, and landlord representation for sub-$3M commercial property — the deals national firms
+          ignore and residential agents aren't built for. Every listing gets institutional-grade marketing:
+          AI-produced offering memoranda, drone and virtual tours, targeted campaigns, and property-level SEO.
+        </p>
+        <ul class="mt-5 space-y-2 text-sm text-ink-700">
+          <li class="flex gap-2"><span class="text-teal-600">✓</span> Sales &amp; leasing representation</li>
+          <li class="flex gap-2"><span class="text-teal-600">✓</span> Site-selection analysis with real data</li>
+          <li class="flex gap-2"><span class="text-teal-600">✓</span> Big-building marketing for every listing</li>
+        </ul>
+        <a href="/commercial-real-estate/" class="mt-6 inline-block font-semibold text-teal-600 hover:text-teal-500">
+          Explore CRE services →
+        </a>
+      </div>
+      <div class="rounded-xl border border-navy-100 bg-white p-8 shadow-sm">
+        <p class="text-xs font-semibold uppercase tracking-widest text-brass-600">Engine 2</p>
+        <h3 class="mt-2 text-2xl font-bold text-navy-900">AI Systems &amp; Marketing</h3>
+        <p class="mt-3 leading-relaxed text-ink-500">
+          Done-for-you AI integration for Main Street businesses: websites that generate leads, automated follow-up and
+          booking, review engines, quoting and invoicing workflows — packaged as Launch, Operate, and Scale so you know
+          exactly what you're buying and what it should return.
+        </p>
+        <ul class="mt-5 space-y-2 text-sm text-ink-700">
+          <li class="flex gap-2"><span class="text-teal-600">✓</span> Launch / Operate / Scale packages</li>
+          <li class="flex gap-2"><span class="text-teal-600">✓</span> AI marketing, SEO &amp; answer-engine optimization</li>
+          <li class="flex gap-2"><span class="text-teal-600">✓</span> Measured in leads, hours saved, and revenue</li>
+        </ul>
+        <a href="/ai-services/" class="mt-6 inline-block font-semibold text-teal-600 hover:text-teal-500">
+          Explore AI services →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS FOR YOU (flywheel, client-framed) -->
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <SectionHeading
+        eyebrow="How it works"
+        heading="From signed offer to automated operations"
+        body="One advisor, one plan, four steps. No handing you off between a broker, a web agency, and an IT consultant who've never spoken to each other."
+        align="center"
+        dark
+      />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          [
+            {
+              step: '01',
+              title: 'Find the right building',
+              body: 'Site selection backed by demographic, traffic, and comparable data — matched to how your business actually operates.',
+            },
+            {
+              step: '02',
+              title: 'Negotiate & close',
+              body: 'Full representation through offer, diligence, and closing — with financing framed and zoning questions answered early.',
+            },
+            {
+              step: '03',
+              title: 'Switch the systems on',
+              body: 'Website, local SEO, booking, review automation, and lead capture live for the new location — often before move-in day.',
+            },
+            {
+              step: '04',
+              title: 'Grow with a partner',
+              body: 'Ongoing AI marketing and operations support, measured monthly. When it’s time for the next building, we already know your business.',
+            },
+          ].map((item) => (
+            <div class="rounded-xl border border-white/10 bg-navy-800 p-6">
+              <p class="font-display text-sm font-bold text-teal-400">{item.step}</p>
+              <h3 class="mt-2 text-lg font-bold text-white">{item.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-navy-100/75">{item.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <SectionHeading
+        eyebrow="Proof, not promises"
+        heading="Real results for South Shore businesses"
+        body="Every engagement is measured in leads, hours saved, and revenue — and written up so you can judge us on numbers."
+      />
+      <a href="/case-studies/" class="font-semibold text-teal-600 hover:text-teal-500">All case studies →</a>
+    </div>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {caseStudies.map((entry) => <CaseStudyCard entry={entry} />)}
+    </div>
+  </section>
+
+  <!-- PACKAGES TEASER -->
+  <section class="bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <SectionHeading
+        eyebrow="AI packages"
+        heading="Launch. Operate. Scale."
+        body="Fixed-scope packages with outcomes attached — so you know what you're buying, what it costs, and what it should return."
+        align="center"
+      />
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {
+          [
+            {
+              name: 'Launch',
+              outcome: 'A professional digital presence live in under 30 days, with measurable lead flow.',
+              items: ['AI-built website or rebuild', 'Google Business optimization', 'Review automation', 'Lead-capture chatbot + analytics'],
+            },
+            {
+              name: 'Operate',
+              outcome: 'Admin time cut 15–25 hours a month and every lead followed up automatically.',
+              items: ['Everything in Launch', 'CRM + follow-up automation', 'AI receptionist & booking', 'Quote, invoice & nurture sequences'],
+            },
+            {
+              name: 'Scale',
+              outcome: 'Operations that support growth without proportional headcount.',
+              items: ['Everything in Operate', 'Custom AI workflows & copilots', 'Deep integrations (accounting, scheduling)', 'Quarterly strategy reviews'],
+            },
+          ].map((tier, i) => (
+            <div
+              class:list={[
+                'flex flex-col rounded-xl border p-8',
+                i === 1 ? 'border-teal-500 bg-navy-900 text-white shadow-lg' : 'border-navy-100 bg-paper',
+              ]}
+            >
+              <h3 class:list={['text-2xl font-bold', i === 1 ? 'text-white' : 'text-navy-900']}>{tier.name}</h3>
+              <p class:list={['mt-2 text-sm leading-relaxed', i === 1 ? 'text-navy-100/85' : 'text-ink-500']}>{tier.outcome}</p>
+              <ul class:list={['mt-5 space-y-2 text-sm', i === 1 ? 'text-navy-100/90' : 'text-ink-700']}>
+                {tier.items.map((item) => (
+                  <li class="flex gap-2">
+                    <span class="text-teal-500">✓</span> {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+      <div class="mt-10 text-center">
+        <a href="/ai-services/" class="font-semibold text-teal-600 hover:text-teal-500">
+          Compare packages &amp; pricing →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT TEASER -->
+  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    <div class="grid items-center gap-10 lg:grid-cols-2">
+      <div>
+        <SectionHeading
+          eyebrow="Who you'll work with"
+          heading="One person. Both skill sets. Local roots."
+          body=""
+        />
+        <p class="mt-4 leading-relaxed text-ink-500">
+          ICS is led by {SITE.founder} — a licensed Massachusetts real estate professional who also personally builds
+          and ships AI systems for South Shore businesses: contractors, retailers, medical offices, solar companies,
+          and more. Not a broker who resells someone else's tech, and not an agency that's never sat at a closing
+          table.
+        </p>
+        <p class="mt-4 leading-relaxed text-ink-500">
+          Deep Brockton-area roots, an active transaction network, and a live portfolio of delivered AI work — which
+          means advice grounded in what actually happens after the keys change hands.
+        </p>
+        <a href="/about/" class="mt-6 inline-block font-semibold text-teal-600 hover:text-teal-500">
+          Meet Daniel →
+        </a>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        {
+          [
+            { value: 'MA', label: 'Licensed real estate professional' },
+            { value: '10+', label: 'South Shore towns served' },
+            { value: '2', label: 'Disciplines under one roof — CRE + AI' },
+            { value: 'Day 1', label: 'Systems live when you get the keys' },
+          ].map((stat) => (
+            <div class="rounded-xl border border-navy-100 bg-white p-6 text-center shadow-sm">
+              <p class="font-display text-3xl font-bold text-navy-900">{stat.value}</p>
+              <p class="mt-2 text-sm text-ink-500">{stat.label}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaSection />
+</Base>

@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+
+const title = 'Privacy Policy | Innovative Commercial Strategies';
+const description = 'Privacy policy for Innovative Commercial Strategies.';
+---
+
+<Base title={title} description={description}>
+  <section class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+    <h1 class="text-3xl font-bold text-navy-900">Privacy Policy</h1>
+    <p class="mt-2 text-sm text-ink-500">Last updated: July 2026</p>
+    <div class="prose-ics mt-8">
+      <p>
+        {SITE.name} ("ICS", "we") respects your privacy. This policy describes what we collect and how we use it.
+      </p>
+      <h2>What we collect</h2>
+      <ul>
+        <li><strong>Contact form submissions:</strong> name, email, phone, and the message you send us.</li>
+        <li><strong>Basic analytics:</strong> anonymized page-view data used to improve the site. We do not sell data or use invasive tracking.</li>
+      </ul>
+      <h2>How we use it</h2>
+      <ul>
+        <li>To respond to your enquiry and provide the services you request.</li>
+        <li>To send occasional updates if you've asked for them — you can opt out at any time.</li>
+      </ul>
+      <h2>What we don't do</h2>
+      <ul>
+        <li>We never sell or rent your information.</li>
+        <li>We don't share your information with third parties except the service providers needed to operate this site and respond to you (e.g., form processing, email).</li>
+      </ul>
+      <h2>Questions or removal requests</h2>
+      <p>
+        Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and we'll respond within a few business days.
+      </p>
+      <p><em>This is a plain-language policy for a small advisory firm. It is not legal advice; have counsel review before relying on it for compliance purposes.</em></p>
+    </div>
+  </section>
+</Base>

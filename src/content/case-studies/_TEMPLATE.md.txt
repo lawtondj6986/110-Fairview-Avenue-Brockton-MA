@@ -1,0 +1,38 @@
+---
+# COPY THIS FILE, rename to your-case-study-name.md, and fill in every field.
+# Files starting with "_" are ignored by the site.
+title: 'Outcome-first headline with a number in it'
+client: 'Client Name or Anonymized Descriptor'
+vertical: trades # one of: trades | retail | medical | real-estate | professional-services | other
+location: 'Town, MA'
+package: 'Launch + Operate' # which ICS package(s) they bought
+summary: 'One or two sentences shown on the case study card. Lead with the pain, end with the result.'
+stats: # 1-4 stats; the first two show on cards
+  - value: '3x'
+    label: 'What the number measures'
+  - value: '22 days'
+    label: 'What the number measures'
+testimonial: # optional — delete this block if you don't have one yet
+  quote: 'Use double quotes if the quote contains apostrophes.'
+  name: 'First Last (or "Owner")'
+  title: 'Role, Company'
+illustrative: false # set true if numbers are illustrative rather than verified actuals
+date: 2026-07-01
+draft: false # set true to hide from the live site
+---
+
+## The Challenge
+
+What was broken or missing, in the client's terms.
+
+## What We Built
+
+Package name + bullet list of concrete deliverables.
+
+## The Results
+
+Quantified outcomes, in plain sentences.
+
+## What's Next
+
+The upsell or referral note — shows momentum.

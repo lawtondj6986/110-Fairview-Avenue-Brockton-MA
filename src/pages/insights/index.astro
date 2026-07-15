@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CtaSection from '../../components/CtaSection.astro';
+
+const posts = (await getCollection('insights', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const categoryLabels: Record<string, string> = {
+  'market-notes': 'Market Notes',
+  'ai-for-business': 'AI for Business',
+  reports: 'Reports',
+};
+
+const title = 'Insights | South Shore Market Notes & AI for Business | ICS';
+const description =
+  'Commercial real estate market notes for the South Shore of Massachusetts and practical AI tactics for small business owners — from Innovative Commercial Strategies.';
+
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<Base title={title} description={description}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">Insights</p>
+      <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
+        The South Shore market, decoded. AI, demystified.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100/90">
+        Weekly notes on the commercial market nobody else covers, plus practical AI tactics you can use this month —
+        the same material from our newsletter and workshops.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6">
+    <div class="space-y-6">
+      {
+        posts.map((post) => (
+          <a
+            href={`/insights/${post.id}/`}
+            class="group block rounded-xl border border-navy-100 bg-white p-6 shadow-sm transition-shadow hover:shadow-md sm:p-8"
+          >
+            <p class="text-xs font-semibold uppercase tracking-widest text-teal-600">
+              {categoryLabels[post.data.category]} · {fmt(post.data.date)}
+            </p>
+            <h2 class="mt-2 text-2xl font-bold text-navy-900 group-hover:text-teal-600">{post.data.title}</h2>
+            <p class="mt-2 leading-relaxed text-ink-500">{post.data.description}</p>
+            <p class="mt-4 text-sm font-semibold text-teal-600">
+              Read more <span aria-hidden="true">→</span>
+            </p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <CtaSection
+    heading="Get this in your inbox instead"
+    body="One email a week: a South Shore commercial market note and one practical AI tactic. No fluff, unsubscribe anytime — just reach out and we'll add you."
+    primaryLabel="Subscribe via Contact Form"
+    secondaryLabel="Attend a Workshop"
+    secondaryHref="/workshops/"
+  />
+</Base>

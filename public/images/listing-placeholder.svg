@@ -1,0 +1,22 @@
+<svg viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="500" fill="#0B1F3A"/>
+  <rect width="800" height="500" fill="url(#g)" fill-opacity="0.35"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="800" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14B8A6"/>
+      <stop offset="1" stop-color="#0B1F3A"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#F8FAFC" stroke-width="6" stroke-linejoin="round" opacity="0.85">
+    <path d="M240 360V220l120-80v220"/>
+    <path d="M360 360V260l120 40v60"/>
+    <path d="M200 360h400"/>
+  </g>
+  <g stroke="#2DD4BF" stroke-width="6" stroke-linecap="round" opacity="0.9">
+    <path d="M480 250h70m0 0v-70"/>
+    <circle cx="550" cy="150" r="12" fill="#2DD4BF" stroke="none"/>
+    <circle cx="590" cy="290" r="12" fill="#2DD4BF" stroke="none"/>
+    <path d="M550 250l40 40"/>
+  </g>
+  <text x="400" y="435" text-anchor="middle" fill="#F8FAFC" opacity="0.6" font-family="Arial, sans-serif" font-size="22" letter-spacing="4">PROPERTY PHOTO COMING SOON</text>
+</svg>

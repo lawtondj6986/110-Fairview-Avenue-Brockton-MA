@@ -1,0 +1,186 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ListingCard from '../components/ListingCard.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { SITE } from '../config';
+
+const listings = (await getCollection('listings', ({ data }) => !data.draft && data.status === 'available'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const title = 'Commercial Real Estate Advisory | Buy, Sell & Lease on the South Shore | ICS';
+const description =
+  'Commercial real estate representation for South Shore MA business owners: buyer and seller advisory, leasing, site selection, and AI-powered listing marketing for sub-$3M properties in Brockton and surrounding towns.';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Commercial Real Estate Advisory',
+    provider: { '@type': 'RealEstateAgent', name: SITE.name },
+    areaServed: 'South Shore, Massachusetts',
+    description,
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">Commercial Real Estate Advisory</p>
+      <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
+        The deals national firms ignore. The process they'd charge millions for.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100/90">
+        Sub-$3M commercial property on the South Shore is chronically underserved — too small for Boston firms, too
+        complex for residential agents. It's exactly what we do, with marketing and analysis most small buildings
+        never get.
+      </p>
+      <a
+        href="/contact/"
+        class="mt-8 inline-block rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-lg hover:bg-teal-500"
+      >
+        Get a Property Strategy Consult
+      </a>
+    </div>
+  </section>
+
+  <!-- WHO WE REPRESENT -->
+  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    <SectionHeading
+      eyebrow="Representation"
+      heading="Every side of the table, sub-$3M focus"
+      body="Owner-users and local investors are our specialty: contractors, retail, medical and professional offices, auto-related, light industrial, and mixed-use."
+      align="center"
+    />
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        [
+          {
+            title: 'Buyers',
+            body: 'Site selection driven by demographics, traffic counts, and comparables — plus off-market hunting so you see buildings before the portals do. SBA and financing framed early.',
+          },
+          {
+            title: 'Sellers',
+            body: 'Institutional-quality marketing for every listing: AI-produced offering memorandum, drone and virtual tours, targeted digital campaigns, and property-level SEO. Small buildings, big-building treatment.',
+          },
+          {
+            title: 'Tenants',
+            body: 'Space search, lease negotiation, and a day-one plan for making the new location produce — local SEO, Google Business, and lead capture ready at move-in.',
+          },
+          {
+            title: 'Landlords',
+            body: 'Leasing representation with real marketing behind it, tenant screening support, and automation for enquiries and showings so vacancies fill faster.',
+          },
+        ].map((card) => (
+          <div class="rounded-xl border border-navy-100 bg-white p-6 shadow-sm">
+            <h3 class="text-xl font-bold text-navy-900">{card.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-ink-500">{card.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- THE MARKETING KIT -->
+  <section class="bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <div class="grid items-start gap-12 lg:grid-cols-2">
+        <div>
+          <SectionHeading
+            eyebrow="The listing difference"
+            heading="Why our listings sell: the AI marketing kit"
+            body="Most sub-$3M listings go to market with phone photos and a two-line description. Ours go to market like this:"
+          />
+          <ul class="mt-8 space-y-4">
+            {
+              [
+                ['Professional offering memorandum', 'AI-assembled OM with demographics, traffic analytics, comparable sales, and financial modeling — produced in days, not weeks.'],
+                ['Drone & virtual tour media', 'Buyers tour the property before they ever call. Sellers get fewer tire-kickers and better-qualified showings.'],
+                ['Targeted digital campaigns', 'Your building put in front of the exact owner-user segments most likely to buy it — trades, medical, retail — not just listed and left.'],
+                ['Property-level SEO & AEO', 'A dedicated, search-optimized page for the property itself, built to be found by Google and recommended by AI assistants.'],
+              ].map(([heading, body]) => (
+                <li class="flex gap-4">
+                  <span class="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-teal-100 font-display text-sm font-bold text-teal-600">
+                    ✓
+                  </span>
+                  <div>
+                    <p class="font-semibold text-navy-900">{heading}</p>
+                    <p class="mt-1 text-sm leading-relaxed text-ink-500">{body}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="rounded-xl bg-navy-900 p-8">
+          <h3 class="text-xl font-bold text-white">Site selection that starts with your business, not the building</h3>
+          <p class="mt-3 text-sm leading-relaxed text-navy-100/85">
+            Before we look at a single property, we model how your business actually works: where your customers and
+            crews come from, what visibility and access you need, what the building must let you do in year three, not
+            just year one.
+          </p>
+          <ul class="mt-6 space-y-3 text-sm text-navy-100/90">
+            <li class="flex gap-2"><span class="text-teal-400">→</span> Demographic &amp; traffic-count analysis</li>
+            <li class="flex gap-2"><span class="text-teal-400">→</span> Comparable sale &amp; lease data</li>
+            <li class="flex gap-2"><span class="text-teal-400">→</span> Zoning &amp; use fit, flagged early</li>
+            <li class="flex gap-2"><span class="text-teal-400">→</span> Total-occupancy cost modeling (own vs. lease)</li>
+          </ul>
+          <a href="/contact/" class="mt-8 inline-block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-teal-500">
+            Start a Site Search
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRENT LISTINGS -->
+  {
+    listings.length > 0 && (
+      <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <SectionHeading eyebrow="On the market" heading="Current listings" />
+          <a href="/listings/" class="font-semibold text-teal-600 hover:text-teal-500">
+            All listings →
+          </a>
+        </div>
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          {listings.map((entry) => (
+            <ListingCard entry={entry} />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <!-- SERVICE AREA -->
+  <section class="bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <SectionHeading
+        eyebrow="Where we work"
+        heading="Brockton-centered, South Shore-wide"
+        body="Based in Brockton, working the Route 24 and Route 28 corridors and the surrounding small-business towns."
+        align="center"
+      />
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        {
+          SITE.serviceAreas.map((town) => (
+            <span class="rounded-full border border-navy-100 bg-paper px-4 py-1.5 text-sm font-medium text-ink-700">
+              {town}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaSection
+    heading="Thinking about a building — buying, selling, or leasing?"
+    body="Tell us where your business is headed. The first strategy call is free and you'll leave with a straight read on the market, whether or not we work together."
+    primaryLabel="Get a Property Strategy Consult"
+    secondaryLabel="Browse Listings"
+    secondaryHref="/listings/"
+  />
+</Base>

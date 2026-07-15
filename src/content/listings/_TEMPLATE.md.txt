@@ -1,0 +1,34 @@
+---
+# COPY THIS FILE, rename to street-address-town.md, and fill in every field.
+# Files starting with "_" are ignored by the site.
+title: 'Headline buyers search for — building type + location hook'
+address: '123 Main Street'
+town: 'Brockton'
+state: 'MA'
+price: '$1,250,000' # display string — for leases use e.g. "$14.50/SF NNN"
+dealType: sale # sale | lease
+propertyType: retail # retail | industrial | office | mixed-use | land | automotive | medical
+sqft: '4,800' # optional — delete line if n/a
+lotSize: '0.62 acres' # optional — delete line if n/a
+status: available # available | under-agreement | sold | leased
+highlights: # up to 6 bullets shown on the listing page
+  - 'Traffic count, frontage, or visibility stat'
+  - 'Parking / loading / ceiling heights'
+  - 'Recent capital improvements'
+image: '/images/listing-placeholder.svg' # drop a real photo in public/images/ and reference it here
+sample: false
+date: 2026-07-01
+draft: false # set true to hide from the live site
+---
+
+## Property Overview
+
+Two or three paragraphs. Write for the owner-user reading on a phone: what is it, why does it fit their business, what's the one thing they can't get elsewhere.
+
+## Location
+
+Corridor, traffic counts, drive times, surrounding trade area.
+
+## The ICS Difference
+
+Standard close: mention the offering memorandum, media package, and (for buyers/tenants) the day-one AI move-in package.

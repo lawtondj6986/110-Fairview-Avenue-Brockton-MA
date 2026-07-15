@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = 'Page Not Found | Innovative Commercial Strategies';
+const description = 'The page you were looking for could not be found.';
+---
+
+<Base title={title} description={description}>
+  <section class="mx-auto flex max-w-3xl flex-col items-center px-4 py-28 text-center sm:px-6">
+    <p class="font-display text-6xl font-bold text-navy-900">404</p>
+    <h1 class="mt-4 text-2xl font-bold text-navy-900">This page moved, sold, or never existed.</h1>
+    <p class="mt-3 max-w-md text-ink-500">
+      Like the best off-market buildings, what you're looking for isn't at this address. Let's get you somewhere
+      useful.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <a href="/" class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white hover:bg-teal-500">Back Home</a>
+      <a href="/contact/" class="rounded-md border border-navy-900 px-6 py-3 font-semibold text-navy-900 hover:bg-navy-900 hover:text-white">
+        Contact Us
+      </a>
+    </div>
+  </section>
+</Base>

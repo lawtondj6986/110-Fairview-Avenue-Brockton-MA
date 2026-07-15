@@ -1,0 +1,111 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { SITE } from '../config';
+
+const title = 'About Daniel Lawton | Innovative Commercial Strategies';
+const description =
+  'Daniel Lawton is a licensed Massachusetts real estate professional and hands-on AI systems builder — the founder of Innovative Commercial Strategies, serving Brockton and the South Shore.';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: SITE.founder,
+    jobTitle: 'Founder, Commercial Real Estate Advisor & AI Systems Builder',
+    worksFor: { '@type': 'Organization', name: SITE.name },
+    email: SITE.email,
+    address: { '@type': 'PostalAddress', addressLocality: 'Brockton', addressRegion: 'MA' },
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">About ICS</p>
+      <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
+        Two careers' worth of skills. One advisor at your table.
+      </h1>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <div class="grid gap-12 lg:grid-cols-3">
+      <div class="lg:col-span-2">
+        <div class="prose-ics">
+          <p>
+            Most commercial deals on the South Shore involve at least three vendors who never talk to each other: a
+            broker who disappears at closing, a web agency that doesn't understand your business, and — if you're
+            lucky — an IT person patching it all together. The result is a building that costs you money for months
+            before it makes you any.
+          </p>
+          <p>
+            <strong>Innovative Commercial Strategies exists to collapse that into one conversation.</strong>
+          </p>
+          <p>
+            ICS was founded by {SITE.founder}, a licensed Massachusetts real estate professional who also personally
+            designs and ships AI systems for local businesses — websites that generate leads, CRMs that follow up
+            automatically, review engines, quoting workflows, and marketing that gets found by Google and recommended
+            by AI assistants.
+          </p>
+          <p>
+            That combination isn't a marketing angle; it's how the work actually gets done. The same person who
+            negotiates your purchase agreement builds the systems that make the building produce. The same data that
+            wins listings — demographics, traffic, comparables — feeds the site-selection analysis when you're buying.
+          </p>
+          <h2>Roots in Brockton, built for the South Shore</h2>
+          <p>
+            Daniel's network runs through the Brockton-area business community — contractors, retailers, medical and
+            professional offices, the trades — with working relationships across municipal offices, attorneys, lenders,
+            and the residential brokerage community. That matters in a market where the best buildings change hands
+            before they're ever properly listed.
+          </p>
+          <p>
+            ICS has delivered digital and AI work for South Shore businesses across contracting, retail, real estate,
+            and solar — the case studies on this site come from that portfolio, and references are available on any
+            strategy call.
+          </p>
+          <h2>How we work</h2>
+          <ul>
+            <li><strong>Outcomes in writing.</strong> Every proposal states expected results — leads, hours saved, revenue impact — before you sign.</li>
+            <li><strong>Numbers, monthly.</strong> Retainer clients get a dashboard and a straight review of what's working.</li>
+            <li><strong>No lock-in.</strong> We keep clients by producing results, not contracts.</li>
+            <li><strong>Local first.</strong> We take fewer clients and know their markets street by street.</li>
+          </ul>
+        </div>
+      </div>
+
+      <aside class="space-y-4 lg:sticky lg:top-24 lg:self-start">
+        <div class="rounded-xl border border-navy-100 bg-white p-6 shadow-sm">
+          <div class="flex h-40 items-center justify-center rounded-lg bg-navy-100 text-sm text-navy-700">
+            <!-- TODO: replace with professional headshot: public/images/daniel-lawton.jpg -->
+            Headshot coming soon
+          </div>
+          <h2 class="mt-4 text-xl font-bold text-navy-900">{SITE.founder}</h2>
+          <p class="text-sm text-ink-500">Founder · CRE Advisor · AI Systems Builder</p>
+          <p class="mt-3 text-xs text-ink-500">{SITE.license}</p>
+          <div class="mt-4 space-y-1 text-sm">
+            <p><a href={`mailto:${SITE.email}`} class="font-semibold text-teal-600 hover:text-teal-500">{SITE.email}</a></p>
+            <p><a href={`tel:${SITE.phone.replace(/[^\d+]/g, '')}`} class="font-semibold text-teal-600 hover:text-teal-500">{SITE.phone}</a></p>
+            <p><a href={SITE.social.linkedin} rel="noopener" class="font-semibold text-teal-600 hover:text-teal-500">LinkedIn</a></p>
+          </div>
+        </div>
+        <div class="rounded-xl bg-navy-900 p-6">
+          <p class="text-sm font-semibold uppercase tracking-wider text-teal-400">Coming seasons</p>
+          <p class="mt-2 text-sm leading-relaxed text-navy-100/85">
+            ICS is expanding to serve Ft. Lauderdale / Broward County, Florida — bringing the same CRE + AI model to
+            South Florida's small-business market during the winter season while maintaining full South Shore
+            operations.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <CtaSection
+    heading="Talk to the person who'll actually do the work"
+    body="No account managers, no handoffs. Book a strategy call and get a straight read on your property or your systems — usually both."
+  />
+</Base>

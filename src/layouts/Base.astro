@@ -1,0 +1,78 @@
+---
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../config';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Extra JSON-LD objects for this page (LocalBusiness is included site-wide). */
+  schema?: Record<string, unknown>[];
+  ogType?: string;
+}
+
+const { title, description, schema = [], ogType = 'website' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': 'RealEstateAgent',
+  name: SITE.name,
+  alternateName: SITE.shortName,
+  description: SITE.description,
+  url: SITE.url,
+  email: SITE.email,
+  telephone: SITE.phone,
+  founder: { '@type': 'Person', name: SITE.founder },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: SITE.address.locality,
+    addressRegion: SITE.address.region,
+    addressCountry: SITE.address.country,
+  },
+  areaServed: SITE.serviceAreas.map((town) => ({ '@type': 'City', name: `${town}, MA` })),
+  knowsAbout: [
+    'Commercial real estate',
+    'Commercial property sales and leasing',
+    'AI business automation',
+    'AI marketing',
+    'Local SEO and answer engine optimization',
+  ],
+};
+
+const jsonLd = [localBusiness, ...schema];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:image" content={new URL('/images/og-default.svg', Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {jsonLd.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
+  </head>
+  <body>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

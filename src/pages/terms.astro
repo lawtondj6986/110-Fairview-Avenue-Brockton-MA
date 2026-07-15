@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+
+const title = 'Terms of Use | Innovative Commercial Strategies';
+const description = 'Terms of use for the Innovative Commercial Strategies website.';
+---
+
+<Base title={title} description={description}>
+  <section class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+    <h1 class="text-3xl font-bold text-navy-900">Terms of Use</h1>
+    <p class="mt-2 text-sm text-ink-500">Last updated: July 2026</p>
+    <div class="prose-ics mt-8">
+      <h2>Informational purposes</h2>
+      <p>
+        Content on this site — including market notes, pricing bands, and case studies — is provided for general
+        information and does not constitute legal, financial, tax, or investment advice. Verify all property
+        information independently; listings may change or be withdrawn without notice.
+      </p>
+      <h2>Real estate services</h2>
+      <p>
+        Real estate services are provided under an active Massachusetts real estate license. Brokerage relationships
+        and compensation are established only by written agreement.
+      </p>
+      <h2>Case studies and results</h2>
+      <p>
+        Results described on this site reflect specific engagements and are not a guarantee of outcomes for your
+        business. Case studies marked illustrative use representative figures for the engagement type.
+      </p>
+      <h2>Intellectual property</h2>
+      <p>
+        Site content, branding, and materials are the property of {SITE.name} and may not be reproduced without
+        permission.
+      </p>
+      <h2>Contact</h2>
+      <p>Questions about these terms: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+      <p><em>Have counsel review these terms before relying on them for compliance purposes.</em></p>
+    </div>
+  </section>
+</Base>

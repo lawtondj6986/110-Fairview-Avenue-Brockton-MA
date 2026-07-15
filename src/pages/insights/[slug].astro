@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import { SITE } from '../../config';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('insights', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, description, date } = post.data;
+
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    datePublished: date.toISOString(),
+    author: { '@type': 'Person', name: SITE.founder },
+    publisher: { '@type': 'Organization', name: SITE.name },
+  },
+];
+---
+
+<Base title={`${title} | ICS Insights`} description={description} schema={schema} ogType="article">
+  <article>
+    <header class="bg-navy-900">
+      <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">{fmt(date)} · {SITE.founder}</p>
+        <h1 class="mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl">{title}</h1>
+      </div>
+    </header>
+    <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+      <div class="prose-ics">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <CtaSection
+    heading="Want this applied to your business?"
+    body="Book a free strategy call — we'll turn the ideas in this article into a concrete plan with numbers attached."
+  />
+</Base>

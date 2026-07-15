@@ -1,0 +1,17 @@
+<svg viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0B1F3A"/>
+  <g stroke="#14B8A6" stroke-width="4" opacity="0.25">
+    <path d="M900 630V330l140-95v395"/>
+    <path d="M1040 630V430l140 50v150"/>
+  </g>
+  <g>
+    <rect x="80" y="80" width="72" height="72" rx="14" fill="#0B1F3A" stroke="#14B8A6" stroke-width="3"/>
+    <path d="M100 132v-25l13-9v34" stroke="#F8FAFC" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M113 132v-18l13 5v13" stroke="#F8FAFC" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M94 132h44" stroke="#F8FAFC" stroke-width="3.5" stroke-linecap="round"/>
+  </g>
+  <text x="80" y="270" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="64" font-weight="bold">Innovative Commercial</text>
+  <text x="80" y="345" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="64" font-weight="bold">Strategies</text>
+  <text x="80" y="420" fill="#14B8A6" font-family="Arial, sans-serif" font-size="30" letter-spacing="2">COMMERCIAL REAL ESTATE ADVISORY + AI SYSTEMS</text>
+  <text x="80" y="500" fill="#94A3B8" font-family="Arial, sans-serif" font-size="26">Brockton &amp; the South Shore, Massachusetts</text>
+</svg>

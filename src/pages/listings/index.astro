@@ -1,0 +1,69 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ListingCard from '../../components/ListingCard.astro';
+import CtaSection from '../../components/CtaSection.astro';
+
+const entries = (await getCollection('listings', ({ data }) => !data.draft)).sort((a, b) => {
+  // available listings first, then by date
+  const rank = (s: string) => (s === 'available' ? 0 : s === 'under-agreement' ? 1 : 2);
+  return rank(a.data.status) - rank(b.data.status) || b.data.date.valueOf() - a.data.date.valueOf();
+});
+
+const title = 'Commercial Listings | South Shore MA Properties for Sale & Lease | ICS';
+const description =
+  'Commercial properties for sale and lease on the South Shore of Massachusetts — retail, industrial, office, and mixed-use listings marketed with offering memoranda, drone media, and targeted campaigns.';
+---
+
+<Base title={title} description={description}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">Listings</p>
+      <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
+        Commercial property, marketed properly.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100/90">
+        Every ICS listing gets a dedicated property page, professional offering memorandum, drone and virtual media,
+        and targeted digital campaigns — the treatment sub-$3M buildings almost never receive.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    {
+      entries.length > 0 ? (
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {entries.map((entry) => (
+            <ListingCard entry={entry} />
+          ))}
+        </div>
+      ) : (
+        <p class="rounded-xl border border-navy-100 bg-white p-8 text-center text-ink-500">
+          New listings are being prepared. Contact us for off-market opportunities.
+        </p>
+      )
+    }
+
+    <div class="mt-14 rounded-xl bg-navy-900 p-8 text-center sm:p-10">
+      <h2 class="text-2xl font-bold text-white">Don't see what you need? Most of our matches never hit the portals.</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-navy-100/85">
+        Tell us your corridor, size, and use — we hunt off-market and through our owner database so you see buildings
+        before everyone else does.
+      </p>
+      <a
+        href="/contact/"
+        class="mt-6 inline-block rounded-md bg-teal-600 px-6 py-3 font-semibold text-white hover:bg-teal-500"
+      >
+        Start a Property Search
+      </a>
+    </div>
+  </section>
+
+  <CtaSection
+    heading="Selling? Your building deserves this marketing."
+    body="Ask for a listing proposal and see exactly how your property would be packaged, priced, and put in front of the deepest buyer pools in this market."
+    primaryLabel="Request a Listing Proposal"
+    secondaryLabel="How We Market Listings"
+    secondaryHref="/commercial-real-estate/"
+  />
+</Base>

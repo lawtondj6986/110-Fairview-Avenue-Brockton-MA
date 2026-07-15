@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import CaseStudyCard from '../../components/CaseStudyCard.astro';
+import CtaSection from '../../components/CtaSection.astro';
+
+const entries = (await getCollection('case-studies', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const title = 'Case Studies | Measured Results for South Shore Businesses | ICS';
+const description =
+  'Real, quantified results from ICS AI and commercial real estate engagements: lead growth, review velocity, quote-to-close time, and hours saved for South Shore MA businesses.';
+---
+
+<Base title={title} description={description}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">Case Studies</p>
+      <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
+        Judge us on numbers.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100/90">
+        Every ICS engagement starts with expected outcomes in writing and ends with measured results. Here's what that
+        looks like for businesses like yours.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {entries.map((entry) => <CaseStudyCard entry={entry} />)}
+    </div>
+    <p class="mt-10 text-sm text-ink-500">
+      Note: case studies marked as illustrative use representative figures from the engagement type while client
+      permissions and verified metrics are finalized. Ask us on a call and we'll walk you through live examples.
+    </p>
+  </section>
+
+  <CtaSection
+    heading="Want results like these?"
+    body="Book a free strategy call and we'll tell you which of these playbooks fits your business — and what numbers you should expect."
+    secondaryLabel="See AI Packages"
+    secondaryHref="/ai-services/"
+  />
+</Base>
