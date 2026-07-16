@@ -22,4 +22,4 @@ AI systems recommend businesses they can **verify and understand**. In practice 
 
 Here's what matters: **almost none of your competitors are doing this.** Local SEO took a decade to become table stakes. AEO is at year one. The businesses that build machine-readable credibility now will be the default answers in their category for years.
 
-This is standard in every ICS Launch, Operate, and Scale package — we build sites and profiles designed to be found by Google *and* recommended by AI. If you'd like an honest read on where your business stands, book a free strategy call and we'll run the assessment with you.
+This is standard in every ICS system — JobSite, Lead Engine, and Market Lock all ship with sites and profiles designed to be found by Google *and* recommended by AI. If you'd like an honest read on where your business stands, book a free strategy call and we'll run the assessment with you.

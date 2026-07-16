@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
 import CtaSection from '../components/CtaSection.astro';
+import QuoteBrain from '../components/QuoteBrain.astro';
 import { SITE } from '../config';
 
 const caseStudies = (await getCollection('case-studies', ({ data }) => !data.draft))
@@ -25,8 +26,8 @@ const description =
       fill="none"
       aria-hidden="true"
     >
-      <path d="M120 520V220l160-110v410" stroke="#2DD4BF" stroke-width="3" stroke-linejoin="round"></path>
-      <path d="M280 520V300l160 55v165" stroke="#2DD4BF" stroke-width="3" stroke-linejoin="round"></path>
+      <path class="draw-line" d="M120 520V220l160-110v410" stroke="#2DD4BF" stroke-width="3" stroke-linejoin="round"></path>
+      <path class="draw-line" d="M280 520V300l160 55v165" stroke="#2DD4BF" stroke-width="3" stroke-linejoin="round"></path>
       <path d="M440 340h90m0 0V190" stroke="#2DD4BF" stroke-width="3" stroke-linecap="round"></path>
       <circle cx="530" cy="160" r="14" fill="#2DD4BF"></circle>
       <circle cx="560" cy="420" r="14" fill="#2DD4BF"></circle>
@@ -43,7 +44,8 @@ const description =
       </h1>
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100/90">
         ICS is the only South Shore firm where the advisor who negotiates your commercial building also builds the AI
-        systems, marketing engine, and workflows that make it produce revenue from day one.
+        systems, marketing engine, and workflows that make it produce revenue from day one. Built by an operator who
+        has run crews and quoted commercial jobs — measured in booked work, not page views.
       </p>
       <div class="mt-9 flex flex-wrap gap-4">
         <a
@@ -95,12 +97,12 @@ const description =
         <p class="text-xs font-semibold uppercase tracking-widest text-brass-600">Engine 2</p>
         <h3 class="mt-2 text-2xl font-bold text-navy-900">AI Systems &amp; Marketing</h3>
         <p class="mt-3 leading-relaxed text-ink-500">
-          Done-for-you AI integration for Main Street businesses: websites that generate leads, automated follow-up and
-          booking, review engines, quoting and invoicing workflows — packaged as Launch, Operate, and Scale so you know
-          exactly what you're buying and what it should return.
+          Done-for-you AI revenue systems for Main Street businesses: websites that generate leads, instant-quote
+          calculators, automated follow-up and booking, review engines — packaged as JobSite, Lead Engine, and Market
+          Lock, with pricing published and guarantees in writing.
         </p>
         <ul class="mt-5 space-y-2 text-sm text-ink-700">
-          <li class="flex gap-2"><span class="text-teal-600">✓</span> Launch / Operate / Scale packages</li>
+          <li class="flex gap-2"><span class="text-teal-600">✓</span> JobSite / Lead Engine / Market Lock systems</li>
           <li class="flex gap-2"><span class="text-teal-600">✓</span> AI marketing, SEO &amp; answer-engine optimization</li>
           <li class="flex gap-2"><span class="text-teal-600">✓</span> Measured in leads, hours saved, and revenue</li>
         </ul>
@@ -171,43 +173,63 @@ const description =
     </div>
   </section>
 
-  <!-- PACKAGES TEASER -->
+  <!-- QUOTEBRAIN DEMO -->
   <section class="bg-white">
     <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
       <SectionHeading
-        eyebrow="AI packages"
-        heading="Launch. Operate. Scale."
-        body="Fixed-scope packages with outcomes attached — so you know what you're buying, what it costs, and what it should return."
+        eyebrow="Touch the product"
+        heading="Most agencies show mockups. Price a job instead."
+        body="This is QuoteBrain™ — a live instant-quote calculator with real sealcoating pricing logic, the same class of tool we install on client sites. Your customers get a serious number in 30 seconds instead of 3 days."
+        align="center"
+      />
+      <div class="reveal mt-10">
+        <QuoteBrain />
+      </div>
+    </div>
+  </section>
+
+  <!-- SYSTEMS TEASER -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <SectionHeading
+        eyebrow="Three systems · Published pricing"
+        heading="JobSite. Lead Engine. Market Lock."
+        body="Fixed scope, published price ranges, written quote in 48 hours, and guarantees with consequences. No 'contact us for pricing.'"
         align="center"
       />
       <div class="mt-12 grid gap-6 md:grid-cols-3">
         {
           [
             {
-              name: 'Launch',
-              outcome: 'A professional digital presence live in under 30 days, with measurable lead flow.',
-              items: ['AI-built website or rebuild', 'Google Business optimization', 'Review automation', 'Lead-capture chatbot + analytics'],
+              name: 'JobSite',
+              price: '$6,500–$9,500 + $450–$700/mo',
+              outcome: 'The conversion storefront — live in 21 days, guaranteed, with QuoteBrain™ and measurable lead flow.',
+              items: ['21-day launch guarantee', 'Instant-quote calculator', 'Reviews + tracking + dashboard'],
             },
             {
-              name: 'Operate',
-              outcome: 'Admin time cut 15–25 hours a month and every lead followed up automatically.',
-              items: ['Everything in Launch', 'CRM + follow-up automation', 'AI receptionist & booking', 'Quote, invoice & nurture sequences'],
+              name: 'Lead Engine',
+              price: '$12,000–$18,000 + $1,500–$2,500/mo',
+              outcome: 'The follow-up machine — every lead answered in under 60 seconds, 24/7, and chased to a decision.',
+              items: ['AI response <60s, guaranteed', 'CRM + quote follow-up sequences', 'Proof Engine content automation'],
             },
             {
-              name: 'Scale',
-              outcome: 'Operations that support growth without proportional headcount.',
-              items: ['Everything in Operate', 'Custom AI workflows & copilots', 'Deep integrations (accounting, scheduling)', 'Quarterly strategy reviews'],
+              name: 'Market Lock',
+              price: '$20,000–$30,000 + $3,500–$6,000/mo',
+              outcome: 'Territory dominance — one business per trade, per market. Your competitor calling us gets a no.',
+              items: ['Exclusive territory', 'Paid media + monthly Reels system', 'AEO + quarterly on-site strategy day'],
             },
           ].map((tier, i) => (
             <div
               class:list={[
-                'flex flex-col rounded-xl border p-8',
-                i === 1 ? 'border-teal-500 bg-navy-900 text-white shadow-lg' : 'border-navy-100 bg-paper',
+                'reveal flex flex-col rounded-xl border p-8',
+                i === 1 ? 'border-teal-500 bg-navy-900 text-white shadow-lg' : 'border-navy-100 bg-white shadow-sm',
               ]}
+              style={`--reveal-delay: ${i * 80}ms`}
             >
               <h3 class:list={['text-2xl font-bold', i === 1 ? 'text-white' : 'text-navy-900']}>{tier.name}</h3>
-              <p class:list={['mt-2 text-sm leading-relaxed', i === 1 ? 'text-navy-100/85' : 'text-ink-500']}>{tier.outcome}</p>
-              <ul class:list={['mt-5 space-y-2 text-sm', i === 1 ? 'text-navy-100/90' : 'text-ink-700']}>
+              <p class:list={['mt-1 font-mono text-xs font-semibold', i === 1 ? 'text-teal-400' : 'text-teal-600']}>{tier.price}</p>
+              <p class:list={['mt-3 text-sm leading-relaxed', i === 1 ? 'text-navy-100/85' : 'text-ink-500']}>{tier.outcome}</p>
+              <ul class:list={['mt-5 flex-1 space-y-2 text-sm', i === 1 ? 'text-navy-100/90' : 'text-ink-700']}>
                 {tier.items.map((item) => (
                   <li class="flex gap-2">
                     <span class="text-teal-500">✓</span> {item}
@@ -219,10 +241,34 @@ const description =
         }
       </div>
       <div class="mt-10 text-center">
-        <a href="/ai-services/" class="font-semibold text-teal-600 hover:text-teal-500">
-          Compare packages &amp; pricing →
+        <a href="/pricing/" class="font-semibold text-teal-600 hover:text-teal-500">
+          See full published pricing →
         </a>
       </div>
+    </div>
+  </section>
+
+  <!-- GUARANTEES STRIP -->
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+      <div class="grid gap-8 text-center sm:grid-cols-2 lg:grid-cols-4">
+        {
+          [
+            ['21 days', 'to launch, or $1,000/week credit'],
+            ['<60 sec', 'lead response, 24/7, measured monthly'],
+            ['90 days', 'to measurable proof, or we work free'],
+            ['100%', 'yours — code, accounts, data, always'],
+          ].map(([value, label], i) => (
+            <a href="/guarantees/" class="reveal group" style={`--reveal-delay: ${i * 60}ms`}>
+              <p class="font-display text-4xl font-bold text-white transition-colors duration-150 group-hover:text-teal-400">{value}</p>
+              <p class="mt-2 text-sm text-navy-100/70">{label}</p>
+            </a>
+          ))
+        }
+      </div>
+      <p class="mt-8 text-center text-sm">
+        <a href="/guarantees/" class="font-semibold text-teal-400 hover:text-teal-500">Four guarantees, in writing, with consequences →</a>
+      </p>
     </div>
   </section>
 

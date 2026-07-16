@@ -63,15 +63,23 @@ Pages live in `src/pages/` — the text is right in the files and safe to edit. 
 
 | Page | File |
 |---|---|
-| Home | `src/pages/index.astro` |
+| Home (incl. QuoteBrain demo) | `src/pages/index.astro` |
 | Commercial Real Estate | `src/pages/commercial-real-estate.astro` |
-| AI Services (packages + pricing + FAQ) | `src/pages/ai-services.astro` |
+| AI Systems (JobSite / Lead Engine / Market Lock) | `src/pages/ai-services.astro` |
+| Pricing (published ranges) | `src/pages/pricing.astro` |
+| Guarantees | `src/pages/guarantees.astro` |
+| Scoreboard (monthly aggregate metrics) | `src/pages/scoreboard.astro` |
 | Case Studies | `src/pages/case-studies/` + `src/content/case-studies/` |
 | Listings | `src/pages/listings/` + `src/content/listings/` |
 | Insights (blog) | `src/pages/insights/` + `src/content/insights/` |
 | About | `src/pages/about.astro` |
 | Contact | `src/pages/contact.astro` |
 | Workshops | `src/pages/workshops.astro` |
+
+### Monthly ritual: update the Scoreboard
+Edit the `stats` array in `src/pages/scoreboard.astro` with verified aggregate numbers, bump `asOf`, and set
+`illustrative` to `false` once real 90-day client data replaces the launch placeholders. The QuoteBrain calculator's
+pricing logic lives in `src/components/QuoteBrain.astro` — adjust rates there as market pricing moves.
 
 Design tokens (colors, fonts) are defined in `src/styles/global.css`. Reusable pieces (header, footer, cards, lead form) are in `src/components/`.
 

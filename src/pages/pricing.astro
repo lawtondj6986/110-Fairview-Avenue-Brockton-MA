@@ -1,0 +1,133 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CtaSection from '../components/CtaSection.astro';
+
+const title = 'Pricing — Published, In Writing, No Games | Innovative Commercial Strategies';
+const description =
+  'ICS publishes its pricing: JobSite $6,500–$9,500, Lead Engine $12,000–$18,000, Market Lock $20,000–$30,000, Operator Session $1,500 credited. Written quote within 48 hours. Compare that to "contact us for pricing."';
+
+const rows = [
+  ['Operator Session', 'Half-day strategy intensive + written 90-day plan', '$1,500 flat', 'Credited 100% toward any system', 'One-time'],
+  ['JobSite', 'Conversion site, QuoteBrain™, GBP, reviews, tracking', '$6,500–$9,500', '$450–$700/mo', '6-month initial, then monthly'],
+  ['Lead Engine', 'JobSite + AI <60s lead response, CRM, follow-up, Proof Engine', '$12,000–$18,000', '$1,500–$2,500/mo', '6-month initial, then monthly'],
+  ['Market Lock', 'Lead Engine + paid media, content system, AEO — territory exclusive', '$20,000–$30,000', '$3,500–$6,000/mo', '12-month, exclusive'],
+  ['Monthly Content System', '4–8 edited Reels/ads from your jobsite footage', '—', '$750–$1,500/mo', 'Add-on, monthly'],
+  ['Brand Refresh', 'Logo system, truck/yard assets, proposal templates', '$3,500–$6,500', '—', 'Project'],
+];
+
+const movesPrice = [
+  ['Trade complexity', 'A sealcoating calculator is simpler than an HVAC service catalog. More services and service areas = more build.'],
+  ['Current state', 'Clean migration from a working CRM costs less than untangling five years of spreadsheets.'],
+  ['Content readiness', 'Photos, reviews, and job history in hand move you to the bottom of the range.'],
+  ['Territory size', 'Market Lock pricing scales with the exclusive territory and ad spend it protects.'],
+];
+---
+
+<Base title={title} description={description}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">Pricing</p>
+      <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
+        Pricing that isn't a secret.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100/90">
+        Most agencies hide pricing behind a sales call because opacity is leverage. We publish ours because
+        accountability wins better clients. Ranges below; your exact number in writing within 48 hours of a call.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <div class="reveal overflow-x-auto rounded-xl border border-navy-100 bg-white shadow-sm">
+      <table class="w-full min-w-[720px] text-left text-sm">
+        <thead>
+          <tr class="border-b border-navy-100 bg-paper">
+            <th class="px-6 py-4 font-display text-xs font-bold uppercase tracking-wider text-navy-900">System</th>
+            <th class="px-6 py-4 font-display text-xs font-bold uppercase tracking-wider text-navy-900">What's in it</th>
+            <th class="px-6 py-4 font-display text-xs font-bold uppercase tracking-wider text-navy-900">Setup</th>
+            <th class="px-6 py-4 font-display text-xs font-bold uppercase tracking-wider text-navy-900">Monthly</th>
+            <th class="px-6 py-4 font-display text-xs font-bold uppercase tracking-wider text-navy-900">Term</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map(([name, scope, setup, monthly, term]) => (
+              <tr class="border-b border-navy-100 last:border-0">
+                <td class="px-6 py-4 font-semibold text-navy-900">{name}</td>
+                <td class="px-6 py-4 text-ink-500">{scope}</td>
+                <td class="px-6 py-4 font-mono font-semibold text-navy-900">{setup}</td>
+                <td class="px-6 py-4 font-mono font-semibold text-navy-900">{monthly}</td>
+                <td class="px-6 py-4 text-ink-500">{term}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-sm text-ink-500">
+      Setup fees: 50% upfront, 50% at launch. Retainers auto-pay on the 1st. Month-to-month after the initial term —
+      we keep clients with numbers, not contracts. Full package details on the
+      <a href="/ai-services/" class="font-semibold text-teal-600 hover:text-teal-500">AI Systems page</a>.
+    </p>
+
+    <div class="mt-14 grid gap-10 lg:grid-cols-2">
+      <div class="reveal">
+        <h2 class="text-2xl font-bold text-navy-900">Why we publish pricing</h2>
+        <p class="mt-4 leading-relaxed text-ink-500">
+          Call three agencies and ask what a website costs. You'll get three sales meetings and zero numbers — vague
+          scoping, 8–14 week timelines, and a proposal engineered around your budget instead of your problem.
+        </p>
+        <p class="mt-4 leading-relaxed text-ink-500">
+          We think that's backwards. Published ranges let you qualify us in thirty seconds, make our quotes
+          accountable to a public standard, and filter for the serious operators we want to work with. If these
+          numbers aren't in your budget yet, the honest move is to tell you now — not after three discovery calls.
+        </p>
+        <p class="mt-4 font-semibold text-navy-900">
+          Every quote arrives in writing within 48 hours of your call, tied to the ranges on this page.
+        </p>
+      </div>
+      <div class="reveal rounded-xl bg-navy-900 p-8" style="--reveal-delay: 80ms">
+        <h2 class="text-xl font-bold text-white">What moves the number inside a range</h2>
+        <ul class="mt-5 space-y-4">
+          {
+            movesPrice.map(([factor, detail]) => (
+              <li>
+                <p class="font-semibold text-teal-400">{factor}</p>
+                <p class="mt-1 text-sm leading-relaxed text-navy-100/80">{detail}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="reveal mt-14 rounded-xl border border-navy-100 bg-white p-8 shadow-sm">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          [
+            ['21 days', 'JobSite launch guarantee — or $1,000/week credit'],
+            ['<60 sec', 'Lead response guarantee on Lead Engine and above'],
+            ['90 days', 'Measured improvement or we work free until'],
+            ['100%', 'You own the code, domain, accounts, and data'],
+          ].map(([value, label]) => (
+            <div class="text-center">
+              <p class="font-display text-3xl font-bold text-navy-900">{value}</p>
+              <p class="mt-2 text-sm leading-relaxed text-ink-500">{label}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mt-6 text-center">
+        <a href="/guarantees/" class="font-semibold text-teal-600 hover:text-teal-500">Read the full guarantees →</a>
+      </p>
+    </div>
+  </section>
+
+  <CtaSection
+    heading="You now know more about our pricing than most clients know about their agency's."
+    body="Book an Operator Session or a free strategy call — either way you leave with a straight number and a written plan."
+    primaryLabel="Book an Operator Session"
+    secondaryLabel="See Client Results"
+  />
+</Base>

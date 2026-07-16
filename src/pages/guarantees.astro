@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+
+const title = 'Our Guarantees — In Writing | Innovative Commercial Strategies';
+const description =
+  'ICS guarantees in writing: 21-day website launch or $1,000/week credit, every lead answered in under 60 seconds, measured 90-day improvement or we work free, and you own everything — code, domain, accounts, data.';
+
+const guarantees = [
+  {
+    number: '01',
+    name: 'The 21-Day Launch Guarantee',
+    applies: 'JobSite and above',
+    promise:
+      'Your site goes live within 21 calendar days of kickoff — or we credit $1,000 for every week we run late.',
+    terms:
+      'Clock starts when we have content inputs and account access (we run a 90-minute kickoff to collect both). Typical agencies quote 8–14 weeks for less. We hit 21 days because the build system is productized — not because we cut corners.',
+  },
+  {
+    number: '02',
+    name: 'The 60-Second Response Guarantee',
+    applies: 'Lead Engine and above',
+    promise:
+      'Every inbound lead — call, form, or chat — gets a substantive first response in under 60 seconds, 24 hours a day, 7 days a week.',
+    terms:
+      'Measured and reported monthly on your dashboard, with median and worst-case response times shown. Jobs go to whoever answers first; with us, that is always you.',
+  },
+  {
+    number: '03',
+    name: 'The 90-Day Proof Guarantee',
+    applies: 'All systems',
+    promise:
+      'Before we start, we agree a measurable 90-day target in writing — lead volume, response time, or review velocity. If we miss it, we keep working at no monthly fee until we hit it.',
+    terms:
+      'Targets are set from your baseline, not fantasy numbers. We don’t guarantee revenue — nobody honestly can — we guarantee the behavior of the system and measured improvement against your own starting point.',
+  },
+  {
+    number: '04',
+    name: 'The You-Own-Everything Guarantee',
+    applies: 'All systems, always',
+    promise:
+      'The code, the domain, the ad accounts, the CRM data, the content — all of it belongs to you, in writing, from day one.',
+    terms:
+      'If you leave, everything comes with you within 10 business days, with handover documentation. Agencies that hold websites hostage need contracts to keep clients. We use results.',
+  },
+];
+---
+
+<Base title={title} description={description}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">Guarantees</p>
+      <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
+        Four promises. In writing. With consequences.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100/90">
+        A guarantee only means something if it costs the person making it. Here's exactly what we promise, exactly
+        what happens if we miss, and exactly what we won't pretend to guarantee.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6">
+    <div class="space-y-6">
+      {
+        guarantees.map((g, i) => (
+          <div class="reveal rounded-xl border border-navy-100 bg-white p-8 shadow-sm" style={`--reveal-delay: ${i * 60}ms`}>
+            <div class="flex items-start gap-5">
+              <span class="font-mono text-sm font-bold text-teal-600">{g.number}</span>
+              <div>
+                <h2 class="text-2xl font-bold text-navy-900">{g.name}</h2>
+                <p class="mt-1 text-xs font-semibold uppercase tracking-widest text-brass-600">{g.applies}</p>
+                <p class="mt-4 text-lg font-semibold leading-relaxed text-navy-900">{g.promise}</p>
+                <p class="mt-3 text-sm leading-relaxed text-ink-500">{g.terms}</p>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="reveal mt-10 rounded-xl bg-navy-950 p-8">
+      <h2 class="text-xl font-bold text-white">What we won't guarantee — and why you should care</h2>
+      <p class="mt-3 text-sm leading-relaxed text-navy-100/80">
+        We will never guarantee a revenue figure, a Google ranking position, or a specific number of leads before we've
+        measured your baseline. Anyone who does is either guessing or lying, and both cost you money. What we guarantee
+        is the behavior of the system — speed, response, measurement, ownership — and improvement you can verify on
+        your own dashboard.
+      </p>
+    </div>
+  </section>
+
+  <CtaSection
+    heading="Hold us to all four."
+    body="Book a call, get your baseline measured, and get every one of these guarantees in your agreement — not in a footnote."
+    primaryLabel="Book a Strategy Call"
+    secondaryLabel="See Published Pricing"
+    secondaryHref="/pricing/"
+  />
+</Base>

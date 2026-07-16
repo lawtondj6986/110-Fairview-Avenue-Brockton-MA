@@ -28,8 +28,49 @@
   --font-body: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
 }
 
+/*
+  Motion tokens — the entire site uses exactly these.
+  Two easings, three durations. Only transform/opacity are ever animated.
+*/
+:root {
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-state: ease-in-out;
+  --dur-micro: 150ms;
+  --dur-standard: 300ms;
+  --dur-hero: 600ms;
+}
+
 html {
   scroll-behavior: smooth;
+}
+
+/* Scroll-reveal: elements with .reveal fade+rise once on first view.
+   JS in Base.astro adds .is-in via IntersectionObserver. */
+@media (prefers-reduced-motion: no-preference) {
+  /* Hidden state only applies once JS confirms it's running (html.js),
+     so content is never invisible if the script fails to load. */
+  html.js .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity var(--dur-hero) var(--ease-enter),
+      transform var(--dur-hero) var(--ease-enter);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  html.js .reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+  .draw-line {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: draw 2.2s var(--ease-enter) 0.2s forwards;
+  }
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
 }
 
 body {

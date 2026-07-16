@@ -3,7 +3,7 @@ title: 'From word-of-mouth to a lead machine: 3x quote requests in 90 days'
 client: 'Regional Paving & Sealcoating Contractor'
 vertical: trades
 location: 'South Shore, MA'
-package: 'Launch + Operate'
+package: 'JobSite + Lead Engine'
 summary: 'A new commercial yard, an outdated web presence, and a manual quoting process — rebuilt into an automated lead-to-quote system in three weeks.'
 stats:
   - value: '3x'
@@ -28,7 +28,7 @@ Strong word-of-mouth reputation, but a digital presence that didn't match the qu
 
 ## What We Built
 
-**Launch + Operate package**, delivered in three weeks:
+**JobSite + Lead Engine**, delivered in three weeks:
 
 - New website with dedicated service pages, a before/after project gallery, and a structured quote request form
 - Google Business Profile optimization for the new yard location, targeting the towns the crews actually serve
@@ -41,4 +41,4 @@ Within the first 90 days: quote requests tripled versus the prior period, review
 
 ## What's Next
 
-The company is now evaluating the **Scale** tier — proposal automation and seasonal campaign management — as it adds a second crew.
+The company is now evaluating the **Market Lock** tier — proposal automation and seasonal campaign management — as it adds a second crew.

@@ -5,7 +5,7 @@ title: 'Outcome-first headline with a number in it'
 client: 'Client Name or Anonymized Descriptor'
 vertical: trades # one of: trades | retail | medical | real-estate | professional-services | other
 location: 'Town, MA'
-package: 'Launch + Operate' # which ICS package(s) they bought
+package: 'JobSite + Lead Engine' # which ICS system(s) they bought
 summary: 'One or two sentences shown on the case study card. Lead with the pain, end with the result.'
 stats: # 1-4 stats; the first two show on cards
   - value: '3x'

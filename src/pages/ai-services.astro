@@ -2,103 +2,103 @@
 import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import CtaSection from '../components/CtaSection.astro';
+import QuoteBrain from '../components/QuoteBrain.astro';
 import { SITE } from '../config';
 
-const title = 'AI Services for Small Business | Launch, Operate & Scale Packages | ICS';
+const title = 'AI Revenue Systems for Contractors & Trades | JobSite, Lead Engine, Market Lock | ICS';
 const description =
-  'Done-for-you AI systems for South Shore MA businesses: AI-built websites, CRM and follow-up automation, AI receptionists, review engines, AI marketing, SEO and answer-engine optimization. Fixed-scope Launch, Operate, and Scale packages.';
+  'Revenue systems for New England contractors and high-ticket service businesses: conversion websites live in 21 days, AI lead response under 60 seconds, instant-quote calculators, and territory-exclusive growth programs. Published pricing, real guarantees.';
 
 const tiers = [
   {
-    name: 'Launch',
-    price: '$3,000–$4,500 setup',
-    monthly: '+ $250–$400/mo',
-    outcome: 'A professional digital presence live in under 30 days, with measurable lead flow.',
-    audience: 'For businesses whose online presence doesn’t match the quality of their work — or who just signed a lease on a new location.',
+    name: 'JobSite',
+    label: 'The conversion storefront',
+    price: '$6,500–$9,500 setup',
+    monthly: '+ $450–$700/mo',
+    outcome: 'A conversion-engineered site live in 21 days — guaranteed — with measurable lead flow from week one.',
+    audience: 'For contractors whose online presence doesn’t match the quality of their work.',
     items: [
-      'AI-built website or full rebuild',
+      'Conversion-engineered website (21-day launch guarantee)',
+      'QuoteBrain™ instant-quote calculator for your trade',
       'Google Business Profile optimization',
-      'Automated review requests',
-      'Basic lead-capture chatbot',
-      'Analytics dashboard — see every lead',
+      'Automated review requests after every job',
+      'Call + form tracking with owner dashboard',
     ],
     featured: false,
   },
   {
-    name: 'Operate',
-    price: '$5,500–$8,000 setup',
-    monthly: '+ $650–$1,100/mo',
-    outcome: 'Admin time cut 15–25 hours a month; every lead followed up in minutes, not days.',
-    audience: 'For businesses winning work but drowning in follow-up, quoting, scheduling, and paperwork.',
+    name: 'Lead Engine',
+    label: 'The follow-up machine',
+    price: '$12,000–$18,000 setup',
+    monthly: '+ $1,500–$2,500/mo',
+    outcome: 'Every lead answered in under 60 seconds, 24/7 — and followed up until it closes or dies.',
+    audience: 'For businesses winning work but losing jobs to whoever answers first.',
     items: [
-      'Everything in Launch',
-      'CRM implementation + follow-up automation',
-      'AI receptionist & booking',
-      'Quote & invoice automation',
-      'Email/SMS nurture sequences',
+      'Everything in JobSite',
+      'First-Minute Response — AI answers every lead <60s, 24/7',
+      'CRM install + quote follow-up sequences (day 2, 5, 10)',
+      'Booking automation + invoice chasing',
+      'Proof Engine — job photos become posts, reviews & portfolio',
     ],
     featured: true,
   },
   {
-    name: 'Scale',
-    price: '$9,000–$14,000 setup',
-    monthly: '+ $1,600–$2,400/mo',
-    outcome: 'Operations that support growth without hiring another office person.',
-    audience: 'For established businesses ready to systematize — more crews, more locations, more volume, same overhead.',
+    name: 'Market Lock',
+    label: 'Territory dominance — one per trade, per territory',
+    price: '$20,000–$30,000 setup',
+    monthly: '+ $3,500–$6,000/mo',
+    outcome: 'Own your trade in your territory. We work with exactly one paving company per market — and it isn’t your competitor.',
+    audience: 'For established operators ready to be the default answer in their market.',
     items: [
-      'Everything in Operate',
-      'Custom AI workflows & internal copilots',
-      'Document & proposal automation',
-      'Integrations: accounting, scheduling, industry tools',
-      'Quarterly strategy reviews',
+      'Everything in Lead Engine — exclusively in your territory',
+      'Paid media with AI-tested creative (Meta + Google)',
+      'Monthly content system: 4–8 edited Reels from your jobsite footage',
+      'AEO program — be the business AI assistants recommend',
+      'Quarterly on-site strategy day + benchmark reporting',
     ],
     featured: false,
   },
 ];
 
-const marketing = [
+const capabilities = [
   {
-    name: 'AI Content Systems',
-    price: '$500–$1,500/mo',
-    body: 'Always-on content production — posts, email, short-video scripts — tuned to your voice and reviewed before anything ships.',
+    name: 'QuoteBrain™',
+    body: 'Instant-quote calculators with real trade pricing logic — square footage, prep condition, mobilization minimums, volume breaks. Your customer gets a serious number in 30 seconds instead of 3 days. Built from actual operations experience, not a plugin.',
   },
   {
-    name: 'Paid Media with AI Creative',
-    price: '$750–$2,000/mo + ad spend',
-    body: 'Meta and Google campaigns with AI-generated, continuously tested creative. Management fee, transparent spend.',
+    name: 'First-Minute Response',
+    body: 'An AI receptionist trained on your trade answers every call and form 24/7, asks qualifying questions that make sense, and books the estimate. Most contractors respond in hours. The job goes to whoever answers first.',
   },
   {
-    name: 'SEO / AEO',
-    price: '$600–$1,500/mo',
-    body: 'Be found by Google and recommended by AI assistants. Answer-engine optimization is the pitch almost no local competitor is making yet.',
+    name: 'Proof Engine',
+    body: 'Your crew shoots job photos on a phone. The system drafts the before/after post, the review request, and the portfolio entry. You approve from the truck. Every completed job becomes marketing — without you touching a keyboard.',
   },
   {
-    name: 'Conversion & Operations Optimization',
-    price: '$1,500–$5,000/project',
-    body: 'Funnel audits, A/B testing, pricing and margin analytics, process automation. Project-based or as an add-on to Scale.',
+    name: 'Owner Dashboard',
+    body: 'One screen: leads this week, response time, quote pipeline, review velocity, revenue attributed. No PDF reports nobody reads — a live scoreboard you check from your phone.',
   },
 ];
 
 const faqs = [
   {
-    q: 'Do I need to be a real estate client to buy AI services?',
-    a: 'No. The AI practice stands on its own — most clients start with a Launch or Operate package with no property transaction involved. The combination is there when you need it.',
+    q: 'Why do you publish pricing when no other agency does?',
+    a: 'Because "contact us for pricing" is how agencies avoid accountability. Published ranges mean you can qualify us in 30 seconds, and the written quote you get within 48 hours of a call has nowhere to hide. If our numbers scare a prospect off, we saved both of us a meeting.',
   },
   {
-    q: 'What do you actually measure?',
-    a: 'Every proposal states expected outcomes up front: lead volume, response time, review velocity, hours saved, revenue impact. You get a dashboard, and we review the numbers with you — AI is the tool; measurable business results are the product.',
+    q: 'What does "21-day launch guarantee" actually mean?',
+    a: 'JobSite goes live within 21 days of kickoff (content and access in hand) or we credit $1,000 per week late. Typical agencies quote 8–14 weeks for less. We can move this fast because we’ve productized the build — not because we cut corners. See the Guarantees page for exact terms.',
   },
   {
-    q: 'Do I have to learn new software?',
-    a: 'No. We build on tools you already use where possible, install and configure everything, and train your team on the handful of things they touch. The point is less work for you, not more.',
+    q: 'What happens if it doesn’t work?',
+    a: 'Every engagement sets a measurable 90-day target in writing — lead volume, response time, review velocity. Miss it and we work free until we hit it. And you own everything — code, domain, ad accounts, data — so leaving is always easy. We keep clients with numbers, not contracts.',
   },
   {
-    q: 'How fast can we start?',
-    a: 'Launch packages typically go live in under 30 days. The first step is a free strategy call and an AI readiness assessment of your current lead flow, follow-up, and online presence.',
+    q: 'Do I need to be a real estate client to buy AI systems?',
+    a: 'No. Most clients start here with no property transaction involved. But when the leads flow and you outgrow your yard, the same advisor who built your revenue system holds a Massachusetts real estate license — and can find you the building. No other firm can say that.',
   },
   {
-    q: 'Is there a long-term contract?',
-    a: 'Retainers are month-to-month after an initial term, billed on the 1st. We keep clients by producing numbers, not by locking them in.',
+    q: 'What does Market Lock exclusivity mean?',
+    a: 'One business per trade, per territory. If you’re our paving client on the South Shore, we will not take another paving company there — full stop. Your competitor calling us gets a no. Exclusivity is confirmed in the agreement.',
   },
 ];
 
@@ -106,9 +106,9 @@ const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: 'Business AI Integration',
+    name: 'AI Revenue Systems for Contractors',
     provider: { '@type': 'Organization', name: SITE.name },
-    areaServed: 'South Shore, Massachusetts',
+    areaServed: 'New England, United States',
     description,
     offers: tiers.map((t) => ({ '@type': 'Offer', name: `${t.name} package`, description: t.outcome })),
   },
@@ -127,103 +127,137 @@ const schema = [
 <Base title={title} description={description} schema={schema}>
   <section class="bg-navy-900">
     <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">AI Systems &amp; Marketing</p>
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">AI Revenue Systems</p>
       <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
-        Enterprise-grade AI, packaged for Main Street.
+        We don't sell websites. We install revenue systems.
       </h1>
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100/90">
-        The national consultancies won't return your call, and the local agencies don't build automation. ICS installs
-        practical AI systems — lead capture, follow-up, booking, quoting, reviews — measured in leads, hours saved, and
-        revenue.
+        Built by someone who has run construction crews and quoted commercial jobs — not just designed pages about
+        them. Every system is measured in leads, response time, and booked work. Pricing is public. Guarantees are in
+        writing.
       </p>
-      <a
-        href="/contact/"
-        class="mt-8 inline-block rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-lg hover:bg-teal-500"
-      >
-        Get a Free AI Readiness Assessment
-      </a>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href="/contact/" class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-lg transition-colors duration-150 hover:bg-teal-500">
+          Book an Operator Session
+        </a>
+        <a href="/guarantees/" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors duration-150 hover:border-teal-400 hover:text-teal-400">
+          Read Our Guarantees
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- PACKAGES -->
-  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+  <!-- QUOTEBRAIN LIVE DEMO -->
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
     <SectionHeading
-      eyebrow="Fixed-scope packages"
-      heading="Pick the tier that matches where your business is"
-      body="No vague consulting hours. Each package has a defined scope, a defined price band, and a defined outcome — finalized in a written proposal before you commit a dollar."
+      eyebrow="Touch the product"
+      heading="This is not a mockup. Price a job."
+      body="A live QuoteBrain™ calculator with real sealcoating pricing logic — the same class of tool we install on client sites. Generic agencies can copy the widget. They can't copy the pricing brain."
       align="center"
     />
-    <div class="mt-12 grid gap-6 lg:grid-cols-3">
-      {
-        tiers.map((tier) => (
-          <div
-            class:list={[
-              'relative flex flex-col rounded-xl border p-8',
-              tier.featured ? 'border-teal-500 bg-navy-900 shadow-xl' : 'border-navy-100 bg-white shadow-sm',
-            ]}
-          >
-            {tier.featured && (
-              <span class="absolute -top-3 left-8 rounded-full bg-teal-600 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
-                Most popular
-              </span>
-            )}
-            <h2 class:list={['text-2xl font-bold', tier.featured ? 'text-white' : 'text-navy-900']}>{tier.name}</h2>
-            <p class:list={['mt-3 font-display text-xl font-bold', tier.featured ? 'text-teal-400' : 'text-navy-900']}>
-              {tier.price}
-            </p>
-            <p class:list={['text-sm font-medium', tier.featured ? 'text-navy-100/70' : 'text-ink-500']}>{tier.monthly}</p>
-            <p class:list={['mt-4 text-sm font-semibold leading-relaxed', tier.featured ? 'text-white' : 'text-navy-900']}>
-              {tier.outcome}
-            </p>
-            <p class:list={['mt-2 text-sm leading-relaxed', tier.featured ? 'text-navy-100/75' : 'text-ink-500']}>
-              {tier.audience}
-            </p>
-            <ul class:list={['mt-6 flex-1 space-y-2.5 text-sm', tier.featured ? 'text-navy-100/90' : 'text-ink-700']}>
-              {tier.items.map((item) => (
-                <li class="flex gap-2">
-                  <span class="text-teal-500">✓</span> {item}
-                </li>
-              ))}
-            </ul>
-            <a
-              href="/contact/"
-              class:list={[
-                'mt-8 rounded-md px-5 py-2.5 text-center text-sm font-semibold transition-colors',
-                tier.featured
-                  ? 'bg-teal-600 text-white hover:bg-teal-500'
-                  : 'border border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white',
-              ]}
-            >
-              Start with {tier.name}
-            </a>
-          </div>
-        ))
-      }
+    <div class="reveal mt-10">
+      <QuoteBrain />
     </div>
-    <p class="mt-6 text-center text-sm text-ink-500">
-      Pricing shown as planning bands; every engagement gets a fixed written quote. Setup fees 50% upfront; retainers
-      billed monthly on the 1st.
-    </p>
   </section>
 
-  <!-- MARKETING SERVICES -->
+  <!-- TIERS -->
   <section class="bg-white">
     <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
       <SectionHeading
-        eyebrow="Growth engine"
-        heading="AI marketing & optimization"
-        body="Add-on services for businesses that want the phone ringing, not just the systems running."
+        eyebrow="Three systems. Published pricing."
+        heading="JobSite. Lead Engine. Market Lock."
+        body="Fixed scope, defined outcomes, written quote within 48 hours of a call. Setup 50% upfront; retainers month-to-month after an initial term. You own everything, always."
         align="center"
+      />
+      <div class="mt-12 grid gap-6 lg:grid-cols-3">
+        {
+          tiers.map((tier, i) => (
+            <div
+              class:list={[
+                'reveal relative flex flex-col rounded-xl border p-8',
+                tier.featured ? 'border-teal-500 bg-navy-900 shadow-xl' : 'border-navy-100 bg-paper shadow-sm',
+              ]}
+              style={`--reveal-delay: ${i * 80}ms`}
+            >
+              {tier.featured && (
+                <span class="absolute -top-3 left-8 rounded-full bg-teal-600 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
+                  Where most land
+                </span>
+              )}
+              <h2 class:list={['text-2xl font-bold', tier.featured ? 'text-white' : 'text-navy-900']}>{tier.name}</h2>
+              <p class:list={['mt-1 text-xs font-semibold uppercase tracking-widest', tier.featured ? 'text-teal-400' : 'text-brass-600']}>
+                {tier.label}
+              </p>
+              <p class:list={['mt-4 font-display text-xl font-bold', tier.featured ? 'text-teal-400' : 'text-navy-900']}>
+                {tier.price}
+              </p>
+              <p class:list={['text-sm font-medium', tier.featured ? 'text-navy-100/70' : 'text-ink-500']}>{tier.monthly}</p>
+              <p class:list={['mt-4 text-sm font-semibold leading-relaxed', tier.featured ? 'text-white' : 'text-navy-900']}>
+                {tier.outcome}
+              </p>
+              <p class:list={['mt-2 text-sm leading-relaxed', tier.featured ? 'text-navy-100/75' : 'text-ink-500']}>
+                {tier.audience}
+              </p>
+              <ul class:list={['mt-6 flex-1 space-y-2.5 text-sm', tier.featured ? 'text-navy-100/90' : 'text-ink-700']}>
+                {tier.items.map((item) => (
+                  <li class="flex gap-2">
+                    <span class="text-teal-500">✓</span> {item}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="/contact/"
+                class:list={[
+                  'mt-8 rounded-md px-5 py-2.5 text-center text-sm font-semibold transition-colors duration-150',
+                  tier.featured
+                    ? 'bg-teal-600 text-white hover:bg-teal-500'
+                    : 'border border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white',
+                ]}
+              >
+                Start with {tier.name}
+              </a>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- OPERATOR SESSION WEDGE -->
+      <div class="reveal mt-8 rounded-xl border border-brass-500/40 bg-navy-950 p-8 sm:flex sm:items-center sm:justify-between sm:gap-8">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-brass-300">Not sure where to start?</p>
+          <h3 class="mt-2 text-2xl font-bold text-white">The Operator Session — $1,500, fully credited</h3>
+          <p class="mt-2 max-w-2xl text-sm leading-relaxed text-navy-100/80">
+            A half-day strategy intensive, in person on the South Shore or by video: lead-flow audit, quote-process
+            teardown, AI readiness score, and a written 90-day plan you can execute with or without us. The full fee
+            credits toward any system above.
+          </p>
+        </div>
+        <a
+          href="/contact/"
+          class="mt-6 inline-block shrink-0 rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors duration-150 hover:bg-brass-300 sm:mt-0"
+        >
+          Book the Session
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAMED CAPABILITIES -->
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <SectionHeading
+        eyebrow="The machinery"
+        heading="AI that knows the difference between a driveway and a lot"
+        body="These aren't plugins bolted onto a template. They're systems built from real operations experience, installed and tuned for your trade."
+        align="center"
+        dark
       />
       <div class="mt-12 grid gap-6 sm:grid-cols-2">
         {
-          marketing.map((svc) => (
-            <div class="rounded-xl border border-navy-100 bg-paper p-6">
-              <div class="flex items-baseline justify-between gap-4">
-                <h3 class="text-lg font-bold text-navy-900">{svc.name}</h3>
-                <span class="shrink-0 font-display text-sm font-bold text-teal-600">{svc.price}</span>
-              </div>
-              <p class="mt-2 text-sm leading-relaxed text-ink-500">{svc.body}</p>
+          capabilities.map((cap, i) => (
+            <div class="reveal rounded-xl border border-white/10 bg-navy-800 p-7" style={`--reveal-delay: ${i * 60}ms`}>
+              <h3 class="font-display text-lg font-bold text-teal-400">{cap.name}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-navy-100/80">{cap.body}</p>
             </div>
           ))
         }
@@ -231,29 +265,65 @@ const schema = [
     </div>
   </section>
 
+  <!-- CREATIVE ADD-ONS -->
+  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    <SectionHeading
+      eyebrow="Creative firepower"
+      heading="Content and brand, produced at operator speed"
+      body="Add-ons for any tier. Built into Market Lock."
+      align="center"
+    />
+    <div class="mt-12 grid gap-6 sm:grid-cols-2">
+      <div class="reveal rounded-xl border border-navy-100 bg-white p-7 shadow-sm">
+        <div class="flex items-baseline justify-between gap-4">
+          <h3 class="text-lg font-bold text-navy-900">Monthly Content System</h3>
+          <span class="shrink-0 font-mono text-sm font-bold text-teal-600">$750–$1,500/mo</span>
+        </div>
+        <p class="mt-2 text-sm leading-relaxed text-ink-500">
+          Your crew shoots jobsite footage on a phone; we turn it into 4–8 edited Reels and ad creatives a month with
+          an AI-assisted production pipeline. Before/after content that sells the way word-of-mouth does — at scale.
+        </p>
+      </div>
+      <div class="reveal rounded-xl border border-navy-100 bg-white p-7 shadow-sm" style="--reveal-delay: 60ms">
+        <div class="flex items-baseline justify-between gap-4">
+          <h3 class="text-lg font-bold text-navy-900">Brand Refresh</h3>
+          <span class="shrink-0 font-mono text-sm font-bold text-teal-600">$3,500–$6,500</span>
+        </div>
+        <p class="mt-2 text-sm leading-relaxed text-ink-500">
+          Logo system, truck-wrap-ready assets, yard signage, proposal and estimate templates. The second purchase most
+          clients make once the leads start flowing and the old brand starts feeling small.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
-  <section class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
-    <SectionHeading eyebrow="Questions" heading="Straight answers" align="center" />
-    <div class="mt-10 space-y-4">
-      {
-        faqs.map((faq) => (
-          <details class="group rounded-xl border border-navy-100 bg-white p-6 shadow-sm">
-            <summary class="cursor-pointer list-none font-semibold text-navy-900 [&::-webkit-details-marker]:hidden">
-              <span class="flex items-center justify-between gap-4">
-                {faq.q}
-                <span class="text-teal-600 transition-transform group-open:rotate-45">+</span>
-              </span>
-            </summary>
-            <p class="mt-3 text-sm leading-relaxed text-ink-500">{faq.a}</p>
-          </details>
-        ))
-      }
+  <section class="bg-white">
+    <div class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+      <SectionHeading eyebrow="Questions" heading="Straight answers" align="center" />
+      <div class="mt-10 space-y-4">
+        {
+          faqs.map((faq) => (
+            <details class="group rounded-xl border border-navy-100 bg-paper p-6 shadow-sm">
+              <summary class="cursor-pointer list-none font-semibold text-navy-900 [&::-webkit-details-marker]:hidden">
+                <span class="flex items-center justify-between gap-4">
+                  {faq.q}
+                  <span class="text-teal-600 transition-transform duration-150 group-open:rotate-45">+</span>
+                </span>
+              </summary>
+              <p class="mt-3 text-sm leading-relaxed text-ink-500">{faq.a}</p>
+            </details>
+          ))
+        }
+      </div>
     </div>
   </section>
 
   <CtaSection
-    heading="Find out what AI should be doing for your business"
-    body="Book a free strategy call. We'll audit your lead flow, follow-up, and online presence — and tell you plainly which package fits, or whether you need one at all."
-    primaryLabel="Get a Free AI Readiness Assessment"
+    heading="Your competitor's agency is in Utah. Yours can be in your yard."
+    body="Book an Operator Session — a half-day working audit of your lead flow, quoting, and online presence, with a written 90-day plan either way."
+    primaryLabel="Book an Operator Session"
+    secondaryLabel="See Published Pricing"
+    secondaryHref="/pricing/"
   />
 </Base>

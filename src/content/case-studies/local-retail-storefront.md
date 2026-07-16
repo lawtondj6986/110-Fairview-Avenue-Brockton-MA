@@ -3,7 +3,7 @@ title: '47 qualified leads in 60 days for a new retail location'
 client: 'Specialty Retail Store'
 vertical: retail
 location: 'Greater Brockton, MA'
-package: 'Operate'
+package: 'Lead Engine'
 summary: 'A second location opened with zero digital presence. We had it generating measurable, trackable lead flow before the grand opening banner came down.'
 stats:
   - value: '47'
@@ -28,7 +28,7 @@ A successful single-location retailer signed a lease on a second storefront — 
 
 ## What We Built
 
-**Operate package**, live before opening day:
+**Lead Engine system**, live before opening day:
 
 - New location website with inventory highlights, hours, and a booking/enquiry flow
 - Google Business Profile built out and optimized so the store surfaced in local searches from day one

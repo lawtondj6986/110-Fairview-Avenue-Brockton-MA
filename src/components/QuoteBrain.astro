@@ -1,0 +1,208 @@
+---
+/**
+ * QuoteBrain™ — live instant-quote demo for commercial sealcoating.
+ * The pricing logic is intentionally trade-accurate (rates, minimums, volume
+ * breaks, condition prep multipliers) — this is the point of the demo:
+ * generic agencies can copy the widget, not the pricing brain.
+ */
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<div
+  class="quotebrain rounded-2xl border border-white/10 bg-navy-950 p-6 shadow-2xl sm:p-8"
+  id="quotebrain"
+>
+  <div class="flex items-center justify-between gap-4">
+    <div>
+      <p class="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-teal-400">
+        QuoteBrain™ · Live Demo
+      </p>
+      <h3 class="mt-1 text-xl font-bold text-white sm:text-2xl">Price a sealcoating job. Right now.</h3>
+    </div>
+    <span class="hidden shrink-0 rounded-full border border-teal-400/40 px-3 py-1 font-mono text-[11px] font-semibold text-teal-400 sm:inline-block">
+      SOUTH SHORE MA RATES
+    </span>
+  </div>
+
+  <div class="mt-6 grid gap-6 lg:grid-cols-5">
+    <form class="space-y-5 lg:col-span-3" id="qb-form">
+      <div>
+        <label for="qb-type" class="mb-1.5 block text-sm font-medium text-navy-100">Job type</label>
+        <select id="qb-type" class="qb-input">
+          <option value="commercial" selected>Commercial lot (2-coat, spray applied)</option>
+          <option value="residential">Residential driveway (2-coat)</option>
+        </select>
+      </div>
+
+      <div>
+        <div class="flex items-baseline justify-between">
+          <label for="qb-sqft" class="mb-1.5 block text-sm font-medium text-navy-100">Pavement area</label>
+          <output id="qb-sqft-out" class="font-mono text-sm font-bold text-teal-400">25,000 sq ft</output>
+        </div>
+        <input type="range" id="qb-sqft" min="500" max="150000" step="500" value="25000" class="qb-range" />
+        <div class="mt-1 flex justify-between font-mono text-[10px] text-navy-100/50">
+          <span>500</span><span>150,000 sq ft</span>
+        </div>
+      </div>
+
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label for="qb-condition" class="mb-1.5 block text-sm font-medium text-navy-100">Surface condition</label>
+          <select id="qb-condition" class="qb-input">
+            <option value="good">Good — maintained, minor wear</option>
+            <option value="fair" selected>Fair — oxidized, some cracking</option>
+            <option value="poor">Poor — heavy cracking, oil spots</option>
+          </select>
+        </div>
+        <div>
+          <label for="qb-cracks" class="mb-1.5 block text-sm font-medium text-navy-100">Crack filling (linear ft)</label>
+          <input type="number" id="qb-cracks" min="0" max="20000" step="50" value="400" class="qb-input" />
+        </div>
+      </div>
+
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label for="qb-stalls" class="mb-1.5 block text-sm font-medium text-navy-100">Re-stripe parking stalls</label>
+          <input type="number" id="qb-stalls" min="0" max="1000" step="1" value="30" class="qb-input" />
+        </div>
+        <div class="flex items-end pb-2">
+          <label class="flex cursor-pointer items-center gap-2.5 text-sm text-navy-100">
+            <input type="checkbox" id="qb-oil" class="h-4 w-4 accent-teal-500" checked />
+            Oil-spot priming needed
+          </label>
+        </div>
+      </div>
+    </form>
+
+    <div class="flex flex-col justify-between rounded-xl border border-teal-500/30 bg-navy-900 p-6 lg:col-span-2">
+      <div>
+        <p class="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-navy-100/60">
+          Planning estimate
+        </p>
+        <p class="qb-result mt-2 font-display text-3xl font-bold text-white sm:text-4xl" id="qb-total">
+          $4,850 – $6,300
+        </p>
+        <dl class="mt-5 space-y-2 border-t border-white/10 pt-4 font-mono text-xs text-navy-100/80" id="qb-lines">
+        </dl>
+      </div>
+      <div class="mt-6">
+        <p class="text-[11px] leading-relaxed text-navy-100/50">
+          Planning ranges for South Shore MA market conditions. Final quotes follow a site walk — but your customer
+          gets this number in 30 seconds instead of 3 days.
+        </p>
+        {
+          !compact && (
+            <a
+              href="/contact/"
+              class="mt-4 block rounded-md bg-teal-600 px-5 py-2.5 text-center text-sm font-semibold text-white transition-colors duration-150 hover:bg-teal-500"
+            >
+              Get QuoteBrain for your trade →
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .qb-input {
+    width: 100%;
+    border-radius: 0.375rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: #0b1f3a;
+    color: #f8fafc;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  .qb-input:focus {
+    outline: none;
+    border-color: #14b8a6;
+    box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.25);
+  }
+  .qb-range {
+    width: 100%;
+    accent-color: #14b8a6;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .qb-result {
+      transition: transform var(--dur-micro) var(--ease-state);
+    }
+    .qb-result.is-updating {
+      transform: scale(1.03);
+    }
+  }
+</style>
+
+<script>
+  // Trade-accurate sealcoating estimator. Rates reflect 2-coat application,
+  // South Shore MA planning bands. Volume breaks and prep multipliers included.
+  const $ = (id: string) => document.getElementById(id) as HTMLInputElement;
+  const form = document.getElementById('qb-form');
+  const totalEl = document.getElementById('qb-total')!;
+  const linesEl = document.getElementById('qb-lines')!;
+  const sqftOut = document.getElementById('qb-sqft-out')!;
+
+  const fmt = (n: number) => '$' + (Math.round(n / 50) * 50).toLocaleString('en-US');
+
+  function estimate() {
+    const type = $('qb-type').value;
+    const sqft = +$('qb-sqft').value;
+    const condition = $('qb-condition').value;
+    const cracks = Math.max(0, +$('qb-cracks').value || 0);
+    const stalls = Math.max(0, +$('qb-stalls').value || 0);
+    const oil = ($('qb-oil') as HTMLInputElement).checked;
+
+    sqftOut.textContent = sqft.toLocaleString('en-US') + ' sq ft';
+
+    // Base rate per sq ft, 2 coats
+    let lo = type === 'commercial' ? 0.16 : 0.22;
+    let hi = type === 'commercial' ? 0.22 : 0.35;
+
+    // Volume breaks (commercial spray work gets cheaper per foot at scale)
+    if (sqft > 100000) { lo *= 0.72; hi *= 0.75; }
+    else if (sqft > 50000) { lo *= 0.85; hi *= 0.88; }
+    else if (sqft < 5000 && type === 'commercial') { lo *= 1.15; hi *= 1.2; }
+
+    // Condition drives prep labor
+    const condMult = condition === 'poor' ? 1.25 : condition === 'fair' ? 1.1 : 1;
+
+    let sealLo = sqft * lo * condMult;
+    let sealHi = sqft * hi * condMult;
+
+    const crackLo = cracks * 1.25;
+    const crackHi = cracks * 2.5;
+    const stripeLo = stalls * 4.5 + (stalls > 0 ? 150 : 0);
+    const stripeHi = stalls * 7.5 + (stalls > 0 ? 250 : 0);
+    const oilLo = oil ? Math.min(sqft * 0.008, 400) : 0;
+    const oilHi = oil ? Math.min(sqft * 0.015, 900) : 0;
+
+    // Mobilization minimums — no crew rolls for less
+    const minJob = type === 'commercial' ? 950 : 400;
+    let totLo = Math.max(sealLo + crackLo + stripeLo + oilLo, minJob);
+    let totHi = Math.max(sealHi + crackHi + stripeHi + oilHi, minJob * 1.3);
+
+    totalEl.classList.add('is-updating');
+    setTimeout(() => totalEl.classList.remove('is-updating'), 150);
+    totalEl.textContent = `${fmt(totLo)} – ${fmt(totHi)}`;
+
+    const lines: [string, string][] = [
+      ['Sealcoat (2 coats)', `${fmt(sealLo)} – ${fmt(sealHi)}`],
+    ];
+    if (cracks > 0) lines.push(['Crack fill', `${fmt(crackLo)} – ${fmt(crackHi)}`]);
+    if (stalls > 0) lines.push(['Striping', `${fmt(stripeLo)} – ${fmt(stripeHi)}`]);
+    if (oil) lines.push(['Oil-spot prime', `${fmt(oilLo)} – ${fmt(oilHi)}`]);
+    linesEl.innerHTML = lines
+      .map(
+        ([k, v]) =>
+          `<div class="flex justify-between gap-3"><dt class="text-navy-100/60">${k}</dt><dd class="text-navy-100">${v}</dd></div>`
+      )
+      .join('');
+  }
+
+  form?.addEventListener('input', estimate);
+  estimate();
+</script>

@@ -6,7 +6,7 @@
 export const SITE = {
   name: 'Innovative Commercial Strategies',
   shortName: 'ICS',
-  tagline: 'AI-Powered Commercial Real Estate Advisory',
+  tagline: 'Built by an operator. Measured in booked jobs.',
   description:
     "The South Shore's AI-powered commercial real estate firm. We help contractors, retailers, and medical practices buy, sell, and lease commercial property — then install the marketing and automation systems that grow the business inside it.",
   url: 'https://innovativecommercialstrategies.com', // TODO: production domain
@@ -49,9 +49,10 @@ export const SITE = {
 };
 
 export const NAV = [
-  { label: 'Commercial Real Estate', href: '/commercial-real-estate/' },
-  { label: 'AI Services', href: '/ai-services/' },
-  { label: 'Case Studies', href: '/case-studies/' },
+  { label: 'Real Estate', href: '/commercial-real-estate/' },
+  { label: 'AI Systems', href: '/ai-services/' },
+  { label: 'Pricing', href: '/pricing/' },
+  { label: 'Results', href: '/case-studies/' },
   { label: 'Listings', href: '/listings/' },
   { label: 'About', href: '/about/' },
   { label: 'Insights', href: '/insights/' },

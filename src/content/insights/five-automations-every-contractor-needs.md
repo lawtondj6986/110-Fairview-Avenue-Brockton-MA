@@ -29,4 +29,4 @@ The least glamorous automation is often the one owners love most. Polite, persis
 
 ## The common thread
 
-None of this requires you to learn new software. That's our job: we install these systems, connect them to the tools you already use, and hand you a dashboard that shows leads, reviews, and revenue in one place. That's the ICS **Operate** package in a nutshell — [see how it works](/ai-services/), or book a free call and we'll tell you which of the five you're leaving money on.
+None of this requires you to learn new software. That's our job: we install these systems, connect them to the tools you already use, and hand you a dashboard that shows leads, reviews, and revenue in one place. That's the ICS **Lead Engine** system in a nutshell — [see how it works](/ai-services/), or book a free call and we'll tell you which of the five you're leaving money on.

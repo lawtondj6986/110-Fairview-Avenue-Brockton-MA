@@ -74,5 +74,51 @@ const jsonLd = [localBusiness, ...schema];
       <slot />
     </main>
     <Footer />
+    <script>
+      // Scroll reveal + metric counters. Transform/opacity only; respects reduced motion.
+      document.documentElement.classList.add('js');
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (!e.isIntersecting) continue;
+            e.target.classList.add('is-in');
+            const counter = e.target.querySelector<HTMLElement>('[data-count]') ?? (e.target as HTMLElement);
+            if (counter?.dataset.count && !counter.dataset.done) runCounter(counter);
+            io.unobserve(e.target);
+          }
+        },
+        // Low threshold + early rootMargin so fast scrollers still trigger reveals
+        { threshold: 0.05, rootMargin: '0px 0px 15% 0px' }
+      );
+
+      function runCounter(el: HTMLElement) {
+        el.dataset.done = '1';
+        const target = parseFloat(el.dataset.count || '0');
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        const decimals = (el.dataset.count || '').includes('.') ? 1 : 0;
+        if (reduced) {
+          el.textContent = prefix + target.toLocaleString('en-US', { maximumFractionDigits: decimals }) + suffix;
+          return;
+        }
+        const dur = 1200;
+        const start = performance.now();
+        const tick = (now: number) => {
+          const p = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent =
+            prefix + (target * eased).toLocaleString('en-US', { maximumFractionDigits: decimals }) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+
+      document.querySelectorAll('.reveal, [data-count]').forEach((el) => {
+        const node = el.closest('.reveal') ?? el;
+        io.observe(node);
+      });
+    </script>
   </body>
 </html>

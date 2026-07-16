@@ -3,7 +3,7 @@ title: 'Quote-to-close time cut from 11 days to 4 for a solar installer'
 client: 'Residential & Commercial Solar Installer'
 vertical: professional-services
 location: 'South Shore, MA'
-package: 'Scale'
+package: 'Market Lock'
 summary: 'Proposal generation, document automation, and follow-up sequences turned a slow, manual sales process into the fastest quote in the market.'
 stats:
   - value: '11 → 4 days'
@@ -28,7 +28,7 @@ Solar sales are won on speed and professionalism. This installer was hand-buildi
 
 ## What We Built
 
-**Scale package**:
+**Market Lock system**:
 
 - Custom proposal-generation workflow: property data, system sizing inputs, and current incentive programs assembled into a branded proposal in minutes instead of days
 - Document automation for contracts and interconnection paperwork

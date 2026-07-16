@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+
+const title = 'The Scoreboard — Live Client Results | Innovative Commercial Strategies';
+const description =
+  'Aggregate results across ICS client systems, updated monthly: leads generated, median response time, new reviews, and content produced. No agency publishes this because no agency measures it.';
+
+/**
+ * TODO(launch): replace with verified aggregate numbers each month.
+ * Values below are illustrative and labeled as such on the page.
+ * Update `asOf` and set `illustrative` to false once 90-day client data lands.
+ */
+const asOf = 'July 2026';
+const illustrative = true;
+const stats = [
+  { value: '312', suffix: '', label: 'Qualified leads generated across client systems, trailing 90 days' },
+  { value: '41', suffix: 's', label: 'Median first-response time to a new lead, all clients, 24/7' },
+  { value: '118', suffix: '', label: 'New Google reviews collected by automated Proof Engine requests' },
+  { value: '64', suffix: '', label: 'Reels and ad creatives produced from client jobsite footage' },
+];
+---
+
+<Base title={title} description={description}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">
+        The Scoreboard · Updated monthly · As of {asOf}
+      </p>
+      <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
+        Agencies show portfolios. We show a scoreboard.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100/90">
+        Aggregate performance across every active ICS client system. We publish it because we measure it — and because
+        you should ask any agency you're considering for their version of this page. There won't be one.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        stats.map((s, i) => (
+          <div class="reveal rounded-xl border border-navy-100 bg-white p-8 text-center shadow-sm" style={`--reveal-delay: ${i * 80}ms`}>
+            <p class="font-display text-5xl font-bold text-navy-900" data-count={s.value} data-suffix={s.suffix}>
+              0{s.suffix}
+            </p>
+            <p class="mt-3 text-sm leading-relaxed text-ink-500">{s.label}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    {
+      illustrative && (
+        <p class="mt-6 rounded-lg border border-navy-100 bg-white p-4 text-xs leading-relaxed text-ink-500">
+          <strong class="text-navy-900">Straight talk:</strong> the figures above are illustrative targets while our
+          founding-client cohort completes its first measured 90 days. The moment verified data lands, it replaces
+          these numbers and this notice disappears. We'd rather show you an honest placeholder than a fake portfolio.
+        </p>
+      )
+    }
+
+    <div class="mt-14 grid gap-10 lg:grid-cols-2">
+      <div class="reveal">
+        <h2 class="text-2xl font-bold text-navy-900">How the numbers are measured</h2>
+        <ul class="mt-5 space-y-4 text-sm leading-relaxed text-ink-500">
+          <li class="flex gap-3">
+            <span class="font-mono font-bold text-teal-600">→</span>
+            <span><strong class="text-navy-900">Leads</strong> are tracked calls, forms, and chats that pass qualification — not raw traffic, not impressions, not "engagement."</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="font-mono font-bold text-teal-600">→</span>
+            <span><strong class="text-navy-900">Response time</strong> is measured from inbound contact to first substantive reply, including nights and weekends.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="font-mono font-bold text-teal-600">→</span>
+            <span><strong class="text-navy-900">Reviews</strong> count only new, public Google reviews attributable to automated requests.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="font-mono font-bold text-teal-600">→</span>
+            <span>Every client sees their own numbers on their dashboard. This page is the roll-up, refreshed monthly.</span>
+          </li>
+        </ul>
+      </div>
+      <div class="reveal rounded-xl bg-navy-900 p-8" style="--reveal-delay: 80ms">
+        <h2 class="text-xl font-bold text-white">Ask your agency for this page</h2>
+        <p class="mt-3 text-sm leading-relaxed text-navy-100/80">
+          Seriously — email whoever built your current site and ask for their aggregate client metrics: leads
+          generated, median response time, review velocity. If the answer is a portfolio of screenshots and an
+          award badge, you've learned what they actually measure: how things look, not what they earn.
+        </p>
+        <a
+          href="/case-studies/"
+          class="mt-6 inline-block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-teal-500"
+        >
+          See Per-Client Case Studies
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CtaSection
+    heading="Want your business on this scoreboard?"
+    body="Every system we install starts with a measured baseline and a 90-day target in writing. Book the call and let's set yours."
+  />
+</Base>
