@@ -1,0 +1,49 @@
+# Temporary review hosting on GitHub Pages until the Vercel project is connected.
+# Deploys https://lawtondj6986.github.io/110-Fairview-Avenue-Brockton-MA/ on every push to main.
+# Safe to delete this file once Vercel is live.
+name: Deploy review site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      # Pages serves project sites under /<repo>/ — rewrite the site's
+      # root-absolute links and asset URLs to match. (Vercel serves from /,
+      # so the source stays clean and this only happens here.)
+      - name: Rewrite root-absolute URLs for the Pages subpath
+        run: |
+          BASE="/110-Fairview-Avenue-Brockton-MA"
+          find dist -name '*.html' -exec sed -i "s|href=\"/|href=\"$BASE/|g; s|src=\"/|src=\"$BASE/|g" {} +
+          find dist -name '*.css' -exec sed -i "s|url(/|url($BASE/|g" {} +
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v4
