@@ -51,6 +51,7 @@ export const SITE = {
 export const NAV = [
   { label: 'Real Estate', href: '/commercial-real-estate/' },
   { label: 'AI Systems', href: '/ai-services/' },
+  { label: 'QuoteBrain', href: '/quotebrain/' },
   { label: 'Pricing', href: '/pricing/' },
   { label: 'Results', href: '/case-studies/' },
   { label: 'Listings', href: '/listings/' },
