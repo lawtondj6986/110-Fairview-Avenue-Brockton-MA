@@ -4,12 +4,16 @@ import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
 import CtaSection from '../components/CtaSection.astro';
-import QuoteBrain from '../components/QuoteBrain.astro';
 import { SITE } from '../config';
 
-const caseStudies = (await getCollection('case-studies', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+const allCaseStudies = (await getCollection('case-studies', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const caseStudies = allCaseStudies.slice(0, 3);
+const testimonials = allCaseStudies
+  .filter((entry) => entry.data.testimonial)
+  .slice(0, 3)
+  .map((entry) => ({ ...entry.data.testimonial!, slug: entry.id }));
 
 const title = 'Innovative Commercial Strategies | Commercial Real Estate + AI Systems, South Shore MA';
 const description =
@@ -36,18 +40,18 @@ const description =
     </svg>
 
     <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">
         Commercial Real Estate Advisory + AI Systems · Brockton &amp; the South Shore
       </p>
-      <h1 class="mt-5 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+      <h1 class="reveal mt-5 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl" style="--reveal-delay: 100ms">
         Your broker shouldn't hand you the keys and disappear.
       </h1>
-      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100/90">
+      <p class="reveal mt-6 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
         ICS is the only South Shore firm where the advisor who negotiates your commercial building also builds the AI
         systems, marketing engine, and workflows that make it produce revenue from day one. Built by an operator who
         has run crews and quoted commercial jobs — measured in booked work, not page views.
       </p>
-      <div class="mt-9 flex flex-wrap gap-4">
+      <div class="reveal mt-9 flex flex-wrap gap-4" style="--reveal-delay: 300ms">
         <a
           href="/contact/"
           class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-lg transition-colors hover:bg-teal-500"
@@ -173,17 +177,33 @@ const description =
     </div>
   </section>
 
-  <!-- QUOTEBRAIN DEMO -->
+  <!-- TESTIMONIALS -->
   <section class="bg-white">
     <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
       <SectionHeading
-        eyebrow="Touch the product"
-        heading="Most agencies show mockups. Price a job instead."
-        body="This is QuoteBrain™ — a live instant-quote calculator with real sealcoating pricing logic, the same class of tool we install on client sites. Your customers get a serious number in 30 seconds instead of 3 days."
+        eyebrow="In their words"
+        heading="What owners say after the systems switch on"
         align="center"
       />
-      <div class="reveal mt-10">
-        <QuoteBrain />
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {
+          testimonials.map((t, i) => (
+            <figure
+              class="reveal lift flex flex-col rounded-xl border border-navy-100 bg-paper p-7"
+              style={`--reveal-delay: ${i * 80}ms`}
+            >
+              <span aria-hidden="true" class="font-display text-5xl font-bold leading-none text-teal-500">“</span>
+              <blockquote class="mt-2 flex-1 text-sm leading-relaxed text-ink-700">{t.quote}</blockquote>
+              <figcaption class="mt-5 border-t border-navy-100 pt-4">
+                <p class="text-sm font-semibold text-navy-900">{t.name}</p>
+                <p class="mt-0.5 text-xs text-ink-500">{t.title}</p>
+                <a href={`/case-studies/${t.slug}/`} class="mt-2 inline-block text-xs font-semibold text-teal-600 hover:text-teal-500">
+                  Read the numbers →
+                </a>
+              </figcaption>
+            </figure>
+          ))
+        }
       </div>
     </div>
   </section>

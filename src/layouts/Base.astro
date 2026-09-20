@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import '@fontsource-variable/space-grotesk';
 import '@fontsource-variable/inter';
 import '../styles/global.css';
@@ -55,8 +56,11 @@ const jsonLd = [localBusiness, ...schema];
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0b1f3a" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
+    <ClientRouter />
 
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
@@ -78,24 +82,34 @@ const jsonLd = [localBusiness, ...schema];
     <Footer />
     <script>
       // Scroll reveal + metric counters. Transform/opacity only; respects reduced motion.
+      // Re-initializes on every client-side navigation (astro:page-load fires on
+      // first load and after each ClientRouter swap).
       document.documentElement.classList.add('js');
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      const io = new IntersectionObserver(
-        (entries) => {
-          for (const e of entries) {
-            if (!e.isIntersecting) continue;
-            e.target.classList.add('is-in');
-            const counter = e.target.querySelector<HTMLElement>('[data-count]') ?? (e.target as HTMLElement);
-            if (counter?.dataset.count && !counter.dataset.done) runCounter(counter);
-            io.unobserve(e.target);
-          }
-        },
-        // Low threshold + early rootMargin so fast scrollers still trigger reveals
-        { threshold: 0.05, rootMargin: '0px 0px 15% 0px' }
-      );
+      function initMotion() {
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      function runCounter(el: HTMLElement) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (!e.isIntersecting) continue;
+              e.target.classList.add('is-in');
+              const counter = e.target.querySelector<HTMLElement>('[data-count]') ?? (e.target as HTMLElement);
+              if (counter?.dataset.count && !counter.dataset.done) runCounter(counter, reduced);
+              io.unobserve(e.target);
+            }
+          },
+          // Low threshold + early rootMargin so fast scrollers still trigger reveals
+          { threshold: 0.05, rootMargin: '0px 0px 15% 0px' }
+        );
+
+        document.querySelectorAll('.reveal, [data-count]').forEach((el) => {
+          const node = el.closest('.reveal') ?? el;
+          io.observe(node);
+        });
+      }
+
+      function runCounter(el: HTMLElement, reduced: boolean) {
         el.dataset.done = '1';
         const target = parseFloat(el.dataset.count || '0');
         const prefix = el.dataset.prefix || '';
@@ -117,10 +131,7 @@ const jsonLd = [localBusiness, ...schema];
         requestAnimationFrame(tick);
       }
 
-      document.querySelectorAll('.reveal, [data-count]').forEach((el) => {
-        const node = el.closest('.reveal') ?? el;
-        io.observe(node);
-      });
+      document.addEventListener('astro:page-load', initMotion);
     </script>
   </body>
 </html>

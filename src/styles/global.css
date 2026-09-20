@@ -71,6 +71,39 @@ html {
       stroke-dashoffset: 0;
     }
   }
+
+  /* Card lift: subtle rise + deeper shadow on hover. Transform/box-shadow only. */
+  .lift {
+    transition:
+      transform var(--dur-standard) var(--ease-enter),
+      box-shadow var(--dur-standard) var(--ease-enter);
+  }
+  .lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px -10px rgb(11 31 58 / 0.18);
+  }
+
+  /* Button press feedback */
+  a[class*='bg-teal-'],
+  button[class*='bg-teal-'] {
+    transition:
+      transform var(--dur-micro) var(--ease-state),
+      background-color var(--dur-micro) var(--ease-state);
+  }
+  a[class*='bg-teal-']:active,
+  button[class*='bg-teal-']:active {
+    transform: scale(0.97);
+  }
+}
+
+::selection {
+  background-color: var(--color-teal-500);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-teal-500);
+  outline-offset: 2px;
 }
 
 body {

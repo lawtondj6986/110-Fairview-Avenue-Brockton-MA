@@ -40,7 +40,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month:
         posts.map((post) => (
           <a
             href={`/insights/${post.id}/`}
-            class="group block rounded-xl border border-navy-100 bg-white p-6 shadow-sm transition-shadow hover:shadow-md sm:p-8"
+            class="lift group block rounded-xl border border-navy-100 bg-white p-6 shadow-sm sm:p-8"
           >
             <p class="text-xs font-semibold uppercase tracking-widest text-teal-600">
               {categoryLabels[post.data.category]} · {fmt(post.data.date)}
