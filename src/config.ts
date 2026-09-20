@@ -9,17 +9,17 @@ export const SITE = {
   tagline: 'Built by an operator. Measured in booked jobs.',
   description:
     "The South Shore's AI-powered commercial real estate firm. We help contractors, retailers, and medical practices buy, sell, and lease commercial property — then install the marketing and automation systems that grow the business inside it.",
-  url: 'https://innovativecommercialstrategies.com', // TODO: production domain
+  url: 'https://icsgroup.ai',
 
   founder: 'Daniel Lawton',
-  email: 'lawtondj@gmail.com', // TODO: switch to a business address, e.g. daniel@ics...
-  phone: '(508) 555-0100', // TODO: real business phone
+  email: 'lawtondj@gmail.com', // TODO: switch to daniel@icsgroup.ai once mailbox is set up
+  phone: '(508) 942-8259',
   address: {
     locality: 'Brockton',
     region: 'MA',
     country: 'US',
   },
-  license: 'Licensed MA Real Estate Salesperson #XXXXXXX', // TODO: real license number
+  license: 'Licensed MA Real Estate Salesperson #9082020',
 
   serviceAreas: [
     'Brockton',
@@ -39,13 +39,13 @@ export const SITE = {
   },
 
   /**
-   * Lead capture: create a free form at https://formspark.io (or Formspree)
-   * and paste the endpoint here. Submissions arrive by email; connect to
-   * HubSpot via Zapier/Make when the CRM is live.
+   * Lead capture (launch mode): the site uses direct email + phone links.
+   * When ready to switch to a hosted form, create one at https://formspree.io,
+   * set formEndpoint to its URL, and the LeadForm component's form UI returns.
    */
-  formEndpoint: 'https://submit-form.com/YOUR_FORM_ID', // TODO
-  /** Booking: create a free event type at https://cal.com and paste the link. */
-  bookingUrl: 'https://cal.com/YOUR_HANDLE/strategy-call', // TODO
+  formEndpoint: '', // empty = email-first launch mode
+  /** Booking: create a free event type at https://cal.com and paste the link to enable booking buttons. */
+  bookingUrl: '', // empty = phone/email links shown instead
 };
 
 export const NAV = [
