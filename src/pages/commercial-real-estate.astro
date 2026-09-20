@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import ListingCard from '../components/ListingCard.astro';
 import CtaSection from '../components/CtaSection.astro';
+import { TOWNS } from '../lib/towns';
 import { SITE } from '../config';
 
 const listings = (await getCollection('listings', ({ data }) => !data.draft && data.status === 'available'))
@@ -166,13 +167,19 @@ const schema = [
       />
       <div class="mt-8 flex flex-wrap justify-center gap-3">
         {
-          SITE.serviceAreas.map((town) => (
-            <span class="rounded-full border border-navy-100 bg-paper px-4 py-1.5 text-sm font-medium text-ink-700">
-              {town}
-            </span>
+          TOWNS.map((t) => (
+            <a
+              href={`/south-shore/${t.slug}/`}
+              class="rounded-full border border-navy-100 bg-paper px-4 py-1.5 text-sm font-medium text-ink-700 transition-colors hover:border-teal-500 hover:text-teal-600"
+            >
+              {t.name}
+            </a>
           ))
         }
       </div>
+      <p class="mt-6 text-center">
+        <a href="/south-shore/" class="font-semibold text-teal-600 hover:text-teal-500">Explore every town's market page →</a>
+      </p>
     </div>
   </section>
 
