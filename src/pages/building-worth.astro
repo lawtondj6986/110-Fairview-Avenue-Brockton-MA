@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CtaSection from '../components/CtaSection.astro';
+import BuildingWorth from '../components/BuildingWorth.astro';
+import { SITE } from '../config';
+
+const title = "What's My Commercial Building Worth? Free Broker Opinion of Value | ICS";
+const description =
+  'Find out what your South Shore MA commercial building is worth: a free Broker Opinion of Value from a licensed local broker — walked in person, built on real comparables, written within 48 hours. Brockton, Bridgewater, Stoughton, Easton and surrounding towns.';
+
+const faqs = [
+  {
+    q: 'How do I find out what my commercial building is worth?',
+    a: "Three ways: a bank appraisal (you pay $2,500–$5,000+, typically ordered during financing), an online guess (worthless for commercial — no algorithm has walked your building), or a Broker Opinion of Value — a licensed broker's written analysis built on real comparable sales and active buyer demand. Ours is free: we walk the property, pull the comps, and put a number range in writing within 48 hours.",
+  },
+  {
+    q: "What's the difference between a Broker Opinion of Value and an appraisal?",
+    a: 'An appraisal is a formal report by a licensed appraiser, required by lenders, and paid for by you. A BOV is a market-facing analysis by a licensed real estate broker: what the building would realistically trade for, to which buyer pool, marketed properly. For deciding whether and when to sell, the BOV is the tool — and ours costs nothing.',
+  },
+  {
+    q: "Is this really free? What's the catch?",
+    a: "Free, and the \"catch\" is transparent: we're a brokerage — if you eventually sell, we'd like to earn the listing by having been useful first. There is no obligation, no listing pressure, and the written opinion is yours either way. Plenty of owners use it just to plan refinancing or estate decisions.",
+  },
+  {
+    q: 'What cap rates apply to South Shore commercial property?',
+    a: 'As planning bands in the current market: small industrial/flex trades tightest (low-to-mid 6% to low 7% range), retail and medical in the high-6s to high-7s, mixed-use around 7–8%, and office widest at 8%+. Every building is its own case — leases, condition, and corridor move real pricing well beyond band math, which is exactly what the in-person BOV resolves.',
+  },
+  {
+    q: 'Do you cover my town?',
+    a: `Yes, in person, if you're on or near the South Shore: ${SITE.serviceAreas.slice(0, 6).join(', ')} and surrounding Plymouth, Norfolk and Bristol County communities. ${SITE.license}.`,
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Free Broker Opinion of Value — South Shore MA Commercial Property',
+    provider: { '@type': 'RealEstateAgent', name: SITE.name, telephone: SITE.phone },
+    areaServed: 'South Shore, Massachusetts',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    description,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">For property owners</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        What's your building actually worth?
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Not a website's guess — a licensed broker's written opinion, built on real South Shore comparables after
+        walking your property. Free, within 48 hours, no obligation. Start with sixty seconds below.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <div class="reveal">
+      <BuildingWorth />
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+    <SectionHeading
+      eyebrow="Why owners ask us"
+      heading="The value isn't in a number. It's in what we do with it."
+      align="center"
+    />
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        [
+          ['Real comps, walked building', "Algorithms haven't stood in your loading dock. The written opinion comes from comparable sales we verify and a building we've actually walked — the same underwriting we'd defend to a buyer."],
+          ['The buyer pool, named', "A number without a buyer is trivia. The BOV tells you who pays it: owner-users, investors, or value-add buyers — and what marketing reaches them. Sub-$3M buildings deserve big-building treatment."],
+          ['Sell, hold, or refinance — mapped', 'Sometimes our honest advice is don\'t sell yet. The opinion comes with the paths: what a sale nets, what a refinance unlocks, and what 12 months of the right improvements could add.'],
+        ].map(([h, b], i) => (
+          <div class="reveal lift rounded-xl border border-navy-100 bg-white p-6 shadow-sm" style={`--reveal-delay: ${i * 60}ms`}>
+            <h3 class="text-lg font-bold text-navy-900">{h}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-500">{b}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <SectionHeading eyebrow="Owner questions" heading="Straight answers" align="center" />
+      <div class="mt-8 space-y-4">
+        {
+          faqs.map((faq) => (
+            <details class="group rounded-xl border border-navy-100 bg-paper p-6">
+              <summary class="cursor-pointer list-none font-semibold text-navy-900 [&::-webkit-details-marker]:hidden">
+                <span class="flex items-center justify-between gap-4">
+                  {faq.q}
+                  <span class="text-teal-600 transition-transform duration-150 group-open:rotate-45">+</span>
+                </span>
+              </summary>
+              <p class="mt-3 text-sm leading-relaxed text-ink-500">{faq.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaSection
+    heading="Rather just talk it through?"
+    body="Call or email — no forms required. Every conversation starts with your goals, not our commission."
+    primaryLabel="Book a Free Strategy Call"
+    secondaryLabel="How We Market Listings"
+    secondaryHref="/commercial-real-estate/"
+  />
+</Base>

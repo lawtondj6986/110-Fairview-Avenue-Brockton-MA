@@ -1,0 +1,317 @@
+---
+import { SITE } from '../config';
+import { TOWNS } from '../lib/towns';
+
+/**
+ * "What's My Building Worth?" island.
+ * Live personalized read (value drivers + optional income-approach planning
+ * band from the owner's own rent numbers), gating a Broker Opinion of Value
+ * request — walked in person, written within 48 hours, free.
+ */
+---
+
+<div
+  id="bov"
+  class="rounded-2xl border border-white/10 bg-navy-950 p-6 shadow-2xl sm:p-8"
+  data-form-endpoint={SITE.formEndpoint}
+  data-email={SITE.email}
+>
+  <div class="flex flex-wrap items-center justify-between gap-3 pb-5">
+    <div>
+      <p class="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-teal-400">
+        Broker Opinion of Value · Free
+      </p>
+      <h2 class="mt-1 text-xl font-bold text-white sm:text-2xl">Tell us about the building.</h2>
+    </div>
+    <span class="rounded-full border border-teal-400/40 px-3 py-1 font-mono text-[11px] font-semibold text-teal-400">
+      WALKED IN PERSON · WRITTEN IN 48H
+    </span>
+  </div>
+
+  <div class="grid gap-5 lg:grid-cols-5">
+    <!-- INPUTS -->
+    <div class="grid content-start gap-4 sm:grid-cols-2 lg:col-span-2">
+      <div class="sm:col-span-2">
+        <label for="bov-type" class="bov-label">Property type</label>
+        <select id="bov-type" class="bov-input">
+          <option value="industrial" selected>Industrial / flex / warehouse</option>
+          <option value="retail">Retail / restaurant</option>
+          <option value="mixed-use">Mixed-use (commercial + apartments)</option>
+          <option value="office">Office / professional</option>
+          <option value="medical">Medical / dental</option>
+          <option value="automotive">Automotive / garage</option>
+          <option value="land">Commercial land</option>
+        </select>
+      </div>
+      <div>
+        <label for="bov-town" class="bov-label">Town</label>
+        <select id="bov-town" class="bov-input">
+          {TOWNS.map((t) => <option value={t.name}>{t.name}</option>)}
+          <option value="Other South Shore">Other South Shore</option>
+        </select>
+      </div>
+      <div>
+        <label for="bov-sqft" class="bov-label">Building size (sq ft)</label>
+        <input id="bov-sqft" type="number" min="0" step="500" value="5000" class="bov-input" />
+      </div>
+      <div>
+        <label for="bov-occupancy" class="bov-label">Occupancy today</label>
+        <select id="bov-occupancy" class="bov-input">
+          <option value="owner" selected>I run my business here</option>
+          <option value="leased">Fully leased to tenants</option>
+          <option value="mixed">Part leased, part mine</option>
+          <option value="vacant">Vacant / mostly vacant</option>
+        </select>
+      </div>
+      <div>
+        <label for="bov-condition" class="bov-label">Condition</label>
+        <select id="bov-condition" class="bov-input">
+          <option value="good">Good — well maintained</option>
+          <option value="fair" selected>Fair — shows its age</option>
+          <option value="poor">Needs real work</option>
+        </select>
+      </div>
+      <div id="bov-rent-wrap">
+        <label for="bov-rent" class="bov-label">Monthly rent collected ($, if any)</label>
+        <input id="bov-rent" type="number" min="0" step="250" value="0" placeholder="0 if none" class="bov-input" />
+      </div>
+      <div id="bov-lease-wrap" class="hidden">
+        <label for="bov-lease" class="bov-label">Who pays the expenses?</label>
+        <select id="bov-lease" class="bov-input">
+          <option value="nnn">Tenants, mostly (NNN)</option>
+          <option value="split" selected>We split them</option>
+          <option value="gross">I pay them (gross lease)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- LIVE READ -->
+    <div class="flex flex-col rounded-xl border border-teal-500/30 bg-navy-900 p-5 lg:col-span-3">
+      <p class="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-navy-100/60">
+        The instant read
+      </p>
+      <div id="bov-band" class="mt-3 hidden rounded-lg border border-white/10 bg-navy-950 p-4">
+        <p class="font-mono text-[11px] font-semibold uppercase tracking-widest text-teal-400">
+          Income-approach planning band — from your numbers
+        </p>
+        <p id="bov-band-figure" class="mt-1 font-display text-3xl font-bold text-white"></p>
+        <p id="bov-band-math" class="mt-1.5 font-mono text-[11px] leading-relaxed text-navy-100/60"></p>
+      </div>
+      <ul id="bov-drivers" class="mt-4 flex-1 space-y-3"></ul>
+      <p class="mt-4 border-t border-white/10 pt-3 text-[11px] leading-relaxed text-navy-100/50">
+        Planning context only — not an appraisal or a valuation of your property. The written number comes from the
+        Broker Opinion of Value: {SITE.founder} walks the building, pulls real comparables, and puts it in writing
+        within 48 hours. Free, no obligation, no listing pressure.
+      </p>
+      <button
+        id="bov-unlock"
+        type="button"
+        class="mt-4 w-full rounded-md bg-brass-500 px-5 py-3 text-sm font-bold text-navy-950 transition-colors hover:bg-brass-300"
+      >
+        Request My Free Opinion of Value →
+      </button>
+    </div>
+  </div>
+
+  <!-- GATE -->
+  <div id="bov-gate" class="mt-5 hidden rounded-xl border border-brass-500/40 bg-navy-900 p-5">
+    <p class="text-sm font-semibold text-white">Where is the building, and how do we reach you?</p>
+    <div class="mt-3 grid gap-3 sm:grid-cols-2">
+      <input id="bov-address" type="text" placeholder="Property address" autocomplete="street-address" class="bov-input sm:col-span-2" />
+      <input id="bov-name" type="text" placeholder="Your name" autocomplete="name" class="bov-input" />
+      <input id="bov-phone" type="tel" placeholder="Phone" autocomplete="tel" class="bov-input" />
+    </div>
+    <button id="bov-generate" type="button" class="mt-4 rounded-md bg-teal-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-500">
+      Confirm the Request
+    </button>
+    <p id="bov-gate-err" class="mt-2 hidden text-xs text-brass-300">Address, name, and phone are required.</p>
+  </div>
+</div>
+
+<!-- REQUEST SUMMARY DOC -->
+<div id="bov-doc" class="print-area mx-auto mt-6 hidden max-w-3xl rounded-xl bg-white p-6 shadow-lg sm:p-8">
+  <div class="flex items-start justify-between gap-4 border-b border-navy-100 pb-5">
+    <div class="flex items-center gap-3">
+      <img src="/images/ics-logo-mark.jpg" alt="" class="h-12 w-12 rounded-lg" width="160" height="160" />
+      <div>
+        <p class="font-display text-lg font-bold text-navy-900">Broker Opinion of Value — Request Summary</p>
+        <p class="text-xs text-ink-500">Innovative Commercial Strategies · icsgroup.ai · {SITE.phone}</p>
+      </div>
+    </div>
+    <p id="bov-doc-date" class="text-xs text-ink-500"></p>
+  </div>
+  <div id="bov-doc-meta" class="mt-4 text-sm leading-relaxed text-ink-700"></div>
+  <div id="bov-doc-read" class="mt-4 space-y-3 text-sm leading-relaxed text-ink-700"></div>
+  <div class="mt-6 rounded-lg border border-navy-100 bg-paper p-4">
+    <p class="font-display text-sm font-bold uppercase tracking-wider text-navy-900">What happens next</p>
+    <ol class="mt-2 space-y-1.5 text-sm text-ink-700">
+      <li><strong>1.</strong> {SITE.founder} calls within one business day to schedule the walk.</li>
+      <li><strong>2.</strong> Site walk — building, systems, leases if any, and your goals (sell, lease, refinance, or just know).</li>
+      <li><strong>3.</strong> Written opinion of value within 48 hours of the walk, built on real comparable sales and current buyer demand.</li>
+    </ol>
+    <p class="mt-3 text-xs text-ink-500">
+      Free and without obligation. A broker opinion of value is not an appraisal; provided under {SITE.license}.
+    </p>
+  </div>
+  <div class="mt-5 flex flex-wrap gap-3 print:hidden">
+    <button id="bov-print" type="button" class="rounded-md bg-navy-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-navy-700">
+      Print / Save as PDF
+    </button>
+    <a id="bov-emailit" href="#" class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-500">
+      Send the Request to ICS
+    </a>
+  </div>
+</div>
+
+<style>
+  .bov-input {
+    width: 100%;
+    border-radius: 0.375rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: #0b1f3a;
+    color: #f8fafc;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  .bov-input:focus {
+    outline: none;
+    border-color: #14b8a6;
+    box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.25);
+  }
+  .bov-label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(219, 228, 240, 0.8);
+  }
+</style>
+
+<script>
+  import {
+    incomeBand,
+    TYPE_NOTES,
+    OCCUPANCY_NOTES,
+    CONDITION_NOTES,
+    type BovInputs,
+    type PropertyType,
+    type Occupancy,
+    type LeaseStructure,
+    type Condition,
+  } from '../lib/bov';
+
+  function init() {
+    const root = document.getElementById('bov');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+
+    const $ = (id: string) => document.getElementById(id) as HTMLInputElement;
+    const fmt = (n: number) => '$' + n.toLocaleString('en-US');
+
+    function inputs(): BovInputs {
+      return {
+        type: $('bov-type').value as PropertyType,
+        town: $('bov-town').value,
+        sqft: Math.max(0, parseInt($('bov-sqft').value || '0', 10)),
+        occupancy: $('bov-occupancy').value as Occupancy,
+        condition: $('bov-condition').value as Condition,
+        monthlyRent: Math.max(0, parseInt($('bov-rent').value || '0', 10)),
+        leaseStructure: ($('bov-lease')?.value || 'split') as LeaseStructure,
+      };
+    }
+
+    function driverItems(i: BovInputs): string[] {
+      return [TYPE_NOTES[i.type], OCCUPANCY_NOTES[i.occupancy], CONDITION_NOTES[i.condition]];
+    }
+
+    function update() {
+      const i = inputs();
+      // land has no building rent panel
+      document.getElementById('bov-rent-wrap')!.style.display = i.type === 'land' ? 'none' : '';
+      document.getElementById('bov-lease-wrap')!.classList.toggle('hidden', i.type === 'land' || i.monthlyRent <= 0);
+
+      const band = incomeBand(i);
+      const bandEl = document.getElementById('bov-band')!;
+      if (band) {
+        bandEl.classList.remove('hidden');
+        document.getElementById('bov-band-figure')!.textContent = `${fmt(band.low)} – ${fmt(band.high)}`;
+        document.getElementById('bov-band-math')!.textContent =
+          `Your ${fmt(i.monthlyRent)}/mo × 12 → NOI ${fmt(band.noiLow)}–${fmt(band.noiHigh)} after expense allowance ÷ ` +
+          `${(band.capHigh * 100).toFixed(2)}%–${(band.capLow * 100).toFixed(2)}% planning cap band. Wide on purpose — the BOV narrows it.`;
+      } else {
+        bandEl.classList.add('hidden');
+      }
+
+      document.getElementById('bov-drivers')!.innerHTML = driverItems(i)
+        .map(
+          (d) =>
+            `<li class="flex gap-2.5 text-sm leading-relaxed text-navy-100/85"><span class="mt-0.5 shrink-0 text-teal-400">→</span><span>${d}</span></li>`
+        )
+        .join('');
+    }
+
+    ['bov-type', 'bov-town', 'bov-sqft', 'bov-occupancy', 'bov-condition', 'bov-rent', 'bov-lease'].forEach((id) =>
+      $(id)?.addEventListener('input', update)
+    );
+
+    document.getElementById('bov-unlock')!.addEventListener('click', () => {
+      const gate = document.getElementById('bov-gate')!;
+      gate.classList.remove('hidden');
+      gate.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    document.getElementById('bov-generate')!.addEventListener('click', () => {
+      const address = $('bov-address').value.trim();
+      const name = $('bov-name').value.trim();
+      const phone = $('bov-phone').value.trim();
+      const err = document.getElementById('bov-gate-err')!;
+      if (!address || !name || !phone) {
+        err.classList.remove('hidden');
+        return;
+      }
+      err.classList.add('hidden');
+
+      const i = inputs();
+      const band = incomeBand(i);
+      const typeLabel = ($('bov-type') as unknown as HTMLSelectElement).selectedOptions[0].textContent;
+
+      document.getElementById('bov-doc-date')!.textContent = new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+      document.getElementById('bov-doc-meta')!.innerHTML =
+        `<strong>Property:</strong> ${address}, ${i.town} — ${typeLabel}${i.sqft ? `, ~${i.sqft.toLocaleString('en-US')} sq ft` : ''}<br/>` +
+        `<strong>Owner:</strong> ${name} · ${phone}` +
+        (band
+          ? `<br/><strong>Income-approach planning band (owner's figures):</strong> ${fmt(band.low)} – ${fmt(band.high)}`
+          : '');
+      document.getElementById('bov-doc-read')!.innerHTML = driverItems(i).map((d) => `<p>${d}</p>`).join('');
+
+      const body = encodeURIComponent(
+        `Broker Opinion of Value request\n\nProperty: ${address}, ${i.town}\nType: ${typeLabel}\nSize: ${i.sqft.toLocaleString('en-US')} sq ft\nOccupancy: ${i.occupancy}\nCondition: ${i.condition}\nMonthly rent: ${i.monthlyRent ? fmt(i.monthlyRent) : 'n/a'}\n${band ? `Planning band: ${fmt(band.low)} – ${fmt(band.high)}\n` : ''}Owner: ${name}\nPhone: ${phone}\n\nPlease call to schedule the site walk.`
+      );
+      (document.getElementById('bov-emailit') as HTMLAnchorElement).href =
+        `mailto:${root.dataset.email}?subject=${encodeURIComponent(`BOV request — ${address}, ${i.town}`)}&body=${body}`;
+
+      if (root.dataset.formEndpoint) {
+        fetch(root.dataset.formEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ source: 'building-worth', address, name, phone, ...i, low: band?.low, high: band?.high }),
+        }).catch(() => {});
+      }
+
+      document.getElementById('bov-gate')!.classList.add('hidden');
+      const doc = document.getElementById('bov-doc')!;
+      doc.classList.remove('hidden');
+      doc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    document.getElementById('bov-print')?.addEventListener('click', () => window.print());
+
+    update();
+  }
+
+  document.addEventListener('astro:page-load', init);
+</script>
