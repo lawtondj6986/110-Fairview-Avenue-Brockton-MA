@@ -61,8 +61,9 @@ const tiers = [
 
 const capabilities = [
   {
-    name: 'QuoteBrain™',
-    body: 'Instant-quote calculators with real trade pricing logic — square footage, prep condition, mobilization minimums, volume breaks. Your customer gets a serious number in 30 seconds instead of 3 days. Built from actual operations experience, not a plugin.',
+    name: 'QuoteBrain™ 2.0',
+    body: 'Instant-quote systems with real trade pricing logic — customers measure their own lot on satellite imagery and get a professional written estimate in 60 seconds, captured straight into your pipeline. Try the live demo on your own property.',
+    href: '/quotebrain/',
   },
   {
     name: 'First-Minute Response',
@@ -241,9 +242,14 @@ const schema = [
       <div class="mt-12 grid gap-6 sm:grid-cols-2">
         {
           capabilities.map((cap, i) => (
-            <div class="reveal rounded-xl border border-white/10 bg-navy-800 p-7" style={`--reveal-delay: ${i * 60}ms`}>
+            <div class="reveal lift rounded-xl border border-white/10 bg-navy-800 p-7" style={`--reveal-delay: ${i * 60}ms`}>
               <h3 class="font-display text-lg font-bold text-teal-400">{cap.name}</h3>
               <p class="mt-2 text-sm leading-relaxed text-navy-100/80">{cap.body}</p>
+              {cap.href && (
+                <a href={cap.href} class="mt-3 inline-block text-sm font-semibold text-teal-400 hover:text-teal-500">
+                  Try the live demo →
+                </a>
+              )}
             </div>
           ))
         }

@@ -1,0 +1,439 @@
+---
+import { SITE } from '../config';
+
+/**
+ * QuoteBrain 2.0 — measure a real lot on satellite imagery, price it with a
+ * trade-configurable engine, and generate a professional written estimate.
+ *
+ * Free/self-hosted stack: Leaflet + Esri World Imagery tiles + OSM Nominatim
+ * geocoding. Pricing + scope live in src/lib/quote-engines.ts.
+ * If SITE.formEndpoint is set, unlocked estimates also POST there as leads.
+ */
+---
+
+<div
+  id="qb2"
+  class="rounded-2xl border border-white/10 bg-navy-950 p-4 shadow-2xl sm:p-6"
+  data-form-endpoint={SITE.formEndpoint}
+  data-email={SITE.email}
+  data-phone={SITE.phone}
+>
+  <div class="flex flex-wrap items-center justify-between gap-3 px-1 pb-4">
+    <div>
+      <p class="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-teal-400">
+        QuoteBrain™ 2.0 · Live
+      </p>
+      <h2 class="mt-1 text-xl font-bold text-white sm:text-2xl">Measure your actual lot. Price the job.</h2>
+    </div>
+    <span class="rounded-full border border-teal-400/40 px-3 py-1 font-mono text-[11px] font-semibold text-teal-400">
+      SATELLITE MEASURE · SOUTH SHORE MA RATES
+    </span>
+  </div>
+
+  <div class="grid gap-5 lg:grid-cols-5">
+    <!-- MAP COLUMN -->
+    <div class="lg:col-span-3">
+      <div class="flex gap-2">
+        <input
+          id="qb2-address"
+          type="search"
+          placeholder="Enter the property address…"
+          class="qb2-input flex-1"
+          autocomplete="street-address"
+        />
+        <button id="qb2-search" type="button" class="rounded-md bg-teal-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-teal-500">
+          Find it
+        </button>
+      </div>
+      <div id="qb2-map" class="mt-3 h-[380px] w-full overflow-hidden rounded-xl border border-white/10 bg-navy-900 sm:h-[440px]"></div>
+      <div class="mt-3 flex flex-wrap items-center gap-2">
+        <span class="rounded-full bg-navy-900 px-3 py-1.5 font-mono text-xs text-navy-100/80">
+          Tap the corners of your pavement
+        </span>
+        <button id="qb2-undo" type="button" class="rounded-md border border-white/20 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">
+          Undo point
+        </button>
+        <button id="qb2-clear" type="button" class="rounded-md border border-white/20 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">
+          Clear
+        </button>
+        <output id="qb2-area" class="ml-auto font-mono text-sm font-bold text-teal-400">0 sq ft</output>
+      </div>
+      <div class="mt-3 flex items-center gap-3">
+        <label for="qb2-sqft" class="text-xs font-medium text-navy-100/80">Or type the area:</label>
+        <input id="qb2-sqft" type="number" min="0" step="100" placeholder="sq ft" class="qb2-input w-32" />
+      </div>
+    </div>
+
+    <!-- PRICING COLUMN -->
+    <div class="flex flex-col rounded-xl border border-teal-500/30 bg-navy-900 p-5 lg:col-span-2">
+      <div class="grid grid-cols-2 gap-3">
+        <div class="col-span-2">
+          <label for="qb2-trade" class="qb2-label">Trade</label>
+          <select id="qb2-trade" class="qb2-input">
+            <option value="sealcoating" selected>Sealcoating (2-coat)</option>
+            <option value="paving">Asphalt overlay (1.5")</option>
+          </select>
+        </div>
+        <div>
+          <label for="qb2-jobtype" class="qb2-label">Property</label>
+          <select id="qb2-jobtype" class="qb2-input">
+            <option value="commercial" selected>Commercial</option>
+            <option value="residential">Residential</option>
+          </select>
+        </div>
+        <div>
+          <label for="qb2-condition" class="qb2-label">Condition</label>
+          <select id="qb2-condition" class="qb2-input">
+            <option value="good">Good</option>
+            <option value="fair" selected>Fair</option>
+            <option value="poor">Poor</option>
+          </select>
+        </div>
+        <div data-seal-only>
+          <label for="qb2-cracks" class="qb2-label">Crack fill (lin ft)</label>
+          <input id="qb2-cracks" type="number" min="0" step="50" value="300" class="qb2-input" />
+        </div>
+        <div>
+          <label for="qb2-stalls" class="qb2-label">Stripe stalls</label>
+          <input id="qb2-stalls" type="number" min="0" step="1" value="20" class="qb2-input" />
+        </div>
+        <label class="col-span-2 flex cursor-pointer items-center gap-2 text-sm text-navy-100" data-seal-only>
+          <input type="checkbox" id="qb2-oil" class="h-4 w-4 accent-teal-500" checked />
+          Oil-spot priming needed
+        </label>
+      </div>
+
+      <div class="mt-5 border-t border-white/10 pt-4">
+        <p class="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-navy-100/60">Planning estimate</p>
+        <p id="qb2-total" class="mt-1 font-display text-3xl font-bold text-white">Measure the lot →</p>
+        <p id="qb2-persqft" class="mt-1 font-mono text-xs text-navy-100/60"></p>
+      </div>
+
+      <div class="mt-auto pt-5">
+        <button
+          id="qb2-unlock"
+          type="button"
+          class="w-full rounded-md bg-brass-500 px-5 py-3 text-sm font-bold text-navy-950 transition-colors hover:bg-brass-300 disabled:cursor-not-allowed disabled:opacity-40"
+          disabled
+        >
+          Get the Written Estimate →
+        </button>
+        <p class="mt-2 text-center text-[11px] text-navy-100/50">
+          Free · printable · no obligation
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEAD GATE -->
+  <div id="qb2-gate" class="mt-5 hidden rounded-xl border border-brass-500/40 bg-navy-900 p-5">
+    <p class="text-sm font-semibold text-white">Where should the estimate go?</p>
+    <div class="mt-3 grid gap-3 sm:grid-cols-3">
+      <input id="qb2-name" type="text" placeholder="Your name" autocomplete="name" class="qb2-input" />
+      <input id="qb2-phone" type="tel" placeholder="Phone" autocomplete="tel" class="qb2-input" />
+      <input id="qb2-mail" type="email" placeholder="Email (optional)" autocomplete="email" class="qb2-input" />
+    </div>
+    <button id="qb2-generate" type="button" class="mt-4 rounded-md bg-teal-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-500">
+      Generate My Estimate
+    </button>
+    <p id="qb2-gate-err" class="mt-2 hidden text-xs text-brass-300">Name and phone are required.</p>
+  </div>
+
+  <!-- ESTIMATE OUTPUT -->
+  <div id="qb2-doc" class="print-area mt-5 hidden rounded-xl bg-white p-6 sm:p-8">
+    <div class="flex items-start justify-between gap-4 border-b border-navy-100 pb-5">
+      <div class="flex items-center gap-3">
+        <img src="/images/ics-logo-mark.jpg" alt="" class="h-12 w-12 rounded-lg" width="160" height="160" />
+        <div>
+          <p class="font-display text-lg font-bold text-navy-900">Innovative Commercial Strategies</p>
+          <p class="text-xs text-ink-500">icsgroup.ai · {SITE.phone} · {SITE.email}</p>
+        </div>
+      </div>
+      <div class="text-right">
+        <p class="font-mono text-[11px] font-semibold uppercase tracking-widest text-teal-600">Planning Estimate</p>
+        <p id="qb2-doc-date" class="mt-1 text-xs text-ink-500"></p>
+      </div>
+    </div>
+    <div id="qb2-doc-meta" class="mt-4 text-sm text-ink-700"></div>
+    <div id="qb2-doc-scope" class="mt-4 space-y-3 text-sm leading-relaxed text-ink-700"></div>
+    <table class="mt-5 w-full text-sm">
+      <thead>
+        <tr class="border-b border-navy-100 text-left">
+          <th class="py-2 font-display text-xs font-bold uppercase tracking-wider text-navy-900">Item</th>
+          <th class="py-2 font-display text-xs font-bold uppercase tracking-wider text-navy-900">Detail</th>
+          <th class="py-2 text-right font-display text-xs font-bold uppercase tracking-wider text-navy-900">Range</th>
+        </tr>
+      </thead>
+      <tbody id="qb2-doc-lines"></tbody>
+      <tfoot>
+        <tr class="border-t-2 border-navy-900">
+          <td colspan="2" class="py-3 font-display text-base font-bold text-navy-900">Estimated total</td>
+          <td id="qb2-doc-total" class="py-3 text-right font-display text-base font-bold text-navy-900"></td>
+        </tr>
+      </tfoot>
+    </table>
+    <p class="mt-4 text-[11px] leading-relaxed text-ink-500">
+      Planning estimate based on customer-provided measurements and current South Shore MA market conditions — not a
+      contract. Firm written quote follows an on-site walk. Estimate valid 30 days. {SITE.license}.
+    </p>
+    <div class="mt-5 flex flex-wrap gap-3 print:hidden">
+      <button id="qb2-print" type="button" class="rounded-md bg-navy-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-navy-700">
+        Print / Save as PDF
+      </button>
+      <a id="qb2-emailit" href="#" class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-500">
+        Email It to ICS — Book the Site Walk
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .qb2-input {
+    width: 100%;
+    border-radius: 0.375rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: #0b1f3a;
+    color: #f8fafc;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.875rem;
+  }
+  .qb2-input:focus {
+    outline: none;
+    border-color: #14b8a6;
+    box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.25);
+  }
+  .qb2-label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(219, 228, 240, 0.8);
+  }
+  /* Estimate doc inputs are on white — keep readable if reused */
+  #qb2-doc .qb2-input {
+    background: #fff;
+    color: #334155;
+    border-color: #dbe4f0;
+  }
+  @media print {
+    :global(body *) {
+      visibility: hidden;
+    }
+    :global(.print-area),
+    :global(.print-area *) {
+      visibility: visible;
+    }
+    :global(.print-area) {
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      border-radius: 0;
+    }
+  }
+</style>
+
+<script>
+  import L from 'leaflet';
+  import 'leaflet/dist/leaflet.css';
+  import { price, writeScope, type QuoteInputs } from '../lib/quote-engines';
+
+  const SQFT_PER_M2 = 10.7639;
+
+  function polygonAreaSqFt(pts: { lat: number; lng: number }[]): number {
+    if (pts.length < 3) return 0;
+    const R = 6378137;
+    const lat0 = (pts.reduce((s, p) => s + p.lat, 0) / pts.length) * (Math.PI / 180);
+    const xy = pts.map((p) => [R * (p.lng * Math.PI / 180) * Math.cos(lat0), R * (p.lat * Math.PI / 180)]);
+    let a = 0;
+    for (let i = 0; i < xy.length; i++) {
+      const [x1, y1] = xy[i];
+      const [x2, y2] = xy[(i + 1) % xy.length];
+      a += x1 * y2 - x2 * y1;
+    }
+    return Math.abs(a / 2) * SQFT_PER_M2;
+  }
+
+  function init() {
+    const root = document.getElementById('qb2');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+
+    const $ = (id: string) => document.getElementById(id) as HTMLInputElement;
+    const fmt = (n: number) => '$' + n.toLocaleString('en-US');
+
+    // --- Map ---
+    const map = L.map('qb2-map', { zoomControl: true, attributionControl: true }).setView([42.083, -71.018], 13);
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 20,
+      maxNativeZoom: 19,
+      attribution: 'Imagery © Esri, Maxar, Earthstar Geographics',
+    }).addTo(map);
+
+    let points: { lat: number; lng: number }[] = [];
+    let polygon: L.Polygon | null = null;
+    let markers: L.CircleMarker[] = [];
+    let measuredSqft = 0;
+    let address = '';
+
+    function redraw() {
+      markers.forEach((m) => m.remove());
+      markers = points.map((p) =>
+        L.circleMarker(p, { radius: 5, color: '#14b8a6', weight: 2, fillColor: '#0b1f3a', fillOpacity: 1 }).addTo(map)
+      );
+      polygon?.remove();
+      polygon = points.length >= 3
+        ? L.polygon(points, { color: '#14b8a6', weight: 2, fillColor: '#14b8a6', fillOpacity: 0.25 }).addTo(map)
+        : null;
+      measuredSqft = Math.round(polygonAreaSqFt(points));
+      document.getElementById('qb2-area')!.textContent = measuredSqft.toLocaleString('en-US') + ' sq ft';
+      if (measuredSqft > 0) $('qb2-sqft').value = String(measuredSqft);
+      update();
+    }
+
+    map.on('click', (e: L.LeafletMouseEvent) => {
+      points.push({ lat: e.latlng.lat, lng: e.latlng.lng });
+      redraw();
+    });
+    document.getElementById('qb2-undo')!.addEventListener('click', () => {
+      points.pop();
+      redraw();
+    });
+    document.getElementById('qb2-clear')!.addEventListener('click', () => {
+      points = [];
+      redraw();
+    });
+
+    // --- Geocoding (OSM Nominatim, light use w/ attribution) ---
+    async function search() {
+      const q = $('qb2-address').value.trim();
+      if (!q) return;
+      address = q;
+      try {
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(q)}`,
+          { headers: { Accept: 'application/json' } }
+        );
+        const hits = await res.json();
+        if (hits?.[0]) {
+          map.setView([parseFloat(hits[0].lat), parseFloat(hits[0].lon)], 19);
+          points = [];
+          redraw();
+        }
+      } catch {
+        /* offline or blocked — user can pan manually */
+      }
+    }
+    document.getElementById('qb2-search')!.addEventListener('click', search);
+    $('qb2-address').addEventListener('keydown', (e) => {
+      if ((e as KeyboardEvent).key === 'Enter') {
+        e.preventDefault();
+        search();
+      }
+    });
+
+    // --- Pricing ---
+    function inputs(): QuoteInputs {
+      return {
+        trade: $('qb2-trade').value as QuoteInputs['trade'],
+        sqft: Math.max(0, parseInt($('qb2-sqft').value || '0', 10)),
+        condition: $('qb2-condition').value as QuoteInputs['condition'],
+        crackFeet: Math.max(0, parseInt($('qb2-cracks').value || '0', 10)),
+        stalls: Math.max(0, parseInt($('qb2-stalls').value || '0', 10)),
+        oilSpots: ($('qb2-oil') as HTMLInputElement).checked,
+        jobType: $('qb2-jobtype').value as QuoteInputs['jobType'],
+      };
+    }
+
+    function update() {
+      const i = inputs();
+      // Sealcoating-only fields toggle
+      root.querySelectorAll<HTMLElement>('[data-seal-only]').forEach((el) => {
+        el.style.display = i.trade === 'sealcoating' ? '' : 'none';
+      });
+      const totalEl = document.getElementById('qb2-total')!;
+      const perEl = document.getElementById('qb2-persqft')!;
+      const unlock = document.getElementById('qb2-unlock') as HTMLButtonElement;
+      if (i.sqft < 100) {
+        totalEl.textContent = 'Measure the lot →';
+        perEl.textContent = '';
+        unlock.disabled = true;
+        return;
+      }
+      if (i.sqft > 2_000_000) {
+        totalEl.textContent = 'Zoom in first';
+        perEl.textContent = "That's over 45 acres — search your address, zoom to your lot, and trace just the pavement.";
+        unlock.disabled = true;
+        return;
+      }
+      const r = price(i);
+      totalEl.textContent = `${fmt(r.low)} – ${fmt(r.high)}`;
+      perEl.textContent = `$${r.perSqftLow.toFixed(2)} – $${r.perSqftHigh.toFixed(2)} per sq ft, all-in`;
+      unlock.disabled = false;
+    }
+    ['qb2-trade', 'qb2-jobtype', 'qb2-condition', 'qb2-cracks', 'qb2-stalls', 'qb2-oil', 'qb2-sqft'].forEach((id) =>
+      $(id).addEventListener('input', update)
+    );
+
+    // --- Lead gate + estimate doc ---
+    document.getElementById('qb2-unlock')!.addEventListener('click', () => {
+      document.getElementById('qb2-gate')!.classList.remove('hidden');
+      document.getElementById('qb2-gate')!.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    document.getElementById('qb2-generate')!.addEventListener('click', async () => {
+      const name = $('qb2-name').value.trim();
+      const phone = $('qb2-phone').value.trim();
+      const email = $('qb2-mail').value.trim();
+      const err = document.getElementById('qb2-gate-err')!;
+      if (!name || !phone) {
+        err.classList.remove('hidden');
+        return;
+      }
+      err.classList.add('hidden');
+
+      const i = inputs();
+      const r = price(i);
+      const scope = writeScope(i, r, address || $('qb2-address').value.trim());
+
+      document.getElementById('qb2-doc-date')!.textContent =
+        new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById('qb2-doc-meta')!.innerHTML =
+        `<strong>Prepared for:</strong> ${name} · ${phone}${email ? ' · ' + email : ''}` +
+        (address ? `<br/><strong>Property:</strong> ${address}` : '');
+      document.getElementById('qb2-doc-scope')!.innerHTML = scope.map((p) => `<p>${p}</p>`).join('');
+      document.getElementById('qb2-doc-lines')!.innerHTML = r.lines
+        .map(
+          (l) =>
+            `<tr class="border-b border-navy-100/60"><td class="py-2 pr-3 font-semibold text-navy-900">${l.item}</td><td class="py-2 pr-3 text-ink-500">${l.detail}</td><td class="py-2 text-right font-mono text-navy-900">${fmt(Math.round(l.low / 50) * 50)} – ${fmt(Math.round(l.high / 50) * 50)}</td></tr>`
+        )
+        .join('');
+      document.getElementById('qb2-doc-total')!.textContent = `${fmt(r.low)} – ${fmt(r.high)}`;
+
+      const body = encodeURIComponent(
+        `QuoteBrain estimate request\n\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nProperty: ${address}\nTrade: ${i.trade} (${i.jobType})\nArea: ${i.sqft.toLocaleString('en-US')} sq ft\nRange: ${fmt(r.low)} – ${fmt(r.high)}\n\nPlease schedule the site walk.`
+      );
+      (document.getElementById('qb2-emailit') as HTMLAnchorElement).href =
+        `mailto:${root.dataset.email}?subject=${encodeURIComponent('QuoteBrain estimate — ' + (address || i.trade))}&body=${body}`;
+
+      // Silent lead capture once a form endpoint exists
+      if (root.dataset.formEndpoint) {
+        fetch(root.dataset.formEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ source: 'quotebrain', name, phone, email, address, ...i, low: r.low, high: r.high }),
+        }).catch(() => {});
+      }
+
+      document.getElementById('qb2-gate')!.classList.add('hidden');
+      const doc = document.getElementById('qb2-doc')!;
+      doc.classList.remove('hidden');
+      doc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    document.getElementById('qb2-print')!.addEventListener('click', () => window.print());
+
+    update();
+  }
+
+  document.addEventListener('astro:page-load', init);
+</script>

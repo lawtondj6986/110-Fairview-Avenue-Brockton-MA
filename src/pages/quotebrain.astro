@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CtaSection from '../components/CtaSection.astro';
+import QuoteBrain2 from '../components/QuoteBrain2.astro';
+import { SITE } from '../config';
+
+const title = 'QuoteBrain 2.0 — Measure Your Lot by Satellite, Get a Real Estimate | ICS';
+const description =
+  'Type your address, trace your parking lot or driveway on satellite imagery, and get a professional written sealcoating or paving estimate in 60 seconds — built by Innovative Commercial Strategies, South Shore MA.';
+
+const steps = [
+  ['01', 'Find your property', 'Type the address and the map flies to your actual lot on satellite imagery.'],
+  ['02', 'Trace the pavement', 'Tap the corners of your lot or driveway — the area is measured to the square foot as you click.'],
+  ['03', 'Dial in the job', 'Trade, condition, crack footage, striping — the price range updates live with real market rates.'],
+  ['04', 'Get the written estimate', 'A professional scope-of-work document, printable as a PDF — and a site walk booked if you want the firm number.'],
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'QuoteBrain 2.0',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    provider: { '@type': 'Organization', name: SITE.name },
+    description,
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">QuoteBrain™ 2.0</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        Your competitor will call you back Thursday. This takes 60 seconds.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Measure your actual lot on satellite imagery and get a professional written estimate with real South Shore
+        pricing — the same class of instant-quote system we install for contractor clients.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <QuoteBrain2 />
+    <p class="mt-3 text-center text-xs text-ink-500">
+      Imagery © Esri · Geocoding © OpenStreetMap contributors · Planning ranges, not a contract — the firm quote
+      follows a site walk.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+    <SectionHeading eyebrow="How it works" heading="Four steps, no phone tag" align="center" />
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        steps.map(([n, t, b], i) => (
+          <div class="reveal rounded-xl border border-navy-100 bg-white p-6 shadow-sm" style={`--reveal-delay: ${i * 60}ms`}>
+            <p class="font-mono text-sm font-bold text-teal-600">{n}</p>
+            <h3 class="mt-2 text-lg font-bold text-navy-900">{t}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-500">{b}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <div class="reveal rounded-xl bg-navy-950 p-8 text-center sm:p-10">
+        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">For contractors</p>
+        <h2 class="mx-auto mt-3 max-w-2xl text-3xl font-bold text-white">
+          Want this on <em class="not-italic text-teal-400">your</em> website, priced with <em class="not-italic text-teal-400">your</em> rates?
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-navy-100/85">
+          QuoteBrain installs ship with every JobSite system — your trade, your pricing logic, your branding, feeding
+          your CRM. While your competitor's customers wait for a callback, yours get a serious number in one minute.
+        </p>
+        <a href="/contact/" class="mt-7 inline-block rounded-md bg-teal-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-teal-500">
+          Get QuoteBrain for Your Trade
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CtaSection
+    heading="Prefer a human number?"
+    body="Skip the calculator entirely — call or email and Daniel will walk the property himself, usually within 48 hours."
+  />
+</Base>
