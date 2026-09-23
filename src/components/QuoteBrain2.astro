@@ -233,6 +233,7 @@ import { SITE } from '../config';
 </style>
 
 <script>
+  import { track } from '@vercel/analytics';
   import L from 'leaflet';
   import 'leaflet/dist/leaflet.css';
   import { price, writeScope, type QuoteInputs } from '../lib/quote-engines';
@@ -424,6 +425,7 @@ import { SITE } from '../config';
         }).catch(() => {});
       }
 
+      track('lead_quotebrain', { trade: i.trade, sqft: i.sqft });
       document.getElementById('qb2-gate')!.classList.add('hidden');
       const doc = document.getElementById('qb2-doc')!;
       doc.classList.remove('hidden');

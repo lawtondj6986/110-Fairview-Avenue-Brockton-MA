@@ -1,0 +1,26 @@
+# Quality receipts: every push to main must build clean, keep every internal
+# link alive, and hold Lighthouse scores above the thresholds in
+# lighthouserc.json. If this fails, the site quality regressed — fix before
+# merging anything else. (Vercel deploys independently; this is the alarm.)
+name: Quality receipts
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Check internal links
+        run: npx linkinator ./dist --recurse --silent --skip "^(?!http://localhost)"
+      - name: Lighthouse audit
+        run: npx --yes @lhci/cli@0.14.x autorun

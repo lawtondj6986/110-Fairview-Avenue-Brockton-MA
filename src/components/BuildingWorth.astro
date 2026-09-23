@@ -188,6 +188,7 @@ import { TOWNS } from '../lib/towns';
 </style>
 
 <script>
+  import { track } from '@vercel/analytics';
   import {
     incomeBand,
     TYPE_NOTES,
@@ -302,6 +303,7 @@ import { TOWNS } from '../lib/towns';
         }).catch(() => {});
       }
 
+      track('lead_bov', { type: i.type, town: i.town });
       document.getElementById('bov-gate')!.classList.add('hidden');
       const doc = document.getElementById('bov-doc')!;
       doc.classList.remove('hidden');
