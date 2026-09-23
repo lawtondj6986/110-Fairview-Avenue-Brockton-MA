@@ -19,3 +19,7 @@ npm-debug.log*
 # editors
 .vscode/
 .idea/
+
+# generated social cards
+public/og/
+src/generated/
