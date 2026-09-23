@@ -34,6 +34,7 @@ function collectPages() {
     ['/ai-readiness/', 'ai-readiness', 'FREE ASSESSMENT · 2 MINUTES', 'Find out exactly where your business leaks revenue.'],
     ['/building-worth/', 'building-worth', 'FREE BROKER OPINION OF VALUE', "What's your building actually worth?"],
     ['/pricing/', 'pricing', 'PUBLISHED PRICING', "Pricing that isn't a secret."],
+    ['/compare/', 'compare', 'THE HONEST COMPARISON', 'DIY, agency, or ICS? The comparison nobody else will publish.'],
     ['/guarantees/', 'guarantees', 'IN WRITING · WITH CONSEQUENCES', 'Four promises. 21 days. 60 seconds. 90 days. 100% yours.'],
     ['/scoreboard/', 'scoreboard', 'UPDATED MONTHLY', 'Agencies show portfolios. We show a scoreboard.'],
     ['/south-shore/', 'south-shore', 'SERVICE AREA · TEN TOWNS, IN PERSON', "We don't cover the South Shore. We work it."],

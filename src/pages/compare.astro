@@ -1,0 +1,201 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { SITE } from '../config';
+
+const title = 'DIY vs. Web Agency vs. ICS — An Honest Comparison | ICS';
+const description =
+  'Wix vs. a web agency vs. ICS revenue systems, compared honestly: cost, launch time, lead response, guarantees, and lock-in. Including when NOT to hire us — and the questions to ask anyone you do.';
+
+const rows = [
+  ['Upfront cost', '$0–$500', '$3K–$15K — revealed after the sales call', '$6.5K–$30K — published before you call'],
+  ['Monthly cost', '$20–$50 platform fee', '$500–$3K, scope drifts', '$450–$6K, scope fixed in writing'],
+  ['Time to launch', 'A weekend — your weekend', '8–14 weeks, typically', '21 days, guaranteed or we pay'],
+  ['Who does the work', 'You, at 11pm after a full day', 'A rotating team behind an account manager', 'The founder, personally, every time'],
+  ['Lead response after launch', 'Whatever you wire up yourself', "Usually not the agency's problem", '<60 seconds, 24/7, guaranteed'],
+  ['Quote follow-up & reviews', 'Manual, when you remember', 'An add-on, priced separately', 'Built in: sequences + Proof Engine'],
+  ['Local SEO + AI visibility (AEO)', 'Template basics, DIY plugins', 'Classic SEO sometimes; AEO rarely', 'Structured data, llms.txt, town pages — standard'],
+  ['Reporting', 'Platform stats page', 'A monthly PDF', 'Live dashboard + a public scoreboard'],
+  ['Guarantees', 'None', '"We\'ll make it right" (verbal)', 'Four written guarantees with consequences'],
+  ['Ownership & lock-in', "Platform lock-in — you can't take a Wix site with you", 'Hosting and retainer lock-in are common', 'You own code, accounts, data — in writing'],
+];
+
+const choose = [
+  {
+    who: 'Choose DIY if…',
+    body: "You're pre-revenue, testing an idea, or a website is genuinely just a business card for you. Wix and Squarespace are fine for that — honestly. Spend the $500, not the $10,000, and come back when leads are worth money.",
+    tone: 'neutral',
+  },
+  {
+    who: 'Choose a traditional agency if…',
+    body: "You need a 15-person team: national brand campaigns, custom e-commerce platforms, TV-adjacent creative. That's real work we don't do. A local service business rarely needs it — but some businesses genuinely do.",
+    tone: 'neutral',
+  },
+  {
+    who: 'Choose ICS if…',
+    body: 'You run a business that lives on leads — trades, services, medical, retail — and you want the website, the response speed, the follow-up, and the reviews working as one measured system, built by someone accountable to written guarantees.',
+    tone: 'ics',
+  },
+];
+
+const questions = [
+  'What does it cost? (If the answer requires three meetings, that\'s the answer.)',
+  'When will it launch — and what happens if you miss the date?',
+  'Who answers my leads at 7pm, and how fast? Show me the measurement.',
+  'What happens to quotes nobody replied to?',
+  'Who owns the code, the domain, the ad accounts, and the data if we part ways?',
+  'Show me three clients\' measured results — leads and revenue, not screenshots.',
+  'What do you guarantee in writing, and what does it cost you when you miss?',
+];
+
+const faqs = [
+  {
+    q: 'Is Wix or Squarespace good enough for my business?',
+    a: "If a website is just your business card — yes, genuinely. If your business lives on leads, the website is the smallest piece: response speed, follow-up sequences, review velocity, and local visibility decide who wins, and DIY platforms don't do those. That's the honest line: pre-revenue, go DIY; lead-driven, build the system.",
+  },
+  {
+    q: 'How much should a small business website cost?',
+    a: 'A brochure site: $0–$500 DIY or $3,000–$8,000 built. A revenue system — site plus instant lead response, follow-up automation, review engine, and local SEO with measurement — runs $6,500–$18,000 to install plus a monthly retainer. Anyone quoting either number without asking about your lead flow is selling a template.',
+  },
+  {
+    q: 'Why do most agencies hide their pricing?',
+    a: "Because opacity is leverage: it forces a sales meeting where the proposal can be engineered around your budget. We publish ours (icsgroup.ai/pricing) because accountability wins better clients — and because a prospect who can't afford the range saves both of us three discovery calls.",
+  },
+  {
+    q: 'What should I ask before hiring any web or marketing company?',
+    a: 'Seven questions: published pricing? guaranteed launch date with consequences? who answers my leads and how fast? what happens to unanswered quotes? who owns everything if we part ways? show me measured client results? what do you guarantee in writing? Ask us the same seven — that\'s the point.',
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">The honest comparison</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        DIY, agency, or ICS? Here's the comparison nobody else will publish.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Including the rows we don't win, the cases where you shouldn't hire us, and the seven questions you should ask
+        anyone you do — us included.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+    <div class="reveal overflow-x-auto rounded-xl border border-navy-100 bg-white shadow-sm">
+      <table class="w-full min-w-[820px] text-left text-sm">
+        <thead>
+          <tr class="border-b border-navy-100 bg-paper">
+            <th class="px-5 py-4 font-display text-xs font-bold uppercase tracking-wider text-navy-900"></th>
+            <th class="px-5 py-4 font-display text-xs font-bold uppercase tracking-wider text-ink-500">DIY (Wix / Squarespace)</th>
+            <th class="px-5 py-4 font-display text-xs font-bold uppercase tracking-wider text-ink-500">Typical agency</th>
+            <th class="bg-navy-900 px-5 py-4 font-display text-xs font-bold uppercase tracking-wider text-teal-400">ICS</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map(([dim, diy, agency, ics]) => (
+              <tr class="border-b border-navy-100 last:border-0">
+                <td class="px-5 py-3.5 font-semibold text-navy-900">{dim}</td>
+                <td class="px-5 py-3.5 text-ink-500">{diy}</td>
+                <td class="px-5 py-3.5 text-ink-500">{agency}</td>
+                <td class="bg-navy-900/[0.03] px-5 py-3.5 font-medium text-navy-900">{ics}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-sm text-ink-500">
+      Agency figures are market-typical ranges, not claims about any specific firm. Our column links to receipts:
+      <a href="/pricing/" class="font-semibold text-teal-600 hover:text-teal-500">published pricing</a>,
+      <a href="/guarantees/" class="font-semibold text-teal-600 hover:text-teal-500">written guarantees</a>, and the
+      <a href="/scoreboard/" class="font-semibold text-teal-600 hover:text-teal-500">scoreboard</a>.
+    </p>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+      <SectionHeading eyebrow="Straight steering" heading="All three are right for someone" align="center" />
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {
+          choose.map((c, i) => (
+            <div
+              class:list={[
+                'reveal lift rounded-xl border p-7',
+                c.tone === 'ics' ? 'border-teal-500 bg-navy-900' : 'border-navy-100 bg-paper',
+              ]}
+              style={`--reveal-delay: ${i * 70}ms`}
+            >
+              <h3 class:list={['text-lg font-bold', c.tone === 'ics' ? 'text-teal-400' : 'text-navy-900']}>{c.who}</h3>
+              <p class:list={['mt-3 text-sm leading-relaxed', c.tone === 'ics' ? 'text-navy-100/85' : 'text-ink-500']}>
+                {c.body}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 py-14 sm:px-6">
+    <SectionHeading
+      eyebrow="Take this list to every meeting"
+      heading="Seven questions to ask anyone you hire — including us"
+      align="center"
+    />
+    <ol class="reveal mt-8 space-y-3">
+      {
+        questions.map((q, i) => (
+          <li class="flex gap-4 rounded-xl border border-navy-100 bg-white p-5 shadow-sm">
+            <span class="font-mono text-sm font-bold text-teal-600">{String(i + 1).padStart(2, '0')}</span>
+            <span class="text-sm leading-relaxed text-ink-700">{q}</span>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="mt-6 text-center text-sm text-ink-500">
+      Our answers to all seven live on this site in writing. If another firm's answers do too — genuinely, hire
+      whoever fits. That's confidence, not a bluff.
+    </p>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-3xl px-4 py-14 sm:px-6">
+      <SectionHeading eyebrow="Decision questions" heading="Straight answers" align="center" />
+      <div class="mt-8 space-y-4">
+        {
+          faqs.map((faq) => (
+            <details class="group rounded-xl border border-navy-100 bg-paper p-6">
+              <summary class="cursor-pointer list-none font-semibold text-navy-900 [&::-webkit-details-marker]:hidden">
+                <span class="flex items-center justify-between gap-4">
+                  {faq.q}
+                  <span class="text-teal-600 transition-transform duration-150 group-open:rotate-45">+</span>
+                </span>
+              </summary>
+              <p class="mt-3 text-sm leading-relaxed text-ink-500">{faq.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaSection
+    heading="Ask us the seven questions."
+    body="Book the call and grill us — published pricing, guaranteed dates, measured results, full ownership. We built the whole business to survive this exact interview."
+    primaryLabel="Book a Free Strategy Call"
+    secondaryLabel="See Published Pricing"
+    secondaryHref="/pricing/"
+  />
+</Base>
