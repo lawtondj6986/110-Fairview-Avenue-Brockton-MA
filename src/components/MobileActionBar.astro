@@ -1,0 +1,75 @@
+---
+import { SITE } from '../config';
+
+/**
+ * Mobile Money Bar — thumb-height action bar that slides in on phones after
+ * the first scroll. Call and Text are native one-tap links; the third slot
+ * routes to the most relevant lead engine for the current page.
+ */
+const path = Astro.url.pathname;
+const tel = SITE.phone.replace(/[^\d+]/g, '');
+
+let target = { href: '/quotebrain/', label: 'Instant Quote' };
+if (/^\/(ai-services|ai-readiness|pricing|guarantees)/.test(path)) {
+  target = { href: '/ai-readiness/', label: 'Free Score' };
+} else if (/^\/(commercial-real-estate|listings|building-worth|south-shore)/.test(path)) {
+  target = { href: '/building-worth/', label: 'Building Value' };
+}
+if (path.startsWith(target.href)) target = { href: '/contact/', label: 'Book a Call' };
+---
+
+<div
+  id="money-bar"
+  class="fixed inset-x-0 bottom-0 z-40 translate-y-full border-t border-white/10 bg-navy-950/95 backdrop-blur transition-transform duration-300 lg:hidden print:hidden"
+  style="padding-bottom: env(safe-area-inset-bottom)"
+  aria-hidden="true"
+>
+  <div class="grid grid-cols-3 gap-px">
+    <a href={`tel:${tel}`} class="flex flex-col items-center gap-0.5 py-2.5 text-white transition-colors active:bg-navy-800">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-400" aria-hidden="true">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+      </svg>
+      <span class="text-[11px] font-semibold">Call</span>
+    </a>
+    <a href={`sms:${tel}`} class="flex flex-col items-center gap-0.5 py-2.5 text-white transition-colors active:bg-navy-800">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-400" aria-hidden="true">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      </svg>
+      <span class="text-[11px] font-semibold">Text</span>
+    </a>
+    <a href={target.href} class="flex flex-col items-center gap-0.5 bg-teal-600 py-2.5 text-white transition-colors active:bg-teal-500">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" />
+      </svg>
+      <span class="text-[11px] font-semibold">{target.label}</span>
+    </a>
+  </div>
+</div>
+
+<style is:global>
+  /* Keep the footer's last content clear of the bar on phones */
+  @media (max-width: 1023px) {
+    footer > div {
+      padding-bottom: 7rem;
+    }
+  }
+  #money-bar.is-on {
+    translate: 0 0;
+  }
+</style>
+
+<script>
+  function initBar() {
+    const bar = document.getElementById('money-bar');
+    if (!bar || bar.dataset.ready) return;
+    bar.dataset.ready = '1';
+    const toggle = () => {
+      const on = window.scrollY > 280;
+      bar.classList.toggle('is-on', on);
+      bar.setAttribute('aria-hidden', on ? 'false' : 'true');
+    };
+    window.addEventListener('scroll', toggle, { passive: true });
+    toggle();
+  }
+  document.addEventListener('astro:page-load', initBar);
+</script>
