@@ -10,9 +10,22 @@ const retailWins = (await getCollection('case-studies', ({ data }) => !data.draf
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
-const title = 'Retail Systems — Real-Time Inventory Online, Run From One Panel | ICS';
+const title = 'Retail Consultants — Real-Time Inventory Online, Run From One Panel | ICS';
 const description =
-  'Retail platforms for South Shore MA stores — including firearms dealers and other regulated retail: real-time inventory on your website, an admin panel you run yourself, reserve-and-pickup flows built around your compliance process, and visibility where ad platforms say no.';
+  'Retail consultants and platform builders for South Shore MA stores — including firearms dealers and other regulated retail: real-time inventory on your website, an admin panel you run yourself, reserve-and-pickup flows built around your compliance process, and visibility where ad platforms say no.';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: 'Retail consulting and retail platform development',
+    name: 'Retail Consultants & Systems',
+    provider: { '@type': 'RealEstateAgent', name: SITE.name, telephone: SITE.phone },
+    areaServed: 'South Shore, Massachusetts',
+    audience: { '@type': 'Audience', audienceType: 'Independent retailers, including firearms dealers and regulated retail' },
+    description,
+  },
+];
 
 const stack = [
   {
@@ -41,10 +54,10 @@ const regulated = [
 ];
 ---
 
-<Base title={title} description={description}>
+<Base title={title} description={description} schema={schema}>
   <section class="bg-navy-900">
     <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
-      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">Retail systems · Including regulated retail</p>
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">Retail consultants · Including regulated retail</p>
       <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
         Your whole store, online. Run from one panel.
       </h1>
