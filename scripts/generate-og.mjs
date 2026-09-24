@@ -36,6 +36,7 @@ function collectPages() {
     ['/pricing/', 'pricing', 'PUBLISHED PRICING', "Pricing that isn't a secret."],
     ['/compare/', 'compare', 'THE HONEST COMPARISON', 'DIY, agency, or ICS? The comparison nobody else will publish.'],
     ['/private-clients/', 'private-clients', 'PRIVATE CLIENTS · MID-SIZE COMPANIES', 'For owners with more at stake.'],
+    ['/intelligence/', 'intelligence', 'COMMERCIAL INTELLIGENCE · OSINT', 'Know before you sign.'],
     ['/guarantees/', 'guarantees', 'IN WRITING · WITH CONSEQUENCES', 'Four promises. 21 days. 60 seconds. 90 days. 100% yours.'],
     ['/scoreboard/', 'scoreboard', 'UPDATED MONTHLY', 'Agencies show portfolios. We show a scoreboard.'],
     ['/south-shore/', 'south-shore', 'SERVICE AREA · TEN TOWNS, IN PERSON', "We don't cover the South Shore. We work it."],

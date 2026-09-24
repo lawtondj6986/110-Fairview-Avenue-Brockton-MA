@@ -1,0 +1,168 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { SITE } from '../config';
+
+const title = 'Commercial Intelligence & OSINT | Know Before You Sign | ICS';
+const description =
+  'Open-source intelligence for business decisions on the South Shore and beyond: property and title research, counterparty and vendor diligence, competitive intelligence, and digital-exposure assessments — public sources, lawful methods, findings in a written, sourced brief.';
+
+const services = [
+  {
+    name: 'Property & title intelligence',
+    body: 'The building\'s real story before you offer: ownership chains and transfer history, liens and encumbrances, permit and code-enforcement records, environmental flags, and the paper trail behind the pro forma. The listing tells you what the seller wants known; the record tells you the rest.',
+  },
+  {
+    name: 'Counterparty & vendor diligence',
+    body: 'Who you\'re actually about to do business with: corporate registrations and officer histories, litigation and judgment records, UCC filings, prior ventures, and reputational signals across the open web. Most bad deals telegraph themselves in public — if someone looks.',
+  },
+  {
+    name: 'Competitive & market intelligence',
+    body: 'Your market, mapped from what competitors publish without realizing it: footprints and expansion moves, pricing signals, hiring patterns, review trajectories, and the gaps nobody is serving. The quarterly brief that turns "I heard" into "I know."',
+  },
+  {
+    name: 'Digital exposure assessment',
+    body: 'The mirror, turned on you: what the open internet — and now AI assistants — reveal about your company, your properties, and your principals. What helps, what hurts, what should quietly be corrected, and what it inadvertently tells your competitors.',
+  },
+];
+
+const moments = [
+  'Before an offer on a building',
+  'Before a partnership or joint venture',
+  'Before extending serious credit to a customer',
+  'Before choosing a contractor for six figures of work',
+  'Before entering a new market or town',
+  'Before a dispute escalates to counsel',
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Commercial Intelligence & OSINT',
+    serviceType: 'Open-source intelligence and business due diligence',
+    provider: { '@type': 'RealEstateAgent', name: SITE.name, telephone: SITE.phone },
+    areaServed: 'South Shore, Massachusetts',
+    description,
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Commercial intelligence · OSINT</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        Know before you sign.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Most expensive mistakes were knowable — the information was public, sitting in registries, dockets, filings,
+        and the open web, waiting for someone with the discipline to assemble it. That discipline is a craft we've
+        spent years refining. We practice it quietly, lawfully, and in writing.
+      </p>
+      <div class="reveal mt-8 flex flex-wrap gap-4" style="--reveal-delay: 300ms">
+        <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Intelligence brief — confidential inquiry')}`} class="rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300">
+          Request a Confidential Brief
+        </a>
+        <a href="/private-clients/" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-brass-300 hover:text-brass-300">
+          The Private Practice
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <SectionHeading eyebrow="The practice" heading="Four kinds of knowing" align="center" />
+    <div class="mt-12 grid gap-6 sm:grid-cols-2">
+      {
+        services.map((s, i) => (
+          <div class="reveal lift rounded-xl border border-navy-100 bg-white p-7 shadow-sm" style={`--reveal-delay: ${(i % 2) * 70}ms`}>
+            <h2 class="text-xl font-bold text-navy-900">{s.name}</h2>
+            <p class="mt-3 text-sm leading-relaxed text-ink-500">{s.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <div class="grid items-start gap-10 lg:grid-cols-2">
+        <div class="reveal">
+          <SectionHeading eyebrow="When it earns its fee" heading="The moments that call for a brief" />
+          <ul class="mt-6 space-y-3">
+            {
+              moments.map((m) => (
+                <li class="flex gap-3 rounded-lg border border-navy-100 bg-paper px-4 py-3 text-sm font-medium text-ink-700">
+                  <span class="text-brass-600">◆</span>
+                  {m}
+                </li>
+              ))
+            }
+          </ul>
+          <p class="mt-6 text-sm leading-relaxed text-ink-500">
+            The deliverable is <strong class="text-navy-900">The Brief</strong>: a written, decision-focused report
+            with every finding sourced, delivered confidentially, and walked through with you personally. Not a data
+            dump — a judgment call you can hold in your hands.
+          </p>
+        </div>
+        <div class="reveal rounded-xl bg-navy-900 p-8" style="--reveal-delay: 80ms">
+          <h3 class="text-xl font-bold text-white">The lines we draw — and why they matter to you</h3>
+          <ul class="mt-5 space-y-4 text-sm leading-relaxed text-navy-100/85">
+            <li class="flex gap-3">
+              <span class="mt-0.5 shrink-0 text-teal-400">✓</span>
+              <span><strong class="text-white">Public sources, lawful methods, always.</strong> Registries, court records, filings, archives, and the open web — assembled with skill, never obtained improperly.</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="mt-0.5 shrink-0 text-teal-400">✓</span>
+              <span><strong class="text-white">Business purposes only.</strong> Properties, companies, transactions, and markets. We decline work targeting private individuals' personal lives, and we don't produce consumer reports for hiring or tenant-screening decisions — those are regulated instruments, and rightly so.</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="mt-0.5 shrink-0 text-teal-400">✓</span>
+              <span><strong class="text-white">Sourced findings, stated confidence.</strong> Every claim in The Brief cites where it came from and how sure we are. Intelligence you can't verify is gossip with formatting.</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="mt-0.5 shrink-0 text-teal-400">✓</span>
+              <span><strong class="text-white">Confidential both directions.</strong> Nobody learns we looked. Nobody learns you asked.</span>
+            </li>
+          </ul>
+          <p class="mt-5 border-t border-white/10 pt-4 text-xs leading-relaxed text-navy-100/60">
+            These boundaries aren't fine print — they're why the work holds up when it matters: in negotiations, in
+            front of counsel, and in your own conscience.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+    <div class="reveal rounded-xl border-l-4 border-brass-500 bg-white p-7 shadow-sm">
+      <p class="text-sm font-semibold uppercase tracking-widest text-brass-600">Why us</p>
+      <p class="mt-2 max-w-3xl text-lg font-medium leading-relaxed text-navy-900">
+        Intelligence work rewards people who understand what they're looking at. We read a title chain as a broker, a
+        contractor's filings as an operator, and a digital footprint as the people who build them for a living. The
+        same finding means more in the hands of someone who's sat on your side of the table.
+      </p>
+      <p class="mt-2 text-xs text-ink-500">— {SITE.founder}, founder</p>
+    </div>
+  </section>
+
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Start quietly</p>
+      <h2 class="mx-auto mt-3 max-w-xl text-3xl font-bold text-white">Tell us what's keeping you from signing.</h2>
+      <p class="mx-auto mt-4 max-w-xl text-navy-100/85">
+        A short, confidential conversation about the decision in front of you. We'll tell you plainly whether a brief
+        would change it — and if it wouldn't, we'll say that too.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Intelligence brief — confidential inquiry')}`} class="rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300">
+          Email Privately
+        </a>
+        <a href={`tel:${SITE.phone.replace(/[^\d+]/g, '')}`} class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-brass-300 hover:text-brass-300">
+          {SITE.phone}
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
