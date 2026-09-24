@@ -117,6 +117,48 @@ const description =
     </div>
   </section>
 
+  <!-- WHO WE WORK WITH -->
+  <section class="bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <SectionHeading
+        eyebrow="Who we work with"
+        heading="From first storefront to family portfolio"
+        body="The tools scale with the ambition. Wherever you are on this line, the standard is the same: written scope, measured outcomes, one accountable advisor."
+        align="center"
+      />
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {
+          [
+            {
+              tier: 'Owner-operators',
+              body: 'Trades, restaurants, salons, practices — businesses that live on leads and deserve institutional-grade tools without institutional pricing.',
+              href: '/ai-services/',
+              label: 'Systems & published pricing',
+            },
+            {
+              tier: 'Growing & multi-location',
+              body: 'Companies past the first location, ready for one system across every branch — operations, visibility, and reporting that scale.',
+              href: '/private-clients/',
+              label: 'Beyond Market Lock',
+            },
+            {
+              tier: 'Private clients & portfolios',
+              body: 'High-net-worth owners, family companies, and investors — served quietly: portfolio strategy, discreet representation, decision-grade intelligence.',
+              href: '/private-clients/',
+              label: 'Private client services',
+            },
+          ].map((c, i) => (
+            <a href={c.href} class="reveal lift group flex flex-col rounded-xl border border-navy-100 bg-paper p-7" style={`--reveal-delay: ${i * 70}ms`}>
+              <h3 class="text-lg font-bold text-navy-900 group-hover:text-teal-600">{c.tier}</h3>
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-500">{c.body}</p>
+              <p class="mt-4 text-sm font-semibold text-teal-600">{c.label} →</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <!-- HOW IT WORKS FOR YOU (flywheel, client-framed) -->
   <section class="bg-navy-900">
     <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
@@ -309,7 +351,8 @@ const description =
         </p>
         <p class="mt-4 leading-relaxed text-ink-500">
           Deep Brockton-area roots, an active transaction network, and a live portfolio of delivered AI work — which
-          means advice grounded in what actually happens after the keys change hands.
+          means advice grounded in what actually happens after the keys change hands. The mission is bigger than any
+          one website: put institutional-grade tools in the hands of the people who actually build our towns.
         </p>
         <a href="/about/" class="mt-6 inline-block font-semibold text-teal-600 hover:text-teal-500">
           Meet Daniel →
