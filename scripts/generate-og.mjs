@@ -30,7 +30,7 @@ function collectPages() {
     ['/', 'home', 'CRE ADVISORY + AI SYSTEMS · SOUTH SHORE MA', "Your broker shouldn't hand you the keys and disappear."],
     ['/commercial-real-estate/', 'commercial-real-estate', 'COMMERCIAL REAL ESTATE ADVISORY', 'The deals national firms ignore. The process they’d charge millions for.'],
     ['/ai-services/', 'ai-services', 'AI REVENUE SYSTEMS', "We don't sell websites. We install revenue systems."],
-    ['/quotebrain/', 'quotebrain', 'QUOTEBRAIN™ 2.0 · LIVE', 'Measure your lot by satellite. Priced in 60 seconds.'],
+    ['/quotebrain/', 'quotebrain', 'QUOTEBRAIN™ 2.0 · INSTANT QUOTES', 'Your website answers in 60 seconds. For any service business.'],
     ['/ai-readiness/', 'ai-readiness', 'FREE ASSESSMENT · 2 MINUTES', 'Find out exactly where your business leaks revenue.'],
     ['/building-worth/', 'building-worth', 'FREE BROKER OPINION OF VALUE', "What's your building actually worth?"],
     ['/pricing/', 'pricing', 'PUBLISHED PRICING', "Pricing that isn't a secret."],

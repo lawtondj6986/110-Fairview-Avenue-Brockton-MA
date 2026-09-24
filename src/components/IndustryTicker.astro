@@ -1,0 +1,61 @@
+---
+/**
+ * Cycling industry ticker — the "see yourself in it" device.
+ * Fades through industries; reduced-motion users get the static phrase.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+
+const industries = [
+  'contractors',
+  'restaurants',
+  'salons & med spas',
+  'law firms',
+  'dental practices',
+  'retail shops',
+  'gyms & studios',
+  'landscapers',
+  'auto shops',
+  'accountants',
+  'every local business',
+];
+---
+
+<span class:list={['industry-ticker inline-block', className]} data-industries={JSON.stringify(industries)}>
+  every local business
+</span>
+
+<style>
+  .industry-ticker {
+    transition: opacity 250ms ease-in-out;
+    min-width: 12ch;
+  }
+  .industry-ticker.is-fading {
+    opacity: 0;
+  }
+</style>
+
+<script>
+  function initTicker() {
+    document.querySelectorAll<HTMLElement>('.industry-ticker').forEach((el) => {
+      if (el.dataset.ready) return;
+      el.dataset.ready = '1';
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const words: string[] = JSON.parse(el.dataset.industries || '[]');
+      if (!words.length) return;
+      let i = 0;
+      el.textContent = words[0];
+      setInterval(() => {
+        el.classList.add('is-fading');
+        setTimeout(() => {
+          i = (i + 1) % words.length;
+          el.textContent = words[i];
+          el.classList.remove('is-fading');
+        }, 250);
+      }, 2200);
+    });
+  }
+  document.addEventListener('astro:page-load', initTicker);
+</script>

@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import CtaSection from '../components/CtaSection.astro';
 import RevenueLeak from '../components/RevenueLeak.astro';
+import IndustryTicker from '../components/IndustryTicker.astro';
 import { SITE } from '../config';
 
 const title = 'AI Revenue Systems for Contractors & Trades | JobSite, Lead Engine, Market Lock | ICS';
@@ -19,7 +20,7 @@ const tiers = [
     audience: 'For contractors whose online presence doesn’t match the quality of their work.',
     items: [
       'Conversion-engineered website (21-day launch guarantee)',
-      'QuoteBrain™ instant-quote calculator for your trade',
+      'QuoteBrain™ instant-quote calculator for your services',
       'Google Business Profile optimization',
       'Automated review requests after every job',
       'Call + form tracking with owner dashboard',
@@ -44,10 +45,10 @@ const tiers = [
   },
   {
     name: 'Market Lock',
-    label: 'Territory dominance — one per trade, per territory',
+    label: 'Territory dominance — one per category, per territory',
     price: '$20,000–$30,000 setup',
     monthly: '+ $3,500–$6,000/mo',
-    outcome: 'Own your trade in your territory. We work with exactly one paving company per market — and it isn’t your competitor.',
+    outcome: 'Own your category in your territory. We work with exactly one business per category, per market — and it isn’t your competitor.',
     audience: 'For established operators ready to be the default answer in their market.',
     items: [
       'Everything in Lead Engine — exclusively in your territory',
@@ -99,7 +100,7 @@ const faqs = [
   },
   {
     q: 'What does Market Lock exclusivity mean?',
-    a: 'One business per trade, per territory. If you’re our paving client on the South Shore, we will not take another paving company there — full stop. Your competitor calling us gets a no. Exclusivity is confirmed in the agreement.',
+    a: 'One business per category, per territory. Whatever you do — roofing, dental, dining, law — once you’re our client in that category on the South Shore, your direct competitor calling us gets a no. Full stop, confirmed in the agreement.',
   },
 ];
 
@@ -132,9 +133,11 @@ const schema = [
       <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
         We don't sell websites. We install revenue systems.
       </h1>
+      <p class="mt-4 font-mono text-sm font-semibold uppercase tracking-[0.15em] text-teal-400">
+        Built for <IndustryTicker class="text-brass-300" />
+      </p>
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100/90">
-        Built by someone who has run construction crews and quoted commercial jobs — not just designed pages about
-        them. Every system is measured in leads, response time, and booked work. Pricing is public. Guarantees are in
+        Built by someone who has built and run real businesses — not just designed pages about them. Every system is measured in leads, response time, and booked work. Pricing is public. Guarantees are in
         writing.
       </p>
       <div class="mt-8 flex flex-wrap gap-4">
@@ -242,7 +245,7 @@ const schema = [
     <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
       <SectionHeading
         eyebrow="The machinery"
-        heading="AI that knows the difference between a driveway and a lot"
+        heading="AI that knows the difference between a $200 job and a $20,000 client"
         body="These aren't plugins bolted onto a template. They're systems built from real operations experience, installed and tuned for your trade."
         align="center"
         dark
