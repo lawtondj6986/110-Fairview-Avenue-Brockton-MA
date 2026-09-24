@@ -16,6 +16,10 @@ Phone: (508) 942-8259. Email: lawtondj@gmail.com. In-person service across Brock
 - [AI Readiness Score](https://icsgroup.ai/ai-readiness/): ten-question assessment scoring lead response, reputation, automation, and search visibility, with a 90-day action plan.
 - [What's My Building Worth?](https://icsgroup.ai/building-worth/): free Broker Opinion of Value — walked in person, built on real comparables, written within 48 hours.
 
+## Retail systems (including firearms dealers & regulated retail)
+
+- [Retail Systems](https://icsgroup.ai/retail/): custom retail platforms where the website shows the real shelf — real-time inventory synced to the floor, an admin panel the owner runs from the counter (list, reprice, mark sold in minutes, no developer), reserve-and-pickup flows built around the store's compliance process, and product-level SEO/AEO for categories the ad platforms restrict. Built on open code the store owns. Proven with [Outback Arms of Plympton, MA](https://icsgroup.ai/case-studies/outback-arms-retail-platform/), a family-run Massachusetts firearms dealer whose owner reports material revenue growth since launch. ICS builds for licensed dealers operating within federal and state law; compliance steps complete in store.
+
 ## Private clients & mid-size companies
 
 - [Private Client Services](https://icsgroup.ai/private-clients/): quiet, portfolio-level service for high-net-worth owners, family companies, and multi-location operations — portfolio opinions of value, discreet off-market representation, open-source intelligence (OSINT: property histories, counterparty and vendor vetting, competitive research from public sources), and revenue systems across whole operations. Scoped privately with written scopes; begins with a leadership working session.

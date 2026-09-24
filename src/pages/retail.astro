@@ -1,0 +1,126 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { SITE } from '../config';
+
+const retailWins = (await getCollection('case-studies', ({ data }) => !data.draft && data.vertical === 'retail'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const title = 'Retail Systems — Real-Time Inventory Online, Run From One Panel | ICS';
+const description =
+  'Retail platforms for South Shore MA stores — including firearms dealers and other regulated retail: real-time inventory on your website, an admin panel you run yourself, reserve-and-pickup flows built around your compliance process, and visibility where ad platforms say no.';
+
+const stack = [
+  {
+    name: 'Your live inventory, on your website',
+    body: "What's on the shelf is on the site — stock, pricing, photos — synced in real time. Customers check before they drive, call about what's actually there, and buy with confidence. The storefront keeps selling after the counter closes.",
+  },
+  {
+    name: 'An admin panel you actually run',
+    body: 'List a product, change a price, mark it sold — in minutes, from the counter, with no developer and no ticket queue. You own the panel, the data, and the pace. Our job was making it powerful; our other job was making it yours.',
+  },
+  {
+    name: 'Reserve & pick up, built around your process',
+    body: 'Customers commit online; the transaction completes in your store, inside your process. For regulated goods that means the paperwork happens exactly where the law says it does — the website accelerates the sale without ever shortcutting the counter.',
+  },
+  {
+    name: 'Found by search — and by AI',
+    body: "Product-level SEO, structured data, and answer-engine visibility, so 'who has X in stock near me' finds your live shelf. For categories the ad platforms restrict, owned visibility isn't a nice-to-have — it's the whole game.",
+  },
+];
+
+const regulated = [
+  ['Payment processing that sticks', 'Mainstream processors routinely drop firearms merchants mid-stream. We architect around processors that genuinely serve the category, so your checkout doesn\'t vanish on a compliance sweep.'],
+  ['Platforms that won\'t evict you', 'Shopify and the big site builders prohibit or restrict firearm sales — a store built there is a store built on borrowed land. We build on open code you own, where the rules are the law, not a platform policy.'],
+  ['Marketing inside the restrictions', 'Meta and Google won\'t run your product ads. Fine — the winners in this category are built on local SEO, answer-engine visibility, review velocity, and an owned audience. That happens to be exactly our toolkit.'],
+  ['Compliance-aware by design', 'Reserve online, complete in store: background checks, transfers, and paperwork happen at the counter, per your process and your license. We build with your compliance workflow, never around it — and where questions get legal, your attorney leads.'],
+];
+---
+
+<Base title={title} description={description}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">Retail systems · Including regulated retail</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        Your whole store, online. Run from one panel.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        We build retail platforms where the website shows the real shelf — live inventory, owner-run admin, and
+        pickup flows shaped to your process. Proven in one of the hardest categories on the internet: a Massachusetts
+        firearms dealer whose owner reports material revenue growth since launch.
+      </p>
+      <div class="reveal mt-8 flex flex-wrap gap-4" style="--reveal-delay: 300ms">
+        <a href="/contact/" class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-lg transition-colors hover:bg-teal-500">
+          Talk About Your Store
+        </a>
+        <a href="/case-studies/outback-arms-retail-platform/" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">
+          The Outback Arms Story
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <SectionHeading eyebrow="The retail stack" heading="Four pieces, one working store" align="center" />
+    <div class="mt-12 grid gap-6 sm:grid-cols-2">
+      {
+        stack.map((s, i) => (
+          <div class="reveal lift rounded-xl border border-navy-100 bg-white p-7 shadow-sm" style={`--reveal-delay: ${(i % 2) * 70}ms`}>
+            <h2 class="text-xl font-bold text-navy-900">{s.name}</h2>
+            <p class="mt-3 text-sm leading-relaxed text-ink-500">{s.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- REGULATED RETAIL -->
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <SectionHeading
+        eyebrow="Firearms & regulated retail"
+        heading="The stores most agencies won't build for"
+        body="Firearms dealers and other regulated retailers get told 'no' by platforms, processors, and ad networks — then get quoted double by the few agencies who'll try. We've shipped in this category, and these are the problems that actually decide who wins:"
+        align="center"
+        dark
+      />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2">
+        {
+          regulated.map(([h, b], i) => (
+            <div class="reveal rounded-xl border border-white/10 bg-navy-900 p-7" style={`--reveal-delay: ${(i % 2) * 70}ms`}>
+              <h3 class="font-display text-lg font-bold text-teal-400">{h}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-navy-100/80">{b}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-navy-100/50">
+        We build software and marketing systems for licensed dealers operating within federal and state law. Nothing
+        here is legal advice — your license, your counsel, your compliance process lead every build.
+      </p>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <SectionHeading eyebrow="Retail proof" heading="Stores we've put online" />
+      <a href="/case-studies/" class="font-semibold text-teal-600 hover:text-teal-500">All case studies →</a>
+    </div>
+    <div class="mt-8 grid gap-6 md:grid-cols-3">
+      {retailWins.map((entry) => <CaseStudyCard entry={entry} />)}
+    </div>
+  </section>
+
+  <CtaSection
+    heading="Put your shelf on the internet."
+    body="One call: bring your inventory headaches, your platform horror stories, or just your ambition. We'll tell you plainly what a build would look like — and you can see a live one working first."
+    primaryLabel="Talk About Your Store"
+    secondaryLabel="See Published Pricing"
+    secondaryHref="/pricing/"
+  />
+</Base>
