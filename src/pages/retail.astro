@@ -109,6 +109,64 @@ const regulated = [
     </div>
   </section>
 
+  <!-- INSIDE THE BUILD -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <SectionHeading
+        eyebrow="Inside the build"
+        heading="High-end engineering. Zero learning curve."
+        body="Two standards, held at the same time: the code is built to a level most local retail never sees — and the people using it every day never have to think about that. Every one of these is live right now at outbackarms.com."
+        align="center"
+      />
+      <div class="mt-12 grid gap-6 lg:grid-cols-2">
+        <div class="reveal rounded-xl border border-navy-100 bg-white p-8 shadow-sm">
+          <p class="text-xs font-semibold uppercase tracking-widest text-brass-600">The engineering</p>
+          <h3 class="mt-2 text-2xl font-bold text-navy-900">Built like software, not a brochure</h3>
+          <ul class="mt-5 space-y-3 text-sm leading-relaxed text-ink-700">
+            {
+              [
+                ['Open code, fully owned', 'Custom-built on open code the store owns outright — no platform landlord, no policy rug-pull, no monthly ransom for your own storefront.'],
+                ['Inventory as the source of truth', 'One live database drives the shelf, the website, and the panel. Change it once, it changes everywhere — the site can never disagree with the store.'],
+                ['Fast on a phone in a parking lot', 'Most customers check stock from their truck, not a desktop. The site is engineered to load instantly on mobile, where the buying decision actually happens.'],
+                ['Structured for search and AI', "Product-level structured data, so search engines and AI assistants can read the live shelf and answer 'who has one in stock near me' with this store."],
+                ['Built to outlast trends', 'No dependence on any platform, plugin marketplace, or vendor that can change its rules. If we disappeared tomorrow, the store keeps running.'],
+              ].map(([h, b]) => (
+                <li class="flex gap-3">
+                  <span class="mt-0.5 text-teal-600">✓</span>
+                  <span><strong class="text-navy-900">{h}.</strong> {b}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="reveal rounded-xl border border-navy-100 bg-white p-8 shadow-sm" style="--reveal-delay: 80ms">
+          <p class="text-xs font-semibold uppercase tracking-widest text-brass-600">The people using it</p>
+          <h3 class="mt-2 text-2xl font-bold text-navy-900">If you can run a register, you can run this</h3>
+          <ul class="mt-5 space-y-3 text-sm leading-relaxed text-ink-700">
+            {
+              [
+                ['Plain-language panel', 'No dashboard jargon, no settings maze. List a product, change a price, mark it sold — the three things a counter actually does, right on top.'],
+                ['Works between customers', "Designed for the real rhythm of a shop floor: a new arrival goes up, with photos, in the minutes between one customer and the next — from the device at the counter."],
+                ['No developer, no ticket queue', 'Nobody emails an agency to fix a price. Staff make the change and it is live on the website that second.'],
+                ['Hard to break on a busy Saturday', 'The panel is built so the fast, obvious action is also the correct one — a new hire can be trusted with it on day one.'],
+                ['The shelf never lies', 'When something sells, it leaves the website — so no employee ever has to tell a customer who drove forty minutes that it sold on Tuesday.'],
+              ].map(([h, b]) => (
+                <li class="flex gap-3">
+                  <span class="mt-0.5 text-teal-600">✓</span>
+                  <span><strong class="text-navy-900">{h}.</strong> {b}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+      <p class="mt-8 text-center text-sm text-ink-500">
+        Don't take the list's word for it —
+        <a href="https://outbackarms.com" rel="noopener" class="font-semibold text-teal-600 hover:text-teal-500">browse the live storefront at outbackarms.com →</a>
+      </p>
+    </div>
+  </section>
+
   <!-- THE COUNTER STORY -->
   <section class="bg-white">
     <div class="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
