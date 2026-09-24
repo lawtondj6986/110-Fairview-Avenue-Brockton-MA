@@ -44,6 +44,8 @@ The store reports **business up 300% since the platform launched** — and the o
 
 That figure is the store's own report, and we're happy to walk through exactly what changed on a call. Better yet: visit [outbackarms.com](https://outbackarms.com) and watch the live shelf working right now — it's the one case study you can browse yourself.
 
+Full disclosure, made proudly: **our founder works this counter.** The platform was built by someone who has to live with it every shift — which is exactly why it fits the way a counter actually runs.
+
 ## What's Next
 
 Ongoing iteration with the owner as the shop's needs evolve — the panel grows with the business, and they own every line of it.
