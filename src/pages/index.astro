@@ -159,6 +159,52 @@ const description =
     </div>
   </section>
 
+  <!-- RETAIL SPOTLIGHT -->
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <div class="grid items-center gap-10 lg:grid-cols-2">
+        <div class="reveal">
+          <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">New · Retail systems</p>
+          <h2 class="mt-3 max-w-lg font-display text-3xl font-bold text-white sm:text-4xl">
+            We put a store's whole shelf online. Business went up 300%.
+          </h2>
+          <p class="mt-4 max-w-xl leading-relaxed text-navy-100/85">
+            Outback Arms of Plympton, MA — a family-run firearms dealer in the hardest retail category on the
+            internet — now runs a live-inventory storefront from one admin panel, on open code they own. The store
+            reports business up 300% since launch, and you can browse the build yourself.
+          </p>
+          <div class="mt-7 flex flex-wrap gap-4">
+            <a href="/retail/" class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-lg transition-colors hover:bg-teal-500">
+              Retail Systems →
+            </a>
+            <a href="https://outbackarms.com" rel="noopener" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">
+              See It Live: outbackarms.com
+            </a>
+          </div>
+        </div>
+        <div class="reveal grid grid-cols-2 gap-4" style="--reveal-delay: 100ms">
+          {
+            [
+              { value: '300%', label: 'Business growth since launch, as reported by the store' },
+              { value: 'Live', label: 'Real-time inventory — the website shows the actual shelf' },
+              { value: 'Minutes', label: 'To list, reprice, or mark sold — no developer needed' },
+              { value: '24/7', label: 'Selling after the counter closes' },
+            ].map((stat) => (
+              <div class="rounded-xl border border-white/10 bg-navy-900 p-6 text-center">
+                <p class="font-display text-3xl font-bold text-teal-400">{stat.value}</p>
+                <p class="mt-2 text-xs leading-relaxed text-navy-100/70">{stat.label}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <p class="mt-8 text-sm text-navy-100/60">
+        Retail, including regulated retail — firearms dealers welcome.
+        <a href="/case-studies/outback-arms-retail-platform/" class="font-semibold text-teal-400 hover:text-teal-500">Read the full Outback Arms story →</a>
+      </p>
+    </div>
+  </section>
+
   <!-- HOW IT WORKS FOR YOU (flywheel, client-framed) -->
   <section class="bg-navy-900">
     <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
