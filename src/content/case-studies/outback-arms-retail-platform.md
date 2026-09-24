@@ -4,16 +4,16 @@ client: 'Outback Arms'
 vertical: retail
 location: 'Plympton, MA'
 package: 'Custom retail platform'
-summary: "A family-run Massachusetts firearms dealer in the hardest category on the internet: platforms ban it, ad networks refuse it, processors drop it. We built them an open platform they own — live inventory on the website, an admin panel run from the counter — and the owner reports material revenue growth since launch."
+summary: "A family-run Massachusetts firearms dealer in the hardest category on the internet: platforms ban it, ad networks refuse it, processors drop it. We built them an open platform they own — live inventory on the website, an admin panel run from the counter — and the store reports business up 300% since launch."
 stats:
+  - value: '300%'
+    label: 'Business growth since launch, as reported by the store'
   - value: 'Live'
     label: 'Real-time inventory — the website shows the actual shelf'
   - value: 'Minutes'
     label: 'For the owner to list a product, change a price, or mark it sold'
   - value: '24/7'
     label: 'The storefront keeps selling after the counter closes'
-  - value: 'Owner-reported'
-    label: 'Material revenue growth since launch — details on a call'
 illustrative: false
 date: 2026-09-20
 ---
@@ -40,9 +40,9 @@ A **custom retail platform on open code the owner fully owns** — no platform l
 
 ## The Results
 
-The owner reports **material revenue growth since the platform launched** — and continues to run the storefront personally, day to day, from the panel. The website now does what the category's restrictions were supposed to make impossible: it sells around the clock, on infrastructure nobody can evict them from.
+The store reports **business up 300% since the platform launched** — and the owner continues to run the storefront personally, day to day, from the panel. The website now does what the category's restrictions were supposed to make impossible: it sells around the clock, on infrastructure nobody can evict them from.
 
-Out of respect for a private company's numbers, we don't publish their figures. Ask on a call, and we'll walk you through what changed — or visit [outbackarms.com](https://outbackarms.com) and watch the live shelf yourself.
+That figure is the store's own report, and we're happy to walk through exactly what changed on a call. Better yet: visit [outbackarms.com](https://outbackarms.com) and watch the live shelf working right now — it's the one case study you can browse yourself.
 
 ## What's Next
 
