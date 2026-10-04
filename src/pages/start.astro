@@ -1,0 +1,290 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+
+const title = 'Start Here — Find Your System in 45 Seconds | Innovative Commercial Strategies';
+const description =
+  'Three questions, 45 seconds: get matched to the right ICS system — JobSite, Lead Engine, Market Lock, a retail platform, CRE advisory, or private-client service — with the published price range and the proof to check.';
+---
+
+<Base title={title} description={description}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-4xl px-4 py-12 text-center sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">Start here · Three questions · 45 seconds</p>
+      <h1 class="reveal mx-auto mt-4 max-w-2xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        Tell us where it hurts. We'll point at the fix.
+      </h1>
+      <p class="reveal mx-auto mt-4 max-w-xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Every system we sell has a published price and live proof. This matches you to the right one — the same way
+        our installs answer your customers: instantly.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <div id="fit" class="rounded-2xl border border-navy-100 bg-white p-6 shadow-lg sm:p-8">
+      <!-- progress -->
+      <div class="flex items-center justify-between">
+        <p id="fit-step-label" class="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-teal-600">Question 1 of 3</p>
+        <div class="flex gap-1.5" aria-hidden="true">
+          <span class="fit-dot is-active" data-dot="0"></span>
+          <span class="fit-dot" data-dot="1"></span>
+          <span class="fit-dot" data-dot="2"></span>
+        </div>
+      </div>
+
+      <!-- STEP 1 -->
+      <fieldset class="fit-panel mt-5" data-step="0">
+        <legend class="text-xl font-bold text-navy-900">What best describes you?</legend>
+        <div class="mt-4 grid gap-3 sm:grid-cols-2">
+          <button type="button" class="fit-opt" data-q="biz" data-v="service">A service business <span>Trades, home services, repair — you quote jobs</span></button>
+          <button type="button" class="fit-opt" data-q="biz" data-v="retail">A store / retail <span>Physical shelf, walk-in customers — including regulated retail</span></button>
+          <button type="button" class="fit-opt" data-q="biz" data-v="practice">A practice or office <span>Medical, legal, professional services</span></button>
+          <button type="button" class="fit-opt" data-q="biz" data-v="property">A property owner / investor <span>Buying, selling, leasing commercial space</span></button>
+          <button type="button" class="fit-opt" data-q="biz" data-v="portfolio">Multi-location or portfolio <span>Several branches, buildings, or companies</span></button>
+          <button type="button" class="fit-opt" data-q="biz" data-v="platform">Building a product or platform <span>You have a venture that needs engineering</span></button>
+        </div>
+      </fieldset>
+
+      <!-- STEP 2 -->
+      <fieldset class="fit-panel mt-5 hidden" data-step="1">
+        <legend class="text-xl font-bold text-navy-900">Biggest bottleneck right now?</legend>
+        <div class="mt-4 grid gap-3 sm:grid-cols-2">
+          <button type="button" class="fit-opt" data-q="pain" data-v="invisible">Nobody can find us online <span>Weak or missing website, invisible in search</span></button>
+          <button type="button" class="fit-opt" data-q="pain" data-v="coldleads">Leads slip through the cracks <span>Slow replies, quotes that go quiet</span></button>
+          <button type="button" class="fit-opt" data-q="pain" data-v="admin">Admin eats my week <span>Quoting, scheduling, follow-up — all manual</span></button>
+          <button type="button" class="fit-opt" data-q="pain" data-v="market">I want to own my market <span>Ready to be the only name in the category</span></button>
+          <button type="button" class="fit-opt" data-q="pain" data-v="building">I need the right building <span>Buy, sell, or lease — and a straight read on value</span></button>
+          <button type="button" class="fit-opt" data-q="pain" data-v="scale">Scale without the chaos <span>More locations or products than systems</span></button>
+        </div>
+      </fieldset>
+
+      <!-- STEP 3 -->
+      <fieldset class="fit-panel mt-5 hidden" data-step="2">
+        <legend class="text-xl font-bold text-navy-900">When do you want this fixed?</legend>
+        <div class="mt-4 grid gap-3 sm:grid-cols-3">
+          <button type="button" class="fit-opt" data-q="when" data-v="asap">Yesterday <span>Ready to move now</span></button>
+          <button type="button" class="fit-opt" data-q="when" data-v="quarter">This quarter <span>Planning the next move</span></button>
+          <button type="button" class="fit-opt" data-q="when" data-v="exploring">Just exploring <span>Learning what's possible</span></button>
+        </div>
+      </fieldset>
+
+      <!-- RESULT -->
+      <div id="fit-result" class="mt-5 hidden">
+        <p class="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brass-600">Your match</p>
+        <h2 id="fit-name" class="mt-1 text-3xl font-bold text-navy-900"></h2>
+        <p id="fit-price" class="mt-1 font-mono text-sm font-semibold text-teal-600"></p>
+        <p id="fit-pitch" class="mt-3 text-sm leading-relaxed text-ink-700"></p>
+        <div class="mt-5 rounded-lg border border-navy-100 bg-paper p-4 text-sm">
+          <span class="text-ink-500">The proof to check first:</span>
+          <a id="fit-proof" href="/case-studies/" class="ml-1 font-semibold text-teal-600 hover:text-teal-500"></a>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a id="fit-email" href="#" class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-teal-500"></a>
+          <a href={`tel:${SITE.phone.replace(/[^\d+]/g, '')}`} class="rounded-md border border-navy-100 px-6 py-3 font-semibold text-navy-900 transition-colors hover:border-teal-500 hover:text-teal-600">
+            Call {SITE.phone}
+          </a>
+          <a id="fit-learn" href="/pricing/" class="rounded-md border border-navy-100 px-6 py-3 font-semibold text-navy-900 transition-colors hover:border-teal-500 hover:text-teal-600">
+            Learn more →
+          </a>
+        </div>
+        <p class="mt-4 text-xs text-ink-500">
+          Full menu anytime: <a href="/pricing/" class="font-semibold text-teal-600 hover:text-teal-500">published pricing</a> ·
+          <a href="/guarantees/" class="font-semibold text-teal-600 hover:text-teal-500">written guarantees</a>
+        </p>
+      </div>
+
+      <!-- back -->
+      <button type="button" id="fit-back" class="mt-6 hidden text-sm font-semibold text-ink-500 hover:text-teal-600">← Back</button>
+
+      <noscript>
+        <p class="mt-5 rounded-lg border border-navy-100 bg-paper p-4 text-sm text-ink-700">
+          The finder needs JavaScript — but the answers are all public anyway:
+          <a href="/pricing/" class="font-semibold text-teal-600">published pricing</a>,
+          <a href="/case-studies/" class="font-semibold text-teal-600">case studies</a>, or just
+          <a href="/contact/" class="font-semibold text-teal-600">talk to {SITE.founder}</a>.
+        </p>
+      </noscript>
+    </div>
+
+    <p class="mt-6 text-center text-xs text-ink-500">
+      No email gate, no spam — the recommendation appears right here. If it's wrong, the phone number isn't.
+    </p>
+  </section>
+</Base>
+
+<style>
+  .fit-dot {
+    height: 6px;
+    width: 22px;
+    border-radius: 9999px;
+    background: #dbe4f0;
+    transition: background 150ms;
+  }
+  .fit-dot.is-active {
+    background: #14b8a6;
+  }
+  .fit-opt {
+    display: block;
+    width: 100%;
+    text-align: left;
+    border: 1px solid #dbe4f0;
+    border-radius: 0.75rem;
+    padding: 0.9rem 1rem;
+    font-weight: 700;
+    color: #0b1f3a;
+    font-size: 0.925rem;
+    transition: border-color 150ms, background 150ms, transform 150ms;
+    background: #fff;
+  }
+  .fit-opt span {
+    display: block;
+    margin-top: 0.15rem;
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: #5a6b82;
+  }
+  .fit-opt:hover {
+    border-color: #14b8a6;
+    background: #f6fbfa;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .fit-opt:active {
+      transform: scale(0.985);
+    }
+  }
+</style>
+
+<script>
+  import { SITE } from '../config';
+
+  function initFit() {
+    const root = document.getElementById('fit');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+
+    const SYSTEMS: Record<string, { name: string; price: string; pitch: string; proofLabel: string; proofHref: string; learnHref: string }> = {
+      jobsite: {
+        name: 'JobSite',
+        price: '$6,500–$9,500 setup + $450–$700/mo',
+        pitch: "The conversion storefront: a website that actually produces — live in 21 days, guaranteed, with an instant-quote calculator, review engine, and tracking so you can see it working.",
+        proofLabel: 'From word-of-mouth to a lead machine (paving contractor) →',
+        proofHref: '/case-studies/south-shore-paving-contractor/',
+        learnHref: '/ai-services/',
+      },
+      leadengine: {
+        name: 'Lead Engine',
+        price: '$12,000–$18,000 setup + $1,500–$2,500/mo',
+        pitch: 'The follow-up machine: every lead answered in under 60 seconds, 24/7, then chased to a decision with CRM sequences — the admin that eats your week, automated.',
+        proofLabel: '47 qualified leads in 60 days (retail opening) →',
+        proofHref: '/case-studies/local-retail-storefront/',
+        learnHref: '/ai-services/',
+      },
+      marketlock: {
+        name: 'Market Lock',
+        price: '$20,000–$30,000 setup + $3,500–$6,000/mo',
+        pitch: 'Territory dominance: one business per category per market. Paid media, monthly content system, AI-assistant visibility — and your competitor calling us gets a no.',
+        proofLabel: 'Quote-to-close cut from 11 days to 4 (solar) →',
+        proofHref: '/case-studies/solar-installer-quoting/',
+        learnHref: '/ai-services/',
+      },
+      retail: {
+        name: 'Custom Retail Platform',
+        price: 'Scoped to the build — written quote in 48 hours',
+        pitch: "Your whole store online: live inventory synced to the floor, an admin panel you run from the counter, reserve-and-pickup shaped to your compliance process. Proven in the hardest category on the internet.",
+        proofLabel: 'Outback Arms — store-reported business up 300% →',
+        proofHref: '/case-studies/outback-arms-retail-platform/',
+        learnHref: '/retail/',
+      },
+      cre: {
+        name: 'CRE Advisory + Free Building Opinion',
+        price: 'Representation is commission-based — the opinion of value is free',
+        pitch: "Buyer, seller, tenant, and landlord representation for the deals national firms ignore — from an advisor who also builds the systems that make the building produce. Start with a free, walked-in-person opinion of value.",
+        proofLabel: "What's my building worth? Free BOV in 48 hours →",
+        proofHref: '/building-worth/',
+        learnHref: '/commercial-real-estate/',
+      },
+      private: {
+        name: 'Private Client Services',
+        price: 'Scoped privately — written scope before any commitment',
+        pitch: 'Portfolio-level service: multi-location rollouts, operations automation across teams, discreet representation, and intelligence work — carried personally by the founder, measured like everything else we do.',
+        proofLabel: 'How we serve at this altitude →',
+        proofHref: '/private-clients/',
+        learnHref: '/private-clients/',
+      },
+      platform: {
+        name: 'Full Platform Build',
+        price: 'Scoped to the mandate — written scope and milestones',
+        pitch: "When the business IS the software. We founded and engineered AfriPulse Times — a pan-African newsroom with automated story flow, a command center, and a live news map — and it runs in production today. Your platform gets the same architecture discipline.",
+        proofLabel: 'AfriPulse Times — the build story →',
+        proofHref: '/case-studies/afripulse-times-media-platform/',
+        learnHref: '/afripulse/',
+      },
+    };
+
+    const answers: Record<string, string> = {};
+    let step = 0;
+
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('.fit-panel'));
+    const dots = Array.from(root.querySelectorAll<HTMLElement>('.fit-dot'));
+    const result = document.getElementById('fit-result')!;
+    const back = document.getElementById('fit-back')!;
+    const label = document.getElementById('fit-step-label')!;
+
+    function recommend(): string {
+      if (answers.biz === 'platform') return 'platform';
+      if (answers.biz === 'property' || answers.pain === 'building') return 'cre';
+      if (answers.biz === 'portfolio' || answers.pain === 'scale') return 'private';
+      if (answers.biz === 'retail') return 'retail';
+      if (answers.pain === 'market') return 'marketlock';
+      if (answers.pain === 'coldleads' || answers.pain === 'admin') return 'leadengine';
+      return 'jobsite';
+    }
+
+    function show(n: number) {
+      step = n;
+      panels.forEach((p, i) => p.classList.toggle('hidden', i !== n));
+      result.classList.add('hidden');
+      dots.forEach((d, i) => d.classList.toggle('is-active', i <= n));
+      label.textContent = `Question ${n + 1} of 3`;
+      back.classList.toggle('hidden', n === 0);
+    }
+
+    function finish() {
+      const key = recommend();
+      const s = SYSTEMS[key];
+      panels.forEach((p) => p.classList.add('hidden'));
+      dots.forEach((d) => d.classList.add('is-active'));
+      label.textContent = 'Matched';
+      back.classList.remove('hidden');
+
+      document.getElementById('fit-name')!.textContent = s.name;
+      document.getElementById('fit-price')!.textContent = s.price;
+      document.getElementById('fit-pitch')!.textContent = s.pitch;
+      const proof = document.getElementById('fit-proof') as HTMLAnchorElement;
+      proof.textContent = s.proofLabel;
+      proof.href = s.proofHref;
+      (document.getElementById('fit-learn') as HTMLAnchorElement).href = s.learnHref;
+
+      const email = document.getElementById('fit-email') as HTMLAnchorElement;
+      const urgency = answers.when === 'asap' ? "Let's move — email now" : answers.when === 'quarter' ? 'Start the conversation' : 'Ask a question';
+      email.textContent = urgency;
+      const body = `Hi Daniel,%0D%0A%0D%0AThe Fit Finder matched me with: ${encodeURIComponent(s.name)}%0D%0A%0D%0AAbout me — type: ${answers.biz}, bottleneck: ${answers.pain}, timeline: ${answers.when}.%0D%0A%0D%0AMy business: %0D%0AName: %0D%0APhone: `;
+      email.href = `mailto:${SITE.email}?subject=${encodeURIComponent('Fit Finder — ' + s.name)}&body=${body}`;
+
+      result.classList.remove('hidden');
+      result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    root.querySelectorAll<HTMLButtonElement>('.fit-opt').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        answers[btn.dataset.q!] = btn.dataset.v!;
+        if (step < 2) show(step + 1);
+        else finish();
+      })
+    );
+    back.addEventListener('click', () => show(Math.max(0, step - 1)));
+    show(0);
+  }
+  document.addEventListener('astro:page-load', initFit);
+</script>
