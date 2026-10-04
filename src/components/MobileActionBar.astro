@@ -10,7 +10,9 @@ const path = Astro.url.pathname;
 const tel = SITE.phone.replace(/[^\d+]/g, '');
 
 let target = { href: '/quotebrain/', label: 'Instant Quote' };
-if (/^\/(ai-services|ai-readiness|pricing|guarantees)/.test(path)) {
+if (/^\/retail/.test(path)) {
+  target = { href: '/contact/', label: 'Talk Shop' };
+} else if (/^\/(ai-services|ai-readiness|pricing|guarantees)/.test(path)) {
   target = { href: '/ai-readiness/', label: 'Free Score' };
 } else if (/^\/(commercial-real-estate|listings|building-worth|south-shore)/.test(path)) {
   target = { href: '/building-worth/', label: 'Building Value' };
