@@ -159,48 +159,85 @@ const description =
     </div>
   </section>
 
-  <!-- RETAIL SPOTLIGHT -->
+  <!-- FLAGSHIP BUILDS -->
   <section class="bg-navy-950">
     <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-      <div class="grid items-center gap-10 lg:grid-cols-2">
-        <div class="reveal">
-          <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">New · Retail systems</p>
-          <h2 class="mt-3 max-w-lg font-display text-3xl font-bold text-white sm:text-4xl">
-            We put a store's whole shelf online. Business went up 300%.
-          </h2>
-          <p class="mt-4 max-w-xl leading-relaxed text-navy-100/85">
-            Outback Arms of Plympton, MA — a family-run firearms dealer in the hardest retail category on the
-            internet — now runs a live-inventory storefront from one admin panel, on open code they own. The store
-            reports business up 300% since launch, and you can browse the build yourself.
+      <SectionHeading
+        eyebrow="Flagship builds · Both live right now"
+        heading="Proof you can visit, not promises"
+        body="Two running platforms, built end to end — a continental media company and a regulated-retail storefront. Click either one and judge the work yourself."
+        align="center"
+        dark
+      />
+      <div class="mt-12 grid gap-6 lg:grid-cols-2">
+        <div class="reveal flex flex-col rounded-xl border border-white/10 bg-navy-900 p-8">
+          <p class="text-xs font-semibold uppercase tracking-widest text-brass-300">Media · Pan-African newsroom</p>
+          <h3 class="mt-2 font-display text-2xl font-bold text-white">AfriPulse Times</h3>
+          <p class="mt-3 flex-1 text-sm leading-relaxed text-navy-100/85">
+            A continental digital newsroom we founded and engineered in-house: automated story flow from curated RSS
+            pipelines, a command-center dashboard that runs the whole operation from one screen, a live news map that
+            updates itself as stories land, and an editorial board keeping human judgment on top of machine speed.
+            Now actively raising funding for a large-scale rollout.
           </p>
-          <div class="mt-7 flex flex-wrap gap-4">
-            <a href="/retail/" class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-lg transition-colors hover:bg-teal-500">
-              Retail Systems →
+          <div class="mt-5 grid grid-cols-3 gap-3 border-t border-white/10 pt-5 text-center">
+            {
+              [
+                ['24/7', 'Automated story flow'],
+                ['One screen', 'Command center'],
+                ['Live', 'Auto-updating news map'],
+              ].map(([v, l]) => (
+                <div>
+                  <p class="font-display text-lg font-bold text-teal-400">{v}</p>
+                  <p class="mt-1 text-[11px] leading-snug text-navy-100/60">{l}</p>
+                </div>
+              ))
+            }
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="https://www.afripulsetimes.com" rel="noopener" class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-500">
+              Visit afripulsetimes.com
             </a>
-            <a href="https://outbackarms.com" rel="noopener" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">
-              See It Live: outbackarms.com
+            <a href="/case-studies/afripulse-times-media-platform/" class="rounded-md border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">
+              The build story →
             </a>
           </div>
         </div>
-        <div class="reveal grid grid-cols-2 gap-4" style="--reveal-delay: 100ms">
-          {
-            [
-              { value: '300%', label: 'Business growth since launch, as reported by the store' },
-              { value: 'Live', label: 'Real-time inventory — the website shows the actual shelf' },
-              { value: 'Minutes', label: 'To list, reprice, or mark sold — no developer needed' },
-              { value: '24/7', label: 'Selling after the counter closes' },
-            ].map((stat) => (
-              <div class="rounded-xl border border-white/10 bg-navy-900 p-6 text-center">
-                <p class="font-display text-3xl font-bold text-teal-400">{stat.value}</p>
-                <p class="mt-2 text-xs leading-relaxed text-navy-100/70">{stat.label}</p>
-              </div>
-            ))
-          }
+
+        <div class="reveal flex flex-col rounded-xl border border-white/10 bg-navy-900 p-8" style="--reveal-delay: 90ms">
+          <p class="text-xs font-semibold uppercase tracking-widest text-brass-300">Retail · Regulated category</p>
+          <h3 class="mt-2 font-display text-2xl font-bold text-white">Outback Arms</h3>
+          <p class="mt-3 flex-1 text-sm leading-relaxed text-navy-100/85">
+            A family-run Massachusetts firearms dealer in the hardest retail category on the internet — now running a
+            live-inventory storefront from one owner-run admin panel, on open code they own, with reserve-and-pickup
+            built around the compliance process. The store reports business up 300% since launch.
+          </p>
+          <div class="mt-5 grid grid-cols-3 gap-3 border-t border-white/10 pt-5 text-center">
+            {
+              [
+                ['300%', 'Growth, store-reported'],
+                ['Live', 'Real-time inventory'],
+                ['Minutes', 'To list or reprice'],
+              ].map(([v, l]) => (
+                <div>
+                  <p class="font-display text-lg font-bold text-teal-400">{v}</p>
+                  <p class="mt-1 text-[11px] leading-snug text-navy-100/60">{l}</p>
+                </div>
+              ))
+            }
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="https://outbackarms.com" rel="noopener" class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-500">
+              Visit outbackarms.com
+            </a>
+            <a href="/retail/" class="rounded-md border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">
+              Retail Consultants →
+            </a>
+          </div>
         </div>
       </div>
-      <p class="mt-8 text-sm text-navy-100/60">
-        Retail, including regulated retail — firearms dealers welcome.
-        <a href="/case-studies/outback-arms-retail-platform/" class="font-semibold text-teal-400 hover:text-teal-500">Read the full Outback Arms story →</a>
+      <p class="mt-8 text-center text-sm text-navy-100/60">
+        Your business could run like this.
+        <a href="/ai-services/" class="font-semibold text-teal-400 hover:text-teal-500">See what we'd build for you →</a>
       </p>
     </div>
   </section>
