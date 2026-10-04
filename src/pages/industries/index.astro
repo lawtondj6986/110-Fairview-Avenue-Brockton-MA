@@ -1,0 +1,64 @@
+---
+import Base from '../../layouts/Base.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import { INDUSTRIES } from '../../lib/industries';
+
+const title = 'Industries We Serve — AI Systems by Vertical | Innovative Commercial Strategies';
+const description =
+  'AI revenue systems tuned by industry: trades, restaurants, medical and dental, salons, professional services, auto, solar, and retail — each with the bottlenecks named and the install mapped, with published pricing.';
+---
+
+<Base title={title} description={description}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-14 text-center sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">Industries · Systems tuned to how you win work</p>
+      <h1 class="reveal mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        Every business leaks revenue differently.
+      </h1>
+      <p class="reveal mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Same systems, same published prices, same guarantees — but a restaurant doesn't lose money the way a roofer
+        does. Pick your world and see the install mapped to it.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        INDUSTRIES.map((industry, i) => (
+          <a
+            href={`/industries/${industry.slug}/`}
+            class="reveal lift group flex flex-col rounded-xl border border-navy-100 bg-white p-7 shadow-sm"
+            style={`--reveal-delay: ${(i % 3) * 70}ms`}
+          >
+            <p class="text-[11px] font-semibold uppercase tracking-widest text-brass-600">{industry.eyebrow}</p>
+            <h2 class="mt-2 text-xl font-bold text-navy-900 group-hover:text-teal-600">{industry.name}</h2>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{industry.headline}</p>
+            <p class="mt-4 text-sm font-semibold text-teal-600">See the install →</p>
+          </a>
+        ))
+      }
+      <a
+        href="/retail/"
+        class="reveal lift group flex flex-col rounded-xl border border-teal-500/50 bg-navy-900 p-7 shadow-sm"
+        style="--reveal-delay: 140ms"
+      >
+        <p class="text-[11px] font-semibold uppercase tracking-widest text-teal-400">Stores · Including regulated retail</p>
+        <h2 class="mt-2 text-xl font-bold text-white group-hover:text-teal-400">Retail</h2>
+        <p class="mt-2 flex-1 text-sm leading-relaxed text-navy-100/80">
+          Retail gets its own practice: live-inventory platforms, owner-run admin panels, and a flagship build
+          reporting business up 300%. Firearms dealers welcome.
+        </p>
+        <p class="mt-4 text-sm font-semibold text-teal-400">Retail Consultants →</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-center text-sm text-ink-500">
+      Don't see your world? The systems adapt — that's the point.
+      <a href="/start/" class="font-semibold text-teal-600 hover:text-teal-500">Take the 45-second Fit Finder →</a>
+    </p>
+  </section>
+
+  <CtaSection />
+</Base>

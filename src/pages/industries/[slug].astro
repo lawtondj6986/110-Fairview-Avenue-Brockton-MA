@@ -1,0 +1,121 @@
+---
+import Base from '../../layouts/Base.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import { INDUSTRIES } from '../../lib/industries';
+import { SITE } from '../../config';
+
+export function getStaticPaths() {
+  return INDUSTRIES.map((industry) => ({ params: { slug: industry.slug }, props: { industry } }));
+}
+
+const { industry } = Astro.props;
+
+const PRICES: Record<string, string> = {
+  JobSite: '$6,500–$9,500 + $450–$700/mo',
+  'Lead Engine': '$12,000–$18,000 + $1,500–$2,500/mo',
+  'Market Lock': '$20,000–$30,000 + $3,500–$6,000/mo',
+};
+
+const title = `AI Systems for ${industry.name} — South Shore MA | ICS`;
+const description = `${industry.headline} Done-for-you AI revenue systems for ${industry.name.toLowerCase()} on the South Shore of Massachusetts — published pricing, written guarantees, built and run by one accountable advisor.`;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: `AI marketing and automation systems for ${industry.name.toLowerCase()}`,
+    name: `AI Revenue Systems — ${industry.name}`,
+    provider: { '@type': 'RealEstateAgent', name: SITE.name, telephone: SITE.phone },
+    areaServed: 'South Shore, Massachusetts',
+    audience: { '@type': 'Audience', audienceType: industry.name },
+    description,
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">{industry.eyebrow}</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        {industry.headline}
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        {industry.intro}
+      </p>
+      <div class="reveal mt-8 flex flex-wrap gap-4" style="--reveal-delay: 300ms">
+        <a href="/start/" class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-lg transition-colors hover:bg-teal-500">
+          Find Your System in 45 Seconds
+        </a>
+        <a href="/contact/" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">
+          Talk to {SITE.founder}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <SectionHeading eyebrow="Sound familiar?" heading={`Where ${industry.name.toLowerCase()} businesses leak revenue`} align="center" />
+    <div class="mt-10 grid gap-4 sm:grid-cols-2">
+      {
+        industry.pains.map((pain, i) => (
+          <div class="reveal flex items-start gap-3 rounded-xl border border-navy-100 bg-white p-5 shadow-sm" style={`--reveal-delay: ${(i % 2) * 70}ms`}>
+            <span class="mt-0.5 font-mono text-sm font-bold text-brass-600">✕</span>
+            <p class="text-sm leading-relaxed text-ink-700">{pain}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <SectionHeading
+        eyebrow="The install"
+        heading="What we'd switch on, in order"
+        body="Published prices, written guarantees, and a 21-day launch clock — the same terms every ICS client gets, tuned to how your business actually wins work."
+        align="center"
+        dark
+      />
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {
+          industry.installs.map((install, i) => (
+            <div class="reveal flex flex-col rounded-xl border border-white/10 bg-navy-900 p-7" style={`--reveal-delay: ${i * 80}ms`}>
+              <p class="font-mono text-xs font-bold text-teal-400">0{i + 1}</p>
+              <h3 class="mt-1 text-xl font-bold text-white">{install.system}</h3>
+              <p class="mt-1 font-mono text-[11px] font-semibold text-brass-300">{PRICES[install.system]}</p>
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-navy-100/80">{install.why}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mt-8 text-center text-sm text-navy-100/70">
+        <a href="/pricing/" class="font-semibold text-teal-400 hover:text-teal-500">Full published pricing →</a>
+        <span class="mx-2">·</span>
+        <a href="/guarantees/" class="font-semibold text-teal-400 hover:text-teal-500">The four written guarantees →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-4xl px-4 py-14 text-center sm:px-6">
+    <div class="reveal rounded-2xl border border-teal-500/40 bg-paper p-8">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">Start free, right now</p>
+      <p class="mt-3 text-lg font-semibold text-navy-900">
+        <a href={industry.tool.href} class="text-teal-600 underline-offset-4 hover:underline">{industry.tool.label} →</a>
+      </p>
+      {
+        industry.proof && (
+          <p class="mt-4 text-sm text-ink-500">
+            Proof first? <a href={industry.proof.href} class="font-semibold text-teal-600 hover:text-teal-500">{industry.proof.label} →</a>
+          </p>
+        )
+      }
+    </div>
+  </section>
+
+  <CtaSection
+    heading={`One call about your ${industry.name.toLowerCase().replace(/ & /, ' or ')} business.`}
+    body="Bring the bottleneck. You'll leave with a straight answer on which system fits, what it costs, and what 90 days should produce — in writing if we proceed."
+  />
+</Base>

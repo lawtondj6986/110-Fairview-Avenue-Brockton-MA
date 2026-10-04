@@ -38,6 +38,7 @@ function collectPages() {
     ['/retail/', 'retail', 'RETAIL CONSULTANTS · INCLUDING REGULATED RETAIL', 'Your whole store, online. Run from one panel.'],
     ['/afripulse/', 'afripulse', 'INVESTOR BRIEF · LIVE IN PRODUCTION', 'AfriPulse Times: a newsroom engineered to run itself.'],
     ['/start/', 'start', 'START HERE · THREE QUESTIONS · 45 SECONDS', "Tell us where it hurts. We'll point at the fix."],
+    ['/industries/', 'industries', 'SYSTEMS TUNED BY INDUSTRY', 'Every business leaks revenue differently.'],
     ['/private-clients/', 'private-clients', 'PRIVATE CLIENTS · MID-SIZE COMPANIES', 'For owners with more at stake.'],
     ['/intelligence/', 'intelligence', 'COMMERCIAL INTELLIGENCE · OSINT', 'Know before you sign.'],
     ['/guarantees/', 'guarantees', 'IN WRITING · WITH CONSEQUENCES', 'Four promises. 21 days. 60 seconds. 90 days. 100% yours.'],
@@ -55,6 +56,12 @@ function collectPages() {
   const townsSrc = readFileSync(rel('src/lib/towns.ts'), 'utf8');
   for (const m of townsSrc.matchAll(/slug: '([^']+)',\s*\n\s*name: '([^']+)'/g)) {
     pages.push([`/south-shore/${m[1]}/`, `south-shore-${m[1]}`, 'COMMERCIAL REAL ESTATE + AI SYSTEMS', `${m[2]}, Massachusetts.`]);
+  }
+
+  // Industries from the data file (same slug/name shape as towns)
+  const indSrc = readFileSync(rel('src/lib/industries.ts'), 'utf8');
+  for (const m of indSrc.matchAll(/slug: '([^']+)',\s*\n\s*name: '([^']+)'/g)) {
+    pages.push([`/industries/${m[1]}/`, `industries-${m[1]}`, 'AI SYSTEMS BY INDUSTRY · SOUTH SHORE MA', `${m[2]}.`]);
   }
 
   const content = [
