@@ -41,3 +41,5 @@ Full disclosure, made proudly: **AfriPulse Times is our own venture** — founde
 ## What's Next
 
 The rollout. The architecture was built for scale from day one — more feeds, more regions, more editorial hands in the same command center — and the funding now being raised is what turns the platform into the continental brand it was engineered to become.
+
+*Investors: a printable brief lives at [icsgroup.ai/afripulse](/afripulse/) — the platform, the thesis, and how to start the conversation.*
