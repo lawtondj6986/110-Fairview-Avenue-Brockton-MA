@@ -84,6 +84,15 @@ export async function generateOg() {
   mkdirSync(rel('src/generated'), { recursive: true });
   mkdirSync(rel('public/og'), { recursive: true });
 
+  // Search index for the ⌘K palette — every route with its title and
+  // eyebrow (which doubles as keywords). Written before OG rendering so
+  // it exists even if satori fails.
+  const allPages = collectPages();
+  writeFileSync(
+    rel('public/search-index.json'),
+    JSON.stringify(allPages.map(([route, , eyebrow, title]) => ({ u: route, t: title, k: eyebrow })))
+  );
+
   try {
     const { default: satori } = await import('satori');
     const { Resvg } = await import('@resvg/resvg-js');
@@ -92,7 +101,7 @@ export async function generateOg() {
     const font700 = readFileSync(rel('node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff'));
     const logo = `data:image/jpeg;base64,${readFileSync(rel('public/images/ics-logo-mark.jpg')).toString('base64')}`;
 
-    const pages = collectPages();
+    const pages = allPages;
     const manifest = {};
 
     for (const [route, slug, eyebrow, title] of pages) {

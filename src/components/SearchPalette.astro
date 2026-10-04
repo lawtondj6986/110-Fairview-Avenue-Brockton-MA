@@ -1,0 +1,166 @@
+---
+/**
+ * ⌘K command palette — instant site search over the build-time index
+ * (public/search-index.json, emitted by scripts/generate-og.mjs).
+ * Opens via the header button or Cmd/Ctrl+K; closes on Esc or backdrop.
+ */
+---
+
+<div
+  id="palette"
+  class="fixed inset-0 z-[60] hidden items-start justify-center bg-navy-950/60 p-4 pt-[12vh] backdrop-blur-sm sm:pt-[18vh]"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Search the site"
+>
+  <div class="w-full max-w-xl overflow-hidden rounded-xl border border-navy-100 bg-white shadow-2xl">
+    <div class="flex items-center gap-3 border-b border-navy-100 px-4">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="shrink-0 text-teal-600" aria-hidden="true">
+        <circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" />
+      </svg>
+      <input
+        id="palette-input"
+        type="text"
+        placeholder="Search pages, tools, towns, industries…"
+        autocomplete="off"
+        spellcheck="false"
+        class="w-full bg-transparent py-3.5 text-sm text-navy-900 placeholder:text-ink-500/60 focus:outline-none"
+      />
+      <kbd class="hidden shrink-0 rounded border border-navy-100 px-1.5 py-0.5 font-mono text-[10px] text-ink-500 sm:block">esc</kbd>
+    </div>
+    <ul id="palette-results" class="max-h-[50vh] overflow-y-auto p-2" role="listbox"></ul>
+    <p class="border-t border-navy-100 px-4 py-2 text-[11px] text-ink-500/70">
+      <kbd class="font-mono">↑↓</kbd> navigate · <kbd class="font-mono">↵</kbd> open · Can't find it? <a href="/contact/" class="font-semibold text-teal-600">Just ask →</a>
+    </p>
+  </div>
+</div>
+
+<style>
+  #palette.is-open {
+    display: flex;
+  }
+  #palette-results li[aria-selected='true'] a {
+    background: #f0faf8;
+    border-color: #14b8a6;
+  }
+</style>
+
+<script>
+  type Entry = { u: string; t: string; k: string };
+  let index: Entry[] | null = null;
+  let selected = 0;
+  let shown: Entry[] = [];
+
+  function palette() {
+    return document.getElementById('palette');
+  }
+
+  async function loadIndex() {
+    if (index) return index;
+    try {
+      index = (await (await fetch('/search-index.json')).json()) as Entry[];
+    } catch {
+      index = [];
+    }
+    return index;
+  }
+
+  function score(entry: Entry, terms: string[]): number {
+    const title = entry.t.toLowerCase();
+    const keywords = entry.k.toLowerCase();
+    const url = entry.u.toLowerCase();
+    let s = 0;
+    for (const term of terms) {
+      if (title.startsWith(term)) s += 6;
+      else if (title.includes(term)) s += 4;
+      if (keywords.includes(term)) s += 2;
+      if (url.includes(term)) s += 1;
+      if (!title.includes(term) && !keywords.includes(term) && !url.includes(term)) return 0;
+    }
+    return s;
+  }
+
+  function render() {
+    const list = document.getElementById('palette-results')!;
+    list.innerHTML = shown.length
+      ? shown
+          .map(
+            (e, i) => `
+      <li role="option" aria-selected="${i === selected}">
+        <a href="${e.u}" class="block rounded-lg border border-transparent px-3 py-2.5 hover:bg-paper">
+          <span class="block text-sm font-semibold text-navy-900">${e.t.replace(/</g, '&lt;')}</span>
+          <span class="mt-0.5 block text-[11px] uppercase tracking-wider text-ink-500/70">${e.k.replace(/</g, '&lt;')}</span>
+        </a>
+      </li>`
+          )
+          .join('')
+      : `<li class="px-3 py-6 text-center text-sm text-ink-500">No pages match — try fewer letters, or <a href="/contact/" class="font-semibold text-teal-600">ask us directly</a>.</li>`;
+  }
+
+  async function update() {
+    const q = (document.getElementById('palette-input') as HTMLInputElement).value.trim().toLowerCase();
+    const idx = await loadIndex();
+    if (!q) {
+      shown = idx.filter((e) => ['/start/', '/pricing/', '/retail/', '/industries/', '/quotebrain/', '/case-studies/', '/contact/'].includes(e.u));
+    } else {
+      const terms = q.split(/\s+/).filter(Boolean);
+      shown = idx
+        .map((e) => [score(e, terms), e] as [number, Entry])
+        .filter(([s]) => s > 0)
+        .sort((a, b) => b[0] - a[0])
+        .slice(0, 8)
+        .map(([, e]) => e);
+    }
+    selected = 0;
+    render();
+  }
+
+  function openPalette() {
+    const el = palette();
+    if (!el) return;
+    el.classList.add('is-open');
+    const input = document.getElementById('palette-input') as HTMLInputElement;
+    input.value = '';
+    update();
+    requestAnimationFrame(() => input.focus());
+  }
+
+  function closePalette() {
+    palette()?.classList.remove('is-open');
+  }
+
+  function bindPage() {
+    const el = palette();
+    if (!el || el.dataset.ready) return;
+    el.dataset.ready = '1';
+    el.addEventListener('click', (ev) => {
+      if (ev.target === el) closePalette();
+    });
+    document.getElementById('palette-input')!.addEventListener('input', update);
+    document.getElementById('palette-input')!.addEventListener('keydown', (ev) => {
+      const kev = ev as KeyboardEvent;
+      if (kev.key === 'ArrowDown' || kev.key === 'ArrowUp') {
+        kev.preventDefault();
+        selected = (selected + (kev.key === 'ArrowDown' ? 1 : shown.length - 1)) % Math.max(shown.length, 1);
+        render();
+      } else if (kev.key === 'Enter' && shown[selected]) {
+        window.location.href = shown[selected].u;
+      }
+    });
+    document.querySelectorAll('[data-open-search]').forEach((btn) => btn.addEventListener('click', openPalette));
+  }
+
+  document.addEventListener('astro:page-load', bindPage);
+
+  if (!(window as any).__paletteKeys) {
+    (window as any).__paletteKeys = true;
+    document.addEventListener('keydown', (ev) => {
+      if ((ev.metaKey || ev.ctrlKey) && ev.key.toLowerCase() === 'k') {
+        ev.preventDefault();
+        palette()?.classList.contains('is-open') ? closePalette() : openPalette();
+      } else if (ev.key === 'Escape') {
+        closePalette();
+      }
+    });
+  }
+</script>

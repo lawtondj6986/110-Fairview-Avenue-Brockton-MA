@@ -6,6 +6,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MobileActionBar from '../components/MobileActionBar.astro';
+import SearchPalette from '../components/SearchPalette.astro';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import ogManifest from '../generated/og-manifest.json';
@@ -97,6 +98,7 @@ const jsonLd = [localBusiness, ...schema];
     </main>
     <Footer />
     <MobileActionBar />
+    <SearchPalette />
     <Analytics />
     <SpeedInsights />
     <script>

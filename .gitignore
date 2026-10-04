@@ -23,3 +23,6 @@ npm-debug.log*
 # generated social cards
 public/og/
 src/generated/
+
+# generated search index (⌘K palette)
+public/search-index.json
