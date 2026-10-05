@@ -14,10 +14,22 @@ const description = 'The page you were looking for could not be found.';
       useful.
     </p>
     <div class="mt-8 flex flex-wrap justify-center gap-4">
-      <a href="/" class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white hover:bg-teal-500">Back Home</a>
-      <a href="/contact/" class="rounded-md border border-navy-900 px-6 py-3 font-semibold text-navy-900 hover:bg-navy-900 hover:text-white">
-        Contact Us
+      <button
+        type="button"
+        data-open-search
+        class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white hover:bg-teal-500"
+      >
+        Search the Site (⌘K)
+      </button>
+      <a href="/start/" class="rounded-md border border-navy-900 px-6 py-3 font-semibold text-navy-900 hover:bg-navy-900 hover:text-white">
+        45-Second Fit Finder
+      </a>
+      <a href="/" class="rounded-md border border-navy-100 px-6 py-3 font-semibold text-ink-500 hover:border-teal-500 hover:text-teal-600">
+        Back Home
       </a>
     </div>
+    <p class="mt-6 text-sm text-ink-500">
+      Or just ask: <a href="/answers/" class="font-semibold text-teal-600 hover:text-teal-500">straight answers live here →</a>
+    </p>
   </section>
 </Base>

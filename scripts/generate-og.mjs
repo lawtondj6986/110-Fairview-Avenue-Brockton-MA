@@ -39,6 +39,7 @@ function collectPages() {
     ['/afripulse/', 'afripulse', 'INVESTOR BRIEF · LIVE IN PRODUCTION', 'AfriPulse Times: a newsroom engineered to run itself.'],
     ['/start/', 'start', 'START HERE · THREE QUESTIONS · 45 SECONDS', "Tell us where it hurts. We'll point at the fix."],
     ['/industries/', 'industries', 'SYSTEMS TUNED BY INDUSTRY', 'Every business leaks revenue differently.'],
+    ['/answers/', 'answers', 'STRAIGHT ANSWERS · NO SALES FILTER', 'Every question we actually get. Answered plainly.'],
     ['/private-clients/', 'private-clients', 'PRIVATE CLIENTS · MID-SIZE COMPANIES', 'For owners with more at stake.'],
     ['/intelligence/', 'intelligence', 'COMMERCIAL INTELLIGENCE · OSINT', 'Know before you sign.'],
     ['/guarantees/', 'guarantees', 'IN WRITING · WITH CONSEQUENCES', 'Four promises. 21 days. 60 seconds. 90 days. 100% yours.'],

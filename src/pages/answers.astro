@@ -1,0 +1,208 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { SITE } from '../config';
+
+const title = 'Straight Answers — Pricing, Process, AI, Real Estate | ICS';
+const description =
+  'Every question we actually get, answered plainly: what the systems cost, what the guarantees mean, how fast we launch, whether AI works for small businesses, how the real estate side works, and what we build for regulated retail.';
+
+interface QA {
+  q: string;
+  a: string;
+  href?: string;
+  label?: string;
+}
+
+const groups: { name: string; items: QA[] }[] = [
+  {
+    name: 'Pricing & guarantees',
+    items: [
+      {
+        q: 'What does a website that actually produces leads cost?',
+        a: 'Our JobSite system runs $6,500–$9,500 setup plus $450–$700/month, live in 21 days guaranteed, with an instant-quote calculator and review engine included. Lead Engine (full follow-up automation) is $12,000–$18,000, and Market Lock (territory exclusivity) is $20,000–$30,000. Those are real ranges, published on purpose.',
+        href: '/pricing/',
+        label: 'Full published pricing',
+      },
+      {
+        q: 'Why do you publish pricing when no other agency does?',
+        a: "Because 'contact us for pricing' is how agencies avoid accountability. Published ranges let you qualify us in 30 seconds, and the written quote you get within 48 hours of a call has nowhere to hide.",
+      },
+      {
+        q: 'What happens if the system doesn\'t work?',
+        a: 'Every engagement sets a measurable 90-day target in writing — lead volume, response time, review velocity. Miss it and we work free until we hit it. And since you own everything, leaving is always easy. We keep clients with numbers, not contracts.',
+        href: '/guarantees/',
+        label: 'The four written guarantees',
+      },
+      {
+        q: 'Do I actually own the website and the data?',
+        a: 'One hundred percent — code, domain, ad accounts, CRM data, reviews. It\'s a written guarantee. If we disappeared tomorrow, everything keeps running and it all belongs to you.',
+      },
+      {
+        q: 'What are the monthly fees actually for?',
+        a: "Running the machine: hosting and monitoring, the AI response system answering your leads 24/7, review and follow-up automation, content production at the higher tiers, and a monthly review of your numbers with a human being. It's an operations contract, not a maintenance retainer.",
+      },
+    ],
+  },
+  {
+    name: 'Working with us',
+    items: [
+      {
+        q: 'How fast can my business be live?',
+        a: 'JobSite launches within 21 days of kickoff — guaranteed in writing, with a $1,000-per-week credit if we run late. Typical agencies quote 8–14 weeks for less.',
+      },
+      {
+        q: 'Who actually does the work?',
+        a: "The founder. No account managers, no offshore handoffs, no junior team learning on your dime. You work with the person who builds the system, answers the phone, and holds the license.",
+        href: '/about/',
+        label: 'Meet Daniel',
+      },
+      {
+        q: 'Do you use templates?',
+        a: "We've productized the process — that's why 21 days is possible — but every build is engineered around your business: your services, your pricing logic, your compliance process if you're in regulated retail. Browse the live builds and judge: afripulsetimes.com and outbackarms.com don't look like anyone's template.",
+        href: '/scoreboard/',
+        label: 'See the live builds',
+      },
+      {
+        q: 'What do you need from me to start?',
+        a: 'A strategy call, then content and access: your services and rough pricing, photos if you have them, logins to whatever exists today. We handle everything else — and the 21-day clock starts when we have those in hand.',
+        href: '/start/',
+        label: 'Start with the 45-second Fit Finder',
+      },
+    ],
+  },
+  {
+    name: 'The AI systems',
+    items: [
+      {
+        q: 'Does AI lead response actually work for a small local business?',
+        a: "It's where it works best. The widely replicated finding is that contact rates collapse as minutes pass after an inquiry — and a two-person shop can't answer at 9pm from a job site. The AI answers in under 60 seconds with questions that make sense for your trade, books the appointment, and hands you a qualified lead instead of a missed call.",
+        href: '/ai-services/',
+        label: 'How the systems work',
+      },
+      {
+        q: 'Will the AI sound robotic to my customers?',
+        a: "It's trained on your business — your services, your service area, how you talk about your work. Customers get an instant, useful answer instead of voicemail. In our experience the complaint never comes; the bookings do.",
+      },
+      {
+        q: 'What is AEO and why do you keep mentioning it?',
+        a: "Answer-engine optimization: making your business the one AI assistants like ChatGPT recommend when someone asks 'who should I hire near me.' More buying questions are asked to AI every month, and almost no local business is competing for those answers yet. That's the opening.",
+      },
+      {
+        q: 'Can you measure whether any of this works?',
+        a: "It's the whole point. Every system ships with a dashboard: leads this week, response time, review velocity, revenue attributed. We publish an aggregate scoreboard and set your 90-day target in writing before you pay.",
+        href: '/scoreboard/',
+        label: 'The scoreboard',
+      },
+    ],
+  },
+  {
+    name: 'Commercial real estate',
+    items: [
+      {
+        q: 'What does the real estate side of ICS do?',
+        a: "Buyer, seller, tenant, and landlord representation for sub-$3M commercial property across sixteen South Shore towns — the deals national firms ignore. Every listing gets institutional-grade marketing: offering memoranda, drone media, targeted campaigns, property-level SEO.",
+        href: '/commercial-real-estate/',
+        label: 'CRE services',
+      },
+      {
+        q: "What's a Broker Opinion of Value and what does it cost?",
+        a: "A professional read on what your building is actually worth — walked in person, built on real comparables, written within 48 hours. Ours is free, no strings: we'd rather earn the relationship before the listing.",
+        href: '/building-worth/',
+        label: "What's my building worth?",
+      },
+      {
+        q: 'Can you find buildings that aren\'t listed anywhere?',
+        a: "That's most of what we do. The best sub-$3M buildings on the South Shore change hands through relationships before a sign ever goes up. Tell us your spec — use, size, towns, budget — and we hunt off-market first.",
+      },
+    ],
+  },
+  {
+    name: 'Specialty practices',
+    items: [
+      {
+        q: 'Can you build e-commerce for a firearms dealer?',
+        a: "Yes — it's a practice area, not an exception. Live inventory on your website, an admin panel you run from the counter, reserve-and-pickup built around your compliance process, and payment architecture that serves the category. Proven at outbackarms.com, where the store reports business up 300% since launch. Nothing we do is legal advice — your license and counsel lead every build.",
+        href: '/retail/',
+        label: 'Retail Consultants',
+      },
+      {
+        q: 'Do you build full platforms — not just websites?',
+        a: "We founded and engineered AfriPulse Times, a pan-African digital newsroom with automated story ingestion, a command-center dashboard, and a live news map — running in production today. When the business is the software, that's the build discipline your project gets.",
+        href: '/case-studies/afripulse-times-media-platform/',
+        label: 'The AfriPulse build story',
+      },
+      {
+        q: 'What is the OSINT / commercial intelligence service?',
+        a: 'Decision-grade research from public sources and lawful methods: property histories and ownership chains, counterparty and vendor vetting, competitive landscapes, digital-exposure assessments. Business purposes only — never consumer reports for hiring or tenant screening — delivered as a written, sourced, confidential brief.',
+        href: '/intelligence/',
+        label: 'Commercial intelligence',
+      },
+    ],
+  },
+];
+
+const allQAs = groups.flatMap((g) => g.items);
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: allQAs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-14 text-center sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">Straight answers · No sales filter</p>
+      <h1 class="reveal mx-auto mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        Every question we actually get. Answered like we answer the phone.
+      </h1>
+      <p class="reveal mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Prices included, hedging excluded. If your question isn't here, call {SITE.phone} and ask the founder directly
+        — that's not a figure of speech.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 py-14 sm:px-6">
+    {
+      groups.map((group) => (
+        <div class="mb-12">
+          <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">{group.name}</h2>
+          <div class="mt-4 space-y-3">
+            {group.items.map((faq) => (
+              <details class="group rounded-xl border border-navy-100 bg-white p-6 shadow-sm">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-navy-900 [&::-webkit-details-marker]:hidden">
+                  {faq.q}
+                  <span class="shrink-0 text-teal-600 transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+                </summary>
+                <p class="mt-3 text-sm leading-relaxed text-ink-500">{faq.a}</p>
+                {faq.href && (
+                  <a href={faq.href} class="mt-3 inline-block text-sm font-semibold text-teal-600 hover:text-teal-500">
+                    {faq.label} →
+                  </a>
+                )}
+              </details>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+    <p class="rounded-xl border border-teal-500/40 bg-paper p-5 text-center text-sm text-ink-700">
+      Not sure which question is even yours?
+      <a href="/start/" class="font-semibold text-teal-600 hover:text-teal-500">The 45-second Fit Finder figures it out →</a>
+    </p>
+  </section>
+
+  <CtaSection
+    heading="Still have a question? Good."
+    body="The ones that don't fit a FAQ page are usually the interesting ones. Bring it to a free strategy call — straight answer guaranteed, sales pitch optional."
+  />
+</Base>
