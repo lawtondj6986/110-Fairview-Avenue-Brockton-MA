@@ -43,7 +43,7 @@ function collectPages() {
     ['/intelligence/', 'intelligence', 'COMMERCIAL INTELLIGENCE · OSINT', 'Know before you sign.'],
     ['/guarantees/', 'guarantees', 'IN WRITING · WITH CONSEQUENCES', 'Four promises. 21 days. 60 seconds. 90 days. 100% yours.'],
     ['/scoreboard/', 'scoreboard', 'UPDATED MONTHLY', 'Agencies show portfolios. We show a scoreboard.'],
-    ['/south-shore/', 'south-shore', 'SERVICE AREA · TEN TOWNS, IN PERSON', "We don't cover the South Shore. We work it."],
+    ['/south-shore/', 'south-shore', 'SERVICE AREA · SIXTEEN TOWNS, IN PERSON', "We don't cover the South Shore. We work it."],
     ['/about/', 'about', 'ABOUT ICS · BROCKTON MA', "Two careers' worth of skills. One advisor at your table."],
     ['/contact/', 'contact', 'CONTACT · (508) 942-8259', 'One call. A straight answer. A concrete next step.'],
     ['/workshops/', 'workshops', 'FREE CHAMBER WORKSHOPS', 'AI for Main Street — free, practical, no hype.'],
