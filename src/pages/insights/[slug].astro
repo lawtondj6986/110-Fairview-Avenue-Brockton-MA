@@ -13,6 +13,16 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 const { title, description, date } = post.data;
 
+// "Keep reading": same category first, then newest of the rest.
+const others = (await getCollection('insights', ({ data }) => !data.draft))
+  .filter((p) => p.id !== post.id)
+  .sort(
+    (a, b) =>
+      Number(b.data.category === post.data.category) - Number(a.data.category === post.data.category) ||
+      b.data.date.valueOf() - a.data.date.valueOf()
+  )
+  .slice(0, 2);
+
 const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
 const schema = [
@@ -42,6 +52,22 @@ const schema = [
       </div>
     </div>
   </article>
+
+  {
+    others.length > 0 && (
+      <section class="mx-auto max-w-3xl px-4 pb-14 sm:px-6">
+        <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">Keep reading</h2>
+        <div class="mt-4 grid gap-4 sm:grid-cols-2">
+          {others.map((p) => (
+            <a href={`/insights/${p.id}/`} class="lift group rounded-xl border border-navy-100 bg-white p-5 shadow-sm">
+              <p class="text-sm font-bold leading-snug text-navy-900 group-hover:text-teal-600">{p.data.title}</p>
+              <p class="mt-2 line-clamp-3 text-xs leading-relaxed text-ink-500">{p.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )
+  }
 
   <CtaSection
     heading="Want this applied to your business?"
