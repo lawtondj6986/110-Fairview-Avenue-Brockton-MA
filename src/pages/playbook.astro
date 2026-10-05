@@ -1,0 +1,215 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { SITE } from '../config';
+
+const title = 'The 90-Day Playbook — Free, Printable, No Email Gate | ICS';
+const description =
+  'The exact 90-day sequence we use to turn a South Shore business from invisible to findable to chosen: Google Business Profile, response time, review velocity, website conversion, and AI-assistant visibility. Free, printable, and genuinely do-it-yourself.';
+
+const phases = [
+  {
+    name: 'Days 1–7 · Claim your ground',
+    goal: 'Exist, correctly, everywhere a customer checks.',
+    steps: [
+      {
+        do: 'Claim and complete your Google Business Profile',
+        how: "Claim the listing at google.com/business, then fill in every field: real hours (including holidays), services with descriptions, service area, and at least 10 photos — your work, your team, your storefront. Choose the most specific category Google offers, not the broadest.",
+        why: 'For a local business this single free listing outworks the website for discovery. An incomplete profile reads as "maybe closed" — and Google ranks completeness.',
+      },
+      {
+        do: 'Time your own response, honestly',
+        how: "Have a friend submit your contact form and call after hours this week. Write down how long each took to get a human answer. That number — not your website's design — is your conversion rate's ceiling.",
+        why: 'Contact and qualification rates collapse as minutes pass after an inquiry. Whoever answers first usually wins the job; most businesses have never measured themselves.',
+      },
+      {
+        do: 'Fix your citations',
+        how: 'Search your exact business name, phone, and address. Everywhere they appear — Yelp, Facebook, Apple Maps, directories — make them match character for character.',
+        why: "Inconsistent listings make search engines trust your information less, and ranking is trust.",
+      },
+    ],
+  },
+  {
+    name: 'Days 8–30 · Make the website answer',
+    goal: 'A visitor should get a price signal, proof, and a next step in 60 seconds.',
+    steps: [
+      {
+        do: 'Put answers where buttons are',
+        how: "Your homepage needs to answer three questions above the fold: what you do, where you do it, and what happens when I tap this button. Add real pricing signals — ranges beat silence. Add your face; people hire people.",
+        why: "Visitors don't read, they scan for safety signals. Price ranges, a human photo, and a working phone link beat every design flourish ever invented.",
+      },
+      {
+        do: 'Build the proof shelf',
+        how: 'Collect your 10 best job photos, 3 strongest reviews, and any number you can honestly claim (years, jobs completed, response time). Put them on one page.',
+        why: 'Proof is the only copy strangers believe. A thin proof page built from real material outsells polished fiction every time.',
+      },
+      {
+        do: 'Kill your slowest page',
+        how: "Run your site through Google's PageSpeed Insights on a phone. If the score is red, your host, your images, or your page builder is costing you customers on mobile — where most local buying decisions happen.",
+        why: 'Every second of load time sheds visitors who already wanted to hire you.',
+      },
+    ],
+  },
+  {
+    name: 'Days 31–60 · Compound the reputation',
+    goal: 'Make every happy customer recruit the next one — automatically.',
+    steps: [
+      {
+        do: 'Ask for the review, every time, the same day',
+        how: "Text the direct review link (your Google profile generates it) within hours of finishing good work, with one personal sentence. Make it a checklist item, not a mood. Target: every satisfied customer gets asked, same day.",
+        why: 'Review recency and velocity influence local ranking — and the customer comparing you at 9pm counts stars before anything else. Same-day asks convert several times better than next-week asks.',
+      },
+      {
+        do: 'Answer every review, including the bad one',
+        how: "Reply to every review within a day or two — short and human for the good ones; calm, factual, and solution-oriented for the bad ones. You're writing for the hundreds of future readers, not the one reviewer.",
+        why: 'Owner responses signal an alive, accountable business to both Google and people.',
+      },
+      {
+        do: 'Install a follow-up cadence',
+        how: "Every quote gets a day-2 check-in, a day-5 nudge, and a day-10 last call — write the three messages once, then send them every time, no exceptions. Calendar reminders work; a CRM just makes it automatic.",
+        why: "Most quoted-but-lost work isn't lost to competitors — it's lost to silence. A written cadence recovers deals that were already yours.",
+      },
+    ],
+  },
+  {
+    name: 'Days 61–90 · Get chosen by the machines',
+    goal: 'Be the answer when customers ask Google — and when they ask AI.',
+    steps: [
+      {
+        do: 'Write the five answer pages',
+        how: 'List the five questions customers actually ask you, then publish one plain-language page per question — your real answer, your real prices where you can, your town names in the text.',
+        why: "Question-shaped pages are what search and AI assistants quote. Five honest pages beat fifty keyword-stuffed ones.",
+      },
+      {
+        do: 'Make yourself legible to AI assistants',
+        how: 'More customers ask ChatGPT and similar tools "who should I hire near me" every month. Structured data, consistent facts across the web, and question-answer content are how you show up; it\'s early, which is exactly the opportunity.',
+        why: 'Almost no local business competes for AI answers yet. Early movers get recommended by default.',
+      },
+      {
+        do: 'Measure, then double down',
+        how: 'Set up free call tracking or at minimum ask every new customer how they found you, and log it. At day 90, compare against your day-7 baseline: response time, review count, leads per week. Keep whatever moved the numbers; drop whatever didn\'t.',
+        why: 'The baseline you wrote in week one is what makes day 90 a fact instead of a feeling.',
+      },
+    ],
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'The 90-Day Revenue Playbook for Local Businesses',
+    description,
+    totalTime: 'P90D',
+    step: phases.flatMap((phase) =>
+      phase.steps.map((s) => ({
+        '@type': 'HowToStep',
+        name: s.do,
+        text: `${s.how} Why it matters: ${s.why}`,
+      }))
+    ),
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950 print:bg-white">
+    <div class="mx-auto max-w-4xl px-4 py-14 sm:px-6 sm:py-16 print:py-6">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400 print:text-navy-900">The 90-day playbook · Free · No email gate</p>
+        <button id="print-playbook" class="rounded-md border border-white/25 px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400 print:hidden">
+          Print / Save as PDF
+        </button>
+      </div>
+      <h1 class="mt-5 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl print:text-navy-900">
+        Ninety days from invisible to chosen. Here's the whole play.
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90 print:text-ink-700">
+        This is the actual sequence behind our systems — given away, because most owners won't have time to run it
+        manually, and the ones who do deserve to win too. Twelve moves, four phases, zero fluff. Print it, tape it to
+        the office wall, start Monday.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-4xl px-4 py-12 sm:px-6 print:py-4">
+    {
+      phases.map((phase, pi) => (
+        <div class="mb-12 print:mb-6">
+          <div class="flex items-baseline gap-3">
+            <span class="font-display text-3xl font-bold text-teal-600">{`0${pi + 1}`}</span>
+            <div>
+              <h2 class="text-2xl font-bold text-navy-900">{phase.name}</h2>
+              <p class="mt-1 text-sm font-semibold text-brass-600">{phase.goal}</p>
+            </div>
+          </div>
+          <div class="mt-5 space-y-4">
+            {phase.steps.map((s) => (
+              <div class="reveal rounded-xl border border-navy-100 bg-white p-6 shadow-sm print:shadow-none">
+                <h3 class="font-bold text-navy-900">☐ {s.do}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-ink-700">{s.how}</p>
+                <p class="mt-2 text-xs leading-relaxed text-ink-500">
+                  <strong class="text-navy-900">Why it matters:</strong> {s.why}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+
+    <div class="rounded-2xl border border-teal-500/40 bg-navy-900 p-8 print:border-navy-100 print:bg-white">
+      <h2 class="text-xl font-bold text-white print:text-navy-900">The honest fork in the road</h2>
+      <p class="mt-3 text-sm leading-relaxed text-navy-100/85 print:text-ink-700">
+        Everything above is real and it works — if someone runs it every week, forever. That's the catch: this isn't
+        a project, it's an operating rhythm. Our systems exist for owners who'd rather buy the rhythm than become it:
+        the response handled in under 60 seconds around the clock, the reviews asked for automatically, the follow-up
+        that never forgets — with <a href="/pricing/" class="font-semibold text-teal-400 print:text-navy-900">published pricing</a> and
+        <a href="/guarantees/" class="font-semibold text-teal-400 print:text-navy-900"> written guarantees</a>. Either way, run the playbook.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-3 print:hidden">
+        <a href="/ai-readiness/" class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-500">
+          Score Your Starting Point (2 min)
+        </a>
+        <a href="/start/" class="rounded-md border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">
+          Or Match a System in 45 Seconds
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-navy-100/50 print:text-ink-500">
+        icsgroup.ai/playbook · {SITE.name} · {SITE.phone} · Free workshops for South Shore chambers and business groups — <a href="/workshops/" class="font-semibold text-teal-400 print:text-navy-900">details here</a>.
+      </p>
+    </div>
+  </section>
+
+  <CtaSection
+    heading="Want the playbook run for you?"
+    body="One call: we'll tell you which phases you've already won, which ones are leaking, and exactly what a done-for-you install costs. The playbook is free either way."
+  />
+</Base>
+
+<style>
+  @media print {
+    :global(header),
+    :global(footer),
+    :global(#money-bar) {
+      display: none !important;
+    }
+    :global(body) {
+      background: white !important;
+    }
+    :global(.reveal) {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  function initPrint() {
+    const btn = document.getElementById('print-playbook');
+    if (!btn || btn.dataset.ready) return;
+    btn.dataset.ready = '1';
+    btn.addEventListener('click', () => window.print());
+  }
+  document.addEventListener('astro:page-load', initPrint);
+</script>
