@@ -8,6 +8,8 @@ import { SITE } from '../config';
  */
 const path = Astro.url.pathname;
 const tel = SITE.phone.replace(/[^\d+]/g, '');
+// The digital card IS a call/text surface — no bar needed there.
+const hidden = path.startsWith('/card');
 
 let target = { href: '/quotebrain/', label: 'Instant Quote' };
 if (/^\/retail/.test(path)) {
@@ -20,6 +22,7 @@ if (/^\/retail/.test(path)) {
 if (path.startsWith(target.href)) target = { href: '/contact/', label: 'Book a Call' };
 ---
 
+{!hidden && (
 <div
   id="money-bar"
   class="fixed inset-x-0 bottom-0 z-40 translate-y-full border-t border-white/10 bg-navy-950/95 backdrop-blur transition-transform duration-300 lg:hidden print:hidden"
@@ -47,6 +50,7 @@ if (path.startsWith(target.href)) target = { href: '/contact/', label: 'Book a C
     </a>
   </div>
 </div>
+)}
 
 <style is:global>
   /* Keep the footer's last content clear of the bar on phones */
