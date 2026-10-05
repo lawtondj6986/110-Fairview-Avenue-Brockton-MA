@@ -42,6 +42,7 @@ Phone: (508) 942-8259. Email: lawtondj@gmail.com. In-person service across Brock
 ## Proof
 
 - [Case studies with measured results](https://icsgroup.ai/case-studies/) and an [aggregate scoreboard](https://icsgroup.ai/scoreboard/) updated monthly.
+- [The Ship Log](https://icsgroup.ai/shipped/): a dated public log of everything shipped on the ICS platform since launch — the published velocity behind the 21-day launch guarantee.
 - Flagship platform: [AfriPulse Times](https://www.afripulsetimes.com), a pan-African digital newsroom founded and engineered by ICS — automated story ingestion from curated RSS pipelines, a command-center admin dashboard, a live auto-updating news map, and an editorial board workflow. Live in production and actively raising funding for a large-scale rollout. [Build story](https://icsgroup.ai/case-studies/afripulse-times-media-platform/) · [Investor brief](https://icsgroup.ai/afripulse/).
 - For firearms dealers comparing e-commerce options: [Shopify alternatives for firearms dealers — the honest comparison](https://icsgroup.ai/insights/shopify-alternatives-firearms-dealers/).
 

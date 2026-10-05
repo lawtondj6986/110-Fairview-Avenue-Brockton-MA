@@ -1,0 +1,132 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CtaSection from '../components/CtaSection.astro';
+
+const title = 'The Ship Log — What ICS Built, Dated | Innovative Commercial Strategies';
+const description =
+  "We publish prices, guarantees, and a scoreboard — so we also publish velocity. A dated log of everything shipped on the ICS platform since launch: tools, pages, systems, and ventures. This is the tempo your project gets.";
+
+const log: { period: string; items: { what: string; href?: string }[] }[] = [
+  {
+    period: 'October 5',
+    items: [
+      { what: 'The Group — the holding-company view: five practices, two live ventures, the expansion map', href: '/group/' },
+      { what: 'Straight Answers hub — 19 real questions answered with real numbers, structured for answer engines', href: '/answers/' },
+      { what: 'Six new town market pages: Plymouth, Kingston, Halifax, Hanson, Rockland, Avon — sixteen towns total', href: '/south-shore/' },
+      { what: 'Founder photo across the site — About, homepage, contact. The operator thing isn\'t a metaphor', href: '/about/' },
+      { what: 'Smarter 404: site search, Fit Finder, and answers from any dead end' },
+      { what: 'The Ship Log — this page. Velocity, published' },
+    ],
+  },
+  {
+    period: 'October 4',
+    items: [
+      { what: '⌘K command palette — instant search across every page, zero dependencies', },
+      { what: 'Industries hub — seven vertical landing pages, each mapping that business\'s revenue leaks to the install', href: '/industries/' },
+      { what: 'The Fit Finder — three questions, 45 seconds, matched system with published price. No email gate', href: '/start/' },
+      { what: 'AfriPulse Times investor brief — printable, shareable, one link', href: '/afripulse/' },
+      { what: 'SEO strike page: Shopify alternatives for firearms dealers — the honest comparison', href: '/insights/shopify-alternatives-firearms-dealers/' },
+      { what: 'AfriPulse Times flagship showcase — case study, homepage spotlight, ventures story', href: '/case-studies/afripulse-times-media-platform/' },
+      { what: 'Scoreboard upgrade: two live platforms anyone can verify, mid-page', href: '/scoreboard/' },
+    ],
+  },
+  {
+    period: 'September 24',
+    items: [
+      { what: 'Retail Consultants vertical — live-inventory platforms, regulated retail welcome', href: '/retail/' },
+      { what: 'Outback Arms case study — named client, store-reported 300%, browsable proof', href: '/case-studies/outback-arms-retail-platform/' },
+      { what: '"We didn\'t study this counter. We work it." — the counter story, published' },
+      { what: 'Retail Consultants added to main navigation' },
+    ],
+  },
+  {
+    period: 'September 20–23',
+    items: [
+      { what: 'QuoteBrain™ 2.0 — measure a lot on satellite imagery, priced quote in 60 seconds', href: '/quotebrain/' },
+      { what: 'AI Readiness Score — ten questions, graded, with a 90-day plan', href: '/ai-readiness/' },
+      { what: "What's My Building Worth — free broker opinion of value, gated by nothing", href: '/building-worth/' },
+      { what: 'Revenue Leak calculator — what doing nothing costs, from your own numbers', href: '/ai-services/' },
+      { what: 'Ten town market pages, written corridor by corridor', href: '/south-shore/' },
+      { what: 'The honest comparison page — DIY vs agency vs ICS', href: '/compare/' },
+      { what: 'Private Clients practice + Commercial Intelligence (OSINT) desk', href: '/private-clients/' },
+      { what: 'Social-card pipeline: every page gets a branded share image, generated at build' },
+      { what: 'Quality gate: automated Lighthouse + broken-link checks on every deploy' },
+    ],
+  },
+  {
+    period: 'September 20',
+    items: [
+      { what: 'icsgroup.ai launched — full site live on the domain, day one', href: '/' },
+    ],
+  },
+];
+
+const totalShips = log.reduce((n, g) => n + g.items.length, 0);
+---
+
+<Base title={title} description={description}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="reveal font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">The ship log · Updated as we ship</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        We publish prices. We publish results. So we publish velocity too.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Most agencies show you a portfolio of last year. Here's our log since launch day — every tool, page, and
+        system, dated. When we guarantee your site live in 21 days, this is the operating tempo behind the promise.
+      </p>
+      <div class="reveal mt-10 grid max-w-2xl grid-cols-3 gap-6" style="--reveal-delay: 300ms">
+        {
+          [
+            [`${totalShips}`, 'Ships logged since launch'],
+            ['15 days', 'Launch day to this page'],
+            ['2', 'Ventures running in production'],
+          ].map(([v, l]) => (
+            <div>
+              <p class="font-display text-4xl font-bold text-teal-400">{v}</p>
+              <p class="mt-1 text-sm text-navy-100/70">{l}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+    <div class="relative border-l-2 border-teal-500/30 pl-8">
+      {
+        log.map((group) => (
+          <div class="relative mb-12">
+            <span class="absolute -left-[41px] top-1 h-4 w-4 rounded-full border-2 border-teal-500 bg-white" aria-hidden="true" />
+            <h2 class="font-mono text-sm font-bold uppercase tracking-[0.2em] text-teal-600">{group.period}</h2>
+            <ul class="mt-4 space-y-3">
+              {group.items.map((item) => (
+                <li class="reveal flex items-start gap-3 rounded-lg border border-navy-100 bg-white p-4 shadow-sm">
+                  <span class="mt-0.5 font-mono text-xs font-bold text-teal-600">▲</span>
+                  <span class="text-sm leading-relaxed text-ink-700">
+                    {item.what}
+                    {item.href && (
+                      <a href={item.href} class="ml-2 whitespace-nowrap font-semibold text-teal-600 hover:text-teal-500">
+                        see it →
+                      </a>
+                    )}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+    <p class="rounded-xl border border-navy-100 bg-paper p-5 text-center text-sm text-ink-700">
+      The log only counts what's live — if it's listed, you can click it on this site right now.
+      Client work ships on the same tempo and lands on the <a href="/scoreboard/" class="font-semibold text-teal-600 hover:text-teal-500">scoreboard</a>.
+    </p>
+  </section>
+
+  <CtaSection
+    heading="Your project, at this tempo."
+    body="21 days to launch isn't a stretch goal — it's the pace you just scrolled through. Book the call and put your business on the log."
+  />
+</Base>
