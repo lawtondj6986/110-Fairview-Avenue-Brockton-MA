@@ -1,0 +1,179 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { SITE } from '../config';
+
+const title = 'The Group — Practices, Ventures & Expansion | Innovative Commercial Strategies';
+const description =
+  'The full map of ICS: five operating practices (real estate advisory, AI revenue systems, retail platforms, commercial intelligence, platform ventures), two live ventures you can click, and where the group expands next.';
+
+const practices = [
+  {
+    name: 'Real Estate Advisory',
+    status: 'Operating · Licensed',
+    body: 'Buyer, seller, tenant, and landlord representation for sub-$3M commercial property across sixteen South Shore towns — with institutional-grade marketing on every listing and free opinions of value that start relationships.',
+    href: '/commercial-real-estate/',
+  },
+  {
+    name: 'AI Revenue Systems',
+    status: 'Operating · Published pricing',
+    body: 'JobSite, Lead Engine, and Market Lock: done-for-you systems that answer every lead in under 60 seconds, quote instantly, and compound reviews — fixed scopes, written guarantees, measured monthly.',
+    href: '/ai-services/',
+  },
+  {
+    name: 'Retail Platforms',
+    status: 'Operating · Flagship live',
+    body: 'Custom storefronts where the website shows the real shelf — live inventory, owner-run admin panels, compliance-aware flows for regulated retail. Flagship build reporting business up 300% since launch.',
+    href: '/retail/',
+  },
+  {
+    name: 'Commercial Intelligence',
+    status: 'Operating · By engagement',
+    body: 'A refined OSINT practice for business decisions: property histories, counterparty and vendor diligence, competitive research, digital-exposure assessments. Public sources, lawful methods, written briefs.',
+    href: '/intelligence/',
+  },
+  {
+    name: 'Platform Ventures',
+    status: 'Operating · Raising',
+    body: 'Full products engineered and operated in-house — media platforms, dashboards, command centers. The proof that when ICS says "we build software," it means companies, not brochures.',
+    href: '/afripulse/',
+  },
+];
+
+const flywheel = [
+  ['The license feeds the systems', 'Every building we close becomes a business that needs revenue systems — and every systems client eventually needs a building. One advisor carries both conversations.'],
+  ['The ventures prove the craft', 'AfriPulse Times and the Outback Arms platform are the live demos no competitor can match: operating companies, not portfolio screenshots. Every practice sells against that proof.'],
+  ['The intelligence sharpens everything', 'The OSINT discipline that serves private clients also underwrites our own deals, vets our counterparties, and keeps our market reads honest.'],
+  ['The counter keeps us honest', 'The founder still works a retail counter the group built software for. Product decisions get tested against a real Saturday rush, not a persona document.'],
+];
+---
+
+<Base title={title} description={description}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">The group · Why the domain says GROUP</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        One group. Five engines. All running.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Innovative Commercial Strategies is built deliberately multi-faceted: a licensed real estate practice, an AI
+        systems shop, a retail platform studio, an intelligence desk, and ventures we own and operate. Each one feeds
+        the others — and two of them are live on the public internet right now for you to judge.
+      </p>
+      <div class="reveal mt-8 flex flex-wrap gap-4" style="--reveal-delay: 300ms">
+        <a href="/start/" class="rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300">
+          Find Your Entry Point
+        </a>
+        <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('The Group — conversation')}`} class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-brass-300 hover:text-brass-300">
+          Talk to the Founder
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <SectionHeading eyebrow="The practices" heading="Five engines, one accountable operator" align="center" />
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        practices.map((p, i) => (
+          <a href={p.href} class="reveal lift group flex flex-col rounded-xl border border-navy-100 bg-white p-7 shadow-sm" style={`--reveal-delay: ${(i % 3) * 70}ms`}>
+            <p class="font-mono text-[10px] font-semibold uppercase tracking-widest text-teal-600">{p.status}</p>
+            <h2 class="mt-2 text-xl font-bold text-navy-900 group-hover:text-teal-600">{p.name}</h2>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{p.body}</p>
+            <p class="mt-4 text-sm font-semibold text-teal-600">Inside the practice →</p>
+          </a>
+        ))
+      }
+      <div class="reveal flex flex-col justify-center rounded-xl border border-dashed border-brass-500/60 bg-paper p-7 text-center" style="--reveal-delay: 140ms">
+        <p class="font-mono text-[10px] font-semibold uppercase tracking-widest text-brass-600">Next engine</p>
+        <p class="mt-2 text-sm leading-relaxed text-ink-700">
+          The group is built to add engines. If you're sitting on the problem the next one should solve —
+          <a href="/contact/" class="font-semibold text-teal-600 hover:text-teal-500">bring it to us</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE VENTURES -->
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <SectionHeading
+        eyebrow="Proof in production"
+        heading="Two ventures you can open in another tab"
+        body="Most firms describe capability. The group operates it, in public, every day."
+        align="center"
+        dark
+      />
+      <div class="mt-10 grid gap-6 lg:grid-cols-2">
+        <div class="reveal rounded-xl border border-white/10 bg-navy-950 p-7">
+          <p class="text-xs font-semibold uppercase tracking-widest text-brass-300">Founded & operated · Actively raising</p>
+          <h3 class="mt-2 text-xl font-bold text-white">AfriPulse Times</h3>
+          <p class="mt-2 text-sm leading-relaxed text-navy-100/85">
+            Pan-African digital newsroom: automated story flow, one-screen command center, live news map. Publishing
+            daily; raising for a continental rollout.
+          </p>
+          <p class="mt-4 text-sm font-semibold">
+            <a href="https://www.afripulsetimes.com" rel="noopener" class="text-teal-400 hover:text-teal-500">afripulsetimes.com →</a>
+            <span class="mx-2 text-white/20">·</span>
+            <a href="/afripulse/" class="text-brass-300 hover:text-brass-500">Investor brief</a>
+          </p>
+        </div>
+        <div class="reveal rounded-xl border border-white/10 bg-navy-950 p-7" style="--reveal-delay: 90ms">
+          <p class="text-xs font-semibold uppercase tracking-widest text-brass-300">Built & supported · Client-operated</p>
+          <h3 class="mt-2 text-xl font-bold text-white">Outback Arms platform</h3>
+          <p class="mt-2 text-sm leading-relaxed text-navy-100/85">
+            Live-inventory storefront running a Massachusetts firearms dealer daily — owner-run panel, compliance-aware
+            flows, store-reported business up 300% since launch.
+          </p>
+          <p class="mt-4 text-sm font-semibold">
+            <a href="https://outbackarms.com" rel="noopener" class="text-teal-400 hover:text-teal-500">outbackarms.com →</a>
+            <span class="mx-2 text-white/20">·</span>
+            <a href="/case-studies/outback-arms-retail-platform/" class="text-brass-300 hover:text-brass-500">Case study</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE FLYWHEEL -->
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <SectionHeading
+      eyebrow="Why multi-faceted works"
+      heading="The facets aren't a menu. They're a flywheel."
+      align="center"
+    />
+    <div class="mt-10 grid gap-6 sm:grid-cols-2">
+      {
+        flywheel.map(([h, b], i) => (
+          <div class="reveal rounded-xl border border-navy-100 bg-white p-6 shadow-sm" style={`--reveal-delay: ${(i % 2) * 70}ms`}>
+            <h3 class="text-lg font-bold text-navy-900">{h}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-500">{b}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- EXPANSION -->
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Expansion</p>
+      <h2 class="mx-auto mt-3 max-w-2xl text-3xl font-bold text-white">
+        Built in Brockton. Engineered to travel.
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl leading-relaxed text-navy-100/85">
+        The playbook is deliberately portable: sixteen South Shore towns today, a seasonal expansion to Ft. Lauderdale
+        / Broward County bringing the same CRE + AI model to South Florida, and a media venture raising for a
+        continental rollout. Same systems, same guarantees, same one accountable operator — new maps.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="/south-shore/" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">
+          The Current Map
+        </a>
+        <a href="/contact/" class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-teal-500">
+          Talk Expansion With Us
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
