@@ -1,0 +1,159 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { SITE } from '../config';
+
+const title = 'Press & Media Kit | Innovative Commercial Strategies';
+const description =
+  'Everything a writer needs about ICS in one place: boilerplate, founder bios, downloadable logos and photos, fast facts, and the story angles — pan-African media venture raising for rollout, a regulated-retail platform up 300%, and published pricing in an industry that hides it.';
+
+const facts = [
+  ['Founded & led by', 'Daniel Lawton — licensed MA real estate salesperson (#9082020), AI systems builder, working retail counter operator'],
+  ['Headquarters', 'Brockton, Massachusetts'],
+  ['Service area', 'Sixteen South Shore towns, in person; seasonal expansion planned for Ft. Lauderdale / Broward County, FL'],
+  ['Practices', 'Commercial real estate advisory · AI revenue systems · retail platforms · commercial intelligence (OSINT) · platform ventures'],
+  ['Live ventures', 'AfriPulse Times (afripulsetimes.com, founded & operated, actively raising) · Outback Arms retail platform (outbackarms.com, client-operated)'],
+  ['Distinctives', 'Published pricing, written guarantees with stated consequences, a public scoreboard, and a dated public ship log'],
+];
+
+const boilerplates = [
+  {
+    label: 'Boilerplate · ~50 words',
+    id: 'bp-short',
+    text: 'Innovative Commercial Strategies (icsgroup.ai) is a Brockton, Massachusetts firm combining commercial real estate advisory with done-for-you AI revenue systems for local businesses. Founded by licensed advisor and systems builder Daniel Lawton, ICS publishes its pricing, backs its work with written guarantees, and operates its own live ventures, including pan-African digital newsroom AfriPulse Times.',
+  },
+  {
+    label: 'Boilerplate · ~100 words',
+    id: 'bp-long',
+    text: "Innovative Commercial Strategies (icsgroup.ai) is a multi-faceted firm based in Brockton, Massachusetts, serving sixteen South Shore towns. Founded by Daniel Lawton — a licensed Massachusetts real estate salesperson who personally engineers the firm's software — ICS pairs commercial real estate advisory with done-for-you AI revenue systems: websites that answer leads in under 60 seconds, instant-quote engines, review automation, and AI-assistant visibility. The firm is known for radical transparency: published pricing, written guarantees, a public results scoreboard, and a dated ship log. Its ventures include AfriPulse Times, a pan-African digital newsroom built and operated in-house and currently raising for a large-scale rollout, and a live-inventory retail platform whose store reports business up 300% since launch.",
+  },
+  {
+    label: 'Founder bio · short',
+    id: 'bio-short',
+    text: "Daniel Lawton is the founder of Innovative Commercial Strategies, a Brockton, MA firm combining licensed commercial real estate advisory with hands-on AI systems engineering. He built and operates AfriPulse Times, a pan-African digital newsroom, and still works the counter at a retail store running software he built — his shorthand: \"the operator thing isn't a metaphor.\"",
+  },
+];
+
+const angles = [
+  ['The one-person firm that out-ships agencies', 'A solo licensed advisor in Brockton, working with AI, shipped a 67-page platform, seven industry practices, and two live ventures — and publishes the dated log to prove the tempo. A story about what AI actually changes for Main Street professional services.', '/shipped/'],
+  ['A pan-African newsroom, engineered in Brockton', 'AfriPulse Times ingests reporting across a continent via automated pipelines, runs from a one-screen command center, and maps the news live — built end to end by a South Shore operator, now actively raising for a continental rollout.', '/afripulse/'],
+  ['The gun shop the internet said couldn\'t sell online', 'Platforms prohibit the category, ad networks refuse it, processors drop it. A family-run Massachusetts dealer got a custom live-inventory platform anyway — and reports business up 300%. A story about regulated commerce and owned infrastructure.', '/case-studies/outback-arms-retail-platform/'],
+  ['Radical transparency as strategy', 'In an industry that says "contact us for pricing," ICS publishes prices, guarantees with penalties, a results scoreboard, and its shipping velocity — and gives away its entire method as a free printable playbook. Either it\'s crazy, or it\'s the future of trust.', '/playbook/'],
+];
+
+const assets = [
+  ['Founder headshot (JPG)', '/images/daniel-lawton.jpg'],
+  ['Logo mark (JPG)', '/images/ics-logo-mark.jpg'],
+  ['Full logo (JPG)', '/images/ics-logo-full.jpg'],
+  ['Founder vCard (.vcf)', '/daniel-lawton.vcf'],
+];
+---
+
+<Base title={title} description={description}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">Press & media kit · Help yourself</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        Everything a writer needs. No PR firm between us.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Boilerplate you can paste, photos you can download, facts you can check, and the founder's direct line.
+        Quotes and interviews: {SITE.founder} answers his own phone — {SITE.phone}, or
+        <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Media inquiry — ICS')}`} class="font-semibold text-teal-400 hover:text-teal-500">email with "Media inquiry"</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div>
+        <SectionHeading eyebrow="Fast facts" heading="Check these, quote these" />
+        <dl class="mt-6 space-y-3">
+          {
+            facts.map(([k, v]) => (
+              <div class="reveal rounded-lg border border-navy-100 bg-white p-4 shadow-sm">
+                <dt class="font-mono text-[10px] font-bold uppercase tracking-widest text-teal-600">{k}</dt>
+                <dd class="mt-1 text-sm leading-relaxed text-ink-700">{v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+
+      <div>
+        <SectionHeading eyebrow="Copy & paste" heading="Boilerplate, ready to run" />
+        <div class="mt-6 space-y-4">
+          {
+            boilerplates.map((bp) => (
+              <div class="reveal rounded-lg border border-navy-100 bg-white p-4 shadow-sm">
+                <div class="flex items-center justify-between gap-3">
+                  <p class="font-mono text-[10px] font-bold uppercase tracking-widest text-teal-600">{bp.label}</p>
+                  <button type="button" class="press-copy rounded border border-navy-100 px-2.5 py-1 font-mono text-[10px] font-semibold text-ink-500 transition-colors hover:border-teal-500 hover:text-teal-600" data-copy={bp.id}>
+                    Copy
+                  </button>
+                </div>
+                <p id={bp.id} class="mt-2 text-sm leading-relaxed text-ink-700">{bp.text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+      <SectionHeading eyebrow="Story angles" heading="Four stories, pre-researched" body="Each angle links to the primary source on this site — and everything claimed is verifiable by clicking." align="center" dark />
+      <div class="mt-10 grid gap-6 sm:grid-cols-2">
+        {
+          angles.map(([h, b, href], i) => (
+            <a href={href} class="reveal lift group rounded-xl border border-white/10 bg-navy-950 p-6" style={`--reveal-delay: ${(i % 2) * 70}ms`}>
+              <h3 class="font-display text-lg font-bold text-teal-400 group-hover:text-teal-300">{h}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-navy-100/80">{b}</p>
+              <p class="mt-3 text-xs font-semibold text-brass-300">Primary source →</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+    <SectionHeading eyebrow="Assets" heading="Download and go" align="center" />
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        assets.map(([label, href]) => (
+          <a href={href} download class="reveal lift flex items-center justify-between rounded-xl border border-navy-100 bg-white p-5 text-sm font-semibold text-navy-900 shadow-sm hover:text-teal-600">
+            {label} <span aria-hidden="true">⬇</span>
+          </a>
+        ))
+      }
+    </div>
+    <p class="mt-8 text-center text-xs text-ink-500">
+      Attribution: "Innovative Commercial Strategies" or "ICS" on first reference · founder is {SITE.founder} ·
+      the live ventures are at <a href="https://www.afripulsetimes.com" rel="noopener" class="font-semibold text-teal-600">afripulsetimes.com</a> and
+      <a href="https://outbackarms.com" rel="noopener" class="font-semibold text-teal-600"> outbackarms.com</a>.
+    </p>
+  </section>
+</Base>
+
+<script>
+  function initPressCopy() {
+    document.querySelectorAll<HTMLButtonElement>('.press-copy').forEach((btn) => {
+      if (btn.dataset.ready) return;
+      btn.dataset.ready = '1';
+      btn.addEventListener('click', async () => {
+        const el = document.getElementById(btn.dataset.copy!);
+        if (!el) return;
+        try {
+          await navigator.clipboard.writeText(el.textContent?.trim() ?? '');
+          btn.textContent = 'Copied ✓';
+          setTimeout(() => (btn.textContent = 'Copy'), 1800);
+        } catch {
+          btn.textContent = 'Select & copy';
+        }
+      });
+    });
+  }
+  document.addEventListener('astro:page-load', initPressCopy);
+</script>
