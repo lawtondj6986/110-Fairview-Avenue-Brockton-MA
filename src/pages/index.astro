@@ -65,7 +65,21 @@ const description =
           See Client Results
         </a>
       </div>
-      <p class="mt-8 text-sm text-navy-100/60">
+      <div class="reveal mt-8 flex items-center gap-3.5" style="--reveal-delay: 400ms">
+        <img
+          src="/images/daniel-lawton.jpg"
+          alt={SITE.founder}
+          class="h-14 w-14 rounded-full border-2 border-teal-500/50 object-cover object-top"
+          width="800"
+          height="1524"
+          loading="eager"
+        />
+        <p class="text-sm leading-snug text-navy-100/80">
+          <span class="font-semibold text-white">{SITE.founder}</span>, Founder
+          <span class="block italic text-navy-100/60">"The operator thing isn't a metaphor."</span>
+        </p>
+      </div>
+      <p class="mt-6 text-sm text-navy-100/60">
         Serving {SITE.serviceAreas.slice(0, 6).join(', ')} and the greater South Shore · {SITE.license}
       </p>
     </div>
