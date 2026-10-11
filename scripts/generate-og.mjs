@@ -47,6 +47,7 @@ function collectPages() {
     ['/press/', 'press', 'PRESS & MEDIA KIT · HELP YOURSELF', 'Everything a writer needs. No PR firm between us.'],
     ['/private-clients/', 'private-clients', 'PRIVATE CLIENTS · MID-SIZE COMPANIES', 'For owners with more at stake.'],
     ['/intelligence/', 'intelligence', 'COMMERCIAL INTELLIGENCE · OSINT', 'Know before you sign.'],
+    ['/intelligence/dossier/', 'intelligence-dossier', 'PREMIER TIER · THE DEEP DOSSIER', 'Institutional-grade files. Public sources, lawful methods.'],
     ['/political/', 'political', 'POLITICAL RESEARCH · PUBLISHED METHODS CODE', 'Everything findable will be found. The only question is by whom.'],
     ['/political/sample/', 'political-sample', 'SAMPLE PAGE · FULLY FICTIONAL', 'The Opposition Book: findings, footnotes, usability ratings.'],
     ['/guarantees/', 'guarantees', 'IN WRITING · WITH CONSEQUENCES', 'Four promises. 21 days. 60 seconds. 90 days. 100% yours.'],
