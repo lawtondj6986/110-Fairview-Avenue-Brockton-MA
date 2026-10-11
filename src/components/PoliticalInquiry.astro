@@ -1,0 +1,172 @@
+---
+import { SITE } from '../config';
+
+/**
+ * Confidential intake for the political research desk.
+ * - Form mode (SITE.formEndpoint set): posts to the hosted form service like LeadForm.
+ * - Launch mode (no endpoint): the same form composes a pre-filled email in the visitor's own mail
+ *   app, so every field arrives in the inbox in order. Without JavaScript it falls back to a
+ *   mailto form post, and the direct email/phone links below always work.
+ * Sensitive details are asked for on the call, after the conflict check, not in this form.
+ */
+const hasForm = Boolean(SITE.formEndpoint);
+const tel = SITE.phone.replace(/[^\d+]/g, '');
+
+const roles = ['Candidate', 'Campaign manager or staff', 'Party, caucus, or PAC', 'Ballot-question committee', 'Consultant, on behalf of a client'];
+const needs = [
+  ['audit', 'The Vulnerability Audit — research us first'],
+  ['book', 'The Opposition Book'],
+  ['rapid', 'The Rapid-Response Desk'],
+  ['landscape', 'The Issue Landscape (ballot question / policy fight)'],
+  ['unsure', 'Not sure yet — help me scope it'],
+];
+const timelines = ['This week', 'Within 30 days', 'Before the primary', 'Before the general', 'Just exploring for a future race'];
+const budgets = ['Under $5,000', '$5,000–$10,000', '$10,000–$25,000', '$25,000+', 'Not set yet'];
+
+const field = 'w-full rounded-md border border-navy-100 bg-white px-3 py-2 text-sm text-navy-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100';
+const label = 'mb-1 block text-sm font-medium text-navy-900';
+---
+
+<form
+  id="political-inquiry"
+  action={hasForm ? SITE.formEndpoint : `mailto:${SITE.email}?subject=${encodeURIComponent('Political research — confidential inquiry')}`}
+  method="POST"
+  enctype={hasForm ? undefined : 'text/plain'}
+  data-mode={hasForm ? 'form' : 'mail'}
+  data-email={SITE.email}
+  class="rounded-xl border border-white/10 bg-white p-6 text-left shadow-lg sm:p-8"
+>
+  <h3 class="text-xl font-bold text-navy-900">Request a confidential conflict check</h3>
+  <p class="mt-1 text-sm text-ink-500">
+    Two minutes. {SITE.founder} reads every one personally and replies within one business day — usually the same day
+    in an election year.
+  </p>
+  {hasForm && <input type="hidden" name="_subject" value="Political research — confidential inquiry" />}
+
+  <div class="mt-6 grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for="pi-name" class={label}>Your name</label>
+      <input id="pi-name" name="name" required autocomplete="name" class={field} />
+    </div>
+    <div>
+      <label for="pi-email" class={label}>Email</label>
+      <input id="pi-email" name="email" type="email" required autocomplete="email" class={field} />
+    </div>
+    <div>
+      <label for="pi-phone" class={label}>Phone <span class="font-normal text-ink-500">(best for a quick call)</span></label>
+      <input id="pi-phone" name="phone" type="tel" autocomplete="tel" class={field} />
+    </div>
+    <div>
+      <label for="pi-role" class={label}>You are</label>
+      <select id="pi-role" name="role" required class={field}>
+        <option value="">Select one…</option>
+        {roles.map((r) => <option>{r}</option>)}
+      </select>
+    </div>
+    <div class="sm:col-span-2">
+      <label for="pi-race" class={label}>Race, office, or ballot question</label>
+      <input id="pi-race" name="race" required placeholder="e.g. State Representative, 9th Plymouth — or Question 4, Brockton" class={field} />
+      <p class="mt-1 text-xs text-ink-500">We use this only to run the conflict check. One client per race.</p>
+    </div>
+  </div>
+
+  <fieldset class="mt-5">
+    <legend class={label}>What do you need?</legend>
+    <div class="mt-1 grid gap-2 sm:grid-cols-2">
+      {
+        needs.map(([v, l]) => (
+          <label class="flex items-start gap-2 rounded-md border border-navy-100 bg-paper px-3 py-2 text-sm text-ink-700 has-[:checked]:border-teal-500 has-[:checked]:bg-teal-100/40">
+            <input type="checkbox" name="needs" value={l} class="mt-0.5 accent-teal-600" />
+            {l}
+          </label>
+        ))
+      }
+    </div>
+  </fieldset>
+
+  <div class="mt-5 grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for="pi-timeline" class={label}>Timeline</label>
+      <select id="pi-timeline" name="timeline" class={field}>
+        <option value="">Select one…</option>
+        {timelines.map((t) => <option>{t}</option>)}
+      </select>
+    </div>
+    <div>
+      <label for="pi-budget" class={label}>Research budget</label>
+      <select id="pi-budget" name="budget" class={field}>
+        <option value="">Select one…</option>
+        {budgets.map((b) => <option>{b}</option>)}
+      </select>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <label for="pi-notes" class={label}>Anything else we should know</label>
+    <textarea id="pi-notes" name="notes" rows="3" class={field} placeholder="Election date, district, what worries you most. Keep sensitive specifics for the call."></textarea>
+  </div>
+
+  <label class="mt-5 flex items-start gap-2 text-xs leading-relaxed text-ink-500">
+    <input type="checkbox" name="methods_code" value="Agreed" required class="mt-0.5 accent-teal-600" />
+    <span>
+      I understand ICS researches the lawful public record only, works one side per race, and declines work targeting
+      private individuals (<a href="#methods-code" class="font-semibold text-teal-600 hover:text-teal-500">the methods code</a>).
+    </span>
+  </label>
+
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+  <button type="submit" class="mt-6 w-full rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300">
+    Request the Conflict Check
+  </button>
+  <p id="pi-status" role="status" class="mt-3 hidden text-sm text-ink-700"></p>
+  <p class="mt-4 text-xs text-ink-500">
+    Confidential both directions. Prefer not to use a form?
+    <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Political research — confidential inquiry')}`} class="font-semibold text-teal-600 hover:text-teal-500">Email {SITE.email}</a>
+    or call <a href={`tel:${tel}`} class="font-semibold text-teal-600 hover:text-teal-500">{SITE.phone}</a>.
+  </p>
+</form>
+
+<script>
+  import { track } from '@vercel/analytics';
+
+  /** Launch mode: turn the answers into a tidy pre-filled email instead of a raw mailto post. */
+  function init() {
+    const form = document.getElementById('political-inquiry') as HTMLFormElement | null;
+    if (!form || form.dataset.ready) return;
+    form.dataset.ready = '1';
+
+    form.addEventListener('submit', (e) => {
+      const data = new FormData(form);
+      if (String(data.get('_gotcha') ?? '')) { e.preventDefault(); return; }
+      const needs = data.getAll('needs').map(String);
+      try { track('lead_political', { role: String(data.get('role') ?? ''), needs: needs.length, timeline: String(data.get('timeline') ?? '') }); } catch { /* analytics never blocks a lead */ }
+      if (form.dataset.mode !== 'mail') return; // form mode: the hosted form service takes the POST
+
+      e.preventDefault();
+      const v = (k: string) => String(data.get(k) ?? '').trim();
+      const subject = `Political research — ${v('role') || 'inquiry'} — ${v('race') || 'race TBD'}`;
+      const body = [
+        `Name: ${v('name')}`,
+        `Email: ${v('email')}`,
+        `Phone: ${v('phone') || '—'}`,
+        `I am: ${v('role')}`,
+        `Race / office / question: ${v('race')}`,
+        `Need: ${needs.join('; ') || 'Not sure yet'}`,
+        `Timeline: ${v('timeline') || '—'}`,
+        `Budget: ${v('budget') || '—'}`,
+        '',
+        v('notes') ? `Notes:\n${v('notes')}` : 'Notes: —',
+        '',
+        'Methods code acknowledged: public records only, one client per race, no private individuals.',
+      ].join('\n');
+      window.location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const status = document.getElementById('pi-status');
+      if (status) {
+        status.textContent = `Your email app should open with everything filled in — just press send. If nothing opened, email ${form.dataset.email} directly.`;
+        status.classList.remove('hidden');
+      }
+    });
+  }
+  document.addEventListener('astro:page-load', init);
+</script>
