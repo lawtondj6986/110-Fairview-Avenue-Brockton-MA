@@ -86,12 +86,13 @@ const schema = [
     <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
       <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Political research · From the ICS intelligence practice</p>
       <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
-        The public record decides races. Know it first.
+        Everything findable will be found. The only question is by whom.
       </h1>
       <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
-        Professional opposition research used to be a statewide-budget luxury. Our OSINT practice brings it to the
-        races that actually shape your town — documented, footnoted, lawful, and priced in the open like everything
-        else we do. For candidates, committees, and ballot campaigns.
+        Assume the other side is already reading. Our OSINT practice goes through the lawful record the way a
+        prosecutor goes through discovery — every vote, every dollar, every docket, every archived sentence —
+        and hands you the book first. Documented, footnoted, and priced in the open. For candidates, committees,
+        and ballot campaigns that intend to win.
       </p>
       <div class="reveal mt-8 flex flex-wrap gap-4" style="--reveal-delay: 300ms">
         <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Political research — confidential inquiry')}`} class="rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300">
@@ -128,13 +129,48 @@ const schema = [
     </div>
   </section>
 
+  <!-- WHAT GETS PULLED -->
+  <section class="bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <SectionHeading
+        eyebrow="The depth · This is what thorough means"
+        heading="What gets pulled when we say 'the record'"
+        body="Amateurs run a search and call it research. A book that decides a race goes to the bottom of the lawful record — the places that take weeks, not minutes."
+        align="center"
+      />
+      <div class="mt-10 grid gap-3 sm:grid-cols-2">
+        {
+          [
+            'Every vote, every absence, every reversal — the full legislative and board record, cross-referenced against what was said at the time',
+            'Every reported donor, every expenditure, every committee transfer — and who those donors are',
+            'Litigation, liens, and judgments pulled county by county, everywhere they\'ve lived and done business',
+            'Corporate filings, failed ventures, dissolutions, and the officers who rode them down',
+            'Property, tax, and assessment records — including the ones that contradict the stump speech',
+            'Licensing boards, regulatory actions, and public enforcement histories',
+            'The press archive to microfilm depth — not just what Google surfaces',
+            'The archived internet: pages deleted years ago, old positions, vanished promises — lawfully preserved in public archives, clipped and timestamped',
+          ].map((item, i) => (
+            <div class="reveal flex items-start gap-3 rounded-lg border border-navy-100 bg-paper px-4 py-3" style={`--reveal-delay: ${(i % 2) * 60}ms`}>
+              <span class="mt-0.5 font-mono text-xs font-bold text-brass-600">▸</span>
+              <p class="text-sm leading-relaxed text-ink-700">{item}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mx-auto mt-8 max-w-2xl text-center text-sm font-semibold text-navy-900">
+        The operating assumption of every book we build: anything findable <em>will</em> be found before Election Day.
+        We make sure you're the one holding it.
+      </p>
+    </div>
+  </section>
+
   <!-- THE METHODS CODE -->
   <section class="bg-navy-900">
     <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <SectionHeading
         eyebrow="The methods code · Published on purpose"
-        heading="The lines we don't cross are the product"
-        body="Opposition research has a reputation problem because some of it is done badly and some of it is done dishonestly. Ours is neither — and because this code is public, your campaign can point to it when the work gets questioned."
+        heading="Ruthless inside the lines"
+        body="We don't cross lines because we don't need to — the lawful record is deeper than most careers can survive. And because this code is public, the work can't be discredited by how it was gathered: your campaign points to the code, and the findings stand."
         align="center"
         dark
       />
@@ -179,11 +215,12 @@ const schema = [
     <div class="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
       <p class="text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">A quiet first conversation</p>
       <h2 class="mx-auto mt-3 max-w-xl text-3xl font-bold text-white">
-        Tell us the race. We'll tell you what the record can do.
+        Every race has someone who did the reading. Be on their side.
       </h2>
       <p class="mx-auto mt-4 max-w-xl text-navy-100/85">
-        Thirty minutes, confidential, no obligation — including the honest answer when the best move is researching
-        yourself first. If we're conflicted out of your race, we'll say so on the call.
+        Thirty minutes, confidential, no obligation — including the honest answer when the smartest first strike is
+        researching yourself. One client per race, so the side that calls first is the side we work for. If we're
+        conflicted out, we'll say so on the call.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Political research — confidential inquiry')}`} class="rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300">
