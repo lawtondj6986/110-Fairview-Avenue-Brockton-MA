@@ -169,6 +169,62 @@ const schema = [
     </div>
   </section>
 
+  <!-- WHAT THE RECORD CAN DOCUMENT -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <SectionHeading
+        eyebrow="The findings · Patterns, documented"
+        heading="What the record can document"
+        body="One rule governs every category below: we document patterns; adjudicators name crimes. The book states exactly what the documents prove — timing, money, contradictions — and nothing the record can't carry. That discipline is why the findings survive scrutiny."
+        align="center"
+      />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          [
+            {
+              name: 'Pay-to-play patterns',
+              proves: 'Campaign-finance schedules cross-referenced against contract awards, roll calls, change orders, and zoning votes: who gave, when, how much — and what got decided three weeks later.',
+              label: 'Labeled as a documented pattern of timing and money. Never "bribery" — unless a court already said it.',
+            },
+            {
+              name: 'Criminal & civil court history',
+              proves: 'Convictions, charges, suits, judgments, bankruptcies, and liens from public dockets, pulled county by county, with dates and dispositions.',
+              label: 'Convictions are fair game; dismissed charges get extreme care or the annex. Everything passes the nexus test: does it bear on fitness for this office?',
+            },
+            {
+              name: 'Conflicts of interest & self-dealing',
+              proves: 'Deeds and assessor records, corporate filings, financial-interest disclosures, and public payrolls — triangulated against the votes. The undisclosed parcel near the rezoning. The LLC that bills the district.',
+              label: 'Stated as holdings, relationships, and votes on the record — the reader draws the conclusion the documents invite.',
+            },
+            {
+              name: 'Public-money misuse signals',
+              proves: 'Municipal audits, inspector-general reports, procurement files, reimbursements, and no-bid patterns. Boring documents almost nobody reads at the local level. We read them.',
+              label: 'Reported as what the auditors and the paper trail flagged — with the citation, not the adjective.',
+            },
+            {
+              name: 'Résumé & narrative fraud',
+              proves: 'Claimed degrees versus registrar verification. "Lifelong resident" versus voter rolls and deeds. "Successful businessman" versus dissolutions and liens. "Perfect attendance" versus certified minutes.',
+              label: 'The cheapest category to verify and the deadliest when it hits — because the story is never the subject of the lie. It\'s the lying.',
+            },
+            {
+              name: 'Their own compliance file',
+              proves: 'Late filings, missing reports, over-limit and cash contributions — the opponent\'s campaign-finance paperwork, which campaigns always forget is public too.',
+              label: 'Stated straight from the disclosure portal, violation by violation, with filing dates.',
+            },
+          ].map((c, i) => (
+            <div class="reveal lift flex flex-col rounded-xl border border-navy-100 bg-white p-6 shadow-sm" style={`--reveal-delay: ${(i % 3) * 60}ms`}>
+              <h3 class="text-lg font-bold text-navy-900">{c.name}</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-700">{c.proves}</p>
+              <p class="mt-3 border-t border-navy-100 pt-3 text-xs leading-relaxed text-ink-500">
+                <strong class="text-brass-600">The discipline:</strong> {c.label}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <!-- THE METHODS CODE -->
   <section class="bg-navy-900">
     <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
