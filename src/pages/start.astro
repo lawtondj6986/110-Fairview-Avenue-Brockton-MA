@@ -43,6 +43,7 @@ const description =
           <button type="button" class="fit-opt" data-q="biz" data-v="property">A property owner / investor <span>Buying, selling, leasing commercial space</span></button>
           <button type="button" class="fit-opt" data-q="biz" data-v="portfolio">Multi-location or portfolio <span>Several branches, buildings, or companies</span></button>
           <button type="button" class="fit-opt" data-q="biz" data-v="platform">Building a product or platform <span>You have a venture that needs engineering</span></button>
+          <button type="button" class="fit-opt" data-q="biz" data-v="campaign">A campaign or committee <span>Candidate, PAC, or ballot question — you need research</span></button>
         </div>
       </fieldset>
 
@@ -212,6 +213,14 @@ const description =
         proofHref: '/private-clients/',
         learnHref: '/private-clients/',
       },
+      political: {
+        name: 'The Political Research Desk',
+        price: 'Vulnerability audits $3,500–$7,500 · opposition books $7,500–$15,000',
+        pitch: 'Public-record research for races that intend to win: vulnerability self-audits, sourced opposition books, rapid-response desks, and ballot-question landscapes — under a published methods code, with a conflict check before any engagement. One client per race.',
+        proofLabel: 'The methods code and the full desk →',
+        proofHref: '/political/',
+        learnHref: '/political/',
+      },
       platform: {
         name: 'Full Platform Build',
         price: 'Scoped to the mandate — written scope and milestones',
@@ -232,6 +241,7 @@ const description =
     const label = document.getElementById('fit-step-label')!;
 
     function recommend(): string {
+      if (answers.biz === 'campaign') return 'political';
       if (answers.biz === 'platform') return 'platform';
       if (answers.biz === 'property' || answers.pain === 'building') return 'cre';
       if (answers.biz === 'portfolio' || answers.pain === 'scale') return 'private';
