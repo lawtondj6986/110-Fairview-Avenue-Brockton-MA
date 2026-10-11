@@ -1,0 +1,156 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../config';
+
+const title = 'Sample Page — The Opposition Book | ICS Political Research';
+const description =
+  'A fully fictional sample page from an ICS opposition research book, showing the format and standards: documented findings, footnoted sources, and the usability rating on every item — including the ones we mark DO NOT USE.';
+
+const findings = [
+  {
+    rating: 'USE',
+    ratingClass: 'bg-teal-600 text-white',
+    headline: 'Claimed "perfect attendance" while missing 14 of 36 board meetings',
+    body: 'Candidate Sample stated at the June 2026 Anytown Civic Forum that he had "never missed a meeting that mattered" and his website claims a "perfect attendance record." Official minutes show absences from 14 of 36 regular Select Board sessions in the 2024–2026 term, including the vote on the water-main override.',
+    sources: [
+      'Anytown Select Board minutes, 2024–2026 term, Sessions 3, 5, 9–12, 18, 21–24, 30, 33, 35 (Town Clerk, certified copies)',
+      'Candidate website, "About Jordan" page, archived 14 Aug 2026 (public web archive)',
+      'Anytown Civic Forum recording, 11 Jun 2026, 00:42:10 (public access cable archive)',
+    ],
+    note: 'Documented contradiction between statement and record. Clean, defensible, directly relevant to the office. Recommended as a primary contrast.',
+  },
+  {
+    rating: 'USE WITH CONTEXT',
+    ratingClass: 'bg-brass-500 text-navy-950',
+    headline: '$4,500 from waste-hauler executives three weeks before the disposal-contract vote',
+    body: 'Campaign finance filings show three $1,500 contributions from officers of Anytown Waste Solutions LLC on 2 Mar 2026. On 24 Mar 2026, Candidate Sample voted with the 3–2 majority to award the five-year disposal contract to that company. The contributions were lawfully made and reported.',
+    sources: [
+      'Campaign finance report, Sample Committee, Q1 2026 filing, Schedule A lines 11–13 (state disclosure portal)',
+      'Anytown Select Board minutes, 24 Mar 2026, Item 7, roll call (Town Clerk)',
+      'Anytown Waste Solutions LLC annual report, officer list (Secretary of State corporate registry)',
+    ],
+    note: 'Everything here is legal and disclosed — the story is the timing, and it must be framed as exactly that. Do not characterize as bribery or quid pro quo; the record does not support it and the overreach would backfire.',
+  },
+  {
+    rating: 'USE WITH CONTEXT',
+    ratingClass: 'bg-brass-500 text-navy-950',
+    headline: 'State tax lien on candidate\'s LLC (2019), released in full (2021)',
+    body: "A $23,400 state tax lien was recorded against Sample Hardware LLC in November 2019 and released as satisfied in February 2021. The candidate's stump speech describes his business record as 'twenty years of meeting every obligation.'",
+    sources: [
+      'Registry of Deeds, lien book/page citation, recorded 12 Nov 2019; release recorded 3 Feb 2021',
+      'Secretary of State corporate registry, Sample Hardware LLC, officer and status history',
+      'Anytown Rotary speech transcript, 20 Apr 2026 (published by the club)',
+    ],
+    note: 'Resolved debt, fully released — usable only against the specific "every obligation" claim, with the release acknowledged. Omitting the release would be the kind of distortion that fails a fact-check and forfeits the story.',
+  },
+  {
+    rating: 'DO NOT USE',
+    ratingClass: 'bg-red-700 text-white',
+    headline: '[Finding withheld — private-life material with no nexus to public duty]',
+    body: 'Research surfaced court records relating to the candidate\'s family life from more than a decade ago. The records are technically public. They have no connection to the candidate\'s conduct in or fitness for office, and their only campaign value would be embarrassment.',
+    sources: ['Citation documented in the confidential annex, flagged non-usable'],
+    note: 'The methods code is not decoration. Material like this is logged, sealed in the annex, and recommended against — in writing — no matter who asks. Campaigns that use it anyway are campaigns we no longer work for.',
+  },
+];
+---
+
+<Base title={title} description={description}>
+  <section class="bg-navy-950 print:bg-white">
+    <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+      <div class="rounded-lg border-2 border-dashed border-brass-400 bg-brass-500/10 p-4 text-center">
+        <p class="font-mono text-xs font-bold uppercase tracking-[0.2em] text-brass-300 print:text-navy-900">
+          Illustrative sample · Every name, record, race, and citation on this page is fictional
+        </p>
+        <p class="mt-1 text-xs text-navy-100/70 print:text-ink-500">
+          Constructed to show the format and standards of The Opposition Book. Real books are confidential and look like this.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 pb-14 sm:px-6">
+    <!-- THE DOCUMENT -->
+    <div class="rounded-xl border border-navy-100 bg-white p-6 shadow-lg sm:p-10">
+      <div class="border-b-2 border-navy-900 pb-5">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-ink-500">Confidential · Prepared for the Client Committee only</p>
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">Sample — Fictional</p>
+        </div>
+        <h1 class="mt-4 font-display text-2xl font-bold text-navy-900 sm:text-3xl">
+          Opposition Research Book — excerpt
+        </h1>
+        <p class="mt-1 font-mono text-sm text-ink-500">
+          Subject: Jordan Sample (fictional) · Race: Anytown Select Board, 2026 (fictional) · Findings 1–4 of 23
+        </p>
+      </div>
+
+      <div class="mt-6 space-y-8">
+        {
+          findings.map((f, i) => (
+            <article class="reveal">
+              <div class="flex flex-wrap items-center gap-3">
+                <span class={`rounded px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wider ${f.ratingClass}`}>{f.rating}</span>
+                <p class="font-mono text-xs text-ink-500">Finding {String(i + 1).padStart(2, '0')}</p>
+              </div>
+              <h2 class="mt-2 text-lg font-bold leading-snug text-navy-900">{f.headline}</h2>
+              <p class="mt-2 text-sm leading-relaxed text-ink-700">{f.body}</p>
+              <div class="mt-3 rounded-lg bg-paper p-4">
+                <p class="font-mono text-[10px] font-bold uppercase tracking-widest text-teal-700">Sources</p>
+                <ol class="mt-1.5 list-decimal space-y-1 pl-5 font-mono text-[11px] leading-relaxed text-ink-500">
+                  {f.sources.map((s) => (
+                    <li>{s}</li>
+                  ))}
+                </ol>
+              </div>
+              <p class="mt-3 border-l-2 border-navy-200 pl-3 text-xs leading-relaxed text-ink-500">
+                <strong class="text-navy-900">Usability assessment:</strong> {f.note}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mt-10 border-t border-navy-100 pt-5 text-center font-mono text-[10px] uppercase tracking-widest text-ink-500">
+        Excerpt ends · Full book: executive summary · 23 findings in priority order · source exhibits · confidential annex
+      </div>
+    </div>
+
+    <div class="mt-8 rounded-xl bg-navy-900 p-7 text-center">
+      <h2 class="text-xl font-bold text-white">This is the standard. Now imagine it on your race.</h2>
+      <p class="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-navy-100/85">
+        Every claim footnoted to a pullable document, every item rated for usability, and the unusable material
+        sealed — that's what "ruthless inside the lines" produces. Vulnerability audits from $3,500; conflict check first.
+      </p>
+      <div class="mt-5 flex flex-wrap justify-center gap-3">
+        <a href="/political/" class="rounded-md bg-brass-500 px-5 py-2.5 text-sm font-semibold text-navy-950 transition-colors hover:bg-brass-300">
+          The Political Desk →
+        </a>
+        <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Political research — confidential inquiry')}`} class="rounded-md border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-brass-300 hover:text-brass-300">
+          Confidential Inquiry
+        </a>
+      </div>
+    </div>
+
+    <p class="mt-6 text-center text-xs leading-relaxed text-ink-500">
+      Reminder: the subject, race, records, and citations above are invented for demonstration. Real engagements are
+      confidential, conflict-checked, and governed by the <a href="/political/" class="font-semibold text-teal-600 hover:text-teal-500">published methods code</a>.
+    </p>
+  </section>
+</Base>
+
+<style>
+  @media print {
+    :global(header),
+    :global(footer),
+    :global(#money-bar) {
+      display: none !important;
+    }
+    :global(body) {
+      background: white !important;
+    }
+    :global(.reveal) {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
