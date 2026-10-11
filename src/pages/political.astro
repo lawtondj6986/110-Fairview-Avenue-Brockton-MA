@@ -1,0 +1,198 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { SITE } from '../config';
+
+const title = 'Political Research — Opposition Research & Vulnerability Audits | ICS';
+const description =
+  'Public-record political research for candidates, committees, and ballot campaigns: vulnerability self-audits, opposition research books, rapid-response fact desks, and issue landscapes. Documented, sourced, lawful — with published pricing, from the ICS intelligence practice.';
+
+const services = [
+  {
+    name: 'The Vulnerability Audit',
+    price: '$3,500–$7,500',
+    tagline: 'Know your own file before anyone else reads it.',
+    body: "We research you the way a motivated opponent would — voting and attendance records, campaign finance filings, court and property records, business history, press archive, every public statement that can be clipped. You get the full book, the three things that will hurt, and the honest read on how to get ahead of each one. Every serious campaign does this first; the ones that don't find out in October.",
+  },
+  {
+    name: 'The Opposition Book',
+    price: '$7,500–$15,000 · statewide scoped separately',
+    tagline: 'The public record, assembled and sourced.',
+    body: "A complete public-record profile of the opposing candidate or committee: votes and flip-flops, donors and spending, litigation and liens, business conduct, statements versus actions. Every claim footnoted to a verifiable source — because research your committee can't defend at a press conference is worse than no research at all.",
+  },
+  {
+    name: 'The Rapid-Response Desk',
+    price: '$2,000–$4,000/mo through Election Day',
+    tagline: 'When the attack lands at 4pm, the receipts land by 7.',
+    body: 'A standing research desk for the live phase of the race: fact-checking claims in both directions, sourcing rebuttals, monitoring filings and public records as they update, and briefing your spokesperson with documents — not vibes — before the next news cycle.',
+  },
+  {
+    name: 'The Issue Landscape',
+    price: '$5,000–$10,000',
+    tagline: 'Ballot questions and policy fights, mapped.',
+    body: "For ballot committees and advocacy campaigns: who funds each side, what the filings show, how the issue has played in comparable towns and states, and where the public record supports — or undercuts — each argument. The brief your steering committee reads before it spends a dollar.",
+  },
+];
+
+const code = [
+  ['Public records. Lawful methods. Full stop.', 'Votes, filings, dockets, deeds, licenses, archives, and published statements. No pretexting, no hacking, no surveillance, no going through anyone\'s private life beyond the public record. If it isn\'t lawfully public, it isn\'t in the book.'],
+  ['Sourced or it doesn\'t ship', 'Every claim footnoted to a document a reporter could pull tomorrow. We flag the difference between what the record proves and what it merely suggests — and we\'ll tell you plainly when a "hit" isn\'t usable.'],
+  ['Research, never disinformation', 'We document what is true. We do not fabricate, distort, astroturf, or build attacks we know are misleading — for any client, at any price. The work has to survive a fact-check, because it will get one.'],
+  ['One client per race', 'Conflict check before engagement, confidentiality both directions, and we never work both sides of the same contest. Ever.'],
+  ['Public roles, not private people', 'Candidates, committees, and officials acting in public capacities. We decline work targeting private individuals, and anything whose purpose is harassment rather than informed voters.'],
+  ['Your counsel leads on compliance', 'Committees handle their own campaign-finance reporting of vendor payments; we invoice as professional research and keep clean records. Nothing we produce is legal advice.'],
+];
+
+const faqs = [
+  {
+    q: 'Is opposition research legal?',
+    a: "Done our way, it's not just legal — it's a standard part of American campaigns at every level. Assembling and verifying the public record on people seeking public office is vetting, and voters are better off for it. What's not acceptable is surveillance, pretexting, or distortion — which is why our methods code is published on this page.",
+  },
+  {
+    q: 'Why hire an OSINT firm instead of a political consultant?',
+    a: "Most local and state campaigns can't afford the big oppo shops, so they get either nothing or a volunteer with a search bar. Our day job is open-source intelligence — property records, corporate filings, litigation histories, digital footprints — done with AI-accelerated pipelines that make professional-depth research affordable at down-ballot budgets. Same discipline we sell to businesses, applied to the public record of a race.",
+  },
+  {
+    q: 'Will you take any campaign as a client?',
+    a: "No. We conflict-check every race, work one side only, and decline engagements that fail the methods code — including 'just find me dirt' requests with no interest in whether it's true. We also happily do the most honorable job in the field: researching you, for you, before your opponent does.",
+  },
+  {
+    q: 'What does the deliverable look like?',
+    a: 'A written, footnoted research book with an executive summary, the documented findings in priority order, source exhibits, and an honest usability assessment of each item. Rapid-response clients get standing briefs. Everything is confidential and yours.',
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: 'Political research and opposition research from public records',
+    name: 'Political Research & Opposition Research',
+    provider: { '@type': 'RealEstateAgent', name: SITE.name, telephone: SITE.phone },
+    areaServed: 'Massachusetts',
+    audience: { '@type': 'Audience', audienceType: 'Candidates, campaign committees, PACs, and ballot-question committees' },
+    description,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Political research · From the ICS intelligence practice</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        The public record decides races. Know it first.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Professional opposition research used to be a statewide-budget luxury. Our OSINT practice brings it to the
+        races that actually shape your town — documented, footnoted, lawful, and priced in the open like everything
+        else we do. For candidates, committees, and ballot campaigns.
+      </p>
+      <div class="reveal mt-8 flex flex-wrap gap-4" style="--reveal-delay: 300ms">
+        <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Political research — confidential inquiry')}`} class="rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300">
+          Confidential Inquiry
+        </a>
+        <a href={`tel:${SITE.phone.replace(/[^\d+]/g, '')}`} class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-brass-300 hover:text-brass-300">
+          Call {SITE.founder} Directly
+        </a>
+      </div>
+      <p class="reveal mt-6 text-xs text-navy-100/50" style="--reveal-delay: 380ms">
+        Conflict check before any engagement · one client per race · confidential both directions
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <SectionHeading
+      eyebrow="The services · Published pricing, as always"
+      heading="Four ways the record gets put to work"
+      body="Ranges below are for local and legislative races; larger contests are scoped in writing. Every engagement starts with a written scope and a conflict check."
+      align="center"
+    />
+    <div class="mt-12 grid gap-6 sm:grid-cols-2">
+      {
+        services.map((s, i) => (
+          <div class="reveal lift flex flex-col rounded-xl border border-navy-100 bg-white p-7 shadow-sm" style={`--reveal-delay: ${(i % 2) * 70}ms`}>
+            <h2 class="text-xl font-bold text-navy-900">{s.name}</h2>
+            <p class="mt-0.5 font-mono text-xs font-semibold text-teal-600">{s.price}</p>
+            <p class="mt-2 text-sm font-semibold italic text-brass-600">{s.tagline}</p>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{s.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- THE METHODS CODE -->
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <SectionHeading
+        eyebrow="The methods code · Published on purpose"
+        heading="The lines we don't cross are the product"
+        body="Opposition research has a reputation problem because some of it is done badly and some of it is done dishonestly. Ours is neither — and because this code is public, your campaign can point to it when the work gets questioned."
+        align="center"
+        dark
+      />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          code.map(([h, b], i) => (
+            <div class="reveal rounded-xl border border-white/10 bg-navy-950 p-6" style={`--reveal-delay: ${(i % 3) * 60}ms`}>
+              <h3 class="font-display text-base font-bold text-teal-400">{h}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-navy-100/80">{b}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+    <SectionHeading eyebrow="Straight answers" heading="The questions campaigns actually ask" align="center" />
+    <div class="mt-8 space-y-3">
+      {
+        faqs.map((faq) => (
+          <details class="group rounded-xl border border-navy-100 bg-white p-6 shadow-sm">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-navy-900 [&::-webkit-details-marker]:hidden">
+              {faq.q}
+              <span class="shrink-0 text-teal-600 transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+            </summary>
+            <p class="mt-3 text-sm leading-relaxed text-ink-500">{faq.a}</p>
+          </details>
+        ))
+      }
+    </div>
+    <p class="mt-8 text-center text-xs leading-relaxed text-ink-500">
+      ICS provides research services from public records for lawful campaign purposes. We are not attorneys and
+      nothing here is legal advice; committees should consult counsel on compliance and reporting. The broader
+      intelligence practice — including business diligence and digital-exposure work — lives at
+      <a href="/intelligence/" class="font-semibold text-teal-600 hover:text-teal-500">icsgroup.ai/intelligence</a>.
+    </p>
+  </section>
+
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">A quiet first conversation</p>
+      <h2 class="mx-auto mt-3 max-w-xl text-3xl font-bold text-white">
+        Tell us the race. We'll tell you what the record can do.
+      </h2>
+      <p class="mx-auto mt-4 max-w-xl text-navy-100/85">
+        Thirty minutes, confidential, no obligation — including the honest answer when the best move is researching
+        yourself first. If we're conflicted out of your race, we'll say so on the call.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Political research — confidential inquiry')}`} class="rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300">
+          Email Privately
+        </a>
+        <a href={`tel:${SITE.phone.replace(/[^\d+]/g, '')}`} class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-brass-300 hover:text-brass-300">
+          {SITE.phone}
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -24,6 +24,11 @@ const services = [
     name: 'Digital exposure assessment',
     body: 'The mirror, turned on you: what the open internet — and now AI assistants — reveal about your company, your properties, and your principals. What helps, what hurts, what should quietly be corrected, and what it inadvertently tells your competitors.',
   },
+  {
+    name: 'Political research & opposition books',
+    body: 'The same public-record discipline, applied to campaigns: vulnerability self-audits, sourced opposition research books, rapid-response fact desks, and ballot-question landscapes — for candidates and committees, under a published methods code with published pricing. This desk has its own page.',
+    href: '/political/',
+  },
 ];
 
 const moments = [
@@ -79,6 +84,11 @@ const schema = [
           <div class="reveal lift rounded-xl border border-navy-100 bg-white p-7 shadow-sm" style={`--reveal-delay: ${(i % 2) * 70}ms`}>
             <h2 class="text-xl font-bold text-navy-900">{s.name}</h2>
             <p class="mt-3 text-sm leading-relaxed text-ink-500">{s.body}</p>
+            {s.href && (
+              <a href={s.href} class="mt-4 inline-block text-sm font-semibold text-brass-600 hover:text-brass-500">
+                The political desk →
+              </a>
+            )}
           </div>
         ))
       }
@@ -115,7 +125,7 @@ const schema = [
             </li>
             <li class="flex gap-3">
               <span class="mt-0.5 shrink-0 text-teal-400">✓</span>
-              <span><strong class="text-white">Business purposes only.</strong> Properties, companies, transactions, and markets. We decline work targeting private individuals' personal lives, and we don't produce consumer reports for hiring or tenant-screening decisions — those are regulated instruments, and rightly so.</span>
+              <span><strong class="text-white">Business and public-arena purposes only.</strong> Properties, companies, transactions, markets — and, through our <a href="/political/" class="font-semibold text-teal-400 hover:text-teal-500">political desk</a>, the public record of candidates and campaigns. We decline work targeting private individuals' personal lives, and we don't produce consumer reports for hiring or tenant-screening decisions — those are regulated instruments, and rightly so.</span>
             </li>
             <li class="flex gap-3">
               <span class="mt-0.5 shrink-0 text-teal-400">✓</span>

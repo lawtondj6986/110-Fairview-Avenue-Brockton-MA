@@ -47,6 +47,7 @@ function collectPages() {
     ['/press/', 'press', 'PRESS & MEDIA KIT · HELP YOURSELF', 'Everything a writer needs. No PR firm between us.'],
     ['/private-clients/', 'private-clients', 'PRIVATE CLIENTS · MID-SIZE COMPANIES', 'For owners with more at stake.'],
     ['/intelligence/', 'intelligence', 'COMMERCIAL INTELLIGENCE · OSINT', 'Know before you sign.'],
+    ['/political/', 'political', 'POLITICAL RESEARCH · PUBLISHED METHODS CODE', 'The public record decides races. Know it first.'],
     ['/guarantees/', 'guarantees', 'IN WRITING · WITH CONSEQUENCES', 'Four promises. 21 days. 60 seconds. 90 days. 100% yours.'],
     ['/scoreboard/', 'scoreboard', 'UPDATED MONTHLY', 'Agencies show portfolios. We show a scoreboard.'],
     ['/south-shore/', 'south-shore', 'SERVICE AREA · SIXTEEN TOWNS, IN PERSON', "We don't cover the South Shore. We work it."],
