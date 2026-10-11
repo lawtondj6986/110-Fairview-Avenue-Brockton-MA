@@ -23,12 +23,12 @@ const tel = SITE.phone.replace(/[^\d+]/g, '');
         <h1 class="mt-4 text-2xl font-bold text-white">{SITE.founder}</h1>
         <p class="mt-1 text-sm font-semibold text-teal-400">Founder · CRE Advisor · AI Systems Builder</p>
         <p class="mt-1 text-xs text-navy-100/60">{SITE.name} · Brockton, MA</p>
-        <p class="mt-1 text-[11px] text-navy-100/50">{SITE.license}</p>
+        <p class="mt-1 text-[11px] text-navy-100/60">{SITE.license}</p>
 
         <div class="mt-6 grid grid-cols-3 gap-2">
-          <a href={`tel:${tel}`} class="rounded-lg bg-teal-600 px-3 py-3 text-sm font-semibold text-white transition-colors hover:bg-teal-500">Call</a>
-          <a href={`sms:${tel}`} class="rounded-lg bg-teal-600 px-3 py-3 text-sm font-semibold text-white transition-colors hover:bg-teal-500">Text</a>
-          <a href={`mailto:${SITE.email}`} class="rounded-lg bg-teal-600 px-3 py-3 text-sm font-semibold text-white transition-colors hover:bg-teal-500">Email</a>
+          <a href={`tel:${tel}`} class="rounded-lg bg-teal-600 px-3 py-3 text-sm font-semibold text-white transition-colors hover:bg-teal-700">Call</a>
+          <a href={`sms:${tel}`} class="rounded-lg bg-teal-600 px-3 py-3 text-sm font-semibold text-white transition-colors hover:bg-teal-700">Text</a>
+          <a href={`mailto:${SITE.email}`} class="rounded-lg bg-teal-600 px-3 py-3 text-sm font-semibold text-white transition-colors hover:bg-teal-700">Email</a>
         </div>
         <a
           href="/daniel-lawton.vcf"
