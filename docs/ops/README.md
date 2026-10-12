@@ -7,8 +7,9 @@ into work you can actually deliver and defend.
 
 | File | What it is | When you use it |
 |---|---|---|
-| `engagement-letter-template.md` | The client contract (attorney-review-ready draft) | Gate 2 — before any research begins |
 | `intake-to-delivery-sop.md` | The 8-stage, 3-gate pipeline + conflict registry + QA checklist + source-grading scale | Every matter, start to finish |
+| `scoping-pricing-worksheet.md` | Live-on-the-call scoping sheet + complexity scorecard → defensible quote → written scope | Stage 2 — the scoping call |
+| `engagement-letter-template.md` | The client contract (attorney-review-ready draft) | Gate 2 — before any research begins |
 | `dossier-template.md` | The finished-deliverable structure (BLUF, graded findings, annex) | Stage 4 — building the product |
 
 ## Before the first paid engagement (do these once)
