@@ -60,6 +60,9 @@ const exclusions = [
         Built to the analytic standards professional intelligence work is held to: every source graded, every
         finding rated for confidence, every conclusion tested against the innocent explanation before it reaches you.
       </p>
+      <p class="reveal mt-4 max-w-2xl text-sm font-semibold uppercase tracking-wide text-navy-100/70" style="--reveal-delay: 320ms">
+        No padding. No guesswork dressed as fact. No finding we can't put a source and a confidence level behind.
+      </p>
       <div class="reveal mt-8 flex flex-wrap gap-4" style="--reveal-delay: 300ms">
         <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Deep Dossier — confidential inquiry')}`} class="rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300">
           Request a Confidential Scope
@@ -106,7 +109,7 @@ const exclusions = [
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {
           [
-            ['Source reliability grading', 'Every source is rated on the standard reliability scale used across professional intelligence and law enforcement — from independently corroborated to unverified — and the grade travels with the finding. You see not just what we found, but how much weight it can bear.'],
+            ['Source reliability grading', 'Every source carries a grade on the A–F / 1–6 reliability-and-credibility scale used across professional intelligence and law enforcement — reliability of the source, credibility of the information, scored separately — and the grade travels with the finding. You see not just what we found, but exactly how much weight it can bear.'],
             ['Confidence levels, stated', 'Each conclusion carries an explicit confidence level — high, moderate, or low — the way recognized analytic standards require. A "maybe" is labeled a maybe. We never dress a guess as a fact, because the one that blows up is always the one that was overstated.'],
             ['Competing hypotheses', 'The core discipline of the craft: we test the damaging explanation against the innocent one, and the file states which the evidence actually supports — and how strongly. It’s what keeps a dossier from becoming a story hunting for facts to fit it.'],
             ['Fact separated from assessment', 'The record is one column; our analysis is another, clearly marked. You always know where the document ends and our judgment begins — so you can weigh both, and defend both.'],
@@ -158,9 +161,13 @@ const exclusions = [
   <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
     <div class="grid items-start gap-10 lg:grid-cols-2">
       <div class="reveal">
-        <SectionHeading eyebrow="The deliverable" heading="What arrives" />
+        <SectionHeading
+          eyebrow="The deliverable"
+          heading="What arrives"
+          body="Not a data dump you have to interpret under deadline. A finished product, written to be read once and acted on — and to hold when the other side comes at it."
+        />
         <ul class="mt-6 space-y-3 text-sm leading-relaxed text-ink-700">
-          <li class="flex gap-3"><span class="mt-0.5 text-brass-600">◆</span> An executive summary built for a decision — the three things that matter, up top.</li>
+          <li class="flex gap-3"><span class="mt-0.5 text-brass-600">◆</span> A BLUF executive summary — bottom line up front: the three things that decide it, before a single supporting page.</li>
           <li class="flex gap-3"><span class="mt-0.5 text-brass-600">◆</span> The beneficial-ownership network, diagrammed.</li>
           <li class="flex gap-3"><span class="mt-0.5 text-brass-600">◆</span> Findings in priority order, each footnoted to a pullable source and rated for confidence.</li>
           <li class="flex gap-3"><span class="mt-0.5 text-brass-600">◆</span> Source exhibits and a methods note — so the file holds up when someone checks it.</li>
