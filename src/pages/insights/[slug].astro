@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const { title, description, date } = post.data;
+const { title, description, date, faqs } = post.data;
 
 // "Keep reading": same category first, then newest of the rest.
 const others = (await getCollection('insights', ({ data }) => !data.draft))
@@ -25,7 +25,7 @@ const others = (await getCollection('insights', ({ data }) => !data.draft))
 
 const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-const schema = [
+const schema: object[] = [
   {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -36,6 +36,18 @@ const schema = [
     publisher: { '@type': 'Organization', name: SITE.name },
   },
 ];
+
+if (faqs && faqs.length) {
+  schema.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  });
+}
 ---
 
 <Base title={`${title} | ICS Insights`} description={description} schema={schema} ogType="article">
@@ -50,6 +62,22 @@ const schema = [
       <div class="prose-ics">
         <Content />
       </div>
+
+      {
+        faqs && faqs.length > 0 && (
+          <section class="mt-12 border-t border-navy-100 pt-8">
+            <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">Common questions</h2>
+            <dl class="mt-5 space-y-5">
+              {faqs.map((f) => (
+                <div>
+                  <dt class="text-base font-bold text-navy-900">{f.q}</dt>
+                  <dd class="mt-1.5 text-sm leading-relaxed text-ink-700">{f.a}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        )
+      }
     </div>
   </article>
 

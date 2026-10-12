@@ -61,6 +61,9 @@ const insights = defineCollection({
     category: z.enum(['market-notes', 'ai-for-business', 'reports']),
     date: z.coerce.date(),
     draft: z.boolean().default(false),
+    // Optional Q&A pairs — rendered visibly at the foot of the article and
+    // emitted as FAQPage JSON-LD for answer engines (one source of truth).
+    faqs: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
   }),
 });
 
