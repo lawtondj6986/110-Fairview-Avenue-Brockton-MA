@@ -275,6 +275,39 @@ const description =
     </div>
   </section>
 
+  <!-- INTELLIGENCE & RESEARCH -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-600">A quieter kind of advantage</p>
+        <h2 class="reveal mt-3 font-display text-3xl font-bold text-navy-900 sm:text-4xl" style="--reveal-delay: 80ms">
+          The intelligence practice
+        </h2>
+        <p class="reveal mx-auto mt-4 text-base leading-relaxed text-ink-500" style="--reveal-delay: 160ms">
+          The same discipline that wins a negotiation also decides a deal, a hire of counsel, or a race. Public
+          sources, lawful methods, findings you can act on — handled with total discretion. For owners, dealmakers,
+          candidates, and anyone who needs to know before they commit.
+        </p>
+      </div>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          [
+            ['Commercial Intelligence', 'Know before you sign — property, counterparty, and competitive diligence from the public record.', '/intelligence/'],
+            ['The Deep Dossier', 'The premier tier: institutional-grade files on public figures, officials, and the people behind a deal.', '/intelligence/dossier/'],
+            ['Political Research', 'Opposition research, vulnerability audits, and rapid response — under a published methods code.', '/political/'],
+            ['Discretion', 'How sensitive work is handled: confidential both directions, need-to-know, nothing obtained improperly.', '/confidential/'],
+          ].map((c, i) => (
+            <a href={c[2]} class="reveal lift group flex flex-col rounded-xl border border-navy-100 bg-white p-6 shadow-sm" style={`--reveal-delay: ${(i % 4) * 60}ms`}>
+              <h3 class="font-display text-lg font-bold text-navy-900 group-hover:text-brass-600">{c[0]}</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{c[1]}</p>
+              <p class="mt-4 text-sm font-semibold text-brass-600">Learn more →</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <!-- HOW IT WORKS FOR YOU (flywheel, client-framed) -->
   <section class="bg-navy-900">
     <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">

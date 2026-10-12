@@ -77,6 +77,25 @@ const schema = [
     </div>
   </section>
 
+  <!-- THE PRACTICE AT A GLANCE -->
+  <section class="border-b border-navy-100 bg-paper">
+    <div class="mx-auto grid max-w-6xl gap-px px-4 py-5 sm:grid-cols-4 sm:px-6">
+      {
+        [
+          ['Commercial diligence', 'this page'],
+          ['The Deep Dossier', '/intelligence/dossier/'],
+          ['Political research', '/political/'],
+          ['Discretion & handling', '/confidential/'],
+        ].map(([label, href], i) => (
+          <a href={href === 'this page' ? '#' : href} class="group flex flex-col px-3 py-2 text-center sm:border-l sm:border-navy-100 sm:first:border-l-0">
+            <span class="font-mono text-[10px] font-bold uppercase tracking-widest text-brass-600">Desk 0{i + 1}</span>
+            <span class="mt-0.5 text-sm font-semibold text-navy-900 group-hover:text-brass-600">{label}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
   <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
     <SectionHeading eyebrow="The practice" heading="Four kinds of knowing" align="center" />
     <div class="mt-12 grid gap-6 sm:grid-cols-2">
