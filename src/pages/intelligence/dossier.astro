@@ -56,6 +56,10 @@ const exclusions = [
         reveals, and the digital trail across time — assembled with the discipline a bank uses before it wires the
         money. On public figures, officials, organizations, and the people behind your deal.
       </p>
+      <p class="reveal mt-4 max-w-2xl text-base leading-relaxed text-brass-200/90" style="--reveal-delay: 260ms">
+        Built to the analytic standards professional intelligence work is held to: every source graded, every
+        finding rated for confidence, every conclusion tested against the innocent explanation before it reaches you.
+      </p>
       <div class="reveal mt-8 flex flex-wrap gap-4" style="--reveal-delay: 300ms">
         <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Deep Dossier — confidential inquiry')}`} class="rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300">
           Request a Confidential Scope
@@ -87,6 +91,39 @@ const exclusions = [
           </div>
         ))
       }
+    </div>
+  </section>
+
+  <!-- THE TRADECRAFT -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <SectionHeading
+        eyebrow="The tradecraft"
+        heading="Anyone can gather. The craft is in the grading."
+        body="A pile of records is not a dossier. What separates professional intelligence work from a search-engine dump is the discipline applied to every finding — the same analytic standards used across intelligence and investigative work, applied here to lawful open sources."
+        align="center"
+      />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          [
+            ['Source reliability grading', 'Every source is rated on the standard reliability scale used across professional intelligence and law enforcement — from independently corroborated to unverified — and the grade travels with the finding. You see not just what we found, but how much weight it can bear.'],
+            ['Confidence levels, stated', 'Each conclusion carries an explicit confidence level — high, moderate, or low — the way recognized analytic standards require. A "maybe" is labeled a maybe. We never dress a guess as a fact, because the one that blows up is always the one that was overstated.'],
+            ['Competing hypotheses', 'The core discipline of the craft: we test the damaging explanation against the innocent one, and the file states which the evidence actually supports — and how strongly. It’s what keeps a dossier from becoming a story hunting for facts to fit it.'],
+            ['Fact separated from assessment', 'The record is one column; our analysis is another, clearly marked. You always know where the document ends and our judgment begins — so you can weigh both, and defend both.'],
+            ['Key assumptions, surfaced', 'We state the assumptions the assessment rests on and name exactly what would change the conclusion. The gaps are flagged, not hidden — a finding is only as strong as what holds it up.'],
+            ['Secure handling', 'Need-to-know distribution, confidential delivery, and no retention of the working file beyond the engagement. The subject never learns we looked; the fact that you asked is itself protected.'],
+          ].map(([h, b], i) => (
+            <div class="reveal flex flex-col rounded-xl border border-navy-100 bg-white p-6 shadow-sm" style={`--reveal-delay: ${(i % 3) * 60}ms`}>
+              <h3 class="font-display text-base font-bold text-navy-900">{h}</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{b}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mx-auto mt-8 max-w-2xl text-center text-sm leading-relaxed text-ink-500">
+        The point of the method isn’t ceremony. It’s that a finding graded, rated, and tested survives the one
+        moment that matters: when someone on the other side tries to tear it apart.
+      </p>
     </div>
   </section>
 
