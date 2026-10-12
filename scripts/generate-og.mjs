@@ -49,6 +49,7 @@ function collectPages() {
     ['/private-clients/', 'private-clients', 'PRIVATE CLIENTS · MID-SIZE COMPANIES', 'For owners with more at stake.'],
     ['/intelligence/', 'intelligence', 'COMMERCIAL INTELLIGENCE · OSINT', 'Know before you sign.'],
     ['/intelligence/dossier/', 'intelligence-dossier', 'PREMIER TIER · THE DEEP DOSSIER', 'Institutional-grade files. Public sources, lawful methods.'],
+    ['/intelligence/dossier/sample/', 'intelligence-dossier-sample', 'SAMPLE DOSSIER · FULLY FICTIONAL', 'BLUF, ownership map, graded sources, competing hypotheses.'],
     ['/confidential/', 'confidential', 'DISCRETION · HOW SENSITIVE WORK IS HANDLED', 'The work only matters if it stays quiet.'],
     ['/intelligence/cost-of-not-knowing/', 'cost-of-not-knowing', 'FREE CALCULATOR · 1 MINUTE', 'What is not knowing worth? The math on a deal, before you sign.'],
     ['/intelligence/due-diligence-checklist/', 'due-diligence-checklist', 'FREE · PRINTABLE · NO EMAIL', 'What to check before you sign anything.'],

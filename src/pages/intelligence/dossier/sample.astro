@@ -1,0 +1,330 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../config';
+
+const title = 'Sample Page — The Deep Dossier | ICS Commercial Intelligence';
+const description =
+  'A fully fictional sample excerpt from an ICS Deep Dossier, showing the format and analytic standards: a BLUF summary, a beneficial-ownership map, source grading on the A–F / 1–6 scale, stated confidence levels, fact separated from assessment, and a worked competing-hypotheses finding.';
+
+// Every name, entity, record, and citation below is invented for demonstration.
+const findings = [
+  {
+    rating: 'MATERIAL',
+    ratingClass: 'bg-red-700 text-white',
+    grade: 'A1',
+    confidence: 'High',
+    confClass: 'bg-teal-600 text-white',
+    headline: 'A $1.86M judgment follows the principal through a dissolved predecessor entity he did not disclose',
+    fact: 'A Superior Court judgment of $1,862,400 was entered in 2021 against Crosswater Holdings LLC, an entity whose sole manager of record was the deal’s named principal. Crosswater was administratively dissolved in 2022 with the judgment unsatisfied. The principal’s deal memo lists his operating history as "fifteen years, zero litigation."',
+    assessment: 'The judgment is a certified court record and the manager identity is confirmed by the Secretary of State registry — both carry the highest grade. The contradiction with the "zero litigation" representation is direct and documented. Confidence High.',
+    sources: [
+      'Superior Court civil docket, judgment entered 14 Sep 2021, certified copy (Clerk of Courts)',
+      'Secretary of State corporate registry — Crosswater Holdings LLC, manager history and administrative dissolution 1 Jul 2022',
+      'Deal memo circulated to the client, p.3, "operating history" (client-provided, dated)',
+    ],
+  },
+  {
+    rating: 'MATERIAL',
+    ratingClass: 'bg-red-700 text-white',
+    grade: 'B2',
+    confidence: 'High',
+    confClass: 'bg-teal-600 text-white',
+    headline: 'The party at the table does not control the asset — it sits three entities deep behind a registered agent',
+    fact: 'The counterparty presenting the deal is Harborline Partners LLC. Title to the subject property is held by SE Fund III LLC, which is wholly owned by Meridian Asset Holdings LLC, whose sole member is a Delaware entity sharing a registered-agent address with two unrelated funds. The named principal appears as a non-managing member at the second layer only.',
+    assessment: 'The ownership chain is reconstructed from four state registries and the deed; each link is individually sourced, but one Delaware layer is opaque by design, so the structure — not the ultimate control — is what we can state with confidence. Who signs is not who decides. Confidence High on the chain as mapped; the identity of the ultimate controlling member is a stated gap, below.',
+    sources: [
+      'Registry of Deeds — current deed, grantee SE Fund III LLC, book/page cited',
+      'Secretary of State registries (MA, DE, FL) — membership and management for each entity in the chain',
+      'Registered-agent filing — shared agent address, three distinct funds (public filing)',
+    ],
+  },
+  {
+    rating: 'ASSESS',
+    ratingClass: 'bg-brass-500 text-navy-950',
+    grade: 'B3',
+    confidence: 'Moderate',
+    confClass: 'bg-brass-500 text-navy-950',
+    headline: 'A cluster of same-week transfers between related LLCs, 60 days before the deal opened — two readings',
+    fact: 'Between 3 and 7 March 2026, four properties moved by quitclaim among entities in the chain above for stated consideration of $1 each. The subject property was not among them. One transferring entity had a tax lien recorded against it eleven days earlier.',
+    assessment: 'This is where the craft matters. Competing hypotheses, tested below. The record supports the benign reading more than the alarming one — but not fully, and the gap is worth a direct question before closing. Confidence Moderate, by design: the records are real, their meaning is not yet settled.',
+    hypotheses: [
+      { label: 'Hypothesis A — ordinary restructuring', text: 'Routine intra-family estate or tax planning; $1 transfers among commonly-controlled entities are common and lawful. Supported by: the transfers predate any known distress event, and the subject property was left untouched.' },
+      { label: 'Hypothesis B — asset shielding ahead of the deal', text: 'Moving unencumbered assets out of a lien-exposed entity before taking on the client as a counterparty. Supported by: the timing against the tax lien. Weakened by: the subject asset wasn’t moved, which an equity-stripping play would likely target.' },
+      { label: 'What the evidence supports', text: 'The timing is real and the proximity to the lien is real, but the pattern fits ordinary restructuring better than shielding. We do not assert intent the record can’t carry. Recommend one documented question to counsel: confirm the purpose of the March transfers in writing before funding.' },
+    ],
+    sources: [
+      'Registry of Deeds — four quitclaim deeds, recorded 3–7 Mar 2026, consideration $1 each',
+      'State tax lien, recorded 20 Feb 2026, transferring entity named',
+      'Secretary of State registries — common control confirmed across the four entities',
+    ],
+  },
+  {
+    rating: 'CONTEXT',
+    ratingClass: 'bg-navy-700 text-white',
+    grade: 'C3',
+    confidence: 'Moderate',
+    confClass: 'bg-brass-500 text-navy-950',
+    headline: 'A 2019 regulatory consent order, resolved — and a current claim the archive contradicts',
+    fact: 'A state regulator entered a consent order against an affiliated management company in 2019 (administrative, settled, no admission, penalty paid). The principal’s current website states the firm has "never been the subject of a regulatory action." An archived version of the same page from 2020 acknowledged the order; the sentence was removed in a 2023 edit.',
+    assessment: 'The consent order is a resolved administrative matter and should be framed as exactly that — not misconduct. The usable point is the edited claim: the removal is preserved and timestamped in a public web archive. Reliability of the archive is high; the characterization of the underlying order is where overreach would backfire. Confidence Moderate, use with context.',
+    sources: [
+      'State regulatory consent order, 2019, settled (agency public docket)',
+      'Firm website, "Compliance" page, current version',
+      'Public web archive — same page captured 2020 (acknowledging the order) and 2023 (sentence removed), both timestamped',
+    ],
+  },
+  {
+    rating: 'WITHHELD',
+    ratingClass: 'bg-ink-700 text-white',
+    grade: '—',
+    confidence: 'Not used',
+    confClass: 'bg-ink-700 text-white',
+    headline: '[Finding withheld — private-life material with no nexus to the transaction]',
+    fact: 'Research surfaced records relating to the principal’s personal and family life. The records are technically public and were documented. They have no bearing on the entity, the asset, the money, or the principal’s capacity to perform the deal.',
+    assessment: 'The lines are not decoration. Material with no nexus to the business decision is logged in the confidential annex, flagged non-usable, and recommended against in writing — regardless of who asks. A dossier that reaches for this is a dossier that can’t be used in a boardroom. It stays out.',
+    sources: ['Citation held in the confidential annex, flagged non-usable'],
+  },
+];
+
+const grades = [
+  ['A', 'Reliable source — history of validity, no doubt of authenticity (e.g. certified court or registry record).'],
+  ['B', 'Usually reliable — minor doubt; most official and institutional sources.'],
+  ['C', 'Fairly reliable — media and secondary sources, corroborated where possible.'],
+  ['D–F', 'Reliability unknown, not usually reliable, or cannot be judged — used only when corroborated and labeled as such.'],
+];
+const credibility = [
+  ['1', 'Confirmed by other independent sources.'],
+  ['2', 'Probably true — logical, consistent with other information.'],
+  ['3', 'Possibly true — reasonable but not confirmed.'],
+  ['4–6', 'Doubtful, improbable, or cannot be judged — flagged explicitly.'],
+];
+---
+
+<Base title={title} description={description}>
+  <section class="bg-navy-950 print:bg-white">
+    <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+      <div class="rounded-lg border-2 border-dashed border-brass-400 bg-brass-500/10 p-4 text-center">
+        <p class="font-mono text-xs font-bold uppercase tracking-[0.2em] text-brass-300 print:text-navy-900">
+          Illustrative sample · Every name, entity, record, and citation on this page is fictional
+        </p>
+        <p class="mt-1 text-xs text-navy-100/70 print:text-ink-500">
+          Constructed to show the format and analytic standards of a Deep Dossier. Real dossiers are confidential and look like this.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 pb-14 sm:px-6">
+    <!-- THE DOCUMENT -->
+    <div class="rounded-xl border border-navy-100 bg-white p-6 shadow-lg sm:p-10">
+      <div class="border-b-2 border-navy-900 pb-5">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-ink-500">Confidential · Prepared for the Client only · Need-to-know</p>
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">Sample — Fictional</p>
+        </div>
+        <h1 class="mt-4 font-display text-2xl font-bold text-navy-900 sm:text-3xl">
+          Deep Dossier — excerpt
+        </h1>
+        <p class="mt-1 font-mono text-sm text-ink-500">
+          Subject: Harborline Partners LLC & principal (fictional) · Context: $4.2M property acquisition (fictional) · Findings 1–5 of 19
+        </p>
+      </div>
+
+      <!-- BLUF -->
+      <div class="mt-6 rounded-lg border-l-4 border-brass-500 bg-paper p-5">
+        <p class="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-brass-600">BLUF · Bottom line up front</p>
+        <p class="mt-2 text-sm leading-relaxed text-ink-700">
+          Three things decide this deal. <strong class="text-navy-900">One:</strong> the principal carries an unsatisfied
+          $1.86M judgment through an entity he represented as litigation-free. <strong class="text-navy-900">Two:</strong>
+          the party at the table is not the party that controls the asset — control sits three entities deep, and one
+          layer is opaque by design. <strong class="text-navy-900">Three:</strong> a cluster of $1 transfers 60 days before
+          the deal opened has a benign explanation and a concerning one; the record leans benign but does not close the
+          question. <span class="font-semibold text-navy-900">Recommendation: proceed only with the ownership chain and the
+          March transfers resolved in writing before funding.</span>
+        </p>
+      </div>
+
+      <!-- BENEFICIAL-OWNERSHIP MAP -->
+      <div class="mt-6 rounded-lg border border-navy-100 bg-navy-950 p-5 print:bg-white print:border-navy-900">
+        <p class="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-brass-300 print:text-navy-900">Beneficial-ownership map · who actually controls the asset</p>
+        <div class="mt-4 overflow-x-auto">
+          <pre class="font-mono text-[11px] leading-5 text-navy-100/90 print:text-ink-700">{`  SUBJECT PROPERTY  (the asset being sold)
+        │
+        ▼
+  SE Fund III LLC            ── holds title (deed of record)
+        │  wholly owned by
+        ▼
+  Meridian Asset Holdings LLC ── sole member below
+        │  sole member
+        ▼
+  [ Delaware entity ]         ── OPAQUE: agent-only, no member disclosed
+        │  shares agent with
+        ├── Unrelated Fund A
+        └── Unrelated Fund B
+
+  Named principal ───────────► non-managing member, Meridian layer only
+                               (signs the deal · does not appear to control the asset)`}</pre>
+        </div>
+        <p class="mt-3 text-[11px] leading-relaxed text-navy-100/60 print:text-ink-500">
+          Each link is individually sourced to a state registry or the deed. The Delaware layer is the stated gap — see Finding 02 and Key assumptions.
+        </p>
+      </div>
+
+      <!-- FINDINGS -->
+      <div class="mt-8 space-y-8">
+        {
+          findings.map((f, i) => (
+            <article class="reveal">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class={`rounded px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wider ${f.ratingClass}`}>{f.rating}</span>
+                <span class="rounded bg-navy-100 px-2 py-1 font-mono text-[11px] font-bold text-navy-900" title="Source grade — reliability (A–F) and credibility (1–6)">Source {f.grade}</span>
+                <span class={`rounded px-2 py-1 font-mono text-[11px] font-bold uppercase tracking-wider ${f.confClass}`} title="Analytic confidence in the conclusion">Confidence: {f.confidence}</span>
+                <p class="ml-auto font-mono text-xs text-ink-500">Finding {String(i + 1).padStart(2, '0')}</p>
+              </div>
+              <h2 class="mt-2 text-lg font-bold leading-snug text-navy-900">{f.headline}</h2>
+
+              <p class="mt-3 text-[10px] font-bold uppercase tracking-widest text-ink-500">The record</p>
+              <p class="mt-1 text-sm leading-relaxed text-ink-700">{f.fact}</p>
+
+              <p class="mt-3 text-[10px] font-bold uppercase tracking-widest text-teal-700">Our assessment</p>
+              <p class="mt-1 text-sm leading-relaxed text-ink-700">{f.assessment}</p>
+
+              {f.hypotheses && (
+                <div class="mt-3 space-y-2 rounded-lg border border-brass-400/50 bg-brass-500/5 p-4">
+                  <p class="font-mono text-[10px] font-bold uppercase tracking-widest text-brass-600">Competing hypotheses</p>
+                  {f.hypotheses.map((h) => (
+                    <p class="text-xs leading-relaxed text-ink-700">
+                      <strong class="text-navy-900">{h.label}.</strong> {h.text}
+                    </p>
+                  ))}
+                </div>
+              )}
+
+              <div class="mt-3 rounded-lg bg-paper p-4">
+                <p class="font-mono text-[10px] font-bold uppercase tracking-widest text-teal-700">Sources</p>
+                <ol class="mt-1.5 list-decimal space-y-1 pl-5 font-mono text-[11px] leading-relaxed text-ink-500">
+                  {f.sources.map((s) => (
+                    <li>{s}</li>
+                  ))}
+                </ol>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <!-- KEY ASSUMPTIONS -->
+      <div class="mt-8 rounded-lg border border-navy-100 bg-paper p-5">
+        <p class="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-navy-900">Key assumptions & what would change the assessment</p>
+        <ul class="mt-2 space-y-1.5 text-xs leading-relaxed text-ink-700">
+          <li>· The ultimate controlling member behind the Delaware layer is undisclosed. If identified, Finding 02 could move from "structure mapped" to "control confirmed" — and could materially change the risk.</li>
+          <li>· The March transfers are assessed as more likely benign. A written confirmation of their purpose from counterparty counsel would close Finding 03 either way.</li>
+          <li>· All findings rest on records current as of the pull date. A refresh is recommended within 30 days of funding.</li>
+        </ul>
+      </div>
+
+      <div class="mt-8 border-t border-navy-100 pt-5 text-center font-mono text-[10px] uppercase tracking-widest text-ink-500">
+        Excerpt ends · Full dossier: BLUF · 19 findings in priority order · full ownership diagram · source exhibits · methods note · confidential annex
+      </div>
+    </div>
+
+    <!-- HOW TO READ THE GRADES -->
+    <div class="mt-8 rounded-xl border border-navy-100 bg-white p-6 shadow-sm sm:p-8">
+      <h2 class="font-display text-lg font-bold text-navy-900">How to read the grades</h2>
+      <p class="mt-1 text-sm leading-relaxed text-ink-500">
+        Every finding carries a source grade and a confidence level, so you can see not just what we found but exactly
+        how much weight it can bear. The grading follows the A–F / 1–6 reliability-and-credibility scale used across
+        professional intelligence and investigative work.
+      </p>
+      <div class="mt-5 grid gap-6 sm:grid-cols-2">
+        <div>
+          <p class="font-mono text-[10px] font-bold uppercase tracking-widest text-teal-700">Reliability of the source (A–F)</p>
+          <dl class="mt-2 space-y-1.5">
+            {grades.map(([k, v]) => (
+              <div class="flex gap-3 text-xs leading-relaxed">
+                <dt class="w-10 shrink-0 font-mono font-bold text-navy-900">{k}</dt>
+                <dd class="text-ink-500">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div>
+          <p class="font-mono text-[10px] font-bold uppercase tracking-widest text-teal-700">Credibility of the information (1–6)</p>
+          <dl class="mt-2 space-y-1.5">
+            {credibility.map(([k, v]) => (
+              <div class="flex gap-3 text-xs leading-relaxed">
+                <dt class="w-10 shrink-0 font-mono font-bold text-navy-900">{k}</dt>
+                <dd class="text-ink-500">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+      <p class="mt-5 text-xs leading-relaxed text-ink-500">
+        So <span class="font-mono font-bold text-navy-900">A1</span> is a certified record confirmed independently;
+        <span class="font-mono font-bold text-navy-900"> C3</span> is a media or secondary source that is plausible but
+        not fully corroborated — usable, with that limit stated. Nothing reaches you without both marks.
+      </p>
+      <div class="mt-5 flex flex-wrap justify-center gap-3 print:hidden">
+        <button
+          id="print-dossier-sample"
+          type="button"
+          class="rounded-md border border-navy-100 px-5 py-2.5 text-sm font-semibold text-navy-800 transition-colors hover:border-brass-500 hover:text-brass-600"
+        >
+          Print / Save as PDF
+        </button>
+      </div>
+    </div>
+
+    <div class="mt-8 rounded-xl bg-navy-900 p-7 text-center">
+      <h2 class="text-xl font-bold text-white">This is the standard. Now put it on your decision.</h2>
+      <p class="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-navy-100/85">
+        A BLUF you can act on in a minute, an ownership chain mapped link by link, every finding graded and confidence-rated,
+        and the material that doesn’t belong sealed away. That’s what separates a dossier from a search-engine dump.
+        Premier engagements are scoped privately, in writing, before you commit a dollar.
+      </p>
+      <div class="mt-5 flex flex-wrap justify-center gap-3">
+        <a href="/intelligence/dossier/" class="rounded-md bg-brass-500 px-5 py-2.5 text-sm font-semibold text-navy-950 transition-colors hover:bg-brass-300">
+          The Deep Dossier →
+        </a>
+        <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Deep Dossier — confidential inquiry')}`} class="rounded-md border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-brass-300 hover:text-brass-300">
+          Request a Confidential Scope
+        </a>
+      </div>
+    </div>
+
+    <p class="mt-6 text-center text-xs leading-relaxed text-ink-500">
+      Reminder: the subject, entities, records, and citations above are invented for demonstration. Real engagements are
+      confidential, conducted from public records and lawful methods only, and governed by the published
+      <a href="/intelligence/dossier/" class="font-semibold text-teal-600 hover:text-teal-700">tradecraft and lines</a>.
+      ICS is not a law firm and does not provide consumer reports under the FCRA.
+    </p>
+  </section>
+</Base>
+
+<style>
+  @media print {
+    :global(header),
+    :global(footer),
+    :global(#money-bar) {
+      display: none !important;
+    }
+    :global(body) {
+      background: white !important;
+    }
+    :global(.reveal) {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  function initDossierSample() {
+    const btn = document.getElementById('print-dossier-sample');
+    if (!btn || btn.dataset.ready) return;
+    btn.dataset.ready = '1';
+    btn.addEventListener('click', () => window.print());
+  }
+  document.addEventListener('astro:page-load', initDossierSample);
+</script>
