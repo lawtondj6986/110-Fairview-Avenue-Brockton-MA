@@ -51,6 +51,7 @@ function collectPages() {
     ['/confidential/', 'confidential', 'DISCRETION · HOW SENSITIVE WORK IS HANDLED', 'The work only matters if it stays quiet.'],
     ['/political/', 'political', 'POLITICAL RESEARCH · PUBLISHED METHODS CODE', 'Everything findable will be found. The only question is by whom.'],
     ['/political/sample/', 'political-sample', 'SAMPLE PAGE · FULLY FICTIONAL', 'The Opposition Book: findings, footnotes, usability ratings.'],
+    ['/political/self-check/', 'political-self-check', 'FREE · 2 MINUTES · NO EMAIL', 'How exposed is your campaign? Score your own file first.'],
     ['/guarantees/', 'guarantees', 'IN WRITING · WITH CONSEQUENCES', 'Four promises. 21 days. 60 seconds. 90 days. 100% yours.'],
     ['/scoreboard/', 'scoreboard', 'UPDATED MONTHLY', 'Agencies show portfolios. We show a scoreboard.'],
     ['/south-shore/', 'south-shore', 'SERVICE AREA · SIXTEEN TOWNS, IN PERSON', "We don't cover the South Shore. We work it."],
