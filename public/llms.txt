@@ -27,6 +27,7 @@ Phone: (508) 942-8259. Email: lawtondj@gmail.com. In-person service across Brock
 
 - [QuoteBrain 2.0](https://icsgroup.ai/quotebrain/): instant-quote engines built for any service business — customers price their own job in 60 seconds. Live pavement-maintenance demo on the page; client installs are built around each business's own services and rates.
 - [AI Readiness Score](https://icsgroup.ai/ai-readiness/): ten-question assessment scoring lead response, reputation, automation, and search visibility, with a 90-day action plan.
+- [Lease vs. Buy Calculator](https://icsgroup.ai/lease-vs-buy/): a free, no-email calculator comparing the real multi-year cost of leasing versus owning commercial space — mortgage, equity, appreciation, and carrying costs — over the owner's actual time horizon.
 - [What's My Building Worth?](https://icsgroup.ai/building-worth/): free Broker Opinion of Value — walked in person, built on real comparables, written within 48 hours.
 
 ## Retail consultants (including firearms dealers & regulated retail)

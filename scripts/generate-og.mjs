@@ -33,6 +33,7 @@ function collectPages() {
     ['/quotebrain/', 'quotebrain', 'QUOTEBRAIN™ 2.0 · INSTANT QUOTES', 'Your website answers in 60 seconds. For any service business.'],
     ['/ai-readiness/', 'ai-readiness', 'FREE ASSESSMENT · 2 MINUTES', 'Find out exactly where your business leaks revenue.'],
     ['/building-worth/', 'building-worth', 'FREE BROKER OPINION OF VALUE', "What's your building actually worth?"],
+    ['/lease-vs-buy/', 'lease-vs-buy', 'FREE CALCULATOR · LEASE VS. BUY', 'Lease it, or own it? The math over your time horizon.'],
     ['/pricing/', 'pricing', 'PUBLISHED PRICING', "Pricing that isn't a secret."],
     ['/compare/', 'compare', 'THE HONEST COMPARISON', 'DIY, agency, or ICS? The comparison nobody else will publish.'],
     ['/retail/', 'retail', 'RETAIL CONSULTANTS · INCLUDING REGULATED RETAIL', 'Your whole store, online. Run from one panel.'],
