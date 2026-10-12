@@ -29,7 +29,7 @@ export const TOWNS: Town[] = [
       'The business base is exactly the profile that gets ignored by big agencies: contractors, auto shops, restaurants, salons, medical and professional offices serving a city of roughly 100,000. Most run on word-of-mouth with a website that hasn\'t changed since the last ownership transition — which means the first operator in any trade to take digital seriously here takes a disproportionate share.',
     angle:
       "This is our home market. We know which corridors flood in March, which blocks the city is investing in, and who's quietly looking to sell. That doesn't come from a database.",
-    neighbors: ['abington', 'whitman', 'west-bridgewater', 'easton', 'stoughton', 'avon'],
+    neighbors: ['randolph', 'holbrook', 'abington', 'whitman', 'west-bridgewater', 'easton', 'stoughton', 'avon'],
   },
   {
     slug: 'abington',
@@ -43,7 +43,7 @@ export const TOWNS: Town[] = [
       'The town supports a strong trades-and-services economy — plumbers, electricians, landscapers, small medical and dental practices — serving both local residents and the commuter flow toward the Route 3 corridor. Few of these businesses have systematic lead capture or review programs, so the digital bar to clear here is low and the upside is fast.',
     angle:
       'Abington is a drive-by market: Route 18 visibility does real work. Pair the right frontage with a site that actually converts and you own the town in your trade.',
-    neighbors: ['whitman', 'brockton', 'rockland'],
+    neighbors: ['holbrook', 'weymouth', 'whitman', 'brockton', 'rockland'],
   },
   {
     slug: 'whitman',
@@ -113,7 +113,7 @@ export const TOWNS: Town[] = [
       'High traffic means high competition: Stoughton businesses fight for attention against regional chains in a way smaller towns don\'t. The local operators who win pair the corridor\'s drive-by volume with digital systems that capture and convert — because here, an unanswered lead doesn\'t wait, it just drives to the next option on the strip.',
     angle:
       'On a corridor with this much traffic, marketing isn\'t decoration — it\'s the multiple on your building\'s value when you sell. We price listings like that matters, because it does.',
-    neighbors: ['easton', 'brockton', 'avon'],
+    neighbors: ['randolph', 'easton', 'brockton', 'avon'],
   },
   {
     slug: 'easton',
@@ -183,7 +183,7 @@ export const TOWNS: Town[] = [
       'The retail and service businesses here draw from Plymouth, Duxbury, and the whole mid-South Shore — a customer base that researches online before driving. For restaurants, fitness, medical, and home-service operators, Kingston rewards polished digital presence the way its anchor district rewards good signage: visibly and immediately.',
     angle:
       "Corridors in transition are where the deals live. Kingston's retail district is repricing in real time — we track it, and our clients hear about openings before the listing portals do.",
-    neighbors: ['plymouth', 'plympton', 'halifax'],
+    neighbors: ['pembroke', 'plymouth', 'plympton', 'halifax'],
   },
   {
     slug: 'halifax',
@@ -197,7 +197,7 @@ export const TOWNS: Town[] = [
       "With a small local population, Halifax businesses live on regional reach — the trades, auto, and specialty operators here work Hanson, Bridgewater, Plympton, and beyond. That makes the marketing problem identical to the one we solve best: owning search across a multi-town radius, answering every lead instantly, and letting review velocity do the rest.",
     angle:
       'The 106 corridor is our home turf — we work it from West Bridgewater to Kingston. Halifax is its quiet middle, and quiet is where patient buyers win.',
-    neighbors: ['plympton', 'hanson', 'bridgewater', 'kingston'],
+    neighbors: ['pembroke', 'plympton', 'hanson', 'bridgewater', 'kingston'],
   },
   {
     slug: 'hanson',
@@ -211,7 +211,7 @@ export const TOWNS: Town[] = [
       "Business in Hanson is neighbor-to-neighbor: trades, auto, food service, childcare, and wellness operators whose customers pass them daily on Route 27. Loyalty is real here, but it's earned online first now — the Hanson operator with same-day response and a steady review stream quietly takes share from every competitor still running on a Facebook page.",
     angle:
       'Small-town loyalty compounds like interest — but only after the first click goes your way. We make sure it does.',
-    neighbors: ['whitman', 'halifax', 'east-bridgewater'],
+    neighbors: ['hanover', 'pembroke', 'whitman', 'halifax', 'east-bridgewater'],
   },
   {
     slug: 'rockland',
@@ -225,7 +225,7 @@ export const TOWNS: Town[] = [
       "The strategic fact about Rockland: its businesses sit minutes from some of the strongest household spending on the South Shore. Trades, auto, fitness, and food operators based here routinely serve Hingham, Norwell, and Hanover customers — if those customers can find them. Winning the searches across that line is worth multiples of winning the town itself.",
     angle:
       "Operate from Rockland, sell to the gold coast. The rent gap pays for the marketing that closes the distance — that's arbitrage, and we engineer it.",
-    neighbors: ['abington', 'whitman', 'hanson'],
+    neighbors: ['holbrook', 'hanover', 'norwell', 'hingham', 'abington', 'whitman', 'hanson'],
   },
   {
     slug: 'avon',
@@ -239,7 +239,119 @@ export const TOWNS: Town[] = [
       "The daytime economy dwarfs the residential one: thousands of workers cycle through the park, supporting the food, fuel, and service businesses along Route 28. For B2B operators in the park itself — suppliers, fabricators, logistics — visibility isn't about foot traffic at all; it's about being the answer when a buyer three towns away searches for exactly what you do.",
     angle:
       "We're headquartered ten minutes away and know the park's turnover rhythms. Industrial buyers: tell us your spec before you need it — that's how Avon deals get done.",
-    neighbors: ['brockton', 'stoughton'],
+    neighbors: ['brockton', 'stoughton', 'randolph', 'holbrook'],
+  },
+  {
+    slug: 'randolph',
+    name: 'Randolph',
+    county: 'Norfolk',
+    position: 'Route 24 and Route 28 in one town — a working commercial crossroads with one of the most diverse business bases on the South Shore.',
+    corridors: ['Route 28 (North Main St)', 'Route 139 / Mazzeo Dr big-box and retail', 'Route 24 access', 'Pacella Park / Teed Dr industrial', 'Crawford Square'],
+    propertyMix:
+      "Randolph's commercial stock splits cleanly by corridor: Route 28 is the long retail-and-auto spine — storefronts, service businesses, restaurants, and repair shops on steady drive-by — while the Route 139 pocket by the Route 24 interchange holds the big-box and larger-format retail. Behind them sit light-industrial and flex pockets around Pacella Park and Teed Drive, within minutes of the highway. Pricing runs below Braintree next door for comparable frontage, which is exactly why owner-users who were priced out of Route 128 land here.",
+    businessMix:
+      "Randolph is one of the most diverse towns in the state, and its business base shows it: a dense layer of immigrant-owned restaurants, markets, salons, and service firms that often run on word-of-mouth and under-invest in search. That is a wide-open lane — the first operator in each category to own its Google Business Profile and answer the phone in under a minute pulls demand from Route 28 traffic that was already driving past.",
+    angle:
+      "Randolph rewards the basics done relentlessly. Ten minutes from our office, we can walk a Route 28 storefront and have the lead system scoped the same afternoon.",
+    neighbors: ['avon', 'stoughton', 'holbrook', 'braintree'],
+  },
+  {
+    slug: 'holbrook',
+    name: 'Holbrook',
+    county: 'Norfolk',
+    position: "Small town on Brockton's shoulder — Route 37 through the center, and value that the bigger neighbors can't offer.",
+    corridors: ['Route 37 (South Franklin St / North Franklin St)', 'Route 139 (Union St / Plymouth St)', 'Holbrook Center', 'Industrial pockets near the Route 37 rail line'],
+    propertyMix:
+      "Holbrook is a compact market: a center along Route 37 with small storefront and mixed-use buildings, a handful of light-industrial and contractor-yard parcels near the rail line, and residential-adjacent commercial along Route 139. Inventory is thin and turnover is slow, which cuts both ways — buyers have to be patient and positioned, and sellers who market properly to the right radius get attention a quiet listing never would.",
+    businessMix:
+      "Holbrook businesses serve the town and a ring of neighbors — Brockton, Abington, Randolph, Weymouth — which means the real trade area is several times the population. The trades and home-service operators based here win on response time and reviews across that whole ring, not on the local sign. A quoting engine and a follow-up system turn a one-town shop into a five-town one.",
+    angle:
+      "We treat Holbrook as part of our home turf — it's a few minutes from Brockton. Small-town inventory needs a bigger-market marketing effort, and that's the part we bring.",
+    neighbors: ['brockton', 'avon', 'randolph', 'abington', 'rockland', 'weymouth'],
+  },
+  {
+    slug: 'weymouth',
+    name: 'Weymouth',
+    county: 'Norfolk',
+    position: 'One of the biggest markets on the South Shore — Route 18, Route 3A, South Shore Hospital, and a generational redevelopment at Union Point.',
+    corridors: ['Route 18 (Main St) — South Weymouth', 'Route 3A (Bridge St) — North Weymouth', 'Route 53 (Washington St)', 'Columbian Square', 'Jackson Square', 'Union Point (former South Weymouth Naval Air Station)', 'Weymouth Landing'],
+    propertyMix:
+      "Weymouth runs several commercial markets at once. Route 18 is the workhorse — retail, auto, restaurants, and a dense medical cluster anchored by South Shore Hospital, all on heavy Route 3 commuter traffic. Route 3A carries the northern retail and service strip; Columbian Square and Jackson Square are the village-scale storefront districts; and Union Point is the long-running mixed-use redevelopment of the former naval air station, a story every South Shore investor watches. Across all of it, owner-user demand stays strong and medical and professional space moves fastest.",
+    businessMix:
+      "Weymouth's population and commuter flow make it a volume market: the question for a local business isn't whether demand exists, it's whether you capture your share of searches before the next operator on Route 18 does. Medical and dental practices here compete on booking convenience; trades compete on response time; restaurants on being the answer to a specific craving. All three are systems problems with measurable fixes.",
+    angle:
+      "Weymouth is where published pricing earns its keep — a big market with a lot of noise and a lot of agencies selling fog. We'd rather hand you numbers and a 21-day launch.",
+    neighbors: ['abington', 'rockland', 'holbrook', 'braintree', 'hingham'],
+  },
+  {
+    slug: 'braintree',
+    name: 'Braintree',
+    county: 'Norfolk',
+    position: "The region's commercial hub — South Shore Plaza, the Braintree Split, and the largest office, hotel, and industrial base south of Boston.",
+    corridors: ['South Shore Plaza / Granite St', 'Braintree Split (I-93 / Route 3 / Route 128)', 'Forbes Rd / Wood Rd office and hotel cluster', 'Route 37 (Washington St) and Braintree Five Corners', 'Campanelli Dr / Grossman Dr industrial', 'Quincy Ave / Pearl St'],
+    propertyMix:
+      "Braintree is the South Shore's commercial capital: the biggest retail concentration in the region around South Shore Plaza and Granite Street, a genuine office and hotel market along Forbes Road and Wood Road at the highway junction, and a deep industrial and flex base on Campanelli Drive and Grossman Drive. The Braintree Split puts the whole thing within minutes of Boston and Route 128, which keeps institutional capital interested and pricing at the top of the South Shore. Sub-$3M owner-user product exists — on Washington Street, Quincy Avenue, and the older industrial pockets — but it moves fast and often off-market.",
+    businessMix:
+      "In Braintree the competition is regional, not local: a business here is measured against everything within fifteen minutes of the Split. That raises the bar on digital presence — the restaurants, medical practices, and service operators that win are the ones that look and respond like the larger firms they're competing with. The upside is scale: capture the search, and the trade area is enormous.",
+    angle:
+      "We bring a Brockton operator's cost discipline to a market that's used to Boston pricing. Same institutional-grade marketing on the listing, a fraction of the overhead behind it.",
+    neighbors: ['randolph', 'holbrook', 'weymouth'],
+  },
+  {
+    slug: 'hingham',
+    name: 'Hingham',
+    county: 'Plymouth',
+    position: 'The affluent coastal anchor — Derby Street, the Shipyard, Hingham Square, and a customer base that pays for quality and expects to find it online.',
+    corridors: ['Derby Street Shops / Route 3 exits', 'Hingham Shipyard (Route 3A)', 'Hingham Square (Main St / South St)', 'Route 3A (Lincoln St / Summer St)', 'Route 53 (Whiting St) / Queen Anne\'s Corner', 'Route 228'],
+    propertyMix:
+      "Hingham's commercial property is high-value and tightly held: the open-air retail at Derby Street, the mixed-use waterfront district at the Shipyard, the historic storefronts of Hingham Square, and professional and medical office along Route 3A and Route 53. Little of it is cheap and little of it is vacant for long. Owner-users and investors here are buying location and tenant quality, and the diligence — title history, use restrictions, parking — matters more than almost anywhere on the South Shore.",
+    businessMix:
+      "Hingham customers research before they buy and they expect polish: a practice or service business here with a weak website or slow follow-up is leaving money to competitors who look the part. The good news is that the same quality bar rewards whoever clears it — review velocity and answer-engine visibility carry real weight with an audience that asks their phone for recommendations.",
+    angle:
+      "Hingham is a market where the intelligence side of our practice earns its place alongside the brokerage — know the building and the counterparty cold before you commit. We do both.",
+    neighbors: ['weymouth', 'norwell', 'rockland'],
+  },
+  {
+    slug: 'hanover',
+    name: 'Hanover',
+    county: 'Plymouth',
+    position: "Route 53's retail spine and the Hanover Crossing redevelopment — the South Shore's busiest commercial strip outside Braintree.",
+    corridors: ['Route 53 (Washington St) retail corridor', 'Hanover Crossing (former Hanover Mall, Route 53 / Route 3)', 'Route 139 (Hanover St)', 'Route 3 access', 'Industrial pockets off Route 53 and Columbia Rd', 'Four Corners'],
+    propertyMix:
+      "Hanover's commercial identity is Route 53: a long, high-traffic corridor of retail, auto, restaurants, and service businesses, re-anchored by the Hanover Crossing redevelopment of the old mall site at the Route 3 interchange. Behind the strip sit contractor and light-industrial parcels that the trades fight over, and Route 139 carries a second, smaller commercial band. For owner-users, Hanover offers highway-adjacent visibility at prices well under the Route 128 markets — which is why the inventory is competitive.",
+    businessMix:
+      "Route 53 traffic is a gift and a trap: thousands of cars a day, and a dozen competitors in every category within two miles. The businesses that grow here convert drive-by awareness into a search-and-book habit — the auto shop whose quote engine answers at 9pm, the restaurant that owns 'near Hanover Crossing.' Awareness is free on Route 53; conversion is the system.",
+    angle:
+      "We know the Route 53 rhythm from Hanson and Rockland next door. Retail and auto operators on the strip: your competitor's weak website is your opening, and it's a 21-day fix.",
+    neighbors: ['rockland', 'hanson', 'norwell', 'pembroke'],
+  },
+  {
+    slug: 'norwell',
+    name: 'Norwell',
+    county: 'Plymouth',
+    position: "The quiet office market — Route 3's suburban business parks, the Route 53 corridor it shares with Hanover, and a village center that keeps its character.",
+    corridors: ['Accord Park Dr / Longwater Dr / Pond St office parks (Route 3)', 'Route 53 (Washington St)', "Queen Anne's Corner (Route 53 / Route 228)", 'Assinippi (Route 53 / Route 123)', 'Norwell Center (Route 123 / Main St)'],
+    propertyMix:
+      "Norwell holds one of the South Shore's real suburban office clusters — the business parks off Route 3 around Accord Park Drive, Longwater Drive, and Pond Street, home to professional, medical, and corporate tenants that want highway access without Braintree rents. Along Route 53 the town shares a retail, auto, and service corridor with Hanover, concentrated at Queen Anne's Corner and Assinippi. Norwell Center stays deliberately small-scale. For buyers, the office and medical stock is the story: it's where a practice or firm can own its building at a sensible basis.",
+    businessMix:
+      "The professional firms and practices in Norwell's parks compete across the whole South Shore for clients who shortlist from a search — which makes answer-engine visibility and a fast, credible website the whole game. On Route 53, the retail and service operators face the same conversion contest as Hanover: traffic is given, capture is earned.",
+    angle:
+      "If you run a practice or professional firm and you're renting in Norwell's parks, run the lease-versus-buy math with us. Owning the suite is more reachable than most tenants assume.",
+    neighbors: ['hanover', 'hingham', 'rockland'],
+  },
+  {
+    slug: 'pembroke',
+    name: 'Pembroke',
+    county: 'Plymouth',
+    position: 'Route 139 at the Route 3 exit, Route 53 on the Hanover line, and a growing residential base that supports service businesses year-round.',
+    corridors: ['Route 139 (Church St) / Route 3 exit — North Pembroke', 'Route 53 (Washington St) near the Hanover line', 'Route 14 (Center St) / Pembroke Center', 'Route 36', 'Route 3 access'],
+    propertyMix:
+      "Pembroke's commercial pockets follow its highways: the Route 139 band at the Route 3 exit carries retail, medical, and service property on commuter traffic; Route 53 near the Hanover line picks up auto and service uses from the bigger corridor next door; and Pembroke Center is the smaller village district. Contractor yards and small flex parcels are scattered along the routes and are in steady demand from the trades that serve the growing residential base. Pricing sits a notch below Hanover and Hingham, which makes owner-user ownership realistic.",
+    businessMix:
+      "Pembroke is a residential growth town, and that's the opportunity: new households, every one of them searching for a dentist, an electrician, a landscaper, a restaurant. The operators who become the default answer early keep those customers for years. That's a lead-capture and review-velocity problem — the kind we install.",
+    angle:
+      "We serve Pembroke from Hanson and Halifax next door. Trades and practices here: the household growth is already happening; the question is whether the searches land on you.",
+    neighbors: ['hanover', 'hanson', 'halifax', 'kingston'],
   },
 ];
 

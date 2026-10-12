@@ -21,6 +21,7 @@ export const SITE = {
   },
   license: 'Licensed MA Real Estate Salesperson #9082020',
 
+  // Every town with a market page (src/lib/towns.ts) — feeds the LocalBusiness areaServed schema.
   serviceAreas: [
     'Brockton',
     'Abington',
@@ -32,6 +33,20 @@ export const SITE = {
     'Plympton',
     'West Bridgewater',
     'East Bridgewater',
+    'Plymouth',
+    'Kingston',
+    'Halifax',
+    'Hanson',
+    'Rockland',
+    'Avon',
+    'Randolph',
+    'Holbrook',
+    'Weymouth',
+    'Braintree',
+    'Hingham',
+    'Hanover',
+    'Norwell',
+    'Pembroke',
   ],
 
   social: {
