@@ -54,7 +54,8 @@ Allow: /
 User-agent: Meta-ExternalAgent
 Allow: /
 
-# Structured guide for language models:
+# Structured guide for language models, and the full site text in one file:
 # https://icsgroup.ai/llms.txt
+# https://icsgroup.ai/llms-full.txt
 
 Sitemap: https://icsgroup.ai/sitemap-index.xml
