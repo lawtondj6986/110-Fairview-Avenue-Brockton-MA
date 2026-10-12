@@ -48,6 +48,7 @@ function collectPages() {
     ['/press/', 'press', 'PRESS & MEDIA KIT · HELP YOURSELF', 'Everything a writer needs. No PR firm between us.'],
     ['/private-clients/', 'private-clients', 'PRIVATE CLIENTS · MID-SIZE COMPANIES', 'For owners with more at stake.'],
     ['/intelligence/', 'intelligence', 'COMMERCIAL INTELLIGENCE · OSINT', 'Know before you sign.'],
+    ['/intelligence/scope/', 'intelligence-scope', 'FREE · 60 SECONDS · NO EMAIL', 'Which intelligence desk do you need? Scope it.'],
     ['/intelligence/dossier/', 'intelligence-dossier', 'PREMIER TIER · THE DEEP DOSSIER', 'Institutional-grade files. Public sources, lawful methods.'],
     ['/intelligence/dossier/sample/', 'intelligence-dossier-sample', 'SAMPLE DOSSIER · FULLY FICTIONAL', 'BLUF, ownership map, graded sources, competing hypotheses.'],
     ['/confidential/', 'confidential', 'DISCRETION · HOW SENSITIVE WORK IS HANDLED', 'The work only matters if it stays quiet.'],

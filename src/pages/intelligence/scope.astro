@@ -1,0 +1,294 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../config';
+
+const title = 'Scope It — Which Intelligence Desk Do You Need? | ICS';
+const description =
+  'Three questions, 60 seconds, no email: get matched to the right ICS intelligence desk — a Commercial Intelligence brief, the Deep Dossier, the political research desk, your own vulnerability self-check, or a confidential scope — with an indicative price band and a private next step.';
+---
+
+<Base title={title} description={description}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-4xl px-4 py-12 text-center sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">The intelligence practice · Three questions · 60 seconds</p>
+      <h1 class="reveal mx-auto mt-4 max-w-2xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        Tell us the decision. We'll point at the desk.
+      </h1>
+      <p class="reveal mx-auto mt-4 max-w-xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        The practice has four desks and a free self-check. This matches your situation to the right one — with an
+        indicative price band and a confidential way in. No email, no sales call to find out.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <div id="scope" class="rounded-2xl border border-navy-100 bg-white p-6 shadow-lg sm:p-8">
+      <!-- progress -->
+      <div class="flex items-center justify-between">
+        <p id="sc-step-label" class="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brass-600">Question 1 of 3</p>
+        <div class="flex gap-1.5" aria-hidden="true">
+          <span class="sc-dot is-active" data-dot="0"></span>
+          <span class="sc-dot" data-dot="1"></span>
+          <span class="sc-dot" data-dot="2"></span>
+        </div>
+      </div>
+
+      <!-- STEP 1 -->
+      <fieldset class="sc-panel mt-5" data-step="0">
+        <legend class="text-xl font-bold text-navy-900">Who or what do you need to understand?</legend>
+        <div class="mt-4 grid gap-3 sm:grid-cols-2">
+          <button type="button" class="sc-opt" data-q="subject" data-v="entity">A company or counterparty <span>The entity on the other side of a deal, a vendor, a title</span></button>
+          <button type="button" class="sc-opt" data-q="subject" data-v="principal">The person behind the deal <span>A principal, an official, a public figure and their record</span></button>
+          <button type="button" class="sc-opt" data-q="subject" data-v="political">A candidate or campaign <span>A race, a committee, or a ballot question</span></button>
+          <button type="button" class="sc-opt" data-q="subject" data-v="self">Your own exposure <span>What an opponent, a reporter, or a counterparty would find on you</span></button>
+        </div>
+      </fieldset>
+
+      <!-- STEP 2 -->
+      <fieldset class="sc-panel mt-5 hidden" data-step="1">
+        <legend class="text-xl font-bold text-navy-900">What's riding on it?</legend>
+        <div class="mt-4 grid gap-3 sm:grid-cols-2">
+          <button type="button" class="sc-opt" data-q="stakes" data-v="deal">A transaction or investment <span>Money is about to move</span></button>
+          <button type="button" class="sc-opt" data-q="stakes" data-v="partner">A partnership, board seat, or key hire <span>You're binding yourself to someone</span></button>
+          <button type="button" class="sc-opt" data-q="stakes" data-v="election">An election or ballot question <span>A campaign that intends to win</span></button>
+          <button type="button" class="sc-opt" data-q="stakes" data-v="reputation">Reputation or a decision you can't un-make <span>Sensitive, and it has to stay quiet</span></button>
+        </div>
+      </fieldset>
+
+      <!-- STEP 3 -->
+      <fieldset class="sc-panel mt-5 hidden" data-step="2">
+        <legend class="text-xl font-bold text-navy-900">How deep does this need to go?</legend>
+        <div class="mt-4 grid gap-3 sm:grid-cols-3">
+          <button type="button" class="sc-opt" data-q="depth" data-v="quick">A fast read <span>Verify the basics before I commit</span></button>
+          <button type="button" class="sc-opt" data-q="depth" data-v="deep">A full file <span>Every lawful record, graded and briefed</span></button>
+          <button type="button" class="sc-opt" data-q="depth" data-v="unsure">Not sure yet <span>Help me scope it</span></button>
+        </div>
+      </fieldset>
+
+      <!-- RESULT -->
+      <div id="sc-result" class="mt-5 hidden">
+        <p class="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brass-600">Your desk</p>
+        <h2 id="sc-name" class="mt-1 text-3xl font-bold text-navy-900"></h2>
+        <p id="sc-price" class="mt-1 font-mono text-sm font-semibold text-brass-600"></p>
+        <p id="sc-pitch" class="mt-3 text-sm leading-relaxed text-ink-700"></p>
+        <div class="mt-5 rounded-lg border border-navy-100 bg-paper p-4 text-sm">
+          <span class="text-ink-500">See the standard first:</span>
+          <a id="sc-proof" href="/intelligence/" class="ml-1 font-semibold text-brass-600 hover:text-brass-500"></a>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a id="sc-open" href="#" class="rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300"></a>
+          <a id="sc-email" href="#" class="rounded-md border border-navy-100 px-6 py-3 font-semibold text-navy-900 transition-colors hover:border-brass-500 hover:text-brass-600">Request a confidential scope</a>
+          <a href={`tel:${SITE.phone.replace(/[^\d+]/g, '')}`} class="rounded-md border border-navy-100 px-6 py-3 font-semibold text-navy-900 transition-colors hover:border-brass-500 hover:text-brass-600">
+            Call {SITE.phone}
+          </a>
+        </div>
+        <p class="mt-4 text-xs leading-relaxed text-ink-500">
+          Every engagement starts with a written scope before you commit a dollar, runs on public records and lawful
+          methods only, and is handled under the <a href="/confidential/" class="font-semibold text-brass-600 hover:text-brass-500">discretion commitments</a>.
+          Not a consumer report under the FCRA.
+        </p>
+      </div>
+
+      <!-- back -->
+      <button type="button" id="sc-back" class="mt-6 hidden text-sm font-semibold text-ink-500 hover:text-brass-600">← Back</button>
+
+      <noscript>
+        <p class="mt-5 rounded-lg border border-navy-100 bg-paper p-4 text-sm text-ink-700">
+          The scoper needs JavaScript — but the desks are all public:
+          <a href="/intelligence/" class="font-semibold text-brass-600">Commercial Intelligence</a>,
+          <a href="/intelligence/dossier/" class="font-semibold text-brass-600">the Deep Dossier</a>,
+          <a href="/political/" class="font-semibold text-brass-600">political research</a>, or
+          <a href="/confidential/" class="font-semibold text-brass-600">a confidential scope</a>.
+        </p>
+      </noscript>
+    </div>
+
+    <p class="mt-6 text-center text-xs text-ink-500">
+      No email gate — the recommendation appears right here. The subject never learns you asked; the fact that you asked is protected.
+    </p>
+  </section>
+</Base>
+
+<style>
+  .sc-dot {
+    height: 6px;
+    width: 22px;
+    border-radius: 9999px;
+    background: #dbe4f0;
+    transition: background 150ms;
+  }
+  .sc-dot.is-active {
+    background: #c9a227;
+  }
+  .sc-opt {
+    display: block;
+    width: 100%;
+    text-align: left;
+    border: 1px solid #dbe4f0;
+    border-radius: 0.75rem;
+    padding: 0.9rem 1rem;
+    font-weight: 700;
+    color: #0b1f3a;
+    font-size: 0.925rem;
+    transition: border-color 150ms, background 150ms, transform 150ms;
+    background: #fff;
+  }
+  .sc-opt span {
+    display: block;
+    margin-top: 0.15rem;
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: #5a6b82;
+  }
+  .sc-opt:hover {
+    border-color: #c9a227;
+    background: #fdfbf4;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .sc-opt:active {
+      transform: scale(0.985);
+    }
+  }
+</style>
+
+<script>
+  import { SITE } from '../../config';
+
+  function initScope() {
+    const root = document.getElementById('scope');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+
+    const DESKS: Record<string, { name: string; price: string; pitch: string; proofLabel: string; proofHref: string; openLabel: string; openHref: string; subject: string }> = {
+      commercial: {
+        name: 'Commercial Intelligence Brief',
+        price: 'Scoped to the question — a focused, written engagement',
+        pitch: "A sourced, confidential brief for a business decision: counterparty and vendor diligence, property and title research, and digital-exposure checks — public records and lawful methods only, delivered as a document you can act on and defend.",
+        proofLabel: 'The pre-signing due-diligence checklist it runs on →',
+        proofHref: '/intelligence/due-diligence-checklist/',
+        openLabel: 'Open Commercial Intelligence →',
+        openHref: '/intelligence/',
+        subject: 'Commercial Intelligence',
+      },
+      dossier: {
+        name: 'The Deep Dossier',
+        price: 'Premier tier — scoped privately, in writing, before you commit',
+        pitch: "The institutional-grade file: full public-record aggregation, beneficial-ownership mapping, sanctions and PEP screening, financial exposure from the public record, and a BLUF briefing — every source graded, every finding confidence-rated. For when 'we looked them up' isn't enough.",
+        proofLabel: 'See a sample dossier — fully fictional →',
+        proofHref: '/intelligence/dossier/sample/',
+        openLabel: 'Open the Deep Dossier →',
+        openHref: '/intelligence/dossier/',
+        subject: 'Deep Dossier',
+      },
+      political: {
+        name: 'The Political Research Desk',
+        price: 'Vulnerability audits $3,500–$7,500 · opposition books $7,500–$15,000',
+        pitch: "Public-record research for races that intend to win: vulnerability audits, sourced opposition books, rapid-response desks, and ballot-question landscapes — under a published methods code, every claim footnoted, one client per race with a conflict check first.",
+        proofLabel: 'See a sample opposition book — fully fictional →',
+        proofHref: '/political/sample/',
+        openLabel: 'Open the Political Desk →',
+        openHref: '/political/',
+        subject: 'Political Research',
+      },
+      selfcheck: {
+        name: 'Start With Your Own File',
+        price: 'The self-check is free · the Integrity Scan runs $3,500–$7,500 with annual refresh',
+        pitch: "Before anyone else pulls your file, pull it yourself. The free Vulnerability Self-Check scores your own public-record exposure in two minutes, no email. For sitting officials and serious future candidates, the Integrity Scan is the full, confidential version with an annual refresh.",
+        proofLabel: 'Take the free self-check now →',
+        proofHref: '/political/self-check/',
+        openLabel: 'The full political desk →',
+        openHref: '/political/',
+        subject: 'Self-exposure review',
+      },
+      confidential: {
+        name: 'A Confidential Scope',
+        price: 'Scoped privately — confidential both directions',
+        pitch: "When it's sensitive and the decision can't be un-made, this starts with discretion, not a sales pitch. We'll tell you what the lawful record can deliver, what it can't, and how it would be handled — need-to-know, one accountable person, nothing retained beyond the engagement.",
+        proofLabel: 'How sensitive work is handled →',
+        proofHref: '/confidential/',
+        openLabel: 'The discretion commitments →',
+        openHref: '/confidential/',
+        subject: 'Confidential scope',
+      },
+    };
+
+    const answers: Record<string, string> = {};
+    let step = 0;
+
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('.sc-panel'));
+    const dots = Array.from(root.querySelectorAll<HTMLElement>('.sc-dot'));
+    const result = document.getElementById('sc-result')!;
+    const back = document.getElementById('sc-back')!;
+    const label = document.getElementById('sc-step-label')!;
+
+    function recommend(): string {
+      const { subject, stakes, depth } = answers;
+      if (subject === 'political') return 'political';
+      if (subject === 'self') return 'selfcheck';
+      if (subject === 'principal') return 'dossier';
+      if (subject === 'entity') {
+        if (depth === 'deep' || stakes === 'partner') return 'dossier';
+        if (stakes === 'reputation') return 'confidential';
+        return 'commercial';
+      }
+      if (stakes === 'reputation') return 'confidential';
+      if (stakes === 'election') return 'political';
+      return 'commercial';
+    }
+
+    function show(n: number) {
+      step = n;
+      panels.forEach((p, i) => p.classList.toggle('hidden', i !== n));
+      result.classList.add('hidden');
+      dots.forEach((d, i) => d.classList.toggle('is-active', i <= n));
+      label.textContent = `Question ${n + 1} of 3`;
+      back.classList.toggle('hidden', n === 0);
+    }
+
+    function finish() {
+      const key = recommend();
+      const d = DESKS[key];
+      panels.forEach((p) => p.classList.add('hidden'));
+      dots.forEach((dot) => dot.classList.add('is-active'));
+      label.textContent = 'Matched';
+      back.classList.remove('hidden');
+
+      document.getElementById('sc-name')!.textContent = d.name;
+      document.getElementById('sc-price')!.textContent = d.price;
+      document.getElementById('sc-pitch')!.textContent = d.pitch;
+      const proof = document.getElementById('sc-proof') as HTMLAnchorElement;
+      proof.textContent = d.proofLabel;
+      proof.href = d.proofHref;
+      const open = document.getElementById('sc-open') as HTMLAnchorElement;
+      open.textContent = d.openLabel;
+      open.href = d.openHref;
+
+      const email = document.getElementById('sc-email') as HTMLAnchorElement;
+      const body = `Hi Daniel,%0D%0A%0D%0AThe Intelligence Scoper pointed me to: ${encodeURIComponent(d.subject)}%0D%0A%0D%0AMy situation — subject: ${answers.subject}, stakes: ${answers.stakes}, depth: ${answers.depth}.%0D%0A%0D%0A(Happy to keep this confidential. Best way and time to reach me: )%0D%0A%0D%0AName: %0D%0APhone: `;
+      email.href = `mailto:${SITE.email}?subject=${encodeURIComponent('Confidential inquiry — ' + d.subject)}&body=${body}`;
+
+      try {
+        (window as unknown as { va?: (e: string, o: unknown) => void }).va?.('event', {
+          name: 'intel-scope',
+          data: { desk: key, subject: answers.subject, stakes: answers.stakes, depth: answers.depth },
+        });
+      } catch {
+        /* analytics is best-effort */
+      }
+
+      result.classList.remove('hidden');
+      result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    root.querySelectorAll<HTMLButtonElement>('.sc-opt').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        answers[btn.dataset.q!] = btn.dataset.v!;
+        if (step < 2) show(step + 1);
+        else finish();
+      })
+    );
+    back.addEventListener('click', () => show(Math.max(0, step - 1)));
+    show(0);
+  }
+  document.addEventListener('astro:page-load', initScope);
+</script>
