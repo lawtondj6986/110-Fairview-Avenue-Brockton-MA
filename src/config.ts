@@ -39,13 +39,20 @@ export const SITE = {
   },
 
   /**
-   * Lead capture (launch mode): the site uses direct email + phone links.
-   * When ready to switch to a hosted form, create one at https://formspree.io,
-   * set formEndpoint to its URL, and the LeadForm component's form UI returns.
+   * Lead capture. Empty = launch mode: every form composes a pre-filled email.
+   * To turn on hosted capture WITHOUT touching code: set the environment
+   * variable PUBLIC_FORM_ENDPOINT (e.g. a Formspree URL) in the Vercel
+   * dashboard → Project → Settings → Environment Variables, then redeploy.
+   * Every form on the site (contact, listings, political intake) switches to
+   * an in-page AJAX submit with inline confirmation. A literal value here
+   * still works as a fallback.
    */
-  formEndpoint: '', // empty = email-first launch mode
-  /** Booking: create a free event type at https://cal.com and paste the link to enable booking buttons. */
-  bookingUrl: '', // empty = phone/email links shown instead
+  formEndpoint: (import.meta.env.PUBLIC_FORM_ENDPOINT as string | undefined)?.trim() || '',
+  /**
+   * Booking. Same pattern: set PUBLIC_BOOKING_URL (e.g. a cal.com event link)
+   * in Vercel and redeploy; booking buttons appear in place of phone/email.
+   */
+  bookingUrl: (import.meta.env.PUBLIC_BOOKING_URL as string | undefined)?.trim() || '',
 };
 
 /**
