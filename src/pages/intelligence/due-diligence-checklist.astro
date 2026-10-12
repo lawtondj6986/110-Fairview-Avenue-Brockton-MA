@@ -1,0 +1,170 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import { SITE } from '../../config';
+
+const title = 'The Pre-Signing Due-Diligence Checklist — Free & Printable | ICS';
+const description =
+  'Before you buy, lend, partner, or sign: the public-record items a smart party verifies first. A free, printable due-diligence checklist organized by category — the entity, the people, the money, litigation, the asset, and reputation — with where each is public and what a red flag looks like.';
+
+const groups = [
+  {
+    name: 'The entity',
+    items: [
+      ['Registration and good standing', 'Secretary of State / corporate registry', 'Not registered, lapsed, or "administratively dissolved" — then still doing business under that name.'],
+      ['Officers, managers, and registered agent', 'Corporate annual reports', 'Names that don’t match who you’re dealing with, or an agent service hiding the principals.'],
+      ['Age and prior entities', 'Registry history + address search', 'A brand-new shell, or a string of dissolved companies at the same address or under the same people.'],
+    ],
+  },
+  {
+    name: 'The people behind it',
+    items: [
+      ['Prior ventures — and how they ended', 'Corporate filings across states', 'A trail of failed or dissolved companies, especially with unpaid creditors.'],
+      ['Other entities they control', 'Officer/agent cross-reference', 'Undisclosed affiliates that change who actually benefits from your deal.'],
+      ['Professional licenses and discipline', 'State licensing boards', 'Suspended, revoked, or disciplined licenses relevant to the work.'],
+    ],
+  },
+  {
+    name: 'The money signals',
+    items: [
+      ['UCC filings (who already has a claim)', 'Secretary of State UCC search', 'Existing liens on the assets you think you’re getting clean.'],
+      ['Tax liens and judgments', 'Registry of deeds / court records', 'Unsatisfied liens or judgments — someone is already owed.'],
+      ['Bankruptcies', 'Federal court (PACER) index', 'A recent or repeat filing the other side didn’t mention.'],
+    ],
+  },
+  {
+    name: 'Litigation history',
+    items: [
+      ['Civil suits — as plaintiff and defendant', 'County and federal court dockets', 'A pattern of disputes with vendors, customers, or partners — or a serial litigant.'],
+      ['Pending matters', 'Active docket search', 'An open case that could change everything post-close.'],
+    ],
+  },
+  {
+    name: 'The property or asset',
+    items: [
+      ['Title and ownership chain', 'Registry of deeds', 'Breaks in the chain, or an owner who isn’t who you’re negotiating with.'],
+      ['Liens, permits, and code enforcement', 'Registry + municipal records', 'Open permits, violations, or encumbrances that become your problem on close.'],
+      ['Tax and environmental status', 'Assessor + state environmental records', 'Back taxes, or a flagged site that tanks the value.'],
+    ],
+  },
+  {
+    name: 'Reputation & the digital record',
+    items: [
+      ['News, regulatory actions, and reviews over time', 'Open web + regulator sites', 'A reputation trajectory heading the wrong way, or enforcement you weren’t told about.'],
+      ['Consistency of their public story', 'Web archive (deleted pages persist)', 'Claims that don’t survive their own paper trail — the deleted page that contradicts today’s pitch.'],
+    ],
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'Pre-Signing Due-Diligence Checklist (public records)',
+    description,
+    step: groups.flatMap((g) =>
+      g.items.map(([what, where, flag]) => ({
+        '@type': 'HowToStep',
+        name: `${g.name}: ${what}`,
+        text: `Check: ${what}. Where it's public: ${where}. Red flag: ${flag}`,
+      }))
+    ),
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950 print:bg-white">
+    <div class="mx-auto max-w-4xl px-4 py-14 sm:px-6 sm:py-16 print:py-6">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-brass-300 print:text-navy-900">Due diligence · Free · Printable · No email</p>
+        <button id="print-ddc" class="rounded-md border border-white/25 px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-brass-300 hover:text-brass-300 print:hidden">
+          Print / Save as PDF
+        </button>
+      </div>
+      <h1 class="mt-5 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl print:text-navy-900">
+        What to check before you sign anything.
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90 print:text-ink-700">
+        Before you buy, lend, partner, or commit — these are the public-record items the careful party verifies first.
+        All of it is lawfully public; most of it, almost nobody checks. Print it, work it, and escalate the ones that
+        matter. Then decide whether to run it yourself or have it done right.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-4xl px-4 py-12 sm:px-6 print:py-4">
+    {
+      groups.map((group, gi) => (
+        <div class="mb-10 print:mb-5">
+          <div class="flex items-baseline gap-3">
+            <span class="font-display text-2xl font-bold text-brass-600">{`0${gi + 1}`}</span>
+            <h2 class="text-2xl font-bold text-navy-900">{group.name}</h2>
+          </div>
+          <div class="mt-4 space-y-3">
+            {group.items.map(([what, where, flag]) => (
+              <div class="reveal rounded-xl border border-navy-100 bg-white p-5 shadow-sm print:shadow-none">
+                <p class="font-bold text-navy-900">☐ {what}</p>
+                <div class="mt-2 grid gap-1 text-sm sm:grid-cols-[auto_1fr] sm:gap-x-3">
+                  <span class="font-mono text-[10px] font-bold uppercase tracking-wider text-teal-700 sm:pt-0.5">Where</span>
+                  <span class="text-ink-700">{where}</span>
+                  <span class="font-mono text-[10px] font-bold uppercase tracking-wider text-brass-600 sm:pt-0.5">Red flag</span>
+                  <span class="text-ink-500">{flag}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+
+    <div class="rounded-2xl border border-brass-400/50 bg-navy-900 p-8 print:border-navy-100 print:bg-white">
+      <h2 class="text-xl font-bold text-white print:text-navy-900">The honest fork</h2>
+      <p class="mt-3 text-sm leading-relaxed text-navy-100/85 print:text-ink-700">
+        Every line above is lawfully public — which means you can run this yourself, and on a smaller deal you should.
+        The catch is that it takes real time, several databases, and the judgment to know which thread is worth
+        pulling. When the amount at stake makes a surprise expensive, this is exactly what our
+        <a href="/intelligence/" class="font-semibold text-brass-300 print:text-navy-900"> Commercial Intelligence</a> and
+        <a href="/intelligence/dossier/" class="font-semibold text-brass-300 print:text-navy-900"> Deep Dossier</a> work
+        delivers — assembled, sourced, and graded, with the parts you’d rather not know included.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-3 print:hidden">
+        <a href="/intelligence/cost-of-not-knowing/" class="rounded-md bg-brass-500 px-5 py-2.5 text-sm font-semibold text-navy-950 transition-colors hover:bg-brass-300">
+          What would a surprise cost? →
+        </a>
+        <a href="/intelligence/" class="rounded-md border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-brass-300 hover:text-brass-300">
+          Have us run it
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-navy-100/50 print:text-ink-500">
+        icsgroup.ai/intelligence/due-diligence-checklist · {SITE.name} · {SITE.phone}. Public records and lawful
+        methods only; not legal advice.
+      </p>
+    </div>
+  </section>
+
+  <CtaSection
+    heading="Want the checklist run for you?"
+    body="Tell us the deal and what's riding on it. We'll assemble the public record into a sourced brief — and tell you plainly whether it changes your decision."
+  />
+</Base>
+
+<style>
+  @media print {
+    :global(header),
+    :global(footer),
+    :global(#money-bar) { display: none !important; }
+    :global(body) { background: white !important; }
+    :global(.reveal) { opacity: 1 !important; transform: none !important; }
+  }
+</style>
+
+<script>
+  function initDDC() {
+    const btn = document.getElementById('print-ddc');
+    if (!btn || btn.dataset.ready) return;
+    btn.dataset.ready = '1';
+    btn.addEventListener('click', () => window.print());
+  }
+  document.addEventListener('astro:page-load', initDDC);
+</script>
