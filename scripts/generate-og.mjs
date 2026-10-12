@@ -49,6 +49,7 @@ function collectPages() {
     ['/intelligence/', 'intelligence', 'COMMERCIAL INTELLIGENCE · OSINT', 'Know before you sign.'],
     ['/intelligence/dossier/', 'intelligence-dossier', 'PREMIER TIER · THE DEEP DOSSIER', 'Institutional-grade files. Public sources, lawful methods.'],
     ['/confidential/', 'confidential', 'DISCRETION · HOW SENSITIVE WORK IS HANDLED', 'The work only matters if it stays quiet.'],
+    ['/intelligence/cost-of-not-knowing/', 'cost-of-not-knowing', 'FREE CALCULATOR · 1 MINUTE', 'What is not knowing worth? The math on a deal, before you sign.'],
     ['/political/', 'political', 'POLITICAL RESEARCH · PUBLISHED METHODS CODE', 'Everything findable will be found. The only question is by whom.'],
     ['/political/sample/', 'political-sample', 'SAMPLE PAGE · FULLY FICTIONAL', 'The Opposition Book: findings, footnotes, usability ratings.'],
     ['/political/self-check/', 'political-self-check', 'FREE · 2 MINUTES · NO EMAIL', 'How exposed is your campaign? Score your own file first.'],
