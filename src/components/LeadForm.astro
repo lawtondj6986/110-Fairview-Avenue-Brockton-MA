@@ -80,6 +80,9 @@ const inputClass =
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
     <input type="hidden" name="_subject" value="New inquiry from icsgroup.ai" />
 
+    <p class="lead-prefilled mt-4 hidden rounded-md border border-teal-200 bg-teal-50 px-3 py-2 text-xs leading-relaxed text-teal-800">
+      We brought your calculator result along — it's in the message below. Add anything else and send.
+    </p>
     <p class="lead-error mt-4 hidden text-sm font-medium text-red-700" role="alert"></p>
 
     <button type="submit" class="lead-submit mt-6 w-full rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-sm transition-colors hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto">
@@ -160,6 +163,21 @@ const inputClass =
         ].join('\n');
         window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines)}`;
       };
+
+      // "Bring your number": calculators link here with the scenario in the URL.
+      try {
+        const q = new URLSearchParams(window.location.search);
+        const msg = q.get('message');
+        const interest = q.get('interest');
+        const ta = form.elements.namedItem('message') as HTMLTextAreaElement | null;
+        const sel = form.elements.namedItem('interest') as HTMLSelectElement | null;
+        let prefilled = false;
+        if (msg && ta && !ta.value) { ta.value = msg; prefilled = true; }
+        if (interest && sel && Array.from(sel.options).some((o) => o.value === interest)) { sel.value = interest; prefilled = true; }
+        if (prefilled) form.querySelector('.lead-prefilled')?.classList.remove('hidden');
+      } catch {
+        /* no-op */
+      }
 
       form.addEventListener('submit', async (e) => {
         // Bot caught by honeypot: swallow quietly.

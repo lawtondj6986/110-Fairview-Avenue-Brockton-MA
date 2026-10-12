@@ -61,8 +61,8 @@ const description =
               at year-one rent. We model the actual proposal on a call.
             </p>
             <div class="mt-4 flex flex-wrap gap-3">
-              <a href="/contact/" class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-500">
-                Negotiate the Real Number →
+              <a id="lda-cta" href="/contact/" class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-500">
+                Bring This Number to Us →
               </a>
               <a href="/lease-vs-buy/" class="rounded-md border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">
                 Should You Buy Instead?
@@ -130,12 +130,20 @@ const description =
       const q = new URLSearchParams(window.location.search);
       fields.forEach((id) => { const v = q.get(PARAMS[id]); if (v !== null && v !== '' && !Number.isNaN(+v)) $(id).value = v; });
     } catch { /* no-op */ }
+    function shareUrl() {
+      const q = new URLSearchParams();
+      fields.forEach((id) => q.set(PARAMS[id], $(id).value));
+      return `${window.location.pathname}?${q.toString()}`;
+    }
     function syncUrl() {
-      try {
-        const q = new URLSearchParams();
-        fields.forEach((id) => q.set(PARAMS[id], $(id).value));
-        history.replaceState(null, '', `${window.location.pathname}?${q.toString()}`);
-      } catch { /* no-op */ }
+      try { history.replaceState(null, '', shareUrl()); } catch { /* no-op */ }
+    }
+    // "Bring your number": the contact CTA carries the scenario and its link into the form.
+    function setCta(summary: string) {
+      const cta = document.getElementById('lda-cta') as HTMLAnchorElement | null;
+      if (!cta) return;
+      const message = `${summary}\nScenario link: ${window.location.origin}${shareUrl()}`;
+      cta.href = `/contact/?${new URLSearchParams({ interest: 'Selling or leasing my property', message }).toString()}`;
     }
 
     function update() {
@@ -186,6 +194,7 @@ const description =
         row('Leasing commission', '-' + money(commission)) +
         row('Landlord: net over term', money(landlordNet), true) +
         row('Landlord: net effective rent', psf(nerLandlord));
+      setCta(`Lease scenario — ${sf.toLocaleString('en-US')} SF at $${rent}/SF, ${term} yrs, ${freeMo} free months, $${ti}/SF TI: tenant net effective ${psf(nerTenant)}, landlord net effective ${psf(nerLandlord)}, total base rent ${money(totalBase)}.`);
     }
 
     fields.forEach((id) => $(id).addEventListener('input', () => { update(); syncUrl(); }));
