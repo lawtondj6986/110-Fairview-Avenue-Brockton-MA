@@ -2,11 +2,18 @@
 import { SITE } from '../config';
 
 /**
- * Lead capture panel.
- * - Launch mode (SITE.formEndpoint empty): direct email + phone links with
- *   pre-filled subjects, so every lead lands in the inbox with context.
- * - Form mode (SITE.formEndpoint set, e.g. a Formspree URL): renders the
- *   full lead form posting to that endpoint.
+ * Lead capture form — one component, progressively enhanced.
+ *
+ * The form always renders. The submit behavior adapts to configuration and JS:
+ *  - Endpoint set (SITE.formEndpoint, e.g. a Formspree URL) + JS: AJAX POST with
+ *    an inline success panel — the visitor never leaves the page.
+ *  - Endpoint set, no JS: native POST to the endpoint (still works).
+ *  - No endpoint + JS: the fields are composed into a fully pre-filled email and
+ *    the visitor's mail app opens — far better than a blank mailto.
+ *  - No endpoint, no JS: the always-visible direct email/phone links below the
+ *    form are the reliable path.
+ *
+ * To turn on hosted capture, set SITE.formEndpoint and nothing else changes.
  */
 interface Props {
   heading?: string;
@@ -14,101 +21,207 @@ interface Props {
 }
 const { heading = 'Tell us where you want to go', compact = false } = Astro.props;
 
-const hasForm = Boolean(SITE.formEndpoint);
+const endpoint = SITE.formEndpoint || '';
 const tel = SITE.phone.replace(/[^\d+]/g, '');
-
-const emailRoutes = [
-  {
-    label: 'Buying or selling commercial property',
-    subject: 'Property inquiry — [your town / property type]',
-  },
-  {
-    label: 'AI systems & marketing for my business',
-    subject: 'AI systems inquiry — [your business / trade]',
-  },
-  {
-    label: 'Both — property and AI systems',
-    subject: 'Property + AI inquiry',
-  },
-];
-const mailto = (subject: string) =>
-  `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
-    'Name:\nBusiness:\nTown:\nWhat’s going on:\n'
-  )}`;
+const nativeAction = endpoint || `mailto:${SITE.email}`;
+const inputClass =
+  'w-full rounded-md border border-navy-100 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100';
 ---
 
-{
-  hasForm ? (
-    <form action={SITE.formEndpoint} method="POST" class="rounded-xl border border-navy-100 bg-white p-6 shadow-sm sm:p-8">
-      <h3 class="text-xl font-bold text-navy-900">{heading}</h3>
-      <p class="mt-1 text-sm text-ink-500">We respond within one business day. No spam, no obligation.</p>
+<div
+  class="lead-form-wrap"
+  data-endpoint={endpoint}
+  data-email={SITE.email}
+  data-tel={tel}
+>
+  <form
+    action={nativeAction}
+    method="POST"
+    class="lead-form rounded-xl border border-navy-100 bg-white p-6 shadow-sm sm:p-8"
+    novalidate
+  >
+    <h3 class="text-xl font-bold text-navy-900">{heading}</h3>
+    <p class="mt-1 text-sm text-ink-500">You'll reach {SITE.founder} directly — not a queue. Response within one business day.</p>
 
-      <div class="mt-6 grid gap-4 sm:grid-cols-2">
-        <div>
-          <label for="name" class="mb-1 block text-sm font-medium text-navy-900">Name</label>
-          <input type="text" id="name" name="name" required autocomplete="name" class="w-full rounded-md border border-navy-100 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100" />
-        </div>
-        <div>
-          <label for="email" class="mb-1 block text-sm font-medium text-navy-900">Email</label>
-          <input type="email" id="email" name="email" required autocomplete="email" class="w-full rounded-md border border-navy-100 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100" />
-        </div>
-        <div>
-          <label for="phone" class="mb-1 block text-sm font-medium text-navy-900">Phone <span class="text-ink-500">(optional)</span></label>
-          <input type="tel" id="phone" name="phone" autocomplete="tel" class="w-full rounded-md border border-navy-100 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100" />
-        </div>
-        <div>
-          <label for="interest" class="mb-1 block text-sm font-medium text-navy-900">I'm interested in</label>
-          <select id="interest" name="interest" required class="w-full rounded-md border border-navy-100 bg-white px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100">
-            <option value="">Select one…</option>
-            <option value="buying">Buying commercial property</option>
-            <option value="selling">Selling or leasing my property</option>
-            <option value="ai-services">AI systems &amp; marketing for my business</option>
-            <option value="both">Both — property and AI services</option>
-            <option value="other">Something else</option>
-          </select>
-        </div>
+    <div class="mt-6 grid gap-4 sm:grid-cols-2">
+      <div>
+        <label for="lf-name" class="mb-1 block text-sm font-medium text-navy-900">Name</label>
+        <input type="text" id="lf-name" name="name" required autocomplete="name" class={inputClass} />
       </div>
-
-      {!compact && (
-        <div class="mt-4">
-          <label for="message" class="mb-1 block text-sm font-medium text-navy-900">What's going on in your business?</label>
-          <textarea id="message" name="message" rows="4" class="w-full rounded-md border border-navy-100 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100" placeholder="E.g., outgrowing our current shop, looking at buildings on Route 28, and our quoting process is a mess…" />
-        </div>
-      )}
-
-      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
-
-      <button type="submit" class="mt-6 w-full rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-sm transition-colors hover:bg-teal-700 sm:w-auto">
-        Send — Get a Response Within 1 Business Day
-      </button>
-    </form>
-  ) : (
-    <div class="rounded-xl border border-navy-100 bg-white p-6 shadow-sm sm:p-8">
-      <h3 class="text-xl font-bold text-navy-900">{heading}</h3>
-      <p class="mt-1 text-sm text-ink-500">
-        Email or call directly — you'll get {SITE.founder} himself, not a form queue. Response within one business day.
-      </p>
-
-      <div class="mt-6 space-y-3">
-        {emailRoutes.map((route) => (
-          <a
-            href={mailto(route.subject)}
-            class="flex items-center justify-between gap-4 rounded-lg border border-navy-100 bg-paper px-4 py-3 text-sm font-semibold text-navy-900 transition-colors hover:border-teal-500 hover:text-teal-600"
-          >
-            {route.label}
-            <span aria-hidden="true" class="text-teal-600">→</span>
-          </a>
-        ))}
+      <div>
+        <label for="lf-email" class="mb-1 block text-sm font-medium text-navy-900">Email</label>
+        <input type="email" id="lf-email" name="email" required autocomplete="email" class={inputClass} />
       </div>
-
-      <div class="mt-6 flex flex-col gap-3 border-t border-navy-100 pt-5 sm:flex-row">
-        <a href={`mailto:${SITE.email}`} class="flex-1 rounded-md bg-teal-600 px-5 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-teal-700">
-          Email {SITE.email}
-        </a>
-        <a href={`tel:${tel}`} class="flex-1 rounded-md border border-navy-900 px-5 py-3 text-center text-sm font-semibold text-navy-900 transition-colors hover:bg-navy-900 hover:text-white">
-          Call or Text {SITE.phone}
-        </a>
+      <div>
+        <label for="lf-phone" class="mb-1 block text-sm font-medium text-navy-900">Phone <span class="text-ink-500">(optional)</span></label>
+        <input type="tel" id="lf-phone" name="phone" autocomplete="tel" class={inputClass} />
+      </div>
+      <div>
+        <label for="lf-interest" class="mb-1 block text-sm font-medium text-navy-900">I'm interested in</label>
+        <select id="lf-interest" name="interest" required class={`${inputClass} bg-white`}>
+          <option value="">Select one…</option>
+          <option value="Buying commercial property">Buying commercial property</option>
+          <option value="Selling or leasing my property">Selling or leasing my property</option>
+          <option value="AI systems & marketing">AI systems &amp; marketing for my business</option>
+          <option value="Both — property and AI systems">Both — property and AI systems</option>
+          <option value="Something else">Something else</option>
+        </select>
       </div>
     </div>
-  )
-}
+
+    {!compact && (
+      <div class="mt-4">
+        <label for="lf-message" class="mb-1 block text-sm font-medium text-navy-900">What's going on in your business?</label>
+        <textarea id="lf-message" name="message" rows="4" class={inputClass} placeholder="E.g., outgrowing our current shop, looking at buildings on Route 28, and our quoting process is a mess…" />
+      </div>
+    )}
+
+    <!-- honeypot: humans never see or fill this -->
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+    <input type="hidden" name="_subject" value="New inquiry from icsgroup.ai" />
+
+    <p class="lead-error mt-4 hidden text-sm font-medium text-red-700" role="alert"></p>
+
+    <button type="submit" class="lead-submit mt-6 w-full rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-sm transition-colors hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto">
+      <span class="lead-submit-label">Send — Get a Response Within 1 Business Day</span>
+    </button>
+
+    <p class="mt-4 border-t border-navy-100 pt-4 text-xs text-ink-500">
+      Prefer to reach {SITE.founder} directly?
+      <a href={`mailto:${SITE.email}`} class="font-semibold text-teal-600 hover:text-teal-700">{SITE.email}</a>
+      ·
+      <a href={`tel:${tel}`} class="font-semibold text-teal-600 hover:text-teal-700">{SITE.phone}</a>
+    </p>
+  </form>
+
+  <div class="lead-success hidden rounded-xl border border-teal-200 bg-teal-50 p-6 shadow-sm sm:p-8" role="status" aria-live="polite">
+    <div class="flex items-start gap-4">
+      <span class="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-teal-600 text-white" aria-hidden="true">
+        <svg viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 011.4-1.4l3.3 3.3 6.8-6.8a1 1 0 011.4 0z" clip-rule="evenodd"></path></svg>
+      </span>
+      <div>
+        <h3 class="lead-success-title text-xl font-bold text-navy-900">Got it — thank you.</h3>
+        <p class="lead-success-body mt-2 text-sm leading-relaxed text-ink-700">
+          Your message is in. {SITE.founder} replies within one business day, usually sooner. Need it faster? Call or text
+          <a href={`tel:${tel}`} class="font-semibold text-teal-600 hover:text-teal-700">{SITE.phone}</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initLeadForms() {
+    document.querySelectorAll<HTMLElement>('.lead-form-wrap').forEach((wrap) => {
+      if (wrap.dataset.ready) return;
+      wrap.dataset.ready = '1';
+
+      const form = wrap.querySelector<HTMLFormElement>('.lead-form');
+      const success = wrap.querySelector<HTMLElement>('.lead-success');
+      if (!form || !success) return;
+
+      const endpoint = wrap.dataset.endpoint || '';
+      const email = wrap.dataset.email || '';
+      const errEl = form.querySelector<HTMLElement>('.lead-error');
+      const btn = form.querySelector<HTMLButtonElement>('.lead-submit');
+      const btnLabel = form.querySelector<HTMLElement>('.lead-submit-label');
+      const defaultLabel = btnLabel?.textContent || 'Send';
+
+      const showError = (msg: string) => {
+        if (!errEl) return;
+        errEl.textContent = msg;
+        errEl.classList.remove('hidden');
+      };
+      const clearError = () => errEl?.classList.add('hidden');
+      const val = (name: string) =>
+        ((form.elements.namedItem(name) as HTMLInputElement | null)?.value || '').trim();
+
+      const showSuccess = () => {
+        const name = val('name').split(' ')[0];
+        if (name) {
+          const title = success.querySelector('.lead-success-title');
+          if (title) title.textContent = `Got it, ${name} — thank you.`;
+        }
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      };
+
+      const composeMailto = () => {
+        const subject = `Website inquiry — ${val('interest') || 'general'}`;
+        const lines = [
+          `Name: ${val('name')}`,
+          `Email: ${val('email')}`,
+          `Phone: ${val('phone') || '—'}`,
+          `Interested in: ${val('interest')}`,
+          '',
+          val('message') || '(no message)',
+          '',
+        ].join('\n');
+        window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines)}`;
+      };
+
+      form.addEventListener('submit', async (e) => {
+        // Bot caught by honeypot: swallow quietly.
+        if (val('_gotcha')) {
+          e.preventDefault();
+          showSuccess();
+          return;
+        }
+
+        if (!form.reportValidity()) {
+          e.preventDefault();
+          return;
+        }
+        clearError();
+
+        // No endpoint configured: pre-fill the visitor's email app with everything.
+        if (!endpoint) {
+          e.preventDefault();
+          composeMailto();
+          success.querySelector('.lead-success-body')!.innerHTML =
+            "We've opened your email app with your details filled in — just press send. If nothing opened, email " +
+            `<a href="mailto:${email}" class="font-semibold text-teal-600">${email}</a> directly.`;
+          showSuccess();
+          return;
+        }
+
+        // Endpoint configured: AJAX so the visitor never leaves the page.
+        e.preventDefault();
+        if (btn) {
+          btn.disabled = true;
+          if (btnLabel) btnLabel.textContent = 'Sending…';
+        }
+        try {
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { Accept: 'application/json' },
+          });
+          if (res.ok) {
+            showSuccess();
+            try {
+              (window as unknown as { va?: (e: string, o: unknown) => void }).va?.('event', {
+                name: 'lead-submit',
+                data: { interest: val('interest') },
+              });
+            } catch {
+              /* analytics best-effort */
+            }
+          } else {
+            throw new Error(String(res.status));
+          }
+        } catch {
+          showError(
+            `Something went wrong sending that. Please email ${email} or call directly — we don't want to lose your message.`
+          );
+          if (btn) {
+            btn.disabled = false;
+            if (btnLabel) btnLabel.textContent = defaultLabel;
+          }
+        }
+      });
+    });
+  }
+  document.addEventListener('astro:page-load', initLeadForms);
+</script>
