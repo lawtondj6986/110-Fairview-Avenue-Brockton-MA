@@ -159,4 +159,105 @@ export const INDUSTRIES: Industry[] = [
     tool: { href: '/ai-readiness/', label: 'Free readiness score — see where your pipeline leaks' },
     proof: { href: '/case-studies/solar-installer-quoting/', label: 'Quote-to-close cut from 11 days to 4: the solar case study' },
   },
+  {
+    slug: 'fitness-studios',
+    name: 'Fitness & Studios',
+    eyebrow: 'Gyms · Boutique fitness · Martial arts · Yoga & Pilates · Personal training',
+    headline: 'Every January you fill up. Every March you leak. Fix the leak.',
+    intro:
+      "Fitness is a membership business wearing a lead-generation disguise: the trial class, the free week, the 'just looking' DM — each one a lead that either books within the hour or books with the studio down the road. Most owners are on the floor coaching when those leads arrive. Our systems book the trial, chase the no-show, and keep the member who's quietly drifting, so growth stops depending on New Year's resolutions.",
+    pains: [
+      'Trial-class inquiries arrive while you’re teaching — and go cold in an hour',
+      'No-shows and ghosted trials never get a second nudge',
+      'Churn is invisible until the card declines',
+      'Big-box gyms and apps outspend you on ads you can’t match',
+    ],
+    installs: [
+      { system: 'JobSite', why: 'A site built around one action — book the trial — with schedule, pricing, and reviews up front, so the first visit is a decision, not a question.' },
+      { system: 'Lead Engine', why: 'Every inquiry answered in under 60 seconds, trials booked and reminded automatically, no-shows re-invited, and lapsing members nudged before they cancel.' },
+      { system: 'Market Lock', why: 'One studio per category per town. When you own “yoga near Hingham,” the next studio calling us gets a no.' },
+    ],
+    tool: { href: '/ai-readiness/', label: 'Score your studio in two minutes — lead response, reviews, retention, and visibility, graded' },
+  },
+  {
+    slug: 'veterinary-pet-services',
+    name: 'Veterinary & Pet Services',
+    eyebrow: 'Veterinary clinics · Groomers · Boarding & daycare · Trainers · Mobile pet care',
+    headline: 'The 9pm “is this an emergency?” call is a client for life — if someone answers.',
+    intro:
+      "Pet owners search in moments of worry and book with whoever responds. A clinic or groomer with a full phone queue, a voicemail after hours, and a booking page that needs a phone call is handing new clients to the practice that answers. Our systems triage the inquiry, book the appointment, request the review, and remind the client who's due — so the front desk stops being the bottleneck on growth.",
+    pains: [
+      'After-hours inquiries hit voicemail and book elsewhere by morning',
+      'The front desk is slammed, so new-client calls wait — or bounce',
+      'Reviews are great but sparse; the clinic down the road has 400',
+      'Reminders, recalls, and reactivations run on sticky notes',
+    ],
+    installs: [
+      { system: 'JobSite', why: 'A site that books: services, pricing transparency where you want it, new-client forms, and reviews — built so a worried owner can act in one tap.' },
+      { system: 'Lead Engine', why: 'Every call, text, and form answered in under 60 seconds, 24/7, with sensible triage — then booked, reminded, and followed up for the review.' },
+      { system: 'Market Lock', why: 'One practice per category per territory, with the content and answer-engine visibility that makes you the recommended answer when someone asks their phone.' },
+    ],
+    tool: { href: '/ai-services/#leak', label: 'What do missed after-hours calls cost a clinic per year? Run your own numbers' },
+  },
+  {
+    slug: 'childcare-education',
+    name: 'Childcare & Early Education',
+    eyebrow: 'Daycares · Preschools · Enrichment & tutoring · After-school programs',
+    headline: 'Parents tour three centers and enroll at the one that answered first.',
+    intro:
+      "Enrollment is won months before the first day: a parent searches, shortlists, requests tours, and chooses the center that replied quickly, looked trustworthy online, and made the tour easy to book. Most centers are busy being excellent with children while those inquiries sit. Our systems answer the parent, book the tour, manage the waitlist, and keep the reviews coming — so your reputation does the recruiting.",
+    pains: [
+      'Tour requests wait for a free moment that never comes',
+      'Waitlists live in a notebook; families drift to whoever confirms first',
+      'Trust is everything, and your online presence doesn’t show it',
+      'Seasonal enrollment swings leave rooms half-full in the wrong months',
+    ],
+    installs: [
+      { system: 'JobSite', why: 'A site built for a parent’s decision: programs, tuition clarity, licensing, staff, reviews, and a tour you can book in one tap.' },
+      { system: 'Lead Engine', why: 'Every inquiry answered in under 60 seconds, tours booked and confirmed, waitlists managed automatically, and enrolled families asked for the review that convinces the next one.' },
+      { system: 'Market Lock', why: 'One center per town, with the content and visibility that makes you the answer to “preschool near me” — before the parent ever makes a call.' },
+    ],
+    tool: { href: '/start/', label: 'Three questions, 45 seconds — match your center to the right system with a published price' },
+  },
+  {
+    slug: 'marine-boat-services',
+    name: 'Marine & Boat Services',
+    eyebrow: 'Marinas · Boat repair & service · Storage & winterization · Detailing · Charters',
+    headline: 'The South Shore has a coastline. Your competitors’ websites don’t know it.',
+    intro:
+      "From Hingham Harbor to Plymouth, Scituate to Marshfield, the marine trade runs on a brutally seasonal calendar: the spring rush, the summer repairs, the fall winterization and storage scramble. Every one of those is a quote-and-book moment, and almost every marine business still handles it by phone tag. Our systems price the storage, quote the service, book the slip, and follow up — so the season is captured instead of chased.",
+    pains: [
+      'Winterization and storage quotes go out by phone, one at a time, in the busiest month',
+      'Spring commissioning requests pile up and get answered in order of who yelled loudest',
+      'Charter and detailing inquiries arrive on Instagram and die there',
+      'A seasonal business with a website that looks the same in January and July',
+    ],
+    installs: [
+      { system: 'JobSite', why: 'A site with instant quoting for the standard jobs — storage by length, winterization, detailing, bottom paint — so a boat owner prices and books in 60 seconds, in season or out.' },
+      { system: 'Lead Engine', why: 'Every inquiry answered in under 60 seconds across phone, text, and social, booked into the season’s calendar, and followed up before the next marina does.' },
+      { system: 'Market Lock', why: 'One marine operator per category per harbor, with seasonal content and the visibility that owns “boat storage near Plymouth” before the fall.' },
+    ],
+    tool: { href: '/quotebrain/', label: 'See instant quoting in action — the same engine that prices a driveway prices a winterization' },
+  },
+  {
+    slug: 'cannabis-regulated-retail',
+    name: 'Cannabis & Regulated Retail',
+    eyebrow: 'Licensed MA dispensaries · Delivery · Cultivation-to-retail · Other restricted categories',
+    headline: 'When the ad platforms won’t take your money, own the channels they can’t touch.',
+    intro:
+      "Licensed cannabis retail in Massachusetts runs with one hand tied: Google and Meta restrict or refuse the ads, the big marketplaces take the customer relationship, and compliance shapes every click. We already built for the hardest restricted category on the internet — a Massachusetts firearms dealer whose platform runs the store daily — and the playbook transfers: owned search and answer-engine visibility instead of rented ads, a live-inventory site the store runs from the counter, and reserve-and-pickup flows shaped to the compliance process. Lawful, licensed operators only.",
+    pains: [
+      'Paid ads are restricted or refused, so growth depends on channels you don’t own',
+      'Menu marketplaces own your customer and charge you for the privilege',
+      'Inventory changes daily and the website never keeps up',
+      'Compliance rules make every off-the-shelf tool a liability',
+    ],
+    installs: [
+      { system: 'JobSite', why: 'A compliant storefront with live inventory synced to the floor, an admin panel the manager runs from the counter, and product-level SEO for the searches the ad platforms won’t sell you.' },
+      { system: 'Lead Engine', why: 'Reserve-and-pickup, order status, and loyalty follow-up — every inquiry answered in under 60 seconds within the rules, and the customer relationship kept in-house.' },
+      { system: 'Market Lock', why: 'One dispensary per market, with the content system and answer-engine visibility that makes you the recommended answer — the only growth lever the platforms can’t restrict.' },
+    ],
+    tool: { href: '/ai-readiness/', label: 'Score your dispensary’s owned channels in two minutes — search, reviews, response, and visibility' },
+    proof: { href: '/case-studies/outback-arms-retail-platform/', label: 'Regulated retail, proven: the Outback Arms platform — store-reported business up 300%' },
+  },
 ];
