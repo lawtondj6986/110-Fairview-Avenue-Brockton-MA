@@ -70,11 +70,32 @@ const description =
       </div>
     </div>
 
-    <p class="mt-6 text-center text-xs text-ink-500">
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-3 print:hidden">
+      <button id="snp-share" type="button" class="rounded-md border border-navy-100 px-4 py-2 text-sm font-semibold text-navy-800 transition-colors hover:border-teal-500 hover:text-teal-600">
+        Copy a shareable link
+      </button>
+      <button id="snp-print" type="button" class="rounded-md border border-navy-100 px-4 py-2 text-sm font-semibold text-navy-800 transition-colors hover:border-teal-500 hover:text-teal-600">
+        Print / Save as PDF
+      </button>
+      <span id="snp-copied" class="hidden text-sm font-semibold text-teal-600">Link copied — send it to your partner or accountant ✓</span>
+    </div>
+
+    <p class="mt-6 text-center text-xs text-ink-500 print:hidden">
       Thinking about selling? <a href="/commercial-real-estate/" class="font-semibold text-teal-600 hover:text-teal-500">See how we market and represent sellers →</a>
     </p>
   </section>
 </Base>
+
+<style>
+  @media print {
+    :global(header),
+    :global(footer),
+    :global(#money-bar) { display: none !important; }
+    :global(body) { background: white !important; }
+    :global(.reveal) { opacity: 1 !important; transform: none !important; }
+    #snp { box-shadow: none; border-color: #dbe4f0; }
+  }
+</style>
 
 <style>
   .snp-input {
@@ -98,6 +119,28 @@ const description =
     const $ = (id: string) => document.getElementById(id) as HTMLInputElement;
     const num = (id: string) => Math.max(0, +$(id).value || 0);
     const fmt = (n: number) => (n < 0 ? '-$' : '$') + Math.round(Math.abs(n)).toLocaleString('en-US');
+
+    // URL state: short param per input, so a result is a shareable link.
+    const PARAMS: Record<string, string> = {
+      'snp-price': 'p', 'snp-payoff': 'pay', 'snp-comm': 'c',
+      'snp-transfer': 't', 'snp-legal': 'l', 'snp-credits': 'r',
+    };
+    const fields = Object.keys(PARAMS);
+    try {
+      const q = new URLSearchParams(window.location.search);
+      fields.forEach((id) => {
+        const v = q.get(PARAMS[id]);
+        if (v !== null && v !== '' && !Number.isNaN(+v)) $(id).value = v;
+      });
+    } catch { /* no-op */ }
+
+    function syncUrl() {
+      try {
+        const q = new URLSearchParams();
+        fields.forEach((id) => q.set(PARAMS[id], $(id).value));
+        history.replaceState(null, '', `${window.location.pathname}?${q.toString()}`);
+      } catch { /* no-op */ }
+    }
 
     function update() {
       const price = num('snp-price');
@@ -135,7 +178,22 @@ const description =
         (credits > 0 ? `<div class="flex justify-between gap-3"><span class="text-navy-100/60">Repairs / credits</span><span>-${fmt(credits)}</span></div>` : '') +
         `<div class="mt-1 flex justify-between gap-3 border-t border-white/10 pt-2 font-bold text-white"><span>Net to you</span><span>${fmt(net)}</span></div>`;
     }
-    ['snp-price','snp-payoff','snp-comm','snp-transfer','snp-legal','snp-credits'].forEach((id) => $(id).addEventListener('input', update));
+    fields.forEach((id) => $(id).addEventListener('input', () => { update(); syncUrl(); }));
+
+    const shareBtn = document.getElementById('snp-share');
+    const copied = document.getElementById('snp-copied');
+    shareBtn?.addEventListener('click', async () => {
+      syncUrl();
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+      } catch {
+        /* clipboard unavailable — the URL in the address bar still carries the scenario */
+      }
+      copied?.classList.remove('hidden');
+      window.setTimeout(() => copied?.classList.add('hidden'), 3500);
+    });
+    document.getElementById('snp-print')?.addEventListener('click', () => window.print());
+
     update();
   }
   document.addEventListener('astro:page-load', initSNP);

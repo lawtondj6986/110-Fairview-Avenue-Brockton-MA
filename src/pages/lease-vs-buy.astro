@@ -72,7 +72,17 @@ const description =
       </div>
     </div>
 
-    <p class="mt-6 text-center text-xs text-ink-500">
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-3 print:hidden">
+      <button id="lvb-share" type="button" class="rounded-md border border-navy-100 px-4 py-2 text-sm font-semibold text-navy-800 transition-colors hover:border-teal-500 hover:text-teal-600">
+        Copy a shareable link
+      </button>
+      <button id="lvb-print" type="button" class="rounded-md border border-navy-100 px-4 py-2 text-sm font-semibold text-navy-800 transition-colors hover:border-teal-500 hover:text-teal-600">
+        Print / Save as PDF
+      </button>
+      <span id="lvb-copied" class="hidden text-sm font-semibold text-teal-600">Link copied — send it to your co-owner or partner ✓</span>
+    </div>
+
+    <p class="mt-6 text-center text-xs text-ink-500 print:hidden">
       Thinking about buying your space? <a href="/commercial-real-estate/" class="font-semibold text-teal-600 hover:text-teal-500">See how we represent owner-users →</a>
     </p>
   </section>
@@ -90,6 +100,14 @@ const description =
   }
   .lvb-input:focus { outline: none; border-color: #14b8a6; box-shadow: 0 0 0 2px rgba(20,184,166,0.2); }
   .lvb-label { display: block; margin-bottom: 0.25rem; font-size: 0.7rem; font-weight: 500; color: #5a6b82; }
+  @media print {
+    :global(header),
+    :global(footer),
+    :global(#money-bar) { display: none !important; }
+    :global(body) { background: white !important; }
+    :global(.reveal) { opacity: 1 !important; transform: none !important; }
+    #lvb { box-shadow: none; border-color: #dbe4f0; }
+  }
 </style>
 
 <script>
@@ -100,6 +118,27 @@ const description =
     const $ = (id) => document.getElementById(id);
     const num = (id) => Math.max(0, +$(id).value || 0);
     const fmt = (n) => '$' + Math.round(n).toLocaleString('en-US');
+
+    const PARAMS = {
+      'lvb-price': 'pr', 'lvb-down': 'dp', 'lvb-rate': 'rt', 'lvb-term': 'tm',
+      'lvb-appr': 'ap', 'lvb-carry': 'cy', 'lvb-lease': 'ls', 'lvb-years': 'yr',
+    };
+    const fields = Object.keys(PARAMS);
+    try {
+      const q = new URLSearchParams(window.location.search);
+      fields.forEach((id) => {
+        const v = q.get(PARAMS[id]);
+        if (v !== null && v !== '' && !Number.isNaN(+v)) $(id).value = v;
+      });
+    } catch (e) { /* no-op */ }
+
+    function syncUrl() {
+      try {
+        const q = new URLSearchParams();
+        fields.forEach((id) => q.set(PARAMS[id], $(id).value));
+        history.replaceState(null, '', window.location.pathname + '?' + q.toString());
+      } catch (e) { /* no-op */ }
+    }
 
     function update() {
       const price = num('lvb-price');
@@ -138,7 +177,17 @@ const description =
         `<div class="flex justify-between gap-3"><span class="text-navy-100/60">Monthly mortgage (P&I)</span><span>${fmt(M)}</span></div>` +
         `<div class="flex justify-between gap-3"><span class="text-navy-100/60">Equity kept at year ${years}</span><span>${fmt(equity)}</span></div>`;
     }
-    ['lvb-price','lvb-down','lvb-rate','lvb-term','lvb-appr','lvb-carry','lvb-lease','lvb-years'].forEach((id) => $(id).addEventListener('input', update));
+    fields.forEach((id) => $(id).addEventListener('input', () => { update(); syncUrl(); }));
+
+    const copied = document.getElementById('lvb-copied');
+    document.getElementById('lvb-share')?.addEventListener('click', async () => {
+      syncUrl();
+      try { await navigator.clipboard.writeText(window.location.href); } catch (e) { /* address bar still carries it */ }
+      copied?.classList.remove('hidden');
+      window.setTimeout(() => copied?.classList.add('hidden'), 3500);
+    });
+    document.getElementById('lvb-print')?.addEventListener('click', () => window.print());
+
     update();
   }
   document.addEventListener('astro:page-load', initLVB);
