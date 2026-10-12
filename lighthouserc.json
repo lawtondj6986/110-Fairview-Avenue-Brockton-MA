@@ -6,7 +6,11 @@
         "http://localhost/index.html",
         "http://localhost/pricing/index.html",
         "http://localhost/ai-services/index.html",
-        "http://localhost/south-shore/brockton/index.html"
+        "http://localhost/south-shore/brockton/index.html",
+        "http://localhost/contact/index.html",
+        "http://localhost/intelligence/scope/index.html",
+        "http://localhost/seller-net/index.html",
+        "http://localhost/insights/how-to-vet-a-business-partner-before-a-deal/index.html"
       ],
       "numberOfRuns": 1,
       "settings": {
