@@ -47,6 +47,11 @@ export const SITE = {
     'Hanover',
     'Norwell',
     'Pembroke',
+    'Quincy',
+    'Marshfield',
+    'Duxbury',
+    'Scituate',
+    'Cohasset',
   ],
 
   social: {

@@ -183,7 +183,7 @@ export const TOWNS: Town[] = [
       'The retail and service businesses here draw from Plymouth, Duxbury, and the whole mid-South Shore — a customer base that researches online before driving. For restaurants, fitness, medical, and home-service operators, Kingston rewards polished digital presence the way its anchor district rewards good signage: visibly and immediately.',
     angle:
       "Corridors in transition are where the deals live. Kingston's retail district is repricing in real time — we track it, and our clients hear about openings before the listing portals do.",
-    neighbors: ['pembroke', 'plymouth', 'plympton', 'halifax'],
+    neighbors: ['duxbury', 'pembroke', 'plymouth', 'plympton', 'halifax'],
   },
   {
     slug: 'halifax',
@@ -281,7 +281,7 @@ export const TOWNS: Town[] = [
       "Weymouth's population and commuter flow make it a volume market: the question for a local business isn't whether demand exists, it's whether you capture your share of searches before the next operator on Route 18 does. Medical and dental practices here compete on booking convenience; trades compete on response time; restaurants on being the answer to a specific craving. All three are systems problems with measurable fixes.",
     angle:
       "Weymouth is where published pricing earns its keep — a big market with a lot of noise and a lot of agencies selling fog. We'd rather hand you numbers and a 21-day launch.",
-    neighbors: ['abington', 'rockland', 'holbrook', 'braintree', 'hingham'],
+    neighbors: ['quincy', 'abington', 'rockland', 'holbrook', 'braintree', 'hingham'],
   },
   {
     slug: 'braintree',
@@ -295,7 +295,7 @@ export const TOWNS: Town[] = [
       "In Braintree the competition is regional, not local: a business here is measured against everything within fifteen minutes of the Split. That raises the bar on digital presence — the restaurants, medical practices, and service operators that win are the ones that look and respond like the larger firms they're competing with. The upside is scale: capture the search, and the trade area is enormous.",
     angle:
       "We bring a Brockton operator's cost discipline to a market that's used to Boston pricing. Same institutional-grade marketing on the listing, a fraction of the overhead behind it.",
-    neighbors: ['randolph', 'holbrook', 'weymouth'],
+    neighbors: ['quincy', 'randolph', 'holbrook', 'weymouth'],
   },
   {
     slug: 'hingham',
@@ -309,7 +309,7 @@ export const TOWNS: Town[] = [
       "Hingham customers research before they buy and they expect polish: a practice or service business here with a weak website or slow follow-up is leaving money to competitors who look the part. The good news is that the same quality bar rewards whoever clears it — review velocity and answer-engine visibility carry real weight with an audience that asks their phone for recommendations.",
     angle:
       "Hingham is a market where the intelligence side of our practice earns its place alongside the brokerage — know the building and the counterparty cold before you commit. We do both.",
-    neighbors: ['weymouth', 'norwell', 'rockland'],
+    neighbors: ['cohasset', 'scituate', 'weymouth', 'norwell', 'rockland'],
   },
   {
     slug: 'hanover',
@@ -323,7 +323,7 @@ export const TOWNS: Town[] = [
       "Route 53 traffic is a gift and a trap: thousands of cars a day, and a dozen competitors in every category within two miles. The businesses that grow here convert drive-by awareness into a search-and-book habit — the auto shop whose quote engine answers at 9pm, the restaurant that owns 'near Hanover Crossing.' Awareness is free on Route 53; conversion is the system.",
     angle:
       "We know the Route 53 rhythm from Hanson and Rockland next door. Retail and auto operators on the strip: your competitor's weak website is your opening, and it's a 21-day fix.",
-    neighbors: ['rockland', 'hanson', 'norwell', 'pembroke'],
+    neighbors: ['marshfield', 'rockland', 'hanson', 'norwell', 'pembroke'],
   },
   {
     slug: 'norwell',
@@ -337,7 +337,7 @@ export const TOWNS: Town[] = [
       "The professional firms and practices in Norwell's parks compete across the whole South Shore for clients who shortlist from a search — which makes answer-engine visibility and a fast, credible website the whole game. On Route 53, the retail and service operators face the same conversion contest as Hanover: traffic is given, capture is earned.",
     angle:
       "If you run a practice or professional firm and you're renting in Norwell's parks, run the lease-versus-buy math with us. Owning the suite is more reachable than most tenants assume.",
-    neighbors: ['hanover', 'hingham', 'rockland'],
+    neighbors: ['marshfield', 'scituate', 'hanover', 'hingham', 'rockland'],
   },
   {
     slug: 'pembroke',
@@ -351,7 +351,77 @@ export const TOWNS: Town[] = [
       "Pembroke is a residential growth town, and that's the opportunity: new households, every one of them searching for a dentist, an electrician, a landscaper, a restaurant. The operators who become the default answer early keep those customers for years. That's a lead-capture and review-velocity problem — the kind we install.",
     angle:
       "We serve Pembroke from Hanson and Halifax next door. Trades and practices here: the household growth is already happening; the question is whether the searches land on you.",
-    neighbors: ['hanover', 'hanson', 'halifax', 'kingston'],
+    neighbors: ['hanover', 'hanson', 'halifax', 'kingston', 'marshfield', 'duxbury'],
+  },
+  {
+    slug: 'quincy',
+    name: 'Quincy',
+    county: 'Norfolk',
+    position: "The South Shore's city — a rebuilt downtown, Marina Bay, Red Line access, and the deepest, most diverse commercial market south of Boston.",
+    corridors: ['Quincy Center (Hancock St) redevelopment', 'Marina Bay', 'Route 3A (Southern Artery / Quincy Shore Dr)', 'Wollaston (Beale St / Newport Ave)', 'North Quincy (Hancock St)', 'Crown Colony office park (Route 3 / Burgin Pkwy)', 'I-93 / Route 3 access'],
+    propertyMix:
+      "Quincy is a different scale from the rest of the South Shore: a city of roughly 100,000 with a downtown that has been rebuilt block by block around Quincy Center station, a waterfront office-and-dining district at Marina Bay, suburban office at Crown Colony by the highway, and dense neighborhood commercial strips through Wollaston and North Quincy. Four Red Line stations and the I-93 / Route 3 junction keep institutional money attentive and pricing at the top of the region. Sub-$3M owner-user product exists in the neighborhood strips and the older industrial pockets along the Southern Artery — it moves fast and is often spoken for before it lists.",
+    businessMix:
+      "Quincy's business base is as diverse as its population — one of the largest Asian-American communities in Massachusetts runs a dense layer of restaurants, markets, and services alongside the professional and medical firms downtown and the neighborhood trades. Competition here is city-grade: a business is measured against everything a Red Line ride away. The operators that win own their searches, answer in seconds, and look as credible online as the firms with ten times their headcount.",
+    angle:
+      "We bring published pricing and an operator's cost discipline to a market used to Boston rates. A Quincy storefront or practice gets the same institutional-grade build — at a Brockton firm's overhead.",
+    neighbors: ['braintree', 'weymouth'],
+  },
+  {
+    slug: 'marshfield',
+    name: 'Marshfield',
+    county: 'Plymouth',
+    position: 'Route 139 from the highway to the beach — a year-round service economy with a summer coast stacked on top.',
+    corridors: ['Route 139 (Plain St / Ocean St) — Route 3 exit to the coast', 'Route 3A', 'Marshfield Center', 'Brant Rock / Ocean Bluff / Green Harbor (seasonal coast)', 'Marshfield Fairgrounds area', 'Route 3 access'],
+    propertyMix:
+      "Marshfield's commercial property runs along Route 139 from the Route 3 interchange toward the ocean — plazas, standalone service and medical buildings, auto, and restaurants on commuter traffic — with a second band on Route 3A and the small-scale storefronts of Marshfield Center. The coast adds a seasonal layer at Brant Rock and Green Harbor: restaurants, marine services, and rentals whose economics run on three months. Owner-users find realistic entry points on 139 and 3A, and the town's steady residential growth keeps service and medical demand firm year-round.",
+    businessMix:
+      "Marshfield operators serve two economies: a growing year-round population of households that need the dentist, the electrician, the landscaper, and a summer wave that rewards whoever owns 'near Brant Rock' when the visitors search. Marine and coastal businesses live on the seasonal calendar — storage, winterization, the spring rush — and every one of those is a quote-and-book moment that phone tag loses.",
+    angle:
+      "Marshfield is where our marine-services playbook and our year-round lead systems meet. Coastal operators: price the season online before it starts, and the summer books itself.",
+    neighbors: ['pembroke', 'hanover', 'norwell', 'duxbury', 'scituate'],
+  },
+  {
+    slug: 'duxbury',
+    name: 'Duxbury',
+    county: 'Plymouth',
+    position: 'Affluent, coastal, and deliberately small-scale — Snug Harbor, Hall’s Corner, and a customer base that pays for quality and checks the reviews first.',
+    corridors: ['Route 3A (Tremont St)', 'Hall’s Corner (Route 3A / Depot St)', 'Snug Harbor (Washington St waterfront)', 'Route 53 on the Kingston line', 'Route 14 / Route 3 exit', 'Duxbury Beach (seasonal)'],
+    propertyMix:
+      "Duxbury keeps its commercial footprint intentionally light: the village cluster at Hall's Corner, the waterfront at Snug Harbor, a few professional and medical buildings along Route 3A, and service property toward Route 53 on the Kingston line. Inventory is scarce and tightly held, so transactions are relationship-driven and often off-market. For a practice or a quality service business, owning a Duxbury location is as much about the address as the square footage — and the diligence on use, parking, and historic constraints is where deals are made or lost.",
+    businessMix:
+      "Duxbury customers research before they buy and expect polish: a weak website or a slow reply reads as a signal here. The upside is a high-value, loyal clientele for the operators who clear the bar — the landscaper, the contractor, the practice that looks and responds like the quality it delivers. Marine services around Snug Harbor and the beach run on the same seasonal quote-and-book calendar as the rest of the coast.",
+    angle:
+      "Small inventory, high standards. In Duxbury the brokerage and the diligence travel together — know the building cold, then present like the market expects.",
+    neighbors: ['kingston', 'pembroke', 'marshfield'],
+  },
+  {
+    slug: 'scituate',
+    name: 'Scituate',
+    county: 'Plymouth',
+    position: 'A working harbor, a commuter-rail terminus, and Route 3A — the coastal town where marine, seasonal, and year-round businesses share the same storefronts.',
+    corridors: ['Scituate Harbor (Front St)', 'Route 3A (Chief Justice Cushing Hwy)', 'North Scituate (Gannett Rd)', 'Greenbush (commuter rail terminus)', 'Humarock (seasonal)', 'Route 123'],
+    propertyMix:
+      "Scituate's commercial life centers on the Harbor — Front Street's restaurants, shops, and marine services on a genuine working waterfront — with a second commercial band along Route 3A and the village node at North Scituate. The Greenbush rail terminus anchors commuter demand at the south end. Inventory is modest and the harbor property in particular rarely trades; when it does, it draws buyers from well beyond the town. Service and medical property on 3A is the realistic entry for owner-users.",
+    businessMix:
+      "Scituate operators run on a blended calendar: a loyal year-round base plus a summer coast at Humarock and the Harbor. Marine businesses — repair, storage, charters, detailing — live on the seasonal rush and lose it to phone tag; restaurants and shops on Front Street win or lose on being the answer to a visitor's search. The year-round trades compete across the whole coast, where response time and reviews decide.",
+    angle:
+      "Scituate is the heart of our marine-services practice on the coast. Harbor and 3A operators: the season is predictable — put the quoting and booking online before it arrives.",
+    neighbors: ['norwell', 'cohasset', 'marshfield', 'hingham'],
+  },
+  {
+    slug: 'cohasset',
+    name: 'Cohasset',
+    county: 'Norfolk',
+    position: 'Small, affluent, and coastal — a village center, a harbor, and the Route 3A strip it shares with Hingham and Scituate.',
+    corridors: ['Cohasset Village (South Main St)', 'Route 3A (Chief Justice Cushing Hwy)', 'Cohasset Harbor', 'Route 228 toward Hingham'],
+    propertyMix:
+      "Cohasset's commercial property is a short list: the village storefronts on South Main Street, the harbor's marine and dining uses, and the Route 3A corridor it shares with Hingham and Scituate, where the service, medical, and retail plazas sit. Almost nothing here is vacant for long and little of it is cheap. Buyers are purchasing an address and a clientele; the work is in finding the building before it's public and getting the diligence right on a tightly regulated, historic town.",
+    businessMix:
+      "A high-value, high-expectation customer base that asks its phone for recommendations and trusts the reviews it finds. For the practices, contractors, and marine operators serving Cohasset, polish and response time are the whole pitch — and answer-engine visibility matters more here than almost anywhere, because that's how this clientele shortlists.",
+    angle:
+      "Cohasset rewards the operators who look like the quality they deliver. We make sure the search finds you first, and the diligence on the building holds up.",
+    neighbors: ['hingham', 'scituate'],
   },
 ];
 
