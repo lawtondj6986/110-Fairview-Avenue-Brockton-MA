@@ -10,7 +10,7 @@ import SearchPalette from '../components/SearchPalette.astro';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import ogManifest from '../generated/og-manifest.json';
-import { SITE } from '../config';
+import { SITE, OFFERINGS } from '../config';
 
 interface Props {
   title: string;
@@ -18,27 +18,53 @@ interface Props {
   /** Extra JSON-LD objects for this page (LocalBusiness is included site-wide). */
   schema?: Record<string, unknown>[];
   ogType?: string;
+  /** Attach the machine-readable published-pricing OfferCatalog (homepage, pricing). */
+  offerCatalog?: boolean;
 }
 
-const { title, description, schema = [], ogType = 'website' } = Astro.props;
+const { title, description, schema = [], ogType = 'website', offerCatalog = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(
   (ogManifest as Record<string, string>)[Astro.url.pathname] ?? '/images/og-default.jpg',
   Astro.site
 );
 
+const unitMap: Record<string, string> = { month: 'MON', setup: 'ANN', project: 'ANN' };
+const offerCatalogNode = {
+  '@type': 'OfferCatalog',
+  name: 'Services and published pricing',
+  itemListElement: OFFERINGS.map((o) => ({
+    '@type': 'Offer',
+    itemOffered: { '@type': 'Service', name: o.name, url: `${SITE.url}${o.href}` },
+    priceSpecification: {
+      '@type': o.unit === 'month' ? 'UnitPriceSpecification' : 'PriceSpecification',
+      priceCurrency: 'USD',
+      minPrice: o.min,
+      maxPrice: o.max,
+      ...(o.unit === 'month' ? { unitCode: unitMap[o.unit], billingDuration: 1 } : {}),
+    },
+    description: o.note,
+    url: `${SITE.url}${o.href}`,
+    availability: 'https://schema.org/InStock',
+  })),
+};
+
 const localBusiness = {
   '@context': 'https://schema.org',
   '@type': 'RealEstateAgent',
+  '@id': `${SITE.url}/#business`,
   name: SITE.name,
   alternateName: SITE.shortName,
   slogan: SITE.tagline,
   description: SITE.description,
   url: SITE.url,
+  logo: `${SITE.url}/images/ics-logo-full.jpg`,
+  image: `${SITE.url}/images/ics-logo-full.jpg`,
   email: SITE.email,
   telephone: SITE.phone,
   priceRange: '$$',
   sameAs: [SITE.social.linkedin],
+  ...(offerCatalog ? { hasOfferCatalog: offerCatalogNode } : {}),
   founder: {
     '@type': 'Person',
     name: SITE.founder,
