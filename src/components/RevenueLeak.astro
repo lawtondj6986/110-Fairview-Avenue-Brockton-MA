@@ -63,8 +63,8 @@
           <a href="/ai-readiness/" class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-700">
             Score My Business Free →
           </a>
-          <a href="/contact/" class="rounded-md border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">
-            Talk to Daniel
+          <a id="rl-cta" href="/contact/" class="rounded-md border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">
+            Bring This Number to Daniel →
           </a>
         </div>
       </div>
@@ -133,6 +133,16 @@
           : total > 0
             ? `Even a tight operation leaks. ${fmt(total)} a year buys back a lot of Saturdays.`
             : 'Enter your numbers — most owners are surprised.';
+
+      // "Bring your number": the contact CTA carries the scenario into the form.
+      const cta = document.getElementById('rl-cta') as HTMLAnchorElement | null;
+      if (cta) {
+        const speedLabel = ($('rl-speed') as unknown as HTMLSelectElement).selectedOptions?.[0]?.textContent?.trim() || `${speedMult}`;
+        const message =
+          `Revenue Leak scenario — avg job ${fmt(job)}, ${leads} leads/mo, ${Math.round(close * 100)}% close, response "${speedLabel}", follow-up ${hasFollowup ? 'yes' : 'no'}: estimated leak ${fmt(total)}/yr` +
+          ` (slow response ${fmt(speedLeak)}${hasFollowup ? '' : `, no follow-up ${fmt(followupLeak)}`}).`;
+        cta.href = `/contact/?${new URLSearchParams({ interest: 'AI systems & marketing', message }).toString()}`;
+      }
     }
     ['rl-job', 'rl-leads', 'rl-close', 'rl-speed', 'rl-followup'].forEach((id) => $(id).addEventListener('input', update));
     update();

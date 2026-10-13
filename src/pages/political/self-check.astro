@@ -120,6 +120,12 @@ const bands = [
       document.getElementById('vc-band').textContent = band.label;
       document.getElementById('vc-score').textContent = `${n} of 10 exposure flags`;
       document.getElementById('vc-note').textContent = band.note;
+      // "Bring your number": carry the result into the confidential intake on the political desk.
+      const cta = document.getElementById('vc-cta');
+      if (cta) {
+        const notes = `Vulnerability Self-Check result: ${band.label} — ${n} of 10 exposure flags. I'd like to talk about a Vulnerability Audit.`;
+        cta.href = `/political/?${new URLSearchParams({ notes }).toString()}#political-inquiry`;
+      }
       const res = document.getElementById('vc-result');
       res.classList.remove('hidden');
       res.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

@@ -153,6 +153,13 @@ const label = 'mb-1 block text-sm font-medium text-navy-900';
     if (!form || form.dataset.ready) return;
     form.dataset.ready = '1';
 
+    // "Bring your number": the self-check links here with its result in the URL.
+    try {
+      const notes = new URLSearchParams(window.location.search).get('notes');
+      const ta = document.getElementById('pi-notes') as HTMLTextAreaElement | null;
+      if (notes && ta && !ta.value) ta.value = notes;
+    } catch { /* no-op */ }
+
     const status = document.getElementById('pi-status');
     const success = document.getElementById('political-inquiry-success');
     const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
