@@ -18,8 +18,19 @@ import { SITE } from '../config';
 interface Props {
   heading?: string;
   compact?: boolean;
+  /** What the inquiry is about (e.g. a listing) — carried in the subject, body, and a hidden field. */
+  context?: string;
+  /** Pre-select an "I'm interested in" option by its value. */
+  interest?: string;
 }
-const { heading = 'Tell us where you want to go', compact = false } = Astro.props;
+const { heading = 'Tell us where you want to go', compact = false, context = '', interest = '' } = Astro.props;
+const interests = [
+  'Buying commercial property',
+  'Selling or leasing my property',
+  'AI systems & marketing',
+  'Both — property and AI systems',
+  'Something else',
+];
 
 const endpoint = SITE.formEndpoint || '';
 const tel = SITE.phone.replace(/[^\d+]/g, '');
@@ -33,6 +44,7 @@ const inputClass =
   data-endpoint={endpoint}
   data-email={SITE.email}
   data-tel={tel}
+  data-context={context}
 >
   <form
     action={nativeAction}
@@ -60,11 +72,9 @@ const inputClass =
         <label for="lf-interest" class="mb-1 block text-sm font-medium text-navy-900">I'm interested in</label>
         <select id="lf-interest" name="interest" required class={`${inputClass} bg-white`}>
           <option value="">Select one…</option>
-          <option value="Buying commercial property">Buying commercial property</option>
-          <option value="Selling or leasing my property">Selling or leasing my property</option>
-          <option value="AI systems & marketing">AI systems &amp; marketing for my business</option>
-          <option value="Both — property and AI systems">Both — property and AI systems</option>
-          <option value="Something else">Something else</option>
+          {interests.map((v) => (
+            <option value={v} selected={v === interest}>{v === 'AI systems & marketing' ? 'AI systems & marketing for my business' : v}</option>
+          ))}
         </select>
       </div>
     </div>
@@ -78,7 +88,8 @@ const inputClass =
 
     <!-- honeypot: humans never see or fill this -->
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
-    <input type="hidden" name="_subject" value="New inquiry from icsgroup.ai" />
+    <input type="hidden" name="_subject" value={context ? `Inquiry: ${context}` : 'New inquiry from icsgroup.ai'} />
+    {context && <input type="hidden" name="context" value={context} />}
 
     <p class="lead-prefilled mt-4 hidden rounded-md border border-teal-200 bg-teal-50 px-3 py-2 text-xs leading-relaxed text-teal-800">
       We brought your calculator result along — it's in the message below. Add anything else and send.
@@ -125,6 +136,7 @@ const inputClass =
 
       const endpoint = wrap.dataset.endpoint || '';
       const email = wrap.dataset.email || '';
+      const context = wrap.dataset.context || '';
       const errEl = form.querySelector<HTMLElement>('.lead-error');
       const btn = form.querySelector<HTMLButtonElement>('.lead-submit');
       const btnLabel = form.querySelector<HTMLElement>('.lead-submit-label');
@@ -151,8 +163,9 @@ const inputClass =
       };
 
       const composeMailto = () => {
-        const subject = `Website inquiry — ${val('interest') || 'general'}`;
+        const subject = context ? `Inquiry: ${context}` : `Website inquiry — ${val('interest') || 'general'}`;
         const lines = [
+          ...(context ? [`Regarding: ${context}`] : []),
           `Name: ${val('name')}`,
           `Email: ${val('email')}`,
           `Phone: ${val('phone') || '—'}`,

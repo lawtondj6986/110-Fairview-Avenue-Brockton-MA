@@ -96,7 +96,12 @@ const schema = [
         </div>
 
         <aside class="lg:sticky lg:top-24 lg:self-start">
-          <LeadForm heading="Request the offering memorandum" compact />
+          <LeadForm
+            heading="Request the offering memorandum"
+            compact
+            context={`${title} — ${address}, ${town}, ${state} · ${price}`}
+            interest={dealType === 'sale' ? 'Buying commercial property' : ''}
+          />
           {dealTools.length > 0 && (
             <div class="mt-5 rounded-xl border border-navy-100 bg-paper p-5">
               <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-brass-600">Run the numbers on this building</p>

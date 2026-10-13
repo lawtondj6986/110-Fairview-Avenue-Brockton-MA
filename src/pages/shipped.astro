@@ -36,6 +36,7 @@ const log: { period: string; items: { what: string; href?: string }[] }[] = [
       { what: '"Bring your number" is now one click — every CRE calculator\'s contact button carries the scenario and its shareable link into the contact form, pre-filled, so a lead arrives already saying what the building pencils at; the deal-tools hub is also linked from the homepage', href: '/cap-rate/' },
       { what: '"Bring your number," every desk — the Revenue Leak result now pre-fills the contact form, the Cost of Not Knowing exposure pre-fills a confidential inquiry, and the Vulnerability Self-Check carries its band and score straight into the political desk\'s intake. No result on the site ends at a blank form anymore', href: '/tools/' },
       { what: 'Run the numbers on this building — every listing now hands its own figures to the calculators: a sale listing gets "Underwrite it" (cap rate at the asking price) and "Own it vs. keep leasing"; a lease listing gets "Analyze this lease" (net effective rent on its SF and rate) and "Lease it vs. own instead." Inventory and tools, finally in the same room', href: '/listings/' },
+      { what: 'OM requests now say which building — the lead form learned its context: a listing\'s "Request the offering memorandum" carries the property, address, and price in the subject, the body, and a hidden field (both email and hosted modes), with the buyer interest pre-selected; and the Ship Log\'s days-since-launch is computed at build so it can never go stale again', href: '/listings/' },
       { what: 'Discretion & Confidentiality — the trust layer for sensitive work: confidential both directions, need-to-know handling, conflict walls, published bright lines', href: '/confidential/' },
       { what: 'Candidate Vulnerability Self-Check — a free, no-email assessment that scores a candidate’s own public-record exposure and routes to the audit', href: '/political/self-check/' },
       { what: 'Surfaced the whole intelligence practice on the homepage, and turned the intelligence page into the four-desk hub', href: '/intelligence/' },
@@ -122,6 +123,8 @@ const log: { period: string; items: { what: string; href?: string }[] }[] = [
 ];
 
 const totalShips = log.reduce((n, g) => n + g.items.length, 0);
+// Days since launch (September 20, 2026), computed at build so the stat never goes stale.
+const daysSinceLaunch = Math.max(1, Math.round((Date.now() - new Date('2026-09-20T12:00:00Z').getTime()) / 86400000));
 ---
 
 <Base title={title} description={description}>
@@ -139,7 +142,7 @@ const totalShips = log.reduce((n, g) => n + g.items.length, 0);
         {
           [
             [`${totalShips}`, 'Ships logged since launch'],
-            ['15 days', 'Launch day to this page'],
+            [`${daysSinceLaunch} days`, 'Since launch day'],
             ['2', 'Ventures running in production'],
           ].map(([v, l]) => (
             <div>
