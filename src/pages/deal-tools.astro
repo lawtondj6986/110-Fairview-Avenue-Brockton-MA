@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import FounderCard from '../components/FounderCard.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import CtaSection from '../components/CtaSection.astro';
 import { SITE } from '../config';
@@ -129,6 +130,8 @@ const schema = [
       <p class="mt-6 text-center text-xs text-ink-500">{SITE.license} · Buyer, seller, tenant, and landlord representation for sub-$3M owner-user and investment property.</p>
     </div>
   </section>
+
+  <FounderCard />
 
   <CtaSection
     heading="Ran your number? Bring it."

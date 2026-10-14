@@ -126,6 +126,15 @@ export async function generateOg() {
     const font400 = readFileSync(rel('node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-400-normal.woff'));
     const font700 = readFileSync(rel('node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff'));
     const logo = `data:image/jpeg;base64,${readFileSync(rel('public/images/ics-logo-mark.jpg')).toString('base64')}`;
+    // The founder is the brand: his portrait rides on every share card.
+    // Pre-crop once to the card frame (top-aligned, 2× for crispness) so each
+    // card decodes a small image instead of the full photo.
+    const { default: sharp } = await import('sharp');
+    const founderBuf = await sharp(rel('public/images/daniel-lawton.jpg'))
+      .resize(272, 340, { fit: 'cover', position: 'top' })
+      .png({ compressionLevel: 6 })
+      .toBuffer();
+    const founder = `data:image/png;base64,${founderBuf.toString('base64')}`;
 
     const pages = allPages;
     const manifest = {};
@@ -156,9 +165,30 @@ export async function generateOg() {
             background: 'radial-gradient(circle, rgba(20,184,166,0.28) 0%, rgba(20,184,166,0) 70%)',
             display: 'flex',
           }),
-          text(eyebrow, { color: '#2dd4bf', fontSize: '26px', fontWeight: 700, letterSpacing: '6px', display: 'flex' }),
+          // Founder portrait, top-aligned inside a clipped frame (satori has no object-position).
+          el(
+            'div',
+            {
+              position: 'absolute',
+              top: '64px',
+              right: '64px',
+              width: '272px',
+              height: '340px',
+              borderRadius: '28px',
+              overflow: 'hidden',
+              border: '4px solid rgba(20,184,166,0.65)',
+              boxShadow: '0 30px 60px rgba(0,0,0,0.45)',
+              display: 'flex',
+            },
+            [{ type: 'img', props: { src: founder, width: 272, height: 340, style: { display: 'flex' } } }]
+          ),
+          el('div', { position: 'absolute', top: '420px', right: '64px', width: '272px', display: 'flex', flexDirection: 'column' }, [
+            text('Daniel Lawton', { color: '#f8fafc', fontSize: '28px', fontWeight: 700, display: 'flex' }),
+            text('FOUNDER · BUILT BY AN OPERATOR', { color: '#c9a227', fontSize: '15px', fontWeight: 700, letterSpacing: '3px', display: 'flex' }),
+          ]),
+          text(eyebrow, { color: '#2dd4bf', fontSize: '26px', fontWeight: 700, letterSpacing: '6px', maxWidth: '760px', display: 'flex' }),
           el('div', { display: 'flex', flexDirection: 'column', gap: '28px' }, [
-            text(title, { color: '#f8fafc', fontSize: `${fontSize}px`, fontWeight: 700, lineHeight: 1.08, maxWidth: '1020px', display: 'flex' }),
+            text(title, { color: '#f8fafc', fontSize: `${fontSize}px`, fontWeight: 700, lineHeight: 1.08, maxWidth: '740px', display: 'flex' }),
             el('div', { width: '170px', height: '10px', background: '#14b8a6', borderRadius: '5px', display: 'flex' }, []),
           ]),
           el('div', { display: 'flex', alignItems: 'center', justifyContent: 'space-between' }, [
@@ -169,7 +199,7 @@ export async function generateOg() {
                 text('Innovative Commercial Strategies · Brockton, MA', { color: 'rgba(219,228,240,0.6)', fontSize: '20px', display: 'flex' }),
               ]),
             ]),
-            text('BUILT BY AN OPERATOR', { color: '#c9a227', fontSize: '20px', fontWeight: 700, letterSpacing: '4px', display: 'flex' }),
+            el('div', { display: 'flex', width: '272px' }, []),
           ]),
         ]
       );

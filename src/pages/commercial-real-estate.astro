@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import FounderCard from '../components/FounderCard.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import ListingCard from '../components/ListingCard.astro';
 import CtaSection from '../components/CtaSection.astro';
@@ -196,6 +197,8 @@ const schema = [
       </p>
     </div>
   </section>
+
+  <FounderCard />
 
   <CtaSection
     heading="Thinking about a building — buying, selling, or leasing?"

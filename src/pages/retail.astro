@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import FounderCard from '../components/FounderCard.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
 import CtaSection from '../components/CtaSection.astro';
@@ -217,6 +218,8 @@ const regulated = [
       {retailWins.map((entry) => <CaseStudyCard entry={entry} />)}
     </div>
   </section>
+
+  <FounderCard />
 
   <CtaSection
     heading="Put your shelf on the internet."

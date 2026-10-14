@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import FounderCard from '../components/FounderCard.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import CtaSection from '../components/CtaSection.astro';
 import { SITE } from '../config';
@@ -130,6 +131,8 @@ const schema = [
       ))}
     </dl>
   </section>
+
+  <FounderCard />
 
   <CtaSection
     heading="Broward business? Start with the 45-second Fit Finder."

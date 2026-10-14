@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import FounderCard from '../components/FounderCard.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import { SITE } from '../config';
 
@@ -101,4 +102,5 @@ const contactHref = (p: (typeof programs)[number]) => `/contact/?${new URLSearch
       </p>
     </div>
   </section>
+  <FounderCard />
 </Base>
