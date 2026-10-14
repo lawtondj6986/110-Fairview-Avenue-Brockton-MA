@@ -127,14 +127,28 @@ export async function generateOg() {
     const font700 = readFileSync(rel('node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff'));
     const logo = `data:image/jpeg;base64,${readFileSync(rel('public/images/ics-logo-mark.jpg')).toString('base64')}`;
     // The founder is the brand: his portrait rides on every share card.
-    // Pre-crop once to the card frame (top-aligned, 2× for crispness) so each
-    // card decodes a small image instead of the full photo.
+    // Satori/resvg decoding an embedded photo costs ~2s per card, so the card
+    // is rasterized with an empty frame and the portrait (rounded, top-aligned)
+    // plus its teal ring are composited on afterwards with sharp (~30ms).
     const { default: sharp } = await import('sharp');
-    const founderBuf = await sharp(rel('public/images/daniel-lawton.jpg'))
-      .resize(272, 340, { fit: 'cover', position: 'top' })
-      .png({ compressionLevel: 6 })
+    const FRAME = { left: 864, top: 64, w: 272, h: 340, r: 28, ring: 4 };
+    const inner = { left: FRAME.left + FRAME.ring, top: FRAME.top + FRAME.ring, w: FRAME.w - 2 * FRAME.ring, h: FRAME.h - 2 * FRAME.ring, r: FRAME.r - FRAME.ring };
+    const roundedMask = Buffer.from(
+      `<svg width="${inner.w}" height="${inner.h}"><rect width="${inner.w}" height="${inner.h}" rx="${inner.r}" ry="${inner.r}"/></svg>`
+    );
+    const portrait = await sharp(
+      await sharp(rel('public/images/daniel-lawton.jpg')).resize(inner.w, inner.h, { fit: 'cover', position: 'top' }).png().toBuffer()
+    )
+      .composite([{ input: roundedMask, blend: 'dest-in' }])
+      .png()
       .toBuffer();
-    const founder = `data:image/png;base64,${founderBuf.toString('base64')}`;
+    const ring = Buffer.from(
+      `<svg width="${FRAME.w}" height="${FRAME.h}"><rect x="${FRAME.ring / 2}" y="${FRAME.ring / 2}" width="${FRAME.w - FRAME.ring}" height="${FRAME.h - FRAME.ring}" rx="${FRAME.r}" ry="${FRAME.r}" fill="none" stroke="rgba(20,184,166,0.75)" stroke-width="${FRAME.ring}"/></svg>`
+    );
+    const overlays = [
+      { input: portrait, left: inner.left, top: inner.top },
+      { input: ring, left: FRAME.left, top: FRAME.top },
+    ];
 
     const pages = allPages;
     const manifest = {};
@@ -165,26 +179,24 @@ export async function generateOg() {
             background: 'radial-gradient(circle, rgba(20,184,166,0.28) 0%, rgba(20,184,166,0) 70%)',
             display: 'flex',
           }),
-          // Founder portrait, top-aligned inside a clipped frame (satori has no object-position).
+          // Founder portrait frame: shadow + dark plate only; the photo and ring are composited by sharp below.
           el(
             'div',
             {
               position: 'absolute',
-              top: '64px',
-              right: '64px',
-              width: '272px',
-              height: '340px',
-              borderRadius: '28px',
-              overflow: 'hidden',
-              border: '4px solid rgba(20,184,166,0.65)',
-              boxShadow: '0 30px 60px rgba(0,0,0,0.45)',
+              top: `${FRAME.top}px`,
+              left: `${FRAME.left}px`,
+              width: `${FRAME.w}px`,
+              height: `${FRAME.h}px`,
+              borderRadius: `${FRAME.r}px`,
+              background: '#06132a',
               display: 'flex',
             },
-            [{ type: 'img', props: { src: founder, width: 272, height: 340, style: { display: 'flex' } } }]
+            []
           ),
           el('div', { position: 'absolute', top: '420px', right: '64px', width: '272px', display: 'flex', flexDirection: 'column' }, [
             text('Daniel Lawton', { color: '#f8fafc', fontSize: '28px', fontWeight: 700, display: 'flex' }),
-            text('FOUNDER · BUILT BY AN OPERATOR', { color: '#c9a227', fontSize: '15px', fontWeight: 700, letterSpacing: '3px', display: 'flex' }),
+            text('FOUNDER', { color: '#c9a227', fontSize: '15px', fontWeight: 700, letterSpacing: '3px', display: 'flex' }),
           ]),
           text(eyebrow, { color: '#2dd4bf', fontSize: '26px', fontWeight: 700, letterSpacing: '6px', maxWidth: '760px', display: 'flex' }),
           el('div', { display: 'flex', flexDirection: 'column', gap: '28px' }, [
@@ -212,7 +224,10 @@ export async function generateOg() {
           { name: 'Space Grotesk', data: font700, weight: 700, style: 'normal' },
         ],
       });
-      const png = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
+      // loadSystemFonts defaults to true and rescans the OS font dirs per card (~2.4s each);
+      // satori already converted all text to paths, so no fonts are needed here.
+      const base = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 }, font: { loadSystemFonts: false } }).render().asPng();
+      const png = await sharp(base).composite(overlays).png({ compressionLevel: 6 }).toBuffer();
       writeFileSync(rel(`public/og/${slug}.png`), png);
       manifest[route] = `/og/${slug}.png`;
     }
