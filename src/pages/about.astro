@@ -1,35 +1,130 @@
 ---
 import Base from '../layouts/Base.astro';
-import SectionHeading from '../components/SectionHeading.astro';
 import CtaSection from '../components/CtaSection.astro';
-import { SITE } from '../config';
+import { SITE, FOUNDER } from '../config';
+import { founderPerson } from '../lib/founder';
 
-const title = 'About Daniel Lawton | Innovative Commercial Strategies';
-const description =
-  'Daniel Lawton is a licensed Massachusetts real estate professional and hands-on AI systems builder — the founder of Innovative Commercial Strategies, serving Brockton and the South Shore.';
+const e = FOUNDER.education;
+const classYear = `'${String(e.year).slice(2)}`;
+const tel = SITE.phone.replace(/[^\d+]/g, '');
+
+const title = `Daniel Lawton — Founder of Innovative Commercial Strategies | Brockton, MA`;
+const description = `Daniel Lawton is the founder of Innovative Commercial Strategies: a ${e.school} ${e.college} graduate (${e.year}, Entrepreneurship and Marketing), a serial founder of small businesses, a licensed Massachusetts real estate salesperson, and a hands-on AI systems builder serving Brockton and the South Shore.`;
+
+const credentials = [
+  { k: 'Education', v: `${e.school}, ${e.college}`, sub: `${e.degreeShort} ${e.year} · Concentrations in ${e.concentrations.join(' and ')} · now the ${e.collegeNow}` },
+  { k: 'Founder', v: 'A number of small businesses since 2008', sub: 'Three operating today: an advisory firm, a daily newsroom, and a retail platform running a storefront' },
+  { k: 'License', v: 'Massachusetts Real Estate Salesperson', sub: `#${FOUNDER.license.replace(/\D/g, '')} · brokerage is Massachusetts-only; Florida work is systems and platforms` },
+  { k: 'Builds', v: 'The systems he sells', sub: 'Lead response, quoting engines, publishing pipelines, retail platforms — engineered and operated personally' },
+  { k: 'Home base', v: FOUNDER.hometown, sub: 'Twenty-nine South Shore towns in person; Fort Lauderdale / Broward County seasonally' },
+  { k: 'How to reach him', v: SITE.phone, sub: 'He answers his own phone. No account manager, no hand-off.' },
+];
+
+const faqs = [
+  {
+    q: 'Who is Daniel Lawton?',
+    a: `Daniel Lawton is the founder of Innovative Commercial Strategies (ICS), a Brockton, Massachusetts firm that pairs licensed commercial real estate advisory with hands-on AI revenue systems, commercial intelligence research, and platform ventures. He is a ${e.year} graduate of ${e.school}'s ${e.college} with concentrations in Entrepreneurship and Marketing, has founded a number of small businesses, holds a Massachusetts real estate salesperson license, and personally builds and operates the software ICS sells.`,
+  },
+  {
+    q: 'Where did Daniel Lawton go to school?',
+    a: `${e.school}, ${e.college} — now the ${e.collegeNow} — graduating in ${e.year} with a ${e.degree} and concentrations in ${e.concentrations.join(' and ')}.`,
+  },
+  {
+    q: 'What businesses has Daniel Lawton founded?',
+    a: 'Several small businesses since graduating. The ones operating in public today: Innovative Commercial Strategies (CRE advisory and AI systems, Brockton), AfriPulse Times (a pan-African digital newsroom he founded and engineered end to end, publishing daily and raising for rollout), and the live-inventory retail platform he built and operates for Outback Arms in Plympton, Massachusetts, where the store reports business up 300% since launch.',
+  },
+  {
+    q: 'Is ICS a one-person firm?',
+    a: 'Deliberately. One licensed advisor who also builds the systems means the person who negotiates your building is the person who installs the lead-response machine inside it. ICS takes fewer clients and publishes its pricing, guarantees, scoreboard, and ship log so you can judge the tempo for yourself.',
+  },
+  {
+    q: 'Is Daniel Lawton licensed in Florida?',
+    a: `No. The real estate license is Massachusetts (${FOUNDER.license}). In Broward County, ICS delivers AI revenue systems, retail platforms, and custom builds; any Florida property transaction is handled alongside a licensed Florida broker.`,
+  },
+];
 
 const schema = [
+  { '@context': 'https://schema.org', ...founderPerson() },
   {
     '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: SITE.founder,
-    jobTitle: 'Founder, Commercial Real Estate Advisor & AI Systems Builder',
-    image: `${SITE.url}/images/daniel-lawton.jpg`,
-    worksFor: { '@type': 'Organization', name: SITE.name },
-    email: SITE.email,
-    address: { '@type': 'PostalAddress', addressLocality: 'Brockton', addressRegion: 'MA' },
-    knowsAbout: ['Commercial real estate', 'AI business automation', 'Digital publishing platforms', 'Retail e-commerce systems'],
+    '@type': 'ProfilePage',
+    '@id': `${SITE.url}${FOUNDER.path}#page`,
+    name: title,
+    url: `${SITE.url}${FOUNDER.path}`,
+    mainEntity: { '@id': FOUNDER.id },
+    about: { '@id': FOUNDER.id },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
   },
 ];
 ---
 
-<Base title={title} description={description} schema={schema}>
-  <section class="bg-navy-900">
-    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">About ICS</p>
-      <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
-        Two careers' worth of skills. One advisor at your table.
-      </h1>
+<Base title={title} description={description} schema={schema} ogType="profile">
+  <!-- FOUNDER HERO -->
+  <section class="relative overflow-hidden bg-navy-950">
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-teal-500/15 blur-3xl" aria-hidden="true"></div>
+    <div class="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.1fr_0.9fr]">
+      <div>
+        <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">The founder · {FOUNDER.hometown}</p>
+        <h1 class="reveal mt-4 font-display text-5xl font-bold leading-[1.02] text-white sm:text-6xl" style="--reveal-delay: 100ms">
+          {FOUNDER.name}
+        </h1>
+        <p class="reveal mt-3 text-sm font-semibold uppercase tracking-widest text-teal-400" style="--reveal-delay: 160ms">{FOUNDER.title}</p>
+        <p class="reveal mt-6 max-w-xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 220ms">
+          {e.school} {e.college} {classYear}, concentrations in {e.concentrations.join(' and ')}. A founder several times over. A
+          licensed advisor who negotiates the building and then personally builds the systems that make it produce.
+        </p>
+        <ul class="reveal mt-7 flex flex-wrap gap-2" style="--reveal-delay: 300ms">
+          {
+            [`${e.school} ${classYear}`, 'Entrepreneurship & Marketing', 'Serial founder', 'Licensed MA advisor', 'AI systems builder'].map((chip) => (
+              <li class="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold text-navy-100/90">{chip}</li>
+            ))
+          }
+        </ul>
+        <div class="reveal mt-8 flex flex-wrap gap-3" style="--reveal-delay: 380ms">
+          <a href="/contact/" class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-teal-700">Book a call with Daniel</a>
+          <a href={`tel:${tel}`} class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">{SITE.phone}</a>
+          <a href="/press/" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-brass-300 hover:text-brass-300">Press kit</a>
+        </div>
+      </div>
+
+      <figure class="reveal relative justify-self-center lg:justify-self-end" style="--reveal-delay: 250ms">
+        <div class="absolute -inset-3 rounded-3xl bg-teal-500/15 blur-2xl" aria-hidden="true"></div>
+        <img
+          src={FOUNDER.image}
+          alt={`${FOUNDER.name}, founder of ${SITE.name}, in a helicopter cockpit with a headset on`}
+          class="relative aspect-[4/5] w-64 rounded-2xl border-2 border-teal-500/50 object-cover object-top shadow-2xl sm:w-72 xl:w-80"
+          width="800"
+          height="1524"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <figcaption class="relative -mt-8 ml-5 w-[calc(100%-1.25rem)] rounded-xl border border-brass-400/50 bg-navy-950/95 p-4 shadow-xl backdrop-blur">
+          <p class="text-sm italic leading-snug text-navy-100/85">"{FOUNDER.quote}"</p>
+          <p class="mt-1 text-[11px] font-semibold uppercase tracking-widest text-brass-300">{FOUNDER.name}</p>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- CREDENTIALS -->
+  <section class="border-b border-navy-100 bg-paper">
+    <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+      <p class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brass-600">Credentials, on the record</p>
+      <dl class="mt-6 grid gap-px overflow-hidden rounded-xl border border-navy-100 bg-navy-100 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          credentials.map((c) => (
+            <div class="bg-white p-5">
+              <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-teal-600">{c.k}</dt>
+              <dd class="mt-1.5 font-display text-lg font-bold leading-snug text-navy-900">{c.v}</dd>
+              <dd class="mt-1 text-sm leading-relaxed text-ink-500">{c.sub}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
   </section>
 
@@ -37,6 +132,14 @@ const schema = [
     <div class="grid gap-12 lg:grid-cols-3">
       <div class="lg:col-span-2">
         <div class="prose-ics">
+          <h2>Trained to start things. Then started them.</h2>
+          <p>
+            Daniel graduated from {e.school}'s {e.college} — now the {e.collegeNow} — in {e.year} with a
+            {e.degree} and concentrations in {e.concentrations[0]} and {e.concentrations[1]}. The two concentrations
+            turned out to be the whole career: find the market, build the thing, then get it found. He has founded a
+            number of small businesses since, and the ones operating in public today are the strongest proof of how
+            ICS works — not a portfolio, but companies with customers.
+          </p>
           <p>
             Most commercial deals on the South Shore involve at least three vendors who never talk to each other: a
             broker who disappears at closing, a web agency that doesn't understand your business, and — if you're
@@ -100,9 +203,65 @@ const schema = [
             <li><strong>Local first.</strong> We take fewer clients and know their markets street by street.</li>
           </ul>
         </div>
+
+        <!-- VENTURES -->
+        <div class="mt-12">
+          <p class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brass-600">Founded, built, operating</p>
+          <div class="mt-4 grid gap-4 sm:grid-cols-3">
+            {
+              FOUNDER.ventures.map((v) => (
+                <a href={v.url} rel="noopener" class="lift group flex flex-col rounded-xl border border-navy-100 bg-white p-5 shadow-sm">
+                  <p class="font-mono text-[11px] font-bold uppercase tracking-widest text-teal-600">{v.role}</p>
+                  <p class="mt-1 font-display text-base font-bold leading-snug text-navy-900 group-hover:text-teal-600">{v.name}</p>
+                  <p class="mt-2 flex-1 text-xs leading-relaxed text-ink-500">{v.blurb}</p>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <section class="mt-12 border-t border-navy-100 pt-8">
+          <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">Common questions</h2>
+          <dl class="mt-5 space-y-5">
+            {
+              faqs.map((f) => (
+                <div>
+                  <dt class="text-base font-bold text-navy-900">{f.q}</dt>
+                  <dd class="mt-1.5 text-sm leading-relaxed text-ink-700">{f.a}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </section>
       </div>
 
       <aside class="space-y-4 lg:sticky lg:top-24 lg:self-start">
+        <div class="rounded-xl border border-navy-100 bg-white p-6 shadow-sm">
+          <h2 class="text-xl font-bold text-navy-900">{FOUNDER.name}</h2>
+          <p class="text-sm text-ink-500">{FOUNDER.title}</p>
+          <dl class="mt-4 space-y-3 border-t border-navy-100 pt-4 text-sm">
+            <div>
+              <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-teal-600">Education</dt>
+              <dd class="mt-0.5 text-ink-700">{e.school}, {e.college} {classYear}</dd>
+              <dd class="text-xs text-ink-500">{e.degreeShort} · {e.concentrations.join(' & ')}</dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-teal-600">License</dt>
+              <dd class="mt-0.5 text-ink-700">{SITE.license}</dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-teal-600">Based in</dt>
+              <dd class="mt-0.5 text-ink-700">{FOUNDER.hometown}</dd>
+            </div>
+          </dl>
+          <div class="mt-4 space-y-1 border-t border-navy-100 pt-4 text-sm">
+            <p><a href={`mailto:${SITE.email}`} class="font-semibold text-teal-600 hover:text-teal-700">{SITE.email}</a></p>
+            <p><a href={`tel:${tel}`} class="font-semibold text-teal-600 hover:text-teal-700">{SITE.phone}</a></p>
+            <p><a href={SITE.social.linkedin} rel="noopener" class="font-semibold text-teal-600 hover:text-teal-700">LinkedIn</a></p>
+            <p><a href="/daniel-lawton.vcf" class="font-semibold text-teal-600 hover:text-teal-700">Save contact (.vcf)</a></p>
+          </div>
+        </div>
         <div class="overflow-hidden rounded-xl border border-navy-100 bg-white shadow-sm">
           <img
             src="/images/ics-logo-full.jpg"
@@ -113,31 +272,12 @@ const schema = [
             loading="lazy"
           />
         </div>
-        <div class="rounded-xl border border-navy-100 bg-white p-6 shadow-sm">
-          <img
-            src="/images/daniel-lawton.jpg"
-            alt="Daniel Lawton in a helicopter cockpit, headset on"
-            class="aspect-[4/5] w-full rounded-lg object-cover object-top"
-            width="800"
-            height="1524"
-            loading="lazy"
-          />
-          <p class="mt-2 text-[11px] text-ink-500">The operator thing isn't a metaphor.</p>
-          <h2 class="mt-4 text-xl font-bold text-navy-900">{SITE.founder}</h2>
-          <p class="text-sm text-ink-500">Founder · CRE Advisor · AI Systems Builder</p>
-          <p class="mt-3 text-xs text-ink-500">{SITE.license}</p>
-          <div class="mt-4 space-y-1 text-sm">
-            <p><a href={`mailto:${SITE.email}`} class="font-semibold text-teal-600 hover:text-teal-700">{SITE.email}</a></p>
-            <p><a href={`tel:${SITE.phone.replace(/[^\d+]/g, '')}`} class="font-semibold text-teal-600 hover:text-teal-700">{SITE.phone}</a></p>
-            <p><a href={SITE.social.linkedin} rel="noopener" class="font-semibold text-teal-600 hover:text-teal-700">LinkedIn</a></p>
-          </div>
-        </div>
         <div class="rounded-xl bg-navy-900 p-6">
           <p class="text-sm font-semibold uppercase tracking-wider text-teal-400">Coming seasons</p>
           <p class="mt-2 text-sm leading-relaxed text-navy-100/85">
             ICS is expanding to serve Ft. Lauderdale / Broward County, Florida — bringing the same CRE + AI model to
             South Florida's small-business market during the winter season while maintaining full South Shore
-            operations.
+            operations. <a href="/broward/" class="font-semibold text-brass-300 hover:text-brass-200">The Broward practice →</a>
           </p>
         </div>
       </aside>

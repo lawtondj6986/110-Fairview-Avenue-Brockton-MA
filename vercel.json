@@ -1,4 +1,8 @@
 {
+  "redirects": [
+    { "source": "/daniel-lawton", "destination": "/about/", "permanent": true },
+    { "source": "/founder", "destination": "/about/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

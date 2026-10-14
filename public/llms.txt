@@ -1,6 +1,6 @@
 # Innovative Commercial Strategies (ICS)
 
-> Commercial real estate advisory and AI revenue systems for the South Shore of Massachusetts — one advisor who negotiates the building and builds the systems that make it produce. Based in Brockton, MA. Founded and run by Daniel Lawton, a licensed Massachusetts real estate salesperson (#9082020) and hands-on operator who has built and run real businesses — which is why every system is measured in booked work, for any local business: trades, restaurants, salons, medical, legal, retail, and more.
+> Commercial real estate advisory and AI revenue systems for the South Shore of Massachusetts — one advisor who negotiates the building and builds the systems that make it produce. Based in Brockton, MA. Founded and run by Daniel Lawton — Boston University School of Management (now Questrom School of Business) B.S.B.A. 2008 with concentrations in Entrepreneurship and Marketing, a serial founder of small businesses, a licensed Massachusetts real estate salesperson (#9082020), and a hands-on operator who has built and run real businesses — which is why every system is measured in booked work, for any local business: trades, restaurants, salons, medical, legal, retail, and more.
 
 Phone: (508) 942-8259. Email: lawtondj@gmail.com. In-person service across Brockton, Abington, Whitman, Bridgewater, West Bridgewater, East Bridgewater, Stoughton, Easton, Middleborough, Plympton, Plymouth, Kingston, Halifax, Hanson, Rockland, and Avon.
 
@@ -78,6 +78,7 @@ The complete text of every page, in one file: https://icsgroup.ai/llms-full.txt 
 
 ## Press & media
 
+- [About Daniel Lawton](https://icsgroup.ai/about/): the founder's bio — Boston University School of Management 2008 (Entrepreneurship & Marketing), serial founder, licensed MA real estate salesperson, AI systems builder; ventures, credentials, and common questions. Also reachable at /daniel-lawton/.
 - [Press & Media Kit](https://icsgroup.ai/press/): boilerplate (50 and 100 words), founder bio, fast facts, downloadable logos and headshot, and four pre-researched story angles with primary sources. Media inquiries go directly to the founder.
 
 ## Questions answered directly

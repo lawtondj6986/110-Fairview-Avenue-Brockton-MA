@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import CtaSection from '../../components/CtaSection.astro';
 import FounderCard from '../../components/FounderCard.astro';
 import { SITE } from '../../config';
+import { founderRef } from '../../lib/founder';
 
 export async function getStaticPaths() {
   const posts = await getCollection('insights', ({ data }) => !data.draft);
@@ -33,8 +34,8 @@ const schema: object[] = [
     headline: title,
     description,
     datePublished: date.toISOString(),
-    author: { '@type': 'Person', name: SITE.founder },
-    publisher: { '@type': 'Organization', name: SITE.name },
+    author: founderRef(),
+    publisher: { '@id': `${SITE.url}/#business` },
   },
 ];
 
@@ -55,7 +56,7 @@ if (faqs && faqs.length) {
   <article>
     <header class="bg-navy-900">
       <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">{fmt(date)} · {SITE.founder}</p>
+        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">{fmt(date)} · <a href="/about/" class="hover:text-teal-300">{SITE.founder}</a></p>
         <h1 class="mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl">{title}</h1>
       </div>
     </header>

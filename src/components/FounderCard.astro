@@ -4,7 +4,7 @@
  *  - "band": a full-width "who you'll actually work with" strip for service pages
  *  - "byline": a compact author card for articles
  */
-import { SITE } from '../config';
+import { SITE, FOUNDER } from '../config';
 
 interface Props {
   variant?: 'band' | 'byline';
@@ -34,8 +34,10 @@ const tel = SITE.phone.replace(/[^\d+]/g, '');
         <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-brass-600">Written by</p>
         <p class="mt-0.5 font-display text-lg font-bold text-navy-900">{SITE.founder}</p>
         <p class="text-sm leading-relaxed text-ink-500">
-          Founder of {SITE.name}. {SITE.license}. Builder-operator — founded a newsroom that publishes daily and a retail
-          platform that runs a storefront; negotiates buildings and builds the revenue systems inside them.
+          Founder of {SITE.name}. {FOUNDER.education.school} {FOUNDER.education.college} '{String(FOUNDER.education.year).slice(2)}
+          ({FOUNDER.education.concentrations.join(' & ')}), a serial founder, and a {SITE.license.replace('Licensed ', 'licensed ')}.
+          Founded a newsroom that publishes daily and built a retail platform that runs a storefront; negotiates buildings
+          and builds the revenue systems inside them.
         </p>
         <p class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm font-semibold">
           <a href="/about/" class="text-teal-600 hover:text-teal-700">The founder's story →</a>

@@ -70,7 +70,7 @@ function collectPages() {
     ['/guarantees/', 'guarantees', 'IN WRITING · WITH CONSEQUENCES', 'Four promises. 21 days. 60 seconds. 90 days. 100% yours.'],
     ['/scoreboard/', 'scoreboard', 'UPDATED MONTHLY', 'Agencies show portfolios. We show a scoreboard.'],
     ['/south-shore/', 'south-shore', 'SERVICE AREA · SIXTEEN TOWNS, IN PERSON', "We don't cover the South Shore. We work it."],
-    ['/about/', 'about', 'ABOUT ICS · BROCKTON MA', "Two careers' worth of skills. One advisor at your table."],
+    ['/about/', 'about', 'DANIEL LAWTON · FOUNDER OF ICS', 'Boston University-trained. Serial founder. Licensed advisor. Builds the systems himself.'],
     ['/contact/', 'contact', 'CONTACT · (508) 942-8259', 'One call. A straight answer. A concrete next step.'],
     ['/workshops/', 'workshops', 'FREE CHAMBER WORKSHOPS', 'AI for Main Street — free, practical, no hype.'],
     ['/insights/', 'insights', 'MARKET NOTES + AI TACTICS', 'The South Shore market, decoded. AI, demystified.'],

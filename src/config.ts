@@ -76,6 +76,50 @@ export const SITE = {
 };
 
 /**
+ * The founder — the face of the brand. Single source of truth for the bio,
+ * credentials, and the schema.org Person node (src/lib/founder.ts).
+ */
+export const FOUNDER = {
+  name: 'Daniel Lawton',
+  firstName: 'Daniel',
+  title: 'Founder',
+  jobTitle: 'Founder · Commercial Real Estate Advisor · AI Systems Builder',
+  /** Canonical bio URL and the @id every Person reference points at. */
+  path: '/about/',
+  id: 'https://icsgroup.ai/about/#daniel-lawton',
+  image: '/images/daniel-lawton.jpg',
+  education: {
+    school: 'Boston University',
+    college: 'School of Management',
+    collegeNow: 'Questrom School of Business',
+    degree: 'Bachelor of Science in Business Administration',
+    degreeShort: 'B.S.B.A.',
+    concentrations: ['Entrepreneurship', 'Marketing'],
+    year: 2008,
+    url: 'https://www.bu.edu/questrom/',
+  },
+  license: 'Licensed MA Real Estate Salesperson #9082020',
+  hometown: 'Brockton, Massachusetts',
+  /** Ventures founded or built and operated — shown on the bio and in schema. */
+  ventures: [
+    { name: 'Innovative Commercial Strategies', role: 'Founder', url: 'https://icsgroup.ai', blurb: 'CRE advisory, AI revenue systems, commercial intelligence, and platform ventures — Brockton, MA.' },
+    { name: 'AfriPulse Times', role: 'Founder & builder', url: 'https://www.afripulsetimes.com', blurb: 'Pan-African digital newsroom, engineered end to end; publishing daily and raising for rollout.' },
+    { name: 'Outback Arms retail platform', role: 'Builder & operator', url: 'https://outbackarms.com', blurb: 'Live-inventory platform running a regulated retail storefront in Plympton, MA — business up 300% since launch.' },
+  ],
+  knowsAbout: [
+    'Commercial real estate',
+    'Entrepreneurship',
+    'Marketing',
+    'Small-business operations',
+    'AI business automation',
+    'Digital publishing platforms',
+    'Retail e-commerce systems',
+    'Open-source intelligence (OSINT) research',
+  ],
+  quote: "The operator thing isn't a metaphor.",
+} as const;
+
+/**
  * Productized services with published pricing — the single source of truth for
  * the machine-readable OfferCatalog (schema.org) emitted on the homepage and
  * pricing page. Keeping this honest and in sync with the public pages is the

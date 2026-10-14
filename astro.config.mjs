@@ -23,6 +23,8 @@ const llmsFull = {
 export default defineConfig({
   site: 'https://icsgroup.ai',
   integrations: [sitemap(), llmsFull],
+  // The founder's name is a brand: a clean URL for it resolves to the bio.
+  redirects: { '/daniel-lawton/': '/about/', '/founder/': '/about/' },
   vite: {
     plugins: [tailwindcss()],
   },

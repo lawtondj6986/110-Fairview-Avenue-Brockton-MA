@@ -16,6 +16,7 @@ import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import ogManifest from '../generated/og-manifest.json';
 import { SITE, OFFERINGS } from '../config';
+import { founderPerson } from '../lib/founder';
 
 interface Props {
   title: string;
@@ -70,13 +71,7 @@ const localBusiness = {
   priceRange: '$$',
   sameAs: [SITE.social.linkedin],
   ...(offerCatalog ? { hasOfferCatalog: offerCatalogNode } : {}),
-  founder: {
-    '@type': 'Person',
-    name: SITE.founder,
-    jobTitle: 'Founder · Commercial Real Estate Advisor · AI Systems Builder',
-    image: `${SITE.url}/images/daniel-lawton.jpg`,
-    knowsAbout: ['Commercial real estate', 'Small-business operations', 'AI business automation'],
-  },
+  founder: founderPerson(),
   address: {
     '@type': 'PostalAddress',
     addressLocality: SITE.address.locality,
