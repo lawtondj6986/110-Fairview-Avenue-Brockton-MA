@@ -208,6 +208,11 @@ const schema = [
                   </li>
                 ))}
               </ul>
+              {tier.name === 'Market Lock' && (
+                <a href="/territories/" class="mb-3 block rounded-lg border border-brass-400/60 bg-brass-500/10 px-4 py-3 text-sm font-semibold text-brass-600 transition-colors hover:bg-brass-500/20">
+                  348 exclusive territories — check whether yours is still open →
+                </a>
+              )}
               <a
                 href="/contact/"
                 class:list={[

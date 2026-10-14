@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { SITE } from '../config';
+
+const title = 'Fort Lauderdale & Broward County — AI Revenue Systems, Retail Platforms, Custom Builds | ICS';
+const description =
+  'ICS brings its AI revenue systems, live-inventory retail platforms, and custom platform builds to Fort Lauderdale and Broward County, Florida — the same published pricing, written guarantees, and one accountable operator, on the ground seasonally. Commercial real estate brokerage remains Massachusetts-licensed; in Florida we work with licensed local brokers.';
+
+const lines = [
+  {
+    name: 'AI Revenue Systems',
+    body: 'JobSite, Lead Engine, and Market Lock — the conversion website, the sub-60-second lead response machine, and territory exclusivity — for Broward trades, restaurants, medical and dental practices, salons, marine services, and the rest. Same published pricing as Massachusetts.',
+    href: '/ai-services/',
+    cta: 'The systems and prices',
+  },
+  {
+    name: 'Retail & Regulated-Retail Platforms',
+    body: 'Live-inventory storefronts the owner runs from the counter, reserve-and-pickup shaped to the compliance process, and product-level search for the categories the ad platforms restrict — proven on a Massachusetts firearms dealer, built for Florida dealers and dispensaries operating within the law.',
+    href: '/retail/',
+    cta: 'The retail practice',
+  },
+  {
+    name: 'Custom Platforms',
+    body: 'When the business is the software: media platforms, command centers, quoting and booking engines, marketplaces. Two are live in production today. Discovery Sprint, fixed price, you own the code.',
+    href: '/platforms/',
+    cta: 'Custom platforms',
+  },
+];
+
+const why = [
+  ['Why Broward', 'One of the densest small-business markets in the country — a year-round service economy stacked under a seasonal one, with marine, hospitality, medical, and trades operators competing on exactly the things our systems fix: who answers first, who looks credible, who the search recommends.'],
+  ['Why seasonally', 'The founder is on the ground in South Florida in the winter months and runs every system remotely the rest of the year — which is how the systems are built to run anyway. Launch calls, strategy days, and property walks happen in person when it matters.'],
+  ['What stays in Massachusetts', `Commercial real estate brokerage. ${SITE.license} — not a Florida license. In Broward we don't broker property; for a Florida transaction we work alongside a licensed local broker, and our free deal tools work anywhere.`],
+];
+
+const faqs = [
+  { q: 'Does ICS do commercial real estate brokerage in Florida?', a: `No. ICS's real estate license is a Massachusetts license (${SITE.license}). In Broward County, ICS provides AI revenue systems, retail platforms, and custom platform builds; for a Florida property transaction, ICS works alongside a licensed Florida broker and can make the introduction. The free deal calculators are useful anywhere.` },
+  { q: 'Is the pricing the same in Florida?', a: 'Yes. ICS publishes its pricing and it does not change by state: JobSite $6,500–$9,500 plus $450–$700/month, Lead Engine $12,000–$18,000 plus $1,500–$2,500/month, Market Lock $20,000–$30,000 plus $3,500–$6,000/month. The written guarantees apply the same way.' },
+  { q: 'Is ICS physically in Broward County?', a: 'Seasonally — the founder is on the ground in South Florida during the winter months and operates remotely the rest of the year, with in-person launch and strategy days scheduled around that. Every system is built to run without anyone standing next to it.' },
+  { q: 'Which Broward businesses fit best?', a: 'The same ones that fit on the South Shore: trades and home services, restaurants, medical and dental, salons and wellness, auto, fitness, veterinary, childcare, and — especially here — marine and boat services and regulated retail. If a business wins or loses on response time, reviews, and being the recommended answer, it fits.' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">Fort Lauderdale · Broward County, FL · Seasonal practice</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        The South Shore playbook, in South Florida.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Same systems, same published prices, same written guarantees, same one accountable operator — now on the ground
+        in Broward County in the winter months. For the businesses that win or lose on who answers first and who the
+        search recommends, the map changed; the machine didn't.
+      </p>
+      <div class="reveal mt-8 flex flex-wrap gap-4" style="--reveal-delay: 300ms">
+        <a href="/start/" class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-lg transition-colors hover:bg-teal-700">Find your system — 45 seconds</a>
+        <a href="/pricing/" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">Published pricing</a>
+      </div>
+      <p class="mt-6 text-sm text-navy-100/60">Fort Lauderdale · Hollywood · Pompano Beach · Pembroke Pines · Coral Springs · Plantation · Davie · Deerfield Beach — and the rest of Broward County</p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <SectionHeading eyebrow="What travels" heading="Three practices, unchanged by the state line." align="center" />
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      {
+        lines.map((l, i) => (
+          <article class="reveal lift flex flex-col rounded-xl border border-navy-100 bg-white p-7 shadow-sm" style={`--reveal-delay: ${i * 70}ms`}>
+            <h2 class="text-xl font-bold text-navy-900">{l.name}</h2>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-500">{l.body}</p>
+            <a href={l.href} class="mt-5 text-sm font-semibold text-teal-600 hover:text-teal-700">{l.cta} →</a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <div class="grid gap-6 md:grid-cols-3">
+        {
+          why.map(([h, b], i) => (
+            <div class="reveal rounded-xl border border-navy-100 bg-white p-7 shadow-sm" style={`--reveal-delay: ${i * 70}ms`}>
+              <h3 class="font-display text-lg font-bold text-navy-900">{h}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-ink-500">{b}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mx-auto mt-8 max-w-2xl text-center text-sm text-ink-700">
+        Marine, coastal, and seasonal operators: the <a href="/industries/marine-boat-services/" class="font-semibold text-teal-600 hover:text-teal-700">marine &amp; boat services playbook</a> was written for a coast. Broward is a bigger one.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+    <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">Common questions</h2>
+    <dl class="mt-5 space-y-5">
+      {faqs.map((f) => (
+        <div>
+          <dt class="text-base font-bold text-navy-900">{f.q}</dt>
+          <dd class="mt-1.5 text-sm leading-relaxed text-ink-700">{f.a}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <CtaSection
+    heading="Broward business? Start with the 45-second Fit Finder."
+    body="It matches you to the right system with its published price and the proof to check — no email, no demo. Then book the call; in season, it can be in person."
+  />
+</Base>

@@ -52,6 +52,7 @@ function collectPages() {
     ['/territories/', 'territories', 'MARKET LOCK · THE TERRITORY BOARD', 'One business per category, per town. Whoever locks it first, keeps it.'],
     ['/platforms/', 'platforms', 'CUSTOM PLATFORMS · YOU OWN THE CODE', 'When the business is the software, we build the business.'],
     ['/partners/', 'partners', 'PARTNERS · REFERRALS · WHITE-LABEL', "We'd rather split a deal with you than compete for it."],
+    ['/broward/', 'broward', 'FORT LAUDERDALE · BROWARD COUNTY, FL', 'The South Shore playbook, in South Florida.'],
     ['/press/', 'press', 'PRESS & MEDIA KIT · HELP YOURSELF', 'Everything a writer needs. No PR firm between us.'],
     ['/private-clients/', 'private-clients', 'PRIVATE CLIENTS · MID-SIZE COMPANIES', 'For owners with more at stake.'],
     ['/intelligence/', 'intelligence', 'COMMERCIAL INTELLIGENCE · OSINT', 'Know before you sign.'],
