@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import FounderLetter from '../components/FounderLetter.astro';
+import { LETTER_PARAGRAPHS } from '../lib/letter';
+import CtaSection from '../components/CtaSection.astro';
+import { SITE, FOUNDER } from '../config';
+import { founderRef } from '../lib/founder';
+
+const title = 'A Letter from Daniel Lawton, Founder | Innovative Commercial Strategies';
+const description =
+  "Why one licensed advisor negotiates the building and then builds the systems inside it, in the founder's own words. Four minutes, no pitch deck, and the phone number at the bottom is his.";
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `${SITE.url}/letter/#letter`,
+    headline: 'A letter from Daniel: why I built a firm that does both',
+    description,
+    articleBody: LETTER_PARAGRAPHS.join('\n\n'),
+    author: founderRef(),
+    publisher: { '@id': `${SITE.url}/#business` },
+    datePublished: '2026-10-14',
+    url: `${SITE.url}/letter/`,
+    mainEntityOfPage: `${SITE.url}/letter/`,
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema} ogType="article">
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">From the founder · In his own words</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        A letter from {FOUNDER.firstName}.
+      </h1>
+      <p class="reveal mt-4 max-w-2xl text-lg text-navy-100/85" style="--reveal-delay: 200ms">
+        The whole firm in four minutes: what I believe, what I built, and why I answer my own phone.
+      </p>
+    </div>
+  </section>
+
+  <FounderLetter standalone />
+
+  <CtaSection
+    heading="Rather talk than read?"
+    body="One call, a straight answer, and a concrete next step — on the building, the business, or both."
+  />
+</Base>

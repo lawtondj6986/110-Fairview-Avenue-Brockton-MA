@@ -79,6 +79,7 @@ The complete text of every page, in one file: https://icsgroup.ai/llms-full.txt 
 ## Press & media
 
 - [About Daniel Lawton](https://icsgroup.ai/about/): the founder's bio — Boston University School of Management 2008 (Entrepreneurship & Marketing), serial founder, licensed MA real estate salesperson, AI systems builder; ventures, credentials, and common questions. Also reachable at /daniel-lawton/.
+- [A Letter from Daniel](https://icsgroup.ai/letter/): the founder's first-person letter — why one licensed advisor negotiates the building and builds the systems inside it, why ICS publishes prices and guarantees, and why he answers his own phone.
 - [Press & Media Kit](https://icsgroup.ai/press/): boilerplate (50 and 100 words), founder bio, fast facts, downloadable logos and headshot, and four pre-researched story angles with primary sources. Media inquiries go directly to the founder.
 
 ## Questions answered directly

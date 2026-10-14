@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
 import CtaSection from '../components/CtaSection.astro';
+import FounderLetter from '../components/FounderLetter.astro';
 import { SITE } from '../config';
 
 const allCaseStudies = (await getCollection('case-studies', ({ data }) => !data.draft)).sort(
@@ -526,58 +527,8 @@ const description =
     </div>
   </section>
 
-  <!-- ABOUT TEASER -->
-  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-    <div class="grid items-center gap-10 lg:grid-cols-2">
-      <div>
-        <SectionHeading
-          eyebrow="Who you'll work with"
-          heading="One person. Both skill sets. Local roots."
-          body=""
-        />
-        <p class="mt-4 leading-relaxed text-ink-500">
-          ICS is led by {SITE.founder} — a licensed Massachusetts real estate professional who also personally builds
-          and ships AI systems for South Shore businesses: contractors, retailers, medical offices, solar companies,
-          and more. Not a broker who resells someone else's tech, and not an agency that's never sat at a closing
-          table.
-        </p>
-        <p class="mt-4 leading-relaxed text-ink-500">
-          Deep Brockton-area roots, an active transaction network, and a live portfolio of delivered AI work — which
-          means advice grounded in what actually happens after the keys change hands. The mission is bigger than any
-          one website: put institutional-grade tools in the hands of the people who actually build our towns.
-        </p>
-        <div class="mt-6 flex items-center gap-4">
-          <img
-            src="/images/daniel-lawton.jpg"
-            alt={SITE.founder}
-            class="h-16 w-16 rounded-full border-2 border-teal-500/40 object-cover object-top"
-            width="800"
-            height="1524"
-            loading="lazy"
-          />
-          <div>
-            <p class="text-sm font-bold text-navy-900">{SITE.founder}</p>
-            <a href="/about/" class="text-sm font-semibold text-teal-600 hover:text-teal-700">Meet Daniel →</a>
-          </div>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-4">
-        {
-          [
-            { value: 'MA', label: 'Licensed real estate professional' },
-            { value: '10+', label: 'South Shore towns served' },
-            { value: '2', label: 'Disciplines under one roof — CRE + AI' },
-            { value: 'Day 1', label: 'Systems live when you get the keys' },
-          ].map((stat) => (
-            <div class="rounded-xl border border-navy-100 bg-white p-6 text-center shadow-sm">
-              <p class="font-display text-3xl font-bold text-navy-900">{stat.value}</p>
-              <p class="mt-2 text-sm text-ink-500">{stat.label}</p>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+  <!-- A LETTER FROM DANIEL — the founder, first person -->
+  <FounderLetter />
 
   <CtaSection />
 </Base>
