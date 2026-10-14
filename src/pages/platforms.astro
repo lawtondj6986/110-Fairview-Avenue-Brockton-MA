@@ -1,0 +1,164 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { SITE } from '../config';
+
+const title = 'Custom Platforms — When the Business Is the Software | ICS';
+const description =
+  'ICS founds and engineers full platforms: a pan-African newsroom with automated story flow and a live news map, a live-inventory retail platform a store runs from the counter. Custom platform builds for founders and operators who have outgrown off-the-shelf software — written scope, fixed price, milestones, and you own the code.';
+
+const proof = [
+  {
+    name: 'AfriPulse Times',
+    kind: 'Media platform · live in production · raising',
+    body: 'A pan-African digital newsroom engineered to run itself: curated RSS pipelines feed one review queue around the clock, a command-center dashboard runs the whole operation, a live map plots stories as they land, and an editorial board sets the standard on top. Founded and built by ICS.',
+    href: '/case-studies/afripulse-times-media-platform/',
+    live: 'https://www.afripulsetimes.com',
+  },
+  {
+    name: 'Outback Arms',
+    kind: 'Regulated-retail platform · runs a Massachusetts storefront daily',
+    body: 'A live-inventory retail platform for a family-run firearms dealer — the website shows the real shelf, the owner lists, reprices, and marks sold from the counter with no developer, and reserve-and-pickup is shaped to the compliance process. Store-reported business up 300% since launch.',
+    href: '/case-studies/outback-arms-retail-platform/',
+    live: 'https://outbackarms.com',
+  },
+];
+
+const builds = [
+  ['Media & content platforms', 'Automated ingestion, editorial workflow, publishing, and the dashboard that runs it — a newsroom or a niche publication that scales with feeds and compute, not headcount.'],
+  ['Live-inventory & regulated retail', 'The website is the shelf: real-time inventory, an admin panel the owner runs, compliant reserve-and-pickup, and product-level search for the categories the ad platforms restrict.'],
+  ['Operations command centers', 'One screen for the whole operation — queues, status, approvals, metrics — for businesses whose process has outgrown spreadsheets and five disconnected tools.'],
+  ['Quoting & booking engines', 'Instant-quote and scheduling systems built around your actual services and rates — the engine behind QuoteBrain, built for your business.'],
+  ['Marketplaces & member platforms', 'Two-sided and membership products: listings, profiles, matching, payments, and the admin layer that keeps it honest.'],
+  ['AI automation layers', 'Intelligence added to a business you already run — triage, drafting, routing, summarizing — wired into your existing systems with a human in the loop where it counts.'],
+];
+
+const phases = [
+  ['Discovery Sprint', 'Two weeks. We map the operation, the users, and the money, and deliver a written architecture, a milestone plan, and a fixed price. The sprint fee is credited toward the build if you proceed.'],
+  ['Build', 'Milestones with working software at each one — weekly demos, not status reports. The architecture pattern is the same across every ICS platform: automate the flow, keep judgment human, make the whole operation legible on one screen.'],
+  ['Launch & Operate', 'Live in production with a dashboard you can read, documentation you can hand to anyone, and the choice of running it yourself or keeping ICS on an operate retainer. Either way, the code, the accounts, and the data are yours.'],
+];
+
+const faqs = [
+  { q: 'What does a custom platform build cost?', a: 'It is scoped to the mandate — every build gets a written scope, a milestone plan, and a fixed price before you commit a dollar, produced by a two-week Discovery Sprint whose fee is credited toward the build. Platforms are a larger engagement than ICS\'s published systems (JobSite, Lead Engine, Market Lock), and they are quoted the same way: in writing, up front.' },
+  { q: 'Do I own the platform?', a: 'Yes. ICS builds on open code and hands over all code, accounts, infrastructure, and data. No platform landlord, no per-seat licensing, no hostage situation at renewal.' },
+  { q: 'Is this different from hiring a dev shop?', a: 'ICS is a builder-operator: the same person who engineers the platform has founded and run businesses on platforms like it, including a newsroom that publishes daily and a retail system that runs a storefront. The questions we ask in discovery are an operator\'s questions, and the result is a business that works, not a feature list.' },
+  { q: 'Who is this for?', a: 'Founders with a venture that needs real engineering, operators who have outgrown off-the-shelf software, and businesses in regulated or restricted categories where the standard tools don\'t fit. If the business is the software, this is the practice.' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Custom platform development',
+    serviceType: 'Custom software platform design, engineering, and operation',
+    provider: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    description,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">Platform ventures · Custom builds · You own the code</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        When the business is the software, we build the business.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Two platforms we founded or built run in production today — a pan-African newsroom publishing daily and a
+        regulated-retail system running a Massachusetts storefront. Same pattern every time: automate the flow, keep
+        judgment human, make the whole operation legible on one screen. Then hand you the keys.
+      </p>
+      <div class="reveal mt-8 flex flex-wrap gap-4" style="--reveal-delay: 300ms">
+        <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Platform build — discovery sprint')}`} class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-lg transition-colors hover:bg-teal-700">Start a Discovery Sprint</a>
+        <a href="#proof" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">See the two that are live</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="proof" class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <SectionHeading eyebrow="Proof, not portfolio" heading="Open either one right now and watch it work." align="center" />
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      {
+        proof.map((p, i) => (
+          <article class="reveal lift flex flex-col rounded-xl border border-navy-100 bg-white p-7 shadow-sm" style={`--reveal-delay: ${i * 80}ms`}>
+            <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-brass-600">{p.kind}</p>
+            <h2 class="mt-2 text-2xl font-bold text-navy-900">{p.name}</h2>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-500">{p.body}</p>
+            <div class="mt-5 flex flex-wrap gap-4 text-sm font-semibold">
+              <a href={p.live} rel="noopener" class="text-teal-600 hover:text-teal-700">See it live →</a>
+              <a href={p.href} class="text-navy-900 hover:text-teal-600">The build story</a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <SectionHeading eyebrow="What we build" heading="Six kinds of platform, one architecture discipline." align="center" />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          builds.map(([h, b], i) => (
+            <div class="reveal rounded-xl border border-navy-100 bg-white p-6 shadow-sm" style={`--reveal-delay: ${(i % 3) * 60}ms`}>
+              <h3 class="font-display text-base font-bold text-navy-900">{h}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-500">{b}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <SectionHeading eyebrow="How an engagement runs" heading="Scope in writing. Price fixed. Milestones you can see." align="center" />
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      {
+        phases.map(([h, b], i) => (
+          <div class="reveal rounded-xl border border-navy-100 bg-white p-7 shadow-sm" style={`--reveal-delay: ${i * 80}ms`}>
+            <p class="font-mono text-xs font-bold text-teal-600">0{i + 1}</p>
+            <h3 class="mt-1 text-xl font-bold text-navy-900">{h}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-ink-500">{b}</p>
+          </div>
+        ))
+      }
+    </div>
+    <div class="mx-auto mt-10 max-w-3xl rounded-xl bg-navy-900 p-7 text-center">
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brass-300">The ownership rule</p>
+      <p class="mt-3 text-lg font-bold text-white">You own the code, the accounts, the infrastructure, and the data. Full stop.</p>
+      <p class="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-navy-100/80">
+        No platform landlord, no per-seat licensing, no hostage situation at renewal. It is the same rule behind every ICS system — the <a href="/guarantees/" class="font-semibold text-teal-400 hover:text-teal-300">written guarantees</a> say so.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">Common questions</h2>
+      <dl class="mt-5 space-y-5">
+        {faqs.map((f) => (
+          <div>
+            <dt class="text-base font-bold text-navy-900">{f.q}</dt>
+            <dd class="mt-1.5 text-sm leading-relaxed text-ink-700">{f.a}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="mt-8 text-center text-xs text-ink-500">
+        Investor in a platform venture? The <a href="/afripulse/" class="font-semibold text-teal-600 hover:text-teal-700">AfriPulse Times investor brief</a> is the right door.
+      </p>
+    </div>
+  </section>
+
+  <CtaSection
+    heading="Bring the venture. Leave with a scope."
+    body="A Discovery Sprint ends with an architecture, a milestone plan, and a fixed price in writing — and the fee is credited toward the build. Start with a conversation."
+  />
+</Base>

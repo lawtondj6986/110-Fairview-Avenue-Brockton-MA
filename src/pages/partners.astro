@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { SITE } from '../config';
+
+const title = 'Partners & Referrals — Brokerages, Agencies, Lenders, Attorneys | ICS';
+const description =
+  'Partner with ICS: referral partnerships for AI systems and platform builds (fee in writing), broker-to-broker real estate referrals with licensed professionals, white-label systems for agencies and brokerages who want to sell what we build, and co-marketing for lenders, attorneys, and accountants who share our clients.';
+
+const programs = [
+  {
+    who: 'Anyone who knows a business owner',
+    name: 'Referral partners',
+    body: 'Send us a business that needs a lead system, a platform, or an intelligence brief. If it becomes an engagement, you are paid a referral fee — set in writing before anything closes. Simple, and we keep you informed.',
+    note: 'For real estate transactions, Massachusetts law permits referral fees only between licensed brokers and agents — see the brokerage program.',
+    interest: 'Something else',
+    message: 'Partnership inquiry — referral partner. I know business owners who could use ICS systems / platforms / intelligence.',
+  },
+  {
+    who: 'Licensed brokers & agents',
+    name: 'Brokerage alliance',
+    body: 'Broker-to-broker referrals for South Shore commercial deals — the owner-user and sub-$3M investment property national firms ignore — and reciprocal referrals for your market, under a written referral agreement between licensed professionals. Residential agents with a commercial lead: this is the door.',
+    note: `${SITE.license}. Referral agreements are written and compliant with Massachusetts licensing rules.`,
+    interest: 'Something else',
+    message: 'Partnership inquiry — brokerage alliance. I am a licensed broker/agent and want to set up a referral agreement.',
+  },
+  {
+    who: 'Agencies, consultants & brokerages',
+    name: 'White-label systems',
+    body: 'Sell what we build under your brand. JobSite, Lead Engine, and QuoteBrain installs delivered by ICS, owned by your client, with you keeping the relationship. You get a product line with published cost structure; your client gets a system that works in 21 days.',
+    note: 'Scoped in writing per partner, with the same ownership rule: the client owns the code, accounts, and data.',
+    interest: 'AI systems & marketing',
+    message: 'Partnership inquiry — white-label. We are an agency/consultancy/brokerage and want to offer ICS systems under our brand.',
+  },
+  {
+    who: 'Lenders, attorneys & accountants',
+    name: 'Co-marketing',
+    body: 'We share clients: the buyer who needs a loan, the seller who needs counsel, the operator who needs a CPA. Joint content, shared events, and the free tools — the Seller Net, the Cap Rate, the Lease Analyzer — as a lead source you can put in front of your own clients with your name on the introduction.',
+    note: 'No fees, no exclusivity — just two professionals who send each other work and say so.',
+    interest: 'Something else',
+    message: 'Partnership inquiry — co-marketing. I am a lender / attorney / accountant and we likely share clients.',
+  },
+];
+
+const contactHref = (p: (typeof programs)[number]) => `/contact/?${new URLSearchParams({ interest: p.interest, message: p.message }).toString()}`;
+---
+
+<Base title={title} description={description}>
+  <section class="bg-navy-900">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">Partners · Referrals · White-label</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        We'd rather split a deal with you than compete for it.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        One firm can't be in every room on the South Shore. Brokers, agencies, lenders, attorneys, accountants, and the
+        people who simply know business owners — there are four ways to work with ICS, every one of them in writing,
+        and every one of them built so the client wins first.
+      </p>
+      <div class="reveal mt-8 flex flex-wrap gap-4" style="--reveal-delay: 300ms">
+        <a href="#programs" class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-lg transition-colors hover:bg-teal-700">The four programs ↓</a>
+        <a href="/group/" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">What ICS is</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="programs" class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <div class="grid gap-6 md:grid-cols-2">
+      {
+        programs.map((p, i) => (
+          <article class="reveal lift flex flex-col rounded-xl border border-navy-100 bg-white p-7 shadow-sm" style={`--reveal-delay: ${(i % 2) * 70}ms`}>
+            <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-brass-600">{p.who}</p>
+            <h2 class="mt-2 text-2xl font-bold text-navy-900">{p.name}</h2>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-500">{p.body}</p>
+            <p class="mt-4 border-t border-navy-100 pt-3 text-xs leading-relaxed text-ink-500">{p.note}</p>
+            <a href={contactHref(p)} class="mt-5 inline-block rounded-md bg-teal-600 px-5 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-teal-700">
+              Start the conversation →
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6">
+      <SectionHeading
+        eyebrow="Why partners send us work"
+        heading="Published prices. Written guarantees. The client owns everything."
+        body="A referral is a reputation loan. These are the reasons the loan is safe: the price your client sees is the price on our website, the promises are written with consequences, and they walk away owning the code, the accounts, and the data."
+        align="center"
+      />
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/pricing/" class="rounded-md border border-navy-100 bg-white px-5 py-2.5 text-sm font-semibold text-navy-900 transition-colors hover:border-teal-500 hover:text-teal-600">Published pricing</a>
+        <a href="/guarantees/" class="rounded-md border border-navy-100 bg-white px-5 py-2.5 text-sm font-semibold text-navy-900 transition-colors hover:border-teal-500 hover:text-teal-600">Written guarantees</a>
+        <a href="/scoreboard/" class="rounded-md border border-navy-100 bg-white px-5 py-2.5 text-sm font-semibold text-navy-900 transition-colors hover:border-teal-500 hover:text-teal-600">The scoreboard</a>
+        <a href="/deal-tools/" class="rounded-md border border-navy-100 bg-white px-5 py-2.5 text-sm font-semibold text-navy-900 transition-colors hover:border-teal-500 hover:text-teal-600">The free tools to share</a>
+      </div>
+      <p class="mt-8 text-center text-xs leading-relaxed text-ink-500">
+        Every partnership is documented before any fee is earned. Real estate referral fees are paid only between licensed professionals under a written agreement, as Massachusetts law requires. Questions first? Call {SITE.founder} at {SITE.phone}.
+      </p>
+    </div>
+  </section>
+</Base>
