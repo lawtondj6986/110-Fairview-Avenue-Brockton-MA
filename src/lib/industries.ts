@@ -217,7 +217,7 @@ export const INDUSTRIES: Industry[] = [
       { system: 'Lead Engine', why: 'Every inquiry answered in under 60 seconds, tours booked and confirmed, waitlists managed automatically, and enrolled families asked for the review that convinces the next one.' },
       { system: 'Market Lock', why: 'One center per town, with the content and visibility that makes you the answer to “preschool near me” — before the parent ever makes a call.' },
     ],
-    tool: { href: '/start/', label: 'Three questions, 45 seconds — match your center to the right system with a published price' },
+    tool: { href: '/start/', label: 'Four questions, 45 seconds — match your center to the right system with a published price' },
   },
   {
     slug: 'marine-boat-services',
