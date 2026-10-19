@@ -1,15 +1,64 @@
 ---
-import { SITE, NAV } from '../config';
+import { SITE } from '../config';
 import { TOWNS } from '../lib/towns';
 import Logo from './Logo.astro';
 
 const year = new Date().getFullYear();
+
+/** Three short columns instead of one long list: what we sell, what's free, who we are. */
+const columns: { title: string; links: [string, string][] }[] = [
+  {
+    title: 'What we do',
+    links: [
+      ['Commercial Real Estate', '/commercial-real-estate/'],
+      ['AI Systems & Marketing', '/ai-services/'],
+      ['Published Pricing', '/pricing/'],
+      ['Commercial Intelligence', '/intelligence/'],
+      ['Political Research', '/political/'],
+      ['Custom Platforms', '/platforms/'],
+      ['Retail Consultants', '/retail/'],
+      ['QuoteBrain', '/quotebrain/'],
+      ['Private Clients', '/private-clients/'],
+      ['Partners & Referrals', '/partners/'],
+      ['Fort Lauderdale & Broward, FL', '/broward/'],
+    ],
+  },
+  {
+    title: 'Free, and proof',
+    links: [
+      ['Start Here: 45-Second Fit Finder', '/start/'],
+      ['Free Tools — The Whole Shelf', '/tools/'],
+      ['Five CRE Deal Tools', '/deal-tools/'],
+      ['The Territory Board', '/territories/'],
+      ['Listings', '/listings/'],
+      ['Case Studies', '/case-studies/'],
+      ['Scoreboard', '/scoreboard/'],
+      ['Guarantees', '/guarantees/'],
+      ['Insights', '/insights/'],
+    ],
+  },
+  {
+    title: 'The firm',
+    links: [
+      ['About Daniel Lawton', '/about/'],
+      ['A Letter from Daniel', '/letter/'],
+      ['The Group', '/group/'],
+      ['The Ship Log', '/shipped/'],
+      ['Discretion & Confidentiality', '/confidential/'],
+      ['Workshops', '/workshops/'],
+      ['Press & Media Kit', '/press/'],
+      ['Contact', '/contact/'],
+    ],
+  },
+];
+const firstTowns = TOWNS.slice(0, 8);
+const moreTowns = TOWNS.slice(8);
 ---
 
 <footer class="bg-navy-950 text-navy-100">
   <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-    <div class="grid gap-10 md:grid-cols-4">
-      <div class="md:col-span-2">
+    <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
+      <div>
         <div class="flex items-center gap-2.5">
           <Logo class="h-10 w-10" />
           <div class="leading-tight">
@@ -17,72 +66,16 @@ const year = new Date().getFullYear();
             <p class="text-xs uppercase tracking-widest text-teal-400">CRE Advisory + AI Systems</p>
           </div>
         </div>
-        <p class="mt-4 max-w-md text-sm leading-relaxed text-navy-100/80">
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-navy-100/80">
           Commercial real estate advisory and done-for-you AI systems for South Shore business owners — one advisor from
           signed offer to automated operations.
         </p>
         <p class="mt-4 text-sm text-navy-100/80">
           {SITE.address.locality}, {SITE.address.region} ·
-          <a href={`mailto:${SITE.email}`} class="hover:text-teal-400">{SITE.email}</a> ·
           <a href={`tel:${SITE.phone.replace(/[^\d+]/g, '')}`} class="hover:text-teal-400">{SITE.phone}</a>
         </p>
+        <p class="text-sm text-navy-100/80"><a href={`mailto:${SITE.email}`} class="hover:text-teal-400">{SITE.email}</a></p>
         <p class="mt-2 text-xs text-navy-100/60">{SITE.license}</p>
-      </div>
-
-      <nav aria-label="Footer">
-        <p class="font-display text-sm font-semibold uppercase tracking-wider text-white">Explore</p>
-        <ul class="mt-3 space-y-2 text-sm">
-          {
-            NAV.map((item) => (
-              <li>
-                <a href={item.href} class="text-navy-100/80 hover:text-teal-400">
-                  {item.label}
-                </a>
-              </li>
-            ))
-          }
-          <li><a href="/start/" class="font-semibold text-teal-400 hover:text-teal-300">Start Here: 45-Second Fit Finder</a></li>
-          <li><a href="/tools/" class="text-navy-100/80 hover:text-teal-400">Free Tools — The Whole Shelf</a></li>
-          <li><a href="/group/" class="text-navy-100/80 hover:text-teal-400">The Group</a></li>
-          <li><a href="/territories/" class="text-navy-100/80 hover:text-teal-400">The Territory Board — Market Lock</a></li>
-          <li><a href="/platforms/" class="text-navy-100/80 hover:text-teal-400">Custom Platforms</a></li>
-          <li><a href="/partners/" class="text-navy-100/80 hover:text-teal-400">Partners &amp; Referrals</a></li>
-          <li><a href="/broward/" class="text-navy-100/80 hover:text-teal-400">Fort Lauderdale &amp; Broward County, FL</a></li>
-          <li><a href="/industries/" class="text-navy-100/80 hover:text-teal-400">Industries We Serve</a></li>
-          <li><a href="/private-clients/" class="text-navy-100/80 hover:text-teal-400">Private Clients</a></li>
-          <li><a href="/intelligence/" class="text-navy-100/80 hover:text-teal-400">Commercial Intelligence</a></li>
-          <li><a href="/intelligence/dossier/" class="text-navy-100/80 hover:text-teal-400">The Deep Dossier</a></li>
-          <li><a href="/political/" class="text-navy-100/80 hover:text-teal-400">Political Research</a></li>
-          <li><a href="/confidential/" class="text-navy-100/80 hover:text-teal-400">Discretion &amp; Confidentiality</a></li>
-          <li><a href="/compare/" class="text-navy-100/80 hover:text-teal-400">Compare Your Options</a></li>
-          <li><a href="/building-worth/" class="text-navy-100/80 hover:text-teal-400">What's My Building Worth?</a></li>
-          <li><a href="/ai-readiness/" class="text-navy-100/80 hover:text-teal-400">AI Readiness Score</a></li>
-          <li><a href="/playbook/" class="text-navy-100/80 hover:text-teal-400">The 90-Day Playbook</a></li>
-          <li><a href="/answers/" class="text-navy-100/80 hover:text-teal-400">Straight Answers</a></li>
-          <li><a href="/guarantees/" class="text-navy-100/80 hover:text-teal-400">Guarantees</a></li>
-          <li><a href="/scoreboard/" class="text-navy-100/80 hover:text-teal-400">Scoreboard</a></li>
-          <li><a href="/shipped/" class="text-navy-100/80 hover:text-teal-400">The Ship Log</a></li>
-          <li><a href="/letter/" class="text-navy-100/80 hover:text-teal-400">A Letter from Daniel</a></li>
-          <li><a href="/workshops/" class="text-navy-100/80 hover:text-teal-400">Workshops</a></li>
-          <li><a href="/press/" class="text-navy-100/80 hover:text-teal-400">Press & Media Kit</a></li>
-          <li><a href="/contact/" class="text-navy-100/80 hover:text-teal-400">Contact</a></li>
-        </ul>
-      </nav>
-
-      <div>
-        <p class="font-display text-sm font-semibold uppercase tracking-wider text-white">
-          <a href="/south-shore/" class="hover:text-teal-400">Serving the South Shore</a>
-        </p>
-        <p class="mt-3 text-sm leading-relaxed text-navy-100/70">
-          {
-            TOWNS.map((t, i) => (
-              <>
-                <a href={`/south-shore/${t.slug}/`} class="hover:text-teal-400">{t.name}</a>{i < TOWNS.length - 1 ? ' · ' : ''}
-              </>
-            ))
-          }
-          — and surrounding Plymouth, Norfolk &amp; Bristol County communities.
-        </p>
         <a
           href="/contact/"
           class="mt-5 inline-block rounded-md bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
@@ -90,9 +83,46 @@ const year = new Date().getFullYear();
           Book a Strategy Call
         </a>
       </div>
+
+      {
+        columns.map((col) => (
+          <nav aria-label={col.title}>
+            <p class="font-display text-sm font-semibold uppercase tracking-wider text-white">{col.title}</p>
+            <ul class="mt-3 space-y-2 text-sm">
+              {col.links.map(([label, href]) => (
+                <li>
+                  <a href={href} class="text-navy-100/80 hover:text-teal-400">{label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))
+      }
     </div>
 
-    <div class="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-navy-100/60 sm:flex-row sm:items-center sm:justify-between">
+    <div class="mt-10 border-t border-white/10 pt-6 text-sm leading-relaxed text-navy-100/70">
+      <a href="/south-shore/" class="font-semibold text-white hover:text-teal-400">Serving the South Shore</a>
+      <span class="text-navy-100/50"> · </span>
+      {firstTowns.map((t, i) => (
+        <>
+          <a href={`/south-shore/${t.slug}/`} class="hover:text-teal-400">{t.name}</a>{i < firstTowns.length - 1 ? ' · ' : ''}
+        </>
+      ))}
+      <details class="inline">
+        <summary class="inline cursor-pointer list-none text-teal-400 hover:text-teal-300 [&::-webkit-details-marker]:hidden"> · and {moreTowns.length} more towns</summary>
+        <span>
+          {' · '}
+          {moreTowns.map((t, i) => (
+            <>
+              <a href={`/south-shore/${t.slug}/`} class="hover:text-teal-400">{t.name}</a>{i < moreTowns.length - 1 ? ' · ' : ''}
+            </>
+          ))}
+          {' — and surrounding Plymouth, Norfolk & Bristol County communities.'}
+        </span>
+      </details>
+    </div>
+
+    <div class="mt-6 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-navy-100/60 sm:flex-row sm:items-center sm:justify-between">
       <p>© {year} {SITE.name}. All rights reserved.</p>
       <p>
         <a href="/privacy/" class="hover:text-teal-400">Privacy</a> ·

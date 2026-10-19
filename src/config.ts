@@ -137,11 +137,14 @@ export const OFFERINGS = [
   { name: 'The Integrity Scan — for officials & future candidates', min: 3500, max: 7500, unit: 'project', note: 'with annual refresh', href: '/political/' },
 ] as const;
 
+/**
+ * Top navigation: seven items, on purpose. Retail Consultants and QuoteBrain
+ * moved to the footer and the AI Systems page so a first-time visitor sees
+ * the two engines, the price, the proof, and the person — not every practice.
+ */
 export const NAV = [
   { label: 'Real Estate', href: '/commercial-real-estate/' },
   { label: 'AI Systems', href: '/ai-services/' },
-  { label: 'Retail Consultants', href: '/retail/' },
-  { label: 'QuoteBrain', href: '/quotebrain/' },
   { label: 'Pricing', href: '/pricing/' },
   { label: 'Results', href: '/case-studies/' },
   { label: 'Listings', href: '/listings/' },
