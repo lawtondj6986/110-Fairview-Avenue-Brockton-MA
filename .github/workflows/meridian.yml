@@ -1,0 +1,42 @@
+# Meridian Immigration Group site (meridian/): the full phase gate on every push touching it.
+name: Meridian gate
+
+on:
+  push:
+    paths: ['meridian/**', '.github/workflows/meridian.yml']
+  pull_request:
+    paths: ['meridian/**', '.github/workflows/meridian.yml']
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: meridian
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_TELEMETRY_DISABLED: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: meridian/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm test
+      - run: pnpm build
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: meridian/test-results
