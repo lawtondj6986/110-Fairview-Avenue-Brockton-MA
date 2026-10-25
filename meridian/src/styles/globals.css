@@ -1,0 +1,120 @@
+@import 'tailwindcss';
+
+/* Brand tokens. gold is an accent on navy ONLY; signal is for emergency ONLY. */
+@theme {
+  --color-navy: #14284b;
+  --color-navy-deep: #0d1b33;
+  --color-gold: #b8892e;
+  --color-brass: #8a6516;
+  --color-teal: #1f6f78;
+  --color-teal-dark: #17555c;
+  --color-ivory: #f7f3ea;
+  --color-ivory-dark: #ece5d5;
+  --color-slate: #2e3440;
+  --color-signal: #b3261e;
+  --color-signal-dark: #8f1e18;
+  --color-white: #ffffff;
+
+  --font-display: var(--font-lora), Georgia, 'Times New Roman', serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+
+  /* Body never below 18px on mobile. */
+  --text-base: 1.125rem;
+  --text-base--line-height: 1.65;
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.6;
+
+  --radius-card: 0.875rem;
+  --spacing-tap: 2.75rem; /* 44px minimum target (WCAG 2.5.8 + comfortable thumbs) */
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-ivory);
+    color: var(--color-slate);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    color: var(--color-navy);
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  a {
+    color: var(--color-teal);
+    text-underline-offset: 0.18em;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-teal);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .on-navy :focus-visible,
+  .on-signal :focus-visible {
+    outline-color: var(--color-gold);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .prose-plain h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-plain p,
+  .prose-plain ul,
+  .prose-plain ol {
+    margin-bottom: 1rem;
+  }
+  .prose-plain ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+  }
+  .prose-plain ol {
+    list-style: decimal;
+    padding-left: 1.5rem;
+  }
+  .prose-plain li {
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Leave room for the sticky mobile action bar so it never covers content. */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: calc(4.75rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media print {
+  header,
+  nav,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+    padding-bottom: 0;
+  }
+  a {
+    color: #000;
+  }
+}
