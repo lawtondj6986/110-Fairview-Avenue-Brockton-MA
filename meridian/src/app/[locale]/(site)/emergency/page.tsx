@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { CallButton } from '@/components/CallButton';
-import { Disclaimer } from '@/components/Disclaimer';
+import { getTranslations } from 'next-intl/server';
 import { LegalBanner } from '@/components/LegalBanner';
 import { TrustNote } from '@/components/TrustNote';
 import { getLegalTranslations } from '@/lib/legal';
@@ -18,6 +18,7 @@ const ICE_LOCATOR = 'https://locator.ice.gov/odls/';
 export default async function EmergencyPage({ params }: LocaleParams) {
   const locale = await initLocale(params);
   const { t, lang, englishOnly } = await getLegalTranslations(locale, 'Emergency');
+  const tUi = await getTranslations('MobileBar');
   const list = (prefix: string, n: number) =>
     Array.from({ length: n }, (_, i) => <li key={i}>{t(`${prefix}${i + 1}` as Parameters<typeof t>[0])}</li>);
 
@@ -27,8 +28,9 @@ export default async function EmergencyPage({ params }: LocaleParams) {
       <article lang={lang} className="prose-plain max-w-3xl">
         <h1 className="text-3xl text-signal md:text-4xl">{t('title')}</h1>
         <p className="mt-3 text-lg">{t('lead')}</p>
-        <div className="not-prose my-6">
-          <CallButton label={t('callCta')} emergency />
+        {/* The call action is UI, not legal text: always in the reader's own language. */}
+        <div lang={locale} className="not-prose my-6">
+          <CallButton label={englishOnly ? tUi('call') : t('callCta')} emergency />
           <TrustNote />
         </div>
 
@@ -47,9 +49,6 @@ export default async function EmergencyPage({ params }: LocaleParams) {
         <ul>{list('prepare', 3)}</ul>
         <p className="text-base text-slate/85">{t('offline')}</p>
       </article>
-      <div className="mt-8 max-w-3xl">
-        <Disclaimer />
-      </div>
     </div>
   );
 }

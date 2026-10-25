@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { CallButton } from '@/components/CallButton';
-import { Disclaimer } from '@/components/Disclaimer';
 import { LegalBanner } from '@/components/LegalBanner';
 import { TrustNote } from '@/components/TrustNote';
 import { isLocale } from '@/i18n/locales';
@@ -49,9 +48,6 @@ export default async function AreaPage({ params }: Params) {
       <div className="mt-6">
         <CallButton label={tContact('primary')} />
         <TrustNote />
-      </div>
-      <div className="mt-8 max-w-3xl">
-        <Disclaimer />
       </div>
     </div>
   );
