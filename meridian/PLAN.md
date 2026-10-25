@@ -93,18 +93,18 @@ Retention (Vercel Cron → `/api/cron/retention`, bearer secret): unconverted in
 Gate for **every** phase: `pnpm typecheck && pnpm lint && pnpm test && pnpm build` • Playwright e2e green • axe
 reports 0 serious/critical • screenshots at 360px and 1280px in `docs/screenshots/phase-N/`.
 
-### Phase 1 — Foundation
-- [ ] Scaffold Next 16.4 / React 19 / TS strict / pnpm in `meridian/`
-- [ ] Tailwind v4 tokens (brand colors, type scale, ≥18px body)
-- [ ] Layout: header (logo, ≤6 nav, language switcher, **Detained or Arrested?** button), footer (attorney,
+### Phase 1 — Foundation ✅ (gate passed; see docs/screenshots/phase-1)
+- [x] Scaffold Next 16.4 / React 19 / TS strict / pnpm in `meridian/`
+- [x] Tailwind v4 tokens (brand colors, type scale, ≥18px body)
+- [x] Layout: header (logo, ≤6 nav, language switcher, **Detained or Arrested?** button), footer (attorney,
       office, disclaimer), sticky mobile bar (Call + Emergency guide)
-- [ ] i18n: next-intl, 5 locales, kea→pt fallback, chooser, cookie, hreflang, `$review` flags
-- [ ] Core pages: home (6 tiles), emergency, about, contact, privacy, disclaimer, accessibility, 404/error
-- [ ] Listen-to-this-page (speech synthesis), PWA manifest + SW caching `/emergency`
-- [ ] Guards: banned-phrase check, i18n parity check
-- [ ] CI workflow (path-filtered to `meridian/`)
-- [ ] CLAUDE.md, DECISIONS.md, TODO.md, SECURITY.md
-- [ ] Gate + screenshots
+- [x] i18n: next-intl, 5 locales, kea→pt fallback, chooser, cookie, hreflang, `$review` flags
+- [x] Core pages: home (6 tiles), emergency, about, contact, privacy, disclaimer, accessibility, 404/error
+- [x] Listen-to-this-page (speech synthesis), PWA manifest + SW caching `/emergency`
+- [x] Guards: banned-phrase check, i18n parity check
+- [x] CI workflow (path-filtered to `meridian/`)
+- [x] CLAUDE.md, DECISIONS.md, TODO.md, SECURITY.md
+- [x] Gate + screenshots
 
 ### Phase 2 — Practice content + structured data + SEO
 Practice area pages (depth ≤ 2), `LegalService`/`Attorney`/`FAQPage` JSON-LD, sitemap with alternates,
