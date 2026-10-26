@@ -37,3 +37,4 @@ Choices the brief left open. Rule: the safer, simpler, more accessible option, w
 | D-031 | The HTML footer label "Attorney advertising" stays in the footer copyright line | A conservative signal under MA RPC 7.x. Wording needs attorney sign-off (TODO.md). |
 | D-032 | HSTS, nosniff, DENY framing, and a strict Permissions-Policy are set in `next.config.ts` now. CSP comes in Phase 6 | Cheap and safe now. A nonce-based CSP needs dynamic rendering decisions that belong in hardening. |
 | D-033 | CI is a separate workflow scoped to `meridian/**` paths | It leaves the ICS site's existing workflow untouched. |
+| D-034 | Proof-of-concept deploy is a separate Vercel project `meridian-immigration` (root `meridian`), public but with `SITE_NOINDEX=true` | Shareable for review. A law firm page showing TODO_ placeholders must not appear in search results. |

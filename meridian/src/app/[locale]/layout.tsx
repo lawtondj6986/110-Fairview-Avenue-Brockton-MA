@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { Inter, Lora } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { ServiceWorker } from '@/components/ServiceWorker';
+import { flags } from '@/config/flags';
 import { site } from '@/config/site';
 import { getLocaleConfig, locales } from '@/i18n/locales';
 import { initLocale } from '@/lib/page';
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
   manifest: '/manifest.webmanifest',
   icons: { icon: '/icon.svg' },
   formatDetection: { telephone: true },
+  ...(flags.noindex ? { robots: { index: false, follow: false } } : {}),
 };
 
 export const viewport: Viewport = {
