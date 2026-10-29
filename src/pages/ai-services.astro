@@ -6,6 +6,7 @@ import CtaSection from '../components/CtaSection.astro';
 import RevenueLeak from '../components/RevenueLeak.astro';
 import IndustryTicker from '../components/IndustryTicker.astro';
 import { SITE } from '../config';
+import ShortVersion from '../components/ShortVersion.astro';
 
 const title = 'AI Revenue Systems for Contractors & Trades | JobSite, Lead Engine, Market Lock | ICS';
 const description =
@@ -156,6 +157,22 @@ const schema = [
       </div>
     </div>
   </section>
+  <ShortVersion
+    number='<60 sec'
+    numberLabel='lead response, 24/7, guaranteed and measured monthly'
+    facts={[
+      'Three systems with published prices: JobSite $6,500–$9,500, Lead Engine $12,000–$18,000, Market Lock $20,000–$30,000 to build, plus a monthly run rate.',
+      'Built and run by the founder; you own the code, the accounts, and the data from day one.',
+      'Four written guarantees: 21-day launch, sub-60-second response, 90 days to measurable proof, 100% yours.',
+    ]}
+    jumps={[
+      ['Published pricing', '/pricing/'],
+      ['Guarantees', '/guarantees/'],
+      ['Check my territory', '/territories/'],
+      ['Talk to Daniel', '/contact/'],
+    ]}
+  />
+
 
   <!-- REVENUE LEAK -->
   <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6">

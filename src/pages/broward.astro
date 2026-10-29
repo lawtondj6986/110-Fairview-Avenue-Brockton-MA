@@ -4,6 +4,7 @@ import FounderCard from '../components/FounderCard.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import CtaSection from '../components/CtaSection.astro';
 import { SITE } from '../config';
+import ShortVersion from '../components/ShortVersion.astro';
 
 const title = 'Fort Lauderdale & Broward County — AI Revenue Systems, Retail Platforms, Custom Builds | ICS';
 const description =
@@ -71,6 +72,21 @@ const schema = [
       <p class="mt-6 text-sm text-navy-100/60">Fort Lauderdale · Hollywood · Pompano Beach · Pembroke Pines · Coral Springs · Plantation · Davie · Deerfield Beach — and the rest of Broward County</p>
     </div>
   </section>
+  <ShortVersion
+    number='288'
+    numberLabel='exclusive Market Lock territories across 24 Broward cities'
+    facts={[
+      'AI revenue systems, retail platforms, and custom builds at the same published pricing as Massachusetts.',
+      'On the ground in Fort Lauderdale seasonally; every system runs remotely the rest of the year, as it is built to.',
+      'Brokerage is Massachusetts-licensed; a Florida property transaction is handled alongside a licensed Florida broker.',
+    ]}
+    jumps={[
+      ['Broward Territory Board', '/broward/territories/'],
+      ['Published pricing', '/pricing/'],
+      ['Talk to Daniel', '/contact/'],
+    ]}
+  />
+
 
   <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
     <SectionHeading eyebrow="What travels" heading="Three practices, unchanged by the state line." align="center" />

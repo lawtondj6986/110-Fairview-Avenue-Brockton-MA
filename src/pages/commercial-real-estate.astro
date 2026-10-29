@@ -7,6 +7,7 @@ import ListingCard from '../components/ListingCard.astro';
 import CtaSection from '../components/CtaSection.astro';
 import { TOWNS } from '../lib/towns';
 import { SITE } from '../config';
+import ShortVersion from '../components/ShortVersion.astro';
 
 const listings = (await getCollection('listings', ({ data }) => !data.draft && data.status === 'available'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -62,6 +63,22 @@ const schema = [
       </div>
     </div>
   </section>
+  <ShortVersion
+    number='Sub-$3M'
+    numberLabel='the commercial deals national firms ignore and residential agents aren’t built for'
+    facts={[
+      'Buyer, seller, tenant, and landlord representation across 29 South Shore towns, Massachusetts-licensed (#9082020).',
+      'Every listing gets institutional marketing: AI-produced offering memoranda, drone and virtual tours, property-level SEO.',
+      'Five free deal tools so you can run the numbers before you ever call.',
+    ]}
+    jumps={[
+      ['Run the numbers', '/deal-tools/'],
+      ['What’s my building worth?', '/building-worth/'],
+      ['Listings', '/listings/'],
+      ['Talk to Daniel', '/contact/'],
+    ]}
+  />
+
 
   <!-- WHO WE REPRESENT -->
   <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">

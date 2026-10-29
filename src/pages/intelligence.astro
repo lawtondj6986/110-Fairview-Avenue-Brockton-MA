@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import FounderCard from '../components/FounderCard.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import { SITE } from '../config';
+import ShortVersion from '../components/ShortVersion.astro';
 
 const title = 'Commercial Intelligence & OSINT | Know Before You Sign | ICS';
 const description =
@@ -80,6 +81,22 @@ const schema = [
       </div>
     </div>
   </section>
+  <ShortVersion
+    number='60 sec'
+    numberLabel='to scope which desk you need, free, no email'
+    facts={[
+      'Property, counterparty, and competitive diligence from public sources and lawful methods; nothing obtained improperly, ever.',
+      'Four desks with published price bands: the commercial brief, the Deep Dossier, political research, and a confidential scope.',
+      'Confidential in both directions, need-to-know handling, conflict walls.',
+    ]}
+    jumps={[
+      ['Scope it', '/intelligence/scope/'],
+      ['The Deep Dossier', '/intelligence/dossier/'],
+      ['Cost of not knowing', '/intelligence/cost-of-not-knowing/'],
+      ['Discretion', '/confidential/'],
+    ]}
+  />
+
 
   <!-- THE PRACTICE AT A GLANCE -->
   <section class="border-b border-navy-100 bg-paper">
