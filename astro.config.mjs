@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { generateOg } from './scripts/generate-og.mjs';
 import { generateLlmsFull } from './scripts/generate-llms-full.mjs';
 import { generateAnswers } from './scripts/generate-answers.mjs';
+import rehypeGlossary from './scripts/rehype-glossary.mjs';
 
 // Branded social cards are rendered before every build/dev session
 await generateOg();
@@ -28,6 +29,8 @@ export default defineConfig({
   integrations: [sitemap({ filter: (page) => !page.includes('/shipped/') }), llmsFull],
   // The founder's name is a brand: a clean URL for it resolves to the bio.
   redirects: { '/daniel-lawton/': '/about/', '/founder/': '/about/' },
+  // The Glossary teaches while people read: first mention of any term in markdown bodies links to its page.
+  markdown: { rehypePlugins: [rehypeGlossary] },
   vite: {
     plugins: [tailwindcss()],
   },
