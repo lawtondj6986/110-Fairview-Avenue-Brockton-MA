@@ -1,8 +1,11 @@
 ---
 /**
- * ⌘K command palette — instant site search over the build-time index
- * (public/search-index.json, emitted by scripts/generate-og.mjs).
- * Opens via the header button or Cmd/Ctrl+K; closes on Esc or backdrop.
+ * ⌘K palette — "Ask ICS". Two indexes, both built at compile time, both served
+ * as static JSON, nothing leaves the browser:
+ *  - public/search-index.json  (pages, tools, towns, industries)
+ *  - dist/answers-index.json   (every FAQ on the site + published pricing)
+ * Type a few letters and it finds pages. Type a question and it answers it,
+ * citing the page the answer lives on. Opens via the header button or ⌘/Ctrl+K.
  */
 ---
 
@@ -11,7 +14,7 @@
   class="fixed inset-0 z-[60] hidden items-start justify-center bg-navy-950/60 p-4 pt-[12vh] backdrop-blur-sm sm:pt-[18vh]"
   role="dialog"
   aria-modal="true"
-  aria-label="Search the site"
+  aria-label="Ask ICS or search the site"
 >
   <div class="w-full max-w-xl overflow-hidden rounded-xl border border-navy-100 bg-white shadow-2xl">
     <div class="flex items-center gap-3 border-b border-navy-100 px-4">
@@ -21,16 +24,20 @@
       <input
         id="palette-input"
         type="text"
-        placeholder="Search pages, tools, towns, industries…"
+        placeholder="Ask a question, or search pages, tools, towns…"
         autocomplete="off"
         spellcheck="false"
         class="w-full bg-transparent py-3.5 text-sm text-navy-900 placeholder:text-ink-500/60 focus:outline-none"
       />
       <kbd class="hidden shrink-0 rounded border border-navy-100 px-1.5 py-0.5 font-mono text-[10px] text-ink-500 sm:block">esc</kbd>
     </div>
-    <ul id="palette-results" class="max-h-[50vh] overflow-y-auto p-2" role="listbox"></ul>
+    <div id="palette-answers" class="hidden border-b border-navy-100 bg-paper p-3"></div>
+    <ul id="palette-results" class="max-h-[46vh] overflow-y-auto p-2" role="listbox"></ul>
+    <div id="palette-suggest" class="flex flex-wrap gap-1.5 border-t border-navy-100 px-3 py-2.5">
+      <span class="w-full text-[11px] font-semibold uppercase tracking-wider text-ink-500/70">Try asking</span>
+    </div>
     <p class="border-t border-navy-100 px-4 py-2 text-[11px] text-ink-500/70">
-      <kbd class="font-mono">↑↓</kbd> navigate · <kbd class="font-mono">↵</kbd> open · Can't find it? <a href="/contact/" class="font-semibold text-teal-600">Just ask →</a>
+      <kbd class="font-mono">↑↓</kbd> navigate · <kbd class="font-mono">↵</kbd> open · Not answered? <a href="/contact/" class="font-semibold text-teal-600">Ask Daniel directly →</a>
     </p>
   </div>
 </div>
@@ -47,13 +54,24 @@
 
 <script>
   type Entry = { u: string; t: string; k: string };
+  type Answer = { q: string; a: string; u: string; p: string };
   let index: Entry[] | null = null;
+  let answers: Answer[] | null = null;
   let selected = 0;
   let shown: Entry[] = [];
 
-  function palette() {
-    return document.getElementById('palette');
-  }
+  const SUGGESTIONS = [
+    'What does Lead Engine cost?',
+    'Who is Daniel Lawton?',
+    'Is Market Lock really exclusive?',
+    'Do I own the website and the data?',
+    'Is ICS licensed in Florida?',
+  ];
+  const STOP = new Set(['the', 'a', 'an', 'is', 'are', 'do', 'does', 'did', 'i', 'my', 'me', 'we', 'you', 'your', 'it', 'to', 'of', 'in', 'on', 'for', 'and', 'or', 'with', 'what', 'whats', 'how', 'why', 'who', 'when', 'where', 'can', 'will', 'be', 'this', 'that', 'there', 'ics', 'much', 'many', 'get', 'have', 'has', 'any', 'about', 'if']);
+  const QUESTION_WORDS = /\b(what|how|who|why|when|where|can|does|do|is|are|should|will|cost|price|pay|own|guarantee|licensed|license)\b|\?/i;
+
+  const palette = () => document.getElementById('palette');
+  const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
   async function loadIndex() {
     if (index) return index;
@@ -64,6 +82,23 @@
     }
     return index;
   }
+  async function loadAnswers() {
+    if (answers) return answers;
+    try {
+      answers = (await (await fetch('/answers-index.json')).json()) as Answer[];
+    } catch {
+      answers = [];
+    }
+    return answers;
+  }
+
+  const tokens = (s: string) =>
+    s
+      .toLowerCase()
+      .replace(/[^a-z0-9$%\s-]/g, ' ')
+      .split(/\s+/)
+      .filter((w) => w && !STOP.has(w));
+  const stem = (w: string) => w.replace(/(ing|ers|er|es|s)$/, '');
 
   function score(entry: Entry, terms: string[]): number {
     const title = entry.t.toLowerCase();
@@ -80,6 +115,48 @@
     return s;
   }
 
+  /** Term-overlap scoring: question words weigh 3, answer words 1; needs most of the query to land. */
+  function answerScore(ans: Answer, qTerms: string[]): number {
+    const qt = new Set(tokens(ans.q).map(stem));
+    const at = new Set(tokens(ans.a).map(stem));
+    let hits = 0;
+    let s = 0;
+    for (const raw of qTerms) {
+      const t = stem(raw);
+      if (qt.has(t)) {
+        s += 3;
+        hits++;
+      } else if (at.has(t)) {
+        s += 1;
+        hits++;
+      }
+    }
+    if (hits === 0) return 0;
+    if (hits < Math.ceil(qTerms.length * 0.6)) return 0;
+    return s + hits / qTerms.length;
+  }
+
+  function renderAnswers(list: Answer[]) {
+    const box = document.getElementById('palette-answers')!;
+    if (!list.length) {
+      box.classList.add('hidden');
+      box.innerHTML = '';
+      return;
+    }
+    box.classList.remove('hidden');
+    box.innerHTML = list
+      .map(
+        (x) => `
+      <div class="rounded-lg border border-teal-200 bg-white p-3.5">
+        <p class="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-teal-600">Answer</p>
+        <p class="mt-1 text-sm font-bold leading-snug text-navy-900">${esc(x.q)}</p>
+        <p class="mt-1.5 text-sm leading-relaxed text-ink-700">${esc(x.a)}</p>
+        <a href="${x.u}" class="mt-2 inline-block text-xs font-semibold text-teal-600 hover:text-teal-700">From: ${esc(x.p)} →</a>
+      </div>`
+      )
+      .join('<div class="h-2"></div>');
+  }
+
   function render() {
     const list = document.getElementById('palette-results')!;
     list.innerHTML = shown.length
@@ -88,28 +165,48 @@
             (e, i) => `
       <li role="option" aria-selected="${i === selected}">
         <a href="${e.u}" class="block rounded-lg border border-transparent px-3 py-2.5 hover:bg-paper">
-          <span class="block text-sm font-semibold text-navy-900">${e.t.replace(/</g, '&lt;')}</span>
-          <span class="mt-0.5 block text-[11px] uppercase tracking-wider text-ink-500/70">${e.k.replace(/</g, '&lt;')}</span>
+          <span class="block text-sm font-semibold text-navy-900">${esc(e.t)}</span>
+          <span class="mt-0.5 block text-[11px] uppercase tracking-wider text-ink-500/70">${esc(e.k)}</span>
         </a>
       </li>`
           )
           .join('')
-      : `<li class="px-3 py-6 text-center text-sm text-ink-500">No pages match — try fewer letters, or <a href="/contact/" class="font-semibold text-teal-600">ask us directly</a>.</li>`;
+      : `<li class="px-3 py-4 text-center text-sm text-ink-500">No pages match — try fewer words, or <a href="/contact/" class="font-semibold text-teal-600">ask us directly</a>.</li>`;
   }
 
   async function update() {
-    const q = (document.getElementById('palette-input') as HTMLInputElement).value.trim().toLowerCase();
+    const raw = (document.getElementById('palette-input') as HTMLInputElement).value.trim();
+    const q = raw.toLowerCase();
     const idx = await loadIndex();
+    const suggest = document.getElementById('palette-suggest')!;
     if (!q) {
       shown = idx.filter((e) => ['/start/', '/pricing/', '/retail/', '/industries/', '/quotebrain/', '/case-studies/', '/contact/'].includes(e.u));
+      renderAnswers([]);
+      suggest.classList.remove('hidden');
     } else {
+      suggest.classList.add('hidden');
       const terms = q.split(/\s+/).filter(Boolean);
       shown = idx
         .map((e) => [score(e, terms), e] as [number, Entry])
         .filter(([s]) => s > 0)
         .sort((a, b) => b[0] - a[0])
-        .slice(0, 8)
+        .slice(0, 6)
         .map(([, e]) => e);
+
+      // Looks like a question (or is long enough to be one)? Answer it.
+      const qTerms = tokens(raw);
+      if (qTerms.length >= 2 && (QUESTION_WORDS.test(raw) || qTerms.length >= 3)) {
+        const all = await loadAnswers();
+        const best = all
+          .map((a) => [answerScore(a, qTerms), a] as [number, Answer])
+          .filter(([s]) => s > 0)
+          .sort((a, b) => b[0] - a[0])
+          .slice(0, 2)
+          .map(([, a]) => a);
+        renderAnswers(best);
+      } else {
+        renderAnswers([]);
+      }
     }
     selected = 0;
     render();
@@ -122,6 +219,7 @@
     const input = document.getElementById('palette-input') as HTMLInputElement;
     input.value = '';
     update();
+    loadAnswers(); // warm the answers index while they type
     requestAnimationFrame(() => input.focus());
   }
 
@@ -136,18 +234,40 @@
     el.addEventListener('click', (ev) => {
       if (ev.target === el) closePalette();
     });
-    document.getElementById('palette-input')!.addEventListener('input', update);
-    document.getElementById('palette-input')!.addEventListener('keydown', (ev) => {
+    const input = document.getElementById('palette-input') as HTMLInputElement;
+    input.addEventListener('input', update);
+    input.addEventListener('keydown', (ev) => {
       const kev = ev as KeyboardEvent;
       if (kev.key === 'ArrowDown' || kev.key === 'ArrowUp') {
         kev.preventDefault();
         selected = (selected + (kev.key === 'ArrowDown' ? 1 : shown.length - 1)) % Math.max(shown.length, 1);
         render();
       } else if (kev.key === 'Enter' && shown[selected]) {
-        window.location.href = shown[selected].u;
+        const answered = !document.getElementById('palette-answers')!.classList.contains('hidden');
+        if (!answered) window.location.href = shown[selected].u;
       }
     });
+    const suggest = document.getElementById('palette-suggest')!;
+    for (const s of SUGGESTIONS) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'rounded-full border border-navy-100 bg-white px-2.5 py-1 text-xs text-ink-700 hover:border-teal-500 hover:text-teal-700';
+      b.textContent = s;
+      b.addEventListener('click', () => {
+        input.value = s;
+        update();
+        input.focus();
+      });
+      suggest.appendChild(b);
+    }
     document.querySelectorAll('[data-open-search]').forEach((btn) => btn.addEventListener('click', openPalette));
+    // Deep link: /?ask=what+does+lead+engine+cost opens the palette with the question.
+    const ask = new URLSearchParams(location.search).get('ask');
+    if (ask) {
+      openPalette();
+      input.value = ask;
+      update();
+    }
   }
 
   document.addEventListener('astro:page-load', bindPage);

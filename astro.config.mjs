@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { fileURLToPath } from 'node:url';
 import { generateOg } from './scripts/generate-og.mjs';
 import { generateLlmsFull } from './scripts/generate-llms-full.mjs';
+import { generateAnswers } from './scripts/generate-answers.mjs';
 
 // Branded social cards are rendered before every build/dev session
 await generateOg();
@@ -16,6 +17,8 @@ const llmsFull = {
     'astro:build:done': ({ dir, logger }) => {
       const { pages, bytes } = generateLlmsFull(fileURLToPath(dir));
       logger.info(`llms-full.txt: ${pages} pages, ${(bytes / 1024).toFixed(0)} KB`);
+      const a = generateAnswers(fileURLToPath(dir));
+      logger.info(`answers-index.json: ${a.answers} answers, ${(a.bytes / 1024).toFixed(0)} KB`);
     },
   },
 };
