@@ -19,10 +19,10 @@ function text(t, style) {
   return { type: 'div', props: { style, children: t } };
 }
 
-function frontmatterTitle(file) {
+function frontmatterTitle(file, key = 'title') {
   const src = readFileSync(file, 'utf8');
-  const m = src.match(/^title:\s*['"](.+?)['"]\s*$/m);
-  return m ? m[1] : null;
+  const m = src.match(new RegExp(`^${key}:\\s*['"](.+?)['"]\\s*$`, 'm'));
+  return m ? m[1].replace(/\\"/g, '"') : null;
 }
 
 function collectPages() {
@@ -71,6 +71,7 @@ function collectPages() {
     ['/scoreboard/', 'scoreboard', 'UPDATED MONTHLY', 'Agencies show portfolios. We show a scoreboard.'],
     ['/south-shore/', 'south-shore', 'SERVICE AREA · SIXTEEN TOWNS, IN PERSON', "We don't cover the South Shore. We work it."],
     ['/about/', 'about', 'DANIEL LAWTON · FOUNDER OF ICS', 'Boston University-trained. Serial founder. Licensed advisor. Builds the systems himself.'],
+    ['/glossary/', 'glossary', 'THE ICS GLOSSARY · PLAIN ENGLISH', 'Every word they use on you, defined.'],
     ['/letter/', 'letter', 'A LETTER FROM DANIEL · IN HIS OWN WORDS', 'Why I built a firm that does both. Four minutes. I answer my own phone.'],
     ['/contact/', 'contact', 'CONTACT · (508) 942-8259', 'One call. A straight answer. A concrete next step.'],
     ['/workshops/', 'workshops', 'FREE CHAMBER WORKSHOPS', 'AI for Main Street — free, practical, no hype.'],
@@ -91,15 +92,28 @@ function collectPages() {
     pages.push([`/industries/${m[1]}/`, `industries-${m[1]}`, 'AI SYSTEMS BY INDUSTRY · SOUTH SHORE MA', `${m[2]}.`]);
   }
 
+  // Broward cities (same slug/name shape as towns)
+  const browardSrc = readFileSync(rel('src/lib/broward.ts'), 'utf8');
+  for (const m of browardSrc.matchAll(/slug: '([^']+)',\s*\n\s*name: '([^']+)'/g)) {
+    pages.push([`/broward/${m[1]}/`, `broward-${m[1]}`, 'AI REVENUE SYSTEMS · BROWARD COUNTY FL', `${m[2]}, Florida.`]);
+  }
+
   const content = [
-    ['src/content/case-studies', 'case-studies', 'CASE STUDY · SOUTH SHORE MA'],
-    ['src/content/insights', 'insights', 'ICS INSIGHTS'],
-    ['src/content/listings', 'listings', 'COMMERCIAL LISTING · SOUTH SHORE MA'],
+    ['src/content/case-studies', 'case-studies', 'CASE STUDY · SOUTH SHORE MA', 'title'],
+    ['src/content/insights', 'insights', 'ICS INSIGHTS', 'title'],
+    ['src/content/listings', 'listings', 'COMMERCIAL LISTING · SOUTH SHORE MA', 'title'],
+    ['src/content/glossary', 'glossary', 'THE ICS GLOSSARY · PLAIN ENGLISH', 'term'],
   ];
-  for (const [dir, base, eyebrow] of content) {
-    for (const f of readdirSync(rel(dir)).filter((f) => f.endsWith('.md') && !f.startsWith('_'))) {
+  for (const [dir, base, eyebrow, key] of content) {
+    let files = [];
+    try {
+      files = readdirSync(rel(dir)).filter((f) => f.endsWith('.md') && !f.startsWith('_'));
+    } catch {
+      continue;
+    }
+    for (const f of files) {
       const slug = f.replace(/\.md$/, '');
-      const title = frontmatterTitle(rel(`${dir}/${f}`));
+      const title = frontmatterTitle(rel(`${dir}/${f}`), key);
       if (title) pages.push([`/${base}/${slug}/`, `${base}-${slug}`, eyebrow, title]);
     }
   }

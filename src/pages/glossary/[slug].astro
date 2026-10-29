@@ -1,0 +1,131 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import FounderCard from '../../components/FounderCard.astro';
+import { SITE } from '../../config';
+import { founderRef } from '../../lib/founder';
+
+export async function getStaticPaths() {
+  const terms = await getCollection('glossary', ({ data }) => !data.draft);
+  return terms.map((t) => ({ params: { slug: t.id }, props: { entry: t } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { term, category, short, related, tool, faqs } = entry.data;
+
+const all = await getCollection('glossary', ({ data }) => !data.draft);
+const relatedEntries = related.map((slug) => all.find((t) => t.id === slug)).filter(Boolean) as typeof all;
+
+const CAT = {
+  cre: { name: 'Commercial real estate', href: '/commercial-real-estate/', cta: 'Talk to a licensed advisor about your deal' },
+  ai: { name: 'AI systems & marketing', href: '/ai-services/', cta: 'See the systems and published pricing' },
+  intel: { name: 'Intelligence & research', href: '/intelligence/', cta: 'Scope a brief in sixty seconds' },
+}[category];
+
+const title = `${term} — meaning, and why it matters on the South Shore | ICS Glossary`;
+const description = `${short} Plain-English definition from Innovative Commercial Strategies, with the local angle for South Shore business owners and two straight answers.`;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'DefinedTerm',
+    '@id': `${SITE.url}/glossary/${entry.id}/#term`,
+    name: term,
+    description: short,
+    url: `${SITE.url}/glossary/${entry.id}/`,
+    inDefinedTermSet: { '@id': `${SITE.url}/glossary/#set` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: `${term}: what it means and why it matters`,
+    description,
+    author: founderRef(),
+    publisher: { '@id': `${SITE.url}/#business` },
+    mainEntityOfPage: `${SITE.url}/glossary/${entry.id}/`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Glossary', item: `${SITE.url}/glossary/` },
+      { '@type': 'ListItem', position: 2, name: term, item: `${SITE.url}/glossary/${entry.id}/` },
+    ],
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema} ogType="article">
+  <article>
+    <header class="bg-navy-900">
+      <div class="mx-auto max-w-3xl px-4 py-14 sm:px-6">
+        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-400">
+          <a href="/glossary/" class="hover:text-teal-300">Glossary</a> · <a href={`/glossary/#${category}`} class="hover:text-teal-300">{CAT.name}</a>
+        </p>
+        <h1 class="mt-4 font-display text-3xl font-bold leading-tight text-white sm:text-5xl">{term}</h1>
+        <p class="mt-4 text-lg leading-relaxed text-navy-100/90">{short}</p>
+      </div>
+    </header>
+
+    <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+      <div class="prose-ics">
+        <Content />
+      </div>
+
+      {
+        tool && (
+          <aside class="mt-10 flex flex-col gap-3 rounded-xl border border-teal-200 bg-teal-50 p-5 sm:flex-row sm:items-center sm:justify-between">
+            <p class="text-sm text-navy-900"><span class="font-semibold">Run it yourself.</span> There is a free tool on this site for exactly this.</p>
+            <a href={tool.href} class="shrink-0 rounded-md bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700">{tool.label} →</a>
+          </aside>
+        )
+      }
+
+      <section class="mt-12 border-t border-navy-100 pt-8">
+        <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">Straight answers</h2>
+        <dl class="mt-5 space-y-5">
+          {faqs.map((f) => (
+            <div>
+              <dt class="text-base font-bold text-navy-900">{f.q}</dt>
+              <dd class="mt-1.5 text-sm leading-relaxed text-ink-700">{f.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      {
+        relatedEntries.length > 0 && (
+          <section class="mt-12">
+            <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brass-600">Related terms</h2>
+            <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+              {relatedEntries.map((r) => (
+                <li>
+                  <a href={`/glossary/${r.id}/`} class="lift group block rounded-xl border border-navy-100 bg-white p-4 shadow-sm">
+                    <p class="text-sm font-bold text-navy-900 group-hover:text-teal-600">{r.data.term}</p>
+                    <p class="mt-1 text-xs leading-relaxed text-ink-500">{r.data.short}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      <p class="mt-10 text-sm text-ink-500">
+        <a href="/glossary/" class="font-semibold text-teal-600 hover:text-teal-700">← All {all.length} terms</a> ·
+        <a href={CAT.href} class="font-semibold text-teal-600 hover:text-teal-700">{CAT.cta} →</a>
+      </p>
+
+      <FounderCard variant="byline" />
+    </div>
+  </article>
+
+  <CtaSection heading="Hearing this term in a deal right now?" body="Call before you sign. A straight read on the clause, the number, or the pitch, usually in one conversation." />
+</Base>

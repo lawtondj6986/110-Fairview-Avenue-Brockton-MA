@@ -67,4 +67,22 @@ const insights = defineCollection({
   }),
 });
 
-export const collections = { 'case-studies': caseStudies, listings, insights };
+/**
+ * Glossary — one markdown file per term the owner hears in a deal, an AI
+ * pitch, or an intelligence brief. Each carries a South Shore angle and two
+ * FAQs, which are emitted as FAQPage JSON-LD and therefore feed Ask ICS.
+ */
+const glossary = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: './src/content/glossary' }),
+  schema: z.object({
+    term: z.string(),
+    category: z.enum(['cre', 'ai', 'intel']),
+    short: z.string(),
+    related: z.array(z.string()).default([]),
+    tool: z.object({ label: z.string(), href: z.string() }).optional(),
+    faqs: z.array(z.object({ q: z.string(), a: z.string() })).min(1),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { 'case-studies': caseStudies, listings, insights, glossary };

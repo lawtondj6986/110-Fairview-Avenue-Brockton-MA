@@ -166,6 +166,18 @@ const total = places.length * INDUSTRIES.length;
     }
     place.addEventListener('change', update);
     cat.addEventListener('change', update);
+
+    // Deep link: /territories/?place=brockton&cat=roofing pre-selects and shows the result.
+    const q = new URLSearchParams(location.search);
+    const wantPlace = q.get('place');
+    const wantCat = q.get('cat');
+    if (wantPlace && Array.from(place.options).some((o) => o.value === wantPlace)) place.value = wantPlace;
+    if (wantCat && Array.from(cat.options).some((o) => o.value === wantCat)) cat.value = wantCat;
+    if (wantPlace || wantCat) {
+      update();
+      if (place.value && cat.value) result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      else root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
   document.addEventListener('astro:page-load', initBoard);
 </script>
