@@ -1,0 +1,102 @@
+---
+/**
+ * Path memory: records which practice the visitor is in (every page), and on a
+ * return visit to the homepage shows one quiet line — "Welcome back. Last time
+ * you were looking at …" — with the hub, the one best next step, and a way to
+ * forget. Browser-only; see src/lib/paths.ts.
+ */
+---
+
+<div
+  id="path-bar"
+  class="hidden border-b border-brass-400/40 bg-navy-950 text-sm text-navy-100/85"
+  role="region"
+  aria-label="Pick up where you left off"
+>
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-5 gap-y-2 px-4 py-2.5 sm:px-6">
+    <p>
+      <span class="font-semibold text-white">Welcome back.</span>
+      Last time you were looking at <span id="pb-label" class="font-semibold text-brass-300"></span><span id="pb-system"></span>.
+    </p>
+    <a id="pb-hub" href="/" class="font-semibold text-teal-400 hover:text-teal-300"></a>
+    <a id="pb-next" href="/" class="font-semibold text-teal-400 hover:text-teal-300"></a>
+    <button id="pb-forget" type="button" class="ml-auto text-xs text-navy-100/60 hover:text-white">Not you? Forget this</button>
+  </div>
+</div>
+
+<script>
+  import { PATHS, pathForUrl, readPath, rememberPath, forgetPath, dismissPathBar, pathBarDismissed } from '../lib/paths';
+
+  const RETURN_GAP_MS = 30 * 60 * 1000; // a new "visit" starts after 30 quiet minutes
+  let recordedFor = ''; // init runs on first execution and again on astro:page-load; record each page once
+
+  function init() {
+    const pathname = location.pathname;
+
+    // Decide once per browser session whether this is a return visit.
+    let returning = '0';
+    try {
+      const flag = sessionStorage.getItem('ics_returning');
+      if (flag === null) {
+        const prev = readPath();
+        returning = prev && Date.now() - prev.at > RETURN_GAP_MS ? '1' : '0';
+        sessionStorage.setItem('ics_returning', returning);
+      } else {
+        returning = flag;
+      }
+    } catch {
+      returning = '0';
+    }
+
+    // Record the practice this page belongs to.
+    const key = pathForUrl(pathname);
+    if (key && recordedFor !== pathname) {
+      rememberPath(key);
+      recordedFor = pathname;
+    }
+
+    const bar = document.getElementById('path-bar');
+    if (!bar || bar.dataset.ready) return;
+    bar.dataset.ready = '1';
+
+    // The bar shows on the homepage only, for return visitors, until used or dismissed.
+    if (pathname !== '/' || returning !== '1' || pathBarDismissed()) return;
+    try {
+      if (sessionStorage.getItem('ics_bar_done')) return;
+    } catch {
+      /* ignore */
+    }
+    const mem = readPath();
+    if (!mem) return;
+    const info = PATHS[mem.key];
+
+    (document.getElementById('pb-label') as HTMLElement).textContent = info.label;
+    (document.getElementById('pb-system') as HTMLElement).textContent = mem.system ? ` (the Fit Finder matched you with ${mem.system})` : '';
+    const hub = document.getElementById('pb-hub') as HTMLAnchorElement;
+    hub.href = info.hub;
+    hub.textContent = info.hubLabel;
+    const next = document.getElementById('pb-next') as HTMLAnchorElement;
+    next.href = info.next[1];
+    next.textContent = info.next[0] + ' →';
+
+    const done = () => {
+      try {
+        sessionStorage.setItem('ics_bar_done', '1');
+      } catch {
+        /* ignore */
+      }
+    };
+    hub.addEventListener('click', done);
+    next.addEventListener('click', done);
+    document.getElementById('pb-forget')?.addEventListener('click', () => {
+      forgetPath();
+      dismissPathBar();
+      bar.classList.add('hidden');
+    });
+
+    bar.classList.remove('hidden');
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>

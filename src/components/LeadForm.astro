@@ -125,6 +125,8 @@ const inputClass =
 </div>
 
 <script>
+  import { PATHS, readPath } from '../lib/paths';
+
   function initLeadForms() {
     document.querySelectorAll<HTMLElement>('.lead-form-wrap').forEach((wrap) => {
       if (wrap.dataset.ready) return;
@@ -188,6 +190,12 @@ const inputClass =
         if (msg && ta && !ta.value) { ta.value = msg; prefilled = true; }
         if (interest && sel && Array.from(sel.options).some((o) => o.value === interest)) { sel.value = interest; prefilled = true; }
         if (prefilled) form.querySelector('.lead-prefilled')?.classList.remove('hidden');
+        // No interest in the URL: fall back to the practice the visitor was last looking at (browser memory).
+        if (!interest && sel && sel.selectedIndex <= 0) {
+          const mem = readPath();
+          const want = mem ? PATHS[mem.key]?.interest : undefined;
+          if (want && Array.from(sel.options).some((o) => o.value === want)) sel.value = want;
+        }
       } catch {
         /* no-op */
       }

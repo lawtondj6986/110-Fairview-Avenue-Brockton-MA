@@ -170,6 +170,7 @@ const description =
 
 <script>
   import { SITE } from '../config';
+  import { rememberPath, FIT_TO_PATH } from '../lib/paths';
 
   function initFit() {
     const root = document.getElementById('fit');
@@ -301,6 +302,8 @@ const description =
           : 'Broward County, FL — the political desk is built for Massachusetts races; ask and we will tell you honestly whether and how we can help in Florida.';
       }
       (document.getElementById('fit-learn') as HTMLAnchorElement).href = answers.where === 'broward' && travels ? '/broward/' : s.learnHref;
+      // Remember the match (browser-only) so a return visit to the homepage can pick it back up.
+      rememberPath(answers.where === 'broward' && travels ? 'broward' : FIT_TO_PATH[key] || 'ai', { system: s.name });
 
       const email = document.getElementById('fit-email') as HTMLAnchorElement;
       const urgency = answers.when === 'asap' ? "Let's move — email now" : answers.when === 'quarter' ? 'Start the conversation' : 'Ask a question';
