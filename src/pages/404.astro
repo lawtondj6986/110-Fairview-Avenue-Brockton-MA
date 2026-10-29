@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import AskBox from '../components/AskBox.astro';
 
 const title = 'Page Not Found | Innovative Commercial Strategies';
 const description = 'The page you were looking for could not be found.';
@@ -13,14 +14,8 @@ const description = 'The page you were looking for could not be found.';
       Like the best off-market buildings, what you're looking for isn't at this address. Let's get you somewhere
       useful.
     </p>
-    <div class="mt-8 flex flex-wrap justify-center gap-4">
-      <button
-        type="button"
-        data-open-search
-        class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white hover:bg-teal-700"
-      >
-        Search the Site (⌘K)
-      </button>
+    <div class="mt-8 w-full max-w-xl"><AskBox placeholder="Ask what you came for: pricing, a tool, a town, a term" /></div>
+    <div class="mt-6 flex flex-wrap justify-center gap-4">
       <a href="/start/" class="rounded-md border border-navy-900 px-6 py-3 font-semibold text-navy-900 hover:bg-navy-900 hover:text-white">
         45-Second Fit Finder
       </a>

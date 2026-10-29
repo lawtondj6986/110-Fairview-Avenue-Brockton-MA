@@ -1,0 +1,66 @@
+---
+/**
+ * Ask ICS, inline. A plain question box that hands the question to the ⌘K
+ * palette, which answers it from the site's own FAQs and published pricing.
+ * Drop it anywhere a question is forming: the glossary, the answers page,
+ * the contact page, the 404.
+ */
+interface Props {
+  placeholder?: string;
+  label?: string;
+  dark?: boolean;
+  compact?: boolean;
+}
+const {
+  placeholder = 'Ask anything: what does Lead Engine cost? Is ICS licensed in Florida?',
+  label = 'Ask ICS',
+  dark = false,
+  compact = false,
+} = Astro.props;
+---
+
+<form
+  class:list={['ask-box flex w-full items-stretch gap-2', compact ? 'max-w-xl' : 'max-w-2xl']}
+  role="search"
+  aria-label="Ask ICS a question"
+  data-ask-box
+>
+  <label class="sr-only" for={`ask-${Math.random().toString(36).slice(2, 7)}`}>{label}</label>
+  <input
+    type="text"
+    name="q"
+    autocomplete="off"
+    placeholder={placeholder}
+    class:list={[
+      'min-w-0 flex-1 rounded-md border px-4 py-3 text-sm focus:outline-none focus:ring-2',
+      dark
+        ? 'border-white/20 bg-white/10 text-white placeholder:text-navy-100/60 focus:border-teal-400 focus:ring-teal-400/30'
+        : 'border-navy-100 bg-white text-navy-900 placeholder:text-ink-500/60 focus:border-teal-500 focus:ring-teal-100',
+    ]}
+  />
+  <button
+    type="submit"
+    class:list={[
+      'shrink-0 rounded-md px-5 py-3 text-sm font-semibold transition-colors',
+      dark ? 'bg-teal-600 text-white hover:bg-teal-700' : 'bg-navy-900 text-white hover:bg-teal-600',
+    ]}
+  >
+    {label}
+  </button>
+</form>
+
+<script>
+  function initAskBoxes() {
+    document.querySelectorAll<HTMLFormElement>('[data-ask-box]').forEach((form) => {
+      if (form.dataset.ready) return;
+      form.dataset.ready = '1';
+      form.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        const q = (form.elements.namedItem('q') as HTMLInputElement).value.trim();
+        document.dispatchEvent(new CustomEvent('ics:ask', { detail: q }));
+      });
+    });
+  }
+  initAskBoxes();
+  document.addEventListener('astro:page-load', initAskBoxes);
+</script>

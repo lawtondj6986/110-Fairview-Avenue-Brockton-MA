@@ -137,25 +137,52 @@
     return s + hits / qTerms.length;
   }
 
-  function renderAnswers(list: Answer[]) {
+  let lastTracked = '';
+  function track(q: string, answered: boolean) {
+    if (!q || q === lastTracked) return;
+    lastTracked = q;
+    try {
+      (window as unknown as { va?: (e: string, o: unknown) => void }).va?.('event', { name: 'ask', data: { q: q.slice(0, 120), answered } });
+    } catch {
+      /* best-effort */
+    }
+  }
+
+  const sendHref = (q: string) => `/contact/?${new URLSearchParams({ interest: 'Something else', message: `Question for Daniel: ${q}` }).toString()}`;
+
+  function renderAnswers(list: Answer[], q = '', isQuestion = false) {
     const box = document.getElementById('palette-answers')!;
-    if (!list.length) {
+    if (!list.length && !isQuestion) {
       box.classList.add('hidden');
       box.innerHTML = '';
       return;
     }
     box.classList.remove('hidden');
-    box.innerHTML = list
-      .map(
-        (x) => `
+    if (!list.length) {
+      // A real question with no instant answer becomes a message to the founder, pre-written.
+      box.innerHTML = `
+      <div class="rounded-lg border border-brass-400/50 bg-white p-3.5">
+        <p class="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-brass-600">No instant answer for that one</p>
+        <p class="mt-1 text-sm leading-relaxed text-ink-700">Daniel answers his own email. Send it as written and you'll get a straight reply, usually the same day.</p>
+        <a href="${sendHref(q)}" class="mt-2 inline-block rounded-md bg-teal-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-teal-700">Send this question to Daniel →</a>
+      </div>`;
+      track(q, false);
+      return;
+    }
+    box.innerHTML =
+      list
+        .map(
+          (x) => `
       <div class="rounded-lg border border-teal-200 bg-white p-3.5">
         <p class="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-teal-600">Answer</p>
         <p class="mt-1 text-sm font-bold leading-snug text-navy-900">${esc(x.q)}</p>
         <p class="mt-1.5 text-sm leading-relaxed text-ink-700">${esc(x.a)}</p>
         <a href="${x.u}" class="mt-2 inline-block text-xs font-semibold text-teal-600 hover:text-teal-700">From: ${esc(x.p)} →</a>
       </div>`
-      )
-      .join('<div class="h-2"></div>');
+        )
+        .join('<div class="h-2"></div>') +
+      `<p class="mt-2 px-1 text-[11px] text-ink-500">Not quite it? <a href="${sendHref(q)}" class="font-semibold text-teal-600 hover:text-teal-700">Send this question to Daniel →</a></p>`;
+    track(q, true);
   }
 
   function render() {
@@ -210,7 +237,7 @@
           .sort((a, b) => b[0] - a[0])
           .slice(0, 2)
           .map(([, a]) => a);
-        renderAnswers(best);
+        renderAnswers(best, raw, true);
       } else {
         renderAnswers([]);
       }
@@ -268,6 +295,18 @@
       suggest.appendChild(b);
     }
     document.querySelectorAll('[data-open-search]').forEach((btn) => btn.addEventListener('click', openPalette));
+    if (!(window as any).__paletteAsk) {
+      (window as any).__paletteAsk = true;
+      document.addEventListener('ics:ask', (ev) => {
+        const q = String((ev as CustomEvent).detail || '').trim();
+        openPalette();
+        const inp = document.getElementById('palette-input') as HTMLInputElement | null;
+        if (inp && q) {
+          inp.value = q;
+          update();
+        }
+      });
+    }
     // Deep link: /?ask=what+does+lead+engine+cost opens the palette with the question.
     const ask = new URLSearchParams(location.search).get('ask');
     if (ask) {

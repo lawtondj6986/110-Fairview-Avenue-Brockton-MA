@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import CtaSection from '../components/CtaSection.astro';
 import { SITE } from '../config';
+import AskBox from '../components/AskBox.astro';
 
 const title = 'Straight Answers — Pricing, Process, AI, Real Estate | ICS';
 const description =
@@ -168,6 +169,9 @@ const schema = [
         Prices included, hedging excluded. If your question isn't here, call {SITE.phone} and ask the founder directly
         — that's not a figure of speech.
       </p>
+      <div class="reveal mx-auto mt-7 flex justify-center" style="--reveal-delay: 280ms">
+        <AskBox dark placeholder="Type your question: what does Lead Engine cost? do I own the website?" />
+      </div>
     </div>
   </section>
 

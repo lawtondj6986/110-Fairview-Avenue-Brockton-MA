@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import CtaSection from '../../components/CtaSection.astro';
 import FounderCard from '../../components/FounderCard.astro';
 import { SITE } from '../../config';
+import AskBox from '../../components/AskBox.astro';
 
 const terms = (await getCollection('glossary', ({ data }) => !data.draft)).sort((a, b) =>
   a.data.term.localeCompare(b.data.term, 'en', { sensitivity: 'base' })
@@ -50,6 +51,9 @@ const schema = [
         The lease, the lender, the agency pitch, the research file. Each term gets a definition, the reason it matters on
         the South Shore, and two straight answers. Ask any of them in the search box and the answer comes back.
       </p>
+      <div class="reveal mt-7" style="--reveal-delay: 260ms">
+        <AskBox dark placeholder="Ask in plain English: what is a good cap rate? what does NNN mean?" />
+      </div>
       <p class="reveal mt-6 flex flex-wrap gap-1.5" style="--reveal-delay: 300ms">
         {letters.map((l) => (
           <a href={`#letter-${l}`} class="rounded border border-white/15 px-2 py-0.5 font-mono text-xs font-semibold text-navy-100/80 hover:border-teal-400 hover:text-teal-400">{l}</a>
