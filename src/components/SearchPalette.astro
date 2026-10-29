@@ -159,6 +159,12 @@
 
   function render() {
     const list = document.getElementById('palette-results')!;
+    const answered = !document.getElementById('palette-answers')!.classList.contains('hidden');
+    if (!shown.length && answered) {
+      // An answer is showing; don't nag about pages underneath it.
+      list.innerHTML = '';
+      return;
+    }
     list.innerHTML = shown.length
       ? shown
           .map(
