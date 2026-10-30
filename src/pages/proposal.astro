@@ -1,0 +1,310 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+import FounderCard from '../components/FounderCard.astro';
+import { SITE, FOUNDER } from '../config';
+import { SYSTEMS } from '../lib/systems';
+import { TOWNS } from '../lib/towns';
+import { BROWARD_CITIES } from '../lib/broward';
+import { INDUSTRIES } from '../lib/industries';
+import { CLAIMED_MA, CLAIMED_FL } from '../lib/claimed';
+
+const title = 'Build Your Own Proposal — Scope, Price, Guarantees in 60 Seconds | ICS';
+const description =
+  'Pick a system, a town, and your industry. The site writes a one-page proposal from the published pricing, the written guarantees, your industry’s fit, and live territory status. Print it, send it, or request it as a written quote within 48 hours. No email required to see the numbers.';
+
+const towns = [...TOWNS].sort((a, b) => a.name.localeCompare(b.name));
+const cities = [...BROWARD_CITIES].sort((a, b) => a.name.localeCompare(b.name));
+const claimed = { MA: CLAIMED_MA, FL: CLAIMED_FL };
+const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'ICS Proposal Builder',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: `${SITE.url}/proposal/`,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    provider: { '@id': `${SITE.url}/#business` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Is the proposal builder a real quote?',
+        acceptedAnswer: { '@type': 'Answer', text: 'It is the published scope and price range for the system you chose, assembled for your town and industry. The written quote, with an exact number inside that range, follows a call and arrives within 48 hours. Nothing in the builder is a number the pricing page does not already show.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Do I have to give an email to see the proposal?',
+        acceptedAnswer: { '@type': 'Answer', text: 'No. The proposal renders on the page, the link carries your choices so you can send it to a partner, and you can print it to PDF. Your email enters the picture only if you ask for the written quote.' },
+      },
+    ],
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950 print:hidden">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Free · Build your own proposal · 60 seconds · No email</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        Write your own proposal. We publish the prices anyway.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Pick a system, your town, and your industry. The page assembles the scope, the price range, the guarantees, the
+        timeline, and whether your territory is still open. Print it, send it to a partner, or ask for it as a written quote.
+      </p>
+    </div>
+  </section>
+
+  <section
+    class="mx-auto max-w-6xl px-4 py-10 sm:px-6"
+    id="builder"
+    data-claimed={JSON.stringify(claimed)}
+    data-today={today}
+  >
+    <div class="grid gap-4 print:hidden sm:grid-cols-3">
+      <label class="block">
+        <span class="mb-1 block text-sm font-medium text-navy-900">The system</span>
+        <select id="pp-system" class="w-full rounded-md border border-navy-100 bg-white px-3 py-2.5 text-sm text-navy-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100">
+          {SYSTEMS.map((s) => <option value={s.key}>{s.name} · {s.setup}</option>)}
+        </select>
+      </label>
+      <label class="block">
+        <span class="mb-1 block text-sm font-medium text-navy-900">Your town or city</span>
+        <select id="pp-place" class="w-full rounded-md border border-navy-100 bg-white px-3 py-2.5 text-sm text-navy-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100">
+          <optgroup label="South Shore, Massachusetts">
+            {towns.map((t) => <option value={`MA:${t.slug}`}>{t.name}, MA</option>)}
+          </optgroup>
+          <optgroup label="Broward County, Florida">
+            {cities.map((c) => <option value={`FL:${c.slug}`}>{c.name}, FL</option>)}
+          </optgroup>
+          <option value="other">Somewhere else</option>
+        </select>
+      </label>
+      <label class="block">
+        <span class="mb-1 block text-sm font-medium text-navy-900">Your industry</span>
+        <select id="pp-industry" class="w-full rounded-md border border-navy-100 bg-white px-3 py-2.5 text-sm text-navy-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100">
+          {INDUSTRIES.map((i) => <option value={i.slug}>{i.name}</option>)}
+          <option value="other">Something else</option>
+        </select>
+      </label>
+    </div>
+    <p class="mt-2 text-xs text-ink-500 print:hidden">
+      Not sure which system? <a href="/start/" class="font-semibold text-teal-600 hover:text-teal-700">The Fit Finder picks one in four questions →</a>
+    </p>
+
+    <!-- THE PROPOSAL -->
+    <article id="sheet" class="mt-8 rounded-2xl border border-navy-100 bg-white shadow-sm print:border-0 print:shadow-none">
+      <header class="flex flex-col gap-4 border-b border-navy-100 p-6 sm:flex-row sm:items-start sm:justify-between sm:p-8">
+        <div>
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">Proposal · prepared <span id="pp-date"></span></p>
+          <h2 class="mt-2 font-display text-3xl font-bold text-navy-900"><span id="pp-sysname"></span></h2>
+          <p class="mt-1 text-base text-ink-500" id="pp-tagline"></p>
+          <p class="mt-3 text-sm text-navy-900">Prepared for <span class="font-semibold" id="pp-for"></span></p>
+        </div>
+        <div class="flex items-center gap-3 sm:text-right">
+          <img src={FOUNDER.image} alt={FOUNDER.name} class="h-14 w-12 rounded-lg border-2 border-teal-500/50 object-cover object-top sm:order-2" width="800" height="1524" loading="lazy" />
+          <div class="text-sm">
+            <p class="font-semibold text-navy-900">{FOUNDER.name}</p>
+            <p class="text-ink-500">{FOUNDER.title}, {SITE.shortName}</p>
+            <p class="text-ink-500">{SITE.phone}</p>
+          </div>
+        </div>
+      </header>
+
+      <div class="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.4fr_1fr]">
+        <div class="space-y-8">
+          <section>
+            <h3 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">Why this system for your business</h3>
+            <p class="mt-3 text-base leading-relaxed text-ink-700" id="pp-why"></p>
+          </section>
+          <section>
+            <h3 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">What is included</h3>
+            <ul class="mt-3 space-y-2 text-sm leading-relaxed text-ink-700" id="pp-includes"></ul>
+          </section>
+          <section id="pp-territory-wrap">
+            <h3 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">Territory</h3>
+            <p class="mt-3 text-sm leading-relaxed text-ink-700" id="pp-territory"></p>
+          </section>
+          <section>
+            <h3 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">What happens next</h3>
+            <ol class="mt-3 space-y-2 text-sm leading-relaxed text-ink-700">
+              <li><span class="font-semibold text-navy-900">1. A call.</span> Thirty minutes with the founder on your business, your market, and whether this is the right system. Free.</li>
+              <li><span class="font-semibold text-navy-900">2. A written quote in 48 hours.</span> An exact number inside the published range, the scope, the timeline, and the guarantees, in writing.</li>
+              <li><span class="font-semibold text-navy-900">3. Kickoff.</span> <span id="pp-timeline"></span>.</li>
+            </ol>
+          </section>
+        </div>
+
+        <aside class="space-y-5">
+          <div class="rounded-xl bg-navy-950 p-6 text-white">
+            <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-300">Published price</p>
+            <p class="mt-2 font-display text-3xl font-bold" id="pp-setup"></p>
+            <p class="text-sm text-navy-100/80">to build</p>
+            <p class="mt-3 font-display text-xl font-bold" id="pp-monthly"></p>
+            <p class="text-sm text-navy-100/80">to run, reported monthly</p>
+            <p class="mt-4 text-xs text-navy-100/60">The same numbers on the <a href="/pricing/" class="font-semibold text-teal-400 hover:text-teal-300">pricing page</a>. Exact figure follows the call.</p>
+          </div>
+          <div class="rounded-xl border border-navy-100 bg-paper p-6">
+            <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">Guarantees, in writing</p>
+            <ul class="mt-3 space-y-2 text-sm leading-relaxed text-ink-700" id="pp-guarantees"></ul>
+            <p class="mt-3 text-xs text-ink-500"><a href="/guarantees/" class="font-semibold text-teal-600 hover:text-teal-700">The full guarantees page →</a></p>
+          </div>
+          <div class="rounded-xl border border-navy-100 bg-white p-6">
+            <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">Best for</p>
+            <p class="mt-2 text-sm leading-relaxed text-ink-700" id="pp-bestfor"></p>
+            <p class="mt-3 text-xs text-ink-500" id="pp-learn"></p>
+          </div>
+        </aside>
+      </div>
+
+      <footer class="flex flex-col gap-3 border-t border-navy-100 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8 print:hidden">
+        <div class="flex flex-wrap gap-3">
+          <a id="pp-quote" href="/contact/" class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-teal-700">Request this as a written quote →</a>
+          <button type="button" id="pp-share" class="rounded-md border border-navy-100 px-5 py-2.5 text-sm font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700">Copy a shareable link</button>
+          <button type="button" id="pp-print" class="rounded-md border border-navy-100 px-5 py-2.5 text-sm font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700">Print / Save as PDF</button>
+        </div>
+        <p class="text-xs text-ink-500">{SITE.license}</p>
+      </footer>
+    </article>
+
+    <!-- Data the script reads: one hidden node per system, and each industry's "why" for each system. -->
+    <div hidden id="pp-data">
+      {
+        SYSTEMS.map((s) => (
+          <div data-system={s.key} data-name={s.name} data-tagline={s.tagline} data-setup={s.setup} data-monthly={s.monthly} data-timeline={s.timeline} data-bestfor={s.bestFor} data-href={s.href}>
+            <ul data-includes>{s.includes.map((x) => <li>{x}</li>)}</ul>
+            <ul data-guarantees>{s.guarantees.map((x) => <li>{x}</li>)}</ul>
+          </div>
+        ))
+      }
+      {
+        INDUSTRIES.map((i) =>
+          i.installs.map((inst) => (
+            <p data-why={`${i.slug}|${inst.system}`}>{inst.why}</p>
+          ))
+        )
+      }
+    </div>
+  </section>
+
+  <FounderCard heading="The person who will write the real one" line="Every proposal on this page is built from numbers and promises already published on this site. The written quote comes from the same person who builds the system." />
+  <CtaSection heading="Want the exact number?" body="One call, a written quote within 48 hours, and a kickoff date. The proposal you just built is the first draft." />
+</Base>
+
+<script>
+  function initBuilder() {
+    const root = document.getElementById('builder');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+    const claimed = JSON.parse(root.dataset.claimed || '{}') as Record<string, { place: string; industry: string }[]>;
+    const sys = document.getElementById('pp-system') as HTMLSelectElement;
+    const place = document.getElementById('pp-place') as HTMLSelectElement;
+    const ind = document.getElementById('pp-industry') as HTMLSelectElement;
+    const $ = (id: string) => document.getElementById(id)!;
+    const NAME_BY_KEY: Record<string, string> = { jobsite: 'JobSite', leadengine: 'Lead Engine', marketlock: 'Market Lock' };
+
+    const q = new URLSearchParams(location.search);
+    const has = (sel: HTMLSelectElement, v: string | null) => !!v && Array.from(sel.options).some((o) => o.value === v);
+    if (has(sys, q.get('system'))) sys.value = q.get('system')!;
+    if (has(place, q.get('place'))) place.value = q.get('place')!;
+    if (has(ind, q.get('industry'))) ind.value = q.get('industry')!;
+    // A remembered path makes a sensible default system.
+    try {
+      const mem = JSON.parse(localStorage.getItem('ics_path') || 'null');
+      if (!q.get('system') && mem?.system) {
+        const k = Object.keys(NAME_BY_KEY).find((key) => NAME_BY_KEY[key] === mem.system);
+        if (k) sys.value = k;
+      }
+    } catch {
+      /* ignore */
+    }
+
+    function render() {
+      const data = document.querySelector<HTMLElement>(`#pp-data [data-system="${sys.value}"]`)!;
+      const sysName = data.dataset.name!;
+      const placeOpt = place.selectedOptions[0];
+      const placeName = place.value === 'other' ? 'your market' : placeOpt.textContent!;
+      const [state, placeSlug] = place.value.includes(':') ? place.value.split(':') : ['', ''];
+      const indName = ind.value === 'other' ? 'your business' : ind.selectedOptions[0].textContent!;
+      const indLower = ind.value === 'other' ? 'business' : indName.toLowerCase() + ' business';
+
+      $('pp-date').textContent = root!.dataset.today!;
+      $('pp-sysname').textContent = sysName;
+      $('pp-tagline').textContent = data.dataset.tagline!;
+      $('pp-for').textContent = `a ${indLower} in ${placeName}`;
+      $('pp-setup').textContent = data.dataset.setup!;
+      $('pp-monthly').textContent = data.dataset.monthly!;
+      $('pp-timeline').textContent = data.dataset.timeline!;
+      $('pp-bestfor').textContent = data.dataset.bestfor!;
+      $('pp-learn').innerHTML = `<a href="${data.dataset.href}" class="font-semibold text-teal-600 hover:text-teal-700">The ${sysName} page →</a>`;
+      $('pp-includes').innerHTML = Array.from(data.querySelectorAll('[data-includes] li')).map((li) => `<li class="flex gap-2"><span class="text-teal-600">✓</span><span>${li.textContent}</span></li>`).join('');
+      $('pp-guarantees').innerHTML = Array.from(data.querySelectorAll('[data-guarantees] li')).map((li) => `<li class="flex gap-2"><span class="text-brass-600">●</span><span>${li.textContent}</span></li>`).join('');
+
+      const why = document.querySelector<HTMLElement>(`#pp-data [data-why="${ind.value}|${sysName}"]`);
+      $('pp-why').textContent = why
+        ? why.textContent!
+        : `${sysName} is built for a ${indLower}: published scope, published price, written guarantees, and one accountable builder from kickoff to the monthly review.`;
+
+      // Territory line
+      const wrap = $('pp-territory-wrap');
+      const t = $('pp-territory');
+      if (sys.value === 'marketlock' && state && ind.value !== 'other') {
+        const locked = (claimed[state] || []).some((c) => c.place === placeSlug && c.industry === ind.value);
+        const boardHref = state === 'FL' ? '/broward/territories/' : '/territories/';
+        t.innerHTML = locked
+          ? `<span class="font-semibold text-brass-600">${indName} in ${placeName} is currently held by an ICS client.</span> We can put you first in line for renewal, or scope a neighboring territory or an adjacent category. <a href="${boardHref}?place=${placeSlug}&cat=${ind.value}" class="font-semibold text-teal-600 hover:text-teal-700">See the board →</a>`
+          : `<span class="font-semibold text-teal-700">${indName} in ${placeName} is open.</span> Market Lock holds one ${indName.toLowerCase()} business per ${state === 'FL' ? 'city' : 'town'}; the first to lock it keeps it for the 12-month term with first right to renew. <a href="${boardHref}?place=${placeSlug}&cat=${ind.value}" class="font-semibold text-teal-600 hover:text-teal-700">Check the board →</a>`;
+        wrap.classList.remove('hidden');
+      } else if (state === 'FL') {
+        t.textContent = `Delivered in ${placeName} at the same published pricing as Massachusetts. ICS is on the ground in Broward seasonally and every system runs remotely the rest of the year. Real estate brokerage is Massachusetts-licensed; this proposal is for systems only.`;
+        wrap.classList.remove('hidden');
+      } else if (state === 'MA') {
+        t.textContent = `Delivered in person across ${placeName} and the surrounding South Shore towns, from the half-day Operator Session to launch day and the monthly review.`;
+        wrap.classList.remove('hidden');
+      } else {
+        t.textContent = 'Every system runs remotely and is built to; in-person work happens on the South Shore of Massachusetts and seasonally in Broward County, Florida.';
+        wrap.classList.remove('hidden');
+      }
+
+      // URL state, quote link, analytics
+      const url = new URL(location.href);
+      url.searchParams.set('system', sys.value);
+      url.searchParams.set('place', place.value);
+      url.searchParams.set('industry', ind.value);
+      history.replaceState(null, '', url.toString());
+      ($('pp-quote') as HTMLAnchorElement).href = `/contact/?${new URLSearchParams({
+        interest: 'AI systems & marketing',
+        message: `Written quote request — ${sysName} for a ${indLower} in ${placeName}.\n\nI built this proposal on your site: ${url.toString()}\n\nMy business: \nBest time to call: `,
+      }).toString()}`;
+      try {
+        (window as unknown as { va?: (e: string, o: unknown) => void }).va?.('event', { name: 'proposal', data: { system: sys.value, place: place.value, industry: ind.value } });
+      } catch {
+        /* best-effort */
+      }
+    }
+
+    [sys, place, ind].forEach((el) => el.addEventListener('change', render));
+    const share = $('pp-share') as HTMLButtonElement;
+    share.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(location.href);
+        share.textContent = 'Link copied';
+      } catch {
+        share.textContent = location.href;
+      }
+      setTimeout(() => (share.textContent = 'Copy a shareable link'), 2500);
+    });
+    $('pp-print').addEventListener('click', () => window.print());
+    render();
+  }
+  initBuilder();
+  document.addEventListener('astro:page-load', initBuilder);
+</script>
