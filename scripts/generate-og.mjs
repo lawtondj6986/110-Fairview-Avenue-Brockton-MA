@@ -54,6 +54,8 @@ function collectPages() {
     ['/partners/', 'partners', 'PARTNERS · REFERRALS · WHITE-LABEL', "We'd rather split a deal with you than compete for it."],
     ['/broward/', 'broward', 'FORT LAUDERDALE · BROWARD COUNTY, FL', 'The South Shore playbook, in South Florida.'],
     ['/broward/territories/', 'broward-territories', 'MARKET LOCK · BROWARD TERRITORY BOARD', 'One business per category, per city. Fort Lauderdale to Parkland.'],
+    ['/palm-beach/', 'palm-beach', 'BOCA RATON · PALM BEACH COUNTY, FL', 'The South Shore playbook, from Boca Raton to Jupiter.'],
+    ['/palm-beach/territories/', 'palm-beach-territories', 'MARKET LOCK · PALM BEACH TERRITORY BOARD', 'One business per category, per city. Boca Raton to Jupiter.'],
     ['/press/', 'press', 'PRESS & MEDIA KIT · HELP YOURSELF', 'Everything a writer needs. No PR firm between us.'],
     ['/private-clients/', 'private-clients', 'PRIVATE CLIENTS · MID-SIZE COMPANIES', 'For owners with more at stake.'],
     ['/intelligence/', 'intelligence', 'COMMERCIAL INTELLIGENCE · OSINT', 'Know before you sign.'],
@@ -98,6 +100,11 @@ function collectPages() {
   const browardSrc = readFileSync(rel('src/lib/broward.ts'), 'utf8');
   for (const m of browardSrc.matchAll(/slug: '([^']+)',\s*\n\s*name: '([^']+)'/g)) {
     pages.push([`/broward/${m[1]}/`, `broward-${m[1]}`, 'AI REVENUE SYSTEMS · BROWARD COUNTY FL', `${m[2]}, Florida.`]);
+  }
+
+  const pbSrc = readFileSync(rel('src/lib/palm-beach.ts'), 'utf8');
+  for (const m of pbSrc.matchAll(/slug: '([^']+)',\s*\n\s*name: '([^']+)'/g)) {
+    pages.push([`/palm-beach/${m[1]}/`, `palm-beach-${m[1]}`, 'AI REVENUE SYSTEMS · PALM BEACH COUNTY FL', `${m[2]}, Florida.`]);
   }
 
   const content = [

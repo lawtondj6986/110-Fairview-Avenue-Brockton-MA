@@ -39,7 +39,7 @@ const description =
         <legend class="text-xl font-bold text-navy-900">Where is the business?</legend>
         <div class="mt-4 grid gap-3 sm:grid-cols-3">
           <button type="button" class="fit-opt" data-q="where" data-v="south-shore">South Shore, MA <span>Brockton and 28 towns — in person</span></button>
-          <button type="button" class="fit-opt" data-q="where" data-v="broward">Broward County, FL <span>Fort Lauderdale and the county — seasonal</span></button>
+          <button type="button" class="fit-opt" data-q="where" data-v="broward">South Florida <span>Broward &amp; Palm Beach Counties — seasonal</span></button>
           <button type="button" class="fit-opt" data-q="where" data-v="elsewhere">Somewhere else <span>The systems run remotely anywhere</span></button>
         </div>
       </fieldset>
@@ -291,7 +291,7 @@ const description =
       const travels = key === 'jobsite' || key === 'leadengine' || key === 'marketlock' || key === 'retail' || key === 'platform';
       const MARKET: Record<string, string> = {
         'south-shore': 'South Shore, MA — in person across 29 towns, Brockton to the coast.',
-        broward: 'Broward County, FL — the seasonal practice, same published pricing and guarantees. Brokerage is Massachusetts-licensed; for a Florida property we work alongside a licensed local broker.',
+        broward: 'South Florida (Broward & Palm Beach Counties) — the seasonal practice, same published pricing and guarantees. Brokerage is Massachusetts-licensed; for a Florida property we work alongside a licensed local broker.',
         elsewhere: 'Outside our in-person markets — every system runs remotely and is built to; commercial real estate brokerage is Massachusetts only.',
       };
       const marketEl = document.getElementById('fit-market')!;

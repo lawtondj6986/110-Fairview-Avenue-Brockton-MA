@@ -1,0 +1,166 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import FounderCard from '../../components/FounderCard.astro';
+import ShortVersion from '../../components/ShortVersion.astro';
+import { PALM_BEACH_CITIES, getPalmBeachCity } from '../../lib/palm-beach';
+import { INDUSTRIES } from '../../lib/industries';
+import { SITE } from '../../config';
+import TerritoryStatus from '../../components/TerritoryStatus.astro';
+import { CLAIMED_PB } from '../../lib/claimed';
+
+export async function getStaticPaths() {
+  return PALM_BEACH_CITIES.map((c) => ({ params: { city: c.slug } }));
+}
+
+const city = getPalmBeachCity(Astro.params.city as string)!;
+const neighbors = city.neighbors.map((s) => getPalmBeachCity(s)!).filter(Boolean);
+const territories = INDUSTRIES.length;
+
+const title = `AI Revenue Systems for ${city.name}, FL Businesses | ICS Palm Beach`;
+const description = `Done-for-you AI revenue systems for ${city.name}, Florida businesses: sub-60-second lead response, instant quoting, review automation, and AI-search visibility, at the same published pricing as Massachusetts. ${city.corridors.slice(0, 3).join(', ')}. One business per category in ${city.name} under Market Lock.`;
+
+const faqs = [
+  {
+    q: `Do you work with businesses in ${city.name}?`,
+    a: `Yes. ICS delivers AI revenue systems, retail platforms, and custom builds to ${city.name} businesses along ${city.corridors.slice(0, 3).join(', ')} and across the city, at the same published pricing as our Massachusetts clients: JobSite from $6,500, Lead Engine from $12,000, Market Lock from $20,000, each with monthly retainers and written guarantees.`,
+  },
+  {
+    q: `Are you actually in ${city.name}, or is this remote?`,
+    a: `Both. The founder is on the ground in Palm Beach County seasonally, which is when launch days and in-person strategy sessions happen, and every system is built to run remotely the rest of the year, because that is how the systems work anyway. Response times and results are measured identically in Florida and Massachusetts.`,
+  },
+  {
+    q: `Can one ${city.name} business lock its category?`,
+    a: `Yes. Market Lock is one business per category, per city, in writing for a twelve-month term with first right to renew. ${city.name} has ${territories} categories on the Palm Beach Territory Board; a competitor in your category who calls after you is declined and told why.`,
+  },
+  {
+    q: `Do you handle commercial real estate in ${city.name}?`,
+    a: `No. ICS’s real estate license is a Massachusetts license (${SITE.license}). In Florida we deliver the systems side; for a ${city.name} property transaction we work alongside a licensed Florida broker, and our free deal tools work anywhere.`,
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `AI Revenue Systems — ${city.name}, FL`,
+    serviceType: 'AI business automation and marketing systems',
+    provider: { '@id': `${SITE.url}/#business` },
+    areaServed: { '@type': 'City', name: `${city.name}, Florida` },
+    description,
+    url: `${SITE.url}/palm-beach/${city.slug}/`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Palm Beach County', item: `${SITE.url}/palm-beach/` },
+      { '@type': 'ListItem', position: 2, name: city.name, item: `${SITE.url}/palm-beach/${city.slug}/` },
+    ],
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">
+        <a href="/palm-beach/" class="hover:text-brass-200">Palm Beach County, FL</a> · {city.name} · Same published pricing
+      </p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        AI revenue systems for {city.name} businesses.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        {city.name} is {city.position}. The businesses that win here answer first, show proof, and get recommended by
+        Google and AI assistants. We install the system that does all three, and we lock it to one business per category.
+      </p>
+      <div class="reveal mt-8 flex flex-wrap gap-3" style="--reveal-delay: 300ms">
+        <a href={`/palm-beach/territories/?place=${city.slug}`} class="rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300">Check my {city.name} territory →</a>
+        <a href="/contact/" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">Book a strategy call</a>
+      </div>
+    </div>
+  </section>
+
+  <ShortVersion
+    number={String(territories)}
+    numberLabel={`exclusive Market Lock categories in ${city.name}, one business each`}
+    facts={[
+      `Same published pricing as Massachusetts: JobSite $6,500–$9,500, Lead Engine $12,000–$18,000, Market Lock $20,000–$30,000 to build.`,
+      `On the ground in Palm Beach County seasonally; every system runs remotely the rest of the year, as it is built to.`,
+      `Systems and platforms only in Florida: brokerage is Massachusetts-licensed, and a ${city.name} property deal is done alongside a licensed Florida broker.`,
+    ]}
+    jumps={[
+      ['The Palm Beach Territory Board', `/palm-beach/territories/?place=${city.slug}`],
+      ['Published pricing', '/pricing/'],
+      ['Talk to Daniel', '/contact/'],
+    ]}
+  />
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <div class="grid gap-12 lg:grid-cols-3">
+      <div class="prose-ics lg:col-span-2">
+        <h2>The {city.name} read</h2>
+        <p>{city.angle}</p>
+        <h2>Where {city.name} does business</h2>
+        <p>
+          {city.corridors.slice(0, -1).join(', ')}, and {city.corridors.slice(-1)[0]}. A system for a {city.name} business
+          is built around these corridors: the town page names them, the ads target them, and the review requests mention them,
+          because that is how a customer here describes where they are.
+        </p>
+        <h2>Who it is built for</h2>
+        <ul>
+          {city.businessMix.map((b) => <li>{b.charAt(0).toUpperCase() + b.slice(1)}</li>)}
+        </ul>
+        <h2>What a {city.name} business gets</h2>
+        <ul>
+          <li><strong>Answered in under 60 seconds, 24/7.</strong> Every call, form, and message gets a real response and a booking path before a competitor has seen the voicemail.</li>
+          <li><strong>Instant quotes on your site.</strong> QuoteBrain gives a {city.name} prospect a price range in seconds and hands you a qualified lead.</li>
+          <li><strong>Reviews and proof on autopilot.</strong> Every finished job becomes a review request and a {city.name}-tagged post.</li>
+          <li><strong>Recommended by AI.</strong> Structured data, a complete profile, and answers to the questions people actually ask, so assistants name you.</li>
+          <li><strong>Exclusive, in writing.</strong> Under Market Lock, one business per category in {city.name}. Your competitor calling after you gets a no.</li>
+        </ul>
+      </div>
+
+      <aside class="space-y-4 lg:sticky lg:top-24 lg:self-start">
+        <div class="rounded-xl border border-navy-100 bg-white p-6 shadow-sm">
+          <p class="font-mono text-[11px] font-bold uppercase tracking-widest text-teal-600">Categories in {city.name}</p>
+          <ul class="mt-3 flex flex-wrap gap-1.5">
+            {INDUSTRIES.map((i) => (
+              <li><a href={`/palm-beach/territories/?place=${city.slug}&cat=${i.slug}`} class="inline-block rounded-full border border-navy-100 px-2.5 py-1 text-xs font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700">{i.name}</a></li>
+            ))}
+          </ul>
+          <p class="mt-3 text-xs text-ink-500">One business per category. Click one to see if it is open.</p>
+        </div>
+        <div class="rounded-xl bg-navy-900 p-6">
+          <p class="text-sm font-semibold uppercase tracking-wider text-teal-400">Nearby cities</p>
+          <ul class="mt-3 space-y-1.5 text-sm">
+            {neighbors.map((n) => (
+              <li><a href={`/palm-beach/${n.slug}/`} class="text-navy-100/85 hover:text-teal-400">{n.name} →</a></li>
+            ))}
+          </ul>
+          <p class="mt-4 text-xs text-navy-100/60">Multi-city locks are priced per territory and scoped together.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brass-600">Common questions · {city.name}</h2>
+      <dl class="mt-5 space-y-5">
+        {faqs.map((f) => (
+          <div><dt class="text-base font-bold text-navy-900">{f.q}</dt><dd class="mt-1.5 text-sm leading-relaxed text-ink-700">{f.a}</dd></div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <TerritoryStatus claimed={CLAIMED_PB} boardHref="/palm-beach/territories/" state="FL" place={{ slug: city.slug, name: city.name }} />
+  <FounderCard heading={`Who you'll actually work with in ${city.name}`} />
+  <CtaSection heading={`Ready to lock ${city.name}?`} body="One call, a straight answer on fit and price, and a written quote within 48 hours. Published pricing, written guarantees, in Florida exactly as in Massachusetts." />
+</Base>

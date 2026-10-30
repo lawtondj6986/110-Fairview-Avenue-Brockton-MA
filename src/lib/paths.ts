@@ -6,7 +6,7 @@
  * "Forget this". Used by PathMemory.astro (the recorder and the welcome-back
  * bar), the Fit Finder (records the match), and LeadForm (pre-selects interest).
  */
-export type PathKey = 'cre' | 'ai' | 'intel' | 'political' | 'retail' | 'platforms' | 'broward' | 'private';
+export type PathKey = 'cre' | 'ai' | 'intel' | 'political' | 'retail' | 'platforms' | 'broward' | 'palmbeach' | 'private';
 
 export interface PathInfo {
   /** Lower-case phrase that completes "Last time you were looking at …" */
@@ -69,6 +69,13 @@ export const PATHS: Record<PathKey, PathInfo> = {
     next: ['Check the Broward Territory Board', '/broward/territories/'],
     interest: 'AI systems & marketing',
   },
+  palmbeach: {
+    label: 'the Palm Beach County practice',
+    hub: '/palm-beach/',
+    hubLabel: 'Back to Palm Beach →',
+    next: ['Check the Palm Beach Territory Board', '/palm-beach/territories/'],
+    interest: 'AI systems & marketing',
+  },
   private: {
     label: 'private client services',
     hub: '/private-clients/',
@@ -81,6 +88,7 @@ export const PATHS: Record<PathKey, PathInfo> = {
 /** First match wins. Order matters: Broward before the generic practices. */
 const RULES: [RegExp, PathKey][] = [
   [/^\/broward(\/|$)/, 'broward'],
+  [/^\/palm-beach(\/|$)/, 'palmbeach'],
   [/^\/(commercial-real-estate|deal-tools|cap-rate|lease-analyzer|lease-vs-buy|seller-net|listings|building-worth|south-shore)(\/|$)/, 'cre'],
   [/^\/(ai-services|pricing|territories|quotebrain|ai-readiness|industries|compare|playbook)(\/|$)/, 'ai'],
   [/^\/intelligence(\/|$)/, 'intel'],

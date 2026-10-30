@@ -1,0 +1,83 @@
+---
+import Base from '../../layouts/Base.astro';
+import FounderCard from '../../components/FounderCard.astro';
+import { CLAIMED_PB } from '../../lib/claimed';
+import MarketMap from '../../components/MarketMap.astro';
+import TerritoryBoard from '../../components/TerritoryBoard.astro';
+import { SITE } from '../../config';
+import { PALM_BEACH_CITIES } from '../../lib/palm-beach';
+import { INDUSTRIES } from '../../lib/industries';
+
+const title = 'The Palm Beach Territory Board — Market Lock Exclusivity, City by City | ICS';
+const description =
+  'Market Lock in Palm Beach County, Florida: one business per category, per city. The board shows every Palm Beach city and every category ICS serves — Boca Raton to Jupiter — pick yours, see whether it is open, and lock it before a competitor does. Same published pricing as Massachusetts, 12-month exclusivity, in writing.';
+
+/**
+ * Locked Palm Beach territories. When a Market Lock client signs, add
+ * { place: '<city slug>', industry: '<industry slug>' }. Never the client's name.
+ */
+const claimed = CLAIMED_PB;
+
+const places = PALM_BEACH_CITIES;
+const total = places.length * INDUSTRIES.length;
+const locked = claimed.length;
+
+const faqs = [
+  { q: 'Is Market Lock exclusivity the same in Florida?', a: 'Identical. One business per category, per city, for a 12-month term with first right to renew; a competitor in your category calling ICS for Market Lock in your city is declined in writing. Same published pricing as Massachusetts: $20,000–$30,000 to build plus $3,500–$6,000 per month.' },
+  { q: 'Is ICS actually in Palm Beach County?', a: 'Seasonally — the founder is on the ground in South Florida in the winter months and runs every system remotely the rest of the year, which is how the systems are built to run anyway. Launch days and strategy days happen in person when it matters.' },
+  { q: 'Can I lock more than one city?', a: 'Yes — multi-territory locks are priced per territory and scoped together, which is how a multi-location operator holds a corridor (say, Boca Raton, Delray Beach, and Boynton Beach) rather than a single city.' },
+  { q: 'Does this include real estate brokerage in Florida?', a: `No. Market Lock is an AI revenue system — lead response, paid media, content, and answer-engine optimization. ICS's real estate license is a Massachusetts license (${SITE.license}); for a Florida property transaction ICS works alongside a licensed Florida broker.` },
+];
+
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Market Lock · Palm Beach County, FL · Same published pricing</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        One business per category, per city. Boca Raton to Jupiter.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        The same exclusivity rule we run on the South Shore, applied to one of the densest small-business markets in
+        the country. {places.length} Palm Beach cities times {INDUSTRIES.length} categories is {total} exclusive
+        territories, and every one of them is open until the first business locks it.
+      </p>
+      <div class="reveal mt-10 grid max-w-2xl grid-cols-3 gap-6" style="--reveal-delay: 300ms">
+        {[[String(total), 'Exclusive territories'], [String(locked), 'Locked'], [String(total - locked), 'Still open']].map(([v, l]) => (
+          <div><p class="font-display text-4xl font-bold text-brass-300">{v}</p><p class="mt-1 text-sm text-navy-100/70">{l}</p></div>
+        ))}
+      </div>
+      <p class="reveal mt-8 text-sm text-navy-100/60" style="--reveal-delay: 360ms">
+        <a href="/palm-beach/" class="font-semibold text-brass-300 hover:text-brass-200">The Palm Beach practice →</a> ·
+        Massachusetts business? <a href="/territories/" class="font-semibold text-brass-300 hover:text-brass-200">The South Shore board →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pt-12 sm:px-6">
+    <p class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brass-600">Pick your city on the map</p>
+    <p class="mt-2 text-sm text-ink-500">Click a city and the board below selects it. Switch to the open-territories layer to see where categories are still available at a glance.</p>
+    <div class="mt-6"><MarketMap market="PB" mode="select" compact /></div>
+  </section>
+
+  <TerritoryBoard market="Palm Beach County" state="FL" placeNoun="city" places={places} placeHrefBase="/palm-beach/" claimed={claimed} />
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brass-600">Common questions</h2>
+      <dl class="mt-5 space-y-5">
+        {faqs.map((f) => (
+          <div><dt class="text-base font-bold text-navy-900">{f.q}</dt><dd class="mt-1.5 text-sm leading-relaxed text-ink-700">{f.a}</dd></div>
+        ))}
+      </dl>
+      <p class="mt-8 text-center text-xs text-ink-500">
+        Not ready for exclusivity? The <a href="/ai-services/" class="font-semibold text-teal-600 hover:text-teal-700">Lead Engine</a> runs the same response machine without the territory. Call {SITE.phone}.
+      </p>
+    </div>
+  </section>
+  <FounderCard />
+</Base>

@@ -21,3 +21,6 @@ export const isLocked = (claimed: Claim[], place: string, industry: string) =>
 export const lockedInPlace = (claimed: Claim[], place: string) => claimed.filter((c) => c.place === place).length;
 
 export const lockedForIndustry = (claimed: Claim[], industry: string) => claimed.filter((c) => c.industry === industry).length;
+
+/** Palm Beach County, FL — place slugs from src/lib/palm-beach.ts */
+export const CLAIMED_PB: Claim[] = [];

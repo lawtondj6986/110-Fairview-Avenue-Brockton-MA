@@ -102,3 +102,23 @@ export const BROWARD_CORRIDORS: Corridor[] = [
   { route: 'I-75', towns: ['weston', 'pembroke-pines', 'miramar'], tone: 'brass' },
   { route: 'Oakland Park Blvd', towns: ['sunrise', 'lauderhill', 'lauderdale-lakes', 'oakland-park', 'wilton-manors', 'fort-lauderdale'], tone: 'brass', labelAt: 1 },
 ];
+
+/** Palm Beach County, FL — approximate centroids for the cities on the Palm Beach board. */
+export const PALM_BEACH_GEO: TownGeo[] = [
+  { slug: 'jupiter', lat: 26.934, lon: -80.094, anchor: 'start', dx: 10, dy: 4 },
+  { slug: 'palm-beach-gardens', lat: 26.823, lon: -80.139, anchor: 'end', dx: -10, dy: 4 },
+  { slug: 'west-palm-beach', lat: 26.715, lon: -80.064, anchor: 'start', dx: 10, dy: 4 },
+  { slug: 'wellington', lat: 26.659, lon: -80.268, anchor: 'start', dx: 10, dy: -8 },
+  { slug: 'lake-worth-beach', lat: 26.617, lon: -80.057, anchor: 'start', dx: 10, dy: 4 },
+  { slug: 'boynton-beach', lat: 26.528, lon: -80.085, anchor: 'start', dx: 10, dy: 4 },
+  { slug: 'delray-beach', lat: 26.461, lon: -80.078, anchor: 'start', dx: 10, dy: 4 },
+  { slug: 'boca-raton', lat: 26.368, lon: -80.104, anchor: 'start', dx: 13, dy: 5 },
+];
+
+export const PALM_BEACH_CORRIDORS: Corridor[] = [
+  { route: 'I-95 / US-1', towns: ['boca-raton', 'delray-beach', 'boynton-beach', 'lake-worth-beach', 'west-palm-beach', 'palm-beach-gardens', 'jupiter'], tone: 'teal', labelAt: 1 },
+  { route: "Florida's Turnpike", towns: ['boca-raton', 'delray-beach', 'boynton-beach', 'wellington', 'west-palm-beach', 'palm-beach-gardens', 'jupiter'], tone: 'brass', labelAt: 3 },
+  { route: 'Southern Blvd (SR-80)', towns: ['wellington', 'west-palm-beach'], tone: 'brass' },
+  { route: 'Military Trail', towns: ['boca-raton', 'delray-beach', 'boynton-beach', 'lake-worth-beach', 'west-palm-beach', 'palm-beach-gardens'], tone: 'brass', labelAt: 5 },
+  { route: 'SR-7 (441)', towns: ['boca-raton', 'wellington'], tone: 'brass' },
+];

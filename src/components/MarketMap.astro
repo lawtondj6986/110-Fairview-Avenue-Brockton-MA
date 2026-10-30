@@ -14,34 +14,42 @@
 import { getCollection } from 'astro:content';
 import { TOWNS } from '../lib/towns';
 import { BROWARD_CITIES } from '../lib/broward';
-import { TOWN_GEO, CORRIDORS, BROWARD_GEO, BROWARD_CORRIDORS, type TownGeo } from '../lib/town-geo';
+import { PALM_BEACH_CITIES } from '../lib/palm-beach';
+import { TOWN_GEO, CORRIDORS, BROWARD_GEO, BROWARD_CORRIDORS, PALM_BEACH_GEO, PALM_BEACH_CORRIDORS, type TownGeo } from '../lib/town-geo';
 import { INDUSTRIES } from '../lib/industries';
-import { CLAIMED_MA, CLAIMED_FL, lockedInPlace } from '../lib/claimed';
+import { CLAIMED_MA, CLAIMED_FL, CLAIMED_PB, lockedInPlace } from '../lib/claimed';
 
 interface Props {
-  market: 'MA' | 'FL';
+  market: 'MA' | 'FL' | 'PB';
   mode?: 'navigate' | 'select';
   compact?: boolean;
 }
 const { market, mode = 'navigate', compact = false } = Astro.props;
 
 const isMA = market === 'MA';
-const geo: TownGeo[] = isMA ? TOWN_GEO : BROWARD_GEO;
-const corridors = isMA ? CORRIDORS : BROWARD_CORRIDORS;
-const claimed = isMA ? CLAIMED_MA : CLAIMED_FL;
-const hq = isMA ? 'brockton' : 'fort-lauderdale';
-const pageBase = isMA ? '/south-shore/' : '/broward/';
-const boardHref = isMA ? '/territories/' : '/broward/territories/';
-const noun = isMA ? 'town' : 'city';
-const state = isMA ? 'MA' : 'FL';
+const CFG = {
+  MA: { geo: TOWN_GEO, corridors: CORRIDORS, claimed: CLAIMED_MA, hq: 'brockton', pageBase: '/south-shore/', boardHref: '/territories/', noun: 'town', state: 'MA', county: '', hqLabel: 'Headquarters' },
+  FL: { geo: BROWARD_GEO, corridors: BROWARD_CORRIDORS, claimed: CLAIMED_FL, hq: 'fort-lauderdale', pageBase: '/broward/', boardHref: '/broward/territories/', noun: 'city', state: 'FL', county: 'Broward County', hqLabel: 'Seasonal base' },
+  PB: { geo: PALM_BEACH_GEO, corridors: PALM_BEACH_CORRIDORS, claimed: CLAIMED_PB, hq: 'boca-raton', pageBase: '/palm-beach/', boardHref: '/palm-beach/territories/', noun: 'city', state: 'FL', county: 'Palm Beach County', hqLabel: 'Flagship' },
+}[market];
+const geo: TownGeo[] = CFG.geo;
+const corridors = CFG.corridors;
+const claimed = CFG.claimed;
+const hq = CFG.hq;
+const pageBase = CFG.pageBase;
+const boardHref = CFG.boardHref;
+const noun = CFG.noun;
+const state = CFG.state;
+const hqLabel = CFG.hqLabel;
+const cityList = market === 'FL' ? BROWARD_CITIES : PALM_BEACH_CITIES;
 
 const places = geo.map((g) => {
-  const t = isMA ? TOWNS.find((x) => x.slug === g.slug)! : BROWARD_CITIES.find((x) => x.slug === g.slug)!;
+  const t = isMA ? TOWNS.find((x) => x.slug === g.slug)! : cityList.find((x) => x.slug === g.slug)!;
   return {
     ...g,
     name: t.name,
-    county: isMA ? `${(t as (typeof TOWNS)[number]).county} County` : 'Broward County',
-    position: isMA ? (t as (typeof TOWNS)[number]).position : (t as (typeof BROWARD_CITIES)[number]).position,
+    county: isMA ? `${(t as (typeof TOWNS)[number]).county} County` : CFG.county,
+    position: isMA ? (t as (typeof TOWNS)[number]).position : (t as (typeof cityList)[number]).position,
     corridors: t.corridors.slice(0, 4),
     open: INDUSTRIES.length - lockedInPlace(claimed, g.slug),
   };
@@ -97,9 +105,10 @@ const paths = corridors.map((c, i) => ({
 }));
 const first = byslug[hq];
 const mapId = `mm-${market.toLowerCase()}-${mode}`;
+const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
 ---
 
-<div class="market-map grid gap-6 lg:grid-cols-[1.4fr_1fr]" id={mapId} data-mode={mode} data-page-base={pageBase} data-board-href={boardHref} data-hq={hq} data-noun={noun} data-state={state} data-industries={INDUSTRIES.length}>
+<div class="market-map grid gap-6 lg:grid-cols-[1.4fr_1fr]" id={mapId} data-mode={mode} data-page-base={pageBase} data-board-href={boardHref} data-hq={hq} data-hq-label={hqLabel} data-noun={noun} data-state={state} data-industries={INDUSTRIES.length}>
   <div class="rounded-2xl border border-navy-100 bg-navy-950 p-3 sm:p-5">
     <div class="mb-3 flex flex-wrap items-center gap-2 px-1">
       <label class="relative flex-1 min-w-[10rem]">
@@ -113,7 +122,7 @@ const mapId = `mm-${market.toLowerCase()}-${mode}`;
       </div>
     </div>
     <svg viewBox={`0 0 ${W} ${H}`} class="h-auto w-full" role="img" aria-labelledby={`${mapId}-title ${mapId}-desc`}>
-      <title id={`${mapId}-title`}>Schematic map of the {places.length} {noun === 'town' ? 'South Shore towns' : 'Broward County cities'} ICS serves</title>
+      <title id={`${mapId}-title`}>Schematic map of the {places.length} {isMA ? 'South Shore towns' : `${CFG.county} cities`} ICS serves</title>
       <desc id={`${mapId}-desc`}>Positions are approximate and routes are simplified. Hover or focus a {noun} for its read; select it to {mode === 'select' ? 'choose it on the board' : 'open its page'}.</desc>
       <defs>
         <pattern id={`${mapId}-grid`} width="40" height="40" patternUnits="userSpaceOnUse">
@@ -121,7 +130,7 @@ const mapId = `mm-${market.toLowerCase()}-${mode}`;
         </pattern>
       </defs>
       <rect width={W} height={H} fill={`url(#${mapId}-grid)`} />
-      <text x={W - 16} y={H - 14} text-anchor="end" fill="rgba(219,228,240,0.45)" font-size="11" font-family="ui-monospace, monospace">{isMA ? 'Atlantic →' : 'Atlantic →'} · schematic, positions approximate</text>
+      <text x={W - 16} y={H - 14} text-anchor="end" fill="rgba(219,228,240,0.45)" font-size="11" font-family="ui-monospace, monospace">Atlantic → · schematic, positions approximate</text>
 
       {paths.map((p) => (
         <g class="mm-corridor" data-corridor={p.id} data-route={p.route} data-names={p.names} data-towns={p.towns.join(',')} tabindex="0" role="button" aria-label={`${p.route}: ${p.names}`}>
@@ -141,7 +150,7 @@ const mapId = `mm-${market.toLowerCase()}-${mode}`;
       ))}
     </svg>
     <p class="mt-2 flex flex-wrap gap-x-4 gap-y-1 px-1 text-[11px] text-navy-100/60">
-      <span><span class="inline-block h-2.5 w-2.5 rounded-full bg-brass-500 align-middle"></span> {isMA ? 'Headquarters' : 'Seasonal base'}</span>
+      <span><span class="inline-block h-2.5 w-2.5 rounded-full bg-brass-500 align-middle"></span> {hqLabel}</span>
       <span><span class="inline-block h-2.5 w-2.5 rounded-full bg-teal-500 align-middle"></span> {noun.charAt(0).toUpperCase() + noun.slice(1)} with its own page</span>
       <span><span class="inline-block h-0.5 w-5 bg-teal-400/60 align-middle"></span> {isMA ? 'Route 3 / 3A' : 'Coastal corridors'}</span>
       <span><span class="inline-block h-0.5 w-5 border-t-2 border-dashed border-brass-400/70 align-middle"></span> Inland corridors</span>
@@ -149,7 +158,7 @@ const mapId = `mm-${market.toLowerCase()}-${mode}`;
   </div>
 
   <aside class="rounded-2xl border border-navy-100 bg-white p-6 shadow-sm" aria-live="polite">
-    <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-600" data-p="county">{first.county}{isMA ? ' · Headquarters' : ' · Seasonal base'}</p>
+    <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-600" data-p="county">{first.county} · {hqLabel}</p>
     <h3 class="mt-1 font-display text-2xl font-bold text-navy-900" data-p="name">{first.name}</h3>
     <p class="mt-2 text-sm italic leading-relaxed text-ink-500" data-p="position">{first.position}</p>
     <p class="mt-3 text-xs text-ink-500"><span class="font-semibold text-navy-900">Corridors:</span> <span data-p="corridors">{first.corridors.join(' · ')}</span></p>
@@ -165,7 +174,7 @@ const mapId = `mm-${market.toLowerCase()}-${mode}`;
       {isMA && mode !== 'select' && <a data-p="compare" href={`/south-shore/compare/?a=${first.slug}&b=abington`} class="rounded-md border border-navy-100 px-4 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700">Compare it →</a>}
       {mode !== 'select' && <a data-p="board" href={`${boardHref}?place=${first.slug}`} class="rounded-md border border-navy-100 px-4 py-2 text-sm font-semibold text-navy-900 hover:border-brass-500 hover:text-brass-600">Territories →</a>}
     </div>
-    <p class="mt-5 text-xs text-ink-500" data-p="hint">Hover or tap a {noun}. Hover a route to light up the {noun === 'town' ? 'towns' : 'cities'} on it. Positions are approximate; the pages are not.</p>
+    <p class="mt-5 text-xs text-ink-500" data-p="hint">Hover or tap a {noun}. Hover a route to light up the {placeNounPlural} on it. Positions are approximate; the pages are not.</p>
   </aside>
 </div>
 
@@ -206,7 +215,7 @@ const mapId = `mm-${market.toLowerCase()}-${mode}`;
         if (fromHover && Date.now() < hoverLockUntil) return;
         const d = el.dataset;
         current = d.slug!;
-        P('county')!.textContent = `${d.county}${d.slug === hq ? (pageBase === '/broward/' ? ' · Seasonal base' : ' · Headquarters') : ''}`;
+        P('county')!.textContent = `${d.county}${d.slug === hq ? ` · ${root.dataset.hqLabel}` : ''}`;
         P('name')!.textContent = d.name!;
         P('position')!.textContent = d.position!;
         P('corridors')!.textContent = d.corridors!;
