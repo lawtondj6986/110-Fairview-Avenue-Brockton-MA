@@ -80,6 +80,11 @@ const paths = corridors.map((c, i) => ({
   // Label sits at the midpoint of the route's longest segment, which keeps labels apart from each other and from town names.
   ...(() => {
     let best = { len: -1, lx: 0, ly: 0 };
+    if (c.labelAt && byslug[c.towns[c.labelAt]] && byslug[c.towns[c.labelAt - 1]]) {
+      const A = byslug[c.towns[c.labelAt - 1]];
+      const B = byslug[c.towns[c.labelAt]];
+      return { lx: (A.X + B.X) / 2, ly: (A.Y + B.Y) / 2 };
+    }
     for (let j = 1; j < c.towns.length; j++) {
       const A = byslug[c.towns[j - 1]];
       const B = byslug[c.towns[j]];

@@ -46,7 +46,15 @@ export const TOWN_GEO: TownGeo[] = [
 ];
 
 /** Schematic corridors: each is a route label and the towns it threads, in order. */
-export const CORRIDORS: { route: string; towns: string[]; tone: 'teal' | 'brass' }[] = [
+export interface Corridor {
+  route: string;
+  towns: string[];
+  tone: 'teal' | 'brass';
+  /** Which segment (1-based index of its end town) carries the label; default is the longest segment. */
+  labelAt?: number;
+}
+
+export const CORRIDORS: Corridor[] = [
   { route: 'Route 3', towns: ['braintree', 'weymouth', 'hingham', 'norwell', 'hanover', 'pembroke', 'kingston', 'plymouth'], tone: 'teal' },
   { route: 'Route 3A', towns: ['quincy', 'weymouth', 'hingham', 'cohasset', 'scituate', 'marshfield', 'duxbury', 'kingston', 'plymouth'], tone: 'teal' },
   { route: 'Route 24', towns: ['randolph', 'avon', 'brockton', 'west-bridgewater', 'bridgewater'], tone: 'brass' },
@@ -84,13 +92,13 @@ export const BROWARD_GEO: TownGeo[] = [
   { slug: 'hallandale-beach', lat: 25.981, lon: -80.148, anchor: 'start', dx: 10, dy: 12 },
 ];
 
-export const BROWARD_CORRIDORS: { route: string; towns: string[]; tone: 'teal' | 'brass' }[] = [
+export const BROWARD_CORRIDORS: Corridor[] = [
   { route: 'I-95 / US-1', towns: ['deerfield-beach', 'pompano-beach', 'oakland-park', 'fort-lauderdale', 'dania-beach', 'hollywood', 'hallandale-beach'], tone: 'teal' },
   { route: 'A1A', towns: ['deerfield-beach', 'lighthouse-point', 'pompano-beach', 'fort-lauderdale', 'hollywood', 'hallandale-beach'], tone: 'teal' },
-  { route: 'Sawgrass Expwy', towns: ['deerfield-beach', 'coconut-creek', 'coral-springs', 'tamarac', 'sunrise', 'weston'], tone: 'brass' },
+  { route: 'Sawgrass Expwy', towns: ['deerfield-beach', 'coconut-creek', 'coral-springs', 'tamarac', 'sunrise', 'weston'], tone: 'brass', labelAt: 1 },
   { route: 'University Dr', towns: ['parkland', 'coral-springs', 'tamarac', 'lauderhill', 'plantation', 'davie', 'cooper-city', 'pembroke-pines', 'miramar'], tone: 'brass' },
-  { route: 'US-441 / SR-7', towns: ['coconut-creek', 'margate', 'north-lauderdale', 'lauderdale-lakes', 'plantation', 'davie', 'hollywood', 'miramar'], tone: 'brass' },
+  { route: 'US-441 / SR-7', towns: ['coconut-creek', 'margate', 'north-lauderdale', 'lauderdale-lakes', 'plantation', 'davie', 'hollywood', 'miramar'], tone: 'brass', labelAt: 4 },
   { route: 'I-595 / SR-84', towns: ['fort-lauderdale', 'plantation', 'davie', 'sunrise', 'weston'], tone: 'brass' },
   { route: 'I-75', towns: ['weston', 'pembroke-pines', 'miramar'], tone: 'brass' },
-  { route: 'Wilton Dr / Oakland Park Blvd', towns: ['sunrise', 'lauderhill', 'lauderdale-lakes', 'oakland-park', 'wilton-manors', 'fort-lauderdale'], tone: 'brass' },
+  { route: 'Oakland Park Blvd', towns: ['sunrise', 'lauderhill', 'lauderdale-lakes', 'oakland-park', 'wilton-manors', 'fort-lauderdale'], tone: 'brass', labelAt: 1 },
 ];
