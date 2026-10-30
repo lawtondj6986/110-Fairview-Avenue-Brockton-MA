@@ -166,6 +166,13 @@ const total = places.length * INDUSTRIES.length;
     }
     place.addEventListener('change', update);
     cat.addEventListener('change', update);
+    document.addEventListener('ics:place', (ev) => {
+      const slug = String((ev as CustomEvent).detail || '');
+      if (Array.from(place.options).some((o) => o.value === slug)) {
+        place.value = slug;
+        update();
+      }
+    });
 
     // Deep link: /territories/?place=brockton&cat=roofing pre-selects and shows the result.
     const q = new URLSearchParams(location.search);

@@ -1,0 +1,329 @@
+---
+/**
+ * The market, as a map. One component for both markets:
+ *  - South Shore, MA: 29 towns, Routes 3, 3A, 18, 24, 28, 106, 139
+ *  - Broward County, FL: 24 cities, I-95/US-1, A1A, Sawgrass, University Dr, 441, I-595, I-75
+ *
+ * Hover/focus/tap a place for its read; hover a corridor to light up the places
+ * on it; type to find a place; switch layers (places · open territories ·
+ * where we've worked); deep-link with ?town=slug. In "select" mode (on a
+ * Territory Board page) a click selects the place on the board instead of
+ * navigating. Schematic by design: centroids are approximate, routes are
+ * simplified polylines.
+ */
+import { getCollection } from 'astro:content';
+import { TOWNS } from '../lib/towns';
+import { BROWARD_CITIES } from '../lib/broward';
+import { TOWN_GEO, CORRIDORS, BROWARD_GEO, BROWARD_CORRIDORS, type TownGeo } from '../lib/town-geo';
+import { INDUSTRIES } from '../lib/industries';
+import { CLAIMED_MA, CLAIMED_FL, lockedInPlace } from '../lib/claimed';
+
+interface Props {
+  market: 'MA' | 'FL';
+  mode?: 'navigate' | 'select';
+  compact?: boolean;
+}
+const { market, mode = 'navigate', compact = false } = Astro.props;
+
+const isMA = market === 'MA';
+const geo: TownGeo[] = isMA ? TOWN_GEO : BROWARD_GEO;
+const corridors = isMA ? CORRIDORS : BROWARD_CORRIDORS;
+const claimed = isMA ? CLAIMED_MA : CLAIMED_FL;
+const hq = isMA ? 'brockton' : 'fort-lauderdale';
+const pageBase = isMA ? '/south-shore/' : '/broward/';
+const boardHref = isMA ? '/territories/' : '/broward/territories/';
+const noun = isMA ? 'town' : 'city';
+const state = isMA ? 'MA' : 'FL';
+
+const places = geo.map((g) => {
+  const t = isMA ? TOWNS.find((x) => x.slug === g.slug)! : BROWARD_CITIES.find((x) => x.slug === g.slug)!;
+  return {
+    ...g,
+    name: t.name,
+    county: isMA ? `${(t as (typeof TOWNS)[number]).county} County` : 'Broward County',
+    position: isMA ? (t as (typeof TOWNS)[number]).position : (t as (typeof BROWARD_CITIES)[number]).position,
+    corridors: t.corridors.slice(0, 4),
+    open: INDUSTRIES.length - lockedInPlace(claimed, g.slug),
+  };
+});
+
+// "Where we've worked": case studies and listings that name a town.
+const worked = new Set<string>();
+if (isMA) {
+  const cs = await getCollection('case-studies', ({ data }) => !data.draft);
+  const ls = await getCollection('listings', ({ data }) => !data.draft);
+  for (const p of places) {
+    if (cs.some((c) => c.data.location.toLowerCase().includes(p.name.toLowerCase())) || ls.some((l) => l.data.town.toLowerCase() === p.name.toLowerCase())) worked.add(p.slug);
+  }
+}
+
+const W = 760;
+const H = compact ? 560 : 700;
+const PAD = 70;
+const lons = geo.map((t) => t.lon);
+const lats = geo.map((t) => t.lat);
+const minLon = Math.min(...lons);
+const maxLon = Math.max(...lons);
+const minLat = Math.min(...lats);
+const maxLat = Math.max(...lats);
+const midLat = (minLat + maxLat) / 2;
+const aspect = 1 / Math.cos((midLat * Math.PI) / 180);
+const scale = Math.min((W - 2 * PAD) / (maxLon - minLon), (H - 2 * PAD) / ((maxLat - minLat) * aspect));
+const x = (lon: number) => PAD + (lon - minLon) * scale;
+const y = (lat: number) => PAD + (maxLat - lat) * scale * aspect;
+const pts = places.map((p) => ({ ...p, X: x(p.lon), Y: y(p.lat), worked: worked.has(p.slug) }));
+const byslug = Object.fromEntries(pts.map((p) => [p.slug, p]));
+const paths = corridors.map((c, i) => ({
+  ...c,
+  id: `c${i}`,
+  d: c.towns.map((s, j) => `${j ? 'L' : 'M'}${byslug[s].X.toFixed(1)} ${byslug[s].Y.toFixed(1)}`).join(' '),
+  // Label sits at the midpoint of the route's longest segment, which keeps labels apart from each other and from town names.
+  ...(() => {
+    let best = { len: -1, lx: 0, ly: 0 };
+    for (let j = 1; j < c.towns.length; j++) {
+      const A = byslug[c.towns[j - 1]];
+      const B = byslug[c.towns[j]];
+      const len = Math.hypot(B.X - A.X, B.Y - A.Y);
+      if (len > best.len) best = { len, lx: (A.X + B.X) / 2, ly: (A.Y + B.Y) / 2 };
+    }
+    return { lx: best.lx, ly: best.ly };
+  })(),
+  names: c.towns.map((s) => byslug[s].name).join(' · '),
+}));
+const first = byslug[hq];
+const mapId = `mm-${market.toLowerCase()}-${mode}`;
+---
+
+<div class="market-map grid gap-6 lg:grid-cols-[1.4fr_1fr]" id={mapId} data-mode={mode} data-page-base={pageBase} data-board-href={boardHref} data-hq={hq} data-noun={noun} data-state={state} data-industries={INDUSTRIES.length}>
+  <div class="rounded-2xl border border-navy-100 bg-navy-950 p-3 sm:p-5">
+    <div class="mb-3 flex flex-wrap items-center gap-2 px-1">
+      <label class="relative flex-1 min-w-[10rem]">
+        <span class="sr-only">Find a {noun}</span>
+        <input type="search" data-find placeholder={`Find a ${noun}…`} autocomplete="off" class="w-full rounded-md border border-white/15 bg-white/5 px-3 py-1.5 text-sm text-white placeholder:text-navy-100/50 focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-400/30" />
+      </label>
+      <div class="flex gap-1 rounded-md border border-white/15 p-0.5" role="group" aria-label="Map layer">
+        <button type="button" data-layer="places" class="mm-layer is-on rounded px-2.5 py-1 text-xs font-semibold text-navy-100/80">Places</button>
+        <button type="button" data-layer="open" class="mm-layer rounded px-2.5 py-1 text-xs font-semibold text-navy-100/80">Open territories</button>
+        {isMA && <button type="button" data-layer="worked" class="mm-layer rounded px-2.5 py-1 text-xs font-semibold text-navy-100/80">Where we've worked</button>}
+      </div>
+    </div>
+    <svg viewBox={`0 0 ${W} ${H}`} class="h-auto w-full" role="img" aria-labelledby={`${mapId}-title ${mapId}-desc`}>
+      <title id={`${mapId}-title`}>Schematic map of the {places.length} {noun === 'town' ? 'South Shore towns' : 'Broward County cities'} ICS serves</title>
+      <desc id={`${mapId}-desc`}>Positions are approximate and routes are simplified. Hover or focus a {noun} for its read; select it to {mode === 'select' ? 'choose it on the board' : 'open its page'}.</desc>
+      <defs>
+        <pattern id={`${mapId}-grid`} width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M40 0H0V40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+        </pattern>
+      </defs>
+      <rect width={W} height={H} fill={`url(#${mapId}-grid)`} />
+      <text x={W - 16} y={H - 14} text-anchor="end" fill="rgba(219,228,240,0.45)" font-size="11" font-family="ui-monospace, monospace">{isMA ? 'Atlantic →' : 'Atlantic →'} · schematic, positions approximate</text>
+
+      {paths.map((p) => (
+        <g class="mm-corridor" data-corridor={p.id} data-route={p.route} data-names={p.names} data-towns={p.towns.join(',')} tabindex="0" role="button" aria-label={`${p.route}: ${p.names}`}>
+          <path d={p.d} fill="none" stroke="transparent" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" />
+          <path d={p.d} fill="none" stroke={p.tone === 'teal' ? 'rgba(45,212,191,0.35)' : 'rgba(201,162,39,0.35)'} stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray={p.tone === 'teal' ? '0' : '6 6'} class="mm-route" />
+          <text x={p.lx + 6} y={p.ly - 7} fill={p.tone === 'teal' ? 'rgba(45,212,191,0.9)' : 'rgba(201,162,39,0.95)'} font-size="10" font-weight="700" font-family="ui-monospace, monospace" paint-order="stroke" stroke="#06132a" stroke-width="3" class="mm-route-label">{p.route}</text>
+        </g>
+      ))}
+
+      {pts.map((p) => (
+        <a href={`${pageBase}${p.slug}/`} class="mm-place" data-slug={p.slug} data-name={p.name} data-county={p.county} data-position={p.position} data-corridors={p.corridors.join(' · ')} data-open={p.open} data-worked={p.worked ? '1' : '0'}>
+          <title>{p.name}, {state} — {p.position}</title>
+          <circle cx={p.X} cy={p.Y} r={p.slug === hq ? 11 : 7} fill={p.slug === hq ? '#c9a227' : '#14b8a6'} stroke="#06132a" stroke-width="2.5" class="mm-dot" />
+          {p.slug === hq && <circle cx={p.X} cy={p.Y} r="17" fill="none" stroke="rgba(201,162,39,0.5)" stroke-width="1.5" />}
+          <text x={p.X + (p.dx ?? 10)} y={p.Y + (p.dy ?? 4)} text-anchor={p.anchor ?? 'start'} fill="#f8fafc" font-size={p.slug === hq ? 14 : 12} font-weight={p.slug === hq ? 700 : 600} font-family="Inter Variable, ui-sans-serif, system-ui, sans-serif" paint-order="stroke" stroke="#06132a" stroke-width="3" class="mm-label">{p.name}</text>
+        </a>
+      ))}
+    </svg>
+    <p class="mt-2 flex flex-wrap gap-x-4 gap-y-1 px-1 text-[11px] text-navy-100/60">
+      <span><span class="inline-block h-2.5 w-2.5 rounded-full bg-brass-500 align-middle"></span> {isMA ? 'Headquarters' : 'Seasonal base'}</span>
+      <span><span class="inline-block h-2.5 w-2.5 rounded-full bg-teal-500 align-middle"></span> {noun.charAt(0).toUpperCase() + noun.slice(1)} with its own page</span>
+      <span><span class="inline-block h-0.5 w-5 bg-teal-400/60 align-middle"></span> {isMA ? 'Route 3 / 3A' : 'Coastal corridors'}</span>
+      <span><span class="inline-block h-0.5 w-5 border-t-2 border-dashed border-brass-400/70 align-middle"></span> Inland corridors</span>
+    </p>
+  </div>
+
+  <aside class="rounded-2xl border border-navy-100 bg-white p-6 shadow-sm" aria-live="polite">
+    <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-600" data-p="county">{first.county}{isMA ? ' · Headquarters' : ' · Seasonal base'}</p>
+    <h3 class="mt-1 font-display text-2xl font-bold text-navy-900" data-p="name">{first.name}</h3>
+    <p class="mt-2 text-sm italic leading-relaxed text-ink-500" data-p="position">{first.position}</p>
+    <p class="mt-3 text-xs text-ink-500"><span class="font-semibold text-navy-900">Corridors:</span> <span data-p="corridors">{first.corridors.join(' · ')}</span></p>
+    <p class="mt-3 text-xs text-ink-500"><span class="font-semibold text-navy-900">Market Lock:</span> <span data-p="open">{first.open}</span> of {INDUSTRIES.length} categories open</p>
+    <div class="mt-5 flex flex-wrap gap-2">
+      {
+        mode === 'select' ? (
+          <button type="button" data-p="choose" class="rounded-md bg-brass-500 px-4 py-2 text-sm font-semibold text-navy-950 hover:bg-brass-300">Check {first.name} on the board ↓</button>
+        ) : (
+          <a data-p="page" href={`${pageBase}${first.slug}/`} class="rounded-md bg-navy-900 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-600">The {first.name} page →</a>
+        )
+      }
+      {isMA && mode !== 'select' && <a data-p="compare" href={`/south-shore/compare/?a=${first.slug}&b=abington`} class="rounded-md border border-navy-100 px-4 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700">Compare it →</a>}
+      {mode !== 'select' && <a data-p="board" href={`${boardHref}?place=${first.slug}`} class="rounded-md border border-navy-100 px-4 py-2 text-sm font-semibold text-navy-900 hover:border-brass-500 hover:text-brass-600">Territories →</a>}
+    </div>
+    <p class="mt-5 text-xs text-ink-500" data-p="hint">Hover or tap a {noun}. Hover a route to light up the {noun === 'town' ? 'towns' : 'cities'} on it. Positions are approximate; the pages are not.</p>
+  </aside>
+</div>
+
+<style>
+  .market-map .mm-place { cursor: pointer; outline: none; }
+  .market-map .mm-dot { transition: r 0.15s ease, fill 0.15s ease, opacity 0.2s ease; }
+  .market-map .mm-label { transition: fill 0.15s ease, opacity 0.2s ease; }
+  .market-map .mm-place:hover .mm-dot, .market-map .mm-place:focus .mm-dot, .market-map .mm-place.is-active .mm-dot { r: 10; fill: #f8fafc; }
+  .market-map .mm-place:hover .mm-label, .market-map .mm-place:focus .mm-label, .market-map .mm-place.is-active .mm-label { fill: #2dd4bf; }
+  .market-map.is-filtering .mm-place:not(.is-match) .mm-dot, .market-map.is-filtering .mm-place:not(.is-match) .mm-label { opacity: 0.18; }
+  .market-map .mm-place.is-match .mm-dot { fill: #f8fafc; r: 9; }
+  .market-map .mm-corridor { cursor: pointer; outline: none; }
+  .market-map .mm-corridor:hover .mm-route, .market-map .mm-corridor:focus .mm-route { stroke-opacity: 1; stroke-width: 4.5; stroke: #f8fafc; }
+  .market-map .mm-corridor:hover .mm-route-label, .market-map .mm-corridor:focus .mm-route-label { fill: #f8fafc; }
+  .market-map.layer-open .mm-place .mm-dot { fill: var(--mm-open-fill, #14b8a6); }
+  .market-map.layer-worked .mm-place[data-worked='0'] .mm-dot { fill: rgba(20,184,166,0.25); }
+  .market-map.layer-worked .mm-place[data-worked='1'] .mm-dot { fill: #f8fafc; r: 9; }
+  .market-map .mm-layer.is-on { background: rgba(255,255,255,0.12); color: #fff; }
+</style>
+
+<script>
+  function initMaps() {
+    document.querySelectorAll<HTMLElement>('.market-map').forEach((root) => {
+      if (root.dataset.ready) return;
+      root.dataset.ready = '1';
+      const mode = root.dataset.mode;
+      const pageBase = root.dataset.pageBase!;
+      const boardHref = root.dataset.boardHref!;
+      const hq = root.dataset.hq!;
+      const total = Number(root.dataset.industries || 12);
+      const P = (k: string) => root.querySelector<HTMLElement>(`[data-p="${k}"]`);
+      let active: HTMLElement | null = root.querySelector(`.mm-place[data-slug="${hq}"]`);
+      active?.classList.add('is-active');
+      let current = hq;
+      let hoverLockUntil = 0; // after a select-mode click we scroll the page; ignore the stray hover that follows
+
+      const show = (el: HTMLElement, fromHover = false) => {
+        if (fromHover && Date.now() < hoverLockUntil) return;
+        const d = el.dataset;
+        current = d.slug!;
+        P('county')!.textContent = `${d.county}${d.slug === hq ? (pageBase === '/broward/' ? ' · Seasonal base' : ' · Headquarters') : ''}`;
+        P('name')!.textContent = d.name!;
+        P('position')!.textContent = d.position!;
+        P('corridors')!.textContent = d.corridors!;
+        P('open')!.textContent = d.open!;
+        const page = P('page') as HTMLAnchorElement | null;
+        if (page) {
+          page.href = `${pageBase}${d.slug}/`;
+          page.textContent = `The ${d.name} page →`;
+        }
+        const cmp = P('compare') as HTMLAnchorElement | null;
+        if (cmp) cmp.href = `/south-shore/compare/?a=${d.slug}&b=${d.slug === 'brockton' ? 'abington' : 'brockton'}`;
+        const board = P('board') as HTMLAnchorElement | null;
+        if (board) board.href = `${boardHref}?place=${d.slug}`;
+        const choose = P('choose');
+        if (choose) choose.textContent = `Check ${d.name} on the board ↓`;
+        active?.classList.remove('is-active');
+        active = el;
+        el.classList.add('is-active');
+      };
+
+      const select = (slug: string) => {
+        document.dispatchEvent(new CustomEvent('ics:place', { detail: slug }));
+        document.getElementById('board')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+
+      root.querySelectorAll<HTMLElement>('.mm-place').forEach((el) => {
+        el.addEventListener('mouseenter', () => show(el, true));
+        el.addEventListener('focus', () => show(el));
+        el.addEventListener('click', (ev) => {
+          if (mode === 'select') {
+            ev.preventDefault();
+            show(el);
+            hoverLockUntil = Date.now() + 1500;
+            select(el.dataset.slug!);
+            return;
+          }
+          if (window.matchMedia('(hover: none)').matches && active !== el) {
+            ev.preventDefault();
+            show(el);
+          }
+        });
+      });
+      P('choose')?.addEventListener('click', () => select(current));
+
+      // Corridors: hover lights up the places on the route and names them in the panel.
+      root.querySelectorAll<HTMLElement>('.mm-corridor').forEach((c) => {
+        const towns = (c.dataset.towns || '').split(',');
+        const on = () => {
+          root.classList.add('is-filtering');
+          root.querySelectorAll<HTMLElement>('.mm-place').forEach((p) => p.classList.toggle('is-match', towns.includes(p.dataset.slug!)));
+          P('hint')!.textContent = `${c.dataset.route}: ${c.dataset.names}`;
+        };
+        const off = () => {
+          if (findInput.value.trim()) return;
+          root.classList.remove('is-filtering');
+          root.querySelectorAll('.mm-place.is-match').forEach((p) => p.classList.remove('is-match'));
+          P('hint')!.textContent = hintDefault;
+        };
+        c.addEventListener('mouseenter', on);
+        c.addEventListener('focus', on);
+        c.addEventListener('mouseleave', off);
+        c.addEventListener('blur', off);
+      });
+
+      // Find: type to highlight; Enter selects the first match.
+      const findInput = root.querySelector<HTMLInputElement>('[data-find]')!;
+      const hintDefault = P('hint')!.textContent || '';
+      findInput.addEventListener('input', () => {
+        const q = findInput.value.trim().toLowerCase();
+        const places = Array.from(root.querySelectorAll<HTMLElement>('.mm-place'));
+        if (!q) {
+          root.classList.remove('is-filtering');
+          places.forEach((p) => p.classList.remove('is-match'));
+          P('hint')!.textContent = hintDefault;
+          return;
+        }
+        root.classList.add('is-filtering');
+        let firstMatch: HTMLElement | null = null;
+        places.forEach((p) => {
+          const m = p.dataset.name!.toLowerCase().includes(q);
+          p.classList.toggle('is-match', m);
+          if (m && !firstMatch) firstMatch = p;
+        });
+        if (firstMatch) show(firstMatch);
+        P('hint')!.textContent = firstMatch ? `Showing matches for “${findInput.value.trim()}”. Press Enter to ${mode === 'select' ? 'choose it on the board' : 'open the page'}.` : `No ${root.dataset.noun} matches “${findInput.value.trim()}”.`;
+      });
+      findInput.addEventListener('keydown', (ev) => {
+        if (ev.key !== 'Enter' || !active) return;
+        ev.preventDefault();
+        if (mode === 'select') select(active.dataset.slug!);
+        else location.href = `${pageBase}${active.dataset.slug}/`;
+      });
+
+      // Layers.
+      root.querySelectorAll<HTMLButtonElement>('.mm-layer').forEach((b) =>
+        b.addEventListener('click', () => {
+          root.querySelectorAll('.mm-layer').forEach((x) => x.classList.remove('is-on'));
+          b.classList.add('is-on');
+          root.classList.remove('layer-open', 'layer-worked');
+          if (b.dataset.layer === 'open') {
+            root.classList.add('layer-open');
+            root.querySelectorAll<HTMLElement>('.mm-place').forEach((p) => {
+              const open = Number(p.dataset.open || total);
+              const ratio = open / total;
+              p.style.setProperty('--mm-open-fill', ratio >= 1 ? '#14b8a6' : ratio >= 0.5 ? '#c9a227' : '#ef4444');
+            });
+            P('hint')!.textContent = `Teal: every category open. Brass: some locked. Red: mostly locked. Hover a ${root.dataset.noun} for the count.`;
+          } else if (b.dataset.layer === 'worked') {
+            root.classList.add('layer-worked');
+            P('hint')!.textContent = 'Bright: towns named in a published case study or listing. Dim: not yet, which is the point of the board.';
+          } else {
+            P('hint')!.textContent = hintDefault;
+          }
+        })
+      );
+
+      // Deep link.
+      const want = new URLSearchParams(location.search).get('town');
+      const target = want ? root.querySelector<HTMLElement>(`.mm-place[data-slug="${want}"]`) : null;
+      if (target) show(target);
+    });
+  }
+  initMaps();
+  document.addEventListener('astro:page-load', initMaps);
+</script>

@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
 import CtaSection from '../../components/CtaSection.astro';
-import SouthShoreMap from '../../components/SouthShoreMap.astro';
+import MarketMap from '../../components/MarketMap.astro';
 import { TOWNS } from '../../lib/towns';
 import { SITE } from '../../config';
 
@@ -37,8 +37,8 @@ const schema = [
   </section>
 
   <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-    <SectionHeading eyebrow="The map" heading="Twenty-nine towns, the corridors that connect them, and the read on each" body="Hover a town for its market read and how many Market Lock categories are still open there. Click through to the page. Brockton is home." align="center" />
-    <div class="mt-10"><SouthShoreMap /></div>
+    <SectionHeading eyebrow="The map" heading="Twenty-nine towns, the corridors that connect them, and the read on each" body="Hover a town for its market read and how many Market Lock categories are still open there. Hover a route to light up the towns on it, type to find a town, switch layers. Brockton is home." align="center" />
+    <div class="mt-10"><MarketMap market="MA" /></div>
   </section>
 
   <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">

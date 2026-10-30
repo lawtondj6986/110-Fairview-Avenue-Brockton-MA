@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import FounderCard from '../../components/FounderCard.astro';
 import { CLAIMED_FL } from '../../lib/claimed';
+import MarketMap from '../../components/MarketMap.astro';
 import TerritoryBoard from '../../components/TerritoryBoard.astro';
 import { SITE } from '../../config';
 import { BROWARD_CITIES } from '../../lib/broward';
@@ -55,6 +56,12 @@ const schema = [
         Massachusetts business? <a href="/territories/" class="font-semibold text-brass-300 hover:text-brass-200">The South Shore board →</a>
       </p>
     </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pt-12 sm:px-6">
+    <p class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brass-600">Pick your city on the map</p>
+    <p class="mt-2 text-sm text-ink-500">Click a city and the board below selects it. Switch to the open-territories layer to see where categories are still available at a glance.</p>
+    <div class="mt-6"><MarketMap market="FL" mode="select" compact /></div>
   </section>
 
   <TerritoryBoard market="Broward County" state="FL" placeNoun="city" places={places} placeHrefBase="/broward/" claimed={claimed} />

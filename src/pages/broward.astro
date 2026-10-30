@@ -5,6 +5,7 @@ import SectionHeading from '../components/SectionHeading.astro';
 import CtaSection from '../components/CtaSection.astro';
 import { SITE } from '../config';
 import { BROWARD_CITIES } from '../lib/broward';
+import MarketMap from '../components/MarketMap.astro';
 import ShortVersion from '../components/ShortVersion.astro';
 
 const title = 'Fort Lauderdale & Broward County — AI Revenue Systems, Retail Platforms, Custom Builds | ICS';
@@ -135,6 +136,12 @@ const schema = [
         Check my territory →
       </a>
     </div>
+  </section>
+
+  <!-- THE MAP -->
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <SectionHeading eyebrow="The map" heading="Twenty-four cities, the corridors that connect them, and the read on each" body="Hover a city for its read and how many Market Lock categories are still open. Hover a corridor to light up the cities on it. Fort Lauderdale is the seasonal base." align="center" />
+    <div class="mt-10"><MarketMap market="FL" /></div>
   </section>
 
   <!-- THE CITIES — one page each, written corridor by corridor -->
