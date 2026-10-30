@@ -4,11 +4,13 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { fileURLToPath } from 'node:url';
 import { generateOg } from './scripts/generate-og.mjs';
+import { generateImages } from './scripts/generate-images.mjs';
 import { generateLlmsFull } from './scripts/generate-llms-full.mjs';
 import { generateAnswers } from './scripts/generate-answers.mjs';
 import rehypeGlossary from './scripts/rehype-glossary.mjs';
 
 // Branded social cards are rendered before every build/dev session
+await generateImages();
 await generateOg();
 
 /** After the static build, emit /llms-full.txt from the finished HTML. */

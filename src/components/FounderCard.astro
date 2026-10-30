@@ -24,6 +24,8 @@ const tel = SITE.phone.replace(/[^\d+]/g, '');
     <aside class="mt-12 flex items-start gap-5 rounded-xl border border-navy-100 bg-paper p-5 sm:items-center">
       <img
         src="/images/daniel-lawton.jpg"
+          srcset="/images/daniel-lawton-320.webp 320w, /images/daniel-lawton-640.webp 640w, /images/daniel-lawton-960.webp 960w"
+          sizes="96px"
         alt={SITE.founder}
         width="800"
         height="1524"
@@ -50,6 +52,8 @@ const tel = SITE.phone.replace(/[^\d+]/g, '');
       <div class="mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 py-12 sm:px-6 lg:flex-row lg:items-center">
         <img
           src="/images/daniel-lawton.jpg"
+          srcset="/images/daniel-lawton-320.webp 320w, /images/daniel-lawton-640.webp 640w, /images/daniel-lawton-960.webp 960w"
+          sizes="(min-width: 640px) 192px, 160px"
           alt={`${SITE.founder}, founder of ${SITE.name}`}
           width="800"
           height="1524"

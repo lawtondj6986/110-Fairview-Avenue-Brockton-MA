@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
 import CtaSection from '../../components/CtaSection.astro';
+import SouthShoreMap from '../../components/SouthShoreMap.astro';
 import { TOWNS } from '../../lib/towns';
 import { SITE } from '../../config';
 
@@ -33,6 +34,11 @@ const schema = [
         market below has its own page because every market below actually reads differently on the ground.
       </p>
     </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <SectionHeading eyebrow="The map" heading="Twenty-nine towns, the corridors that connect them, and the read on each" body="Hover a town for its market read and how many Market Lock categories are still open there. Click through to the page. Brockton is home." align="center" />
+    <div class="mt-10"><SouthShoreMap /></div>
   </section>
 
   <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
