@@ -1,0 +1,226 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import FounderCard from '../../components/FounderCard.astro';
+import { TOWNS } from '../../lib/towns';
+import { SITE } from '../../config';
+
+const title = 'Town Compare — Any Two South Shore Towns, Side by Side | Free ICS Tool';
+const description =
+  'Pick any two of the 29 South Shore towns and compare them side by side: the commercial corridors, what the buildings are, what the businesses are, the operator’s read on each, and the neighbors. Site selection starts with the right town. Free, no email, shareable link.';
+
+const sorted = [...TOWNS].sort((a, b) => a.name.localeCompare(b.name));
+const cards = TOWNS.map((t) => ({ ...t, neighborTowns: t.neighbors.map((n) => TOWNS.find((x) => x.slug === n)).filter(Boolean) as typeof TOWNS }));
+const defaultA = 'brockton';
+const defaultB = 'abington';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'ICS Town Compare',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: `${SITE.url}/south-shore/compare/`,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    provider: { '@id': `${SITE.url}/#business` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'How do I choose which South Shore town to open a business in?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Start from where your customers already are, then compare the towns that fit on four things: the corridors your customers drive, the kind of commercial buildings available there, the businesses already competing, and zoning for your use. This tool puts the first three side by side for any two towns; a buyer-representation call adds zoning, parking, and what is quietly for sale.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Which South Shore town has the most commercial real estate?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Brockton carries the deepest commercial inventory on this side of the South Shore: downtown mixed-use, the Route 28 retail spine, auto-related and light-industrial buildings, and owner-user trades buildings. Quincy is the largest city by population and office stock. The right answer for a given business depends on its customers and its use, which is what the comparison is for.',
+        },
+      },
+    ],
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Free tool · Town Compare · 29 towns</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        Any two South Shore towns, side by side.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        The corridors, what the buildings are, what the businesses are, and the operator's read on each. Site selection
+        starts with the right town. Pick two, compare, send the link to your partner.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6" id="compare" data-default-a={defaultA} data-default-b={defaultB}>
+    <div class="grid gap-4 sm:grid-cols-[1fr_auto_1fr] sm:items-end">
+      <label class="block">
+        <span class="mb-1 block text-sm font-medium text-navy-900">Town A</span>
+        <select id="town-a" class="w-full rounded-md border border-navy-100 bg-white px-3 py-2.5 text-sm text-navy-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100">
+          {sorted.map((t) => <option value={t.slug}>{t.name}</option>)}
+        </select>
+      </label>
+      <button type="button" id="swap" class="rounded-md border border-navy-100 px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700" aria-label="Swap towns">⇄ Swap</button>
+      <label class="block">
+        <span class="mb-1 block text-sm font-medium text-navy-900">Town B</span>
+        <select id="town-b" class="w-full rounded-md border border-navy-100 bg-white px-3 py-2.5 text-sm text-navy-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100">
+          {sorted.map((t) => <option value={t.slug}>{t.name}</option>)}
+        </select>
+      </label>
+    </div>
+
+    <div class="mt-8 grid gap-6 lg:grid-cols-2">
+      <div id="slot-a" class="min-w-0"></div>
+      <div id="slot-b" class="min-w-0"></div>
+    </div>
+
+    <div class="mt-8 flex flex-wrap gap-3 print:hidden">
+      <a id="bring" href="/contact/" class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-teal-700">Bring these two towns to Daniel →</a>
+      <button type="button" id="share" class="rounded-md border border-navy-100 px-5 py-2.5 text-sm font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700">Copy a shareable link</button>
+      <button type="button" id="print" class="rounded-md border border-navy-100 px-5 py-2.5 text-sm font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700">Print / Save as PDF</button>
+    </div>
+    <p class="mt-3 text-xs text-ink-500">
+      The read on each town is the same copy that lives on its market page, written by someone who works these corridors. Zoning for a specific use, parking, and what is quietly for sale come from a call.
+    </p>
+
+    <!-- One card per town, rendered once and hidden; the script clones the two that are selected. -->
+    <div hidden id="town-cards">
+    {
+      cards.map((t) => (
+        <div data-town-card={t.slug}>
+          <article class="flex h-full flex-col rounded-2xl border border-navy-100 bg-white p-6 shadow-sm sm:p-7">
+            <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-600">{t.county} County</p>
+            <h2 class="mt-1 font-display text-2xl font-bold text-navy-900">{t.name}</h2>
+            <p class="mt-1 text-sm italic text-ink-500">{t.position}</p>
+            <dl class="mt-5 space-y-5 text-sm leading-relaxed text-ink-700">
+              <div>
+                <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">Corridors</dt>
+                <dd class="mt-1.5 flex flex-wrap gap-1.5">
+                  {t.corridors.map((c) => <span class="rounded-full border border-navy-100 bg-paper px-2.5 py-0.5 text-xs font-medium text-navy-900">{c}</span>)}
+                </dd>
+              </div>
+              <div>
+                <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">The buildings</dt>
+                <dd class="mt-1.5">{t.propertyMix}</dd>
+              </div>
+              <div>
+                <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">The businesses</dt>
+                <dd class="mt-1.5">{t.businessMix}</dd>
+              </div>
+              <div>
+                <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">The operator's read</dt>
+                <dd class="mt-1.5">{t.angle}</dd>
+              </div>
+              <div>
+                <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">Neighbors</dt>
+                <dd class="mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
+                  {t.neighborTowns.map((nt) => (
+                    <button type="button" data-pick={nt.slug} class="text-xs font-semibold text-teal-600 hover:text-teal-700">{nt.name} →</button>
+                  ))}
+                </dd>
+              </div>
+            </dl>
+            <p class="mt-6 border-t border-navy-100 pt-4 text-sm">
+              <a href={`/south-shore/${t.slug}/`} class="font-semibold text-teal-600 hover:text-teal-700">The {t.name} market page →</a>
+              <span class="text-ink-500"> · </span>
+              <a href={`/territories/?place=${t.slug}`} class="font-semibold text-brass-600 hover:text-brass-500">Open territories in {t.name} →</a>
+            </p>
+          </article>
+        </div>
+      ))
+    }
+    </div>
+  </section>
+
+  <FounderCard heading="The person behind every one of these reads" line="Twenty-nine towns, written corridor by corridor by the licensed advisor who works them. When two towns are close on paper, the call is what separates them." />
+  <CtaSection heading="Narrowed it to two?" body="Bring both towns to a call. You will leave with a straight read on zoning for your use, parking, what is quietly for sale, and which one we would pick." />
+</Base>
+
+<script>
+  function initCompare() {
+    const root = document.getElementById('compare');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+    const a = document.getElementById('town-a') as HTMLSelectElement;
+    const b = document.getElementById('town-b') as HTMLSelectElement;
+    const slotA = document.getElementById('slot-a')!;
+    const slotB = document.getElementById('slot-b')!;
+    const bring = document.getElementById('bring') as HTMLAnchorElement;
+    const share = document.getElementById('share') as HTMLButtonElement;
+    const valid = (v: string | null) => !!v && !!document.querySelector(`[data-town-card="${v}"]`);
+
+    const q = new URLSearchParams(location.search);
+    a.value = valid(q.get('a')) ? q.get('a')! : root.dataset.defaultA!;
+    b.value = valid(q.get('b')) ? q.get('b')! : root.dataset.defaultB!;
+    if (a.value === b.value) b.value = Array.from(b.options).find((o) => o.value !== a.value)!.value;
+
+    function fill(slot: HTMLElement, slug: string) {
+      const card = document.querySelector(`[data-town-card="${slug}"] article`);
+      slot.innerHTML = '';
+      if (card) slot.appendChild(card.cloneNode(true));
+      slot.querySelectorAll<HTMLButtonElement>('[data-pick]').forEach((btn) =>
+        btn.addEventListener('click', () => {
+          const other = slot === slotA ? b : a;
+          other.value = btn.dataset.pick!;
+          render();
+          other.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        })
+      );
+    }
+
+    function render() {
+      fill(slotA, a.value);
+      fill(slotB, b.value);
+      const nameA = a.selectedOptions[0].textContent;
+      const nameB = b.selectedOptions[0].textContent;
+      const url = new URL(location.href);
+      url.searchParams.set('a', a.value);
+      url.searchParams.set('b', b.value);
+      history.replaceState(null, '', url.toString());
+      bring.href = `/contact/?${new URLSearchParams({
+        interest: 'Buying commercial property',
+        message: `Town Compare — I'm deciding between ${nameA} and ${nameB} for my business. Here is the comparison I ran: ${url.toString()}\n\nMy business: \nWhat I need (size, doors, parking, use): `,
+      }).toString()}`;
+      try {
+        (window as unknown as { va?: (e: string, o: unknown) => void }).va?.('event', { name: 'town-compare', data: { a: a.value, b: b.value } });
+      } catch {
+        /* best-effort */
+      }
+    }
+
+    a.addEventListener('change', render);
+    b.addEventListener('change', render);
+    document.getElementById('swap')!.addEventListener('click', () => {
+      const t = a.value;
+      a.value = b.value;
+      b.value = t;
+      render();
+    });
+    share.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(location.href);
+        share.textContent = 'Link copied';
+      } catch {
+        share.textContent = location.href;
+      }
+      setTimeout(() => (share.textContent = 'Copy a shareable link'), 2500);
+    });
+    document.getElementById('print')!.addEventListener('click', () => window.print());
+    render();
+  }
+  initCompare();
+  document.addEventListener('astro:page-load', initCompare);
+</script>

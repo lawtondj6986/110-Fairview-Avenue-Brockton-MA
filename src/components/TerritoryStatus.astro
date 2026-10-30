@@ -1,0 +1,94 @@
+---
+/**
+ * Territory status — the Market Lock ledger, read from a town page or an
+ * industry page. One business per category, per town; this shows what is
+ * open right here, right now, and deep-links into the board.
+ */
+import { INDUSTRIES } from '../lib/industries';
+import { TOWNS } from '../lib/towns';
+import { type Claim, isLocked, lockedInPlace, lockedForIndustry } from '../lib/claimed';
+
+interface Props {
+  claimed: Claim[];
+  boardHref: string; // "/territories/" or "/broward/territories/"
+  state: string; // "MA" | "FL"
+  place?: { slug: string; name: string };
+  industry?: { slug: string; name: string };
+  placeCount?: number; // for industry mode; defaults to TOWNS.length
+}
+const { claimed, boardHref, state, place, industry, placeCount = TOWNS.length } = Astro.props;
+
+const openHere = place ? INDUSTRIES.length - lockedInPlace(claimed, place.slug) : 0;
+const openTowns = industry ? placeCount - lockedForIndustry(claimed, industry.slug) : 0;
+---
+
+<section class="bg-navy-950">
+  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+      <div class="max-w-xl">
+        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Market Lock · Territory status</p>
+        {
+          place ? (
+            <>
+              <p class="mt-2 font-display text-2xl font-bold leading-snug text-white sm:text-3xl">
+                {openHere} of {INDUSTRIES.length} categories in {place.name} are still open.
+              </p>
+              <p class="mt-2 text-sm leading-relaxed text-navy-100/75">
+                One business per category, per town, in writing for twelve months. The first {place.name} business in a category to lock it
+                gets the whole machine and a written no to every competitor who calls after.
+              </p>
+            </>
+          ) : industry ? (
+            <>
+              <p class="mt-2 font-display text-2xl font-bold leading-snug text-white sm:text-3xl">
+                {industry.name} is open in {openTowns} of {placeCount} {state === 'FL' ? 'cities' : 'towns'}.
+              </p>
+              <p class="mt-2 text-sm leading-relaxed text-navy-100/75">
+                Market Lock holds one {industry.name.toLowerCase()} business per {state === 'FL' ? 'city' : 'town'}. Pick yours on the board and see
+                whether it is open before a competitor does.
+              </p>
+            </>
+          ) : null
+        }
+      </div>
+      <div class="lg:max-w-md">
+        {
+          place ? (
+            <ul class="flex flex-wrap gap-1.5">
+              {INDUSTRIES.map((i) => {
+                const locked = isLocked(claimed, place.slug, i.slug);
+                return (
+                  <li>
+                    <a
+                      href={`${boardHref}?place=${place.slug}&cat=${i.slug}`}
+                      class:list={[
+                        'inline-block rounded-full border px-2.5 py-1 text-xs font-semibold transition-colors',
+                        locked
+                          ? 'border-brass-400/40 text-brass-300/70 line-through decoration-brass-400/60 hover:text-brass-300'
+                          : 'border-white/15 text-navy-100/90 hover:border-teal-400 hover:text-teal-400',
+                      ]}
+                      title={locked ? `${i.name} in ${place.name} is held by an ICS client` : `${i.name} in ${place.name} is open`}
+                    >
+                      {i.name}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : industry ? (
+            <a
+              href={`${boardHref}?cat=${industry.slug}`}
+              class="inline-block rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300"
+            >
+              Check {industry.name} in my {state === 'FL' ? 'city' : 'town'} →
+            </a>
+          ) : null
+        }
+        <p class="mt-3 text-xs text-navy-100/55">
+          Published pricing: $20,000–$30,000 to build plus $3,500–$6,000 per month.
+          <a href={boardHref} class="font-semibold text-teal-400 hover:text-teal-300">The full board →</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

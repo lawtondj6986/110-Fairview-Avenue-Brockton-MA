@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import FounderCard from '../components/FounderCard.astro';
+import { CLAIMED_MA } from '../lib/claimed';
 import TerritoryBoard from '../components/TerritoryBoard.astro';
 import { SITE } from '../config';
 import { TOWNS } from '../lib/towns';
@@ -15,7 +16,7 @@ const description =
  * { place: '<town slug>', industry: '<industry slug>' }. The board shows the
  * territory as locked — never the client's name.
  */
-const claimed: { place: string; industry: string }[] = [];
+const claimed = CLAIMED_MA;
 
 const places = TOWNS.map((t) => ({ slug: t.slug, name: t.name }));
 const total = places.length * INDUSTRIES.length;

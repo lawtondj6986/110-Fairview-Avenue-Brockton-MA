@@ -4,6 +4,8 @@ import SectionHeading from '../../components/SectionHeading.astro';
 import CtaSection from '../../components/CtaSection.astro';
 import { INDUSTRIES } from '../../lib/industries';
 import { SITE } from '../../config';
+import TerritoryStatus from '../../components/TerritoryStatus.astro';
+import { CLAIMED_MA } from '../../lib/claimed';
 
 export function getStaticPaths() {
   return INDUSTRIES.map((industry) => ({ params: { slug: industry.slug }, props: { industry } }));
@@ -97,6 +99,8 @@ const schema = [
       </p>
     </div>
   </section>
+
+  <TerritoryStatus claimed={CLAIMED_MA} boardHref="/territories/" state="MA" industry={{ slug: industry.slug, name: industry.name }} />
 
   <section class="mx-auto max-w-4xl px-4 py-14 text-center sm:px-6">
     <div class="reveal rounded-2xl border border-teal-500/40 bg-paper p-8">

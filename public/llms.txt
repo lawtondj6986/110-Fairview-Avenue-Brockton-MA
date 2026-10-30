@@ -25,7 +25,7 @@ The complete text of every page, in one file: https://icsgroup.ai/llms-full.txt 
 
 ## Free tools
 
-- [The Free Shelf](https://icsgroup.ai/tools/): fifteen free tools on one page — Fit Finder, QuoteBrain, AI Readiness Score, building valuation, Lease vs. Buy, Seller Net Proceeds, Cap Rate & NOI, Lease Deal Analyzer, Revenue Leak, the Cost of Not Knowing, the political Vulnerability Self-Check, the 90-Day Playbook, the Due-Diligence Checklist, Straight Answers, and the DIY-vs-agency comparison. None require an email address.
+- [The Free Shelf](https://icsgroup.ai/tools/): sixteen free tools on one page — Fit Finder, QuoteBrain, AI Readiness Score, building valuation, Lease vs. Buy, Seller Net Proceeds, Cap Rate & NOI, Lease Deal Analyzer, Revenue Leak, the Cost of Not Knowing, the political Vulnerability Self-Check, the 90-Day Playbook, the Due-Diligence Checklist, Straight Answers, and the DIY-vs-agency comparison. None require an email address.
 
 - [Start Here — the Fit Finder](https://icsgroup.ai/start/): four questions, 60 seconds, no email gate — matches any business to the right ICS system with its published price range and live proof to verify.
 - [The Pre-Signing Due-Diligence Checklist](https://icsgroup.ai/intelligence/due-diligence-checklist/): a free, printable, no-email checklist of the public-record items to verify before buying, lending, partnering, or signing — organized by the entity, the people, the money, litigation, the asset, and reputation, with where each is public and what a red flag looks like.
@@ -79,6 +79,7 @@ The complete text of every page, in one file: https://icsgroup.ai/llms-full.txt 
 
 - [About Daniel Lawton](https://icsgroup.ai/about/): the founder's bio — Boston University School of Management 2008 (Entrepreneurship & Marketing), serial founder, licensed MA real estate salesperson, AI systems builder; ventures, credentials, and common questions. Also reachable at /daniel-lawton/.
 - [A Letter from Daniel](https://icsgroup.ai/letter/): the founder's first-person letter — why one licensed advisor negotiates the building and builds the systems inside it, why ICS publishes prices and guarantees, and why he answers his own phone.
+- [Town Compare](https://icsgroup.ai/south-shore/compare/): free tool — any two of the 29 South Shore towns side by side (corridors, property mix, business mix, the operator's read, neighbors) for site selection; shareable links.
 - [The Glossary](https://icsgroup.ai/glossary/): 130 plain-English definitions of the terms a business owner hears in a commercial lease, an AI marketing pitch, and a due diligence brief, each with a South Shore angle and two answered questions. Individual terms live at /glossary/<term>/.
 - [Broward County city pages](https://icsgroup.ai/broward/): 24 city pages (Fort Lauderdale, Hollywood, Pembroke Pines, Pompano Beach, Coral Springs, and more) describing the corridors, the business mix, and how the AI revenue systems apply there, at /broward/<city>/. Systems only in Florida; brokerage is Massachusetts-licensed.
 - [Press & Media Kit](https://icsgroup.ai/press/): boilerplate (50 and 100 words), founder bio, fast facts, downloadable logos and headshot, and four pre-researched story angles with primary sources. Media inquiries go directly to the founder.

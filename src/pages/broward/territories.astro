@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import FounderCard from '../../components/FounderCard.astro';
+import { CLAIMED_FL } from '../../lib/claimed';
 import TerritoryBoard from '../../components/TerritoryBoard.astro';
 import { SITE } from '../../config';
 import { BROWARD_CITIES } from '../../lib/broward';
@@ -14,7 +15,7 @@ const description =
  * Locked Broward territories. When a Market Lock client signs, add
  * { place: '<city slug>', industry: '<industry slug>' }. Never the client's name.
  */
-const claimed: { place: string; industry: string }[] = [];
+const claimed = CLAIMED_FL;
 
 const places = BROWARD_CITIES;
 const total = places.length * INDUSTRIES.length;

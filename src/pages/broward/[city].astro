@@ -6,6 +6,8 @@ import ShortVersion from '../../components/ShortVersion.astro';
 import { BROWARD_CITIES, getBrowardCity } from '../../lib/broward';
 import { INDUSTRIES } from '../../lib/industries';
 import { SITE } from '../../config';
+import TerritoryStatus from '../../components/TerritoryStatus.astro';
+import { CLAIMED_FL } from '../../lib/claimed';
 
 export async function getStaticPaths() {
   return BROWARD_CITIES.map((c) => ({ params: { city: c.slug } }));
@@ -158,6 +160,7 @@ const schema = [
     </div>
   </section>
 
+  <TerritoryStatus claimed={CLAIMED_FL} boardHref="/broward/territories/" state="FL" place={{ slug: city.slug, name: city.name }} />
   <FounderCard heading={`Who you'll actually work with in ${city.name}`} />
   <CtaSection heading={`Ready to lock ${city.name}?`} body="One call, a straight answer on fit and price, and a written quote within 48 hours. Published pricing, written guarantees, in Florida exactly as in Massachusetts." />
 </Base>
