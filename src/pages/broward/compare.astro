@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import FounderCard from '../../components/FounderCard.astro';
+import CityCompare from '../../components/CityCompare.astro';
+import { BROWARD_CITIES } from '../../lib/broward';
+import { CLAIMED_FL } from '../../lib/claimed';
+import { SITE } from '../../config';
+
+const title = 'City Compare — Any Two Broward County Cities, Side by Side | Free ICS Tool';
+const description =
+  'Pick any two of the 24 Broward County cities and compare them side by side: the corridors, who buys there, the operator’s read, how many Market Lock categories are still open, and the neighbors. Choosing where to own your category starts with the right city. Free, no email, shareable link.';
+
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'ICS City Compare (Broward)', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: `${SITE.url}/broward/compare/`, description, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, provider: { '@id': `${SITE.url}/#business` } },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'How do I choose which Broward city to focus my business on?', acceptedAnswer: { '@type': 'Answer', text: 'Start from where your customers already are, then compare the cities that fit on the corridors they drive, who buys there, and whether your category is still open under Market Lock. This tool puts those side by side for any two of the 24 cities; a call adds the specifics of your trade.' } },
+      { '@type': 'Question', name: 'Does ICS broker property in Broward County?', acceptedAnswer: { '@type': 'Answer', text: 'No. In Florida ICS delivers AI revenue systems, retail platforms, and custom builds; real estate brokerage is Massachusetts-licensed, and a Florida property transaction is handled alongside a licensed Florida broker. The free deal tools work anywhere.' } },
+    ],
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Free tool · City Compare · <a href="/broward/" class="hover:text-brass-200">Broward County</a> · 24 cities</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">Any two Broward cities, side by side.</h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        The corridors, who buys there, the operator's read, and how many categories are still open in each. Choosing where to own your category starts with the right city. Pick two, compare, send the link to your partner.
+      </p>
+    </div>
+  </section>
+  <CityCompare cities={BROWARD_CITIES} base="/broward/" boardHref="/broward/territories/" county="Broward County" defaultA="fort-lauderdale" defaultB="hollywood" claimed={CLAIMED_FL} />
+  <FounderCard heading="The person behind every one of these reads" line="Twenty-four cities, written corridor by corridor. On the ground in Broward seasonally; every system runs remotely the rest of the year." />
+  <CtaSection heading="Narrowed it to two?" body="Bring both cities to a call. You will leave with a straight read on which categories are open, what the system would look like there, and which one we would pick." />
+</Base>

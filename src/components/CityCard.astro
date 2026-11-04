@@ -1,0 +1,49 @@
+---
+/** One city card for City Compare; rendered once per city in the hidden list and once more for each default slot. */
+import type { BrowardCity } from '../lib/broward';
+interface Props {
+  c: BrowardCity & { open: number; neighborCities: BrowardCity[] };
+  county: string;
+  base: string;
+  boardHref: string;
+  total: number;
+}
+const { c, county, base, boardHref, total } = Astro.props;
+---
+
+<article class="flex h-full flex-col rounded-2xl border border-navy-100 bg-white p-6 shadow-sm sm:p-7">
+  <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-600">{county}</p>
+  <h2 class="mt-1 font-display text-2xl font-bold text-navy-900">{c.name}, FL</h2>
+  <p class="mt-1 text-sm italic text-ink-500">{c.position.charAt(0).toUpperCase() + c.position.slice(1)}</p>
+  <dl class="mt-5 space-y-5 text-sm leading-relaxed text-ink-700">
+    <div>
+      <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">Where it does business</dt>
+      <dd class="mt-1.5 flex flex-wrap gap-1.5">{c.corridors.map((r) => <span class="rounded-full border border-navy-100 bg-paper px-2.5 py-0.5 text-xs font-medium">{r}</span>)}</dd>
+    </div>
+    <div>
+      <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">Who buys here</dt>
+      <dd class="mt-1.5"><ul class="list-disc space-y-1 pl-5">{c.businessMix.map((b) => <li>{b.charAt(0).toUpperCase() + b.slice(1)}</li>)}</ul></dd>
+    </div>
+    <div>
+      <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">The operator's read</dt>
+      <dd class="mt-1.5">{c.angle}</dd>
+    </div>
+    <div>
+      <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">Market Lock</dt>
+      <dd class="mt-1.5"><a href={`${boardHref}?place=${c.slug}`} class="font-semibold text-teal-600 hover:text-teal-700">{c.open} of {total} categories open →</a></dd>
+    </div>
+    <div>
+      <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">Neighbors</dt>
+      <dd class="mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
+        {c.neighborCities.map((n) => (
+          <button type="button" data-pick={n.slug} class="-mx-1 inline-block rounded px-2 py-1.5 text-xs font-semibold text-teal-600 hover:bg-paper hover:text-teal-700">{n.name} →</button>
+        ))}
+      </dd>
+    </div>
+  </dl>
+  <p class="mt-6 border-t border-navy-100 pt-4 text-sm">
+    <a href={`${base}${c.slug}/`} class="font-semibold text-teal-600 hover:text-teal-700">The {c.name} page →</a>
+    <span class="text-ink-500"> · </span>
+    <a href={`${base}${c.slug}/sheet/`} class="font-semibold text-teal-600 hover:text-teal-700">Print the {c.name} sheet →</a>
+  </p>
+</article>

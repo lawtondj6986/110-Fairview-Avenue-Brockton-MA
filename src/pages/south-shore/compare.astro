@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import CtaSection from '../../components/CtaSection.astro';
 import FounderCard from '../../components/FounderCard.astro';
 import { TOWNS } from '../../lib/towns';
+import TownCard from '../../components/TownCard.astro';
 import { SITE } from '../../config';
 
 const title = 'Town Compare — Any Two South Shore Towns, Side by Side | Free ICS Tool';
@@ -13,6 +14,8 @@ const sorted = [...TOWNS].sort((a, b) => a.name.localeCompare(b.name));
 const cards = TOWNS.map((t) => ({ ...t, neighborTowns: t.neighbors.map((n) => TOWNS.find((x) => x.slug === n)).filter(Boolean) as typeof TOWNS }));
 const defaultA = 'brockton';
 const defaultB = 'abington';
+const cardA = cards.find((t) => t.slug === defaultA)!;
+const cardB = cards.find((t) => t.slug === defaultB)!;
 
 const schema = [
   {
@@ -83,8 +86,8 @@ const schema = [
     </div>
 
     <div class="mt-8 grid gap-6 lg:grid-cols-2">
-      <div id="slot-a" class="min-w-0"></div>
-      <div id="slot-b" class="min-w-0"></div>
+      <div id="slot-a" class="min-w-0"><TownCard t={cardA} /></div>
+      <div id="slot-b" class="min-w-0"><TownCard t={cardB} /></div>
     </div>
 
     <div class="mt-8 flex flex-wrap gap-3 print:hidden">
@@ -98,52 +101,9 @@ const schema = [
 
     <!-- One card per town, rendered once and hidden; the script clones the two that are selected. -->
     <div hidden id="town-cards">
-    {
-      cards.map((t) => (
-        <div data-town-card={t.slug}>
-          <article class="flex h-full flex-col rounded-2xl border border-navy-100 bg-white p-6 shadow-sm sm:p-7">
-            <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-600">{t.county} County</p>
-            <h2 class="mt-1 font-display text-2xl font-bold text-navy-900">{t.name}</h2>
-            <p class="mt-1 text-sm italic text-ink-500">{t.position}</p>
-            <dl class="mt-5 space-y-5 text-sm leading-relaxed text-ink-700">
-              <div>
-                <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">Corridors</dt>
-                <dd class="mt-1.5 flex flex-wrap gap-1.5">
-                  {t.corridors.map((c) => <span class="rounded-full border border-navy-100 bg-paper px-2.5 py-0.5 text-xs font-medium text-navy-900">{c}</span>)}
-                </dd>
-              </div>
-              <div>
-                <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">The buildings</dt>
-                <dd class="mt-1.5">{t.propertyMix}</dd>
-              </div>
-              <div>
-                <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">The businesses</dt>
-                <dd class="mt-1.5">{t.businessMix}</dd>
-              </div>
-              <div>
-                <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">The operator's read</dt>
-                <dd class="mt-1.5">{t.angle}</dd>
-              </div>
-              <div>
-                <dt class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">Neighbors</dt>
-                <dd class="mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
-                  {t.neighborTowns.map((nt) => (
-                    <button type="button" data-pick={nt.slug} class="-mx-1 inline-block rounded px-2 py-1.5 text-xs font-semibold text-teal-600 hover:bg-paper hover:text-teal-700">{nt.name} →</button>
-                  ))}
-                </dd>
-              </div>
-            </dl>
-            <p class="mt-6 border-t border-navy-100 pt-4 text-sm">
-              <a href={`/south-shore/${t.slug}/`} class="font-semibold text-teal-600 hover:text-teal-700">The {t.name} market page →</a>
-              <span class="text-ink-500"> · </span>
-              <a href={`/territories/?place=${t.slug}`} class="font-semibold text-brass-600 hover:text-brass-500">Open territories in {t.name} →</a>
-              <span class="text-ink-500"> · </span>
-              <a href={`/south-shore/${t.slug}/sheet/`} class="font-semibold text-teal-600 hover:text-teal-700">Print the {t.name} sheet →</a>
-            </p>
-          </article>
-        </div>
-      ))
-    }
+      {cards.map((t) => (
+        <div data-town-card={t.slug}><TownCard t={t} /></div>
+      ))}
     </div>
   </section>
 

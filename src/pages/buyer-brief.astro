@@ -122,7 +122,7 @@ const select = 'w-full rounded-md border border-navy-100 bg-white px-3 py-2.5 te
       <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
         Most sub-$3M South Shore buildings change hands before they are listed. Describe what you are hunting, pick your
         towns on the map, and the page writes the one-page brief we would take into that hunt, with each town's corridors
-        and property read already on it.
+        and property read already on it. Leasing rather than buying? Pick the tenant seat; the brief becomes a space brief.
       </p>
     </div>
   </section>
@@ -137,6 +137,7 @@ const select = 'w-full rounded-md border border-navy-100 bg-white px-3 py-2.5 te
           <div class="flex flex-wrap gap-2" data-group="seat">
             <button type="button" class={chip} data-value="owner" aria-pressed="true">Owner-user, my business will occupy it</button>
             <button type="button" class={chip} data-value="investor" aria-pressed="false">Investor, income property</button>
+            <button type="button" class={chip} data-value="tenant" aria-pressed="false">Tenant, leasing space</button>
           </div>
         </fieldset>
 
@@ -325,7 +326,7 @@ const select = 'w-full rounded-md border border-navy-100 bg-white px-3 py-2.5 te
     // Hydrate from URL
     const q = new URLSearchParams(location.search);
     const list = (k: string, valid: (v: string) => boolean) => (q.get(k) || '').split(',').filter((v) => v && valid(v));
-    if (q.get('seat') === 'investor') state.seat = 'investor';
+    if (q.get('seat') === 'investor' || q.get('seat') === 'tenant') state.seat = q.get('seat')!;
     state.type = list('type', (v) => v in LABELS.type);
     state.must = list('must', (v) => v in LABELS.must);
     state.towns = list('towns', (v) => townData.has(v));
@@ -358,7 +359,7 @@ const select = 'w-full rounded-md border border-navy-100 bg-white px-3 py-2.5 te
 
     function render(push = true) {
       $('bb-date').textContent = root!.dataset.today!;
-      const seatWord = state.seat === 'investor' ? 'Investor' : 'Owner-user';
+      const seatWord = state.seat === 'investor' ? 'Investor' : state.seat === 'tenant' ? 'Tenant' : 'Owner-user';
       const types = state.type.length ? state.type.map((t) => LABELS.type[t].toLowerCase()).join(' or ') : 'commercial property';
       const size = state.size ? LABELS.size[state.size].toLowerCase() : '';
       const townNames = state.towns.map((s) => townData.get(s)!.dataset.name!);
@@ -370,10 +371,10 @@ const select = 'w-full rounded-md border border-navy-100 bg-white px-3 py-2.5 te
       const specs = $('bb-specs');
       specs.textContent = '';
       const rows: [string, string][] = [
-        ['Seat', state.seat === 'investor' ? 'Investor: the building is the business' : 'Owner-user: my business will occupy it'],
+        ['Seat', state.seat === 'investor' ? 'Investor: the building is the business' : state.seat === 'tenant' ? 'Tenant: leasing space for my business' : 'Owner-user: my business will occupy it'],
         ['Property type', state.type.length ? state.type.map((t) => LABELS.type[t]).join(', ') : 'Open to the right building'],
         ['Size', LABELS.size[state.size]],
-        ['Budget', LABELS.budget[state.budget]],
+        [state.seat === 'tenant' ? 'Budget (purchase equivalent; monthly rent on the call)' : 'Budget', LABELS.budget[state.budget]],
         ['Must-haves', state.must.length ? state.must.map((m) => LABELS.must[m]).join('; ') : 'None named yet'],
         ['Timing', LABELS.timing[state.timing]],
         ['Financing', LABELS.fin[state.fin]],
@@ -418,8 +419,14 @@ const select = 'w-full rounded-md border border-navy-100 bg-white px-3 py-2.5 te
       moves.push(
         state.seat === 'investor'
           ? 'Underwrite before we tour: NOI, going-in cap rate, debt service, and the value at your target cap, so the first offer is the one the math supports.'
-          : 'Price the alternative first: what level rent for the same space would cost over the years you will occupy, so the purchase is a decision and not a reflex.'
+          : state.seat === 'tenant'
+            ? 'Read the lease from your chair before you fall for the space: face rent, escalations, free months, tenant improvement allowance, and what NNN adds, resolved into net effective rent.'
+            : 'Price the alternative first: what level rent for the same space would cost over the years you will occupy, so the purchase is a decision and not a reflex.'
       );
+      if (state.seat === 'tenant') {
+        moves.push('Term, options, and the use clause are negotiated with the rent, not after it: a five-year term with two options and your use named in writing is worth more than a free month.');
+        moves.push('Tenant representation is paid by the landlord in most deals; you get an advocate on your side of the table at no cost to you, and never both sides of the same lease.');
+      }
       if (state.fin === 'sba') moves.push('Frame the SBA 504 or 7(a) structure before you offer: 10 percent down is real, and so is the timeline, and a seller who hears it early rarely balks.');
       if (state.fin === 'unsure') moves.push('Get the financing conversation done in week one. The building you can close on is the one worth hunting.');
       if (state.fin === 'cash') moves.push('A cash buyer sets the terms: we lead with speed and certainty, and expect a price for it.');
@@ -448,6 +455,10 @@ const select = 'w-full rounded-md border border-navy-100 bg-white px-3 py-2.5 te
         tool.append('Does the building pencil? ');
         toolA.textContent = 'Cap Rate & NOI calculator →';
         toolA.href = '/cap-rate/';
+      } else if (state.seat === 'tenant') {
+        tool.append('What does this lease really cost? ');
+        toolA.textContent = 'Lease Deal Analyzer →';
+        toolA.href = '/lease-analyzer/';
       } else {
         tool.append('Should your business lease or own? ');
         toolA.textContent = 'Lease vs. Buy calculator →';
@@ -458,7 +469,7 @@ const select = 'w-full rounded-md border border-navy-100 bg-white px-3 py-2.5 te
       // URL state + send link
       const u = new URL(location.href);
       const setq = (k: string, v: string) => (v ? u.searchParams.set(k, v) : u.searchParams.delete(k));
-      setq('seat', state.seat === 'investor' ? 'investor' : '');
+      setq('seat', state.seat === 'owner' ? '' : state.seat);
       setq('type', state.type.join(','));
       setq('size', state.size);
       setq('budget', state.budget);
@@ -469,8 +480,8 @@ const select = 'w-full rounded-md border border-navy-100 bg-white px-3 py-2.5 te
       if (push) history.replaceState(null, '', u.toString());
       const headline = $('bb-headline').textContent || '';
       ($('bb-send') as HTMLAnchorElement).href = `/contact/?${new URLSearchParams({
-        interest: 'Buying commercial property',
-        message: `Buyer brief: ${headline}\n${$('bb-sub').textContent}\nMust-haves: ${state.must.length ? state.must.map((m) => LABELS.must[m]).join('; ') : 'none named'}\n\nI built this on your site: ${u.toString()}\n\nMy business: \nBest time to call: `,
+        interest: state.seat === 'tenant' ? 'Something else' : 'Buying commercial property',
+        message: `${state.seat === 'tenant' ? 'Space brief (leasing)' : 'Buyer brief'}: ${headline}\n${$('bb-sub').textContent}\nMust-haves: ${state.must.length ? state.must.map((m) => LABELS.must[m]).join('; ') : 'none named'}\n\nI built this on your site: ${u.toString()}\n\nMy business: \nBest time to call: `,
       }).toString()}`;
       paintChips();
       try {

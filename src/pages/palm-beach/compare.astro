@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import FounderCard from '../../components/FounderCard.astro';
+import CityCompare from '../../components/CityCompare.astro';
+import { PALM_BEACH_CITIES } from '../../lib/palm-beach';
+import { CLAIMED_PB } from '../../lib/claimed';
+import { SITE } from '../../config';
+
+const title = 'City Compare — Any Two Palm Beach County Cities, Side by Side | Free ICS Tool';
+const description =
+  'Pick any two of the eight Palm Beach County cities, Boca Raton to Jupiter, and compare them side by side: the corridors, who buys there, the operator’s read, how many Market Lock categories are still open, and the neighbors. Free, no email, shareable link.';
+
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'ICS City Compare (Palm Beach)', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: `${SITE.url}/palm-beach/compare/`, description, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, provider: { '@id': `${SITE.url}/#business` } },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'Boca Raton or Delray Beach: which is better for my business?', acceptedAnswer: { '@type': 'Answer', text: 'It depends on who buys from you. Boca Raton is the corporate, medical, and affluent anchor with the highest expectations and the most valuable categories per client; Delray runs on Atlantic Avenue and a resident base behind it, deepest in hospitality and wellness. The comparison puts both reads side by side; a call adds your trade.' } },
+      { '@type': 'Question', name: 'Does ICS broker property in Palm Beach County?', acceptedAnswer: { '@type': 'Answer', text: 'No. In Florida ICS delivers AI revenue systems, retail platforms, and custom builds; real estate brokerage is Massachusetts-licensed, and a Florida property transaction is handled alongside a licensed Florida broker.' } },
+    ],
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Free tool · City Compare · <a href="/palm-beach/" class="hover:text-brass-200">Palm Beach County</a> · 8 cities</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">Any two Palm Beach cities, side by side.</h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Boca Raton to Jupiter: the corridors, who buys there, the operator's read, and how many categories are still open in each. Pick two, compare, send the link to your partner.
+      </p>
+    </div>
+  </section>
+  <CityCompare cities={PALM_BEACH_CITIES} base="/palm-beach/" boardHref="/palm-beach/territories/" county="Palm Beach County" defaultA="boca-raton" defaultB="delray-beach" claimed={CLAIMED_PB} />
+  <FounderCard heading="The person behind every one of these reads" line="Eight cities, Boca Raton first, written corridor by corridor. On the ground in Palm Beach County seasonally; every system runs remotely the rest of the year." />
+  <CtaSection heading="Narrowed it to two?" body="Bring both cities to a call. You will leave with a straight read on which categories are open, what the system would look like there, and which one we would pick." />
+</Base>

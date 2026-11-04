@@ -144,6 +144,7 @@ const schema = [
     <SectionHeading eyebrow="The map" heading="Twenty-four cities, the corridors that connect them, and the read on each" body="Hover a city for its read and how many Market Lock categories are still open. Hover a corridor to light up the cities on it. Fort Lauderdale is the seasonal base." align="center" />
     <div class="mt-10"><MarketMap market="FL" /></div>
     <p class="mt-6 text-center text-sm text-ink-700"><span class="font-semibold text-navy-900">By corridor:</span> {CORRIDOR_GUIDES.filter((g) => g.market === 'FL').map((g, i) => <><a href={`/corridors/${g.slug}/`} class="font-semibold text-teal-600 hover:text-teal-700">{g.route}</a>{i < 7 ? ' · ' : ''}</>)} <a href="/corridors/" class="text-ink-500 hover:text-teal-700">(all corridor guides)</a></p>
+    <p class="mt-2 text-center text-sm"><a href="/broward/compare/" class="font-semibold text-teal-600 hover:text-teal-700">City Compare: any two Broward cities side by side →</a></p>
   </section>
 
   <!-- THE CITIES — one page each, written corridor by corridor -->

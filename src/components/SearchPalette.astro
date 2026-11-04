@@ -21,6 +21,13 @@ import { CORRIDOR_GUIDES } from '../lib/corridors';
 const ALIASES: Record<string, string[]> = {
   'fort-lauderdale': ['ft lauderdale', 'ft. lauderdale', 'lauderdale'],
   'boca-raton': ['boca'],
+  'delray-beach': ['delray'],
+  'boynton-beach': ['boynton'],
+  'pompano-beach': ['pompano'],
+  'deerfield-beach': ['deerfield'],
+  'hallandale-beach': ['hallandale'],
+  'dania-beach': ['dania'],
+  'lighthouse-point': ['lighthouse pt'],
   'west-palm-beach': ['west palm', 'wpb'],
   'palm-beach-gardens': ['pbg', 'the gardens'],
   'lake-worth-beach': ['lake worth'],
@@ -99,6 +106,9 @@ const INTENTS = {
         spellcheck="false"
         class="w-full bg-transparent py-3.5 text-sm text-navy-900 placeholder:text-ink-500/60 focus:outline-none"
       />
+      <button type="button" id="palette-mic" hidden class="shrink-0 rounded-md border border-navy-100 p-1.5 text-ink-500 hover:border-teal-500 hover:text-teal-700 aria-pressed:border-teal-600 aria-pressed:text-teal-700" aria-label="Ask by voice" aria-pressed="false" title="Ask by voice">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 10a7 7 0 0 0 14 0" /><path d="M12 17v4" /></svg>
+      </button>
       <kbd class="hidden shrink-0 rounded border border-navy-100 px-1.5 py-0.5 font-mono text-[10px] text-ink-500 sm:block">esc</kbd>
     </div>
     <div id="palette-answers" class="hidden border-b border-navy-100 bg-paper p-3"></div>
@@ -169,15 +179,19 @@ const INTENTS = {
     const has = (re: RegExp) => re.test(q);
 
     // Places, longest name first so "Pembroke Pines" wins over "Pembroke".
-    const places: Place[] = [];
+    const found: { p: Place; at: number }[] = [];
     const cands = intents.places.flatMap((p) => [p.n.toLowerCase(), ...p.a].map((name) => ({ name, p }))).sort((a, b) => b.name.length - a.name.length);
     for (const c of cands) {
       const needle = ' ' + c.name + ' ';
-      if (q.includes(needle) && !places.includes(c.p)) {
-        places.push(c.p);
-        q = q.replace(needle, ' ');
+      const at = q.indexOf(needle);
+      if (at >= 0 && !found.some((f) => f.p === c.p)) {
+        found.push({ p: c.p, at });
+        // Blank the match (same length) so shorter names cannot re-match inside it, and positions stay true.
+        q = q.slice(0, at) + ' '.repeat(needle.length) + q.slice(at + needle.length);
       }
     }
+    // In the order they were typed: "compare Davie and Weston" puts Davie first.
+    const places: Place[] = found.sort((a, b) => a.at - b.at).map((f) => f.p);
     const corridor = intents.corridors.find((c) => c.k.some((k) => q.includes(' ' + k.trim() + ' ') || (k.endsWith(' ') && q.includes(' ' + k))));
     const industry = intents.industries.find((i) => i.k.some((k) => q.includes(k.trim().length < 4 ? ' ' + k.trim() + ' ' : k.trim())));
     const system = intents.systems.find((sys) => q.includes(sys.n.toLowerCase()) || (sys.s === 'jobsite' && q.includes('job site')));
@@ -185,7 +199,8 @@ const INTENTS = {
     const V = {
       sheet: /\b(sheet|print|printable|leave ?behind|one ?page|one-pager|handout|pdf)\b/,
       compare: /\b(compare|comparison|versus|vs)\b/,
-      hunt: /\b(find|hunt|hunting|looking for|buy|buying|purchase|acquire|building|space|flex|warehouse|yard|storefront|office|land|lot|property|properties)\b/,
+      hunt: /\b(find|hunt|hunting|looking for|buy|buying|purchase|acquire|building|space|flex|warehouse|yard|storefront|office|land|lot|property|properties|lease|leasing|rent|renting|sublease)\b/,
+      lease: /\b(lease|leasing|rent|renting|sublease|tenant)\b/,
       territory: /\b(open|territory|territories|locked|lock|available|availability|exclusive|exclusivity|category|categories|claim|taken|held)\b/,
       payback: /\b(pay ?back|payback|roi|break ?even|worth it|return on|pays for itself)\b/,
       f90: /\b(after (i|we) sign|first 90|90 days|ninety days|kickoff|kick off|onboard|onboarding|timeline|what happens (next|after)|how long (does|will|to)|rollout|go live)\b/,
@@ -201,13 +216,20 @@ const INTENTS = {
 
     if (has(V.compare) && ma.length >= 2) {
       out.push({ eyebrow: 'Town Compare', title: `${ma[0].n} and ${ma[1].n}, side by side`, body: 'Corridors, property mix, business mix, and the operator\'s read on each.', links: [['Open the comparison →', `/south-shore/compare/?a=${ma[0].s}&b=${ma[1].s}`]] });
+    } else if (has(V.compare) && places.length >= 2 && places[0].m !== 'MA' && places[0].m === places[1].m) {
+      out.push({ eyebrow: 'City Compare', title: `${places[0].n} and ${places[1].n}, side by side`, body: 'Corridors, who buys there, the operator\'s read, and open categories in each.', links: [['Open the comparison →', `${BASE[places[0].m]}compare/?a=${places[0].s}&b=${places[1].s}`]] });
     }
     if (has(V.sheet) && first) {
       out.push({ eyebrow: 'Market Sheet', title: `The one-page ${first.n} market sheet`, body: 'Corridors, who buys there, open categories, published pricing, and a QR code back to the live page. Prints on one Letter page.', links: [['Open the sheet →', `${BASE[first.m]}${first.s}/sheet/`], ['All market sheets', '/market-sheets/']] });
     }
     if (has(V.hunt) && !has(V.territory) && !system && (ma.length || !places.length) && !corridor) {
       const towns = ma.map((p) => p.s).join(',');
-      out.push({ eyebrow: 'Buyer Brief', title: ma.length ? `Hunting in ${names(ma)}? Build the brief.` : 'Hunting for a building? Build the brief.', body: 'Describe the building; we hunt owner by owner, before the portals. The brief writes itself from your choices.', links: [['Build a buyer brief →', `/buyer-brief/${towns ? '?towns=' + towns : ''}`]] });
+      const leasing = has(V.lease) && !/\b(buy|buying|purchase|acquire)\b/.test(q);
+      const ps = new URLSearchParams();
+      if (towns) ps.set('towns', towns);
+      if (leasing) ps.set('seat', 'tenant');
+      const qs = ps.toString().replace(/%2C/g, ',');
+      out.push({ eyebrow: leasing ? 'Space Brief' : 'Buyer Brief', title: ma.length ? `${leasing ? 'Leasing' : 'Hunting'} in ${names(ma)}? Build the brief.` : leasing ? 'Leasing space? Build the brief.' : 'Hunting for a building? Build the brief.', body: leasing ? 'Size, towns, must-haves, timing; we hunt the space and read the lease from your chair.' : 'Describe the building; we hunt owner by owner, before the portals. The brief writes itself from your choices.', links: [[leasing ? 'Build a space brief →' : 'Build a buyer brief →', `/buyer-brief/${qs ? '?' + qs : ''}`]] });
     } else if (has(V.hunt) && places.length && !ma.length && !has(V.territory)) {
       out.push({ eyebrow: 'Florida', title: `Property in ${names(places)}`, body: 'ICS does not broker property in Florida; the license is Massachusetts. For a Florida building we work alongside a licensed local broker, and the free deal tools work anywhere.', links: [['The free deal tools →', '/deal-tools/'], [`${first.n} systems page →`, `${BASE[first.m]}${first.s}/`]] });
     }
@@ -517,6 +539,43 @@ const INTENTS = {
       suggest.appendChild(b);
     }
     document.querySelectorAll('[data-open-search]').forEach((btn) => btn.addEventListener('click', openPalette));
+    // Voice: speak the request where the browser supports it (Chrome, Edge, Safari).
+    const SR = (window as unknown as { SpeechRecognition?: any; webkitSpeechRecognition?: any }).SpeechRecognition || (window as unknown as { webkitSpeechRecognition?: any }).webkitSpeechRecognition;
+    const mic = document.getElementById('palette-mic') as HTMLButtonElement | null;
+    if (SR && mic && window.isSecureContext) {
+      mic.hidden = false;
+      let rec: any = null;
+      mic.addEventListener('click', () => {
+        if (rec) {
+          rec.stop();
+          return;
+        }
+        rec = new SR();
+        rec.lang = 'en-US';
+        rec.interimResults = true;
+        rec.maxAlternatives = 1;
+        mic.setAttribute('aria-pressed', 'true');
+        input.placeholder = 'Listening…';
+        rec.onresult = (ev: any) => {
+          const text = Array.from(ev.results as ArrayLike<any>).map((r: any) => r[0].transcript).join(' ').trim();
+          input.value = text;
+          update();
+        };
+        const done = () => {
+          mic.setAttribute('aria-pressed', 'false');
+          input.placeholder = 'Ask a question, name a town, or say what you need…';
+          rec = null;
+          input.focus();
+        };
+        rec.onend = done;
+        rec.onerror = done;
+        try {
+          rec.start();
+        } catch {
+          done();
+        }
+      });
+    }
     if (!(window as any).__paletteAsk) {
       (window as any).__paletteAsk = true;
       document.addEventListener('ics:ask', (ev) => {
