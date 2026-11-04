@@ -92,6 +92,7 @@ function collectPages() {
   }
   pages.push(['/market-sheets/', 'market-sheets', 'FREE TOOL · THE LEAVE-BEHIND', 'Market Sheets: one printable page for every town and city.']);
   pages.push(['/monthly-report/sample/', 'monthly-report-sample', 'SAMPLE · THE MONTHLY REPORT', 'What the first of the month looks like for an ICS client.']);
+  pages.push(['/buyer-brief/', 'buyer-brief', 'FREE TOOL · BUYER BRIEF · SOUTH SHORE MA', 'Tell us the building. We hunt off-market for it.']);
 
   // Industries from the data file (same slug/name shape as towns)
   const indSrc = readFileSync(rel('src/lib/industries.ts'), 'utf8');

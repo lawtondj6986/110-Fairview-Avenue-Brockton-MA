@@ -89,7 +89,7 @@ export const PATHS: Record<PathKey, PathInfo> = {
 const RULES: [RegExp, PathKey][] = [
   [/^\/broward(\/|$)/, 'broward'],
   [/^\/palm-beach(\/|$)/, 'palmbeach'],
-  [/^\/(commercial-real-estate|deal-tools|cap-rate|lease-analyzer|lease-vs-buy|seller-net|listings|building-worth|south-shore)(\/|$)/, 'cre'],
+  [/^\/(commercial-real-estate|deal-tools|cap-rate|lease-analyzer|lease-vs-buy|seller-net|listings|building-worth|south-shore|buyer-brief|market-sheets)(\/|$)/, 'cre'],
   [/^\/(ai-services|pricing|territories|quotebrain|ai-readiness|industries|compare|playbook)(\/|$)/, 'ai'],
   [/^\/intelligence(\/|$)/, 'intel'],
   [/^\/political(\/|$)/, 'political'],

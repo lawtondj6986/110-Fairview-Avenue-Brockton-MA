@@ -1,0 +1,538 @@
+---
+/**
+ * Build a Buyer Brief — the real estate side's Proposal Builder. A buyer
+ * describes what they are hunting (seat, type, size, budget, towns, must-haves,
+ * timing, financing) and the page writes the one-page brief an advisor would
+ * take to the off-market hunt, with the towns' own corridors and property
+ * reads pulled in. Shareable link, print, one-click send to the founder.
+ */
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+import FounderCard from '../components/FounderCard.astro';
+import MarketMap from '../components/MarketMap.astro';
+import { SITE, FOUNDER } from '../config';
+import { TOWNS } from '../lib/towns';
+
+const towns = [...TOWNS].sort((a, b) => a.name.localeCompare(b.name));
+const firstSentence = (p: string) => p.replace(/\s+/g, ' ').split(/(?<=[.!?])\s+(?=[A-Z"“])/)[0];
+const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const title = 'Build a Buyer Brief — What You Are Hunting, on One Page | ICS';
+const description =
+  'Describe the building you are hunting on the South Shore: owner-user or investor, property type, size, budget, towns (pick them on the map), must-haves, timing, and financing. The page writes a one-page buyer brief with each town’s corridors and property read, the first moves an advisor would make, and the right free deal tool. Share it, print it, or send it to the founder in one click. No email required.';
+
+const TYPES = [
+  ['retail', 'Retail'],
+  ['industrial', 'Industrial / flex'],
+  ['office', 'Office'],
+  ['mixed-use', 'Mixed-use'],
+  ['automotive', 'Automotive'],
+  ['medical', 'Medical'],
+  ['land', 'Land'],
+];
+const SIZES = [
+  ['', 'Any size'],
+  ['u2500', 'Under 2,500 SF'],
+  ['2500-5000', '2,500 to 5,000 SF'],
+  ['5000-10000', '5,000 to 10,000 SF'],
+  ['10000-25000', '10,000 to 25,000 SF'],
+  ['25000+', '25,000 SF and up'],
+];
+const BUDGETS = [
+  ['', 'Not sure yet'],
+  ['u500', 'Under $500,000'],
+  ['500-1000', '$500,000 to $1M'],
+  ['1000-2000', '$1M to $2M'],
+  ['2000-3000', '$2M to $3M'],
+  ['3000+', '$3M and up'],
+];
+const MUSTS = [
+  ['yard', 'Yard or outdoor storage'],
+  ['dock', 'Loading dock or drive-in door'],
+  ['frontage', 'Route frontage and signage'],
+  ['parking', 'Parking for 20 or more'],
+  ['clear', 'Clear height 16 ft or more'],
+  ['drivethru', 'Drive-thru'],
+  ['units', 'Residential units above'],
+  ['zoning', 'Zoning for my use confirmed'],
+  ['highway', 'Near Route 3 or Route 24'],
+];
+const TIMINGS = [
+  ['now', 'Now, within 3 months'],
+  ['soon', '3 to 6 months'],
+  ['year', '6 to 12 months'],
+  ['watching', 'Watching the market'],
+];
+const FINS = [
+  ['unsure', 'Not sure yet'],
+  ['sba', 'SBA 504 or 7(a)'],
+  ['conventional', 'Conventional bank loan'],
+  ['cash', 'Cash'],
+];
+
+const faqs = [
+  {
+    q: 'What happens after I send the brief?',
+    a: `${SITE.founder} reads it, calls within one business day, and tells you straight whether the building you describe exists in those towns at that budget. If it does, the hunt starts with owners who are not listed, because that is where most sub-$3M South Shore buildings change hands. If it does not, you hear that too, with what would have to change.`,
+  },
+  {
+    q: 'Does buyer representation cost me anything?',
+    a: 'In most transactions the buyer’s broker is paid from the commission the seller has already agreed to pay, so representation costs the buyer nothing out of pocket. Where a seller pays no commission, as with some off-market deals, we agree the fee in writing before you make an offer, never after.',
+  },
+  {
+    q: 'Do I have to give an email to build the brief?',
+    a: 'No. The brief renders on the page, the link carries your choices, and you can print it. Your email enters the picture only when you send the brief to us.',
+  },
+  {
+    q: 'Can you do this in Florida?',
+    a: `No. Real estate brokerage is Massachusetts-licensed (${SITE.license}). In Florida we deliver the systems side; a Florida property transaction is handled alongside a licensed Florida broker, and the free deal tools work anywhere.`,
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'ICS Buyer Brief Builder',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: `${SITE.url}/buyer-brief/`,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    provider: { '@id': `${SITE.url}/#business` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+
+const chip = 'rounded-full border border-navy-100 bg-white px-3 py-1.5 text-sm font-medium text-navy-900 hover:border-teal-500 aria-pressed:border-teal-600 aria-pressed:bg-teal-600 aria-pressed:text-white';
+const select = 'w-full rounded-md border border-navy-100 bg-white px-3 py-2.5 text-sm text-navy-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100';
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950 print:hidden">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Free · Build a buyer brief · 2 minutes · No email</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        Tell us the building. We hunt off-market for it.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Most sub-$3M South Shore buildings change hands before they are listed. Describe what you are hunting, pick your
+        towns on the map, and the page writes the one-page brief we would take into that hunt, with each town's corridors
+        and property read already on it.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6" id="bb" data-today={today}>
+    <div class="grid gap-8 print:hidden lg:grid-cols-[1fr_1.1fr]">
+      <!-- CONTROLS -->
+      <div class="space-y-6">
+        <h2 class="sr-only">Describe the building</h2>
+        <fieldset>
+          <legend class="mb-2 text-sm font-medium text-navy-900">Your seat</legend>
+          <div class="flex flex-wrap gap-2" data-group="seat">
+            <button type="button" class={chip} data-value="owner" aria-pressed="true">Owner-user, my business will occupy it</button>
+            <button type="button" class={chip} data-value="investor" aria-pressed="false">Investor, income property</button>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend class="mb-2 text-sm font-medium text-navy-900">Property type <span class="font-normal text-ink-500">(pick any)</span></legend>
+          <div class="flex flex-wrap gap-2" data-group="type" data-multi>
+            {TYPES.map(([v, l]) => <button type="button" class={chip} data-value={v} aria-pressed="false">{l}</button>)}
+          </div>
+        </fieldset>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-navy-900">Size</span>
+            <select id="bb-size" class={select}>{SIZES.map(([v, l]) => <option value={v}>{l}</option>)}</select>
+          </label>
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-navy-900">Budget</span>
+            <select id="bb-budget" class={select}>{BUDGETS.map(([v, l]) => <option value={v}>{l}</option>)}</select>
+          </label>
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-navy-900">Timing</span>
+            <select id="bb-timing" class={select}>{TIMINGS.map(([v, l]) => <option value={v}>{l}</option>)}</select>
+          </label>
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-navy-900">Financing</span>
+            <select id="bb-fin" class={select}>{FINS.map(([v, l]) => <option value={v}>{l}</option>)}</select>
+          </label>
+        </div>
+
+        <fieldset>
+          <legend class="mb-2 text-sm font-medium text-navy-900">Must-haves <span class="font-normal text-ink-500">(pick any)</span></legend>
+          <div class="flex flex-wrap gap-2" data-group="must" data-multi>
+            {MUSTS.map(([v, l]) => <button type="button" class={chip} data-value={v} aria-pressed="false">{l}</button>)}
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend class="mb-2 text-sm font-medium text-navy-900">Towns <span class="font-normal text-ink-500">(tap the map or the list; none selected means any South Shore town)</span></legend>
+          <div class="flex flex-wrap gap-1.5" data-group="towns" data-multi>
+            {towns.map((t) => <button type="button" class={chip.replace('px-3 py-1.5 text-sm', 'px-2.5 py-1 text-xs')} data-value={t.slug} aria-pressed="false">{t.name}</button>)}
+          </div>
+          <div class="mt-3 flex gap-3 text-xs">
+            <button type="button" id="bb-clear-towns" class="font-semibold text-teal-600 hover:text-teal-700">Clear towns</button>
+          </div>
+        </fieldset>
+      </div>
+
+      <div>
+        <MarketMap market="MA" mode="select" compact />
+        <p class="mt-2 text-xs text-ink-500">Tap a town to add it to the brief; tap again to remove it. Selected towns are listed on the left.</p>
+      </div>
+    </div>
+
+    <!-- Hidden town data for the brief -->
+    <div hidden>
+      {TOWNS.map((t) => (
+        <div data-town-brief={t.slug} data-name={t.name} data-county={t.county} data-corridors={t.corridors.slice(0, 3).join(' · ')} data-read={firstSentence(t.propertyMix)} data-neighbors={t.neighbors.join(',')}></div>
+      ))}
+    </div>
+
+    <!-- THE BRIEF -->
+    <article id="brief" class="mt-10 rounded-2xl border border-navy-100 bg-white shadow-sm print:border-0 print:shadow-none">
+      <header class="flex flex-col gap-4 border-b border-navy-100 p-6 sm:flex-row sm:items-start sm:justify-between sm:p-8">
+        <div class="min-w-0">
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">Buyer brief · prepared <span id="bb-date"></span></p>
+          <h2 class="mt-2 font-display text-2xl font-bold leading-snug text-navy-900 sm:text-3xl" id="bb-headline"></h2>
+          <p class="mt-2 text-sm text-ink-500" id="bb-sub"></p>
+        </div>
+        <div class="flex items-center gap-3 sm:text-right">
+          <img src={FOUNDER.image} srcset="/images/daniel-lawton-320.webp 320w, /images/daniel-lawton-640.webp 640w, /images/daniel-lawton-960.webp 960w" sizes="64px" alt={FOUNDER.name} class="h-14 w-12 rounded-lg border-2 border-teal-500/50 object-cover object-top sm:order-2" width="800" height="1524" loading="lazy" />
+          <div class="text-sm">
+            <p class="font-semibold text-navy-900">{FOUNDER.name}</p>
+            <p class="text-ink-500">{SITE.license}</p>
+            <p class="text-ink-500">{SITE.phone}</p>
+          </div>
+        </div>
+      </header>
+
+      <div class="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.3fr_1fr]">
+        <div class="space-y-7">
+          <section>
+            <h3 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">The building</h3>
+            <dl class="mt-3 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2" id="bb-specs"></dl>
+          </section>
+          <section>
+            <h3 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">Where this inventory lives</h3>
+            <ul class="mt-3 space-y-3 text-sm text-ink-700" id="bb-towns"></ul>
+          </section>
+          <section>
+            <h3 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">The first moves</h3>
+            <ul class="mt-3 space-y-2 text-sm leading-relaxed text-ink-700" id="bb-moves"></ul>
+          </section>
+        </div>
+        <aside class="space-y-5">
+          <div class="rounded-xl bg-navy-900 p-5 text-sm text-navy-100/90">
+            <p class="font-semibold uppercase tracking-wider text-teal-400">How the hunt works</p>
+            <ol class="mt-3 list-decimal space-y-1.5 pl-5">
+              <li>A call to pressure-test the brief: does this building exist at this budget?</li>
+              <li>Owner outreach in your towns, block by block, before the portals.</li>
+              <li>Pre-offer intelligence on the property and the seller from public records.</li>
+              <li>Financing framed before you offer, SBA included.</li>
+              <li>The offer the math supports, negotiated on your side of the table only.</li>
+            </ol>
+          </div>
+          <div class="rounded-xl border border-navy-100 p-5 text-sm">
+            <p class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">Run the numbers first</p>
+            <p class="mt-2 text-ink-700" id="bb-tool"></p>
+          </div>
+          <div class="print:hidden">
+            <a id="bb-send" href="/contact/" class="block rounded-md bg-brass-500 px-5 py-3 text-center font-semibold text-navy-950 hover:bg-brass-300">Send this brief to {FOUNDER.name.split(' ')[0]} →</a>
+            <div class="mt-2 grid grid-cols-2 gap-2">
+              <button type="button" id="bb-share" class="rounded-md border border-navy-100 bg-white px-3 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500">Copy a shareable link</button>
+              <button type="button" id="bb-print" class="rounded-md border border-navy-100 bg-white px-3 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500">Print</button>
+            </div>
+            <p class="mt-2 text-[11px] text-ink-500">The link carries your choices. Nothing is stored on our side until you send it.</p>
+          </div>
+        </aside>
+      </div>
+      <footer class="border-t border-navy-100 px-6 py-4 text-xs text-ink-500 sm:px-8">
+        Buyer representation on the South Shore of Massachusetts. {SITE.license}. Referral fees only between licensed professionals. Prepared from your selections; nothing here is a commitment by either side.
+      </footer>
+    </article>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brass-600">Common questions · Buyer brief</h2>
+      <dl class="mt-5 space-y-5">
+        {faqs.map((f) => (
+          <div><dt class="text-base font-bold text-navy-900">{f.q}</dt><dd class="mt-1.5 text-sm leading-relaxed text-ink-700">{f.a}</dd></div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <FounderCard heading="Who runs the hunt" />
+  <CtaSection heading="Rather just talk it through?" body="One call, a straight answer on whether the building exists, and a plan for finding it before it is listed." />
+</Base>
+
+<style>
+  @media print {
+    :global(header),
+    :global(footer:not(#brief footer)),
+    :global(#money-bar),
+    :global(#path-bar),
+    :global(#palette) {
+      display: none !important;
+    }
+    :global(body) {
+      background: white !important;
+    }
+    :global(.reveal) {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  const LABELS: Record<string, Record<string, string>> = {
+    type: { retail: 'Retail', industrial: 'Industrial / flex', office: 'Office', 'mixed-use': 'Mixed-use', automotive: 'Automotive', medical: 'Medical', land: 'Land' },
+    size: { '': 'Any size', u2500: 'Under 2,500 SF', '2500-5000': '2,500 to 5,000 SF', '5000-10000': '5,000 to 10,000 SF', '10000-25000': '10,000 to 25,000 SF', '25000+': '25,000 SF and up' },
+    budget: { '': 'Budget not set yet', u500: 'Under $500,000', '500-1000': '$500,000 to $1M', '1000-2000': '$1M to $2M', '2000-3000': '$2M to $3M', '3000+': '$3M and up' },
+    must: { yard: 'Yard or outdoor storage', dock: 'Loading dock or drive-in door', frontage: 'Route frontage and signage', parking: 'Parking for 20 or more', clear: 'Clear height 16 ft or more', drivethru: 'Drive-thru', units: 'Residential units above', zoning: 'Zoning for my use confirmed', highway: 'Near Route 3 or Route 24' },
+    timing: { now: 'Now, within 3 months', soon: '3 to 6 months', year: '6 to 12 months', watching: 'Watching the market' },
+    fin: { unsure: 'Financing not decided', sba: 'SBA 504 or 7(a)', conventional: 'Conventional bank loan', cash: 'Cash' },
+  };
+
+  type State = { seat: string; type: string[]; size: string; budget: string; towns: string[]; must: string[]; timing: string; fin: string };
+
+  function initBrief() {
+    const root = document.getElementById('bb');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+    const $ = (id: string) => document.getElementById(id)!;
+    const groups = Array.from(root.querySelectorAll<HTMLElement>('[data-group]'));
+    const sizeEl = $('bb-size') as HTMLSelectElement;
+    const budgetEl = $('bb-budget') as HTMLSelectElement;
+    const timingEl = $('bb-timing') as HTMLSelectElement;
+    const finEl = $('bb-fin') as HTMLSelectElement;
+    const townData = new Map<string, HTMLElement>();
+    root.querySelectorAll<HTMLElement>('[data-town-brief]').forEach((d) => townData.set(d.dataset.townBrief!, d));
+
+    const state: State = { seat: 'owner', type: [], size: '', budget: '', towns: [], must: [], timing: 'now', fin: 'unsure' };
+
+    // Hydrate from URL
+    const q = new URLSearchParams(location.search);
+    const list = (k: string, valid: (v: string) => boolean) => (q.get(k) || '').split(',').filter((v) => v && valid(v));
+    if (q.get('seat') === 'investor') state.seat = 'investor';
+    state.type = list('type', (v) => v in LABELS.type);
+    state.must = list('must', (v) => v in LABELS.must);
+    state.towns = list('towns', (v) => townData.has(v));
+    if ((q.get('size') || '') in LABELS.size) state.size = q.get('size') || '';
+    if ((q.get('budget') || '') in LABELS.budget) state.budget = q.get('budget') || '';
+    if ((q.get('timing') || '') in LABELS.timing) state.timing = q.get('timing')!;
+    if ((q.get('fin') || '') in LABELS.fin) state.fin = q.get('fin')!;
+    sizeEl.value = state.size;
+    budgetEl.value = state.budget;
+    timingEl.value = state.timing;
+    finEl.value = state.fin;
+
+    function paintChips() {
+      groups.forEach((g) => {
+        const key = g.dataset.group as keyof State;
+        const val = state[key];
+        g.querySelectorAll<HTMLButtonElement>('button[data-value]').forEach((b) => {
+          const on = Array.isArray(val) ? val.includes(b.dataset.value!) : val === b.dataset.value;
+          b.setAttribute('aria-pressed', String(on));
+        });
+      });
+    }
+
+    function node(tag: string, cls: string, text?: string) {
+      const e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text !== undefined) e.textContent = text;
+      return e;
+    }
+
+    function render(push = true) {
+      $('bb-date').textContent = root!.dataset.today!;
+      const seatWord = state.seat === 'investor' ? 'Investor' : 'Owner-user';
+      const types = state.type.length ? state.type.map((t) => LABELS.type[t].toLowerCase()).join(' or ') : 'commercial property';
+      const size = state.size ? LABELS.size[state.size].toLowerCase() : '';
+      const townNames = state.towns.map((s) => townData.get(s)!.dataset.name!);
+      const where = townNames.length ? (townNames.length <= 3 ? townNames.join(', ') : `${townNames.slice(0, 3).join(', ')} and ${townNames.length - 3} more`) : 'any South Shore town';
+      $('bb-headline').textContent = `${seatWord} seeking ${types}${size ? ', ' + size + ',' : ''} in ${where}.`;
+      $('bb-sub').textContent = `${LABELS.budget[state.budget]} · ${LABELS.timing[state.timing]} · ${LABELS.fin[state.fin]}`;
+
+      // Specs
+      const specs = $('bb-specs');
+      specs.textContent = '';
+      const rows: [string, string][] = [
+        ['Seat', state.seat === 'investor' ? 'Investor: the building is the business' : 'Owner-user: my business will occupy it'],
+        ['Property type', state.type.length ? state.type.map((t) => LABELS.type[t]).join(', ') : 'Open to the right building'],
+        ['Size', LABELS.size[state.size]],
+        ['Budget', LABELS.budget[state.budget]],
+        ['Must-haves', state.must.length ? state.must.map((m) => LABELS.must[m]).join('; ') : 'None named yet'],
+        ['Timing', LABELS.timing[state.timing]],
+        ['Financing', LABELS.fin[state.fin]],
+        ['Towns', townNames.length ? townNames.join(', ') : 'Any of the 29 South Shore towns'],
+      ];
+      rows.forEach(([k, v]) => {
+        const wrap = node('div', '');
+        wrap.append(node('dt', 'font-mono text-[10px] font-bold uppercase tracking-widest text-ink-500', k), node('dd', 'mt-0.5 text-navy-900', v));
+        specs.appendChild(wrap);
+      });
+
+      // Towns
+      const tl = $('bb-towns');
+      tl.textContent = '';
+      const shown = state.towns.length ? state.towns : [];
+      if (!shown.length) {
+        tl.appendChild(node('li', 'text-ink-500', 'No towns picked yet. Tap the map or the list and each town\'s corridors and property read appear here.'));
+      }
+      shown.forEach((slug) => {
+        const d = townData.get(slug)!;
+        const li = node('li', 'rounded-lg border border-navy-100 p-3');
+        const head = node('p', 'flex flex-wrap items-baseline justify-between gap-x-3');
+        const a = node('a', 'font-semibold text-navy-900 hover:text-teal-700', `${d.dataset.name}, ${d.dataset.county} County`) as HTMLAnchorElement;
+        a.href = `/south-shore/${slug}/`;
+        const c = node('span', 'text-xs text-ink-500', d.dataset.corridors);
+        head.append(a, c);
+        const read = node('p', 'mt-1 text-[13px] leading-snug text-ink-700', d.dataset.read);
+        const links = node('p', 'mt-1.5 text-xs');
+        const s = node('a', 'font-semibold text-teal-600 hover:text-teal-700', 'Market sheet →') as HTMLAnchorElement;
+        s.href = `/south-shore/${slug}/sheet/`;
+        const sep = node('span', 'text-ink-500', ' · ');
+        const cmp = node('a', 'font-semibold text-teal-600 hover:text-teal-700', 'Compare with a neighbor →') as HTMLAnchorElement;
+        const nb = (d.dataset.neighbors || '').split(',')[0];
+        cmp.href = `/south-shore/compare/?a=${slug}${nb ? '&b=' + nb : ''}`;
+        links.append(s, sep, cmp);
+        li.append(head, read, links);
+        tl.appendChild(li);
+      });
+
+      // Moves
+      const moves: string[] = [];
+      moves.push(
+        state.seat === 'investor'
+          ? 'Underwrite before we tour: NOI, going-in cap rate, debt service, and the value at your target cap, so the first offer is the one the math supports.'
+          : 'Price the alternative first: what level rent for the same space would cost over the years you will occupy, so the purchase is a decision and not a reflex.'
+      );
+      if (state.fin === 'sba') moves.push('Frame the SBA 504 or 7(a) structure before you offer: 10 percent down is real, and so is the timeline, and a seller who hears it early rarely balks.');
+      if (state.fin === 'unsure') moves.push('Get the financing conversation done in week one. The building you can close on is the one worth hunting.');
+      if (state.fin === 'cash') moves.push('A cash buyer sets the terms: we lead with speed and certainty, and expect a price for it.');
+      if (state.type.includes('industrial') || state.must.includes('yard') || state.must.includes('dock')) moves.push('Flex and yard product moves through relationships: we start with the contractor yards and clear-span buildings that are never listed, owner by owner.');
+      if (state.type.includes('retail') || state.must.includes('frontage') || state.must.includes('drivethru')) moves.push('Frontage is the asset: traffic counts and sightlines on the corridor first, then the building, then the price per foot.');
+      if (state.type.includes('mixed-use') || state.must.includes('units')) moves.push('Mixed-use is underwritten twice: the commercial floor on its own and the apartments on theirs, with the residential side checked against the town’s rental comps.');
+      if (state.type.includes('land')) moves.push('Land is a zoning question before it is a price question: use, dimensional rules, wetlands and Title 5 on the parcel, in that order.');
+      if (state.type.includes('medical')) moves.push('Medical space is parking, power, and plumbing: we screen for the three before anyone falls in love with a floor plan.');
+      if (state.type.includes('automotive')) moves.push('Automotive buildings carry environmental history: a Phase I assessment and the town’s file are read before an offer, not after.');
+      if (state.must.includes('zoning')) moves.push('We pull the zoning bylaw and the parcel’s use table and put the answer in writing before you spend a dollar on due diligence.');
+      if (state.must.includes('highway')) moves.push('Route 3 and Route 24 access narrows the map to a handful of interchanges; we work those pockets block by block.');
+      moves.push(state.timing === 'watching' ? 'Watching is fine: we keep the brief live and call only when a building fits it.' : 'Every candidate comes to you with the property record, the owner, and a first read on price before you see it in person.');
+      const ml = $('bb-moves');
+      ml.textContent = '';
+      moves.forEach((m) => {
+        const li = node('li', 'flex gap-2');
+        li.append(node('span', 'text-teal-600', '✓'), node('span', '', m));
+        ml.appendChild(li);
+      });
+
+      // Tool
+      const tool = $('bb-tool');
+      tool.textContent = '';
+      const toolA = node('a', 'font-semibold text-teal-600 hover:text-teal-700') as HTMLAnchorElement;
+      if (state.seat === 'investor') {
+        tool.append('Does the building pencil? ');
+        toolA.textContent = 'Cap Rate & NOI calculator →';
+        toolA.href = '/cap-rate/';
+      } else {
+        tool.append('Should your business lease or own? ');
+        toolA.textContent = 'Lease vs. Buy calculator →';
+        toolA.href = '/lease-vs-buy/';
+      }
+      tool.appendChild(toolA);
+
+      // URL state + send link
+      const u = new URL(location.href);
+      const setq = (k: string, v: string) => (v ? u.searchParams.set(k, v) : u.searchParams.delete(k));
+      setq('seat', state.seat === 'investor' ? 'investor' : '');
+      setq('type', state.type.join(','));
+      setq('size', state.size);
+      setq('budget', state.budget);
+      setq('towns', state.towns.join(','));
+      setq('must', state.must.join(','));
+      setq('timing', state.timing === 'now' ? '' : state.timing);
+      setq('fin', state.fin === 'unsure' ? '' : state.fin);
+      if (push) history.replaceState(null, '', u.toString());
+      const headline = $('bb-headline').textContent || '';
+      ($('bb-send') as HTMLAnchorElement).href = `/contact/?${new URLSearchParams({
+        interest: 'Buying commercial property',
+        message: `Buyer brief: ${headline}\n${$('bb-sub').textContent}\nMust-haves: ${state.must.length ? state.must.map((m) => LABELS.must[m]).join('; ') : 'none named'}\n\nI built this on your site: ${u.toString()}\n\nMy business: \nBest time to call: `,
+      }).toString()}`;
+      paintChips();
+      try {
+        (window as unknown as { va?: (e: string, o: unknown) => void }).va?.('event', { name: 'buyer-brief', data: { seat: state.seat, towns: state.towns.length, types: state.type.join(',') } });
+      } catch {
+        /* best-effort */
+      }
+    }
+
+    groups.forEach((g) => {
+      const key = g.dataset.group as keyof State;
+      const multi = g.hasAttribute('data-multi');
+      g.addEventListener('click', (e) => {
+        const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-value]');
+        if (!b) return;
+        const v = b.dataset.value!;
+        if (multi) {
+          const arr = state[key] as string[];
+          const i = arr.indexOf(v);
+          if (i >= 0) arr.splice(i, 1);
+          else arr.push(v);
+        } else {
+          (state as unknown as Record<string, string>)[key] = v;
+        }
+        render();
+      });
+    });
+    [sizeEl, budgetEl, timingEl, finEl].forEach((el) =>
+      el.addEventListener('change', () => {
+        state.size = sizeEl.value;
+        state.budget = budgetEl.value;
+        state.timing = timingEl.value;
+        state.fin = finEl.value;
+        render();
+      })
+    );
+    $('bb-clear-towns').addEventListener('click', () => {
+      state.towns = [];
+      render();
+    });
+    // The map in select mode announces a town; toggle it in the brief.
+    document.addEventListener('ics:place', (ev) => {
+      const slug = String((ev as CustomEvent).detail || '');
+      if (!townData.has(slug)) return;
+      const i = state.towns.indexOf(slug);
+      if (i >= 0) state.towns.splice(i, 1);
+      else state.towns.push(slug);
+      render();
+    });
+    const share = $('bb-share') as HTMLButtonElement;
+    share.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(location.href);
+        share.textContent = 'Link copied';
+      } catch {
+        share.textContent = location.href;
+      }
+      setTimeout(() => (share.textContent = 'Copy a shareable link'), 2500);
+    });
+    $('bb-print').addEventListener('click', () => window.print());
+    render(false);
+  }
+  initBrief();
+  document.addEventListener('astro:page-load', initBrief);
+</script>
