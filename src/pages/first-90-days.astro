@@ -1,0 +1,272 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+import FounderCard from '../components/FounderCard.astro';
+import { SITE } from '../config';
+import { SYSTEMS } from '../lib/systems';
+import { TIMELINES, CHECKLIST } from '../lib/timeline';
+
+const title = 'The First 90 Days — What Happens After You Sign, Week by Week | ICS';
+const description =
+  'The engagement timeline for every ICS system, week by week: what we do, what we need from you, what you have at the end of each phase, and where the written guarantees attach. JobSite live in 21 days, Lead Engine fully live in four to six weeks, Market Lock in six to eight with exclusivity from day one, and the first monthly report on the first business day after launch. With a kickoff checklist that saves your progress in your browser.';
+
+const faqs = [
+  {
+    q: 'When does the 21-day clock start for JobSite?',
+    a: 'When content and access are in hand: the checklist on this page is the list. Most clients clear it in the first week. If we are late after that, the guarantee pays $1,000 per week.',
+  },
+  {
+    q: 'How much of my time does this take?',
+    a: 'About five hours in the first month: a one-hour kickoff, two or three review calls, and a launch walkthrough. After that, a 30-minute monthly review and, under Market Lock, an hour on camera for the Reels. The point of the system is that it runs without you.',
+  },
+  {
+    q: 'What if we miss the 90-day target?',
+    a: 'We keep working at no monthly fee until we hit it. The target is set from your own baseline at kickoff, in writing, so there is nothing to argue about at day 90.',
+  },
+  {
+    q: 'Where does the Operator Session fit?',
+    a: 'Before Day 0, if you want it: a paid half-day diagnostic ($1,500, fully credited toward any system) that produces the baseline and a written plan. Clients who start with the session skip most of the kickoff.',
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'The first 90 days of an ICS engagement',
+    description,
+    step: TIMELINES.leadengine.map((p, i) => ({ '@type': 'HowToStep', position: i + 1, name: `${p.when}: ${p.title}`, text: `${p.we.join(' ')} You: ${p.you.join(' ')} Result: ${p.get}` })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950 print:hidden">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">The first 90 days · week by week · every system</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        What happens after you sign. In order, with dates.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Price is the first question and this is the second. Pick the system and read the ninety days: what we do each
+        week, what we need from you, what you have at the end of each phase, and exactly where the written guarantees attach.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6" id="f90">
+    <div class="flex flex-wrap items-center gap-2 print:hidden" role="group" aria-label="Choose the system">
+      <span class="mr-2 font-mono text-[11px] font-bold uppercase tracking-widest text-ink-500">System</span>
+      {SYSTEMS.map((s) => (
+        <button type="button" data-system={s.key} aria-pressed={s.key === 'leadengine' ? 'true' : 'false'} class="f90-tab rounded-md border border-navy-100 bg-white px-4 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500">{s.name} <span class="font-normal text-ink-500">· {s.timeline.split(';')[0].split(',')[0].replace(/^(\w)/, (c) => c.toLowerCase())}</span></button>
+      ))}
+      <span class="ml-auto flex gap-2">
+        <button type="button" id="f90-copy" class="rounded-md border border-navy-100 bg-white px-3 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500">Copy link</button>
+        <button type="button" id="f90-print" class="rounded-md bg-navy-900 px-3.5 py-2 text-sm font-semibold text-white hover:bg-teal-600">Print</button>
+      </span>
+    </div>
+
+    {SYSTEMS.map((s) => (
+      <article data-timeline={s.key} hidden={s.key !== 'leadengine'} class="mt-8">
+        <header class="rounded-2xl border border-navy-100 bg-white p-6 shadow-sm sm:p-8">
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">The first 90 days · {s.name}</p>
+          <h2 class="mt-2 font-display text-3xl font-bold text-navy-900">{s.tagline}</h2>
+          <p class="mt-2 text-sm text-ink-700">{s.timeline}. {s.setup} to build, {s.monthly}. <a href={`/proposal/?system=${s.key}`} class="font-semibold text-teal-600 hover:text-teal-700">Build the proposal →</a></p>
+        </header>
+
+        <ol class="mt-6 space-y-4">
+          {TIMELINES[s.key].map((p, i) => (
+            <li class="relative grid gap-4 rounded-2xl border border-navy-100 bg-white p-6 sm:grid-cols-[9rem_1fr] sm:p-7">
+              <div>
+                <p class="font-mono text-xs font-bold uppercase tracking-widest text-teal-600">{p.when}</p>
+                <p class="mt-1 text-xl font-bold text-navy-900">{p.title}</p>
+                <p class="mt-1 text-xs text-ink-500">Phase {i + 1} of {TIMELINES[s.key].length}</p>
+              </div>
+              <div class="grid gap-5 md:grid-cols-2">
+                <div>
+                  <p class="font-mono text-[11px] font-bold uppercase tracking-widest text-ink-500">What we do</p>
+                  <ul class="mt-2 space-y-1.5 text-sm text-ink-700">{p.we.map((w) => <li class="flex gap-2"><span class="text-teal-600">✓</span><span>{w}</span></li>)}</ul>
+                </div>
+                <div>
+                  <p class="font-mono text-[11px] font-bold uppercase tracking-widest text-ink-500">What we need from you</p>
+                  <ul class="mt-2 space-y-1.5 text-sm text-ink-700">{p.you.map((w) => <li class="flex gap-2"><span class="text-brass-600">●</span><span>{w}</span></li>)}</ul>
+                </div>
+                <div class="md:col-span-2 rounded-lg bg-paper px-4 py-3 text-sm">
+                  <span class="font-semibold text-navy-900">At the end of this phase:</span> <span class="text-ink-700">{p.get}</span>
+                  {p.guarantee && <span class="mt-1 block text-xs font-semibold text-teal-700">In writing: {p.guarantee}</span>}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </article>
+    ))}
+
+    <!-- Kickoff checklist -->
+    <section class="mt-10 rounded-2xl border border-brass-300 bg-white p-6 shadow-sm sm:p-8" aria-labelledby="f90-check-h">
+      <div class="flex flex-wrap items-baseline justify-between gap-3">
+        <div>
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">The kickoff checklist</p>
+          <h2 id="f90-check-h" class="mt-2 text-2xl font-bold text-navy-900">What we need from you on Day 0</h2>
+          <p class="mt-1 text-sm text-ink-700">The 21-day clock starts when this is in hand. Tick what you have; this page remembers it in your browser only.</p>
+        </div>
+        <p class="text-sm font-semibold text-teal-700"><span id="f90-count">0</span> of <span id="f90-total">0</span> ready</p>
+      </div>
+      <ul class="mt-5 grid gap-2 sm:grid-cols-2" id="f90-checklist">
+        {CHECKLIST.map((c) => (
+          <li data-systems={(c.systems || []).join(',')}>
+            <label class="flex cursor-pointer items-start gap-3 rounded-lg border border-navy-100 px-3 py-2.5 text-sm text-ink-700 hover:border-teal-500">
+              <input type="checkbox" data-check={c.key} class="mt-0.5 h-4 w-4 accent-teal-600" />
+              <span>{c.label}</span>
+            </label>
+          </li>
+        ))}
+      </ul>
+      <div class="mt-4 flex flex-wrap items-center gap-3 print:hidden">
+        <a id="f90-ready" href="/contact/" class="rounded-md bg-brass-500 px-5 py-2.5 text-sm font-semibold text-navy-950 hover:bg-brass-300">Tell Daniel what's ready →</a>
+        <button type="button" id="f90-clear" class="text-sm font-semibold text-ink-500 hover:text-teal-700">Clear the list</button>
+      </div>
+    </section>
+
+    <p class="mt-6 text-sm text-ink-700">
+      Want the half-day diagnostic first? <a href="/ai-services/#operator-session" class="font-semibold text-teal-600 hover:text-teal-700">The Operator Session is $1,500, fully credited →</a>
+      <span class="text-ink-500"> And this is what month four looks like: </span><a href="/monthly-report/sample/" class="font-semibold text-teal-600 hover:text-teal-700">the sample monthly report →</a>
+    </p>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brass-600">Common questions · The first 90 days</h2>
+      <dl class="mt-5 space-y-5">
+        {faqs.map((f) => (
+          <div><dt class="text-base font-bold text-navy-900">{f.q}</dt><dd class="mt-1.5 text-sm leading-relaxed text-ink-700">{f.a}</dd></div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <FounderCard heading="Who runs the ninety days" />
+  <CtaSection heading="Ready to start the clock?" body={`One call, a straight answer on fit and price, and a written quote within 48 hours. ${SITE.founder} runs every kickoff himself.`} />
+</Base>
+
+<style>
+  .f90-tab[aria-pressed='true'] {
+    background: var(--color-navy-900);
+    border-color: var(--color-navy-900);
+    color: #fff;
+  }
+  .f90-tab[aria-pressed='true'] span {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  @media print {
+    :global(header),
+    :global(footer),
+    :global(#money-bar),
+    :global(#path-bar),
+    :global(#palette) {
+      display: none !important;
+    }
+    :global(body) {
+      background: white !important;
+    }
+    :global(.reveal) {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  function initF90() {
+    const root = document.getElementById('f90');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('.f90-tab'));
+    const timelines = Array.from(root.querySelectorAll<HTMLElement>('[data-timeline]'));
+    const items = Array.from(root.querySelectorAll<HTMLLIElement>('#f90-checklist li'));
+    const boxes = Array.from(root.querySelectorAll<HTMLInputElement>('[data-check]'));
+    const KEY = 'ics_f90_checks';
+    const valid = new Set(tabs.map((t) => t.dataset.system!));
+
+    const read = (): Record<string, boolean> => {
+      try {
+        return JSON.parse(localStorage.getItem(KEY) || '{}');
+      } catch {
+        return {};
+      }
+    };
+    const write = (v: Record<string, boolean>) => {
+      try {
+        localStorage.setItem(KEY, JSON.stringify(v));
+      } catch {
+        /* storage unavailable */
+      }
+    };
+
+    function count() {
+      const visible = items.filter((li) => !li.hidden);
+      const done = visible.filter((li) => li.querySelector<HTMLInputElement>('input')!.checked);
+      document.getElementById('f90-count')!.textContent = String(done.length);
+      document.getElementById('f90-total')!.textContent = String(visible.length);
+      const labels = done.map((li) => li.textContent!.trim());
+      const missing = visible.filter((li) => !li.querySelector<HTMLInputElement>('input')!.checked).map((li) => li.textContent!.trim());
+      const sys = tabs.find((t) => t.getAttribute('aria-pressed') === 'true')?.textContent?.split('·')[0].trim() || '';
+      (document.getElementById('f90-ready') as HTMLAnchorElement).href = `/contact/?${new URLSearchParams({
+        interest: 'AI systems & marketing',
+        message: `Kickoff checklist for ${sys}: ${done.length} of ${visible.length} ready.\n\nReady: ${labels.join('; ') || 'none yet'}\nStill need: ${missing.join('; ') || 'nothing'}\n\nMy business: \nBest time to call: `,
+      }).toString()}`;
+    }
+
+    function show(key: string, push = true) {
+      if (!valid.has(key)) key = 'leadengine';
+      tabs.forEach((t) => t.setAttribute('aria-pressed', String(t.dataset.system === key)));
+      timelines.forEach((tl) => (tl.hidden = tl.dataset.timeline !== key));
+      items.forEach((li) => {
+        const only = (li.dataset.systems || '').split(',').filter(Boolean);
+        li.hidden = only.length > 0 && !only.includes(key);
+      });
+      if (push) {
+        const u = new URL(location.href);
+        u.searchParams.set('system', key);
+        history.replaceState(null, '', u.toString());
+      }
+      count();
+    }
+
+    const saved = read();
+    boxes.forEach((b) => {
+      b.checked = !!saved[b.dataset.check!];
+      b.addEventListener('change', () => {
+        const v = read();
+        v[b.dataset.check!] = b.checked;
+        write(v);
+        count();
+      });
+    });
+    tabs.forEach((t) => t.addEventListener('click', () => show(t.dataset.system!)));
+    document.getElementById('f90-clear')!.addEventListener('click', () => {
+      boxes.forEach((b) => (b.checked = false));
+      write({});
+      count();
+    });
+    document.getElementById('f90-print')!.addEventListener('click', () => window.print());
+    const copy = document.getElementById('f90-copy')!;
+    copy.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(location.href);
+        copy.textContent = 'Link copied';
+      } catch {
+        copy.textContent = location.href;
+      }
+      setTimeout(() => (copy.textContent = 'Copy link'), 1800);
+    });
+    show(new URLSearchParams(location.search).get('system') || 'leadengine', false);
+  }
+  initF90();
+  document.addEventListener('astro:page-load', initF90);
+</script>

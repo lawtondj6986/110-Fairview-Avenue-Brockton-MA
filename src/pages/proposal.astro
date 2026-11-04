@@ -146,7 +146,7 @@ const schema = [
             <ol class="mt-3 space-y-2 text-sm leading-relaxed text-ink-700">
               <li><span class="font-semibold text-navy-900">1. A call.</span> Thirty minutes with the founder on your business, your market, and whether this is the right system. Free.</li>
               <li><span class="font-semibold text-navy-900">2. A written quote in 48 hours.</span> An exact number inside the published range, the scope, the timeline, and the guarantees, in writing.</li>
-              <li><span class="font-semibold text-navy-900">3. Kickoff.</span> <span id="pp-timeline"></span>.</li>
+              <li><span class="font-semibold text-navy-900">3. Kickoff.</span> <span id="pp-timeline"></span>. <a id="pp-f90" href="/first-90-days/" class="font-semibold text-teal-600 hover:text-teal-700">The first 90 days, week by week →</a></li>
             </ol>
           </section>
         </div>
@@ -251,6 +251,7 @@ const schema = [
       $('pp-setup').textContent = data.dataset.setup!;
       $('pp-monthly').textContent = data.dataset.monthly!;
       $('pp-timeline').textContent = data.dataset.timeline!;
+      ($('pp-f90') as HTMLAnchorElement).href = `/first-90-days/?system=${sys.value}`;
       $('pp-bestfor').textContent = data.dataset.bestfor!;
       $('pp-learn').innerHTML = `<a href="${data.dataset.href}" class="font-semibold text-teal-600 hover:text-teal-700">The ${sysName} page →</a>`;
       $('pp-includes').innerHTML = Array.from(data.querySelectorAll('[data-includes] li')).map((li) => `<li class="flex gap-2"><span class="text-teal-600">✓</span><span>${li.textContent}</span></li>`).join('');
