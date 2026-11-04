@@ -1,0 +1,58 @@
+---
+/**
+ * Progressive web app plumbing: registers the service worker (written at
+ * build by scripts/pwa.mjs) and wires any [data-install] button to the
+ * browser's install prompt. Buttons stay hidden unless the prompt is
+ * available and the site is not already running as an installed app.
+ */
+---
+
+<script>
+  type BIP = Event & { prompt: () => Promise<void>; userChoice: Promise<{ outcome: string }> };
+  const w = window as unknown as { __icsInstall?: BIP | null; __icsSw?: boolean };
+
+  function paintInstallButtons() {
+    const standalone = window.matchMedia('(display-mode: standalone)').matches || (navigator as unknown as { standalone?: boolean }).standalone === true;
+    document.querySelectorAll<HTMLElement>('[data-install]').forEach((b) => {
+      const show = !!w.__icsInstall && !standalone;
+      b.hidden = !show;
+      if (show && !b.dataset.ready) {
+        b.dataset.ready = '1';
+        b.addEventListener('click', async () => {
+          const ev = w.__icsInstall;
+          if (!ev) return;
+          await ev.prompt();
+          const choice = await ev.userChoice.catch(() => ({ outcome: 'dismissed' }));
+          if (choice.outcome === 'accepted') {
+            w.__icsInstall = null;
+            paintInstallButtons();
+            try {
+              (window as unknown as { va?: (e: string, o: unknown) => void }).va?.('event', { name: 'install' });
+            } catch {
+              /* best-effort */
+            }
+          }
+        });
+      }
+    });
+  }
+
+  if (!w.__icsSw) {
+    w.__icsSw = true;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      w.__icsInstall = e as BIP;
+      paintInstallButtons();
+    });
+    window.addEventListener('appinstalled', () => {
+      w.__icsInstall = null;
+      paintInstallButtons();
+    });
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => undefined);
+      });
+    }
+  }
+  document.addEventListener('astro:page-load', paintInstallButtons);
+</script>

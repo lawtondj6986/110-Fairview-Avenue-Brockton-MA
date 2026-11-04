@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { fileURLToPath } from 'node:url';
 import { generateOg } from './scripts/generate-og.mjs';
 import { generateImages } from './scripts/generate-images.mjs';
+import { generatePwa } from './scripts/pwa.mjs';
 import { generateLlmsFull } from './scripts/generate-llms-full.mjs';
 import { generateAnswers } from './scripts/generate-answers.mjs';
 import rehypeGlossary from './scripts/rehype-glossary.mjs';
@@ -22,13 +23,15 @@ const llmsFull = {
       logger.info(`llms-full.txt: ${pages} pages, ${(bytes / 1024).toFixed(0)} KB`);
       const a = generateAnswers(fileURLToPath(dir));
       logger.info(`answers-index.json: ${a.answers} answers, ${(a.bytes / 1024).toFixed(0)} KB`);
+      const p = generatePwa(fileURLToPath(dir));
+      logger.info(`sw.js: build ${p.version}, ${p.sheets} sheets available offline`);
     },
   },
 };
 
 export default defineConfig({
   site: 'https://icsgroup.ai',
-  integrations: [sitemap({ filter: (page) => !page.includes('/shipped/') }), llmsFull],
+  integrations: [sitemap({ filter: (page) => !page.includes('/shipped/') && !page.includes('/offline/') }), llmsFull],
   // The founder's name is a brand: a clean URL for it resolves to the bio.
   redirects: { '/daniel-lawton/': '/about/', '/founder/': '/about/' },
   // The Glossary teaches while people read: first mention of any term in markdown bodies links to its page.

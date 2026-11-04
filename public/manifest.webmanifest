@@ -1,0 +1,26 @@
+{
+  "name": "ICS · Innovative Commercial Strategies",
+  "short_name": "ICS",
+  "description": "Commercial real estate advisory and AI revenue systems for the South Shore of Massachusetts, Broward, and Palm Beach Counties. Market sheets, deal tools, and the Territory Board, on your phone.",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#06132a",
+  "theme_color": "#0b1f3a",
+  "lang": "en-US",
+  "categories": ["business", "productivity"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Market Sheets", "short_name": "Sheets", "url": "/market-sheets/?source=pwa", "description": "One printable page per town and city" },
+    { "name": "Build a Buyer Brief", "short_name": "Buyer Brief", "url": "/buyer-brief/?source=pwa" },
+    { "name": "Build a Proposal", "short_name": "Proposal", "url": "/proposal/?source=pwa" },
+    { "name": "Territory Board", "short_name": "Territories", "url": "/territories/?source=pwa" },
+    { "name": "Call Daniel", "short_name": "Call", "url": "/contact/?source=pwa" }
+  ]
+}

@@ -66,7 +66,14 @@ const schema = [
         operator's read, which Market Lock categories are still open, the three systems with published pricing, and a QR
         code back to the live page. Print one before a meeting. Hand one across a counter.
       </p>
-      <div class="reveal mt-8 flex flex-wrap gap-3" style="--reveal-delay: 300ms">
+      <div class="reveal mt-6 flex flex-wrap items-center gap-3 rounded-xl border border-white/15 bg-white/5 p-4 text-sm text-navy-100/90" style="--reveal-delay: 250ms" id="sheets-offline">
+        <span class="font-semibold text-white">Heading out?</span>
+        <span>Save every sheet to this device and they open with no signal, at the counter.</span>
+        <button type="button" id="sheets-save" class="rounded-md bg-teal-500 px-4 py-2 text-sm font-semibold text-navy-950 hover:bg-teal-400">Save all sheets for offline</button>
+        <span id="sheets-save-status" class="font-mono text-xs text-teal-300" aria-live="polite"></span>
+        <button type="button" data-install hidden class="rounded-md border border-white/25 px-4 py-2 text-sm font-semibold text-white hover:border-teal-400 hover:text-teal-400">Install ICS on this device</button>
+      </div>
+      <div class="reveal mt-6 flex flex-wrap gap-3" style="--reveal-delay: 300ms">
         <a href="#south-shore" class="rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300">South Shore, MA</a>
         <a href="#broward" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">Broward County, FL</a>
         <a href="#palm-beach" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">Palm Beach County, FL</a>
@@ -112,3 +119,65 @@ const schema = [
 
   <CtaSection heading="Want the sheet with your name on it?" body="Build Your Own Proposal turns a sheet into a priced, dated proposal for your business in your town, in about a minute. Or call, and we will bring the printed one." />
 </Base>
+
+<script>
+  function initSheetsOffline() {
+    const btn = document.getElementById('sheets-save') as HTMLButtonElement | null;
+    const status = document.getElementById('sheets-save-status');
+    if (!btn || !status || btn.dataset.ready) return;
+    btn.dataset.ready = '1';
+    if (!('serviceWorker' in navigator)) {
+      btn.hidden = true;
+      status.textContent = 'This browser cannot save pages offline.';
+      return;
+    }
+    const KEY = 'ics_sheets_saved';
+    try {
+      const saved = localStorage.getItem(KEY);
+      if (saved) status.textContent = `Saved ${saved}. Tap again to refresh.`;
+    } catch {
+      /* ignore */
+    }
+    navigator.serviceWorker.addEventListener('message', (ev) => {
+      const d = ev.data || {};
+      if (d.type !== 'cache-sheets') return;
+      if (d.error) {
+        status.textContent = 'Could not save: ' + d.error;
+        btn.disabled = false;
+        return;
+      }
+      if (d.complete) {
+        const when = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        status.textContent = `Saved ${d.done} of ${d.total} sheets for offline (${when}).`;
+        btn.disabled = false;
+        btn.textContent = 'Refresh the saved sheets';
+        try {
+          localStorage.setItem(KEY, `${d.done} sheets on ${when}`);
+        } catch {
+          /* ignore */
+        }
+        try {
+          (window as unknown as { va?: (e: string, o: unknown) => void }).va?.('event', { name: 'sheets-offline', data: { n: d.done } });
+        } catch {
+          /* best-effort */
+        }
+      } else if (typeof d.done === 'number') {
+        status.textContent = `Saving ${d.done} of ${d.total}…`;
+      }
+    });
+    btn.addEventListener('click', async () => {
+      btn.disabled = true;
+      status.textContent = 'Saving…';
+      const reg = await navigator.serviceWorker.ready.catch(() => null);
+      const sw = reg?.active || navigator.serviceWorker.controller;
+      if (!sw) {
+        status.textContent = 'Reload the page once, then tap again.';
+        btn.disabled = false;
+        return;
+      }
+      sw.postMessage({ type: 'cache-sheets' });
+    });
+  }
+  initSheetsOffline();
+  document.addEventListener('astro:page-load', initSheetsOffline);
+</script>
