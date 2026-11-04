@@ -1,0 +1,116 @@
+---
+/**
+ * ShareKit — hand a tool's current state to someone else, from wherever you
+ * are. Native share where the browser has it (phones), a QR code of the live
+ * URL for a counter or a screen-share, and text/email links with the URL in
+ * the body. The URL is read at click time, so it carries whatever the tool
+ * has put in the query string. The QR encoder loads only when asked for.
+ */
+interface Props {
+  /** What is being shared, used in the text/email body, e.g. "the Boca Raton market sheet". */
+  what: string;
+  /** Visual size. */
+  compact?: boolean;
+  /** Dark background (navy hero) styling. */
+  dark?: boolean;
+}
+const { what, compact = false, dark = false } = Astro.props;
+const btn = dark
+  ? 'rounded-md border border-white/25 px-3 py-1.5 text-xs font-semibold text-white hover:border-teal-400 hover:text-teal-400'
+  : `rounded-md border border-navy-100 bg-white ${compact ? 'px-3 py-1.5 text-xs' : 'px-3.5 py-2 text-sm'} font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700`;
+---
+
+<span class="sharekit inline-flex flex-wrap items-center gap-2 print:hidden" data-sharekit data-what={what}>
+  <button type="button" data-sk-native hidden class={btn}>Share…</button>
+  <button type="button" data-sk-qr class={btn} aria-expanded="false">Send to a phone</button>
+  <a data-sk-sms href="sms:?&body=" class={btn}>Text it</a>
+  <a data-sk-mail href="mailto:?subject=&body=" class={btn}>Email it</a>
+  <span data-sk-panel hidden class="basis-full">
+    <span class="mt-2 inline-flex flex-col items-center gap-2 rounded-xl border border-navy-100 bg-white p-4 text-center shadow-sm">
+      <img data-sk-img alt="QR code for this page" width="200" height="200" class="h-[200px] w-[200px]" />
+      <span class="max-w-[16rem] break-all font-mono text-[11px] text-ink-700" data-sk-url></span>
+      <span class="text-[11px] text-ink-500">Scan with a phone camera. The code carries everything on this page.</span>
+    </span>
+  </span>
+</span>
+
+<script>
+  function initShareKits() {
+    document.querySelectorAll<HTMLElement>('[data-sharekit]').forEach((kit) => {
+      if (kit.dataset.ready) return;
+      kit.dataset.ready = '1';
+      const what = kit.dataset.what || 'this page';
+      const title = () => document.title.replace(/\s*\|.*$/, '');
+      const url = () => location.href;
+      const native = kit.querySelector<HTMLButtonElement>('[data-sk-native]')!;
+      const nav = navigator as Navigator & { share?: (d: { title?: string; text?: string; url?: string }) => Promise<void> };
+      if (typeof nav.share === 'function') {
+        native.hidden = false;
+        native.addEventListener('click', async () => {
+          try {
+            await nav.share!({ title: title(), text: `From ICS: ${what}`, url: url() });
+            track('native');
+          } catch {
+            /* dismissed */
+          }
+        });
+      }
+      const sms = kit.querySelector<HTMLAnchorElement>('[data-sk-sms]')!;
+      const mail = kit.querySelector<HTMLAnchorElement>('[data-sk-mail]')!;
+      const refresh = () => {
+        const body = `From ICS: ${what}\n${url()}`;
+        sms.href = `sms:?&body=${encodeURIComponent(body)}`;
+        mail.href = `mailto:?subject=${encodeURIComponent(title())}&body=${encodeURIComponent(body)}`;
+      };
+      refresh();
+      // Tools rewrite the URL as their state changes; refresh the links as soon as a finger or pointer arrives.
+      kit.addEventListener('pointerover', refresh);
+      kit.addEventListener('focusin', refresh);
+      kit.addEventListener('touchstart', refresh, { passive: true });
+      sms.addEventListener('click', () => {
+        refresh();
+        track('sms');
+      });
+      mail.addEventListener('click', () => {
+        refresh();
+        track('email');
+      });
+      const qrBtn = kit.querySelector<HTMLButtonElement>('[data-sk-qr]')!;
+      const panel = kit.querySelector<HTMLElement>('[data-sk-panel]')!;
+      const img = kit.querySelector<HTMLImageElement>('[data-sk-img]')!;
+      const urlEl = kit.querySelector<HTMLElement>('[data-sk-url]')!;
+      let lastUrl = '';
+      qrBtn.addEventListener('click', async () => {
+        const open = panel.hidden;
+        if (!open) {
+          panel.hidden = true;
+          qrBtn.setAttribute('aria-expanded', 'false');
+          return;
+        }
+        panel.hidden = false;
+        qrBtn.setAttribute('aria-expanded', 'true');
+        const u = url();
+        urlEl.textContent = u.replace(/^https?:\/\//, '');
+        if (u !== lastUrl) {
+          try {
+            const QR = await import('qrcode');
+            img.src = await QR.toDataURL(u, { margin: 1, width: 400, errorCorrectionLevel: 'M', color: { dark: '#0f1b33', light: '#ffffff' } });
+            lastUrl = u;
+          } catch {
+            urlEl.textContent = u;
+          }
+        }
+        track('qr');
+      });
+      function track(how: string) {
+        try {
+          (window as unknown as { va?: (e: string, o: unknown) => void }).va?.('event', { name: 'share', data: { how, path: location.pathname } });
+        } catch {
+          /* best-effort */
+        }
+      }
+    });
+  }
+  initShareKits();
+  document.addEventListener('astro:page-load', initShareKits);
+</script>

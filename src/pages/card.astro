@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE } from '../config';
+import ShareKit from '../components/ShareKit.astro';
 
 const title = 'Daniel Lawton — Digital Card | Innovative Commercial Strategies';
 const description =
@@ -39,6 +40,7 @@ const tel = SITE.phone.replace(/[^\d+]/g, '');
         >
           ⬇ Save Contact to Phone
         </a>
+        <div class="mt-3 flex justify-center"><ShareKit what="Daniel Lawton's digital card" dark /></div>
 
         <div class="mt-6 space-y-2 border-t border-white/10 pt-5 text-left">
           {
