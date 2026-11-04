@@ -1,0 +1,910 @@
+---
+/**
+ * The Monthly Report, sample — what a Lead Engine client receives on the first
+ * of every month. Every number on this page is invented to show the format;
+ * the page says so in three places. Charts are drawn in the browser from the
+ * data block below so the month switcher re-renders everything together.
+ */
+import Base from '../../layouts/Base.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import { SITE } from '../../config';
+import { getSystem } from '../../lib/systems';
+
+const le = getSystem('leadengine')!;
+
+const title = 'The Monthly Report, a Sample — What an ICS Client Sees on the First of the Month | ICS';
+const description =
+  'A fully illustrative sample of the monthly report every Lead Engine and Market Lock client receives: median first-response time against the 60-second guarantee, leads by source, the quote-to-booked pipeline, a six-month trend, review velocity, what we did, and what we will do next. Every number on the page is invented to show the format.';
+
+const faqs = [
+  {
+    q: 'Is this a real client?',
+    a: 'No. Northline Heating & Air is a fictional Abington, Massachusetts HVAC company and every number on this page is invented to show the format. Real client reports are private; the Scoreboard publishes aggregate figures across clients.',
+  },
+  {
+    q: 'When does the report arrive?',
+    a: 'On the first business day of the month, as a link to the live dashboard and a one-page PDF, followed by a 30-minute monthly review call. The dashboard itself is live all month; the report is the month closed out and read for you.',
+  },
+  {
+    q: 'What does "measured monthly" mean for the 60-second guarantee?',
+    a: 'Median first-response time across every inbound lead that month, calls, forms, and messages, 24 hours a day. If the median is over 60 seconds, the retainer for that month is credited. The distribution chart shows the whole picture, not just the median.',
+  },
+  {
+    q: 'Who owns the data?',
+    a: `You do. The CRM, the call tracking, the review platform, and the dashboard are in accounts you own. If we parted ways tomorrow, the report would keep arriving from your own systems. ${SITE.founder} reads it with you; he does not hold it.`,
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'The Monthly Report, a sample',
+    description,
+    url: `${SITE.url}/monthly-report/sample/`,
+    isPartOf: { '@id': `${SITE.url}/#website` },
+    about: { '@type': 'Service', name: 'Lead Engine', url: `${SITE.url}${le.href}` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Illustrative sample · Every number on this page is invented</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        The Monthly Report. This is what the first of the month looks like.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Every Lead Engine and Market Lock client gets this page about their own business: the guarantee measured, leads by
+        source, the pipeline from first ring to booked job, the trend, the reviews, what we did, and what we do next.
+        Agencies send a PDF nobody reads. We send a scoreboard and then sit down and read it with you.
+      </p>
+      <div class="reveal mt-8 flex flex-wrap gap-3" style="--reveal-delay: 300ms">
+        <a href="#report" class="rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300">Read the sample ↓</a>
+        <a href="/ai-services/" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">The systems that produce it</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="report" class="bg-navy-100/40 px-2 py-8 sm:px-4 sm:py-12">
+    <article class="mr mx-auto max-w-5xl rounded-xl bg-white text-navy-900 shadow-xl ring-1 ring-navy-100" aria-label="Sample monthly report">
+      <!-- Report masthead -->
+      <header class="mr-mast flex flex-wrap items-start justify-between gap-4 rounded-t-xl bg-navy-950 px-6 py-5 text-white sm:px-8">
+        <div class="flex items-center gap-3">
+          <img src="/images/ics-logo-mark.jpg" alt="" width="160" height="160" class="h-10 w-10 rounded-md object-cover" />
+          <div>
+            <p class="font-display text-[11px] font-bold uppercase tracking-[0.22em] text-brass-300">Innovative Commercial Strategies</p>
+            <p class="text-xs text-navy-100/80">Monthly Report · Lead Engine · <span data-mr="monthLong">October 2026</span></p>
+          </div>
+        </div>
+        <div class="text-right text-xs text-navy-100/80">
+          <p class="font-semibold text-white">Northline Heating &amp; Air <span class="font-normal text-navy-100/70">(fictional)</span></p>
+          <p>Abington, MA · Month <span data-mr="monthNo">4</span> of the engagement</p>
+        </div>
+      </header>
+
+      <div class="px-6 py-6 sm:px-8">
+        <p class="rounded-md border border-brass-300 bg-brass-300/15 px-3 py-2 text-xs text-ink-700">
+          <strong class="text-navy-950">Sample.</strong> Northline Heating &amp; Air is fictional and every figure below is invented to show the format. Your report shows your numbers, from accounts you own.
+        </p>
+
+        <!-- Filter row: month -->
+        <div class="no-print mt-5 flex flex-wrap items-center gap-2" role="group" aria-label="Choose the month">
+          <span class="mr-2 font-mono text-[11px] font-bold uppercase tracking-widest text-ink-500">Month</span>
+          <button type="button" data-month="2026-08" class="mr-month rounded-md border border-navy-100 px-3 py-1.5 text-sm font-semibold text-navy-900 hover:border-teal-500" aria-pressed="false">August</button>
+          <button type="button" data-month="2026-09" class="mr-month rounded-md border border-navy-100 px-3 py-1.5 text-sm font-semibold text-navy-900 hover:border-teal-500" aria-pressed="false">September</button>
+          <button type="button" data-month="2026-10" class="mr-month rounded-md border border-navy-100 px-3 py-1.5 text-sm font-semibold text-navy-900 hover:border-teal-500" aria-pressed="true">October</button>
+          <span class="ml-auto flex gap-2">
+            <button type="button" id="mr-copy" class="rounded-md border border-navy-100 bg-white px-3 py-1.5 text-sm font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700">Copy link</button>
+            <button type="button" id="mr-print" class="rounded-md bg-navy-900 px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-teal-600">Print / save as PDF</button>
+          </span>
+        </div>
+
+        <!-- BLUF -->
+        <div class="mt-6 border-l-4 border-teal-500 bg-paper px-4 py-3">
+          <p class="font-mono text-[11px] font-bold uppercase tracking-widest text-teal-600">Bottom line up front</p>
+          <p class="mt-1 text-base font-medium leading-snug text-navy-900" data-mr="bluf"></p>
+        </div>
+
+        <!-- Hero: the guarantee -->
+        <section class="mt-6 grid gap-5 lg:grid-cols-[1.1fr_1fr]" data-print-cols="2" aria-labelledby="mr-h-guarantee">
+          <div class="rounded-xl border border-navy-100 p-5">
+            <h2 id="mr-h-guarantee" class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">The guarantee, measured</h2>
+            <p class="mt-2 text-sm text-ink-700">Median first response to every inbound lead, 24/7. Under 60 seconds or the month is credited.</p>
+            <p class="mt-3 flex items-baseline gap-2">
+              <span class="mr-hero text-[52px] font-bold leading-none text-navy-950" data-mr="median">42</span>
+              <span class="text-lg font-semibold text-ink-700">seconds</span>
+              <span class="ml-2 rounded-full px-2 py-0.5 text-xs font-semibold" data-mr="medianDelta"></span>
+            </p>
+            <div class="mt-4">
+              <div class="flex justify-between font-mono text-[10px] uppercase tracking-wider text-ink-500"><span>0 s</span><span>60 s guarantee</span></div>
+              <div class="mr-meter mt-1 h-2.5 w-full rounded-full bg-teal-100" role="meter" aria-valuemin="0" aria-valuemax="60" aria-valuenow="42" aria-label="Median first response against the 60-second guarantee">
+                <div class="h-2.5 rounded-full bg-teal-600" data-mr="meterFill" style="width:70%"></div>
+              </div>
+            </div>
+            <p class="mt-3 flex items-center gap-2 text-sm font-semibold text-teal-700" data-mr="guaranteeStatus">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="currentColor" /><path d="M4.5 8.5l2.2 2.2L11.5 6" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              <span>Guarantee met: <span data-mr="under60"></span>% of leads answered in under 60 seconds</span>
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-navy-100 p-5">
+            <h2 class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">How fast, lead by lead</h2>
+            <p class="mt-2 text-sm text-ink-700">Share of the month's leads by time to first response.</p>
+            <div class="mr-cols mt-4" data-chart="buckets" role="img" aria-label="Distribution of first-response times"></div>
+            <details class="mt-3 text-xs text-ink-700"><summary class="cursor-pointer font-semibold text-teal-700">Table view</summary><table class="mt-2 w-full text-left" data-table="buckets"></table></details>
+          </div>
+        </section>
+
+        <!-- KPI row -->
+        <section class="mt-6" aria-label="Headline numbers">
+          <div class="grid gap-3 sm:grid-cols-3 lg:grid-cols-6" data-print-cols="6" data-chart="kpis"></div>
+        </section>
+
+        <!-- Sources + pipeline -->
+        <section class="mt-6 grid gap-5 lg:grid-cols-2" data-print-cols="2">
+          <div class="rounded-xl border border-navy-100 p-5">
+            <h2 class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">Leads by source</h2>
+            <p class="mt-2 text-sm text-ink-700">Where this month's leads came from, largest first.</p>
+            <div class="mr-bars mt-4" data-chart="sources" role="img" aria-label="Leads by source, ranked"></div>
+            <details class="mt-3 text-xs text-ink-700"><summary class="cursor-pointer font-semibold text-teal-700">Table view</summary><table class="mt-2 w-full text-left" data-table="sources"></table></details>
+          </div>
+          <div class="rounded-xl border border-navy-100 p-5">
+            <h2 class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">From first ring to booked job</h2>
+            <p class="mt-2 text-sm text-ink-700">Every lead this month, step by step. The drop between steps is where next month's work is.</p>
+            <div class="mr-bars mt-4" data-chart="pipeline" role="img" aria-label="Pipeline from lead to completed job"></div>
+            <details class="mt-3 text-xs text-ink-700"><summary class="cursor-pointer font-semibold text-teal-700">Table view</summary><table class="mt-2 w-full text-left" data-table="pipeline"></table></details>
+          </div>
+        </section>
+
+        <!-- Trend -->
+        <section class="mt-6 rounded-xl border border-navy-100 p-5">
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <div>
+              <h2 class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">Six months: leads and booked jobs</h2>
+              <p class="mt-2 text-sm text-ink-700">Two months before Lead Engine went live, and every month since. Hover for the values.</p>
+            </div>
+            <ul class="flex gap-4 text-xs text-ink-700" aria-label="Legend">
+              <li class="flex items-center gap-1.5"><span class="inline-block h-0.5 w-5 rounded bg-teal-600"></span>Booked jobs</li>
+              <li class="flex items-center gap-1.5"><span class="inline-block h-0.5 w-5 rounded bg-[#94a3b8]"></span>Leads</li>
+            </ul>
+          </div>
+          <div class="relative mt-4" data-chart="trend"></div>
+          <details class="mt-3 text-xs text-ink-700"><summary class="cursor-pointer font-semibold text-teal-700">Table view</summary><table class="mt-2 w-full text-left" data-table="trend"></table></details>
+        </section>
+
+        <!-- Reviews + money -->
+        <section class="mt-6 grid gap-5 lg:grid-cols-3" data-print-cols="3">
+          <div class="rounded-xl border border-navy-100 p-5">
+            <h2 class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">Reviews</h2>
+            <p class="mt-3 text-3xl font-bold text-navy-950"><span data-mr="reviews"></span> <span class="text-base font-semibold text-ink-700">new this month</span></p>
+            <p class="mt-1 text-sm text-ink-700">Google rating <strong data-mr="rating"></strong> on <span data-mr="reviewTotal"></span> reviews. Asked automatically after every completed job.</p>
+            <div class="mt-3" data-chart="reviewSpark" role="img" aria-label="New reviews per week, last twelve weeks"></div>
+          </div>
+          <div class="rounded-xl border border-navy-100 p-5">
+            <h2 class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">Money</h2>
+            <dl class="mt-3 space-y-2 text-sm">
+              <div class="flex justify-between gap-3"><dt class="text-ink-700">Revenue booked, attributed</dt><dd class="font-semibold text-navy-950" data-mr="revenue"></dd></div>
+              <div class="flex justify-between gap-3"><dt class="text-ink-700">Average booked job</dt><dd class="font-semibold text-navy-950" data-mr="avgJob"></dd></div>
+              <div class="flex justify-between gap-3"><dt class="text-ink-700">Paid search (your spend, tracked by the system)</dt><dd class="font-semibold text-navy-950" data-mr="adSpend"></dd></div>
+              <div class="flex justify-between gap-3"><dt class="text-ink-700">Lead Engine retainer</dt><dd class="font-semibold text-navy-950" data-mr="retainer"></dd></div>
+              <div class="flex justify-between gap-3 border-t border-navy-100 pt-2"><dt class="text-ink-700">Cost per booked job, all in</dt><dd class="font-semibold text-navy-950" data-mr="cpb"></dd></div>
+            </dl>
+            <p class="mt-3 text-[11px] text-ink-500">Attributed means the lead was tracked from first contact to a booked job in the CRM you own. Nothing is estimated.</p>
+          </div>
+          <div class="rounded-xl border border-navy-100 p-5">
+            <h2 class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">Flags</h2>
+            <ul class="mt-3 space-y-2.5 text-sm text-ink-700" data-chart="flags"></ul>
+          </div>
+        </section>
+
+        <!-- Did / next -->
+        <section class="mt-6 grid gap-5 lg:grid-cols-2" data-print-cols="2">
+          <div class="rounded-xl bg-paper p-5">
+            <h2 class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">What we did this month</h2>
+            <ul class="mt-3 space-y-2 text-sm text-ink-700" data-chart="did"></ul>
+          </div>
+          <div class="rounded-xl bg-paper p-5">
+            <h2 class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">What we do next month</h2>
+            <ul class="mt-3 space-y-2 text-sm text-ink-700" data-chart="next"></ul>
+          </div>
+        </section>
+
+        <footer class="mt-6 flex flex-wrap items-end justify-between gap-4 border-t-2 border-navy-950 pt-4 text-sm">
+          <div>
+            <p class="font-display text-lg font-bold text-navy-950">Monthly review: <span data-mr="reviewDate"></span>, 30 minutes, your office.</p>
+            <p class="mt-1 text-ink-700">Read by {SITE.founder} before it reaches you. Questions before then: {SITE.phone}.</p>
+          </div>
+          <p class="text-xs text-ink-500">Sample report · all figures fictional · format current as of November 2026</p>
+        </footer>
+      </div>
+    </article>
+    <div id="mr-tip" class="pointer-events-none fixed z-50 hidden rounded-md bg-navy-950 px-2.5 py-1.5 text-xs text-white shadow-lg" role="tooltip"></div>
+  </div>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <div class="grid gap-10 lg:grid-cols-3">
+      <div class="prose-ics lg:col-span-2">
+        <h2>Why the report looks like this</h2>
+        <p>
+          A report is read for about ninety seconds, so the first line says whether the month was good and why. The guarantee
+          comes next because it is the promise you paid for, and it is shown as a distribution, not a single number, because a
+          median can hide a bad week. Leads by source tells you which channel to feed. The pipeline tells you where leads die.
+          The six-month line is the only chart that matters to a lender or a buyer. And the two lists at the bottom are the
+          contract for next month, in writing.
+        </p>
+        <h2>What it is built from</h2>
+        <ul>
+          {le.includes.map((i) => <li>{i}</li>)}
+        </ul>
+        <p>
+          Lead Engine is {le.setup} to build plus {le.monthly}; the report is included, and so is the monthly review.
+          <a href="/proposal/?system=leadengine">Build the proposal</a> or <a href="/pricing/">see all published pricing</a>.
+        </p>
+      </div>
+      <aside class="space-y-4 lg:sticky lg:top-24 lg:self-start">
+        <div class="rounded-xl border border-navy-100 bg-white p-6 shadow-sm">
+          <p class="font-mono text-[11px] font-bold uppercase tracking-widest text-teal-600">Common questions</p>
+          <dl class="mt-3 space-y-4">
+            {faqs.map((f) => (
+              <div><dt class="text-sm font-bold text-navy-900">{f.q}</dt><dd class="mt-1 text-xs leading-relaxed text-ink-700">{f.a}</dd></div>
+            ))}
+          </dl>
+        </div>
+        <div class="rounded-xl bg-navy-900 p-6 text-sm">
+          <p class="font-semibold uppercase tracking-wider text-teal-400">Related</p>
+          <ul class="mt-3 space-y-1.5">
+            <li><a href="/scoreboard/" class="text-navy-100/85 hover:text-teal-400">The public Scoreboard, aggregate results →</a></li>
+            <li><a href="/guarantees/" class="text-navy-100/85 hover:text-teal-400">The guarantees, in writing →</a></li>
+            <li><a href="/case-studies/" class="text-navy-100/85 hover:text-teal-400">Case studies with real numbers →</a></li>
+            <li><a href="/intelligence/dossier/sample/" class="text-navy-100/85 hover:text-teal-400">Another sample: the Deep Dossier →</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <CtaSection heading="Want this report about your business?" body="One call, a straight answer on fit, and a written quote within 48 hours. The first report arrives on the first of the month after launch." />
+</Base>
+
+<style>
+  .mr-hero {
+    font-variant-numeric: normal;
+  }
+  .mr-month[aria-pressed='true'] {
+    background: var(--color-navy-900);
+    border-color: var(--color-navy-900);
+    color: #fff;
+  }
+  .mr-bars :global(.row) {
+    display: grid;
+    grid-template-columns: minmax(7rem, 11rem) 1fr 3.5rem;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.2rem 0;
+  }
+  .mr-bars :global(.track) {
+    height: 18px;
+    position: relative;
+  }
+  .mr-bars :global(.fill) {
+    height: 18px;
+    border-radius: 0 4px 4px 0;
+    background: var(--color-teal-600);
+    transition: width 0.4s ease;
+    outline: none;
+  }
+  .mr-bars :global(.fill:hover),
+  .mr-bars :global(.fill:focus-visible) {
+    filter: brightness(1.15);
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--color-teal-600);
+  }
+  .mr-cols :global(.cols) {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 6px;
+    align-items: end;
+    height: 150px;
+    border-bottom: 1px solid var(--color-navy-100);
+  }
+  .mr-cols :global(.col) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+  }
+  .mr-cols :global(.bar) {
+    width: 100%;
+    max-width: 24px;
+    border-radius: 4px 4px 0 0;
+    background: var(--color-teal-600);
+    transition: height 0.4s ease;
+    outline: none;
+  }
+  .mr-cols :global(.bar.late) {
+    background: var(--color-brass-500);
+  }
+  .mr-cols :global(.bar:hover),
+  .mr-cols :global(.bar:focus-visible) {
+    filter: brightness(1.15);
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--color-teal-600);
+  }
+  .mr-cols :global(.labels) {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 6px;
+    margin-top: 6px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--color-ink-500);
+  }
+  .mr :global(table) {
+    border-collapse: collapse;
+  }
+  .mr :global(td),
+  .mr :global(th) {
+    padding: 0.25rem 0.5rem 0.25rem 0;
+    border-bottom: 1px solid var(--color-navy-100);
+    font-variant-numeric: tabular-nums;
+  }
+  .mr-mast {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media print {
+    @page {
+      size: letter;
+      margin: 0.4in;
+    }
+    :global(header:not(.mr-mast)),
+    :global(footer:not(.mr footer)),
+    :global(#money-bar),
+    :global(#path-bar),
+    :global(#palette),
+    :global(main#main > *:not(#report)),
+    .no-print,
+    #mr-tip {
+      display: none !important;
+    }
+    .mr section > div,
+    .mr section.rounded-xl {
+      break-inside: avoid;
+    }
+    .mr [data-print-cols='2'] {
+      grid-template-columns: 1fr 1fr !important;
+    }
+    .mr [data-print-cols='3'] {
+      grid-template-columns: 1fr 1fr 1fr !important;
+    }
+    .mr [data-print-cols='6'] {
+      grid-template-columns: repeat(6, 1fr) !important;
+    }
+    :global(body),
+    #report {
+      background: white !important;
+      padding: 0 !important;
+    }
+    .mr {
+      box-shadow: none !important;
+      max-width: none !important;
+      zoom: 0.72;
+    }
+    .mr :global(details) {
+      display: none;
+    }
+    :global(.reveal) {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  type Month = {
+    key: string;
+    long: string;
+    no: number;
+    leads: number;
+    median: number;
+    under60: number;
+    quoted: number;
+    booked: number;
+    completed: number;
+    revenue: number;
+    reviews: number;
+    rating: string;
+    reviewTotal: number;
+    adSpend: number;
+    retainer: number;
+    sources: [string, number][];
+    buckets: [string, number][];
+    spark: number[];
+    bluf: string;
+    flags: { level: 'good' | 'watch'; text: string }[];
+    did: string[];
+    next: string[];
+    reviewDate: string;
+  };
+
+  const MONTHS: Month[] = [
+    {
+      key: '2026-08',
+      long: 'August 2026',
+      no: 2,
+      leads: 64,
+      median: 58,
+      under60: 71,
+      quoted: 44,
+      booked: 22,
+      completed: 16,
+      revenue: 71400,
+      reviews: 6,
+      rating: '4.6',
+      reviewTotal: 58,
+      adSpend: 1150,
+      retainer: 1900,
+      sources: [['Google Business Profile', 24], ['Website form', 15], ['Missed-call text-back', 9], ['Referral', 8], ['Paid search', 6], ['Reels and social', 2]],
+      buckets: [['Under 30 s', 36], ['30 to 60 s', 35], ['1 to 5 min', 17], ['5 to 30 min', 8], ['Over 30 min', 4]],
+      spark: [0, 1, 0, 1, 1, 0, 2, 1, 0, 2, 1, 3],
+      bluf: 'A good second month with one real problem: the median response was 58 seconds, inside the guarantee but only just, because after-hours calls were still routing to a voicemail that nobody cleared until morning. Fixed on August 19. Twenty-two jobs booked, up from twelve in July.',
+      flags: [
+        { level: 'watch', text: 'Median response 58 s: two seconds inside the guarantee. After-hours routing fixed August 19; September will show it.' },
+        { level: 'watch', text: 'Eight percent of leads waited over five minutes. All after 9 pm, all before the fix.' },
+        { level: 'good', text: 'Missed-call text-back recovered nine leads that would have been lost outright.' },
+      ],
+      did: ['Rerouted after-hours calls to the AI receptionist instead of voicemail (Aug 19).', 'Wrote and launched the Abington and Whitman town pages.', 'Turned on review requests at job completion; six new reviews in twelve days.', 'Built the quote follow-up sequence: text at 2 hours, email at day 2, a call at day 5.'],
+      next: ['Get the median under 50 seconds with the new routing in place for a full month.', 'Launch the Rockland and Hanover town pages.', 'Start a small paid-search test on "emergency AC repair" in Abington and Rockland.'],
+      reviewDate: 'Thursday, September 3',
+    },
+    {
+      key: '2026-09',
+      long: 'September 2026',
+      no: 3,
+      leads: 79,
+      median: 47,
+      under60: 83,
+      quoted: 56,
+      booked: 29,
+      completed: 24,
+      revenue: 96800,
+      reviews: 11,
+      rating: '4.7',
+      reviewTotal: 69,
+      adSpend: 1480,
+      retainer: 1900,
+      sources: [['Google Business Profile', 28], ['Website form', 19], ['Missed-call text-back', 13], ['Referral', 8], ['Paid search', 8], ['Reels and social', 3]],
+      buckets: [['Under 30 s', 44], ['30 to 60 s', 39], ['1 to 5 min', 11], ['5 to 30 min', 4], ['Over 30 min', 2]],
+      spark: [1, 0, 2, 1, 3, 1, 2, 3, 2, 3, 2, 4],
+      bluf: 'The routing fix held: median response fell to 47 seconds and 83 percent of leads were answered inside the guarantee. Seventy-nine leads, twenty-nine booked. Quote conversion is the number to watch now; 56 quotes produced 29 jobs, and most of the lost quotes went quiet after day two.',
+      flags: [
+        { level: 'good', text: 'Median response 47 s, down eleven. The after-hours fix is the whole story.' },
+        { level: 'watch', text: 'Quote to booked at 52 percent. The day-5 call is being skipped on busy weeks; we are moving it to the receptionist.' },
+        { level: 'good', text: 'Google Business Profile passed 25 leads in a month for the first time.' },
+      ],
+      did: ['Launched the Rockland and Hanover town pages; both indexed within a week.', 'Started the paid-search test: $1,480 spent, eight leads, four booked.', 'Added photos and the service list to the Google Business Profile; profile views up a third.', 'Moved the day-5 follow-up call to the AI receptionist on weeks over 20 quotes.'],
+      next: ['Lift quote-to-booked above 55 percent with the automated day-5 call.', 'Produce the first four Reels from September job footage.', 'Decide on the paid-search test: keep it if cost per booked job stays under $450.'],
+      reviewDate: 'Friday, October 2',
+    },
+    {
+      key: '2026-10',
+      long: 'October 2026',
+      no: 4,
+      leads: 87,
+      median: 42,
+      under60: 88,
+      quoted: 61,
+      booked: 34,
+      completed: 27,
+      revenue: 118300,
+      reviews: 14,
+      rating: '4.8',
+      reviewTotal: 83,
+      adSpend: 1620,
+      retainer: 1900,
+      sources: [['Google Business Profile', 31], ['Website form', 22], ['Missed-call text-back', 14], ['Referral', 9], ['Paid search', 7], ['Reels and social', 4]],
+      buckets: [['Under 30 s', 52], ['30 to 60 s', 36], ['1 to 5 min', 8], ['5 to 30 min', 3], ['Over 30 min', 1]],
+      spark: [2, 3, 2, 4, 3, 3, 4, 3, 4, 3, 5, 4],
+      bluf: 'The best month so far and the first one that looks like the system running rather than being fixed: 87 leads, a 42-second median, 34 jobs booked, $118,300 attributed. Quote-to-booked reached 56 percent once the day-5 call was automated. One flag: paid-search cost per lead rose, so the Weymouth ad group is paused.',
+      flags: [
+        { level: 'good', text: 'Median response 42 s; 88 percent of leads inside the guarantee. Best month on both.' },
+        { level: 'good', text: 'Quote to booked 56 percent, up from 52. The automated day-5 call did it.' },
+        { level: 'watch', text: 'Paid search: $231 per lead in Weymouth against $118 in Abington. Weymouth group paused; budget moved to Rockland.' },
+      ],
+      did: ['Automated the day-5 quote follow-up call for every quote, not just busy weeks.', 'Published four Reels from job footage; one produced two direct calls.', 'Paused the Weymouth paid-search group and moved the budget to Rockland.', 'Rewrote the website form to ask for the system age and the symptom; quotes now go out with fewer callbacks.'],
+      next: ['Hold the median under 45 seconds through the heating-season rush.', 'Open the maintenance-plan offer to the 83 reviewers and past customers.', 'Scope Market Lock for HVAC in Abington: the category is open and the numbers now justify it.'],
+      reviewDate: 'Monday, November 2',
+    },
+  ];
+
+  const TREND = {
+    labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+    leads: [31, 38, 52, 64, 79, 87],
+    booked: [9, 12, 17, 22, 29, 34],
+    liveIndex: 2,
+  };
+
+  const $ = (sel: string) => document.querySelector<HTMLElement>(sel)!;
+  const money = (n: number) => '$' + n.toLocaleString('en-US');
+  const fmtDelta = (cur: number, prev: number | undefined, upGood = true, suffix = '') => {
+    if (prev === undefined) return { text: 'first month tracked', good: null as boolean | null };
+    const d = cur - prev;
+    const sign = d > 0 ? '+' : d < 0 ? '−' : '±';
+    return { text: `${sign}${Math.abs(d)}${suffix} vs ${'prior month'}`, good: d === 0 ? null : upGood ? d > 0 : d < 0 };
+  };
+
+  let tip: HTMLElement;
+  function bindTips(root: HTMLElement) {
+    root.querySelectorAll<HTMLElement>('[data-tip]').forEach((el) => {
+      const show = (e: Event) => {
+        tip.textContent = el.dataset.tip || '';
+        tip.classList.remove('hidden');
+        const r = el.getBoundingClientRect();
+        const pe = e as PointerEvent;
+        const x = pe.clientX ? pe.clientX : r.left + r.width / 2;
+        const y = pe.clientY ? pe.clientY : r.top;
+        tip.style.left = Math.min(x + 12, window.innerWidth - tip.offsetWidth - 8) + 'px';
+        tip.style.top = Math.max(8, y - tip.offsetHeight - 10) + 'px';
+      };
+      const hide = () => tip.classList.add('hidden');
+      el.addEventListener('pointermove', show);
+      el.addEventListener('pointerenter', show);
+      el.addEventListener('pointerleave', hide);
+      el.addEventListener('focus', show);
+      el.addEventListener('blur', hide);
+    });
+  }
+
+  function table(sel: string, head: string[], rows: (string | number)[][]) {
+    const t = document.querySelector<HTMLTableElement>(sel)!;
+    t.textContent = '';
+    const thead = document.createElement('thead');
+    const tr = document.createElement('tr');
+    head.forEach((h) => {
+      const th = document.createElement('th');
+      th.textContent = h;
+      tr.appendChild(th);
+    });
+    thead.appendChild(tr);
+    t.appendChild(thead);
+    const tb = document.createElement('tbody');
+    rows.forEach((r) => {
+      const tr2 = document.createElement('tr');
+      r.forEach((c) => {
+        const td = document.createElement('td');
+        td.textContent = String(c);
+        tr2.appendChild(td);
+      });
+      tb.appendChild(tr2);
+    });
+    t.appendChild(tb);
+  }
+
+  function hbars(sel: string, rows: [string, number][], total: number, unit: string) {
+    const root = $(sel);
+    root.textContent = '';
+    const max = Math.max(...rows.map((r) => r[1]));
+    rows.forEach(([label, v]) => {
+      const row = document.createElement('div');
+      row.className = 'row';
+      const l = document.createElement('span');
+      l.className = 'truncate text-sm text-ink-700';
+      l.textContent = label;
+      const track = document.createElement('div');
+      track.className = 'track';
+      const fill = document.createElement('div');
+      fill.className = 'fill';
+      fill.style.width = Math.max(1.5, (v / max) * 100) + '%';
+      fill.tabIndex = 0;
+      fill.setAttribute('role', 'img');
+      const pct = Math.round((v / total) * 100);
+      fill.setAttribute('aria-label', `${label}: ${v} ${unit}, ${pct} percent`);
+      fill.dataset.tip = `${v} ${unit} · ${label} · ${pct}%`;
+      track.appendChild(fill);
+      const val = document.createElement('span');
+      val.className = 'text-right text-sm font-semibold text-navy-950';
+      val.style.fontVariantNumeric = 'tabular-nums';
+      val.textContent = String(v);
+      row.append(l, track, val);
+      root.appendChild(row);
+    });
+    bindTips(root);
+  }
+
+  function columns(sel: string, rows: [string, number][]) {
+    const root = $(sel);
+    root.textContent = '';
+    const cols = document.createElement('div');
+    cols.className = 'cols';
+    const max = Math.max(...rows.map((r) => r[1]));
+    rows.forEach(([label, v], i) => {
+      const col = document.createElement('div');
+      col.className = 'col';
+      const cap = document.createElement('span');
+      cap.className = 'mb-1 text-xs font-semibold text-navy-950';
+      cap.textContent = v + '%';
+      const bar = document.createElement('div');
+      bar.className = 'bar' + (i >= 2 ? ' late' : '');
+      bar.style.height = Math.max(2, (v / max) * 100) + '%';
+      bar.tabIndex = 0;
+      bar.setAttribute('role', 'img');
+      bar.setAttribute('aria-label', `${label}: ${v} percent of leads`);
+      bar.dataset.tip = `${v}% of leads · ${label}${i >= 2 ? ' · outside the guarantee' : ''}`;
+      col.append(cap, bar);
+      cols.appendChild(col);
+    });
+    const labels = document.createElement('div');
+    labels.className = 'labels';
+    rows.forEach(([label]) => {
+      const s = document.createElement('span');
+      s.textContent = label;
+      labels.appendChild(s);
+    });
+    const key = document.createElement('p');
+    key.className = 'mt-2 flex flex-wrap gap-3 text-[11px] text-ink-500';
+    const k1 = document.createElement('span');
+    k1.innerHTML = '<span class="mr-1 inline-block h-2 w-2 rounded-sm bg-teal-600"></span>inside the 60-second guarantee';
+    const k2 = document.createElement('span');
+    k2.innerHTML = '<span class="mr-1 inline-block h-2 w-2 rounded-sm bg-brass-500"></span>outside it';
+    key.append(k1, k2);
+    root.append(cols, labels, key);
+    bindTips(root);
+  }
+
+  function trend(sel: string) {
+    const root = $(sel);
+    root.textContent = '';
+    const W = 720;
+    const H = 240;
+    const P = { l: 36, r: 64, t: 16, b: 28 };
+    const n = TREND.labels.length;
+    const max = 100;
+    const x = (i: number) => P.l + (i * (W - P.l - P.r)) / (n - 1);
+    const y = (v: number) => P.t + (1 - v / max) * (H - P.t - P.b);
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.setAttribute('class', 'h-auto w-full');
+    svg.setAttribute('role', 'img');
+    svg.setAttribute('aria-label', 'Leads and booked jobs per month, May through October');
+    const el = (tag: string, attrs: Record<string, string | number>, text?: string) => {
+      const e = document.createElementNS(ns, tag);
+      for (const k in attrs) e.setAttribute(k, String(attrs[k]));
+      if (text !== undefined) e.textContent = text;
+      svg.appendChild(e);
+      return e;
+    };
+    [0, 25, 50, 75, 100].forEach((v) => {
+      el('line', { x1: P.l, x2: W - P.r, y1: y(v), y2: y(v), stroke: '#dbe4f0', 'stroke-width': 1 });
+      el('text', { x: P.l - 8, y: y(v) + 4, 'text-anchor': 'end', 'font-size': 11, fill: '#64748b' }, String(v));
+    });
+    // Go-live marker
+    el('line', { x1: x(TREND.liveIndex), x2: x(TREND.liveIndex), y1: P.t, y2: H - P.b, stroke: '#c9a227', 'stroke-width': 1.5, 'stroke-dasharray': '3 3' });
+    el('text', { x: x(TREND.liveIndex) + 6, y: P.t + 10, 'font-size': 11, fill: '#856a14', 'font-weight': 600 }, 'Lead Engine live');
+    TREND.labels.forEach((l, i) => el('text', { x: x(i), y: H - 8, 'text-anchor': 'middle', 'font-size': 11, fill: '#64748b' }, l));
+    const path = (vals: number[]) => vals.map((v, i) => `${i ? 'L' : 'M'}${x(i)},${y(v)}`).join(' ');
+    el('path', { d: path(TREND.leads), fill: 'none', stroke: '#94a3b8', 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' });
+    el('path', { d: path(TREND.booked), fill: 'none', stroke: '#0f766e', 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' });
+    const last = n - 1;
+    el('circle', { cx: x(last), cy: y(TREND.leads[last]), r: 4.5, fill: '#94a3b8', stroke: '#fff', 'stroke-width': 2 });
+    el('circle', { cx: x(last), cy: y(TREND.booked[last]), r: 4.5, fill: '#0f766e', stroke: '#fff', 'stroke-width': 2 });
+    el('text', { x: x(last) + 10, y: y(TREND.leads[last]) + 4, 'font-size': 12, 'font-weight': 600, fill: '#334155' }, `${TREND.leads[last]} leads`);
+    el('text', { x: x(last) + 10, y: y(TREND.booked[last]) + 4, 'font-size': 12, 'font-weight': 600, fill: '#334155' }, `${TREND.booked[last]} booked`);
+    // Crosshair + hit zones
+    const cross = el('line', { x1: 0, x2: 0, y1: P.t, y2: H - P.b, stroke: '#0b1f3a', 'stroke-width': 1, opacity: 0 });
+    const d1 = el('circle', { cx: 0, cy: 0, r: 5, fill: '#94a3b8', stroke: '#fff', 'stroke-width': 2, opacity: 0 });
+    const d2 = el('circle', { cx: 0, cy: 0, r: 5, fill: '#0f766e', stroke: '#fff', 'stroke-width': 2, opacity: 0 });
+    const band = (W - P.l - P.r) / (n - 1);
+    TREND.labels.forEach((l, i) => {
+      const hit = el('rect', { x: x(i) - band / 2, y: P.t, width: band, height: H - P.t - P.b, fill: 'transparent', tabindex: 0, role: 'img', 'aria-label': `${l}: ${TREND.leads[i]} leads, ${TREND.booked[i]} booked` });
+      const show = (e: Event) => {
+        cross.setAttribute('x1', String(x(i)));
+        cross.setAttribute('x2', String(x(i)));
+        cross.setAttribute('opacity', '1');
+        d1.setAttribute('cx', String(x(i)));
+        d1.setAttribute('cy', String(y(TREND.leads[i])));
+        d1.setAttribute('opacity', '1');
+        d2.setAttribute('cx', String(x(i)));
+        d2.setAttribute('cy', String(y(TREND.booked[i])));
+        d2.setAttribute('opacity', '1');
+        tip.textContent = `${l} 2026 · ${TREND.booked[i]} booked · ${TREND.leads[i]} leads`;
+        tip.classList.remove('hidden');
+        const r = (e.target as Element).getBoundingClientRect();
+        const pe = e as PointerEvent;
+        const cx = pe.clientX || r.left + r.width / 2;
+        tip.style.left = Math.min(cx + 12, window.innerWidth - tip.offsetWidth - 8) + 'px';
+        tip.style.top = Math.max(8, r.top + 8) + 'px';
+      };
+      const hide = () => {
+        cross.setAttribute('opacity', '0');
+        d1.setAttribute('opacity', '0');
+        d2.setAttribute('opacity', '0');
+        tip.classList.add('hidden');
+      };
+      hit.addEventListener('pointermove', show);
+      hit.addEventListener('pointerenter', show);
+      hit.addEventListener('pointerleave', hide);
+      hit.addEventListener('focus', show);
+      hit.addEventListener('blur', hide);
+    });
+    root.appendChild(svg);
+    table('[data-table="trend"]', ['Month', 'Leads', 'Booked jobs'], TREND.labels.map((l, i) => [l + ' 2026', TREND.leads[i], TREND.booked[i]]));
+  }
+
+  function spark(sel: string, vals: number[]) {
+    const root = $(sel);
+    root.textContent = '';
+    const W = 240;
+    const H = 44;
+    const max = Math.max(...vals, 1);
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.setAttribute('class', 'h-11 w-full max-w-[240px]');
+    const bw = W / vals.length - 4;
+    vals.forEach((v, i) => {
+      const r = document.createElementNS(ns, 'rect');
+      const h = Math.max(2, (v / max) * (H - 6));
+      r.setAttribute('x', String(i * (W / vals.length) + 2));
+      r.setAttribute('y', String(H - h));
+      r.setAttribute('width', String(bw));
+      r.setAttribute('height', String(h));
+      r.setAttribute('rx', '2');
+      r.setAttribute('fill', i === vals.length - 1 ? '#0f766e' : '#cbd5e1');
+      const t = document.createElementNS(ns, 'title');
+      t.textContent = `Week ${i + 1}: ${v} new review${v === 1 ? '' : 's'}`;
+      r.appendChild(t);
+      svg.appendChild(r);
+    });
+    root.appendChild(svg);
+    const cap = document.createElement('p');
+    cap.className = 'mt-1 text-[11px] text-ink-500';
+    cap.textContent = 'New reviews per week, last twelve weeks. Current week in teal.';
+    root.appendChild(cap);
+  }
+
+  function list(sel: string, items: string[]) {
+    const root = $(sel);
+    root.textContent = '';
+    items.forEach((t) => {
+      const li = document.createElement('li');
+      li.className = 'flex gap-2';
+      const mark = document.createElement('span');
+      mark.className = 'text-teal-600';
+      mark.textContent = '✓';
+      const s = document.createElement('span');
+      s.textContent = t;
+      li.append(mark, s);
+      root.appendChild(li);
+    });
+  }
+
+  function flags(sel: string, items: Month['flags']) {
+    const root = $(sel);
+    root.textContent = '';
+    items.forEach((f) => {
+      const li = document.createElement('li');
+      li.className = 'flex gap-2';
+      const icon = document.createElement('span');
+      icon.className = 'mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white ' + (f.level === 'good' ? 'bg-teal-600' : 'bg-brass-600');
+      icon.textContent = f.level === 'good' ? '✓' : '!';
+      icon.setAttribute('aria-hidden', 'true');
+      const s = document.createElement('span');
+      const b = document.createElement('strong');
+      b.className = 'text-navy-950';
+      b.textContent = f.level === 'good' ? 'Good. ' : 'Watch. ';
+      s.append(b, document.createTextNode(f.text));
+      li.append(icon, s);
+      root.appendChild(li);
+    });
+  }
+
+  function kpis(m: Month, prev: Month | undefined) {
+    const root = $('[data-chart="kpis"]');
+    root.textContent = '';
+    const items: [string, string, ReturnType<typeof fmtDelta>][] = [
+      ['Leads', String(m.leads), fmtDelta(m.leads, prev?.leads)],
+      ['Median first response', `${m.median} s`, fmtDelta(m.median, prev?.median, false, ' s')],
+      ['Quotes sent', String(m.quoted), fmtDelta(m.quoted, prev?.quoted)],
+      ['Jobs booked', String(m.booked), fmtDelta(m.booked, prev?.booked)],
+      ['Quote to booked', `${Math.round((m.booked / m.quoted) * 100)}%`, fmtDelta(Math.round((m.booked / m.quoted) * 100), prev ? Math.round((prev.booked / prev.quoted) * 100) : undefined, true, ' pts')],
+      ['New reviews', String(m.reviews), fmtDelta(m.reviews, prev?.reviews)],
+    ];
+    items.forEach(([label, value, d]) => {
+      const card = document.createElement('div');
+      card.className = 'rounded-lg border border-navy-100 p-3';
+      const l = document.createElement('p');
+      l.className = 'text-[11px] text-ink-500';
+      l.textContent = label;
+      const v = document.createElement('p');
+      v.className = 'mt-1 text-2xl font-bold text-navy-950';
+      v.textContent = value;
+      const dd = document.createElement('p');
+      dd.className = 'mt-0.5 text-[11px] font-semibold ' + (d.good === null ? 'text-ink-500' : d.good ? 'text-teal-700' : 'text-brass-600');
+      dd.textContent = d.text;
+      card.append(l, v, dd);
+      root.appendChild(card);
+    });
+  }
+
+  function render(key: string, push = true) {
+    const idx = MONTHS.findIndex((m) => m.key === key);
+    const m = MONTHS[idx < 0 ? MONTHS.length - 1 : idx];
+    const prev = MONTHS[(idx < 0 ? MONTHS.length - 1 : idx) - 1];
+    document.querySelectorAll<HTMLButtonElement>('.mr-month').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.month === m.key)));
+    const set = (k: string, v: string) => document.querySelectorAll<HTMLElement>(`[data-mr="${k}"]`).forEach((e) => (e.textContent = v));
+    set('monthLong', m.long);
+    set('monthNo', String(m.no));
+    set('bluf', m.bluf);
+    set('median', String(m.median));
+    set('under60', String(m.under60));
+    set('reviews', String(m.reviews));
+    set('rating', m.rating);
+    set('reviewTotal', String(m.reviewTotal));
+    set('revenue', money(m.revenue));
+    set('avgJob', money(Math.round(m.revenue / m.booked)));
+    set('adSpend', money(m.adSpend));
+    set('retainer', money(m.retainer) + ' per month');
+    set('cpb', money(Math.round((m.adSpend + m.retainer) / m.booked)));
+    set('reviewDate', m.reviewDate);
+    const md = fmtDelta(m.median, prev?.median, false, ' s');
+    const mdEl = $('[data-mr="medianDelta"]');
+    mdEl.textContent = md.text;
+    mdEl.className = 'ml-2 rounded-full px-2 py-0.5 text-xs font-semibold ' + (md.good === null ? 'bg-paper text-ink-700' : md.good ? 'bg-teal-100 text-teal-700' : 'bg-brass-300/30 text-brass-600');
+    const meter = $('.mr-meter');
+    meter.setAttribute('aria-valuenow', String(m.median));
+    $('[data-mr="meterFill"]').style.width = Math.min(100, (m.median / 60) * 100) + '%';
+    $('[data-mr="guaranteeStatus"]').className = 'mt-3 flex items-center gap-2 text-sm font-semibold ' + (m.median < 60 ? 'text-teal-700' : 'text-brass-600');
+
+    columns('[data-chart="buckets"]', m.buckets);
+    table('[data-table="buckets"]', ['Time to first response', 'Share of leads'], m.buckets.map(([l, v]) => [l, v + '%']));
+    hbars('[data-chart="sources"]', m.sources, m.leads, 'leads');
+    table('[data-table="sources"]', ['Source', 'Leads', 'Share'], m.sources.map(([l, v]) => [l, v, Math.round((v / m.leads) * 100) + '%']));
+    const pipe: [string, number][] = [['Leads', m.leads], ['Answered in under 60 s', Math.round((m.leads * m.under60) / 100)], ['Quoted', m.quoted], ['Booked', m.booked], ['Completed this month', m.completed]];
+    hbars('[data-chart="pipeline"]', pipe, m.leads, '');
+    table('[data-table="pipeline"]', ['Step', 'Count', 'Of leads'], pipe.map(([l, v]) => [l, v, Math.round((v / m.leads) * 100) + '%']));
+    kpis(m, prev);
+    spark('[data-chart="reviewSpark"]', m.spark);
+    flags('[data-chart="flags"]', m.flags);
+    list('[data-chart="did"]', m.did);
+    list('[data-chart="next"]', m.next);
+    if (push) {
+      const u = new URL(location.href);
+      u.searchParams.set('month', m.key);
+      history.replaceState(null, '', u);
+    }
+  }
+
+  function init() {
+    const root = document.getElementById('report');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+    tip = $('#mr-tip');
+    trend('[data-chart="trend"]');
+    const q = new URLSearchParams(location.search).get('month') || '2026-10';
+    render(q, false);
+    document.querySelectorAll<HTMLButtonElement>('.mr-month').forEach((b) => b.addEventListener('click', () => render(b.dataset.month!)));
+    $('#mr-print').addEventListener('click', () => window.print());
+    const copy = $('#mr-copy');
+    copy.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(location.href);
+        copy.textContent = 'Link copied';
+      } catch {
+        copy.textContent = location.href;
+      }
+      setTimeout(() => (copy.textContent = 'Copy link'), 1800);
+    });
+    const va = (window as unknown as { va?: (...a: unknown[]) => void }).va;
+    if (va) va('event', { name: 'monthly-report-sample' });
+  }
+  document.addEventListener('astro:page-load', init);
+</script>

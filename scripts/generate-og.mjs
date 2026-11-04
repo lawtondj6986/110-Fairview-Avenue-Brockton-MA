@@ -91,6 +91,7 @@ function collectPages() {
     pages.push([`/south-shore/${m[1]}/sheet/`, `sheet-south-shore-${m[1]}`, 'MARKET SHEET · ONE PRINTABLE PAGE', `${m[2]}, MA: corridors, buyers, open categories, pricing.`]);
   }
   pages.push(['/market-sheets/', 'market-sheets', 'FREE TOOL · THE LEAVE-BEHIND', 'Market Sheets: one printable page for every town and city.']);
+  pages.push(['/monthly-report/sample/', 'monthly-report-sample', 'SAMPLE · THE MONTHLY REPORT', 'What the first of the month looks like for an ICS client.']);
 
   // Industries from the data file (same slug/name shape as towns)
   const indSrc = readFileSync(rel('src/lib/industries.ts'), 'utf8');
