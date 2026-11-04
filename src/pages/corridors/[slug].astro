@@ -1,0 +1,201 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import MarketMap from '../../components/MarketMap.astro';
+import FounderCard from '../../components/FounderCard.astro';
+import { CORRIDOR_GUIDES, getCorridorGuide, corridorGeometry } from '../../lib/corridors';
+import { MARKETS, getSheetPlace } from '../../lib/sheets';
+import { INDUSTRIES } from '../../lib/industries';
+import { lockedInPlace } from '../../lib/claimed';
+import { SITE } from '../../config';
+
+export async function getStaticPaths() {
+  return CORRIDOR_GUIDES.map((g) => ({ params: { slug: g.slug } }));
+}
+
+const guide = getCorridorGuide(Astro.params.slug as string)!;
+const spec = MARKETS[guide.market];
+const geo = corridorGeometry(guide)!;
+const places = geo.towns.map((s) => getSheetPlace(guide.market, s)!).filter(Boolean).map((p) => ({ ...p, open: INDUSTRIES.length - lockedInPlace(spec.claimed, p.slug) }));
+const names = places.map((p) => p.name);
+const nameList = names.length <= 4 ? names.join(', ') : `${names.slice(0, 3).join(', ')}, and ${names.length - 3} more`;
+const isMA = guide.market === 'MA';
+
+const listings = isMA
+  ? (await getCollection('listings', ({ data }) => !data.draft && geo.towns.includes(data.town.toLowerCase().replace(/\s+/g, '-')))).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  : [];
+
+const siblings = CORRIDOR_GUIDES.filter((g) => g.market === guide.market && g.slug !== guide.slug);
+const briefHref = `/buyer-brief/?towns=${geo.towns.join(',')}`;
+const boardHref = `${spec.boardHref}?place=${geo.towns[0]}`;
+
+const title = `${guide.name} — Commercial Corridor Guide, ${spec.label} | ICS`;
+const description = `${guide.tagline} The ${places.length} ${spec.noun === 'town' ? 'towns' : 'cities'} on ${guide.route} (${names.join(', ')}), who does business along it, the advisor's note, Market Lock status by ${spec.noun}, and the market sheet for each.`;
+
+const faqs = [
+  {
+    q: `Which ${spec.noun === 'town' ? 'towns' : 'cities'} are on ${guide.route}?`,
+    a: `On the ICS map, ${guide.route} threads ${names.join(', ')}. Each has its own market page and a printable one-page market sheet.`,
+  },
+  {
+    q: `What kind of businesses do well on ${guide.route}?`,
+    a: `${guide.businesses.map((b) => b.charAt(0).toUpperCase() + b.slice(1)).join('; ')}. ${guide.note}`,
+  },
+  isMA
+    ? {
+        q: `Can ICS find me a building on ${guide.route}?`,
+        a: `Yes. Most sub-$3M buildings on the South Shore change hands before they are listed, and corridor frontage especially. Build a buyer brief with the ${guide.route} towns pre-selected and the hunt starts owner by owner. Buyer representation is Massachusetts-licensed (${SITE.license}).`,
+      }
+    : {
+        q: `Does ICS handle real estate on ${guide.route}?`,
+        a: `No. In Florida ICS delivers AI revenue systems, retail platforms, and custom builds; brokerage is Massachusetts-licensed, and a Florida property transaction is handled alongside a licensed Florida broker. The free deal tools work anywhere.`,
+      },
+  {
+    q: `Can one business lock a category along the whole corridor?`,
+    a: `Market Lock is one business per category per ${spec.noun}, in writing, so a corridor is several territories. A business that serves the whole road locks the two or three ${spec.noun === 'town' ? 'towns' : 'cities'} it wants most; the board shows what is open in each.`,
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `${guide.name}: commercial corridor guide`,
+    description,
+    url: `${SITE.url}/corridors/${guide.slug}/`,
+    isPartOf: { '@id': `${SITE.url}/#website` },
+    about: places.map((p) => ({ '@type': 'City', name: `${p.name}, ${spec.stateName}` })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Corridor Guides', item: `${SITE.url}/corridors/` },
+      { '@type': 'ListItem', position: 2, name: guide.name, item: `${SITE.url}/corridors/${guide.slug}/` },
+    ],
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">
+        <a href="/corridors/" class="hover:text-brass-200">Corridor guides</a> · <a href={spec.hubHref} class="hover:text-brass-200">{spec.label}</a> · {places.length} {spec.noun === 'town' ? 'towns' : 'cities'}
+      </p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">{guide.name}</h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">{guide.tagline}</p>
+      <p class="reveal mt-3 text-sm text-navy-100/70" style="--reveal-delay: 250ms">{names.join(' · ')}</p>
+      <div class="reveal mt-8 flex flex-wrap gap-3" style="--reveal-delay: 300ms">
+        {isMA && <a href={briefHref} class="rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300">Hunting on {guide.route}? Build a buyer brief →</a>}
+        <a href={boardHref} class:list={['rounded-md px-6 py-3 font-semibold transition-colors', isMA ? 'border border-white/25 text-white hover:border-teal-400 hover:text-teal-400' : 'bg-brass-500 text-navy-950 hover:bg-brass-300']}>Check the Territory Board</a>
+        <a href="/proposal/" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">Build a proposal</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <h2 class="sr-only">{guide.route} on the map</h2>
+    <MarketMap market={guide.market} highlight={guide.route} compact />
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
+    <div class="grid gap-12 lg:grid-cols-3">
+      <div class="prose-ics lg:col-span-2">
+        <h2>The read</h2>
+        {guide.read.map((p) => <p>{p}</p>)}
+        <h2>Who does business on {guide.route}</h2>
+        <ul>
+          {guide.businesses.map((b) => <li>{b.charAt(0).toUpperCase() + b.slice(1)}</li>)}
+        </ul>
+        <div class="not-prose mt-8 rounded-xl border-l-4 border-teal-500 bg-white p-6 shadow-sm">
+          <p class="text-sm font-semibold uppercase tracking-widest text-teal-600">The advisor's note</p>
+          <p class="mt-2 text-lg font-medium leading-relaxed text-navy-900">{guide.note}</p>
+          <p class="mt-2 text-xs text-ink-500">— {SITE.founder}, founder</p>
+        </div>
+      </div>
+      <aside class="space-y-4 lg:sticky lg:top-24 lg:self-start">
+        <div class="rounded-xl border border-navy-100 bg-white p-6 shadow-sm">
+          <p class="font-mono text-[11px] font-bold uppercase tracking-widest text-teal-600">Other corridors in {spec.label}</p>
+          <ul class="mt-3 space-y-1.5 text-sm">
+            {siblings.map((s) => <li><a href={`/corridors/${s.slug}/`} class="font-semibold text-navy-900 hover:text-teal-700">{s.name} →</a></li>)}
+          </ul>
+        </div>
+        <div class="rounded-xl bg-navy-900 p-6 text-sm">
+          <p class="font-semibold uppercase tracking-wider text-teal-400">Market Lock along {guide.route}</p>
+          <p class="mt-2 text-navy-100/85">One business per category per {spec.noun}. Open categories right now:</p>
+          <ul class="mt-3 space-y-1">
+            {places.map((p) => (
+              <li class="flex justify-between gap-3 text-navy-100/85"><a href={`${spec.boardHref}?place=${p.slug}`} class="hover:text-teal-400">{p.name}</a><span class="font-mono text-xs text-teal-400">{p.open} of {INDUSTRIES.length}</span></li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <div class="max-w-2xl">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">{spec.noun === 'town' ? 'Town' : 'City'} by {spec.noun}</p>
+        <h2 class="mt-2 text-3xl font-bold text-navy-900 sm:text-4xl">Along {guide.route}, in order</h2>
+      </div>
+      <ol class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {places.map((p, i) => (
+          <li class="lift flex h-full flex-col rounded-xl border border-navy-100 bg-paper p-5">
+            <p class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">{i + 1} · {p.county}</p>
+            <h3 class="mt-1 text-xl font-bold text-navy-900"><a href={p.pageHref} class="hover:text-teal-700">{p.name}, {spec.state}</a></h3>
+            <p class="mt-1 flex-1 text-sm text-ink-700">{p.position}</p>
+            <p class="mt-2 text-xs text-ink-500">{p.corridors.slice(0, 3).join(' · ')}</p>
+            <p class="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs">
+              <a href={p.pageHref} class="font-semibold text-teal-600 hover:text-teal-700">Market page →</a>
+              <a href={p.sheetHref} class="font-semibold text-teal-600 hover:text-teal-700">Market sheet →</a>
+              <a href={`${spec.boardHref}?place=${p.slug}`} class="font-semibold text-brass-600 hover:text-brass-500">{p.open} categories open →</a>
+            </p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {listings.length > 0 && (
+    <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-teal-600">On the market</p>
+          <h2 class="mt-2 text-3xl font-bold text-navy-900">Listings on {guide.route}</h2>
+        </div>
+        <a href="/listings/" class="font-semibold text-teal-600 hover:text-teal-700">All listings →</a>
+      </div>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {listings.map((l) => (
+          <li class="rounded-xl border border-navy-100 bg-white p-5">
+            <p class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">{l.data.town} · {l.data.dealType === 'sale' ? 'For sale' : 'For lease'}{l.data.sample ? ' · Sample listing' : ''}</p>
+            <h3 class="mt-1 text-lg font-bold text-navy-900"><a href={`/listings/${l.id}/`} class="hover:text-teal-700">{l.data.title}</a></h3>
+            <p class="mt-1 text-sm text-ink-700">{l.data.price}{l.data.sqft ? ` · ${l.data.sqft}` : ''}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brass-600">Common questions · {guide.route}</h2>
+      <dl class="mt-5 space-y-5">
+        {faqs.map((f) => (
+          <div><dt class="text-base font-bold text-navy-900">{f.q}</dt><dd class="mt-1.5 text-sm leading-relaxed text-ink-700">{f.a}</dd></div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <FounderCard heading={`Who works ${guide.route}`} />
+  <CtaSection heading={isMA ? `Looking for a building on ${guide.route}?` : `Ready to own your category on ${guide.route}?`} body={isMA ? `Tell us the building and the towns. We hunt owner by owner along ${nameList}, before the portals.` : `One business per category per city, in writing. One call, a straight answer on fit and price, and a written quote within 48 hours.`} />
+</Base>

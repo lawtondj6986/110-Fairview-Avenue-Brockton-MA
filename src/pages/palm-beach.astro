@@ -6,6 +6,7 @@ import CtaSection from '../components/CtaSection.astro';
 import { SITE } from '../config';
 import { PALM_BEACH_CITIES } from '../lib/palm-beach';
 import MarketMap from '../components/MarketMap.astro';
+import { CORRIDOR_GUIDES } from '../lib/corridors';
 import ShortVersion from '../components/ShortVersion.astro';
 
 const title = 'Boca Raton & Palm Beach County — AI Revenue Systems, Retail Platforms, Custom Builds | ICS';
@@ -142,6 +143,7 @@ const schema = [
   <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
     <SectionHeading eyebrow="The map" heading="Eight cities, the corridors that connect them, and the read on each" body="Hover a city for its read and how many Market Lock categories are still open. Hover a corridor to light up the cities on it. Boca Raton is the seasonal base." align="center" />
     <div class="mt-10"><MarketMap market="PB" /></div>
+    <p class="mt-6 text-center text-sm text-ink-700"><span class="font-semibold text-navy-900">By corridor:</span> {CORRIDOR_GUIDES.filter((g) => g.market === 'PB').map((g, i) => <><a href={`/corridors/${g.slug}/`} class="font-semibold text-teal-600 hover:text-teal-700">{g.route}</a>{i < 4 ? ' · ' : ''}</>)} <a href="/corridors/" class="text-ink-500 hover:text-teal-700">(all corridor guides)</a></p>
   </section>
 
   <!-- THE CITIES — one page each, written corridor by corridor -->

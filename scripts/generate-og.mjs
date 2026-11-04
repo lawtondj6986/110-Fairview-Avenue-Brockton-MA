@@ -92,6 +92,12 @@ function collectPages() {
   }
   pages.push(['/market-sheets/', 'market-sheets', 'FREE TOOL · THE LEAVE-BEHIND', 'Market Sheets: one printable page for every town and city.']);
   pages.push(['/monthly-report/sample/', 'monthly-report-sample', 'SAMPLE · THE MONTHLY REPORT', 'What the first of the month looks like for an ICS client.']);
+  pages.push(['/corridors/', 'corridors', 'CORRIDOR GUIDES · THREE MARKETS', 'Commerce follows the road. These are the roads.']);
+  const corrSrc = readFileSync(rel('src/lib/corridors.ts'), 'utf8');
+  for (const m of corrSrc.matchAll(/slug: '([^']+)',\s*\n\s*market: '(MA|FL|PB)',\s*\n\s*route: [^\n]*\n\s*name: (['"])(.*?)\3,/g)) {
+    const where = m[2] === 'MA' ? 'SOUTH SHORE MA' : m[2] === 'FL' ? 'BROWARD COUNTY FL' : 'PALM BEACH COUNTY FL';
+    pages.push([`/corridors/${m[1]}/`, `corridors-${m[1]}`, `CORRIDOR GUIDE · ${where}`, `${m[4].replace(/\\'/g, "'")}.`]);
+  }
   pages.push(['/buyer-brief/', 'buyer-brief', 'FREE TOOL · BUYER BRIEF · SOUTH SHORE MA', 'Tell us the building. We hunt off-market for it.']);
 
   // Industries from the data file (same slug/name shape as towns)

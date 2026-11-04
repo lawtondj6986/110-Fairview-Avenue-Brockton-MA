@@ -8,11 +8,13 @@ import { TOWNS, getTown } from '../../lib/towns';
 import { SITE } from '../../config';
 import TerritoryStatus from '../../components/TerritoryStatus.astro';
 import { CLAIMED_MA } from '../../lib/claimed';
+import { corridorsThrough } from '../../lib/corridors';
 
 export async function getStaticPaths() {
   return TOWNS.map((t) => ({ params: { town: t.slug } }));
 }
 
+const corridorGuides = corridorsThrough('MA', Astro.params.town as string);
 const town = getTown(Astro.params.town as string)!;
 const neighbors = town.neighbors.map((slug) => getTown(slug)!).filter(Boolean);
 
@@ -105,6 +107,9 @@ const schema = [
         ))
       }
     </div>
+    {corridorGuides.length > 0 && (
+      <p class="mt-4 text-sm text-ink-700"><span class="font-semibold text-navy-900">Corridor guides through {town.name}:</span> {corridorGuides.map((g, i) => <><a href={`/corridors/${g.slug}/`} class="font-semibold text-teal-600 hover:text-teal-700">{g.route}</a>{i < corridorGuides.length - 1 ? ' · ' : ''}</>)}</p>
+    )}
     <div class="mt-8 grid gap-8 lg:grid-cols-2">
       <div class="reveal">
         <h3 class="font-display text-lg font-bold text-navy-900">The property side</h3>

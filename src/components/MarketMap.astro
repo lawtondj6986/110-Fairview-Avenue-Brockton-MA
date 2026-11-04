@@ -23,8 +23,10 @@ interface Props {
   market: 'MA' | 'FL' | 'PB';
   mode?: 'navigate' | 'select';
   compact?: boolean;
+  /** A corridor route name (as in town-geo) to keep lit, with its places matched, e.g. on a corridor guide page. */
+  highlight?: string;
 }
-const { market, mode = 'navigate', compact = false } = Astro.props;
+const { market, mode = 'navigate', compact = false, highlight } = Astro.props;
 
 const isMA = market === 'MA';
 const CFG = {
@@ -104,11 +106,13 @@ const paths = corridors.map((c, i) => ({
   names: c.towns.map((s) => byslug[s].name).join(' · '),
 }));
 const first = byslug[hq];
-const mapId = `mm-${market.toLowerCase()}-${mode}`;
+const mapId = `mm-${market.toLowerCase()}-${mode}${highlight ? '-lit' : ''}`;
+const litTowns: string[] = highlight ? (corridors.find((c) => c.route === highlight)?.towns ?? []) : [];
+const litNames = litTowns.map((s) => byslug[s]?.name).filter(Boolean).join(' · ');
 const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
 ---
 
-<div class="market-map grid gap-6 lg:grid-cols-[1.4fr_1fr]" id={mapId} data-mode={mode} data-page-base={pageBase} data-board-href={boardHref} data-hq={hq} data-hq-label={hqLabel} data-noun={noun} data-state={state} data-industries={INDUSTRIES.length}>
+<div class:list={['market-map grid gap-6 lg:grid-cols-[1.4fr_1fr]', litTowns.length && 'is-filtering']} id={mapId} data-mode={mode} data-lit={litTowns.join(',')} data-page-base={pageBase} data-board-href={boardHref} data-hq={hq} data-hq-label={hqLabel} data-noun={noun} data-state={state} data-industries={INDUSTRIES.length}>
   <div class="rounded-2xl border border-navy-100 bg-navy-950 p-3 sm:p-5">
     <div class="mb-3 flex flex-wrap items-center gap-2 px-1">
       <label class="relative flex-1 min-w-[10rem]">
@@ -133,7 +137,7 @@ const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
       <text x={W - 16} y={H - 14} text-anchor="end" fill="rgba(219,228,240,0.45)" font-size="11" font-family="ui-monospace, monospace">Atlantic → · schematic, positions approximate</text>
 
       {paths.map((p) => (
-        <g class="mm-corridor" data-corridor={p.id} data-route={p.route} data-names={p.names} data-towns={p.towns.join(',')} tabindex="0" role="button" aria-label={`${p.route}: ${p.names}`}>
+        <g class:list={['mm-corridor', p.route === highlight && 'is-lit']} data-corridor={p.id} data-route={p.route} data-names={p.names} data-towns={p.towns.join(',')} tabindex="0" role="button" aria-label={`${p.route}: ${p.names}`}>
           <path d={p.d} fill="none" stroke="transparent" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" />
           <path d={p.d} fill="none" stroke={p.tone === 'teal' ? 'rgba(45,212,191,0.35)' : 'rgba(201,162,39,0.35)'} stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray={p.tone === 'teal' ? '0' : '6 6'} class="mm-route" />
           <text x={p.lx + 6} y={p.ly - 7} fill={p.tone === 'teal' ? 'rgba(45,212,191,0.9)' : 'rgba(201,162,39,0.95)'} font-size="10" font-weight="700" font-family="ui-monospace, monospace" paint-order="stroke" stroke="#06132a" stroke-width="3" class="mm-route-label">{p.route}</text>
@@ -141,7 +145,7 @@ const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
       ))}
 
       {pts.map((p) => (
-        <a href={`${pageBase}${p.slug}/`} class="mm-place" data-slug={p.slug} data-name={p.name} data-county={p.county} data-position={p.position} data-corridors={p.corridors.join(' · ')} data-open={p.open} data-worked={p.worked ? '1' : '0'}>
+        <a href={`${pageBase}${p.slug}/`} class:list={['mm-place', litTowns.includes(p.slug) && 'is-match']} data-slug={p.slug} data-name={p.name} data-county={p.county} data-position={p.position} data-corridors={p.corridors.join(' · ')} data-open={p.open} data-worked={p.worked ? '1' : '0'}>
           <title>{p.name}, {state} — {p.position}</title>
           <circle cx={p.X} cy={p.Y} r={p.slug === hq ? 11 : 7} fill={p.slug === hq ? '#c9a227' : '#14b8a6'} stroke="#06132a" stroke-width="2.5" class="mm-dot" />
           {p.slug === hq && <circle cx={p.X} cy={p.Y} r="17" fill="none" stroke="rgba(201,162,39,0.5)" stroke-width="1.5" />}
@@ -174,7 +178,7 @@ const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
       {isMA && mode !== 'select' && <a data-p="compare" href={`/south-shore/compare/?a=${first.slug}&b=abington`} class="rounded-md border border-navy-100 px-4 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700">Compare it →</a>}
       {mode !== 'select' && <a data-p="board" href={`${boardHref}?place=${first.slug}`} class="rounded-md border border-navy-100 px-4 py-2 text-sm font-semibold text-navy-900 hover:border-brass-500 hover:text-brass-600">Territories →</a>}
     </div>
-    <p class="mt-5 text-xs text-ink-500" data-p="hint">Hover or tap a {noun}. Hover a route to light up the {placeNounPlural} on it. Positions are approximate; the pages are not.</p>
+    <p class="mt-5 text-xs text-ink-500" data-p="hint">{highlight ? `${highlight}: ${litNames}` : `Hover or tap a ${noun}. Hover a route to light up the ${placeNounPlural} on it. Positions are approximate; the pages are not.`}</p>
   </aside>
 </div>
 
@@ -189,6 +193,8 @@ const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
   .market-map .mm-corridor { cursor: pointer; outline: none; }
   .market-map .mm-corridor:hover .mm-route, .market-map .mm-corridor:focus .mm-route { stroke-opacity: 1; stroke-width: 4.5; stroke: #f8fafc; }
   .market-map .mm-corridor:hover .mm-route-label, .market-map .mm-corridor:focus .mm-route-label { fill: #f8fafc; }
+  .market-map .mm-corridor.is-lit .mm-route { stroke-opacity: 1; stroke-width: 4.5; stroke: #f8fafc; stroke-dasharray: 0; }
+  .market-map .mm-corridor.is-lit .mm-route-label { fill: #f8fafc; }
   .market-map.layer-open .mm-place .mm-dot { fill: var(--mm-open-fill, #14b8a6); }
   .market-map.layer-worked .mm-place[data-worked='0'] .mm-dot { fill: rgba(20,184,166,0.25); }
   .market-map.layer-worked .mm-place[data-worked='1'] .mm-dot { fill: #f8fafc; r: 9; }
@@ -260,6 +266,15 @@ const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
       });
       P('choose')?.addEventListener('click', () => select(current));
 
+      // A corridor guide page keeps its route lit; hovers borrow the highlight and hand it back.
+      const litSlugs = (root.dataset.lit || '').split(',').filter(Boolean);
+      const restoreLit = () => {
+        if (!litSlugs.length) return false;
+        root.classList.add('is-filtering');
+        root.querySelectorAll<HTMLElement>('.mm-place').forEach((p) => p.classList.toggle('is-match', litSlugs.includes(p.dataset.slug!)));
+        return true;
+      };
+
       // Corridors: hover lights up the places on the route and names them in the panel.
       root.querySelectorAll<HTMLElement>('.mm-corridor').forEach((c) => {
         const towns = (c.dataset.towns || '').split(',');
@@ -270,6 +285,10 @@ const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
         };
         const off = () => {
           if (findInput.value.trim()) return;
+          if (restoreLit()) {
+            P('hint')!.textContent = hintDefault;
+            return;
+          }
           root.classList.remove('is-filtering');
           root.querySelectorAll('.mm-place.is-match').forEach((p) => p.classList.remove('is-match'));
           P('hint')!.textContent = hintDefault;
@@ -287,8 +306,10 @@ const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
         const q = findInput.value.trim().toLowerCase();
         const places = Array.from(root.querySelectorAll<HTMLElement>('.mm-place'));
         if (!q) {
-          root.classList.remove('is-filtering');
-          places.forEach((p) => p.classList.remove('is-match'));
+          if (!restoreLit()) {
+            root.classList.remove('is-filtering');
+            places.forEach((p) => p.classList.remove('is-match'));
+          }
           P('hint')!.textContent = hintDefault;
           return;
         }

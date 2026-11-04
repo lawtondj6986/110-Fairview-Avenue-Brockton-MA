@@ -1,0 +1,73 @@
+---
+import Base from '../../layouts/Base.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import { CORRIDOR_GUIDES, corridorGeometry } from '../../lib/corridors';
+import { MARKETS, getSheetPlace, type Market } from '../../lib/sheets';
+import { SITE } from '../../config';
+
+const order: Market[] = ['MA', 'FL', 'PB'];
+const groups = order.map((m) => ({
+  spec: MARKETS[m],
+  guides: CORRIDOR_GUIDES.filter((g) => g.market === m).map((g) => {
+    const geo = corridorGeometry(g)!;
+    return { ...g, places: geo.towns.map((s) => getSheetPlace(m, s)!).filter(Boolean) };
+  }),
+}));
+const total = CORRIDOR_GUIDES.length;
+
+const title = `Corridor Guides — ${total} Commercial Routes Across Three Markets | ICS`;
+const description = `The named routes that organize commerce on the South Shore of Massachusetts, in Broward County, and in Palm Beach County: ${CORRIDOR_GUIDES.filter((g) => g.market === 'MA').map((g) => g.route).join(', ')} and ${total - 7} Florida corridors. Each guide reads the route, names the towns and cities on it, who does business there, Market Lock status, and the advisor's note.`;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'ICS Corridor Guides',
+    description,
+    url: `${SITE.url}/corridors/`,
+    hasPart: CORRIDOR_GUIDES.map((g) => ({ '@type': 'WebPage', name: g.name, url: `${SITE.url}/corridors/${g.slug}/` })),
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Corridor guides · {total} routes · three markets</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        Commerce follows the road. These are the roads.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        A customer says "on Route 28" or "off the Sawgrass" before they say the town. Each guide reads one corridor: the
+        towns and cities it threads, who does business along it, which Market Lock categories are open on it, and what
+        an advisor would tell you before you buy, lease, or build there.
+      </p>
+    </div>
+  </section>
+
+  {groups.map(({ spec, guides }) => (
+    <section id={spec.hubHref.replace(/\//g, '')} class={spec.key === 'FL' ? 'bg-white' : ''}>
+      <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <SectionHeading eyebrow={`${guides.length} corridors`} heading={spec.label} />
+          <a href={spec.hubHref} class="font-semibold text-teal-600 hover:text-teal-700">{spec.hubLabel} practice page →</a>
+        </div>
+        <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {guides.map((g) => (
+            <li>
+              <a href={`/corridors/${g.slug}/`} class="lift group flex h-full flex-col rounded-xl border border-navy-100 bg-white p-5 shadow-sm hover:border-teal-500">
+                <span class="font-mono text-[11px] font-bold uppercase tracking-widest text-brass-600">{g.places.length} {spec.noun === 'town' ? 'towns' : 'cities'}</span>
+                <span class="mt-1 font-display text-xl font-bold text-navy-900 group-hover:text-teal-700">{g.name}</span>
+                <span class="mt-2 flex-1 text-sm text-ink-700">{g.tagline}</span>
+                <span class="mt-3 text-xs text-ink-500">{g.places.map((p) => p.name).join(' · ')}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  ))}
+
+  <CtaSection heading="Know the road, not the town?" body="Tell us the corridor and what you are hunting; we will tell you which towns on it have the building, and which categories on it are still open." />
+</Base>
