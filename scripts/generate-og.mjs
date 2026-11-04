@@ -92,6 +92,7 @@ function collectPages() {
   }
   pages.push(['/market-sheets/', 'market-sheets', 'FREE TOOL · THE LEAVE-BEHIND', 'Market Sheets: one printable page for every town and city.']);
   pages.push(['/monthly-report/sample/', 'monthly-report-sample', 'SAMPLE · THE MONTHLY REPORT', 'What the first of the month looks like for an ICS client.']);
+  pages.push(['/payback/', 'payback', 'FREE TOOL · THE PAYBACK CALCULATOR', 'How many extra jobs cover the retainer? When does the build pay back?']);
   pages.push(['/first-90-days/', 'first-90-days', 'THE FIRST 90 DAYS · WEEK BY WEEK', 'What happens after you sign. In order, with dates.']);
   pages.push(['/corridors/', 'corridors', 'CORRIDOR GUIDES · THREE MARKETS', 'Commerce follows the road. These are the roads.']);
   const corrSrc = readFileSync(rel('src/lib/corridors.ts'), 'utf8');

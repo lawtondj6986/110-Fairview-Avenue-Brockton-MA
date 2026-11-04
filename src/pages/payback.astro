@@ -1,0 +1,485 @@
+---
+/**
+ * The Payback Calculator — the investment-side companion to the Revenue Leak.
+ * Your job value, your margin, your assumption about incremental jobs; our
+ * published prices. It answers "how many extra jobs cover the retainer" and
+ * "when does the build pay back," for all three systems at once, low and high
+ * ends of each published range. No input of ours is hidden; nothing is promised.
+ */
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { SITE, OFFERINGS } from '../config';
+import { SYSTEMS } from '../lib/systems';
+
+const money = (n: number) => '$' + n.toLocaleString('en-US');
+const parseMonthly = (note: string) => {
+  const m = note.match(/\$([\d,]+)–\$([\d,]+)\/month/);
+  return m ? [Number(m[1].replace(/,/g, '')), Number(m[2].replace(/,/g, ''))] : [0, 0];
+};
+const rows = SYSTEMS.map((s) => {
+  const o = OFFERINGS.find((x) => x.name.startsWith(s.name))!;
+  const [mLow, mHigh] = parseMonthly(o.note);
+  return { key: s.key, name: s.name, tagline: s.tagline, buildLow: o.min, buildHigh: o.max, monthlyLow: mLow, monthlyHigh: mHigh, href: s.href };
+});
+
+const title = 'The Payback Calculator — How Many Extra Jobs Cover the Retainer, and When the Build Pays Back | ICS';
+const description =
+  'Your average job value, your gross margin, and your own assumption about extra jobs per month, against ICS’s published prices for JobSite, Lead Engine, and Market Lock: how many additional jobs a month cover each retainer, the month the build pays back, and the first-year net at the low and high ends of every range. Shareable, printable, no email.';
+
+const faqs = [
+  {
+    q: 'Is this a revenue guarantee?',
+    a: 'No. Nobody can honestly guarantee revenue and we do not. The calculator uses your numbers and your assumption about extra jobs; it shows what has to be true for the system to pay back. What we do guarantee, in writing, is the behavior of the system: live in 21 days, under 60 seconds to first response, and measured 90-day improvement against your own baseline or we work free until there is.',
+  },
+  {
+    q: 'Where do the prices come from?',
+    a: `The published pricing page. The calculator reads the same price table the pricing page and the Proposal Builder read, so it cannot quote a number the site does not already show: JobSite ${money(rows[0].buildLow)}–${money(rows[0].buildHigh)} plus ${money(rows[0].monthlyLow)}–${money(rows[0].monthlyHigh)} a month, Lead Engine ${money(rows[1].buildLow)}–${money(rows[1].buildHigh)} plus ${money(rows[1].monthlyLow)}–${money(rows[1].monthlyHigh)}, Market Lock ${money(rows[2].buildLow)}–${money(rows[2].buildHigh)} plus ${money(rows[2].monthlyLow)}–${money(rows[2].monthlyHigh)}.`,
+  },
+  {
+    q: 'What is a reasonable number of extra jobs to assume?',
+    a: 'Start low. Two or three extra booked jobs a month is a conservative assumption for a business that currently answers in hours rather than seconds and does not follow up on quotes; the Revenue Leak calculator estimates the upside from your own response time. The sample monthly report shows what the numbers looked like for a fictional HVAC company by month four.',
+  },
+  {
+    q: 'Why show the low and the high end of each range?',
+    a: 'Because the written quote lands somewhere inside the range after a call, and you should see the payback at both ends before that call. If the system only pays back at the low end, say so on the call; we would rather scope it down than sell it.',
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'ICS Payback Calculator',
+    applicationCategory: 'FinanceApplication',
+    operatingSystem: 'Web',
+    url: `${SITE.url}/payback/`,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    provider: { '@id': `${SITE.url}/#business` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+const input = 'w-full rounded-md border border-navy-100 bg-white px-3 py-2.5 text-sm text-navy-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100';
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950 print:hidden">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Free · The payback calculator · 1 minute · No email</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        How many extra jobs cover the retainer? When does the build pay back?
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Your job value, your margin, your assumption. Our published prices, low end and high end, for all three systems
+        at once. The honest version of the ROI slide, with nothing hidden and nothing promised.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6" id="pb" data-rows={JSON.stringify(rows)}>
+    <div class="grid gap-8 lg:grid-cols-[1fr_1.6fr]">
+      <div class="space-y-5 print:hidden">
+        <h2 class="sr-only">Your numbers</h2>
+        <label class="block">
+          <span class="mb-1 block text-sm font-medium text-navy-900">Average booked job or customer value ($)</span>
+          <input id="pb-value" type="number" min="50" step="50" value="2500" class={input} />
+        </label>
+        <label class="block">
+          <span class="mb-1 block text-sm font-medium text-navy-900">Gross margin on a job (%)</span>
+          <input id="pb-margin" type="number" min="5" max="95" step="5" value="40" class={input} />
+          <span class="mt-1 block text-xs text-ink-500">What is left after materials, labor, and subs. Many trades run 35 to 50; practices and services often higher.</span>
+        </label>
+        <label class="block">
+          <span class="mb-1 flex items-baseline justify-between text-sm font-medium text-navy-900"><span>Extra booked jobs per month you expect from the system</span><span id="pb-inc-out" class="font-mono text-teal-700">3</span></span>
+          <input id="pb-inc" type="range" min="1" max="20" step="1" value="3" class="w-full accent-teal-600" />
+          <span class="mt-1 block text-xs text-ink-500">Your assumption, not ours. Start low; the Revenue Leak calculator estimates what faster response alone recovers.</span>
+        </label>
+        <label class="block">
+          <span class="mb-1 block text-sm font-medium text-navy-900">Jobs you book per month today <span class="font-normal text-ink-500">(optional, for context)</span></span>
+          <input id="pb-now" type="number" min="0" step="1" value="12" class={input} />
+        </label>
+        <div class="rounded-xl bg-paper p-4 text-sm text-ink-700">
+          <p><span class="font-semibold text-navy-900">Profit per extra job:</span> <span id="pb-ppj" class="font-mono">$1,000</span></p>
+          <p class="mt-1"><span class="font-semibold text-navy-900">Extra gross profit per month at your assumption:</span> <span id="pb-gpm" class="font-mono">$3,000</span></p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" id="pb-share" class="rounded-md border border-navy-100 bg-white px-3.5 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500">Copy a shareable link</button>
+          <button type="button" id="pb-print" class="rounded-md border border-navy-100 bg-white px-3.5 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500">Print</button>
+        </div>
+      </div>
+
+      <div class="min-w-0">
+        <article class="min-w-0 rounded-2xl border border-navy-100 bg-white p-6 shadow-sm sm:p-8">
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">Payback · from published pricing</p>
+          <h2 class="mt-2 font-display text-2xl font-bold text-navy-900">Three systems, your numbers</h2>
+          <p class="mt-1 text-sm text-ink-700" id="pb-summary"></p>
+          <div class="mt-5 overflow-x-auto">
+            <table class="w-full min-w-[34rem] border-collapse text-sm">
+              <thead>
+                <tr class="border-b border-navy-950 text-left font-mono text-[10px] uppercase tracking-wider text-ink-500">
+                  <th class="py-2 pr-3 font-semibold">System</th>
+                  <th class="py-2 pr-3 font-semibold">Extra jobs/mo to cover retainer</th>
+                  <th class="py-2 pr-3 font-semibold">Build pays back in</th>
+                  <th class="py-2 font-semibold">Year-one net</th>
+                </tr>
+              </thead>
+              <tbody id="pb-rows"></tbody>
+            </table>
+          </div>
+          <p class="mt-3 text-[11px] leading-relaxed text-ink-500">
+            Each cell shows the low end of the published range first and the high end second. Break-even jobs = monthly retainer ÷ profit per job. Payback months = build cost ÷ (extra monthly gross profit − retainer). Year-one net = 12 × extra monthly gross profit − build − 12 × retainer. Planning math from your inputs; the guarantees cover the system's behavior, not your revenue.
+          </p>
+        </article>
+
+        <article class="mt-6 rounded-2xl border border-navy-100 bg-white p-6 shadow-sm sm:p-8">
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <div>
+              <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">Cumulative cash position · first 12 months</p>
+              <p class="mt-1 text-sm text-ink-700">At the midpoint of each range. Click a system in the table or the legend to bring it forward. Hover a month for the values.</p>
+            </div>
+            <ul class="flex flex-wrap gap-3 text-xs text-ink-700" id="pb-legend" aria-label="Legend"></ul>
+          </div>
+          <div class="relative mt-4" id="pb-chart"></div>
+          <details class="mt-3 text-xs text-ink-700"><summary class="cursor-pointer font-semibold text-teal-700">Table view</summary><table class="mt-2 w-full text-left" id="pb-table"></table></details>
+        </article>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3 print:hidden">
+          <a id="pb-bring" href="/contact/" class="rounded-md bg-brass-500 px-5 py-3 font-semibold text-navy-950 hover:bg-brass-300">Bring these numbers to Daniel →</a>
+          <a id="pb-proposal" href="/proposal/" class="rounded-md border border-navy-100 bg-white px-5 py-3 font-semibold text-navy-900 hover:border-teal-500">Build the proposal →</a>
+          <a href="/first-90-days/" class="text-sm font-semibold text-teal-600 hover:text-teal-700">What the first 90 days look like →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brass-600">Common questions · Payback</h2>
+      <dl class="mt-5 space-y-5">
+        {faqs.map((f) => (
+          <div><dt class="text-base font-bold text-navy-900">{f.q}</dt><dd class="mt-1.5 text-sm leading-relaxed text-ink-700">{f.a}</dd></div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <CtaSection heading="Want the number inside the range?" body="One call, a straight answer on fit, and a written quote within 48 hours. If it only pays back at the low end, we will say so." />
+</Base>
+
+<style>
+  #pb-rows tr.is-on td {
+    background: var(--color-teal-100);
+  }
+  #pb-rows tr {
+    cursor: pointer;
+  }
+  @media print {
+    :global(header),
+    :global(footer),
+    :global(#money-bar),
+    :global(#path-bar),
+    :global(#palette) {
+      display: none !important;
+    }
+    :global(body) {
+      background: white !important;
+    }
+    :global(.reveal) {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  type Row = { key: string; name: string; tagline: string; buildLow: number; buildHigh: number; monthlyLow: number; monthlyHigh: number; href: string };
+
+  function initPayback() {
+    const root = document.getElementById('pb');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+    const rows: Row[] = JSON.parse(root.dataset.rows || '[]');
+    const $ = (id: string) => document.getElementById(id)!;
+    const value = $('pb-value') as HTMLInputElement;
+    const margin = $('pb-margin') as HTMLInputElement;
+    const inc = $('pb-inc') as HTMLInputElement;
+    const now = $('pb-now') as HTMLInputElement;
+    const money = (n: number) => (n < 0 ? '−' : '') + '$' + Math.round(Math.abs(n)).toLocaleString('en-US');
+    const one = (n: number) => (Math.round(n * 10) / 10).toLocaleString('en-US', { maximumFractionDigits: 1 });
+    let selected = 'leadengine';
+    let tip: HTMLElement | null = null;
+
+    const q = new URLSearchParams(location.search);
+    const num = (k: string, el: HTMLInputElement) => {
+      const v = Number(q.get(k));
+      if (q.has(k) && Number.isFinite(v) && v >= Number(el.min || 0)) el.value = String(v);
+    };
+    num('value', value);
+    num('margin', margin);
+    num('inc', inc);
+    num('now', now);
+    if (q.get('system') && rows.some((r) => r.key === q.get('system'))) selected = q.get('system')!;
+
+    const COLORS: Record<string, string> = { jobsite: '#94a3b8', leadengine: '#94a3b8', marketlock: '#94a3b8' };
+
+    function compute() {
+      const v = Math.max(0, Number(value.value) || 0);
+      const m = Math.min(0.95, Math.max(0.05, (Number(margin.value) || 0) / 100));
+      const i = Math.max(1, Number(inc.value) || 1);
+      const ppj = v * m;
+      const gpm = ppj * i;
+      $('pb-inc-out').textContent = String(i);
+      $('pb-ppj').textContent = money(ppj);
+      $('pb-gpm').textContent = money(gpm);
+      const nowJobs = Number(now.value) || 0;
+      $('pb-summary').textContent = `At ${money(v)} a job and ${Math.round(m * 100)}% margin, each extra job is worth ${money(ppj)} in gross profit. ${i} extra ${i === 1 ? 'job' : 'jobs'} a month${nowJobs ? ` on top of your ${nowJobs}` : ''} adds ${money(gpm)} a month.`;
+
+      const calc = rows.map((r) => {
+        const be = [r.monthlyLow / (ppj || 1), r.monthlyHigh / (ppj || 1)];
+        const netLow = gpm - r.monthlyLow;
+        const netHigh = gpm - r.monthlyHigh;
+        const pbLow = netLow > 0 ? r.buildLow / netLow : Infinity;
+        const pbHigh = netHigh > 0 ? r.buildHigh / netHigh : Infinity;
+        const y1Low = 12 * gpm - r.buildLow - 12 * r.monthlyLow;
+        const y1High = 12 * gpm - r.buildHigh - 12 * r.monthlyHigh;
+        const midBuild = (r.buildLow + r.buildHigh) / 2;
+        const midMonthly = (r.monthlyLow + r.monthlyHigh) / 2;
+        const series: number[] = [];
+        let cash = -midBuild;
+        for (let mo = 1; mo <= 12; mo++) {
+          cash += gpm - midMonthly;
+          series.push(cash);
+        }
+        return { ...r, be, pbLow, pbHigh, y1Low, y1High, series };
+      });
+
+      const tb = $('pb-rows');
+      tb.textContent = '';
+      calc.forEach((c) => {
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-navy-100 align-top' + (c.key === selected ? ' is-on' : '');
+        tr.dataset.key = c.key;
+        tr.tabIndex = 0;
+        const cells: [string, string][] = [
+          ['', ''],
+          ['', ''],
+          ['', ''],
+          ['', ''],
+        ];
+        const td0 = document.createElement('td');
+        td0.className = 'py-2.5 pr-3';
+        const b = document.createElement('strong');
+        b.className = 'text-navy-950';
+        b.textContent = c.name;
+        const small = document.createElement('span');
+        small.className = 'block text-[11px] text-ink-500';
+        small.textContent = `${money(c.buildLow)}–${money(c.buildHigh)} build · ${money(c.monthlyLow)}–${money(c.monthlyHigh)}/mo`;
+        td0.append(b, small);
+        const td1 = document.createElement('td');
+        td1.className = 'py-2.5 pr-3 font-mono';
+        td1.textContent = `${one(c.be[0])} – ${one(c.be[1])}`;
+        const td2 = document.createElement('td');
+        td2.className = 'py-2.5 pr-3 font-mono';
+        td2.textContent = `${Number.isFinite(c.pbLow) ? one(c.pbLow) + ' mo' : 'not at this assumption'} – ${Number.isFinite(c.pbHigh) ? one(c.pbHigh) + ' mo' : 'not at this assumption'}`;
+        const td3 = document.createElement('td');
+        td3.className = 'py-2.5 font-mono ' + (c.y1High >= 0 ? 'text-teal-700' : c.y1Low >= 0 ? 'text-ink-700' : 'text-brass-600');
+        td3.textContent = `${money(c.y1Low)} – ${money(c.y1High)}`;
+        tr.append(td0, td1, td2, td3);
+        void cells;
+        const pick = () => {
+          selected = c.key;
+          compute();
+        };
+        tr.addEventListener('click', pick);
+        tr.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            pick();
+          }
+        });
+        tb.appendChild(tr);
+      });
+
+      drawChart(calc);
+
+      // URL + links
+      const u = new URL(location.href);
+      u.searchParams.set('value', String(v));
+      u.searchParams.set('margin', String(Math.round(m * 100)));
+      u.searchParams.set('inc', String(i));
+      if (nowJobs) u.searchParams.set('now', String(nowJobs));
+      else u.searchParams.delete('now');
+      u.searchParams.set('system', selected);
+      history.replaceState(null, '', u.toString());
+      const sel = calc.find((c) => c.key === selected)!;
+      ($('pb-proposal') as HTMLAnchorElement).href = `/proposal/?system=${selected}`;
+      ($('pb-bring') as HTMLAnchorElement).href = `/contact/?${new URLSearchParams({
+        interest: 'AI systems & marketing',
+        message: `Payback check — ${sel.name}.\nMy numbers: ${money(v)} average job, ${Math.round(m * 100)}% margin, assuming ${i} extra jobs a month${nowJobs ? ` on top of ${nowJobs} today` : ''}.\nBreak-even: ${one(sel.be[0])}–${one(sel.be[1])} extra jobs a month. Build pays back in ${Number.isFinite(sel.pbLow) ? one(sel.pbLow) : 'n/a'}–${Number.isFinite(sel.pbHigh) ? one(sel.pbHigh) : 'n/a'} months. Year-one net ${money(sel.y1Low)} to ${money(sel.y1High)}.\n\nI ran this on your site: ${u.toString()}\n\nMy business: \nBest time to call: `,
+      }).toString()}`;
+      try {
+        (window as unknown as { va?: (e: string, o: unknown) => void }).va?.('event', { name: 'payback', data: { system: selected, inc: i } });
+      } catch {
+        /* best-effort */
+      }
+    }
+
+    function drawChart(calc: ReturnType<typeof computeType>) {
+      const host = $('pb-chart');
+      host.textContent = '';
+      const W = 720;
+      const H = 260;
+      const P = { l: 64, r: 170, t: 16, b: 28 };
+      const all = calc.flatMap((c) => c.series);
+      const max = Math.max(...all, 0);
+      const min = Math.min(...all, 0);
+      const span = max - min || 1;
+      const x = (mo: number) => P.l + ((mo - 1) * (W - P.l - P.r)) / 11;
+      const y = (v: number) => P.t + ((max - v) / span) * (H - P.t - P.b);
+      const ns = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(ns, 'svg');
+      svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+      svg.setAttribute('class', 'h-auto w-full');
+      svg.setAttribute('role', 'img');
+      svg.setAttribute('aria-label', 'Cumulative cash position by month for the three systems');
+      const el = (tag: string, attrs: Record<string, string | number>, text?: string) => {
+        const e = document.createElementNS(ns, tag);
+        for (const k in attrs) e.setAttribute(k, String(attrs[k]));
+        if (text !== undefined) e.textContent = text;
+        svg.appendChild(e);
+        return e;
+      };
+      // Gridlines at clean steps
+      const step = niceStep(span / 4);
+      for (let g = Math.ceil(min / step) * step; g <= max; g += step) {
+        el('line', { x1: P.l, x2: W - P.r, y1: y(g), y2: y(g), stroke: g === 0 ? '#0b1f3a' : '#dbe4f0', 'stroke-width': g === 0 ? 1.5 : 1 });
+        el('text', { x: P.l - 8, y: y(g) + 4, 'text-anchor': 'end', 'font-size': 11, fill: '#64748b' }, compact(g));
+      }
+      for (let mo = 1; mo <= 12; mo++) el('text', { x: x(mo), y: H - 8, 'text-anchor': 'middle', 'font-size': 11, fill: '#64748b' }, `M${mo}`);
+      const order = [...calc].sort((a, b) => (a.key === selected ? 1 : 0) - (b.key === selected ? 1 : 0));
+      order.forEach((c) => {
+        const on = c.key === selected;
+        const d = c.series.map((v, i) => `${i ? 'L' : 'M'}${x(i + 1)},${y(v)}`).join(' ');
+        el('path', { d, fill: 'none', stroke: on ? '#0f766e' : '#cbd5e1', 'stroke-width': on ? 2.5 : 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' });
+        const last = c.series[11];
+        el('circle', { cx: x(12), cy: y(last), r: on ? 5 : 4, fill: on ? '#0f766e' : '#cbd5e1', stroke: '#fff', 'stroke-width': 2 });
+        el('text', { x: x(12) + 10, y: y(last) + 4, 'font-size': 12, 'font-weight': on ? 700 : 500, fill: on ? '#0b1f3a' : '#64748b' }, `${c.name} ${compact(last)}`);
+      });
+      // Crosshair + tooltip
+      const cross = el('line', { x1: 0, x2: 0, y1: P.t, y2: H - P.b, stroke: '#0b1f3a', 'stroke-width': 1, opacity: 0 });
+      const band = (W - P.l - P.r) / 11;
+      if (!tip) {
+        tip = document.createElement('div');
+        tip.id = 'pb-tip';
+        tip.className = 'pointer-events-none fixed z-50 hidden rounded-md bg-navy-950 px-2.5 py-1.5 text-xs text-white shadow-lg';
+        tip.setAttribute('role', 'tooltip');
+        document.body.appendChild(tip);
+      }
+      for (let mo = 1; mo <= 12; mo++) {
+        const hit = el('rect', { x: x(mo) - band / 2, y: P.t, width: band, height: H - P.t - P.b, fill: 'transparent', tabindex: 0, role: 'img', 'aria-label': `Month ${mo}: ` + calc.map((c) => `${c.name} ${compact(c.series[mo - 1])}`).join(', ') });
+        const show = (e: Event) => {
+          cross.setAttribute('x1', String(x(mo)));
+          cross.setAttribute('x2', String(x(mo)));
+          cross.setAttribute('opacity', '1');
+          tip!.textContent = `Month ${mo} · ` + calc.map((c) => `${c.name} ${money(c.series[mo - 1])}`).join(' · ');
+          tip!.classList.remove('hidden');
+          const r = (e.target as Element).getBoundingClientRect();
+          const pe = e as PointerEvent;
+          const cx = pe.clientX || r.left + r.width / 2;
+          tip!.style.left = Math.min(cx + 12, window.innerWidth - tip!.offsetWidth - 8) + 'px';
+          tip!.style.top = Math.max(8, r.top + 8) + 'px';
+        };
+        const hide = () => {
+          cross.setAttribute('opacity', '0');
+          tip!.classList.add('hidden');
+        };
+        hit.addEventListener('pointermove', show);
+        hit.addEventListener('pointerenter', show);
+        hit.addEventListener('pointerleave', hide);
+        hit.addEventListener('focus', show);
+        hit.addEventListener('blur', hide);
+      }
+      host.appendChild(svg);
+      // Legend (clickable)
+      const legend = $('pb-legend');
+      legend.textContent = '';
+      calc.forEach((c) => {
+        const li = document.createElement('li');
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'flex items-center gap-1.5 rounded px-1.5 py-1 hover:bg-paper';
+        btn.setAttribute('aria-pressed', String(c.key === selected));
+        const sw = document.createElement('span');
+        sw.className = 'inline-block h-0.5 w-5 rounded';
+        sw.style.background = c.key === selected ? '#0f766e' : '#cbd5e1';
+        btn.append(sw, document.createTextNode(c.name));
+        btn.addEventListener('click', () => {
+          selected = c.key;
+          compute();
+        });
+        li.appendChild(btn);
+        legend.appendChild(li);
+      });
+      // Table view
+      const t = $('pb-table') as HTMLTableElement;
+      t.textContent = '';
+      const thead = document.createElement('thead');
+      const hr = document.createElement('tr');
+      ['Month', ...calc.map((c) => c.name)].forEach((h) => {
+        const th = document.createElement('th');
+        th.className = 'py-1 pr-3';
+        th.textContent = h;
+        hr.appendChild(th);
+      });
+      thead.appendChild(hr);
+      const tbody = document.createElement('tbody');
+      for (let mo = 1; mo <= 12; mo++) {
+        const tr = document.createElement('tr');
+        [`M${mo}`, ...calc.map((c) => money(c.series[mo - 1]))].forEach((v) => {
+          const td = document.createElement('td');
+          td.className = 'py-1 pr-3 border-b border-navy-100';
+          td.style.fontVariantNumeric = 'tabular-nums';
+          td.textContent = v;
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      }
+      t.append(thead, tbody);
+    }
+    // Type helper for drawChart's parameter (keeps TS happy without exporting).
+    function computeType() {
+      return rows.map((r) => ({ ...r, be: [0, 0] as number[], pbLow: 0, pbHigh: 0, y1Low: 0, y1High: 0, series: [] as number[] }));
+    }
+    function niceStep(raw: number) {
+      const p = Math.pow(10, Math.floor(Math.log10(raw || 1)));
+      const n = raw / p;
+      return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * p;
+    }
+    function compact(n: number) {
+      const a = Math.abs(n);
+      const s = a >= 1000 ? `$${(a / 1000).toFixed(a >= 100000 ? 0 : 1).replace(/\.0$/, '')}K` : `$${Math.round(a)}`;
+      return (n < 0 ? '−' : '') + s;
+    }
+
+    [value, margin, inc, now].forEach((el) => el.addEventListener('input', compute));
+    const share = $('pb-share') as HTMLButtonElement;
+    share.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(location.href);
+        share.textContent = 'Link copied';
+      } catch {
+        share.textContent = location.href;
+      }
+      setTimeout(() => (share.textContent = 'Copy a shareable link'), 2500);
+    });
+    $('pb-print').addEventListener('click', () => window.print());
+    void COLORS;
+    compute();
+  }
+  initPayback();
+  document.addEventListener('astro:page-load', initPayback);
+</script>
