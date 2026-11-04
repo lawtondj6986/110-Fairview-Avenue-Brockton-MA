@@ -6,7 +6,76 @@
  *  - dist/answers-index.json   (every FAQ on the site + published pricing)
  * Type a few letters and it finds pages. Type a question and it answers it,
  * citing the page the answer lives on. Opens via the header button or ⌘/Ctrl+K.
+ * Type a request ("find me a flex building in Brockton", "print the Boca sheet",
+ * "is medical open in Quincy") and it offers the tool that does it, pre-filled:
+ * the intents table below is built at compile time from the same data files
+ * the tools read, so an action can only point at a page that exists.
  */
+import { TOWNS } from '../lib/towns';
+import { BROWARD_CITIES } from '../lib/broward';
+import { PALM_BEACH_CITIES } from '../lib/palm-beach';
+import { INDUSTRIES } from '../lib/industries';
+import { SYSTEMS } from '../lib/systems';
+import { CORRIDOR_GUIDES } from '../lib/corridors';
+
+const ALIASES: Record<string, string[]> = {
+  'fort-lauderdale': ['ft lauderdale', 'ft. lauderdale', 'lauderdale'],
+  'boca-raton': ['boca'],
+  'west-palm-beach': ['west palm', 'wpb'],
+  'palm-beach-gardens': ['pbg', 'the gardens'],
+  'lake-worth-beach': ['lake worth'],
+  'west-bridgewater': ['west bw', 'w bridgewater'],
+  'east-bridgewater': ['east bw', 'e bridgewater'],
+  'north-lauderdale': ['n lauderdale'],
+  'lauderdale-lakes': ['lauderdale lakes'],
+  'pembroke-pines': ['pines'],
+};
+const IND_KEYS: Record<string, string[]> = {
+  'trades-home-services': ['plumber', 'plumbing', 'hvac', 'heating', 'roofer', 'roofing', 'electrician', 'electrical', 'landscaper', 'landscaping', 'contractor', 'paving', 'painter', 'remodel', 'trades', 'home services', 'handyman', 'mason', 'fence'],
+  'restaurants-food': ['restaurant', 'cafe', 'pizza', 'catering', 'bakery', 'food truck', 'diner', 'bar '],
+  'medical-dental': ['dentist', 'dental', 'doctor', 'medical', 'clinic', 'physician', 'chiropractor', 'orthodont', 'urgent care', 'physical therapy', 'aesthetic', 'med spa'],
+  'salons-wellness': ['salon', 'barber', 'spa', 'nails', 'lash', 'wellness', 'massage', 'hair'],
+  'professional-services': ['lawyer', 'attorney', 'law firm', 'accountant', 'cpa', 'bookkeep', 'insurance', 'financial advisor', 'consultant', 'professional services', 'architect'],
+  'auto-services': ['auto', 'mechanic', 'body shop', 'tire', 'car repair', 'detailing', 'dealer'],
+  'solar-energy': ['solar', 'energy', 'generator', 'ev charger', 'insulation'],
+  'fitness-studios': ['gym', 'fitness', 'studio', 'yoga', 'pilates', 'crossfit', 'martial arts', 'boxing'],
+  'veterinary-pet-services': ['vet', 'veterinar', 'pet', 'groomer', 'grooming', 'kennel', 'dog'],
+  'childcare-education': ['daycare', 'childcare', 'preschool', 'tutoring', 'tutor', 'learning center', 'school'],
+  'marine-boat-services': ['marine', 'marina', 'boat', 'yacht', 'dock', 'outboard'],
+  'cannabis-regulated-retail': ['cannabis', 'dispensary', 'vape', 'smoke shop', 'liquor', 'firearms', 'gun shop', 'regulated'],
+};
+const CORR_KEYS: Record<string, string[]> = {
+  'route-3': ['route 3 ', 'rt 3 ', 'rte 3 ', 'pilgrims highway'],
+  'route-3a': ['route 3a', 'rt 3a', 'rte 3a', 'coast road'],
+  'route-24': ['route 24', 'rt 24', 'rte 24'],
+  'route-28': ['route 28', 'rt 28', 'rte 28', 'main street', 'main st'],
+  'route-18': ['route 18', 'rt 18', 'rte 18', 'bedford street', 'bedford st'],
+  'route-139': ['route 139', 'rt 139', 'rte 139'],
+  'route-106': ['route 106', 'rt 106', 'rte 106'],
+  'i-95-us-1-broward': ['i-95 broward', 'i95 broward', 'federal highway broward', 'us-1 broward', 'us 1 broward'],
+  a1a: ['a1a', 'beach road'],
+  'sawgrass-expressway': ['sawgrass'],
+  'university-drive': ['university drive', 'university dr'],
+  'us-441': ['441', 'state road 7 broward', 'sr-7 broward'],
+  'i-595': ['595', 'state road 84', 'sr-84', 'sr 84'],
+  'i-75': ['i-75', 'i75', 'i 75'],
+  'oakland-park-boulevard': ['oakland park blvd', 'oakland park boulevard'],
+  'i-95-us-1-palm-beach': ['i-95 palm beach', 'i95 palm beach', 'federal highway palm beach', 'us-1 palm beach', 'i-95', 'i95', 'us-1', 'us 1', 'federal highway'],
+  'floridas-turnpike': ['turnpike'],
+  'southern-boulevard': ['southern blvd', 'southern boulevard', 'sr-80', 'state road 80'],
+  'military-trail': ['military trail', 'military trl'],
+  'sr-7-441-palm-beach': ['sr-7 palm beach', 'state road 7 palm beach', '441 palm beach', 'sr-7', 'state road 7'],
+};
+const INTENTS = {
+  places: [
+    ...TOWNS.map((t) => ({ n: t.name, s: t.slug, m: 'MA', a: ALIASES[t.slug] || [] })),
+    ...BROWARD_CITIES.map((c) => ({ n: c.name, s: c.slug, m: 'FL', a: ALIASES[c.slug] || [] })),
+    ...PALM_BEACH_CITIES.map((c) => ({ n: c.name, s: c.slug, m: 'PB', a: ALIASES[c.slug] || [] })),
+  ],
+  industries: INDUSTRIES.map((i) => ({ n: i.name, s: i.slug, k: IND_KEYS[i.slug] || [] })),
+  corridors: CORRIDOR_GUIDES.map((g) => ({ n: g.name, s: g.slug, m: g.market, k: CORR_KEYS[g.slug] || [] })),
+  systems: SYSTEMS.map((s) => ({ n: s.name, s: s.key, setup: s.setup, monthly: s.monthly })),
+};
 ---
 
 <div
@@ -15,6 +84,7 @@
   role="dialog"
   aria-modal="true"
   aria-label="Ask ICS or search the site"
+  data-intents={JSON.stringify(INTENTS)}
 >
   <div class="w-full max-w-xl overflow-hidden rounded-xl border border-navy-100 bg-white shadow-2xl">
     <div class="flex items-center gap-3 border-b border-navy-100 px-4">
@@ -24,7 +94,7 @@
       <input
         id="palette-input"
         type="text"
-        placeholder="Ask a question, or search pages, tools, towns…"
+        placeholder="Ask a question, name a town, or say what you need…"
         autocomplete="off"
         spellcheck="false"
         class="w-full bg-transparent py-3.5 text-sm text-navy-900 placeholder:text-ink-500/60 focus:outline-none"
@@ -61,13 +131,146 @@
   let shown: Entry[] = [];
 
   const SUGGESTIONS = [
-    'What does Lead Engine cost?',
-    'Who is Daniel Lawton?',
-    'Is Market Lock really exclusive?',
-    'Do I own the website and the data?',
-    'What does NNN mean on a listing?',
+    'Find me a flex building in Brockton',
+    'Is medical open in Quincy?',
+    'When does Lead Engine pay back?',
+    'Print the Boca Raton sheet',
+    'Compare Abington and Rockland',
+    'What does Market Lock cost?',
     'Is ICS licensed in Florida?',
   ];
+
+  // ---- Intents: the palette offers the tool that does what was typed. ----
+  type Place = { n: string; s: string; m: 'MA' | 'FL' | 'PB'; a: string[] };
+  type Intents = {
+    places: Place[];
+    industries: { n: string; s: string; k: string[] }[];
+    corridors: { n: string; s: string; m: string; k: string[] }[];
+    systems: { n: string; s: string; setup: string; monthly: string }[];
+  };
+  type Action = { eyebrow: string; title: string; body: string; links: [string, string][] };
+  let intents: Intents | null = null;
+  const BOARD: Record<string, string> = { MA: '/territories/', FL: '/broward/territories/', PB: '/palm-beach/territories/' };
+  const BASE: Record<string, string> = { MA: '/south-shore/', FL: '/broward/', PB: '/palm-beach/' };
+  const norm = (s: string) => ' ' + s.toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9\-\s]/g, ' ').replace(/\s+/g, ' ').trim() + ' ';
+
+  function detectActions(raw: string): Action[] {
+    const el = palette();
+    if (!intents) {
+      try {
+        intents = JSON.parse(el?.dataset.intents || 'null');
+      } catch {
+        intents = null;
+      }
+    }
+    if (!intents || raw.trim().length < 3) return [];
+    let q = norm(raw);
+    const out: Action[] = [];
+    const has = (re: RegExp) => re.test(q);
+
+    // Places, longest name first so "Pembroke Pines" wins over "Pembroke".
+    const places: Place[] = [];
+    const cands = intents.places.flatMap((p) => [p.n.toLowerCase(), ...p.a].map((name) => ({ name, p }))).sort((a, b) => b.name.length - a.name.length);
+    for (const c of cands) {
+      const needle = ' ' + c.name + ' ';
+      if (q.includes(needle) && !places.includes(c.p)) {
+        places.push(c.p);
+        q = q.replace(needle, ' ');
+      }
+    }
+    const corridor = intents.corridors.find((c) => c.k.some((k) => q.includes(' ' + k.trim() + ' ') || (k.endsWith(' ') && q.includes(' ' + k))));
+    const industry = intents.industries.find((i) => i.k.some((k) => q.includes(k.trim().length < 4 ? ' ' + k.trim() + ' ' : k.trim())));
+    const system = intents.systems.find((sys) => q.includes(sys.n.toLowerCase()) || (sys.s === 'jobsite' && q.includes('job site')));
+
+    const V = {
+      sheet: /\b(sheet|print|printable|leave ?behind|one ?page|one-pager|handout|pdf)\b/,
+      compare: /\b(compare|comparison|versus|vs)\b/,
+      hunt: /\b(find|hunt|hunting|looking for|buy|buying|purchase|acquire|building|space|flex|warehouse|yard|storefront|office|land|lot|property|properties)\b/,
+      territory: /\b(open|territory|territories|locked|lock|available|availability|exclusive|exclusivity|category|categories|claim|taken|held)\b/,
+      payback: /\b(pay ?back|payback|roi|break ?even|worth it|return on|pays for itself)\b/,
+      f90: /\b(after (i|we) sign|first 90|90 days|ninety days|kickoff|kick off|onboard|onboarding|timeline|what happens (next|after)|how long (does|will|to)|rollout|go live)\b/,
+      report: /\b(report|dashboard|reporting|scorecard)\b/,
+      proposal: /\b(proposal|quote|estimate|scope|price for|pricing for)\b/,
+      contact: /\b(call|phone|talk|book|contact|email|reach|meet)\b/,
+      map: /\bmap\b/,
+    };
+    const ma = places.filter((p) => p.m === 'MA');
+    const names = (ps: Place[]) => ps.map((p) => p.n).join(', ');
+    const first = places[0];
+
+    if (has(V.compare) && ma.length >= 2) {
+      out.push({ eyebrow: 'Town Compare', title: `${ma[0].n} and ${ma[1].n}, side by side`, body: 'Corridors, property mix, business mix, and the operator\'s read on each.', links: [['Open the comparison →', `/south-shore/compare/?a=${ma[0].s}&b=${ma[1].s}`]] });
+    }
+    if (has(V.sheet) && first) {
+      out.push({ eyebrow: 'Market Sheet', title: `The one-page ${first.n} market sheet`, body: 'Corridors, who buys there, open categories, published pricing, and a QR code back to the live page. Prints on one Letter page.', links: [['Open the sheet →', `${BASE[first.m]}${first.s}/sheet/`], ['All market sheets', '/market-sheets/']] });
+    }
+    if (has(V.hunt) && !has(V.territory) && !system && (ma.length || !places.length) && !corridor) {
+      const towns = ma.map((p) => p.s).join(',');
+      out.push({ eyebrow: 'Buyer Brief', title: ma.length ? `Hunting in ${names(ma)}? Build the brief.` : 'Hunting for a building? Build the brief.', body: 'Describe the building; we hunt owner by owner, before the portals. The brief writes itself from your choices.', links: [['Build a buyer brief →', `/buyer-brief/${towns ? '?towns=' + towns : ''}`]] });
+    } else if (has(V.hunt) && places.length && !ma.length && !has(V.territory)) {
+      out.push({ eyebrow: 'Florida', title: `Property in ${names(places)}`, body: 'ICS does not broker property in Florida; the license is Massachusetts. For a Florida building we work alongside a licensed local broker, and the free deal tools work anywhere.', links: [['The free deal tools →', '/deal-tools/'], [`${first.n} systems page →`, `${BASE[first.m]}${first.s}/`]] });
+    }
+    if ((has(V.territory) || (industry && first)) && first) {
+      const cat = industry ? `&cat=${industry.s}` : '';
+      out.push({ eyebrow: 'Territory Board', title: industry ? `Is ${industry.n} open in ${first.n}?` : `What is open in ${first.n}?`, body: 'One business per category per town, in writing. The board shows live status.', links: [['Check the board →', `${BOARD[first.m]}?place=${first.s}${cat}`]] });
+    } else if (has(V.territory) && industry && !first) {
+      out.push({ eyebrow: 'Territory Boards', title: `Where is ${industry.n} still open?`, body: 'Pick the market; the board shows every town or city and whether your category is held.', links: [['South Shore →', `/territories/?cat=${industry.s}`], ['Broward →', `/broward/territories/?cat=${industry.s}`], ['Palm Beach →', `/palm-beach/territories/?cat=${industry.s}`]] });
+    }
+    if (corridor) {
+      out.push({ eyebrow: 'Corridor Guide', title: corridor.n, body: 'The read on the road, who does business along it, the towns in order, and the map with the route lit.', links: [['Read the guide →', `/corridors/${corridor.s}/`]] });
+    }
+    if (has(V.payback)) {
+      out.push({ eyebrow: 'Payback Calculator', title: system ? `When does ${system.n} pay back?` : 'How many extra jobs cover the retainer?', body: 'Your job value, your margin, your assumption, against the published prices for all three systems.', links: [['Run the numbers →', `/payback/${system ? '?system=' + system.s : ''}`]] });
+    }
+    if (has(V.f90)) {
+      out.push({ eyebrow: 'The First 90 Days', title: system ? `${system.n}, week by week` : 'What happens after you sign', body: 'Each phase: what we do, what we need from you, what you have at the end, and where the guarantees attach.', links: [['Read the ninety days →', `/first-90-days/${system ? '?system=' + system.s : ''}`]] });
+    }
+    if (has(V.report)) {
+      out.push({ eyebrow: 'The Monthly Report', title: 'What the first of the month looks like', body: 'A fully illustrative sample: the guarantee measured, leads by source, the pipeline, the trend, what we did, what we do next.', links: [['See the sample →', '/monthly-report/sample/']] });
+    }
+    if (has(V.proposal) && (system || industry || first)) {
+      const ps = new URLSearchParams();
+      if (system) ps.set('system', system.s);
+      if (first) ps.set('place', `${first.m}:${first.s}`);
+      if (industry) ps.set('industry', industry.s);
+      out.push({ eyebrow: 'Proposal Builder', title: 'Write the proposal yourself', body: 'Published scope, price range, guarantees, timeline, and live territory status, assembled for your choices.', links: [['Build the proposal →', `/proposal/?${ps.toString()}`]] });
+    }
+    if (!out.length && first) {
+      const links: [string, string][] = [[`The ${first.n} page →`, `${BASE[first.m]}${first.s}/`], ['Market sheet', `${BASE[first.m]}${first.s}/sheet/`], ['Open categories', `${BOARD[first.m]}?place=${first.s}`]];
+      if (first.m === 'MA') links.push(['Build a buyer brief', `/buyer-brief/?towns=${first.s}`]);
+      out.push({ eyebrow: first.m === 'MA' ? 'South Shore town' : first.m === 'FL' ? 'Broward County city' : 'Palm Beach County city', title: `${first.n}, ${first.m === 'MA' ? 'MA' : 'FL'}`, body: first.m === 'MA' ? 'The market page, the one-page sheet, what is open under Market Lock, and the buyer brief with the town pre-selected.' : 'The city page, the one-page sheet, and what is open under Market Lock. Systems only in Florida; brokerage is Massachusetts-licensed.', links });
+    }
+    if (!out.length && system) {
+      out.push({ eyebrow: system.n, title: `${system.setup} to build, ${system.monthly}`, body: 'Published pricing. Build the proposal, see when it pays back, or read the first ninety days.', links: [['Proposal →', `/proposal/?system=${system.s}`], ['Payback', `/payback/?system=${system.s}`], ['First 90 days', `/first-90-days/?system=${system.s}`]] });
+    }
+    if (!out.length && industry) {
+      out.push({ eyebrow: 'Industry', title: `AI systems for ${industry.n}`, body: 'What the revenue leaks are in your trade, which system closes them, and whether your category is still open in your town.', links: [['The industry page →', `/industries/${industry.s}/`], ['Is it open in my town?', `/territories/?cat=${industry.s}`]] });
+    }
+    if (!out.length && has(V.contact) && !has(QUESTION_WORDS)) {
+      out.push({ eyebrow: 'Talk to Daniel', title: 'One call, a straight answer', body: 'He answers his own phone and email. A written quote follows within 48 hours.', links: [['Contact →', '/contact/'], ['Call (508) 942-8259', 'tel:+15089428259']] });
+    }
+    if (!out.length && has(V.map)) {
+      out.push({ eyebrow: 'The map', title: 'Every town and city, with the corridors', body: 'Hover a town for its read and how many categories are open; hover a route to light up the towns on it.', links: [['South Shore map →', '/south-shore/'], ['Broward', '/broward/'], ['Palm Beach', '/palm-beach/']] });
+    }
+    return out.slice(0, 2);
+  }
+
+  let currentActions: Action[] = [];
+  function actionsHtml(list: Action[]) {
+    return list
+      .map(
+        (a) => `
+      <div class="rounded-lg border border-brass-400/60 bg-white p-3.5" data-action>
+        <p class="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-brass-600">${esc(a.eyebrow)}</p>
+        <p class="mt-1 text-sm font-bold leading-snug text-navy-900">${esc(a.title)}</p>
+        <p class="mt-1 text-xs leading-relaxed text-ink-700">${esc(a.body)}</p>
+        <p class="mt-2 flex flex-wrap gap-2">${a.links
+          .map(([label, href], i) => `<a href="${href}" class="${i === 0 ? 'rounded-md bg-teal-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-teal-700' : 'rounded-md border border-navy-100 px-3 py-1.5 text-xs font-semibold text-navy-900 hover:border-teal-500'}">${esc(label)}</a>`)
+          .join('')}</p>
+      </div>`
+      )
+      .join('<div class="h-2"></div>');
+  }
   const STOP = new Set(['the', 'a', 'an', 'is', 'are', 'do', 'does', 'did', 'i', 'my', 'me', 'we', 'you', 'your', 'it', 'to', 'of', 'in', 'on', 'for', 'and', 'or', 'with', 'what', 'whats', 'how', 'why', 'who', 'when', 'where', 'can', 'will', 'be', 'this', 'that', 'there', 'ics', 'much', 'many', 'get', 'have', 'has', 'any', 'about', 'if']);
   const QUESTION_WORDS = /\b(what|how|who|why|when|where|can|does|do|is|are|should|will|cost|price|pay|own|guarantee|licensed|license)\b|\?/i;
 
@@ -150,14 +353,21 @@
 
   const sendHref = (q: string) => `/contact/?${new URLSearchParams({ interest: 'Something else', message: `Question for Daniel: ${q}` }).toString()}`;
 
-  function renderAnswers(list: Answer[], q = '', isQuestion = false) {
+  function renderAnswers(list: Answer[], q = '', isQuestion = false, actions: Action[] = []) {
     const box = document.getElementById('palette-answers')!;
-    if (!list.length && !isQuestion) {
+    currentActions = actions;
+    if (!list.length && !isQuestion && !actions.length) {
       box.classList.add('hidden');
       box.innerHTML = '';
       return;
     }
     box.classList.remove('hidden');
+    if (actions.length && !list.length) {
+      // The palette can do what was asked; offer the tool, pre-filled.
+      box.innerHTML = actionsHtml(actions) + (isQuestion ? `<p class="mt-2 px-1 text-[11px] text-ink-500">Had a question instead? <a href="${sendHref(q)}" class="font-semibold text-teal-600 hover:text-teal-700">Send it to Daniel →</a></p>` : '');
+      track(q, true);
+      return;
+    }
     if (!list.length) {
       // A real question with no instant answer becomes a message to the founder, pre-written.
       box.innerHTML = `
@@ -170,6 +380,7 @@
       return;
     }
     box.innerHTML =
+      (actions.length ? actionsHtml(actions) + '<div class="h-2"></div>' : '') +
       list
         .map(
           (x) => `
@@ -227,6 +438,8 @@
         .slice(0, 6)
         .map(([, e]) => e);
 
+      // Can a tool do what was typed? Offer it first.
+      const actions = detectActions(raw);
       // Looks like a question (or is long enough to be one)? Answer it.
       const qTerms = tokens(raw);
       if (qTerms.length >= 2 && (QUESTION_WORDS.test(raw) || qTerms.length >= 3)) {
@@ -235,11 +448,11 @@
           .map((a) => [answerScore(a, qTerms), a] as [number, Answer])
           .filter(([s]) => s > 0)
           .sort((a, b) => b[0] - a[0])
-          .slice(0, 2)
+          .slice(0, actions.length ? 1 : 2)
           .map(([, a]) => a);
-        renderAnswers(best, raw, true);
+        renderAnswers(best, raw, true, actions);
       } else {
-        renderAnswers([]);
+        renderAnswers([], raw, false, actions);
       }
     }
     selected = 0;
@@ -276,7 +489,12 @@
         kev.preventDefault();
         selected = (selected + (kev.key === 'ArrowDown' ? 1 : shown.length - 1)) % Math.max(shown.length, 1);
         render();
-      } else if (kev.key === 'Enter' && shown[selected]) {
+      } else if (kev.key === 'Enter') {
+        if (currentActions.length) {
+          window.location.href = currentActions[0].links[0][1];
+          return;
+        }
+        if (!shown[selected]) return;
         const answered = !document.getElementById('palette-answers')!.classList.contains('hidden');
         if (!answered) window.location.href = shown[selected].u;
       }

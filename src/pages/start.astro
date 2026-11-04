@@ -101,6 +101,11 @@ const description =
             Learn more →
           </a>
         </div>
+        <p id="fit-next" class="mt-4 hidden text-sm text-ink-700">
+          Then: <a id="fit-f90" href="/first-90-days/" class="font-semibold text-teal-600 hover:text-teal-700">what the first 90 days look like →</a>
+          <span class="text-ink-500"> · </span>
+          <a id="fit-payback" href="/payback/" class="font-semibold text-teal-600 hover:text-teal-700">when it pays back →</a>
+        </p>
         <p class="mt-4 text-xs text-ink-500">
           Full menu anytime: <a href="/pricing/" class="font-semibold text-teal-600 hover:text-teal-700">published pricing</a> ·
           <a href="/guarantees/" class="font-semibold text-teal-600 hover:text-teal-700">written guarantees</a>
@@ -302,6 +307,12 @@ const description =
           : 'Broward County, FL — the political desk is built for Massachusetts races; ask and we will tell you honestly whether and how we can help in Florida.';
       }
       (document.getElementById('fit-learn') as HTMLAnchorElement).href = answers.where === 'broward' && travels ? '/broward/' : s.learnHref;
+      const isSystem = key === 'jobsite' || key === 'leadengine' || key === 'marketlock';
+      document.getElementById('fit-next')!.classList.toggle('hidden', !isSystem);
+      if (isSystem) {
+        (document.getElementById('fit-f90') as HTMLAnchorElement).href = `/first-90-days/?system=${key}`;
+        (document.getElementById('fit-payback') as HTMLAnchorElement).href = `/payback/?system=${key}`;
+      }
       // Remember the match (browser-only) so a return visit to the homepage can pick it back up.
       rememberPath(answers.where === 'broward' && travels ? 'broward' : FIT_TO_PATH[key] || 'ai', { system: s.name });
 
