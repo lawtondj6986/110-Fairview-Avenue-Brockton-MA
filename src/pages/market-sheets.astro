@@ -1,0 +1,114 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { MARKETS, allSheetPlaces, type Market } from '../lib/sheets';
+import { INDUSTRIES } from '../lib/industries';
+import { lockedInPlace } from '../lib/claimed';
+import { SITE } from '../config';
+
+const order: Market[] = ['MA', 'FL', 'PB'];
+const groups = order.map((m) => {
+  const spec = MARKETS[m];
+  const places = allSheetPlaces(m).map((p) => ({ ...p, open: INDUSTRIES.length - lockedInPlace(spec.claimed, p.slug) }));
+  return { spec, places };
+});
+const total = groups.reduce((n, g) => n + g.places.length, 0);
+
+const title = `Market Sheets — ${total} Printable One-Page Market Briefs | ICS`;
+const description = `One printable page for every town and city ICS serves: ${groups.map((g) => `${g.places.length} ${g.spec.label}`).join(', ')}. Each sheet carries the corridors, who buys there, the operator's read, which Market Lock categories are open, published pricing, and a QR code to the live page. Print one before a meeting or hand it across a counter.`;
+
+const faqs = [
+  {
+    q: 'What is a market sheet?',
+    a: `A one-page, print-ready brief on a single town or city: where it does business, who buys there, how ICS reads it, which of the ${INDUSTRIES.length} Market Lock categories are still open, and the three systems with their published pricing. It is the same information as the live market page, laid out to be handed across a counter.`,
+  },
+  {
+    q: 'Why would I print one?',
+    a: 'Because a meeting about a town goes better when both people are looking at the same page. Owners print a sheet before a site visit or a partner conversation; the founder leaves one behind after a first call. The QR code brings the reader back to the live page, where the territory status is always current.',
+  },
+  {
+    q: 'Is the sheet up to date?',
+    a: `Every sheet is rebuilt with the site, so prices and territory status match the pricing page and the Territory Boards on the day it is printed. The month and year are printed in the masthead; if a sheet in your hand is older than a season, scan the code.`,
+  },
+  {
+    q: 'Do the Florida sheets cover real estate?',
+    a: `No. In Florida ICS delivers AI revenue systems, retail platforms, and custom builds; brokerage is Massachusetts-licensed (${SITE.license}), and a Florida property transaction is handled alongside a licensed Florida broker. Every Florida sheet says so in its footer.`,
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'ICS Market Sheets',
+    description,
+    url: `${SITE.url}/market-sheets/`,
+    hasPart: groups.flatMap((g) => g.places.map((p) => ({ '@type': 'WebPage', name: `${p.name}, ${g.spec.state} Market Sheet`, url: `${SITE.url}${p.sheetHref}` }))),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Free tool · The leave-behind</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        Market Sheets: one printable page for every town and city we serve.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        {total} sheets across three markets. Each one fits on a single US Letter page: the corridors, who buys there, the
+        operator's read, which Market Lock categories are still open, the three systems with published pricing, and a QR
+        code back to the live page. Print one before a meeting. Hand one across a counter.
+      </p>
+      <div class="reveal mt-8 flex flex-wrap gap-3" style="--reveal-delay: 300ms">
+        <a href="#south-shore" class="rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300">South Shore, MA</a>
+        <a href="#broward" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">Broward County, FL</a>
+        <a href="#palm-beach" class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">Palm Beach County, FL</a>
+      </div>
+    </div>
+  </section>
+
+  {groups.map(({ spec, places }) => (
+    <section id={spec.hubHref.replace(/\//g, '')} class={spec.key === 'FL' ? 'bg-white' : ''}>
+      <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <SectionHeading eyebrow={`${places.length} ${spec.noun === 'town' ? 'towns' : 'cities'}`} heading={spec.label} />
+          <a href={spec.hubHref} class="font-semibold text-teal-600 hover:text-teal-700">{spec.hubLabel} practice page →</a>
+        </div>
+        <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {places.map((p) => (
+            <li>
+              <a href={p.sheetHref} class="lift group flex h-full items-start justify-between gap-3 rounded-xl border border-navy-100 bg-white p-4 shadow-sm hover:border-teal-500">
+                <span class="min-w-0">
+                  <span class="block font-display text-lg font-bold text-navy-900 group-hover:text-teal-700">{p.name}, {spec.state}</span>
+                  <span class="mt-0.5 block truncate text-xs text-ink-500">{p.corridors.slice(0, 2).join(' · ')}</span>
+                  <span class="mt-2 inline-block rounded-full bg-paper px-2 py-0.5 text-[11px] font-semibold text-teal-700">{p.open} of {INDUSTRIES.length} categories open</span>
+                </span>
+                <span class="shrink-0 font-mono text-[10px] font-bold uppercase tracking-widest text-brass-600">Sheet →</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  ))}
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brass-600">Common questions · Market Sheets</h2>
+      <dl class="mt-5 space-y-5">
+        {faqs.map((f) => (
+          <div><dt class="text-base font-bold text-navy-900">{f.q}</dt><dd class="mt-1.5 text-sm leading-relaxed text-ink-700">{f.a}</dd></div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <CtaSection heading="Want the sheet with your name on it?" body="Build Your Own Proposal turns a sheet into a priced, dated proposal for your business in your town, in about a minute. Or call, and we will bring the printed one." />
+</Base>

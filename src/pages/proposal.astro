@@ -266,9 +266,11 @@ const schema = [
       if (sys.value === 'marketlock' && state && ind.value !== 'other') {
         const locked = (claimed[state] || []).some((c) => c.place === placeSlug && c.industry === ind.value);
         const boardHref = state === 'FL' ? '/broward/territories/' : state === 'PB' ? '/palm-beach/territories/' : '/territories/';
+        const sheetHref = (state === 'FL' ? '/broward/' : state === 'PB' ? '/palm-beach/' : '/south-shore/') + placeSlug + '/sheet/';
+        const sheetLink = ` <a href="${sheetHref}" class="font-semibold text-teal-600 hover:text-teal-700">Print the ${placeName} market sheet →</a>`;
         t.innerHTML = locked
-          ? `<span class="font-semibold text-brass-600">${indName} in ${placeName} is currently held by an ICS client.</span> We can put you first in line for renewal, or scope a neighboring territory or an adjacent category. <a href="${boardHref}?place=${placeSlug}&cat=${ind.value}" class="font-semibold text-teal-600 hover:text-teal-700">See the board →</a>`
-          : `<span class="font-semibold text-teal-700">${indName} in ${placeName} is open.</span> Market Lock holds one ${indName.toLowerCase()} business per ${state === 'MA' ? 'town' : 'city'}; the first to lock it keeps it for the 12-month term with first right to renew. <a href="${boardHref}?place=${placeSlug}&cat=${ind.value}" class="font-semibold text-teal-600 hover:text-teal-700">Check the board →</a>`;
+          ? `<span class="font-semibold text-brass-600">${indName} in ${placeName} is currently held by an ICS client.</span> We can put you first in line for renewal, or scope a neighboring territory or an adjacent category. <a href="${boardHref}?place=${placeSlug}&cat=${ind.value}" class="font-semibold text-teal-600 hover:text-teal-700">See the board →</a>` + sheetLink
+          : `<span class="font-semibold text-teal-700">${indName} in ${placeName} is open.</span> Market Lock holds one ${indName.toLowerCase()} business per ${state === 'MA' ? 'town' : 'city'}; the first to lock it keeps it for the 12-month term with first right to renew. <a href="${boardHref}?place=${placeSlug}&cat=${ind.value}" class="font-semibold text-teal-600 hover:text-teal-700">Check the board →</a>` + sheetLink;
         wrap.classList.remove('hidden');
       } else if (state === 'FL' || state === 'PB') {
         t.textContent = `Delivered in ${placeName} at the same published pricing as Massachusetts. ICS is on the ground in South Florida seasonally and every system runs remotely the rest of the year. Real estate brokerage is Massachusetts-licensed; this proposal is for systems only.`;

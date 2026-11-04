@@ -88,7 +88,9 @@ function collectPages() {
   const townsSrc = readFileSync(rel('src/lib/towns.ts'), 'utf8');
   for (const m of townsSrc.matchAll(/slug: '([^']+)',\s*\n\s*name: '([^']+)'/g)) {
     pages.push([`/south-shore/${m[1]}/`, `south-shore-${m[1]}`, 'COMMERCIAL REAL ESTATE + AI SYSTEMS', `${m[2]}, Massachusetts.`]);
+    pages.push([`/south-shore/${m[1]}/sheet/`, `sheet-south-shore-${m[1]}`, 'MARKET SHEET · ONE PRINTABLE PAGE', `${m[2]}, MA: corridors, buyers, open categories, pricing.`]);
   }
+  pages.push(['/market-sheets/', 'market-sheets', 'FREE TOOL · THE LEAVE-BEHIND', 'Market Sheets: one printable page for every town and city.']);
 
   // Industries from the data file (same slug/name shape as towns)
   const indSrc = readFileSync(rel('src/lib/industries.ts'), 'utf8');
@@ -100,11 +102,13 @@ function collectPages() {
   const browardSrc = readFileSync(rel('src/lib/broward.ts'), 'utf8');
   for (const m of browardSrc.matchAll(/slug: '([^']+)',\s*\n\s*name: '([^']+)'/g)) {
     pages.push([`/broward/${m[1]}/`, `broward-${m[1]}`, 'AI REVENUE SYSTEMS · BROWARD COUNTY FL', `${m[2]}, Florida.`]);
+    pages.push([`/broward/${m[1]}/sheet/`, `sheet-broward-${m[1]}`, 'MARKET SHEET · BROWARD COUNTY FL', `${m[2]}, FL: corridors, buyers, open categories, pricing.`]);
   }
 
   const pbSrc = readFileSync(rel('src/lib/palm-beach.ts'), 'utf8');
   for (const m of pbSrc.matchAll(/slug: '([^']+)',\s*\n\s*name: '([^']+)'/g)) {
     pages.push([`/palm-beach/${m[1]}/`, `palm-beach-${m[1]}`, 'AI REVENUE SYSTEMS · PALM BEACH COUNTY FL', `${m[2]}, Florida.`]);
+    pages.push([`/palm-beach/${m[1]}/sheet/`, `sheet-palm-beach-${m[1]}`, 'MARKET SHEET · PALM BEACH COUNTY FL', `${m[2]}, FL: corridors, buyers, open categories, pricing.`]);
   }
 
   const content = [

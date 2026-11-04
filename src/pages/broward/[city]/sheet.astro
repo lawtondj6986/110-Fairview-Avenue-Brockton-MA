@@ -1,0 +1,43 @@
+---
+import Base from '../../../layouts/Base.astro';
+import MarketSheet from '../../../components/MarketSheet.astro';
+import { getSheetPlace, sheetParams } from '../../../lib/sheets';
+import { INDUSTRIES } from '../../../lib/industries';
+import { CLAIMED_FL, lockedInPlace } from '../../../lib/claimed';
+import { SITE } from '../../../config';
+
+export async function getStaticPaths() {
+  return sheetParams('FL', 'city');
+}
+
+const place = getSheetPlace('FL', Astro.params.city as string)!;
+const open = INDUSTRIES.length - lockedInPlace(CLAIMED_FL, place.slug);
+const title = `${place.name}, FL Market Sheet — One Printable Page | ICS Broward`;
+const description = `The one-page market sheet for ${place.name}, Florida: corridors (${place.corridors.slice(0, 3).join(', ')}), who buys here, the operator's read, ${open} of ${INDUSTRIES.length} Market Lock categories open, and the same published pricing as Massachusetts. Print it or save it as a PDF.`;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `${place.name}, FL Market Sheet`,
+    description,
+    url: `${SITE.url}${place.sheetHref}`,
+    isPartOf: { '@id': `${SITE.url}/#website` },
+    about: { '@type': 'City', name: `${place.name}, Florida` },
+    mainEntityOfPage: `${SITE.url}${place.pageHref}`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Broward County', item: `${SITE.url}/broward/` },
+      { '@type': 'ListItem', position: 2, name: place.name, item: `${SITE.url}${place.pageHref}` },
+      { '@type': 'ListItem', position: 3, name: 'Market Sheet', item: `${SITE.url}${place.sheetHref}` },
+    ],
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <MarketSheet market="FL" slug={place.slug} />
+</Base>

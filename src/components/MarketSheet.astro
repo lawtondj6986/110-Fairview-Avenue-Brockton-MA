@@ -1,0 +1,324 @@
+---
+/**
+ * MarketSheet — the one-page, print-ready leave-behind for a town or city.
+ *
+ * Screen: a toolbar (print, copy link, back) above a letter-proportioned sheet.
+ * Print: chrome hidden, the sheet alone on one US Letter page with the navy
+ * masthead preserved. Every figure comes from live data: towns/cities, geo,
+ * the claims file, OFFERINGS via SYSTEMS, and INDUSTRIES.
+ */
+import QRCode from 'qrcode';
+import { MARKETS, getSheetPlace, type Market } from '../lib/sheets';
+import { INDUSTRIES } from '../lib/industries';
+import { SYSTEMS } from '../lib/systems';
+import { isLocked, lockedInPlace } from '../lib/claimed';
+import { SITE } from '../config';
+
+interface Props {
+  market: Market;
+  slug: string;
+}
+const { market, slug } = Astro.props;
+const spec = MARKETS[market];
+const place = getSheetPlace(market, slug)!;
+const url = `${SITE.url}${place.pageHref}`;
+const shortUrl = url.replace(/^https?:\/\//, '');
+const qr = await QRCode.toString(url, { type: 'svg', margin: 0, errorCorrectionLevel: 'M', color: { dark: '#0f1b33', light: '#ffffff' } });
+
+const open = INDUSTRIES.length - lockedInPlace(spec.claimed, slug);
+const cats = INDUSTRIES.map((i) => ({ slug: i.slug, name: i.name, locked: isLocked(spec.claimed, slug, i.slug) }));
+
+const dated = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+// Mini map: every place in the market as a dot, this one highlighted, neighbors named.
+const W = 300;
+const H = 230;
+const PAD = 22;
+const geo = spec.geo;
+const lons = geo.map((g) => g.lon);
+const lats = geo.map((g) => g.lat);
+const minLon = Math.min(...lons);
+const maxLon = Math.max(...lons);
+const minLat = Math.min(...lats);
+const maxLat = Math.max(...lats);
+const midLat = (minLat + maxLat) / 2;
+const aspect = 1 / Math.cos((midLat * Math.PI) / 180);
+const scale = Math.min((W - 2 * PAD) / (maxLon - minLon || 1), (H - 2 * PAD) / ((maxLat - minLat) * aspect || 1));
+const x = (lon: number) => PAD + (lon - minLon) * scale;
+const y = (lat: number) => PAD + (maxLat - lat) * scale * aspect;
+const neighborSet = new Set(place.neighbors.map((n) => n.slug));
+const dots = geo.map((g) => {
+  const X = x(g.lon);
+  const Y = y(g.lat);
+  // Flip a label that would run off the small canvas.
+  const anchor: 'start' | 'end' | 'middle' = X < 70 ? 'start' : X > W - 70 ? 'end' : (g.anchor ?? 'start');
+  return {
+    slug: g.slug,
+    X,
+    Y,
+    self: g.slug === slug,
+    neighbor: neighborSet.has(g.slug),
+    name: g.slug === slug ? place.name : place.neighbors.find((n) => n.slug === g.slug)?.name,
+    anchor,
+    dx: Math.abs(g.dx ?? 8),
+    dy: g.dy ?? 4,
+  };
+});
+
+const sheetId = `sheet-${market.toLowerCase()}-${slug}`;
+---
+
+<!-- Toolbar: screen only -->
+<div class="no-print border-b border-navy-100 bg-paper">
+  <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
+    <p class="text-sm text-ink-700">
+      <a href={place.pageHref} class="font-semibold text-teal-600 hover:text-teal-700">← {place.name} market page</a>
+      <span class="text-ink-500"> · </span>
+      <a href="/market-sheets/" class="font-semibold text-ink-700 hover:text-teal-700">All market sheets</a>
+    </p>
+    <div class="flex flex-wrap gap-2">
+      <button type="button" data-sheet-copy class="rounded-md border border-navy-100 bg-white px-3.5 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700">Copy link</button>
+      <button type="button" data-sheet-print class="rounded-md bg-navy-900 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-600">Print / save as PDF</button>
+    </div>
+  </div>
+</div>
+
+<div class="sheet-stage bg-navy-100/40 px-2 py-6 sm:px-4 sm:py-10">
+  <article id={sheetId} class="sheet mx-auto max-w-[8.5in] bg-white text-navy-900 shadow-xl ring-1 ring-navy-100" aria-label={`Market sheet: ${place.name}, ${spec.state}`}>
+    <!-- Masthead -->
+    <header class="masthead flex flex-wrap items-start justify-between gap-4 bg-navy-950 px-7 py-5 text-white sm:px-9">
+      <div class="flex items-center gap-3">
+        <img src="/images/ics-logo-mark.jpg" alt="" width="160" height="160" class="h-10 w-10 rounded-md object-cover" />
+        <div>
+          <p class="font-display text-[11px] font-bold uppercase tracking-[0.22em] text-brass-300">Innovative Commercial Strategies</p>
+          <p class="text-xs text-navy-100/80">Market Sheet · {spec.label}</p>
+        </div>
+      </div>
+      <div class="text-right text-xs text-navy-100/80">
+        <p class="font-mono">{dated}</p>
+        <p>{shortUrl}</p>
+      </div>
+    </header>
+
+    <div class="px-7 pb-6 pt-6 sm:px-9">
+      <!-- Title block -->
+      <div class="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 border-b-2 border-navy-950 pb-4">
+        <div>
+          <h1 class="font-display text-3xl font-bold leading-none text-navy-950 sm:text-4xl">{place.name}, {spec.state}</h1>
+          <p class="mt-1.5 text-sm text-ink-500">{place.county} · {place.position}</p>
+        </div>
+        <p class="rounded-md bg-teal-100 px-3 py-1.5 text-xs font-semibold text-teal-700">
+          {open} of {INDUSTRIES.length} Market Lock categories open
+        </p>
+      </div>
+
+      <!-- Map + corridors + buyers -->
+      <div class="mt-5 grid gap-6 sm:grid-cols-[1fr_1.35fr]">
+        <figure class="m-0">
+          <svg viewBox={`0 0 ${W} ${H}`} class="h-auto w-full rounded-md border border-navy-100 bg-paper" role="img" aria-label={`${place.name} among the ${geo.length} ${spec.noun === 'town' ? 'towns' : 'cities'} ICS serves in ${spec.label}`}>
+            {dots.filter((d) => !d.self).map((d) => (
+              <circle cx={d.X} cy={d.Y} r={d.neighbor ? 3.4 : 2.4} fill={d.neighbor ? '#0f766e' : '#b4bccf'} />
+            ))}
+            {dots.filter((d) => d.neighbor).map((d) => (
+              <text x={d.X + (d.anchor === 'end' ? -d.dx : d.anchor === 'middle' ? 0 : d.dx) * 0.7} y={d.Y + d.dy * 0.7} text-anchor={d.anchor} font-size="8.5" fill="#0f766e" font-family="ui-sans-serif, system-ui, sans-serif" paint-order="stroke" stroke="#f6f4ee" stroke-width="2.5">{d.name}</text>
+            ))}
+            {dots.filter((d) => d.self).map((d) => (
+              <>
+                <circle cx={d.X} cy={d.Y} r="11" fill="#c9a24a" fill-opacity="0.25" />
+                <circle cx={d.X} cy={d.Y} r="5.5" fill="#a8832f" stroke="#ffffff" stroke-width="2" />
+                <text x={d.X + (d.anchor === 'end' ? -d.dx : d.anchor === 'middle' ? 0 : d.dx) * 0.9} y={d.Y + d.dy * 0.9 - 1} text-anchor={d.anchor} font-size="11" font-weight="700" fill="#0f1b33" font-family="ui-sans-serif, system-ui, sans-serif" paint-order="stroke" stroke="#f6f4ee" stroke-width="3">{d.name}</text>
+              </>
+            ))}
+          </svg>
+          <figcaption class="mt-1.5 text-[11px] text-ink-500">
+            {place.name} (brass) and its neighbors (teal) among the {geo.length} {spec.noun === 'town' ? 'towns' : 'cities'} ICS serves in {spec.label}. Schematic, not a survey.
+          </figcaption>
+        </figure>
+
+        <div class="grid gap-5 text-sm">
+          <div>
+            <h2 class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-brass-600">Where {place.name} does business</h2>
+            <ul class="mt-1.5 flex flex-wrap gap-1.5">
+              {place.corridors.map((c) => <li class="rounded-full border border-navy-100 bg-white px-2.5 py-0.5 text-xs font-medium text-ink-700">{c}</li>)}
+            </ul>
+          </div>
+          <div>
+            <h2 class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-brass-600">Who buys here</h2>
+            <ul class="mt-1.5 space-y-1 text-[13px] leading-snug text-ink-700">
+              {place.businessBullets.map((b) => <li class="flex gap-2"><span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-teal-600"></span><span>{b}</span></li>)}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {place.propertyMix && (
+        <div class="mt-5">
+          <h2 class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-brass-600">The property side</h2>
+          <p class="mt-1.5 text-[13px] leading-snug text-ink-700">{place.propertyMix}</p>
+        </div>
+      )}
+
+      <!-- The read -->
+      <blockquote class="mt-5 border-l-4 border-teal-500 bg-paper px-4 py-3">
+        <p class="text-[13.5px] font-medium leading-snug text-navy-900">{place.angle}</p>
+        <footer class="mt-1.5 text-xs text-ink-500">{SITE.founder}, founder</footer>
+      </blockquote>
+
+      <!-- Territory grid -->
+      <div class="mt-5">
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-brass-600">Market Lock in {place.name}: one business per category</h2>
+          <p class="text-[11px] text-ink-500">Live status at {SITE.url.replace(/^https?:\/\//, '')}{spec.boardHref}</p>
+        </div>
+        <ul class="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-[12.5px] sm:grid-cols-3">
+          {cats.map((c) => (
+            <li class="flex items-center gap-2 border-b border-dotted border-navy-100 py-1">
+              <span class={`inline-block h-2.5 w-2.5 shrink-0 rounded-sm ${c.locked ? 'bg-brass-500' : 'border border-teal-600 bg-teal-100'}`} aria-hidden="true"></span>
+              <span class={c.locked ? 'text-ink-500 line-through' : 'text-ink-700'}>{c.name}</span>
+              <span class="ml-auto font-mono text-[10px] uppercase tracking-wider text-ink-500">{c.locked ? 'held' : 'open'}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Pricing -->
+      <div class="mt-5">
+        <h2 class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-brass-600">Three systems, published pricing, same in {spec.stateName}</h2>
+        <div class="mt-2 overflow-x-auto">
+          <table class="w-full min-w-[30rem] border-collapse text-[12.5px]">
+            <thead>
+              <tr class="border-b border-navy-950 text-left font-mono text-[10px] uppercase tracking-wider text-ink-500">
+                <th class="py-1 pr-3 font-semibold">System</th>
+                <th class="py-1 pr-3 font-semibold">Build</th>
+                <th class="py-1 pr-3 font-semibold">Monthly</th>
+                <th class="py-1 font-semibold">Live</th>
+              </tr>
+            </thead>
+            <tbody>
+              {SYSTEMS.map((s) => (
+                <tr class="border-b border-navy-100 align-top">
+                  <td class="py-1.5 pr-3"><strong class="text-navy-950">{s.name}</strong><span class="block text-[11px] text-ink-500">{s.tagline}</span></td>
+                  <td class="py-1.5 pr-3 font-mono whitespace-nowrap">{s.setup}</td>
+                  <td class="py-1.5 pr-3 font-mono whitespace-nowrap">{s.monthly.replace(' per month', '/mo')}</td>
+                  <td class="py-1.5 text-ink-700">{s.timeline.split(';')[0].split(',')[0]}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-2 text-[11.5px] text-ink-700">
+          <strong class="text-navy-950">In writing:</strong> live in 21 days or a $1,000-per-week credit · under 60 seconds to first response, measured monthly · 90 days to measurable proof or we work free until there is · 100% yours: code, domain, accounts, data.
+        </p>
+      </div>
+
+      <!-- Next step + QR -->
+      <div class="mt-6 flex flex-wrap items-center justify-between gap-5 border-t-2 border-navy-950 pt-4">
+        <div class="min-w-[16rem] flex-1">
+          <p class="font-display text-lg font-bold text-navy-950">Next step: one call, a straight answer, a written quote within 48 hours.</p>
+          <p class="mt-1 text-sm text-ink-700">{SITE.founder} · {SITE.phone} · {shortUrl}</p>
+          <p class="mt-2 text-[11px] leading-snug text-ink-500">{spec.presence} {spec.scope} {spec.state === 'MA' ? SITE.license + '.' : ''}</p>
+        </div>
+        <figure class="m-0 shrink-0 text-center">
+          <div class="qr mx-auto h-[88px] w-[88px] rounded-md border border-navy-100 bg-white p-1.5" set:html={qr} />
+          <figcaption class="mt-1 font-mono text-[9.5px] uppercase tracking-wider text-ink-500">Scan for the live page</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <p class="no-print mx-auto mt-5 max-w-[8.5in] text-center text-xs text-ink-700">
+    Prints on one US Letter page. Neighbors: {place.neighbors.map((n, i) => <><a href={`${spec.pageBase}${n.slug}/sheet/`} class="font-semibold text-teal-600 hover:text-teal-700">{n.name}</a>{i < place.neighbors.length - 1 ? ', ' : ''}</>)}.
+  </p>
+</div>
+
+<style>
+  .qr :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .masthead {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media print {
+    @page {
+      size: letter;
+      margin: 0.35in;
+    }
+    :global(header:not(.masthead)),
+    :global(footer:not(.sheet footer)),
+    :global(#money-bar),
+    :global(#path-bar),
+    :global(#palette),
+    .no-print {
+      display: none !important;
+    }
+    :global(body) {
+      background: white !important;
+    }
+    .sheet-stage {
+      background: white !important;
+      padding: 0 !important;
+    }
+    .sheet {
+      box-shadow: none !important;
+      --tw-ring-color: transparent;
+      max-width: none !important;
+      zoom: 0.7;
+      break-inside: avoid;
+    }
+    .sheet > div {
+      padding-top: 1rem !important;
+      padding-bottom: 0.75rem !important;
+    }
+    .sheet .mt-5 {
+      margin-top: 0.7rem !important;
+    }
+    .sheet .mt-6 {
+      margin-top: 0.9rem !important;
+    }
+    .sheet .masthead {
+      background: #0a1226 !important;
+      color: #fff !important;
+    }
+    :global(.reveal) {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+</style>
+
+<script>
+  function initSheet() {
+    const print = document.querySelector<HTMLButtonElement>('[data-sheet-print]');
+    const copy = document.querySelector<HTMLButtonElement>('[data-sheet-copy]');
+    if (print && !print.dataset.ready) {
+      print.dataset.ready = '1';
+      print.addEventListener('click', () => window.print());
+    }
+    if (copy && !copy.dataset.ready) {
+      copy.dataset.ready = '1';
+      copy.addEventListener('click', async () => {
+        const label = copy.textContent;
+        try {
+          await navigator.clipboard.writeText(location.href);
+          copy.textContent = 'Link copied';
+        } catch {
+          copy.textContent = location.href;
+        }
+        setTimeout(() => (copy.textContent = label), 1800);
+      });
+    }
+    const va = (window as unknown as { va?: (...a: unknown[]) => void }).va;
+    if (va && !document.body.dataset.sheetTracked) {
+      document.body.dataset.sheetTracked = '1';
+      va('event', { name: 'market-sheet', data: { path: location.pathname } });
+    }
+  }
+  document.addEventListener('astro:page-load', initSheet);
+</script>
