@@ -193,6 +193,7 @@ const INTENTS = {
       proposal: /\b(proposal|quote|estimate|scope|price for|pricing for)\b/,
       contact: /\b(call|phone|talk|book|contact|email|reach|meet)\b/,
       map: /\bmap\b/,
+      quiz: /\b(quiz|fluency|test me|vocabulary|how fluent)\b/,
     };
     const ma = places.filter((p) => p.m === 'MA');
     const names = (ps: Place[]) => ps.map((p) => p.n).join(', ');
@@ -248,6 +249,9 @@ const INTENTS = {
     }
     if (!out.length && has(V.contact) && !has(QUESTION_WORDS)) {
       out.push({ eyebrow: 'Talk to Daniel', title: 'One call, a straight answer', body: 'He answers his own phone and email. A written quote follows within 48 hours.', links: [['Contact →', '/contact/'], ['Call (508) 942-8259', 'tel:+15089428259']] });
+    }
+    if (has(V.quiz)) {
+      out.push({ eyebrow: 'The Fluency Test', title: 'Ten questions from the glossary', body: 'Read the definition, pick the term. Every miss links to a two-minute read.', links: [['Take the test →', '/fluency/'], ['The deal track', '/fluency/?track=cre'], ['The pitch track', '/fluency/?track=ai']] });
     }
     if (!out.length && has(V.map)) {
       out.push({ eyebrow: 'The map', title: 'Every town and city, with the corridors', body: 'Hover a town for its read and how many categories are open; hover a route to light up the towns on it.', links: [['South Shore map →', '/south-shore/'], ['Broward', '/broward/'], ['Palm Beach', '/palm-beach/']] });

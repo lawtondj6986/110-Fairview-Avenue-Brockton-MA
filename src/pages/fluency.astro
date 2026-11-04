@@ -1,0 +1,274 @@
+---
+/**
+ * The Fluency Test — ten questions drawn from the Glossary. A definition is
+ * shown; the reader picks the term from four options drawn from the same
+ * category. Every miss links to the term's page. Built from the glossary
+ * collection at compile time, so a new term joins the test automatically.
+ */
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { SITE } from '../config';
+
+const terms = (await getCollection('glossary', ({ data }) => !data.draft)).map((e) => ({ t: e.data.term, s: e.id, c: e.data.category, d: e.data.short }));
+const counts = { cre: terms.filter((t) => t.c === 'cre').length, ai: terms.filter((t) => t.c === 'ai').length, intel: terms.filter((t) => t.c === 'intel').length };
+
+const title = 'The Fluency Test — Ten Questions From the Glossary | ICS';
+const description = `How fluent are you in the language of the deal, the pitch, and the file? Ten questions drawn at random from the ${terms.length}-term ICS Glossary: read the definition, pick the term from four. Every miss links to its page. Three tracks: commercial real estate (${counts.cre} terms), AI systems (${counts.ai}), commercial intelligence (${counts.intel}). No email, no score sent anywhere.`;
+
+const faqs = [
+  { q: 'Where do the questions come from?', a: `Every question is a term from the ICS Glossary with its one-line definition; the four options are drawn from the same category so the distractors are plausible. The test is rebuilt with the site, so when a term is added to the glossary it joins the pool.` },
+  { q: 'Is my score recorded?', a: 'No. The test runs in your browser and nothing is sent anywhere. "Copy my score" puts a sentence on your clipboard for you to paste wherever you like; that is the whole sharing mechanism.' },
+  { q: 'What is a good score?', a: 'Eight or more means you can sit across from a broker, an agency, or an analyst and follow every sentence. Five to seven is where most owners start. Below five is the reason the glossary exists; each miss links to a two-minute read.' },
+];
+
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'ICS Fluency Test', applicationCategory: 'EducationalApplication', operatingSystem: 'Web', url: `${SITE.url}/fluency/`, description, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, provider: { '@id': `${SITE.url}/#business` } },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+const tab = 'rounded-md border border-navy-100 bg-white px-4 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500 aria-pressed:border-navy-900 aria-pressed:bg-navy-900 aria-pressed:text-white';
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Free · The fluency test · 3 minutes · No email</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        How fluent are you in the language of the deal?
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Ten definitions from the {terms.length}-term glossary. Pick the term. Every miss links to a two-minute read, so the
+        test is also the fastest way through the glossary. Pick your track.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 py-10 sm:px-6" id="fq">
+    <script type="application/json" id="fq-data" set:html={JSON.stringify(terms)} />
+    <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Choose a track">
+      <span class="mr-2 font-mono text-[11px] font-bold uppercase tracking-widest text-ink-500">Track</span>
+      <button type="button" class={`fq-track ${tab}`} data-track="cre" aria-pressed="true">The deal <span class="font-normal opacity-70">· {counts.cre} terms</span></button>
+      <button type="button" class={`fq-track ${tab}`} data-track="ai" aria-pressed="false">The pitch <span class="font-normal opacity-70">· {counts.ai}</span></button>
+      <button type="button" class={`fq-track ${tab}`} data-track="intel" aria-pressed="false">The file <span class="font-normal opacity-70">· {counts.intel}</span></button>
+      <button type="button" class={`fq-track ${tab}`} data-track="all" aria-pressed="false">Mixed</button>
+    </div>
+
+    <article class="mt-6 rounded-2xl border border-navy-100 bg-white p-6 shadow-sm sm:p-8" aria-live="polite">
+      <div id="fq-quiz">
+        <p class="flex items-baseline justify-between font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600"><span id="fq-track-label">The deal</span><span id="fq-progress">Question 1 of 10</span></p>
+        <p class="mt-4 text-sm font-semibold uppercase tracking-wider text-ink-500">Which term means:</p>
+        <p id="fq-def" class="mt-2 font-display text-2xl font-bold leading-snug text-navy-900"></p>
+        <div id="fq-options" class="mt-6 grid gap-2 sm:grid-cols-2"></div>
+        <div id="fq-feedback" class="mt-4 hidden rounded-lg px-4 py-3 text-sm"></div>
+        <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
+          <p class="text-xs text-ink-500">Score so far: <span id="fq-score" class="font-semibold text-navy-900">0</span></p>
+          <button type="button" id="fq-next" class="hidden rounded-md bg-navy-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-teal-600">Next →</button>
+        </div>
+      </div>
+
+      <div id="fq-result" class="hidden">
+        <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">Your result</p>
+        <p class="mt-3 flex items-baseline gap-3"><span id="fq-final" class="text-6xl font-bold text-navy-950">0</span><span class="text-xl text-ink-700">out of 10</span></p>
+        <p id="fq-grade" class="mt-2 text-lg font-semibold text-navy-900"></p>
+        <p id="fq-note" class="mt-1 text-sm text-ink-700"></p>
+        <div id="fq-missed-wrap" class="mt-6 hidden">
+          <p class="font-mono text-[11px] font-bold uppercase tracking-widest text-teal-600">Two-minute reads for the ones you missed</p>
+          <ul id="fq-missed" class="mt-2 grid gap-2 sm:grid-cols-2 text-sm"></ul>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <button type="button" id="fq-again" class="rounded-md bg-brass-500 px-5 py-2.5 text-sm font-semibold text-navy-950 hover:bg-brass-300">Ten more →</button>
+          <button type="button" id="fq-copy" class="rounded-md border border-navy-100 bg-white px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-teal-500">Copy my score</button>
+          <a href="/glossary/" class="rounded-md border border-navy-100 bg-white px-4 py-2.5 text-sm font-semibold text-navy-900 hover:border-teal-500">The whole glossary →</a>
+        </div>
+      </div>
+    </article>
+    <p class="mt-3 text-xs text-ink-500">Runs in your browser; nothing is sent anywhere. Definitions are the glossary's own one-line versions.</p>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-3xl px-4 py-14 sm:px-6">
+      <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brass-600">Common questions · The fluency test</h2>
+      <dl class="mt-5 space-y-5">
+        {faqs.map((f) => (
+          <div><dt class="text-base font-bold text-navy-900">{f.q}</dt><dd class="mt-1.5 text-sm leading-relaxed text-ink-700">{f.a}</dd></div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <CtaSection heading="Fluent enough to want the building, or the system?" body="The Fit Finder picks a system in four questions; the Buyer Brief describes the building in two minutes. Both free, both without an email." />
+</Base>
+
+<script>
+  type Term = { t: string; s: string; c: string; d: string };
+  function initFluency() {
+    const root = document.getElementById('fq');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+    const all: Term[] = JSON.parse(document.getElementById('fq-data')!.textContent || '[]');
+    const $ = (id: string) => document.getElementById(id)!;
+    const LABEL: Record<string, string> = { cre: 'The deal', ai: 'The pitch', intel: 'The file', all: 'Mixed' };
+    let track = 'cre';
+    let qs: { term: Term; options: Term[] }[] = [];
+    let i = 0;
+    let score = 0;
+    let missed: Term[] = [];
+    let answered = false;
+
+    const firstWord = (t: string) => (t.toLowerCase().match(/[a-z]{4,}/) || [''])[0];
+    const askable = (t: Term) => {
+      const w = firstWord(t.t);
+      return !w || !t.d.toLowerCase().includes(w);
+    };
+    const shuffle = <T,>(a: T[]) => {
+      const b = a.slice();
+      for (let k = b.length - 1; k > 0; k--) {
+        const j = Math.floor(Math.random() * (k + 1));
+        [b[k], b[j]] = [b[j], b[k]];
+      }
+      return b;
+    };
+
+    function build() {
+      const pool = (track === 'all' ? all : all.filter((t) => t.c === track)).filter(askable);
+      const picked = shuffle(pool).slice(0, 10);
+      qs = picked.map((term) => {
+        const same = all.filter((t) => t.c === term.c && t.s !== term.s);
+        const options = shuffle([term, ...shuffle(same).slice(0, 3)]);
+        return { term, options };
+      });
+      i = 0;
+      score = 0;
+      missed = [];
+      $('fq-result').classList.add('hidden');
+      $('fq-quiz').classList.remove('hidden');
+      show();
+    }
+
+    function show() {
+      answered = false;
+      const q = qs[i];
+      $('fq-track-label').textContent = LABEL[track];
+      $('fq-progress').textContent = `Question ${i + 1} of ${qs.length}`;
+      $('fq-def').textContent = q.term.d;
+      $('fq-score').textContent = String(score);
+      const fb = $('fq-feedback');
+      fb.classList.add('hidden');
+      fb.textContent = '';
+      $('fq-next').classList.add('hidden');
+      const box = $('fq-options');
+      box.textContent = '';
+      q.options.forEach((o) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'fq-opt rounded-lg border border-navy-100 bg-white px-4 py-3 text-left text-sm font-semibold text-navy-900 hover:border-teal-500';
+        b.textContent = o.t;
+        b.dataset.slug = o.s;
+        b.addEventListener('click', () => answer(o, b));
+        box.appendChild(b);
+      });
+    }
+
+    function answer(o: Term, btn: HTMLButtonElement) {
+      if (answered) return;
+      answered = true;
+      const q = qs[i];
+      const right = o.s === q.term.s;
+      if (right) score++;
+      else missed.push(q.term);
+      document.querySelectorAll<HTMLButtonElement>('.fq-opt').forEach((b) => {
+        b.disabled = true;
+        if (b.dataset.slug === q.term.s) b.className += ' border-teal-600 bg-teal-100';
+      });
+      if (!right) btn.className += ' border-brass-500 bg-brass-300/30 line-through';
+      const fb = $('fq-feedback');
+      fb.className = 'mt-4 rounded-lg px-4 py-3 text-sm ' + (right ? 'bg-teal-100 text-teal-700' : 'bg-brass-300/20 text-navy-900');
+      fb.textContent = '';
+      const strong = document.createElement('strong');
+      strong.textContent = right ? 'Right. ' : `Not quite. It is "${q.term.t}". `;
+      const a = document.createElement('a');
+      a.href = `/glossary/${q.term.s}/`;
+      a.className = 'font-semibold text-teal-700 underline';
+      a.textContent = right ? 'Read the full entry →' : 'Two-minute read →';
+      fb.append(strong, a);
+      fb.classList.remove('hidden');
+      $('fq-score').textContent = String(score);
+      const next = $('fq-next');
+      next.textContent = i + 1 < qs.length ? 'Next →' : 'See my result →';
+      next.classList.remove('hidden');
+      next.focus();
+    }
+
+    function finish() {
+      $('fq-quiz').classList.add('hidden');
+      $('fq-result').classList.remove('hidden');
+      $('fq-final').textContent = String(score);
+      const grade = score === 10 ? 'Fluent.' : score >= 8 ? 'Conversational.' : score >= 5 ? 'Getting there.' : 'Start with the glossary.';
+      const note =
+        score >= 8
+          ? 'You can sit across from a broker, an agency, or an analyst and follow every sentence. Now use it: the tools below speak the same language.'
+          : score >= 5
+            ? 'Where most owners start. Each miss below is a two-minute read, and the glossary links every term to the tool that uses it.'
+            : 'This is exactly why the glossary exists. Read the misses below in order; ten minutes changes the next conversation you have.';
+      $('fq-grade').textContent = grade;
+      $('fq-note').textContent = note;
+      const wrap = $('fq-missed-wrap');
+      const ul = $('fq-missed');
+      ul.textContent = '';
+      if (missed.length) {
+        wrap.classList.remove('hidden');
+        missed.forEach((m) => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = `/glossary/${m.s}/`;
+          a.className = 'block rounded-lg border border-navy-100 px-3 py-2 font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700';
+          a.textContent = m.t;
+          li.appendChild(a);
+          ul.appendChild(li);
+        });
+      } else wrap.classList.add('hidden');
+      try {
+        (window as unknown as { va?: (e: string, o: unknown) => void }).va?.('event', { name: 'fluency', data: { track, score } });
+      } catch {
+        /* best-effort */
+      }
+    }
+
+    $('fq-next').addEventListener('click', () => {
+      if (i + 1 < qs.length) {
+        i++;
+        show();
+      } else finish();
+    });
+    $('fq-again').addEventListener('click', build);
+    const copy = $('fq-copy') as HTMLButtonElement;
+    copy.addEventListener('click', async () => {
+      const text = `I scored ${score}/10 on the ICS fluency test (${LABEL[track].toLowerCase()} track). Try it: ${location.origin}/fluency/?track=${track}`;
+      try {
+        await navigator.clipboard.writeText(text);
+        copy.textContent = 'Copied';
+      } catch {
+        copy.textContent = text;
+      }
+      setTimeout(() => (copy.textContent = 'Copy my score'), 2000);
+    });
+    document.querySelectorAll<HTMLButtonElement>('.fq-track').forEach((b) =>
+      b.addEventListener('click', () => {
+        track = b.dataset.track!;
+        document.querySelectorAll<HTMLButtonElement>('.fq-track').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        const u = new URL(location.href);
+        u.searchParams.set('track', track);
+        history.replaceState(null, '', u.toString());
+        build();
+      })
+    );
+    const want = new URLSearchParams(location.search).get('track');
+    if (want && want in LABEL) {
+      track = want;
+      document.querySelectorAll<HTMLButtonElement>('.fq-track').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.track === want)));
+    }
+    build();
+  }
+  initFluency();
+  document.addEventListener('astro:page-load', initFluency);
+</script>
