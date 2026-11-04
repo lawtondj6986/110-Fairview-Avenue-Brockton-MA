@@ -15,15 +15,59 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 const { title, description, date, faqs } = post.data;
 
-// "Keep reading": same category first, then newest of the rest.
+// "Keep reading": the articles that share the most vocabulary with this one
+// (title + description, stemmed), with the same category and recency as tie-breaks.
+const STOP = new Set(['the', 'a', 'an', 'and', 'or', 'of', 'to', 'in', 'on', 'for', 'with', 'is', 'are', 'what', 'how', 'why', 'when', 'who', 'your', 'you', 'it', 'its', 'this', 'that', 'here', 'from', 'by', 'at', 'as', 'be', 'we', 'our', 'not', 'before', 'after', 'into', 'than', 'one', 'they', 'their', 'which', 'about', 'does', 'do', 'can', 'should', 'actually', 'every', 'most', 'all', 'any', 'plus', 'own', 'ics']);
+const words = (t: string) =>
+  new Set(
+    t
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .split(/\s+/)
+      .filter((w) => w.length > 2 && !STOP.has(w))
+      .map((w) => w.replace(/(ing|ers|er|es|s)$/, ''))
+  );
+const mine = words(`${title} ${description}`);
 const others = (await getCollection('insights', ({ data }) => !data.draft))
   .filter((p) => p.id !== post.id)
-  .sort(
-    (a, b) =>
-      Number(b.data.category === post.data.category) - Number(a.data.category === post.data.category) ||
-      b.data.date.valueOf() - a.data.date.valueOf()
-  )
-  .slice(0, 2);
+  .map((p) => {
+    const theirs = words(`${p.data.title} ${p.data.description}`);
+    let shared = 0;
+    theirs.forEach((w) => mine.has(w) && shared++);
+    return { p, score: shared * 10 + Number(p.data.category === post.data.category) * 3 };
+  })
+  .sort((a, b) => b.score - a.score || b.p.data.date.valueOf() - a.p.data.date.valueOf())
+  .slice(0, 3)
+  .map((x) => x.p);
+
+// "Tools in this article": the free tools the body links to, surfaced as a strip.
+const TOOL_NAMES: Record<string, string> = {
+  '/buyer-brief/': 'Build a Buyer Brief',
+  '/proposal/': 'Build Your Own Proposal',
+  '/payback/': 'The Payback Calculator',
+  '/first-90-days/': 'The First 90 Days',
+  '/monthly-report/sample/': 'The Monthly Report, a sample',
+  '/market-sheets/': 'Market Sheets',
+  '/corridors/': 'Corridor Guides',
+  '/territories/': 'The Territory Board',
+  '/south-shore/compare/': 'Town Compare',
+  '/cap-rate/': 'Cap Rate & NOI',
+  '/seller-net/': 'Seller Net Proceeds',
+  '/lease-vs-buy/': 'Lease vs. Buy',
+  '/lease-analyzer/': 'Lease Deal Analyzer',
+  '/building-worth/': "What's My Building Worth?",
+  '/ai-readiness/': 'AI Readiness Score',
+  '/quotebrain/': 'QuoteBrain',
+  '/playbook/': 'The 90-Day Playbook',
+  '/start/': 'The Fit Finder',
+  '/ai-services/#leak': 'The Revenue Leak',
+  '/glossary/': 'The Glossary',
+  '/deal-tools/': 'Five CRE Deal Tools',
+  '/intelligence/scope/': 'The Intelligence Scoper',
+  '/political/self-check/': 'The Political Self-Check',
+};
+const linked = new Set(Array.from(post.body?.matchAll(/\]\((\/[^)\s]*)\)/g) ?? []).map((m) => m[1]));
+const tools = Object.entries(TOOL_NAMES).filter(([href]) => linked.has(href));
 
 const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
@@ -81,6 +125,19 @@ if (faqs && faqs.length) {
         )
       }
 
+      {
+        tools.length > 0 && (
+          <aside class="mt-10 rounded-xl border border-brass-300 bg-paper p-5" aria-label="Tools in this article">
+            <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">Tools in this article · free, no email</p>
+            <ul class="mt-3 flex flex-wrap gap-2">
+              {tools.map(([href, name]) => (
+                <li><a href={href} class="inline-block rounded-full border border-navy-100 bg-white px-3 py-1.5 text-sm font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700">{name} →</a></li>
+              ))}
+            </ul>
+          </aside>
+        )
+      }
+
       <FounderCard variant="byline" />
     </div>
   </article>
@@ -89,7 +146,7 @@ if (faqs && faqs.length) {
     others.length > 0 && (
       <section class="mx-auto max-w-3xl px-4 pb-14 sm:px-6">
         <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">Keep reading</h2>
-        <div class="mt-4 grid gap-4 sm:grid-cols-2">
+        <div class="mt-4 grid gap-4 sm:grid-cols-3">
           {others.map((p) => (
             <a href={`/insights/${p.id}/`} class="lift group rounded-xl border border-navy-100 bg-white p-5 shadow-sm">
               <p class="text-sm font-bold leading-snug text-navy-900 group-hover:text-teal-600">{p.data.title}</p>
