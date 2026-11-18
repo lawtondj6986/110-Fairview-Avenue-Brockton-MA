@@ -19,4 +19,4 @@ Territory exclusivity is a contractual promise by a marketing or lead-generation
 
 ## Why it matters on the South Shore
 
-ICS's Market Lock is exclusivity made concrete: 29 South Shore towns times twelve categories, 348 territories, each held by at most one business. The same structure runs in Broward County. The Territory Board on this site shows what is locked and what is open.
+ICS's Market Lock is exclusivity made concrete: 41 South Shore towns times twelve categories, 492 territories, each held by at most one business. The same structure runs in Broward and Palm Beach Counties, 972 territories in all, each with its own page. The Territory Board on this site shows what is locked and what is open.

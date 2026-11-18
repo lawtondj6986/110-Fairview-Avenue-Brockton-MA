@@ -43,7 +43,7 @@ Because it caps their revenue. An agency that can sell the playbook to every roo
 
 [Market Lock](/ai-services/) is the only system ICS sells that it refuses to sell twice. One business per category, per town, for twelve months, with first right of renewal — and a written no to every competitor who calls after. Published pricing: **$20,000–$30,000 to build, plus $3,500–$6,000 a month**, for the whole machine: the Lead Engine's sub-60-second response and follow-up, paid media, a monthly content system, and answer-engine optimization pointed at one territory.
 
-And because an exclusivity promise is only real if you can *see* it, we publish [the Territory Board](/territories/): twenty-nine South Shore towns and twelve categories — 348 exclusive territories — showing which are open and which are locked. South Florida businesses have [their own board](/broward/territories/) for Broward County's cities.
+And because an exclusivity promise is only real if you can *see* it, we publish [the Territory Board](/territories/): forty-one South Shore towns and twelve categories — 492 exclusive territories — showing which are open and which are locked. South Florida businesses have [their own board](/broward/territories/) for Broward County's cities.
 
 ## The question under the question
 

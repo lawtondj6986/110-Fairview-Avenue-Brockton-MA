@@ -16,7 +16,7 @@ Zoning divides a town into districts and sets what uses, building sizes, setback
 
 ## Why it matters on the South Shore
 
-The South Shore is 29 towns with 29 bylaws. The same auto repair use is by right on one stretch of Route 28 in Brockton and needs a special permit a mile away in Avon. Confirming the use for the specific parcel is the first thing we do on any site search, before anyone falls in love with a building.
+The South Shore is 41 towns with 41 bylaws. The same auto repair use is by right on one stretch of Route 28 in Brockton and needs a special permit a mile away in Avon. Confirming the use for the specific parcel is the first thing we do on any site search, before anyone falls in love with a building.
 
 ## In practice
 
