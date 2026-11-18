@@ -27,8 +27,10 @@ interface Props {
   highlight?: string;
   /** One industry: dots color by whether that category is open in each place and link to the territory page. */
   industry?: { slug: string; name: string };
+  /** A place slug to open on: it is selected, its neighbors are lit, and the panel reads it first (town and city pages). */
+  focus?: string;
 }
-const { market, mode = 'navigate', compact = false, highlight, industry } = Astro.props;
+const { market, mode = 'navigate', compact = false, highlight, industry, focus } = Astro.props;
 
 const isMA = market === 'MA';
 const CFG = {
@@ -122,15 +124,16 @@ const paths = corridors.map((c, i) => ({
   })(),
   names: c.towns.map((s) => byslug[s].name).join(' · '),
 }));
-const first = byslug[hq];
-const mapId = `mm-${market.toLowerCase()}-${mode}${highlight ? '-lit' : ''}${industry ? '-' + industry.slug : ''}`;
+const first = byslug[focus && byslug[focus] ? focus : hq];
+const mapId = `mm-${market.toLowerCase()}-${mode}${highlight ? '-lit' : ''}${industry ? '-' + industry.slug : ''}${focus ? '-' + focus : ''}`;
 const placeHref = (slug: string) => `${pageBase}${slug}/${industry ? industry.slug + '/' : ''}`;
-const litTowns: string[] = highlight ? (corridors.find((c) => c.route === highlight)?.towns ?? []) : [];
+const focusPlace = focus ? (isMA ? TOWNS.find((t) => t.slug === focus) : cityList.find((c) => c.slug === focus)) : undefined;
+const litTowns: string[] = highlight ? (corridors.find((c) => c.route === highlight)?.towns ?? []) : focusPlace ? [focusPlace.slug, ...focusPlace.neighbors.filter((n) => byslug[n])] : [];
 const litNames = litTowns.map((s) => byslug[s]?.name).filter(Boolean).join(' · ');
 const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
 ---
 
-<div class:list={['market-map grid gap-6 lg:grid-cols-[1.4fr_1fr]', litTowns.length && 'is-filtering', industry && 'layer-open']} id={mapId} data-mode={mode} data-lit={litTowns.join(',')} data-page-base={pageBase} data-board-href={boardHref} data-industry={industry?.slug} data-industry-name={industry?.name} data-hq={hq} data-hq-label={hqLabel} data-noun={noun} data-state={state} data-industries={INDUSTRIES.length}>
+<div class:list={['market-map grid gap-6 lg:grid-cols-[1.4fr_1fr]', litTowns.length && 'is-filtering', industry && 'layer-open']} id={mapId} data-mode={mode} data-lit={litTowns.join(',')} data-page-base={pageBase} data-board-href={boardHref} data-industry={industry?.slug} data-industry-name={industry?.name} data-focus={focus} data-hq={hq} data-hq-label={hqLabel} data-noun={noun} data-state={state} data-industries={INDUSTRIES.length}>
   <div class="rounded-2xl border border-navy-100 bg-navy-950 p-3 sm:p-5">
     <div class="mb-3 flex flex-wrap items-center gap-2 px-1">
       <label class="relative flex-1 min-w-[10rem]">
@@ -186,7 +189,7 @@ const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
   </div>
 
   <aside class="rounded-2xl border border-navy-100 bg-white p-6 shadow-sm" aria-live="polite">
-    <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-600" data-p="county">{first.county} · {hqLabel}</p>
+    <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-600" data-p="county">{first.county}{first.slug === hq ? ` · ${hqLabel}` : ''}</p>
     <h3 class="mt-1 font-display text-2xl font-bold text-navy-900" data-p="name">{first.name}</h3>
     <p class="mt-2 text-sm italic leading-relaxed text-ink-500" data-p="position">{first.position}</p>
     <p class="mt-3 text-xs text-ink-500"><span class="font-semibold text-navy-900">Corridors:</span> <span data-p="corridors">{first.corridors.join(' · ')}</span></p>
@@ -202,7 +205,7 @@ const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
       {isMA && mode !== 'select' && <a data-p="compare" href={`/south-shore/compare/?a=${first.slug}&b=abington`} class="rounded-md border border-navy-100 px-4 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700">Compare it →</a>}
       {mode !== 'select' && <a data-p="board" href={`${boardHref}?place=${first.slug}`} class="rounded-md border border-navy-100 px-4 py-2 text-sm font-semibold text-navy-900 hover:border-brass-500 hover:text-brass-600">Territories →</a>}
     </div>
-    <p class="mt-5 text-xs text-ink-500" data-p="hint">{highlight ? `${highlight}: ${litNames}` : industry ? `Teal: ${industry.name.toLowerCase()} is open there. Red: held. Tap a ${noun} to open its ${industry.name.toLowerCase()} page.` : `Hover or tap a ${noun}. Hover a route to light up the ${placeNounPlural} on it. Positions are approximate; the pages are not.`}</p>
+    <p class="mt-5 text-xs text-ink-500" data-p="hint">{highlight ? `${highlight}: ${litNames}` : focusPlace ? `${first.name} and the ${placeNounPlural} next door, lit. Tap a neighbor to read it; switch on Satellite to see the ground.` : industry ? `Teal: ${industry.name.toLowerCase()} is open there. Red: held. Tap a ${noun} to open its ${industry.name.toLowerCase()} page.` : `Hover or tap a ${noun}. Hover a route to light up the ${placeNounPlural} on it. Positions are approximate; the pages are not.`}</p>
   </aside>
 </div>
 
@@ -239,9 +242,10 @@ const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
       const hq = root.dataset.hq!;
       const total = Number(root.dataset.industries || 12);
       const P = (k: string) => root.querySelector<HTMLElement>(`[data-p="${k}"]`);
-      let active: HTMLElement | null = root.querySelector(`.mm-place[data-slug="${hq}"]`);
+      const startSlug = root.dataset.focus || hq;
+      let active: HTMLElement | null = root.querySelector(`.mm-place[data-slug="${startSlug}"]`);
       active?.classList.add('is-active');
-      let current = hq;
+      let current = startSlug;
       let hoverLockUntil = 0; // after a select-mode click we scroll the page; ignore the stray hover that follows
 
       const show = (el: HTMLElement, fromHover = false) => {

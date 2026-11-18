@@ -7,6 +7,7 @@ import { BROWARD_CITIES, getBrowardCity } from '../../lib/broward';
 import { INDUSTRIES } from '../../lib/industries';
 import { SITE } from '../../config';
 import TerritoryStatus from '../../components/TerritoryStatus.astro';
+import MarketMap from '../../components/MarketMap.astro';
 import { corridorsThrough } from '../../lib/corridors';
 import { CLAIMED_FL, isLocked } from '../../lib/claimed';
 
@@ -170,6 +171,12 @@ const schema = [
         ))}
       </dl>
     </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <p class="text-sm font-semibold uppercase tracking-widest text-teal-600">Where {city.name} sits</p>
+    <h2 class="mt-2 font-display text-2xl font-bold text-navy-900">{city.name} on the Broward County map, with the cities next door</h2>
+    <div class="mt-6"><MarketMap market="FL" focus={city.slug} compact /></div>
   </section>
 
   <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">

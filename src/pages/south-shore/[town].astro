@@ -7,6 +7,7 @@ import CtaSection from '../../components/CtaSection.astro';
 import { TOWNS, getTown } from '../../lib/towns';
 import { SITE } from '../../config';
 import TerritoryStatus from '../../components/TerritoryStatus.astro';
+import MarketMap from '../../components/MarketMap.astro';
 import { INDUSTRIES } from '../../lib/industries';
 import { isLocked } from '../../lib/claimed';
 import { CLAIMED_MA } from '../../lib/claimed';
@@ -194,6 +195,13 @@ const schema = [
         }
       </div>
     </div>
+  </section>
+
+  <!-- THE MAP, OPENED ON THIS TOWN -->
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <p class="text-sm font-semibold uppercase tracking-widest text-teal-600">Where {town.name} sits</p>
+    <h2 class="mt-2 font-display text-2xl font-bold text-navy-900">{town.name} on the South Shore map, with the towns next door</h2>
+    <div class="mt-6"><MarketMap market="MA" focus={town.slug} compact /></div>
   </section>
 
   <!-- EVERY CATEGORY IN THIS TOWN — one page per territory -->
