@@ -1,0 +1,288 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+import FounderCard from '../components/FounderCard.astro';
+import ShareKit from '../components/ShareKit.astro';
+import { LEASE_CLAUSES, GROUPS } from '../lib/lease-clauses';
+import { SITE } from '../config';
+
+const title = 'Lease Clause Decoder — Every Clause in a Commercial Lease, in Plain English | Free ICS Tool';
+const description = `${LEASE_CLAUSES.length} clauses that show up in a South Shore commercial lease, decoded: what each one does, what the tenant wants, what the landlord wants, the red flags, sample language you can recognize on the page, and the exact ask. Tick the clauses in your lease and the page builds the list of questions to take to your attorney. Free, no email, shareable.`;
+
+const faqs = [
+  { q: 'Is this legal advice?', a: 'No. It is an operator\'s plain-English read of the clauses that come up in nearly every South Shore commercial lease, written to make the conversation with your attorney faster and cheaper. Hire a Massachusetts real estate attorney for the lease itself; the list this page builds is what you bring them.' },
+  { q: 'Which clauses are worth fighting over in a small lease?', a: 'Rent commencement, the use clause, assignment and subletting, the personal guaranty, the HVAC obligation, pass-throughs, delivery condition, and the default and cure terms. Those eight decide most of the money and most of the risk. The rest matter when they bite, which is less often.' },
+  { q: 'Can a tenant really negotiate a landlord\'s form lease?', a: 'Almost always, and more than most first-time tenants try. The form is the opening position. A reasonable set of asks delivered in one organized letter, early, gets most of its points on small and mid-size South Shore deals, especially on a space that has sat vacant.' },
+  { q: 'Does ICS review leases?', a: 'As part of tenant or landlord representation in Massachusetts, yes, alongside your attorney: we read the business terms, model the net effective rent, and negotiate the points. The Lease Deal Analyzer on this site does the rent math; this page does the clauses.' },
+];
+
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'ICS Lease Clause Decoder', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: `${SITE.url}/lease-clauses/`, description, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, provider: { '@id': `${SITE.url}/#business` } },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Commercial lease clauses, decoded', numberOfItems: LEASE_CLAUSES.length, itemListElement: LEASE_CLAUSES.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, url: `${SITE.url}/lease-clauses/#${c.slug}` })) },
+];
+
+const groupKeys = Object.keys(GROUPS) as (keyof typeof GROUPS)[];
+const chip = 'lc-chip rounded-full border border-navy-100 bg-white px-3 py-1.5 text-xs font-semibold text-navy-900 hover:border-teal-500 aria-pressed:border-teal-600 aria-pressed:bg-teal-600 aria-pressed:text-white';
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950 print:hidden">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Free tool · Lease Clause Decoder · {LEASE_CLAUSES.length} clauses · no email</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">Every clause in your lease, in plain English. With the ask.</h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        What the clause does, what each chair wants, the red flags, language you will recognize on the page, and the sentence to put
+        in the email. Tick the clauses in front of you and the page writes the list of questions for your attorney.
+      </p>
+      <p class="reveal mt-4 text-sm text-navy-100/70" style="--reveal-delay: 260ms">Not legal advice. Written by a licensed Massachusetts salesperson who negotiates these for clients; the attorney signs off.</p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6" id="decoder">
+    <div class="sticky top-16 z-20 -mx-4 border-b border-navy-100 bg-paper/95 px-4 py-3 backdrop-blur print:hidden sm:-mx-6 sm:px-6">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="mr-1 font-mono text-[11px] font-bold uppercase tracking-widest text-ink-500">Your chair</span>
+        <button type="button" class="lc-seat rounded-md border border-navy-100 bg-white px-3 py-1.5 text-sm font-semibold text-navy-900 hover:border-teal-500 aria-pressed:border-teal-600 aria-pressed:bg-navy-900 aria-pressed:text-white" data-seat="tenant" aria-pressed="true">Tenant</button>
+        <button type="button" class="lc-seat rounded-md border border-navy-100 bg-white px-3 py-1.5 text-sm font-semibold text-navy-900 hover:border-teal-500 aria-pressed:border-teal-600 aria-pressed:bg-navy-900 aria-pressed:text-white" data-seat="landlord" aria-pressed="false">Landlord</button>
+        <label class="ml-auto flex min-w-[200px] flex-1 items-center gap-2 sm:flex-none">
+          <span class="sr-only">Search clauses</span>
+          <input id="lc-q" type="search" placeholder="Search: guaranty, HVAC, assignment…" class="w-full rounded-md border border-navy-100 bg-white px-3 py-1.5 text-sm text-navy-900 placeholder:text-ink-500 focus:border-teal-500 focus:outline-none" autocomplete="off" />
+        </label>
+      </div>
+      <div class="mt-2 flex flex-wrap gap-2" role="group" aria-label="Filter by group">
+        <button type="button" class={chip} data-group="all" aria-pressed="true">All {LEASE_CLAUSES.length}</button>
+        {groupKeys.map((g) => <button type="button" class={chip} data-group={g} aria-pressed="false">{GROUPS[g].name} <span class="opacity-60">{LEASE_CLAUSES.filter((c) => c.group === g).length}</span></button>)}
+        <button type="button" class={chip} data-group="fight" aria-pressed="false">Worth the fight</button>
+      </div>
+    </div>
+
+    <p id="lc-empty" class="mt-8 hidden text-sm text-ink-500">Nothing matches. Try a shorter word, or clear the filters.</p>
+
+    <div class="mt-6 space-y-10">
+      {groupKeys.map((g) => (
+        <section data-group-section={g}>
+          <header class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+            <h2 class="font-display text-2xl font-bold text-navy-900">{GROUPS[g].name}</h2>
+            <p class="text-sm text-ink-500">{GROUPS[g].blurb}</p>
+          </header>
+          <div class="grid gap-4 lg:grid-cols-2">
+            {LEASE_CLAUSES.filter((c) => c.group === g).map((c) => (
+              <article id={c.slug} class="lc-card flex scroll-mt-40 flex-col rounded-2xl border border-navy-100 bg-white p-5 shadow-sm sm:p-6" data-slug={c.slug} data-group={c.group} data-weight={c.weight} data-text={`${c.name} ${c.plain} ${c.redFlags.join(' ')} ${c.sample}`.toLowerCase()}>
+                <div class="flex items-start justify-between gap-3">
+                  <h3 class="text-lg font-bold text-navy-900">{c.name}</h3>
+                  <span class="shrink-0 font-mono text-[10px] font-bold uppercase tracking-wider text-ink-500" title="How often it is worth negotiating">
+                    {['', 'Rarely fought', 'Often fought', 'Always fought'][c.weight]}
+                  </span>
+                </div>
+                <p class="mt-2 text-sm leading-relaxed text-ink-700">{c.plain}</p>
+                <div class="mt-4 grid gap-3 sm:grid-cols-2">
+                  <div class="lc-want rounded-lg border border-navy-100 p-3" data-want="tenant">
+                    <p class="font-mono text-[10px] font-bold uppercase tracking-wider text-teal-700">The tenant wants</p>
+                    <p class="mt-1 text-sm leading-relaxed text-ink-700">{c.tenant}</p>
+                  </div>
+                  <div class="lc-want rounded-lg border border-navy-100 p-3" data-want="landlord">
+                    <p class="font-mono text-[10px] font-bold uppercase tracking-wider text-brass-600">The landlord wants</p>
+                    <p class="mt-1 text-sm leading-relaxed text-ink-700">{c.landlord}</p>
+                  </div>
+                </div>
+                <details class="mt-4 group">
+                  <summary class="cursor-pointer list-none text-sm font-semibold text-navy-900 hover:text-teal-700">Red flags, sample language, and the ask <span class="font-normal text-ink-500 group-open:hidden">· show</span><span class="hidden font-normal text-ink-500 group-open:inline">· hide</span></summary>
+                  <div class="mt-3 space-y-3">
+                    <div>
+                      <p class="font-mono text-[10px] font-bold uppercase tracking-wider text-brass-600">Red flags</p>
+                      <ul class="mt-1 space-y-1">
+                        {c.redFlags.map((r) => <li class="flex gap-2 text-sm leading-relaxed text-ink-700"><span class="font-mono text-xs font-bold text-brass-600">✕</span><span>{r}</span></li>)}
+                      </ul>
+                    </div>
+                    <div>
+                      <p class="font-mono text-[10px] font-bold uppercase tracking-wider text-ink-500">What it looks like on the page</p>
+                      <p class="mt-1 rounded-lg bg-paper p-3 font-mono text-[12px] leading-relaxed text-ink-700">{c.sample}</p>
+                    </div>
+                    <div>
+                      <p class="font-mono text-[10px] font-bold uppercase tracking-wider text-teal-700">The ask</p>
+                      <p class="lc-ask mt-1 rounded-lg border border-teal-500/30 bg-teal-100/30 p-3 text-sm leading-relaxed text-navy-900">{c.ask}</p>
+                      <div class="mt-2 flex flex-wrap gap-2 print:hidden">
+                        <button type="button" class="lc-copy rounded-md border border-navy-100 bg-white px-3 py-1.5 text-xs font-semibold text-navy-900 hover:border-teal-500" data-text={c.ask}>Copy the ask</button>
+                        {c.glossary.map((s) => <a href={`/glossary/${s}/`} class="rounded-md px-2 py-1.5 text-xs font-semibold text-teal-700 hover:underline">{s.replace(/-/g, ' ')} →</a>)}
+                      </div>
+                    </div>
+                  </div>
+                </details>
+                <label class="mt-4 flex cursor-pointer items-center gap-2 border-t border-navy-100 pt-3 text-sm font-semibold text-navy-900 print:hidden">
+                  <input type="checkbox" class="lc-pick h-4 w-4 accent-teal-600" data-slug={c.slug} />
+                  This clause is in my lease
+                </label>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </section>
+
+  <!-- The attorney list -->
+  <section id="list" class="mx-auto max-w-6xl px-4 pb-12 sm:px-6">
+    <div class="rounded-2xl border border-navy-100 bg-white p-6 shadow-sm sm:p-8">
+      <div class="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">For your attorney</p>
+          <h2 class="mt-2 font-display text-2xl font-bold text-navy-900 sm:text-3xl">The questions list</h2>
+          <p class="mt-2 max-w-xl text-sm text-ink-700">Tick the clauses above that appear in your lease. The asks assemble here, in the order a lawyer would want them, ready to paste into an email or print for the meeting.</p>
+        </div>
+        <div class="flex flex-wrap gap-2 print:hidden">
+          <button type="button" id="lc-copy-all" class="rounded-md bg-navy-900 px-3.5 py-2 text-sm font-semibold text-white hover:bg-teal-600" disabled>Copy the list</button>
+          <button type="button" id="lc-print" class="rounded-md border border-navy-100 bg-white px-3.5 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500" disabled>Print</button>
+          <button type="button" id="lc-clear" class="rounded-md border border-navy-100 bg-white px-3.5 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500" disabled>Clear</button>
+        </div>
+      </div>
+      <p id="lc-count" class="mt-4 text-sm text-ink-500">No clauses ticked yet.</p>
+      <ol id="lc-list" class="mt-4 hidden list-decimal space-y-3 pl-5 text-sm leading-relaxed text-ink-700"></ol>
+      <p class="mt-6 text-xs text-ink-500">This is a negotiation checklist, not legal advice. A Massachusetts real estate attorney should review the lease. Nothing you tick is sent anywhere; the list lives in the link and on this device.</p>
+      <div class="mt-4 print:hidden"><ShareKit what="my lease clause list" compact /></div>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-4xl px-4 py-14 sm:px-6">
+      <h2 class="text-center font-display text-2xl font-bold text-navy-900">Asked before the lease is signed</h2>
+      <div class="mt-8 space-y-4">
+        {faqs.map((f) => (
+          <details class="rounded-xl border border-navy-100 bg-white p-5" open>
+            <summary class="cursor-pointer list-none font-semibold text-navy-900">{f.q}</summary>
+            <p class="mt-3 text-sm leading-relaxed text-ink-700">{f.a}</p>
+          </details>
+        ))}
+      </div>
+      <p class="mt-8 text-center text-sm text-ink-500">The rent math is a separate tool: <a href="/lease-analyzer/" class="font-semibold text-teal-600 hover:text-teal-700">the Lease Deal Analyzer →</a> <span class="mx-2">·</span> Leasing space? <a href="/buyer-brief/?seat=tenant" class="font-semibold text-teal-600 hover:text-teal-700">Build a space brief →</a></p>
+    </div>
+  </section>
+
+  <FounderCard heading="Who wrote these" line="Every clause here has been negotiated, from one chair or the other, on South Shore leases from 1,200-square-foot storefronts to 40,000-square-foot flex buildings. The attorney writes the lease. This is the business read that makes that call shorter." />
+  <CtaSection heading="Have a lease in front of you?" body="Send it. You will get the business terms read back to you in plain English, the net effective rent, and the five points worth pushing on, before your attorney's clock starts." />
+</Base>
+
+<script>
+  function init() {
+    const root = document.getElementById('decoder');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.lc-card'));
+    const picks = Array.from(document.querySelectorAll<HTMLInputElement>('.lc-pick'));
+    const list = document.getElementById('lc-list')!;
+    const count = document.getElementById('lc-count')!;
+    const empty = document.getElementById('lc-empty')!;
+    const q = document.getElementById('lc-q') as HTMLInputElement;
+    const copyAll = document.getElementById('lc-copy-all') as HTMLButtonElement;
+    const printBtn = document.getElementById('lc-print') as HTMLButtonElement;
+    const clearBtn = document.getElementById('lc-clear') as HTMLButtonElement;
+    const KEY = 'ics-lease-clauses';
+    let seat = 'tenant';
+    let group = 'all';
+
+    const nameOf = (slug: string) => document.querySelector(`#${CSS.escape(slug)} h3`)?.textContent?.trim() || slug;
+    const askOf = (slug: string) => document.querySelector(`#${CSS.escape(slug)} .lc-ask`)?.textContent?.trim() || '';
+
+    function applySeat() {
+      document.querySelectorAll<HTMLElement>('.lc-seat').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.seat === seat)));
+      document.querySelectorAll<HTMLElement>('.lc-want').forEach((w) => {
+        const on = w.dataset.want === seat;
+        w.classList.toggle('ring-2', on);
+        w.classList.toggle('ring-teal-500/60', on);
+        w.classList.toggle('bg-paper', on);
+        w.classList.toggle('opacity-70', !on);
+      });
+    }
+    function applyFilter() {
+      const term = q.value.trim().toLowerCase();
+      let shown = 0;
+      cards.forEach((c) => {
+        const okGroup = group === 'all' || (group === 'fight' ? c.dataset.weight === '3' : c.dataset.group === group);
+        const okText = !term || (c.dataset.text || '').includes(term);
+        const on = okGroup && okText;
+        c.hidden = !on;
+        if (on) shown++;
+      });
+      document.querySelectorAll<HTMLElement>('[data-group-section]').forEach((s) => {
+        s.hidden = !Array.from(s.querySelectorAll<HTMLElement>('.lc-card')).some((c) => !c.hidden);
+      });
+      empty.classList.toggle('hidden', shown > 0);
+      document.querySelectorAll<HTMLElement>('.lc-chip').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.group === group)));
+    }
+    function selected() {
+      return picks.filter((p) => p.checked).map((p) => p.dataset.slug!);
+    }
+    function render() {
+      const sel = selected();
+      const u = new URL(location.href);
+      if (sel.length) u.searchParams.set('c', sel.join(','));
+      else u.searchParams.delete('c');
+      u.searchParams.set('seat', seat);
+      history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
+      try { localStorage.setItem(KEY, JSON.stringify({ sel, seat })); } catch {}
+      list.innerHTML = '';
+      sel.forEach((s) => {
+        const li = document.createElement('li');
+        const b = document.createElement('strong');
+        b.className = 'text-navy-900';
+        b.textContent = nameOf(s) + '. ';
+        li.appendChild(b);
+        li.appendChild(document.createTextNode(askOf(s)));
+        list.appendChild(li);
+      });
+      list.classList.toggle('hidden', sel.length === 0);
+      count.textContent = sel.length ? `${sel.length} clause${sel.length === 1 ? '' : 's'} on the list, as the ${seat}.` : 'No clauses ticked yet.';
+      [copyAll, printBtn, clearBtn].forEach((b) => (b.disabled = sel.length === 0));
+    }
+    function listText() {
+      const sel = selected();
+      return [`Questions for my attorney on the lease (${seat} side), ${sel.length} clauses:`, '', ...sel.map((s, i) => `${i + 1}. ${nameOf(s)}: ${askOf(s)}`), '', `Built with the ICS Lease Clause Decoder: ${location.href}`].join('\n');
+    }
+
+    // Restore from URL, then local storage
+    const params = new URLSearchParams(location.search);
+    let restored = false;
+    if (params.get('seat') === 'landlord') seat = 'landlord';
+    const fromUrl = (params.get('c') || '').split(',').filter(Boolean);
+    if (fromUrl.length) {
+      picks.forEach((p) => (p.checked = fromUrl.includes(p.dataset.slug!)));
+      restored = true;
+    }
+    if (!restored) {
+      try {
+        const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+        if (saved?.sel?.length) picks.forEach((p) => (p.checked = saved.sel.includes(p.dataset.slug!)));
+        if (saved?.seat && !params.get('seat')) seat = saved.seat;
+      } catch {}
+    }
+
+    document.querySelectorAll<HTMLElement>('.lc-seat').forEach((b) => b.addEventListener('click', () => { seat = b.dataset.seat!; applySeat(); render(); }));
+    document.querySelectorAll<HTMLElement>('.lc-chip').forEach((b) => b.addEventListener('click', () => { group = b.dataset.group!; applyFilter(); }));
+    q.addEventListener('input', applyFilter);
+    picks.forEach((p) => p.addEventListener('change', render));
+    clearBtn.addEventListener('click', () => { picks.forEach((p) => (p.checked = false)); render(); });
+    printBtn.addEventListener('click', () => window.print());
+    const flash = (b: HTMLButtonElement, t: string) => { const was = b.textContent; b.textContent = t; setTimeout(() => (b.textContent = was), 1400); };
+    copyAll.addEventListener('click', async () => { try { await navigator.clipboard.writeText(listText()); flash(copyAll, 'Copied'); } catch { flash(copyAll, 'Select and copy'); } });
+    document.querySelectorAll<HTMLButtonElement>('.lc-copy').forEach((b) => b.addEventListener('click', async () => { try { await navigator.clipboard.writeText(b.dataset.text || ''); flash(b, 'Copied'); } catch { flash(b, 'Select and copy'); } }));
+
+    // Deep link to a clause opens its details
+    if (location.hash) {
+      const el = document.querySelector<HTMLElement>(location.hash);
+      el?.querySelector('details')?.setAttribute('open', '');
+    }
+    applySeat();
+    applyFilter();
+    render();
+  }
+  document.addEventListener('astro:page-load', init);
+  init();
+</script>
+
+<style is:global>
+  @media print {
+    html:has(#decoder) #decoder, html:has(#decoder) body > header, html:has(#decoder) body > footer, html:has(#decoder) main > *:not(#list) { display: none !important; }
+    html:has(#decoder) #list { padding-top: 0 !important; }
+    html:has(#decoder) #lc-list { display: block !important; }
+  }
+</style>

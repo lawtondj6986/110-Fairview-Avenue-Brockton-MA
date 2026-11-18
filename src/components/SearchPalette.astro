@@ -175,6 +175,7 @@ const INTENTS = {
   const BASE: Record<string, string> = { MA: '/south-shore/', FL: '/broward/', PB: '/palm-beach/' };
   const norm = (s: string) => ' ' + s.toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9\-\s]/g, ' ').replace(/\s+/g, ' ').trim() + ' ';
 
+  const leaseSeat = (q: string) => (/\b(landlord|owner|my tenant|my building)\b/.test(q) ? 'seat=landlord' : 'seat=tenant');
   function detectActions(raw: string): Action[] {
     const el = palette();
     if (!intents) {
@@ -220,6 +221,7 @@ const INTENTS = {
       contact: /\b(call|phone|talk|book|contact|email|reach|meet)\b/,
       map: /\bmap\b/,
       quiz: /\b(quiz|fluency|test me|vocabulary|how fluent)\b/,
+      clause: /\b(clause|clauses|guaranty|guarantee|holdover|estoppel|snda|subordination|assignment|sublet|subletting|escalation|escalations|abatement|cam|pass[- ]?through|exclusive use|co-?tenancy|relocation|indemnif|my lease says|in my lease|lease says|fine print)\b/,
     };
     const ma = places.filter((p) => p.m === 'MA');
     const names = (ps: Place[]) => ps.map((p) => p.n).join(', ');
@@ -282,6 +284,9 @@ const INTENTS = {
     }
     if (!out.length && has(V.contact) && !has(QUESTION_WORDS)) {
       out.push({ eyebrow: 'Talk to Daniel', title: 'One call, a straight answer', body: 'He answers his own phone and email. A written quote follows within 48 hours.', links: [['Contact →', '/contact/'], ['Call (508) 942-8259', 'tel:+15089428259']] });
+    }
+    if (has(V.clause)) {
+      out.push({ eyebrow: 'Lease Clause Decoder', title: 'What that clause means, and what to ask for', body: 'Thirty-eight commercial lease clauses in plain English: both chairs, the red flags, sample language, the ask. Tick the ones in your lease and it writes the list for your attorney.', links: [['Open the decoder →', `/lease-clauses/?${leaseSeat(q)}`], ['The rent math', '/lease-analyzer/']] });
     }
     if (has(V.quiz)) {
       out.push({ eyebrow: 'The Fluency Test', title: 'Ten questions from the glossary', body: 'Read the definition, pick the term. Every miss links to a two-minute read.', links: [['Take the test →', '/fluency/'], ['The deal track', '/fluency/?track=cre'], ['The pitch track', '/fluency/?track=ai']] });
