@@ -199,6 +199,17 @@ const select = 'w-full rounded-md border border-navy-100 bg-white px-3 py-2 text
   <CtaSection heading="Want the number to go with the plan?" body="Send the brief. You will get a free opinion of value within 48 hours of the walk-through, built on comparables you can check, and a straight read on whether now is the time." />
 </Base>
 
+<style is:global>
+  @media print {
+    html:has(#sb) body > header, html:has(#sb) body > footer, html:has(#sb) main > *:not(:has(#sb-out)), html:has(#sb) #sb-form { display: none !important; }
+    html:has(#sb) #sb { padding: 0 !important; }
+    html:has(#sb) #sb > .grid { display: block !important; }
+    html:has(#sb) #sb-out p, html:has(#sb) #sb-out li { font-size: 11px !important; line-height: 1.4 !important; }
+    html:has(#sb) #sb-out h2 { font-size: 20px !important; }
+    html:has(#sb) #sb-out section { margin-top: 0.7rem !important; break-inside: avoid; }
+  }
+</style>
+
 <script define:vars={{ townData }}>
   function initSellerBrief() {
     const root = document.getElementById('sb');
