@@ -6,6 +6,7 @@
  * market, and the live claim list.
  */
 import CtaSection from './CtaSection.astro';
+import MarketMap from './MarketMap.astro';
 import FounderCard from './FounderCard.astro';
 import { INDUSTRIES, type Industry } from '../lib/industries';
 import { PLAYBOOKS, seasonFor } from '../lib/playbooks';
@@ -159,6 +160,20 @@ const contactHref = `/contact/?${new URLSearchParams({ interest: 'AI systems & m
       </ul>
       <p class="mt-4 text-sm text-ink-500">Same {noun}, other trades: <a href={`${base}${place.slug}/`} class="font-semibold text-teal-600 hover:text-teal-700">every category in {place.name} →</a> <span class="mx-1">·</span> <a href={compareHref} class="font-semibold text-teal-600 hover:text-teal-700">compare {place.name} with {neighbors[0]?.name ?? places[0].name} →</a></p>
     </div>
+  </div>
+</section>
+
+<section class="mx-auto max-w-6xl px-4 pb-14 sm:px-6">
+  <p class="text-sm font-semibold uppercase tracking-widest text-teal-600">{industry.name} across {hubName}, opened on {place.name}</p>
+  <h2 class="mt-2 font-display text-2xl font-bold text-navy-900">Where {lower} is open, {noun} by {noun}</h2>
+  <div class="mt-6"><MarketMap market={market} industry={{ slug: industry.slug, name: industry.name }} focus={place.slug} compact /></div>
+  <div class="mt-6 rounded-2xl border border-teal-500/40 bg-navy-950 p-6 text-white sm:flex sm:items-center sm:justify-between sm:gap-6">
+    <div>
+      <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-400">The written proposal, prefilled</p>
+      <p class="mt-1 text-lg font-semibold">{locked ? 'Lead Engine' : 'Market Lock'} for {lower} in {place.name}: scope, price, guarantees, and the first ninety days on one page.</p>
+      <p class="mt-1 text-sm text-navy-100/70">Built from the published pricing; nothing to fill in but your name.</p>
+    </div>
+    <a href={`/proposal/?system=${locked ? 'leadengine' : 'marketlock'}&place=${market}:${place.slug}&industry=${industry.slug}`} class="mt-4 inline-block shrink-0 rounded-md bg-teal-600 px-5 py-2.5 font-semibold text-white hover:bg-teal-700 sm:mt-0">Build the proposal →</a>
   </div>
 </section>
 
