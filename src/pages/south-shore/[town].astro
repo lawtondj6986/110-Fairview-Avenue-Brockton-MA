@@ -7,6 +7,8 @@ import CtaSection from '../../components/CtaSection.astro';
 import { TOWNS, getTown } from '../../lib/towns';
 import { SITE } from '../../config';
 import TerritoryStatus from '../../components/TerritoryStatus.astro';
+import { INDUSTRIES } from '../../lib/industries';
+import { isLocked } from '../../lib/claimed';
 import { CLAIMED_MA } from '../../lib/claimed';
 import { corridorsThrough } from '../../lib/corridors';
 
@@ -191,6 +193,23 @@ const schema = [
           ))
         }
       </div>
+    </div>
+  </section>
+
+  <!-- EVERY CATEGORY IN THIS TOWN — one page per territory -->
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <p class="text-sm font-semibold uppercase tracking-widest text-teal-600">Every category in {town.name}</p>
+    <h2 class="mt-2 font-display text-2xl font-bold text-navy-900">Twelve trades, one page each, with the territory status</h2>
+    <div class="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+      {INDUSTRIES.map((ind) => {
+        const held = isLocked(CLAIMED_MA, town.slug, ind.slug);
+        return (
+          <a href={`/south-shore/${town.slug}/${ind.slug}/`} class="flex items-center justify-between gap-3 rounded-lg border border-navy-100 bg-white px-4 py-3 text-sm font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700">
+            <span>{ind.name} in {town.name}</span>
+            <span class={`shrink-0 rounded-full px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${held ? 'bg-red-100 text-red-700' : 'bg-teal-100 text-teal-700'}`}>{held ? 'held' : 'open'}</span>
+          </a>
+        );
+      })}
     </div>
   </section>
 

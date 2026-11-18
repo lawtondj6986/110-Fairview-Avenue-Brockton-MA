@@ -5,7 +5,8 @@ import CtaSection from '../../components/CtaSection.astro';
 import { INDUSTRIES } from '../../lib/industries';
 import { SITE } from '../../config';
 import TerritoryStatus from '../../components/TerritoryStatus.astro';
-import { CLAIMED_MA } from '../../lib/claimed';
+import { CLAIMED_MA, isLocked } from '../../lib/claimed';
+import { TOWNS } from '../../lib/towns';
 
 export function getStaticPaths() {
   return INDUSTRIES.map((industry) => ({ params: { slug: industry.slug }, props: { industry } }));
@@ -109,6 +110,19 @@ const schema = [
   </section>
 
   <TerritoryStatus claimed={CLAIMED_MA} boardHref="/territories/" state="MA" industry={{ slug: industry.slug, name: industry.name }} />
+
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <p class="text-sm font-semibold uppercase tracking-widest text-teal-600">{industry.name}, town by town</p>
+    <h2 class="mt-2 font-display text-2xl font-bold text-navy-900">Forty-one South Shore towns, one page each, with the territory status</h2>
+    <div class="mt-5 flex flex-wrap gap-2">
+      {TOWNS.map((t) => {
+        const held = isLocked(CLAIMED_MA, t.slug, industry.slug);
+        return (
+          <a href={`/south-shore/${t.slug}/${industry.slug}/`} class={`rounded-full border px-3 py-1.5 text-sm font-semibold hover:border-teal-500 hover:text-teal-700 ${held ? 'border-red-200 bg-red-50 text-red-700' : 'border-navy-100 bg-white text-navy-900'}`}>{t.name}{held ? ' · held' : ''}</a>
+        );
+      })}
+    </div>
+  </section>
 
   <section class="mx-auto max-w-4xl px-4 py-14 text-center sm:px-6">
     <div class="reveal rounded-2xl border border-teal-500/40 bg-paper p-8">

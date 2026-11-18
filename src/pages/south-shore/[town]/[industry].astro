@@ -1,0 +1,161 @@
+---
+/**
+ * One page per Market Lock territory: an industry in a town. 41 towns x 12
+ * categories = 492 pages, each assembled from the town's own read, the
+ * industry's install, the playbook's season, and the live claim list, so no
+ * two say the same thing. The territory board stays the source of truth for
+ * status; this is the page a business owner lands on when they search
+ * "<trade> marketing <town>".
+ */
+import Base from '../../../layouts/Base.astro';
+import CtaSection from '../../../components/CtaSection.astro';
+import FounderCard from '../../../components/FounderCard.astro';
+import { TOWNS, getTown } from '../../../lib/towns';
+import { INDUSTRIES } from '../../../lib/industries';
+import { PLAYBOOKS } from '../../../lib/playbooks';
+import { CLAIMED_MA, isLocked, lockedForIndustry, lockedInPlace } from '../../../lib/claimed';
+import { corridorsThrough } from '../../../lib/corridors';
+import { SITE, FOUNDER } from '../../../config';
+
+export function getStaticPaths() {
+  return TOWNS.flatMap((town) => INDUSTRIES.map((industry) => ({ params: { town: town.slug, industry: industry.slug }, props: { town, industry } })));
+}
+const { town, industry } = Astro.props;
+const playbook = PLAYBOOKS.find((p) => p.slug === industry.slug)!;
+const locked = isLocked(CLAIMED_MA, town.slug, industry.slug);
+const openInTown = INDUSTRIES.length - lockedInPlace(CLAIMED_MA, town.slug);
+const openForIndustry = TOWNS.length - lockedForIndustry(CLAIMED_MA, industry.slug);
+const lower = industry.name.toLowerCase();
+const shortName = industry.name.split(' & ')[0].split(' ')[0].toLowerCase() === 'trades' ? 'trades' : industry.name.replace(/ & /g, ' and ').toLowerCase();
+const neighbors = town.neighbors.map((s) => getTown(s)!).filter(Boolean).slice(0, 6);
+const neighborStatus = neighbors.map((n) => ({ ...n, locked: isLocked(CLAIMED_MA, n.slug, industry.slug) }));
+const guides = corridorsThrough('MA', town.slug).slice(0, 3);
+const month = new Date().getMonth();
+const seasonNow = playbook.season[month];
+const kpis = playbook.kpis.slice(0, 3);
+const money = (n: number) => '$' + n.toLocaleString('en-US');
+const leak = Math.round(playbook.math.leadsPerMonth * playbook.math.missedShare * playbook.math.closeRate * playbook.math.avgTicket);
+const PRICES: Record<string, string> = { JobSite: '$6,500–$9,500 + $450–$700/mo', 'Lead Engine': '$12,000–$18,000 + $1,500–$2,500/mo', 'Market Lock': '$20,000–$30,000 + $3,500–$6,000/mo' };
+
+const title = `${industry.name} in ${town.name}, MA — AI Systems, Market Lock Status, the Local Read | ICS`;
+const description = `${industry.name} in ${town.name}: ${locked ? 'the Market Lock territory is held' : 'the Market Lock territory is open'} as of this build. The town's business read, the corridors that carry the trade, the install with published prices, what the season is doing this month, and the questions a ${town.name} owner asks first. One business per category per town, in writing.`;
+
+const faqs = [
+  { q: `Is ${industry.name.toLowerCase()} still open in ${town.name} under Market Lock?`, a: locked ? `Not at the moment: a ${town.name} business holds the ${lower} category. The neighboring towns are listed on this page with their status, and the Lead Engine runs the same response system without the exclusivity anywhere.` : `Yes, as of this build. Market Lock installs one ${lower} business per town; when a ${town.name} operator signs, the board flips and the next ${lower} business that calls about ${town.name} gets a no. ${openForIndustry} of ${TOWNS.length} South Shore towns are open for this category.` },
+  { q: `What does it cost for a ${town.name} ${lower} business?`, a: `The same published prices as every ICS client: JobSite at ${PRICES.JobSite}, Lead Engine at ${PRICES['Lead Engine']}, Market Lock at ${PRICES['Market Lock']}. The install for ${lower} starts with ${industry.installs[0].system}, because that is where the money leaks first in this trade.` },
+  { q: `How fast would it be running in ${town.name}?`, a: `JobSite is live in 21 days or the fee drops $1,000 a week. Lead Engine is fully live in four to six weeks with response under 60 seconds from the first day the phone is routed. The first thirty days for ${lower} are on the playbook, with the ${town.name} season already marked.` },
+];
+
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'Service', serviceType: `AI marketing and automation systems for ${lower}`, name: `${industry.name} — ${town.name}, MA`, provider: { '@id': `${SITE.url}/#business` }, areaServed: { '@type': 'City', name: town.name, containedInPlace: { '@type': 'AdministrativeArea', name: `${town.county} County, Massachusetts` } }, audience: { '@type': 'Audience', audienceType: industry.name }, description, url: `${SITE.url}/south-shore/${town.slug}/${industry.slug}/` },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'South Shore', item: `${SITE.url}/south-shore/` },
+    { '@type': 'ListItem', position: 2, name: town.name, item: `${SITE.url}/south-shore/${town.slug}/` },
+    { '@type': 'ListItem', position: 3, name: industry.name, item: `${SITE.url}/south-shore/${town.slug}/${industry.slug}/` },
+  ] },
+];
+const contactHref = `/contact/?${new URLSearchParams({ interest: 'AI systems & marketing', message: `${industry.name} in ${town.name}: I want to talk about ${locked ? 'the Lead Engine' : 'claiming the Market Lock territory'}.\n\nMy business: \nBest time to call: ` }).toString()}`;
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">
+        <a href="/south-shore/" class="hover:text-brass-200">South Shore</a> · <a href={`/south-shore/${town.slug}/`} class="hover:text-brass-200">{town.name}</a> · <a href={`/industries/${industry.slug}/`} class="hover:text-brass-200">{industry.name}</a>
+      </p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
+        {industry.name.replace(/ & /g, ' and ')} in {town.name}.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        {town.position} {industry.headline}
+      </p>
+      <div class="reveal mt-6 inline-flex flex-wrap items-center gap-3 rounded-xl border border-white/10 bg-navy-900 px-4 py-3" style="--reveal-delay: 260ms">
+        <span class={`inline-flex h-3 w-3 rounded-full ${locked ? 'bg-red-500' : 'bg-teal-400'}`} aria-hidden="true"></span>
+        <span class="text-sm font-semibold text-white">Market Lock · {town.name} · {industry.name}: {locked ? 'held' : 'open'}</span>
+        <span class="text-xs text-navy-100/70">{openInTown} of {INDUSTRIES.length} categories open in {town.name} · {openForIndustry} of {TOWNS.length} towns open for {lower}</span>
+      </div>
+      <div class="reveal mt-8 flex flex-wrap gap-3" style="--reveal-delay: 320ms">
+        <a href={contactHref} class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-lg hover:bg-teal-700">{locked ? `Run the Lead Engine in ${town.name}` : `Claim ${town.name} for ${shortName}`}</a>
+        <a href={`/territories/?place=${town.slug}&cat=${industry.slug}`} class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white hover:border-teal-400 hover:text-teal-400">See it on the board</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <div class="grid gap-6 lg:grid-cols-5">
+      <article class="reveal rounded-2xl border border-navy-100 bg-white p-6 shadow-sm lg:col-span-3 sm:p-8">
+        <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-700">The {town.name} read</p>
+        <h2 class="mt-2 font-display text-2xl font-bold text-navy-900">Who is already buying here, and how</h2>
+        <p class="mt-4 text-sm leading-relaxed text-ink-700">{town.businessMix}</p>
+        <p class="mt-3 text-sm leading-relaxed text-ink-700">{town.angle}</p>
+        <p class="mt-4 text-xs text-ink-500"><span class="font-semibold text-navy-900">Corridors:</span> {town.corridors.join(' · ')}</p>
+        {guides.length > 0 && <p class="mt-2 text-xs text-ink-500"><span class="font-semibold text-navy-900">Corridor guides:</span> {guides.map((g, i) => <span>{i > 0 && ' · '}<a href={`/corridors/${g.slug}/`} class="font-semibold text-teal-600 hover:text-teal-700">{g.name}</a></span>)}</p>}
+      </article>
+      <aside class="reveal rounded-2xl border border-teal-500/30 bg-navy-950 p-6 text-white lg:col-span-2" style="--reveal-delay: 120ms">
+        <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-400">Where {lower} leaks money</p>
+        <ul class="mt-4 space-y-2">{industry.pains.map((p) => <li class="flex gap-2 text-sm leading-relaxed text-navy-100/85"><span class="font-mono text-xs font-bold text-brass-300">✕</span><span>{p}</span></li>)}</ul>
+        <p class="mt-5 rounded-lg bg-navy-900 p-3 text-sm text-navy-100/85">For a typical single-location {lower} business, about <span class="font-semibold text-white">{money(leak)} a month</span> walks out while nobody picks up. <a href={`/industries/${industry.slug}/playbook/#leak`} class="font-semibold text-teal-400 hover:text-teal-500">The math →</a></p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+      <div class="grid gap-6 md:grid-cols-3">
+        {industry.installs.map((inst, i) => (
+          <div class="reveal flex flex-col rounded-xl border border-navy-100 bg-white p-6" style={`--reveal-delay: ${i * 80}ms`}>
+            <p class="font-mono text-xs font-bold text-teal-600">0{i + 1}</p>
+            <h3 class="mt-1 text-xl font-bold text-navy-900">{inst.system}</h3>
+            <p class="mt-1 font-mono text-[11px] font-semibold text-brass-600">{PRICES[inst.system]}</p>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-700">{inst.why}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 text-center text-sm text-ink-500">Published for every client, in writing: <a href="/pricing/" class="font-semibold text-teal-600 hover:text-teal-700">pricing →</a> <span class="mx-2">·</span> <a href="/guarantees/" class="font-semibold text-teal-600 hover:text-teal-700">the four guarantees →</a></p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+    <div class="grid gap-6 lg:grid-cols-2">
+      <div class="reveal rounded-2xl border border-navy-100 bg-white p-6 shadow-sm">
+        <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">{seasonNow.month} for {lower}</p>
+        <p class="mt-3 text-base leading-relaxed text-navy-900">{seasonNow.note}</p>
+        <table class="mt-5 w-full text-left text-sm">
+          <thead><tr class="border-b border-navy-100"><th class="py-2 font-mono text-[10px] font-bold uppercase tracking-wider text-ink-500">Number</th><th class="py-2 font-mono text-[10px] font-bold uppercase tracking-wider text-ink-500">Typical</th><th class="py-2 font-mono text-[10px] font-bold uppercase tracking-wider text-teal-700">90-day target</th></tr></thead>
+          <tbody>{kpis.map((k) => <tr class="border-b border-navy-100 last:border-0 align-top"><td class="py-2 pr-3 font-semibold text-navy-900">{k.name}</td><td class="py-2 pr-3 text-ink-700">{k.baseline}</td><td class="py-2 font-semibold text-teal-700">{k.target}</td></tr>)}</tbody>
+        </table>
+        <p class="mt-4 text-sm text-ink-500">The whole year, the scripts, and the first thirty days: <a href={`/industries/${industry.slug}/playbook/`} class="font-semibold text-teal-600 hover:text-teal-700">the {lower} playbook →</a></p>
+      </div>
+      <div class="reveal rounded-2xl border border-navy-100 bg-white p-6 shadow-sm" style="--reveal-delay: 120ms">
+        <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">{industry.name} in the towns next door</p>
+        <ul class="mt-3 divide-y divide-navy-100">
+          {neighborStatus.map((n) => (
+            <li class="flex items-center justify-between gap-3 py-2.5 text-sm">
+              <a href={`/south-shore/${n.slug}/${industry.slug}/`} class="font-semibold text-navy-900 hover:text-teal-700">{industry.name} in {n.name} →</a>
+              <span class={`shrink-0 rounded-full px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${n.locked ? 'bg-red-100 text-red-700' : 'bg-teal-100 text-teal-700'}`}>{n.locked ? 'held' : 'open'}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-4 text-sm text-ink-500">Same town, other trades: <a href={`/south-shore/${town.slug}/`} class="font-semibold text-teal-600 hover:text-teal-700">every category in {town.name} →</a> <span class="mx-1">·</span> <a href={`/south-shore/compare/?a=${town.slug}&b=${neighbors[0]?.slug ?? 'brockton'}`} class="font-semibold text-teal-600 hover:text-teal-700">compare {town.name} with {neighbors[0]?.name ?? 'Brockton'} →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-4xl px-4 py-14 sm:px-6">
+      <h2 class="text-center font-display text-2xl font-bold text-navy-900">Asked by {town.name} {lower} owners</h2>
+      <div class="mt-8 space-y-4">
+        {faqs.map((f) => (
+          <details class="rounded-xl border border-navy-100 bg-white p-5" open>
+            <summary class="cursor-pointer list-none font-semibold text-navy-900">{f.q}</summary>
+            <p class="mt-3 text-sm leading-relaxed text-ink-700">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FounderCard heading={`The person who would run it in ${town.name}`} line={`${FOUNDER.name} builds and runs every system personally, from Brockton, and has the ${town.name} read because the work is done in these towns, not from a dashboard about them.`} />
+  <CtaSection heading={`One call about ${lower} in ${town.name}.`} body={locked ? `The territory is held, and the Lead Engine still answers every call in under 60 seconds. Bring the bottleneck; you will leave with a straight answer and a price.` : `Bring the bottleneck. You will leave with a straight answer on the system, the price, what ninety days should produce, and whether ${town.name} is still yours to claim.`} />
+</Base>

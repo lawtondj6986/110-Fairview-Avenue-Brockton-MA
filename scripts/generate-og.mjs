@@ -283,6 +283,11 @@ export async function generateOg() {
       manifest[route] = `/og/${slug}.png`;
     }
 
+    // Territory pages (town x industry) share the industry's card rather than rendering 492 more.
+    const townSlugs = [...readFileSync(rel('src/lib/towns.ts'), 'utf8').matchAll(/slug: '([^']+)',\s*\n\s*name: '([^']+)'/g)].map((m) => m[1]);
+    const indSlugs = [...readFileSync(rel('src/lib/industries.ts'), 'utf8').matchAll(/slug: '([^']+)',\s*\n\s*name: '([^']+)'/g)].map((m) => m[1]);
+    for (const t of townSlugs) for (const i of indSlugs) manifest[`/south-shore/${t}/${i}/`] = `/og/industries-${i}.png`;
+
     writeFileSync(manifestPath, JSON.stringify(manifest, null, 1));
     console.log(`[og] generated ${pages.length} social cards`);
   } catch (err) {
