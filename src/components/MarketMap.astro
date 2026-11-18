@@ -93,7 +93,7 @@ const paths = corridors.map((c, i) => ({
     if (c.labelAt && byslug[c.towns[c.labelAt]] && byslug[c.towns[c.labelAt - 1]]) {
       const A = byslug[c.towns[c.labelAt - 1]];
       const B = byslug[c.towns[c.labelAt]];
-      return { lx: (A.X + B.X) / 2, ly: (A.Y + B.Y) / 2 };
+      return { lx: (A.X + B.X) / 2 + (c.labelDx ?? 0), ly: (A.Y + B.Y) / 2 + (c.labelDy ?? 0) };
     }
     for (let j = 1; j < c.towns.length; j++) {
       const A = byslug[c.towns[j - 1]];
@@ -101,7 +101,7 @@ const paths = corridors.map((c, i) => ({
       const len = Math.hypot(B.X - A.X, B.Y - A.Y);
       if (len > best.len) best = { len, lx: (A.X + B.X) / 2, ly: (A.Y + B.Y) / 2 };
     }
-    return { lx: best.lx, ly: best.ly };
+    return { lx: best.lx + (c.labelDx ?? 0), ly: best.ly + (c.labelDy ?? 0) };
   })(),
   names: c.towns.map((s) => byslug[s].name).join(' · '),
 }));

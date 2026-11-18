@@ -76,8 +76,8 @@ const schema = [
     </div>
   </section>
   <ShortVersion
-    number='96'
-    numberLabel='exclusive Market Lock territories across 8 Palm Beach County cities, Boca Raton first'
+    number='192'
+    numberLabel='exclusive Market Lock territories across 16 Palm Beach County cities, Boca Raton first'
     facts={[
       'AI revenue systems, retail platforms, and custom builds at the same published pricing as Massachusetts.',
       'On the ground in Boca Raton seasonally; every system runs remotely the rest of the year, as it is built to.',
@@ -129,9 +129,9 @@ const schema = [
       <div>
         <p class="text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Market Lock · The Palm Beach Territory Board</p>
         <p class="mt-2 max-w-2xl text-xl font-bold leading-snug text-white sm:text-2xl">
-          One business per category, per city. 8 Palm Beach County cities × 12 categories = 96 exclusive territories — every one still open.
+          One business per category, per city. 16 Palm Beach County cities × 12 categories = 192 exclusive territories — every one still open.
         </p>
-        <p class="mt-2 text-sm text-navy-100/70">Boca Raton to Jupiter. Whoever locks it first, keeps it.</p>
+        <p class="mt-2 text-sm text-navy-100/70">Boca Raton to Tequesta. Whoever locks it first, keeps it.</p>
       </div>
       <a href="/palm-beach/territories/" class="shrink-0 rounded-md bg-brass-500 px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-brass-300">
         Check my territory →
@@ -141,7 +141,7 @@ const schema = [
 
   <!-- THE MAP -->
   <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-    <SectionHeading eyebrow="The map" heading="Eight cities, the corridors that connect them, and the read on each" body="Hover a city for its read and how many Market Lock categories are still open. Hover a corridor to light up the cities on it. Boca Raton is the seasonal base." align="center" />
+    <SectionHeading eyebrow="The map" heading="Sixteen cities, the corridors that connect them, and the read on each" body="Hover a city for its read and how many Market Lock categories are still open. Hover a corridor to light up the cities on it. Boca Raton is the seasonal base." align="center" />
     <div class="mt-10"><MarketMap market="PB" /></div>
     <p class="mt-6 text-center text-sm text-ink-700"><span class="font-semibold text-navy-900">By corridor:</span> {CORRIDOR_GUIDES.filter((g) => g.market === 'PB').map((g, i) => <><a href={`/corridors/${g.slug}/`} class="font-semibold text-teal-600 hover:text-teal-700">{g.route}</a>{i < 4 ? ' · ' : ''}</>)} <a href="/corridors/" class="text-ink-500 hover:text-teal-700">(all corridor guides)</a></p>
     <p class="mt-2 text-center text-sm"><a href="/palm-beach/compare/" class="font-semibold text-teal-600 hover:text-teal-700">City Compare: any two Palm Beach cities side by side →</a></p>
@@ -150,9 +150,9 @@ const schema = [
   <!-- THE CITIES — one page each, written corridor by corridor -->
   <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
     <SectionHeading
-      eyebrow="Eight cities · One page each"
+      eyebrow="Sixteen cities · One page each"
       heading="Pick your city. Each one is written for the businesses that actually operate there."
-      body="Boca Raton to Jupiter, the corridors a local would name, the categories that dominate demand, and what a system does differently there."
+      body="Boca Raton to Tequesta, the corridors a local would name, the categories that dominate demand, and what a system does differently there."
       align="center"
     />
     <ul class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

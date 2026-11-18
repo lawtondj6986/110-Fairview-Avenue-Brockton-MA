@@ -64,6 +64,9 @@ export interface Corridor {
   tone: 'teal' | 'brass';
   /** Which segment (1-based index of its end town) carries the label; default is the longest segment. */
   labelAt?: number;
+  /** Optional nudge for the route label, in map pixels. */
+  labelDx?: number;
+  labelDy?: number;
 }
 
 export const CORRIDORS: Corridor[] = [
@@ -130,12 +133,22 @@ export const PALM_BEACH_GEO: TownGeo[] = [
   { slug: 'boynton-beach', lat: 26.528, lon: -80.085, anchor: 'start', dx: 10, dy: 4 },
   { slug: 'delray-beach', lat: 26.461, lon: -80.078, anchor: 'start', dx: 10, dy: 4 },
   { slug: 'boca-raton', lat: 26.368, lon: -80.104, anchor: 'start', dx: 13, dy: 5 },
+  { slug: 'tequesta', lat: 26.968, lon: -80.129, anchor: 'end', dx: -10, dy: 4 },
+  { slug: 'juno-beach', lat: 26.88, lon: -80.053, anchor: 'start', dx: 10, dy: 4 },
+  { slug: 'north-palm-beach', lat: 26.817, lon: -80.06, anchor: 'start', dx: 10, dy: -9 },
+  { slug: 'lake-park', lat: 26.8, lon: -80.07, anchor: 'start', dx: 10, dy: 4 },
+  { slug: 'riviera-beach', lat: 26.775, lon: -80.07, anchor: 'start', dx: 10, dy: 14 },
+  { slug: 'royal-palm-beach', lat: 26.708, lon: -80.23, anchor: 'middle', dx: 0, dy: -11 },
+  { slug: 'greenacres', lat: 26.627, lon: -80.14, anchor: 'end', dx: -10, dy: 12 },
+  { slug: 'palm-springs', lat: 26.636, lon: -80.096, anchor: 'start', dx: 10, dy: -7 },
 ];
 
 export const PALM_BEACH_CORRIDORS: Corridor[] = [
-  { route: 'I-95 / US-1', towns: ['boca-raton', 'delray-beach', 'boynton-beach', 'lake-worth-beach', 'west-palm-beach', 'palm-beach-gardens', 'jupiter'], tone: 'teal', labelAt: 1 },
-  { route: "Florida's Turnpike", towns: ['boca-raton', 'delray-beach', 'boynton-beach', 'wellington', 'west-palm-beach', 'palm-beach-gardens', 'jupiter'], tone: 'brass', labelAt: 3 },
-  { route: 'Southern Blvd (SR-80)', towns: ['wellington', 'west-palm-beach'], tone: 'brass' },
-  { route: 'Military Trail', towns: ['boca-raton', 'delray-beach', 'boynton-beach', 'lake-worth-beach', 'west-palm-beach', 'palm-beach-gardens'], tone: 'brass', labelAt: 5 },
-  { route: 'SR-7 (441)', towns: ['boca-raton', 'wellington'], tone: 'brass' },
+  { route: 'I-95 / US-1', towns: ['boca-raton', 'delray-beach', 'boynton-beach', 'lake-worth-beach', 'west-palm-beach', 'riviera-beach', 'lake-park', 'north-palm-beach', 'juno-beach', 'jupiter', 'tequesta'], tone: 'teal', labelAt: 1 },
+  { route: "Florida's Turnpike", towns: ['boca-raton', 'delray-beach', 'boynton-beach', 'wellington', 'west-palm-beach', 'palm-beach-gardens', 'jupiter'], tone: 'brass', labelAt: 2 },
+  { route: 'Southern Blvd (SR-80)', towns: ['wellington', 'royal-palm-beach', 'west-palm-beach'], tone: 'brass', labelAt: 2, labelDy: -14 },
+  { route: 'Military Trail', towns: ['boca-raton', 'delray-beach', 'boynton-beach', 'lake-worth-beach', 'west-palm-beach', 'palm-beach-gardens'], tone: 'brass', labelAt: 3 },
+  { route: 'SR-7 (441)', towns: ['boca-raton', 'wellington', 'royal-palm-beach'], tone: 'brass' },
+  { route: 'Northlake Blvd', towns: ['palm-beach-gardens', 'lake-park', 'north-palm-beach'], tone: 'brass', labelAt: 2, labelDx: 90, labelDy: 8 },
+  { route: 'Lake Worth Rd', towns: ['wellington', 'greenacres', 'palm-springs', 'lake-worth-beach'], tone: 'brass', labelAt: 1 },
 ];
