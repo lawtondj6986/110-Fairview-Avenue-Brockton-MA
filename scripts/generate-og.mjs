@@ -48,7 +48,7 @@ function collectPages() {
     ['/seller-net/', 'seller-net', 'FREE CALCULATOR · 1 MINUTE', 'Selling your building? See what you actually net.'],
     ['/cap-rate/', 'cap-rate', 'FREE CALCULATOR · 1 MINUTE', 'Does the building pencil? Cap rate, cash-on-cash, DSCR.'],
     ['/lease-analyzer/', 'lease-analyzer', 'FREE CALCULATOR · 1 MINUTE', 'The face rent is not the rent. Net effective rent, both chairs.'],
-    ['/deal-tools/', 'deal-tools', 'SEVEN FREE CRE TOOLS · NO EMAIL', 'Every seat at the table has a number. Run yours first.'],
+    ['/deal-tools/', 'deal-tools', 'EIGHT FREE CRE TOOLS · NO EMAIL', 'Every seat at the table has a number. Run yours first.'],
     ['/lease-clauses/', 'lease-clauses', 'FREE TOOL · LEASE CLAUSE DECODER · 40 CLAUSES', 'Every clause in your lease, in plain English. With the ask.'],
     ['/territories/', 'territories', 'MARKET LOCK · THE TERRITORY BOARD', 'One business per category, per town. Whoever locks it first, keeps it.'],
     ['/platforms/', 'platforms', 'CUSTOM PLATFORMS · YOU OWN THE CODE', 'When the business is the software, we build the business.'],
@@ -105,6 +105,7 @@ function collectPages() {
     pages.push([`/corridors/${m[1]}/`, `corridors-${m[1]}`, `CORRIDOR GUIDE · ${where}`, `${m[4].replace(/\\'/g, "'")}.`]);
   }
   pages.push(['/buyer-brief/', 'buyer-brief', 'FREE TOOL · BUYER BRIEF · SOUTH SHORE MA', 'Tell us the building. We hunt off-market for it.']);
+  pages.push(['/tour-scorecard/', 'tour-scorecard', 'FREE TOOL · TOUR SCORECARD · 23 ITEMS', 'Walk the building with the right questions. Score it as you go.']);
   pages.push(['/seller-brief/', 'seller-brief', 'FREE TOOL · SELLER BRIEF · SOUTH SHORE MA', 'Tell us the building. The page writes the sale plan.']);
 
   // Head-to-head comparisons

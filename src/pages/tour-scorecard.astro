@@ -1,0 +1,279 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+import FounderCard from '../components/FounderCard.astro';
+import ShareKit from '../components/ShareKit.astro';
+import { CRITERIA, SEATS, GROUPS, SCORE_LABELS } from '../lib/tour-scorecard';
+import { SITE } from '../config';
+
+const title = 'Tour Scorecard — Score Up to Three South Shore Buildings on the Walk-Through | Free ICS Tool';
+const description = `${CRITERIA.length} things to look at when you walk a commercial building, weighted by how you will use it (flex, retail, office, or investment). Score up to three buildings side by side on your phone during the tour; the page totals them, names the weak items, and writes the questions for the seller. Free, no email, shareable, printable.`;
+
+const faqs = [
+  { q: 'Why does the same building score differently for a retail buyer and a flex buyer?', a: 'Because the weights change. Visibility and parking carry triple weight for a storefront and almost none for a fabricator, who cares about clear height, loading, and three-phase power. The scorecard asks how you will use the building first, then weights the walk-through accordingly.' },
+  { q: 'Is a high score a reason to skip inspections?', a: 'No. It is a reason to make an offer and spend inspection money on the right building. The scorecard is the tour; the Phase I, the structural inspection, the Title V, and the title search are due diligence, and the brief lists them.' },
+  { q: 'Can I use it on my phone while walking the building?', a: 'That is how it is meant to be used. Tap a score per item as you go, add the second building on the next tour, and the comparison is waiting in the link. Nothing is sent anywhere; it lives in the address bar and on the device.' },
+  { q: 'What do I do with the low-scoring items?', a: 'Price them or make them conditions. The scorecard writes the seller questions from your low scores so the next call is specific: the roof age, the amperage, the Title V, the certificate of occupancy. Low items that cannot be fixed at a price are how you walk away early instead of late.' },
+];
+
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'ICS Tour Scorecard', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: `${SITE.url}/tour-scorecard/`, description, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, provider: { '@id': `${SITE.url}/#business` } },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+const seatKeys = Object.keys(SEATS) as (keyof typeof SEATS)[];
+const groupKeys = Object.keys(GROUPS) as (keyof typeof GROUPS)[];
+const chip = 'ts-seat rounded-md border border-navy-100 bg-white px-3 py-1.5 text-xs font-semibold text-navy-900 hover:border-teal-500 aria-pressed:border-teal-600 aria-pressed:bg-navy-900 aria-pressed:text-white';
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950 print:hidden">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Free tool · Tour Scorecard · {CRITERIA.length} items · no email</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">Walk the building with the right questions. Score it as you go.</h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        Say how you will use it, then score each item on the walk-through. Up to three buildings side by side, weighted for your seat, with the weak items named and the seller questions written. Built to be used on a phone in a parking lot.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6" id="ts">
+    <div class="sticky top-16 z-20 -mx-4 border-b border-navy-100 bg-paper/95 px-4 py-3 backdrop-blur print:hidden sm:-mx-6 sm:px-6">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="mr-1 font-mono text-[11px] font-bold uppercase tracking-widest text-ink-500">How you will use it</span>
+        {seatKeys.map((k, i) => <button type="button" class={chip} data-seat={k} aria-pressed={i === 0 ? 'true' : 'false'} title={SEATS[k].blurb}>{SEATS[k].name}</button>)}
+      </div>
+      <div class="mt-2 grid gap-2 sm:grid-cols-3" id="ts-buildings">
+        {[0, 1, 2].map((i) => (
+          <div class="flex items-center gap-2">
+            <span class={`inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full font-mono text-[11px] font-bold text-white ${['bg-teal-600', 'bg-brass-500', 'bg-navy-900'][i]}`}>{String.fromCharCode(65 + i)}</span>
+            <input type="text" class="ts-name w-full rounded-md border border-navy-100 bg-white px-3 py-1.5 text-sm text-navy-900 placeholder:text-ink-500 focus:border-teal-500 focus:outline-none" data-b={i} placeholder={i === 0 ? 'Building A (address or nickname)' : i === 1 ? 'Building B (optional)' : 'Building C (optional)'} maxlength="40" />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-6 grid gap-4" id="ts-totals">
+      {[0, 1, 2].map((i) => (
+        <div class="ts-total hidden rounded-2xl border border-navy-100 bg-white p-5 shadow-sm sm:flex sm:items-center sm:justify-between sm:gap-6" data-b={i}>
+          <div>
+            <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-ink-500">Building {String.fromCharCode(65 + i)} · <span data-t="name"></span></p>
+            <p class="mt-1 font-display text-3xl font-bold text-navy-900"><span data-t="pct">0</span><span class="text-lg text-ink-500">/100</span> <span class="ml-2 rounded-full px-2.5 py-1 align-middle text-xs font-bold" data-t="verdict"></span></p>
+            <p class="mt-1 text-sm text-ink-700" data-t="text"></p>
+            <p class="mt-1 text-xs text-ink-500"><span data-t="scored">0</span> of <span data-t="of">{CRITERIA.length}</span> items scored · heavy items low: <span data-t="weak" class="font-semibold text-navy-900">none yet</span></p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-6 space-y-8">
+      {groupKeys.map((g) => (
+        <section>
+          <h2 class="font-display text-xl font-bold text-navy-900">{GROUPS[g]}</h2>
+          <div class="mt-3 space-y-3">
+            {CRITERIA.filter((c) => c.group === g).map((c) => (
+              <article class="ts-item rounded-xl border border-navy-100 bg-white p-4" data-key={c.key} data-w={JSON.stringify(c.weight)}>
+                <div class="flex flex-wrap items-start justify-between gap-2">
+                  <h3 class="text-base font-bold text-navy-900">{c.name} <span class="ts-w ml-1 font-mono text-[10px] font-bold uppercase tracking-wider text-ink-500"></span></h3>
+                  <details class="text-sm">
+                    <summary class="cursor-pointer list-none font-semibold text-teal-700 hover:underline">What good looks like</summary>
+                    <p class="mt-2 max-w-xl text-ink-700"><span class="font-semibold text-navy-900">Good:</span> {c.good}</p>
+                    <p class="mt-1 max-w-xl text-ink-700"><span class="font-semibold text-brass-600">Red flag:</span> {c.redFlag}</p>
+                  </details>
+                </div>
+                <div class="mt-3 grid gap-2 sm:grid-cols-3">
+                  {[0, 1, 2].map((i) => (
+                    <div class="ts-row flex items-center gap-1" data-b={i} hidden={i > 0}>
+                      <span class={`mr-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full font-mono text-[10px] font-bold text-white ${['bg-teal-600', 'bg-brass-500', 'bg-navy-900'][i]}`}>{String.fromCharCode(65 + i)}</span>
+                      <div class="flex flex-1 gap-1" role="group" aria-label={`Score ${c.name} for building ${String.fromCharCode(65 + i)}`}>
+                        {SCORE_LABELS.map((l, s) => <button type="button" class="ts-score flex-1 rounded border border-navy-100 bg-white px-1 py-1.5 text-[11px] font-semibold text-navy-900 hover:border-teal-500 aria-pressed:border-teal-600 aria-pressed:bg-teal-600 aria-pressed:text-white" data-s={s} aria-pressed="false">{l}</button>)}
+                        <button type="button" class="ts-score rounded border border-dashed border-navy-100 bg-white px-1.5 py-1.5 text-[11px] font-semibold text-ink-500 hover:border-teal-500 aria-pressed:border-navy-900 aria-pressed:bg-navy-100 aria-pressed:text-navy-900" data-s="x" aria-pressed="false" title="Not applicable">n/a</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pb-12 sm:px-6" id="ts-out">
+    <div class="rounded-2xl border border-navy-100 bg-white p-6 shadow-sm sm:p-8">
+      <div class="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">For the seller, the broker, or your partner</p>
+          <h2 class="mt-2 font-display text-2xl font-bold text-navy-900 sm:text-3xl">The questions your low scores wrote</h2>
+          <p class="mt-2 max-w-xl text-sm text-ink-700">Every item you scored Poor or Fair on a heavily weighted criterion becomes a question. Ask them before the LOI, not after.</p>
+        </div>
+        <div class="flex flex-wrap gap-2 print:hidden">
+          <button type="button" id="ts-copy" class="rounded-md bg-navy-900 px-3.5 py-2 text-sm font-semibold text-white hover:bg-teal-600">Copy the questions</button>
+          <button type="button" id="ts-link" class="rounded-md border border-navy-100 bg-white px-3.5 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500">Copy a shareable link</button>
+          <button type="button" id="ts-print" class="rounded-md border border-navy-100 bg-white px-3.5 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500">Print</button>
+          <button type="button" id="ts-reset" class="rounded-md border border-navy-100 bg-white px-3.5 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500">Start over</button>
+        </div>
+      </div>
+      <div class="mt-5 grid gap-6 md:grid-cols-3" id="ts-questions"></div>
+      <p class="mt-6 text-xs text-ink-500">A walk-through aid, not an inspection or legal advice. Nothing you score is sent anywhere; it lives in the link and on this device.</p>
+      <div class="mt-4 print:hidden"><ShareKit what="my building tour scorecard" compact /></div>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-4xl px-4 py-14 sm:px-6">
+      <h2 class="text-center font-display text-2xl font-bold text-navy-900">Asked in the parking lot</h2>
+      <div class="mt-8 space-y-4">
+        {faqs.map((f) => (
+          <details class="rounded-xl border border-navy-100 bg-white p-5" open>
+            <summary class="cursor-pointer list-none font-semibold text-navy-900">{f.q}</summary>
+            <p class="mt-3 text-sm leading-relaxed text-ink-700">{f.a}</p>
+          </details>
+        ))}
+      </div>
+      <p class="mt-8 text-center text-sm text-ink-500">Before the tour: <a href="/buyer-brief/" class="font-semibold text-teal-600 hover:text-teal-700">the Buyer Brief →</a> <span class="mx-2">·</span> After it: <a href="/cap-rate/" class="font-semibold text-teal-600 hover:text-teal-700">Cap rate and NOI →</a> <span class="mx-2">·</span> The flex guide: <a href="/insights/flex-space-south-shore-owner-user-guide/" class="font-semibold text-teal-600 hover:text-teal-700">what a 5,000-square-foot owner-user should know →</a></p>
+    </div>
+  </section>
+
+  <FounderCard heading="Who walks buildings with this list" line="Every item on it has cost a buyer money on a South Shore deal, or saved one. Bring the scorecard; the walk-through with a licensed advisor is free." />
+  <CtaSection heading="Want a second set of eyes on the walk?" body="Send the scorecard. You will get a read on which low items are priceable, which are deal-breakers, and what the offer should say." />
+</Base>
+
+<script>
+  function initScorecard() {
+    const root = document.getElementById('ts');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+    const KEY = 'ics-tour-scorecard';
+    type Seat = 'flex' | 'retail' | 'office' | 'investor';
+    const items = Array.from(document.querySelectorAll<HTMLElement>('.ts-item'));
+    const names = Array.from(document.querySelectorAll<HTMLInputElement>('.ts-name'));
+    const state: { seat: Seat; names: string[]; scores: Record<string, (number | 'x' | null)[]> } = { seat: 'flex', names: ['', '', ''], scores: {} };
+    items.forEach((it) => (state.scores[it.dataset.key!] = [null, null, null]));
+
+    const enc = () => {
+      const u = new URL(location.href);
+      u.searchParams.set('s', state.seat);
+      [0, 1, 2].forEach((i) => (state.names[i] ? u.searchParams.set('n' + i, state.names[i]) : u.searchParams.delete('n' + i)));
+      const str = items.map((it) => state.scores[it.dataset.key!].map((v) => (v === null ? '-' : String(v))).join('')).join('');
+      if (/[^-]/.test(str)) u.searchParams.set('q', str);
+      else u.searchParams.delete('q');
+      return u;
+    };
+    const dec = () => {
+      const q = new URLSearchParams(location.search);
+      let any = false;
+      if (q.get('s') && ['flex', 'retail', 'office', 'investor'].includes(q.get('s')!)) { state.seat = q.get('s') as Seat; any = true; }
+      [0, 1, 2].forEach((i) => { if (q.get('n' + i)) { state.names[i] = q.get('n' + i)!.slice(0, 40); any = true; } });
+      const str = q.get('q');
+      if (str && str.length === items.length * 3) {
+        items.forEach((it, k) => { state.scores[it.dataset.key!] = [0, 1, 2].map((i) => { const ch = str[k * 3 + i]; return ch === '-' ? null : ch === 'x' ? 'x' : Number(ch); }); });
+        any = true;
+      }
+      if (!any) try { const saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved?.scores) { state.seat = saved.seat || 'flex'; state.names = saved.names || ['', '', '']; items.forEach((it) => { if (saved.scores[it.dataset.key!]) state.scores[it.dataset.key!] = saved.scores[it.dataset.key!]; }); } } catch {}
+    };
+
+    const activeBuildings = () => [0, 1, 2].filter((i) => i === 0 || state.names[i] || items.some((it) => state.scores[it.dataset.key!][i] !== null));
+    const verdictOf = (pct: number) => pct >= 85 ? ['Buy-grade', 'bg-teal-100 text-teal-700', 'Few surprises left. Negotiate on price and terms, not on whether.'] : pct >= 70 ? ['Worth pursuing', 'bg-teal-100 text-teal-700', 'Solid with known gaps. Price the gaps and put them in the offer.'] : pct >= 50 ? ['Conditional', 'bg-brass-300/40 text-brass-600', 'It works only if the weak items can be fixed or credited. Get numbers before the LOI.'] : ['Walk, unless', 'bg-red-100 text-red-700', 'Too many heavy items scored low. Only a price that reflects all of them makes this a deal.'];
+    const nameOf = (i: number) => state.names[i] || `Building ${'ABC'[i]}`;
+    const itemName = (it: HTMLElement) => it.querySelector('h3')!.childNodes[0].textContent!.trim();
+
+    function render(push = true) {
+      document.querySelectorAll<HTMLElement>('.ts-seat').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.seat === state.seat)));
+      names.forEach((n, i) => { if (n.value !== state.names[i]) n.value = state.names[i]; });
+      const act = activeBuildings();
+      const show = [0, 1, 2].map((i) => act.includes(i) || i === Math.min(2, act.length));
+      items.forEach((it) => {
+        const w = JSON.parse(it.dataset.w!)[state.seat] as number;
+        it.querySelector('.ts-w')!.textContent = w === 0 ? 'not weighted for this seat' : w === 3 ? 'heavy' : w === 2 ? 'standard' : 'light';
+        it.classList.toggle('opacity-60', w === 0);
+        it.querySelectorAll<HTMLElement>('.ts-row').forEach((row) => {
+          const i = Number(row.dataset.b);
+          row.hidden = !show[i];
+          const v = state.scores[it.dataset.key!][i];
+          row.querySelectorAll<HTMLButtonElement>('.ts-score').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.s === (v === null ? '' : String(v)))));
+        });
+      });
+      // Totals
+      const weakAll: string[][] = [[], [], []];
+      [0, 1, 2].forEach((i) => {
+        const card = document.querySelector<HTMLElement>(`.ts-total[data-b="${i}"]`)!;
+        const on = act.includes(i);
+        card.classList.toggle('hidden', !on);
+        card.classList.toggle('sm:flex', on);
+        if (!on) return;
+        let num = 0, den = 0, scored = 0;
+        items.forEach((it) => {
+          const w = JSON.parse(it.dataset.w!)[state.seat] as number;
+          const v = state.scores[it.dataset.key!][i];
+          if (v === null || v === 'x' || w === 0) { if (v !== null) scored++; return; }
+          scored++;
+          num += w * v;
+          den += w * 3;
+          if (w === 3 && v <= 1) weakAll[i].push(itemName(it));
+        });
+        const pct = den ? Math.round((num / den) * 100) : 0;
+        const [label, cls, text] = verdictOf(pct);
+        card.querySelector('[data-t="name"]')!.textContent = nameOf(i);
+        card.querySelector('[data-t="pct"]')!.textContent = String(pct);
+        const vEl = card.querySelector<HTMLElement>('[data-t="verdict"]')!;
+        vEl.textContent = scored ? label : 'Not scored yet';
+        vEl.className = `ml-2 rounded-full px-2.5 py-1 align-middle text-xs font-bold ${scored ? cls : 'bg-navy-100 text-ink-500'}`;
+        card.querySelector('[data-t="text"]')!.textContent = scored ? text : 'Tap a score on each item as you walk.';
+        card.querySelector('[data-t="scored"]')!.textContent = String(scored);
+        card.querySelector('[data-t="weak"]')!.textContent = weakAll[i].length ? weakAll[i].join(', ') : 'none yet';
+      });
+      // Questions
+      const qs = document.getElementById('ts-questions')!;
+      qs.innerHTML = '';
+      act.forEach((i) => {
+        const col = document.createElement('div');
+        const h = document.createElement('p');
+        h.className = 'font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-ink-500';
+        h.textContent = nameOf(i);
+        col.appendChild(h);
+        const ul = document.createElement('ul');
+        ul.className = 'mt-2 space-y-2 text-sm leading-relaxed text-ink-700';
+        const list = items.filter((it) => { const w = JSON.parse(it.dataset.w!)[state.seat] as number; const v = state.scores[it.dataset.key!][i]; return w >= 2 && typeof v === 'number' && v <= 1; });
+        if (!list.length) { const li = document.createElement('li'); li.className = 'text-ink-500'; li.textContent = act.length && items.some((it) => state.scores[it.dataset.key!][i] !== null) ? 'No heavy item scored low. Ask about the roof and the power anyway.' : 'Score the walk-through and the questions appear here.'; ul.appendChild(li); }
+        list.forEach((it) => { const li = document.createElement('li'); li.innerHTML = `<span class="mr-1 font-mono text-xs font-bold text-brass-600">?</span><span class="font-semibold text-navy-900">${itemName(it)}:</span> ${it.querySelector('details p:last-child')!.textContent!.replace(/^Red flag:\s*/, '')} What is the documented answer here?`; ul.appendChild(li); });
+        col.appendChild(ul);
+        qs.appendChild(col);
+      });
+      const u = enc();
+      if (push) history.replaceState(null, '', u.pathname + u.search);
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {}
+    }
+
+    document.querySelectorAll<HTMLElement>('.ts-seat').forEach((b) => b.addEventListener('click', () => { state.seat = b.dataset.seat as Seat; render(); }));
+    names.forEach((n, i) => n.addEventListener('input', () => { state.names[i] = n.value.slice(0, 40); render(); }));
+    items.forEach((it) => it.querySelectorAll<HTMLButtonElement>('.ts-score').forEach((b) => b.addEventListener('click', () => {
+      const i = Number((b.closest('.ts-row') as HTMLElement).dataset.b);
+      const cur = state.scores[it.dataset.key!][i];
+      const next = b.dataset.s === 'x' ? 'x' : Number(b.dataset.s);
+      state.scores[it.dataset.key!][i] = cur === next ? null : next;
+      render();
+    })));
+    const flash = (b: HTMLButtonElement, t: string) => { const was = b.textContent; b.textContent = t; setTimeout(() => (b.textContent = was), 1500); };
+    (document.getElementById('ts-copy') as HTMLButtonElement).addEventListener('click', async (e) => { const b = e.currentTarget as HTMLButtonElement; const txt = Array.from(document.querySelectorAll('#ts-questions > div')).map((c) => c.textContent!.replace(/\s+/g, ' ').trim()).join('\n\n') + `\n\nBuilt with the ICS Tour Scorecard: ${location.href}`; try { await navigator.clipboard.writeText(txt); flash(b, 'Copied'); } catch { flash(b, 'Select and copy'); } });
+    (document.getElementById('ts-link') as HTMLButtonElement).addEventListener('click', async (e) => { const b = e.currentTarget as HTMLButtonElement; try { await navigator.clipboard.writeText(location.href); flash(b, 'Link copied'); } catch { flash(b, 'Copy the address bar'); } });
+    document.getElementById('ts-print')!.addEventListener('click', () => window.print());
+    document.getElementById('ts-reset')!.addEventListener('click', () => { state.names = ['', '', '']; items.forEach((it) => (state.scores[it.dataset.key!] = [null, null, null])); try { localStorage.removeItem(KEY); } catch {} render(); });
+    dec();
+    render(false);
+  }
+  initScorecard();
+  document.addEventListener('astro:page-load', initScorecard);
+</script>
+
+<style is:global>
+  @media print {
+    html:has(#ts) body > header, html:has(#ts) body > footer, html:has(#ts) main > *:not(#ts):not(#ts-out), html:has(#ts) .sticky, html:has(#ts) .ts-score:not([aria-pressed="true"]), html:has(#ts) details summary { display: none !important; }
+    html:has(#ts) details { display: block !important; }
+    html:has(#ts) details > p { display: none !important; }
+    html:has(#ts) .ts-item { padding: 0.3rem 0.5rem !important; break-inside: avoid; }
+    html:has(#ts) .ts-item h3, html:has(#ts) .ts-row { font-size: 10px !important; }
+    html:has(#ts) .ts-item .grid { display: flex !important; gap: 1rem !important; margin-top: 0.1rem !important; }
+    html:has(#ts) #ts section { margin-top: 0.5rem !important; }
+  }
+</style>

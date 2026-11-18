@@ -221,6 +221,7 @@ const INTENTS = {
       contact: /\b(call|phone|talk|book|contact|email|reach|meet)\b/,
       map: /\bmap\b/,
       quiz: /\b(quiz|fluency|test me|vocabulary|how fluent)\b/,
+      tour: /\b(tour(ing)?|walk[- ]?through|walking (a|the) building|scorecard|score (a|the|this) building|showing|site visit|inspect(ing)? (a|the) building)\b/,
       sell: /\b(sell(ing)? (my|our|the|a) (building|property|plaza|warehouse|garage|lot|land)|sale[- ]leaseback|list my building|what is my building worth|seller brief|put (it|the building) on the market)\b/,
       alt: /\b(angi|home ?advisor|thumbtack|yelp ads|lead ?gen|buying leads|shared leads|answering service|virtual receptionist|call center|hire a marketer|marketing hire|in-house marketer|franchise|franchisor|hubspot|go ?high ?level|crm subscription|zapier|freelancer|my nephew|my cousin|web designer)\b/,
       clause: /\b(clause|clauses|guaranty|guarantee|holdover|estoppel|snda|subordination|assignment|sublet|subletting|escalation|escalations|abatement|cam|pass[- ]?through|exclusive use|co-?tenancy|relocation|indemnif|my lease says|in my lease|lease says|fine print)\b/,
@@ -286,6 +287,9 @@ const INTENTS = {
     }
     if (!out.length && has(V.contact) && !has(QUESTION_WORDS)) {
       out.push({ eyebrow: 'Talk to Daniel', title: 'One call, a straight answer', body: 'He answers his own phone and email. A written quote follows within 48 hours.', links: [['Contact →', '/contact/'], ['Call (508) 942-8259', 'tel:+15089428259']] });
+    }
+    if (has(V.tour)) {
+      out.push({ eyebrow: 'Tour Scorecard', title: 'Walking a building? Score it as you go.', body: 'Twenty-three items weighted for your use, up to three buildings side by side, the weak items named and the seller questions written. Built for a phone in a parking lot.', links: [['Open the scorecard →', '/tour-scorecard/'], ['Before the tour: Buyer Brief', '/buyer-brief/']] });
     }
     if (has(V.sell)) {
       out.push({ eyebrow: 'Seller Brief', title: ma.length ? `Selling in ${names(ma)}? Build the plan.` : 'Selling a building? Build the plan.', body: 'Ten answers and the page writes the 120-day timeline with dates, the file to assemble, how it will be priced, and the first three moves.', links: [['Build a seller brief →', `/seller-brief/${ma.length ? '?t=' + ma[0].s : ''}`], ['Free building valuation', '/building-worth/'], ['Seller net sheet', '/seller-net/']] });
