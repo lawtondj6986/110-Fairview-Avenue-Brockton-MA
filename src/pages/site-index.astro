@@ -18,7 +18,9 @@ import { ALTERNATIVES } from '../lib/alternatives';
 import { SITE } from '../config';
 
 const index: { u: string; t: string; k: string }[] = JSON.parse(readFileSync(new URL('../../public/search-index.json', import.meta.url), 'utf8'));
-const top = index.filter((e) => /^\/[a-z0-9-]+\/$/.test(e.u) && !['/shipped/', '/offline/', '/site-index/'].includes(e.u)).sort((a, b) => a.t.localeCompare(b.t));
+const NAMES: Record<string, string> = { '/ai-services/': 'AI systems', '/ai-readiness/': 'AI Readiness Score', '/cap-rate/': 'Cap Rate and NOI', '/start/': 'Fit Finder', '/tools/': 'Free Shelf (all tools)', '/quotebrain/': 'QuoteBrain', '/seller-net/': 'Seller Net Proceeds', '/building-worth/': 'Free Building Valuation', '/lease-analyzer/': 'Lease Deal Analyzer', '/lease-clauses/': 'Lease Clause Decoder', '/lease-vs-buy/': 'Lease vs. Buy', '/first-90-days/': 'The First 90 Days', '/playbook/': 'The 90-Day Playbook', '/fluency/': 'Fluency Test', '/payback/': 'Payback Calculator', '/compare/': 'Honest comparisons', '/afripulse/': 'AfriPulse Times', '/card/': 'Digital card' };
+const nameOf = (u: string) => NAMES[u] ?? u.replace(/\//g, '').replace(/-/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
+const top = index.filter((e) => /^\/[a-z0-9-]+\/$/.test(e.u) && !['/shipped/', '/offline/', '/site-index/'].includes(e.u)).map((e) => ({ ...e, n: nameOf(e.u) })).sort((a, b) => a.n.localeCompare(b.n));
 const insights = (await getCollection('insights', ({ data }) => !data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const glossary = (await getCollection('glossary', ({ data }) => !data.draft)).sort((a, b) => a.data.term.localeCompare(b.data.term));
 const cases = await getCollection('case-studies', ({ data }) => !data.draft);
@@ -50,7 +52,7 @@ const cols = 'mt-4 columns-1 gap-8 sm:columns-2 lg:columns-3 [&>li]:mb-1.5 [&>li
   <div class="mx-auto max-w-6xl space-y-14 px-4 py-14 sm:px-6">
     <section id="pages" class="scroll-mt-24">
       <h2 class={h2}>Pages and tools <span class="text-base font-normal text-ink-500">· {top.length}</span></h2>
-      <ul class={cols}>{top.map((e) => <li><a href={e.u} class={link}>{e.t}</a></li>)}</ul>
+      <ul class={cols}>{top.map((e) => <li class="!mb-2.5"><a href={e.u} class={`${link} font-semibold !text-navy-900`}>{e.n}</a><span class="block text-xs leading-snug text-ink-500">{e.t}</span></li>)}</ul>
     </section>
 
     <section id="industries" class="scroll-mt-24">
