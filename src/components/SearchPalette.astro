@@ -221,6 +221,7 @@ const INTENTS = {
       contact: /\b(call|phone|talk|book|contact|email|reach|meet)\b/,
       map: /\bmap\b/,
       quiz: /\b(quiz|fluency|test me|vocabulary|how fluent)\b/,
+      month: /\b(this month|this week|right now|what should (i|we) (do|run|post)|seasonal|season(ality)?|calendar|what month)\b/,
       tour: /\b(tour(ing)?|walk[- ]?through|walking (a|the) building|scorecard|score (a|the|this) building|showing|site visit|inspect(ing)? (a|the) building)\b/,
       sell: /\b(sell(ing)? (my|our|the|a) (building|property|plaza|warehouse|garage|lot|land)|sale[- ]leaseback|list my building|what is my building worth|seller brief|put (it|the building) on the market)\b/,
       alt: /\b(angi|home ?advisor|thumbtack|yelp ads|lead ?gen|buying leads|shared leads|answering service|virtual receptionist|call center|hire a marketer|marketing hire|in-house marketer|franchise|franchisor|hubspot|go ?high ?level|crm subscription|zapier|freelancer|my nephew|my cousin|web designer)\b/,
@@ -251,7 +252,7 @@ const INTENTS = {
     }
     if ((has(V.territory) || (industry && first)) && first) {
       const cat = industry ? `&cat=${industry.s}` : '';
-      out.push({ eyebrow: 'Territory Board', title: industry ? `Is ${industry.n} open in ${first.n}?` : `What is open in ${first.n}?`, body: 'One business per category per town, in writing. The board shows live status.', links: industry ? [['Check the board →', `${BOARD[first.m]}?place=${first.s}${cat}`], [`The ${industry.n} playbook`, `/industries/${industry.s}/playbook/`]] : [['Check the board →', `${BOARD[first.m]}?place=${first.s}${cat}`]] });
+      out.push({ eyebrow: 'Territory Board', title: industry ? `Is ${industry.n} open in ${first.n}?` : `What is open in ${first.n}?`, body: 'One business per category per town, in writing. The board shows live status.', links: industry ? [[`${industry.n} in ${first.n}: the page →`, `${BASE[first.m]}${first.s}/${industry.s}/`], ['Check the board', `${BOARD[first.m]}?place=${first.s}${cat}`], [`The ${industry.n} playbook`, `/industries/${industry.s}/playbook/${first.m === 'MA' ? '' : '?market=fl'}`]] : [['Check the board →', `${BOARD[first.m]}?place=${first.s}${cat}`]] });
     } else if (has(V.territory) && industry && !first) {
       out.push({ eyebrow: 'Territory Boards', title: `Where is ${industry.n} still open?`, body: 'Pick the market; the board shows every town or city and whether your category is held.', links: [['South Shore →', `/territories/?cat=${industry.s}`], ['Broward →', `/broward/territories/?cat=${industry.s}`], ['Palm Beach →', `/palm-beach/territories/?cat=${industry.s}`]] });
     }
@@ -300,6 +301,9 @@ const INTENTS = {
     }
     if (has(V.clause)) {
       out.push({ eyebrow: 'Lease Clause Decoder', title: 'What that clause means, and what to ask for', body: 'Thirty-eight commercial lease clauses in plain English: both chairs, the red flags, sample language, the ask. Tick the ones in your lease and it writes the list for your attorney.', links: [['Open the decoder →', `/lease-clauses/?${leaseSeat(q)}`], ['The rent math', '/lease-analyzer/']] });
+    }
+    if (has(V.month) && !has(V.lease) && !has(V.hunt)) {
+      out.push({ eyebrow: 'This month', title: 'What every trade should be doing this month', body: 'The current month for all twelve industries, South Shore and South Florida, from the playbooks: when the phone rings, when it does not, and what the system should be running.', links: [['Open this month →', '/this-month/'], ['The marketing calendar', '/insights/south-shore-small-business-marketing-calendar/']] });
     }
     if (has(V.quiz)) {
       out.push({ eyebrow: 'The Fluency Test', title: 'Ten questions from the glossary', body: 'Read the definition, pick the term. Every miss links to a two-minute read.', links: [['Take the test →', '/fluency/'], ['The deal track', '/fluency/?track=cre'], ['The pitch track', '/fluency/?track=ai']] });

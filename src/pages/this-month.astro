@@ -1,0 +1,142 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+import FounderCard from '../components/FounderCard.astro';
+import ShareKit from '../components/ShareKit.astro';
+import { INDUSTRIES } from '../lib/industries';
+import { PLAYBOOKS, SEASON_FL } from '../lib/playbooks';
+import { SITE } from '../config';
+
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const now = new Date();
+const thisMonth = now.getMonth();
+const rows = INDUSTRIES.map((ind) => {
+  const pb = PLAYBOOKS.find((p) => p.slug === ind.slug)!;
+  return { slug: ind.slug, name: ind.name, eyebrow: ind.eyebrow, ma: pb.season.map((m) => m.note), fl: SEASON_FL[ind.slug] ?? pb.season.map((m) => m.note), first: pb.firstThirty[0], kpi: pb.kpis[0] };
+});
+
+const title = 'This Month — What Every Trade Should Be Doing Right Now, South Shore and South Florida | ICS';
+const description = `The current month for all twelve industries ICS serves, drawn from the playbooks: when the phone rings, when it does not, and what the system should be running, on the South Shore of Massachusetts and in Broward and Palm Beach County. Pick any month to plan ahead. Updates itself on the first of every month.`;
+
+const faqs = [
+  { q: 'Where do these month notes come from?', a: 'From the twelve industry playbooks, which were written from install call logs and the monthly reports: when inquiries actually arrive in each trade on the South Shore and in South Florida, and what the system should be doing about it. They are planning notes, not forecasts; your own numbers from the monthly report replace them within a quarter.' },
+  { q: 'Why is the Florida calendar so different?', a: 'Because the year runs the other way. South Florida\'s season is November to April when seasonal residents are in town, summer is heat, afternoon rain, and hurricane watch from June 1, and nothing closes for snow. Boat shows, spring break, and mid-August school starts move the rest.' },
+  { q: 'What should I actually do with this page?', a: 'Read your trade\'s note for this month and next, then open the playbook for the scripts and the first thirty days. If the note describes a rush you are not ready for, that is the month the system pays for itself; the Payback Calculator puts a number on it.' },
+];
+
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'WebPage', name: 'This Month', description, url: `${SITE.url}/this-month/`, isPartOf: { '@id': `${SITE.url}/#website` } },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'ItemList', name: `${MONTHS[thisMonth]} for twelve industries`, itemListElement: rows.map((r, i) => ({ '@type': 'ListItem', position: i + 1, name: `${r.name}: ${MONTHS[thisMonth]}`, description: r.ma[thisMonth], url: `${SITE.url}/industries/${r.slug}/playbook/` })) },
+];
+const chip = 'tm-chip rounded-md border border-navy-100 bg-white px-3 py-1.5 text-xs font-semibold text-navy-900 hover:border-teal-500 aria-pressed:border-teal-600 aria-pressed:bg-navy-900 aria-pressed:text-white';
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950 print:hidden">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">This month · twelve industries · two markets</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">What every trade should be doing in <span data-tm-month-name>{MONTHS[thisMonth]}</span>.</h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        One line per industry for the month you are in, from the playbooks: when the phone rings, when it does not, and what the system should be running. Flip to next month to get ahead of it. Flip to Florida to see the year run the other way.
+      </p>
+      <div class="reveal mt-6 print:hidden" style="--reveal-delay: 260ms"><ShareKit what="what every trade should be doing this month" compact dark /></div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6" id="tm" data-now={thisMonth}>
+    <div class="sticky top-16 z-20 -mx-4 border-b border-navy-100 bg-paper/95 px-4 py-3 backdrop-blur print:hidden sm:-mx-6 sm:px-6">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="mr-1 font-mono text-[11px] font-bold uppercase tracking-widest text-ink-500">Market</span>
+        <button type="button" class={chip} data-market="MA" aria-pressed="true">South Shore, MA</button>
+        <button type="button" class={chip} data-market="FL" aria-pressed="false">Broward and Palm Beach, FL</button>
+        <span class="ml-auto flex items-center gap-1">
+          <button type="button" id="tm-prev" class="rounded-md border border-navy-100 bg-white px-2.5 py-1.5 text-sm font-semibold text-navy-900 hover:border-teal-500" aria-label="Previous month">←</button>
+          <span class="min-w-[7.5rem] text-center font-mono text-xs font-bold uppercase tracking-widest text-navy-900" data-tm-month-name>{MONTHS[thisMonth]}</span>
+          <button type="button" id="tm-next" class="rounded-md border border-navy-100 bg-white px-2.5 py-1.5 text-sm font-semibold text-navy-900 hover:border-teal-500" aria-label="Next month">→</button>
+          <button type="button" id="tm-today" class="ml-2 rounded-md bg-navy-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-teal-600">Today</button>
+        </span>
+      </div>
+    </div>
+
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      {rows.map((r, i) => (
+        <article class="tm-card reveal flex flex-col rounded-2xl border border-navy-100 bg-white p-5 shadow-sm" style={`--reveal-delay: ${(i % 2) * 70}ms`} data-slug={r.slug}>
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <p class="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-ink-500">{r.eyebrow}</p>
+              <h2 class="mt-1 text-lg font-bold text-navy-900">{r.name}</h2>
+            </div>
+            <span class="shrink-0 rounded-full bg-paper px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-ink-500" data-tm-month-name>{MONTHS[thisMonth]}</span>
+          </div>
+          <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-700" data-note>{r.ma[thisMonth]}</p>
+          <template data-ma>{r.ma.join('␟')}</template>
+          <template data-fl>{r.fl.join('␟')}</template>
+          <p class="mt-3 text-xs text-ink-500"><span class="font-semibold text-navy-900">Watch:</span> {r.kpi.name}, from {r.kpi.baseline.toLowerCase()} to {r.kpi.target.toLowerCase()}.</p>
+          <p class="mt-1 text-xs text-ink-500"><span class="font-semibold text-navy-900">First thing live:</span> {r.first}</p>
+          <p class="mt-3 text-sm"><a href={`/industries/${r.slug}/playbook/`} class="tm-pb font-semibold text-teal-600 hover:text-teal-700" data-href={`/industries/${r.slug}/playbook/`}>The {r.name.toLowerCase()} playbook →</a></p>
+        </article>
+      ))}
+    </div>
+    <p class="mt-6 text-center text-sm text-ink-500">The whole year for every trade with local hooks: <a href="/insights/south-shore-small-business-marketing-calendar/" class="font-semibold text-teal-600 hover:text-teal-700">the South Shore small-business marketing calendar →</a></p>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-4xl px-4 py-14 sm:px-6">
+      <h2 class="text-center font-display text-2xl font-bold text-navy-900">About these notes</h2>
+      <div class="mt-8 space-y-4">
+        {faqs.map((f) => (
+          <details class="rounded-xl border border-navy-100 bg-white p-5" open>
+            <summary class="cursor-pointer list-none font-semibold text-navy-900">{f.q}</summary>
+            <p class="mt-3 text-sm leading-relaxed text-ink-700">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FounderCard heading="Who keeps the calendar" line="The month notes come from the call logs and the monthly reports of installs on the South Shore and in South Florida, kept by the person who runs them." />
+  <CtaSection heading="Is this the month it pays for itself?" body="If your trade's note describes a rush you are not ready for, bring it to a call. You will leave with the system, the price, and what ninety days should produce." />
+</Base>
+
+<script>
+  function initMonth() {
+    const root = document.getElementById('tm');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+    const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const SHORT = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+    const today = Number(root.dataset.now);
+    let month = today;
+    let market = 'MA';
+    const q = new URLSearchParams(location.search);
+    if (q.get('market') === 'fl') market = 'FL';
+    const qm = q.get('m');
+    if (qm && SHORT.includes(qm)) month = SHORT.indexOf(qm);
+    const render = () => {
+      document.querySelectorAll<HTMLElement>('[data-tm-month-name]').forEach((el) => (el.textContent = MONTHS[month] + (month === today ? '' : market === 'FL' ? '' : '')));
+      document.querySelectorAll<HTMLElement>('.tm-chip').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.market === market)));
+      document.querySelectorAll<HTMLElement>('.tm-card').forEach((card) => {
+        const src = card.querySelector<HTMLTemplateElement>(market === 'FL' ? '[data-fl]' : '[data-ma]')!;
+        const notes = (src.content.textContent || '').split('␟');
+        card.querySelector('[data-note]')!.textContent = notes[month] || '';
+        const a = card.querySelector<HTMLAnchorElement>('.tm-pb')!;
+        a.href = a.dataset.href! + (market === 'FL' ? '?market=fl' : '');
+      });
+      const u = new URL(location.href);
+      month === today ? u.searchParams.delete('m') : u.searchParams.set('m', SHORT[month]);
+      market === 'FL' ? u.searchParams.set('market', 'fl') : u.searchParams.delete('market');
+      history.replaceState(null, '', u.pathname + u.search);
+      const todayBtn = document.getElementById('tm-today') as HTMLButtonElement;
+      todayBtn.disabled = month === today;
+      todayBtn.classList.toggle('opacity-50', month === today);
+    };
+    document.querySelectorAll<HTMLElement>('.tm-chip').forEach((b) => b.addEventListener('click', () => { market = b.dataset.market!; render(); }));
+    document.getElementById('tm-prev')!.addEventListener('click', () => { month = (month + 11) % 12; render(); });
+    document.getElementById('tm-next')!.addEventListener('click', () => { month = (month + 1) % 12; render(); });
+    document.getElementById('tm-today')!.addEventListener('click', () => { month = today; render(); });
+    render();
+  }
+  initMonth();
+  document.addEventListener('astro:page-load', initMonth);
+</script>

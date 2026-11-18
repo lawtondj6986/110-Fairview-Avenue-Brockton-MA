@@ -105,6 +105,7 @@ function collectPages() {
     pages.push([`/corridors/${m[1]}/`, `corridors-${m[1]}`, `CORRIDOR GUIDE · ${where}`, `${m[4].replace(/\\'/g, "'")}.`]);
   }
   pages.push(['/buyer-brief/', 'buyer-brief', 'FREE TOOL · BUYER BRIEF · SOUTH SHORE MA', 'Tell us the building. We hunt off-market for it.']);
+  pages.push(['/this-month/', 'this-month', 'THIS MONTH · TWELVE INDUSTRIES · TWO MARKETS', 'What every trade should be doing right now.']);
   pages.push(['/tour-scorecard/', 'tour-scorecard', 'FREE TOOL · TOUR SCORECARD · 23 ITEMS', 'Walk the building with the right questions. Score it as you go.']);
   pages.push(['/seller-brief/', 'seller-brief', 'FREE TOOL · SELLER BRIEF · SOUTH SHORE MA', 'Tell us the building. The page writes the sale plan.']);
 
