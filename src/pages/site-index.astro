@@ -1,0 +1,103 @@
+---
+/**
+ * Everything, on one page: a human-readable directory of the whole site,
+ * built from the same data the pages are. Territory pages are reached
+ * through each town and city (twelve trades apiece).
+ */
+import { readFileSync } from 'node:fs';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+import AskBox from '../components/AskBox.astro';
+import { TOWNS } from '../lib/towns';
+import { BROWARD_CITIES } from '../lib/broward';
+import { PALM_BEACH_CITIES } from '../lib/palm-beach';
+import { INDUSTRIES } from '../lib/industries';
+import { CORRIDOR_GUIDES } from '../lib/corridors';
+import { ALTERNATIVES } from '../lib/alternatives';
+import { SITE } from '../config';
+
+const index: { u: string; t: string; k: string }[] = JSON.parse(readFileSync(new URL('../../public/search-index.json', import.meta.url), 'utf8'));
+const top = index.filter((e) => /^\/[a-z0-9-]+\/$/.test(e.u) && !['/shipped/', '/offline/', '/site-index/'].includes(e.u)).sort((a, b) => a.t.localeCompare(b.t));
+const insights = (await getCollection('insights', ({ data }) => !data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const glossary = (await getCollection('glossary', ({ data }) => !data.draft)).sort((a, b) => a.data.term.localeCompare(b.data.term));
+const cases = await getCollection('case-studies', ({ data }) => !data.draft);
+const CAT = { cre: 'Commercial real estate', ai: 'AI systems and marketing', intel: 'Intelligence and research' } as const;
+const byName = <T extends { name: string }>(xs: T[]) => [...xs].sort((a, b) => a.name.localeCompare(b.name));
+const territoryCount = (TOWNS.length + BROWARD_CITIES.length + PALM_BEACH_CITIES.length) * INDUSTRIES.length;
+
+const title = 'Site Index — Everything on icsgroup.ai, on One Page | ICS';
+const description = `The whole site as a directory: ${top.length} pages and tools, ${INDUSTRIES.length} industries with playbooks, ${TOWNS.length} South Shore towns and ${BROWARD_CITIES.length + PALM_BEACH_CITIES.length} South Florida cities with ${territoryCount} territory pages behind them, ${CORRIDOR_GUIDES.length} corridor guides, ${insights.length} Insights, and ${glossary.length} glossary terms.`;
+const schema = [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Site Index', description, url: `${SITE.url}/site-index/` }];
+const h2 = 'font-display text-2xl font-bold text-navy-900';
+const link = 'text-sm text-ink-700 hover:text-teal-700 hover:underline';
+const cols = 'mt-4 columns-1 gap-8 sm:columns-2 lg:columns-3 [&>li]:mb-1.5 [&>li]:break-inside-avoid';
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Site index · everything, on one page</p>
+      <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">The whole site, as a directory.</h1>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90">Every tool, market, industry, corridor, article, and term. Or ask for it in your own words.</p>
+      <div class="mt-6 max-w-xl"><AskBox placeholder="Ask for it: a tool, a town, a trade, a term" /></div>
+      <nav class="mt-6 flex flex-wrap gap-2 text-sm" aria-label="Sections">
+        {[['pages', 'Pages and tools'], ['industries', 'Industries'], ['south-shore', 'South Shore'], ['florida', 'South Florida'], ['corridors', 'Corridors'], ['compare', 'Comparisons'], ['insights', 'Insights'], ['glossary', 'Glossary']].map(([id, n]) => <a href={`#${id}`} class="rounded-full border border-white/20 px-3 py-1.5 font-semibold text-white hover:border-teal-400 hover:text-teal-400">{n}</a>)}
+      </nav>
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-6xl space-y-14 px-4 py-14 sm:px-6">
+    <section id="pages" class="scroll-mt-24">
+      <h2 class={h2}>Pages and tools <span class="text-base font-normal text-ink-500">· {top.length}</span></h2>
+      <ul class={cols}>{top.map((e) => <li><a href={e.u} class={link}>{e.t}</a></li>)}</ul>
+    </section>
+
+    <section id="industries" class="scroll-mt-24">
+      <h2 class={h2}>Industries <span class="text-base font-normal text-ink-500">· {INDUSTRIES.length}, each with a playbook</span></h2>
+      <ul class={cols}>{INDUSTRIES.map((i) => <li><a href={`/industries/${i.slug}/`} class={`${link} font-semibold`}>{i.name}</a> <a href={`/industries/${i.slug}/playbook/`} class="text-xs font-semibold text-teal-600 hover:underline">playbook</a></li>)}</ul>
+      <p class="mt-3 text-sm text-ink-500">Case studies: {cases.map((c, i) => <span>{i > 0 && ' · '}<a href={`/case-studies/${c.id}/`} class="font-semibold text-teal-600 hover:underline">{c.data.title}</a></span>)}</p>
+    </section>
+
+    <section id="south-shore" class="scroll-mt-24">
+      <h2 class={h2}>South Shore, Massachusetts <span class="text-base font-normal text-ink-500">· {TOWNS.length} towns, {TOWNS.length * INDUSTRIES.length} territory pages</span></h2>
+      <p class="mt-2 text-sm text-ink-500"><a href="/south-shore/" class="font-semibold text-teal-600 hover:underline">The map</a> · <a href="/territories/" class="font-semibold text-teal-600 hover:underline">Territory Board</a> · <a href="/south-shore/compare/" class="font-semibold text-teal-600 hover:underline">Town Compare</a> · <a href="/market-sheets/" class="font-semibold text-teal-600 hover:underline">Market sheets</a>. Each town page lists its twelve trades.</p>
+      <ul class={cols}>{byName(TOWNS).map((t) => <li><a href={`/south-shore/${t.slug}/`} class={`${link} font-semibold`}>{t.name}</a> <a href={`/south-shore/${t.slug}/sheet/`} class="text-xs font-semibold text-teal-600 hover:underline">sheet</a></li>)}</ul>
+    </section>
+
+    <section id="florida" class="scroll-mt-24">
+      <h2 class={h2}>South Florida <span class="text-base font-normal text-ink-500">· {BROWARD_CITIES.length + PALM_BEACH_CITIES.length} cities, systems only</span></h2>
+      <p class="mt-2 text-sm text-ink-500"><a href="/broward/" class="font-semibold text-teal-600 hover:underline">Broward County</a> · <a href="/broward/territories/" class="font-semibold text-teal-600 hover:underline">board</a> · <a href="/broward/compare/" class="font-semibold text-teal-600 hover:underline">compare</a></p>
+      <ul class={cols}>{byName(BROWARD_CITIES).map((c) => <li><a href={`/broward/${c.slug}/`} class={`${link} font-semibold`}>{c.name}</a> <a href={`/broward/${c.slug}/sheet/`} class="text-xs font-semibold text-teal-600 hover:underline">sheet</a></li>)}</ul>
+      <p class="mt-6 text-sm text-ink-500"><a href="/palm-beach/" class="font-semibold text-teal-600 hover:underline">Palm Beach County</a> · <a href="/palm-beach/territories/" class="font-semibold text-teal-600 hover:underline">board</a> · <a href="/palm-beach/compare/" class="font-semibold text-teal-600 hover:underline">compare</a></p>
+      <ul class={cols}>{byName(PALM_BEACH_CITIES).map((c) => <li><a href={`/palm-beach/${c.slug}/`} class={`${link} font-semibold`}>{c.name}</a> <a href={`/palm-beach/${c.slug}/sheet/`} class="text-xs font-semibold text-teal-600 hover:underline">sheet</a></li>)}</ul>
+    </section>
+
+    <section id="corridors" class="scroll-mt-24">
+      <h2 class={h2}>Corridor guides <span class="text-base font-normal text-ink-500">· {CORRIDOR_GUIDES.length}</span></h2>
+      <ul class={cols}>{CORRIDOR_GUIDES.map((g) => <li><a href={`/corridors/${g.slug}/`} class={link}>{g.name}</a> <span class="text-xs text-ink-500">{g.market === 'MA' ? 'MA' : 'FL'}</span></li>)}</ul>
+    </section>
+
+    <section id="compare" class="scroll-mt-24">
+      <h2 class={h2}>Honest comparisons</h2>
+      <ul class={cols}><li><a href="/compare/" class={link}>DIY vs. agency vs. ICS</a></li>{ALTERNATIVES.map((a) => <li><a href={`/compare/${a.slug}/`} class={link}>ICS vs. {a.name.toLowerCase()}</a></li>)}</ul>
+    </section>
+
+    <section id="insights" class="scroll-mt-24">
+      <h2 class={h2}>Insights <span class="text-base font-normal text-ink-500">· {insights.length}, newest first</span></h2>
+      <ul class="mt-4 space-y-1.5">{insights.map((p) => <li><a href={`/insights/${p.id}/`} class={link}>{p.data.title}</a></li>)}</ul>
+    </section>
+
+    <section id="glossary" class="scroll-mt-24">
+      <h2 class={h2}>Glossary <span class="text-base font-normal text-ink-500">· {glossary.length} terms</span></h2>
+      {(Object.keys(CAT) as (keyof typeof CAT)[]).map((c) => (
+        <div class="mt-6">
+          <h3 class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-700">{CAT[c]} · {glossary.filter((g) => g.data.category === c).length}</h3>
+          <ul class="mt-3 columns-2 gap-8 sm:columns-3 lg:columns-4 [&>li]:mb-1 [&>li]:break-inside-avoid">{glossary.filter((g) => g.data.category === c).map((g) => <li><a href={`/glossary/${g.id}/`} class={link}>{g.data.term}</a></li>)}</ul>
+        </div>
+      ))}
+    </section>
+  </div>
+
+  <CtaSection heading="Did not find it?" body="Ask. One call, a straight answer, from the person who built every page on this list." />
+</Base>
