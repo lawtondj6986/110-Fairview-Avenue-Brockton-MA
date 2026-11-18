@@ -287,6 +287,10 @@ export async function generateOg() {
     const townSlugs = [...readFileSync(rel('src/lib/towns.ts'), 'utf8').matchAll(/slug: '([^']+)',\s*\n\s*name: '([^']+)'/g)].map((m) => m[1]);
     const indSlugs = [...readFileSync(rel('src/lib/industries.ts'), 'utf8').matchAll(/slug: '([^']+)',\s*\n\s*name: '([^']+)'/g)].map((m) => m[1]);
     for (const t of townSlugs) for (const i of indSlugs) manifest[`/south-shore/${t}/${i}/`] = `/og/industries-${i}.png`;
+    for (const [file, base] of [['src/lib/broward.ts', '/broward/'], ['src/lib/palm-beach.ts', '/palm-beach/']]) {
+      const slugs = [...readFileSync(rel(file), 'utf8').matchAll(/slug: '([^']+)',\s*\n\s*name: '([^']+)'/g)].map((m) => m[1]);
+      for (const c of slugs) for (const i of indSlugs) manifest[`${base}${c}/${i}/`] = `/og/industries-${i}.png`;
+    }
 
     writeFileSync(manifestPath, JSON.stringify(manifest, null, 1));
     console.log(`[og] generated ${pages.length} social cards`);

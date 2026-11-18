@@ -1,0 +1,25 @@
+---
+/**
+ * One page per Market Lock territory in Palm Beach County: 16 cities x 12
+ * categories = 192 pages. Systems only in Florida. See components/TerritoryPage.astro.
+ */
+import Base from '../../../layouts/Base.astro';
+import TerritoryPage from '../../../components/TerritoryPage.astro';
+import { PALM_BEACH_CITIES } from '../../../lib/palm-beach';
+import { INDUSTRIES } from '../../../lib/industries';
+import { CLAIMED_PB, isLocked } from '../../../lib/claimed';
+
+export function getStaticPaths() {
+  return PALM_BEACH_CITIES.flatMap((city) => INDUSTRIES.map((industry) => ({ params: { city: city.slug, industry: industry.slug }, props: { city, industry } })));
+}
+const { city, industry } = Astro.props;
+const places = PALM_BEACH_CITIES.map((c) => ({ slug: c.slug, name: c.name, county: 'Palm Beach County', position: c.position, corridors: c.corridors, businessMix: Array.isArray(c.businessMix) ? c.businessMix.join(' ') : String(c.businessMix), angle: c.angle, neighbors: c.neighbors }));
+const place = places.find((p) => p.slug === city.slug)!;
+const locked = isLocked(CLAIMED_PB, city.slug, industry.slug);
+const title = `${industry.name} in ${city.name}, FL — AI Systems, Market Lock Status, the Local Read | ICS`;
+const description = `${industry.name} in ${city.name}, Palm Beach County: the Market Lock territory is ${locked ? 'held' : 'open'} as of this build. The city's business read, the corridors that carry the trade, the install with published prices, what the South Florida season is doing this month, and the questions a ${city.name} owner asks first. Systems only in Florida; one business per category per city, in writing.`;
+---
+
+<Base title={title} description={description}>
+  <TerritoryPage market="PB" place={place} industry={industry} places={places} claimed={CLAIMED_PB} base="/palm-beach/" boardHref="/palm-beach/territories/" hubName="Palm Beach County" noun="city" />
+</Base>
