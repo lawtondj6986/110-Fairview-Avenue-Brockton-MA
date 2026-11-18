@@ -92,6 +92,14 @@ const schema = [
           ))
         }
       </div>
+      <div class="mt-10 rounded-2xl border border-teal-500/30 bg-navy-900 p-6 sm:flex sm:items-center sm:justify-between sm:gap-6">
+        <div>
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-400">The playbook</p>
+          <p class="mt-1 text-lg font-semibold text-white">The {industry.name.toLowerCase()} season, the five numbers, the intake, and the exact scripts.</p>
+          <p class="mt-1 text-sm text-navy-100/70">Printable, shareable, and written from installs rather than theory.</p>
+        </div>
+        <a href={`/industries/${industry.slug}/playbook/`} class="mt-4 inline-block shrink-0 rounded-md bg-teal-600 px-5 py-2.5 font-semibold text-white hover:bg-teal-700 sm:mt-0">Open the playbook →</a>
+      </div>
       <p class="mt-8 text-center text-sm text-navy-100/70">
         <a href="/pricing/" class="font-semibold text-teal-400 hover:text-teal-500">Full published pricing →</a>
         <span class="mx-2">·</span>

@@ -109,6 +109,7 @@ function collectPages() {
   const indSrc = readFileSync(rel('src/lib/industries.ts'), 'utf8');
   for (const m of indSrc.matchAll(/slug: '([^']+)',\s*\n\s*name: '([^']+)'/g)) {
     pages.push([`/industries/${m[1]}/`, `industries-${m[1]}`, 'AI SYSTEMS BY INDUSTRY · SOUTH SHORE MA', `${m[2]}.`]);
+    pages.push([`/industries/${m[1]}/playbook/`, `playbook-${m[1]}`, 'INDUSTRY PLAYBOOK · SEASON · NUMBERS · SCRIPTS', `The ${m[2]} playbook.`]);
   }
 
   // Broward cities (same slug/name shape as towns)

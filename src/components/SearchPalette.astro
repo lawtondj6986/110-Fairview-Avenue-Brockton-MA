@@ -246,7 +246,7 @@ const INTENTS = {
     }
     if ((has(V.territory) || (industry && first)) && first) {
       const cat = industry ? `&cat=${industry.s}` : '';
-      out.push({ eyebrow: 'Territory Board', title: industry ? `Is ${industry.n} open in ${first.n}?` : `What is open in ${first.n}?`, body: 'One business per category per town, in writing. The board shows live status.', links: [['Check the board →', `${BOARD[first.m]}?place=${first.s}${cat}`]] });
+      out.push({ eyebrow: 'Territory Board', title: industry ? `Is ${industry.n} open in ${first.n}?` : `What is open in ${first.n}?`, body: 'One business per category per town, in writing. The board shows live status.', links: industry ? [['Check the board →', `${BOARD[first.m]}?place=${first.s}${cat}`], [`The ${industry.n} playbook`, `/industries/${industry.s}/playbook/`]] : [['Check the board →', `${BOARD[first.m]}?place=${first.s}${cat}`]] });
     } else if (has(V.territory) && industry && !first) {
       out.push({ eyebrow: 'Territory Boards', title: `Where is ${industry.n} still open?`, body: 'Pick the market; the board shows every town or city and whether your category is held.', links: [['South Shore →', `/territories/?cat=${industry.s}`], ['Broward →', `/broward/territories/?cat=${industry.s}`], ['Palm Beach →', `/palm-beach/territories/?cat=${industry.s}`]] });
     }
@@ -278,7 +278,7 @@ const INTENTS = {
       out.push({ eyebrow: system.n, title: `${system.setup} to build, ${system.monthly}`, body: 'Published pricing. Build the proposal, see when it pays back, or read the first ninety days.', links: [['Proposal →', `/proposal/?system=${system.s}`], ['Payback', `/payback/?system=${system.s}`], ['First 90 days', `/first-90-days/?system=${system.s}`]] });
     }
     if (!out.length && industry) {
-      out.push({ eyebrow: 'Industry', title: `AI systems for ${industry.n}`, body: 'What the revenue leaks are in your trade, which system closes them, and whether your category is still open in your town.', links: [['The industry page →', `/industries/${industry.s}/`], ['Is it open in my town?', `/territories/?cat=${industry.s}`]] });
+      out.push({ eyebrow: 'Industry', title: `AI systems for ${industry.n}`, body: 'What the revenue leaks are in your trade, which system closes them, and whether your category is still open in your town.', links: [['The industry page →', `/industries/${industry.s}/`], ['The playbook: season, numbers, scripts', `/industries/${industry.s}/playbook/`], ['Is it open in my town?', `/territories/?cat=${industry.s}`]] });
     }
     if (!out.length && has(V.contact) && !has(QUESTION_WORDS)) {
       out.push({ eyebrow: 'Talk to Daniel', title: 'One call, a straight answer', body: 'He answers his own phone and email. A written quote follows within 48 hours.', links: [['Contact →', '/contact/'], ['Call (508) 942-8259', 'tel:+15089428259']] });

@@ -1,0 +1,322 @@
+---
+import Base from '../../../layouts/Base.astro';
+import SectionHeading from '../../../components/SectionHeading.astro';
+import CtaSection from '../../../components/CtaSection.astro';
+import FounderCard from '../../../components/FounderCard.astro';
+import ShareKit from '../../../components/ShareKit.astro';
+import TerritoryStatus from '../../../components/TerritoryStatus.astro';
+import { INDUSTRIES } from '../../../lib/industries';
+import { PLAYBOOKS, leakPerMonth } from '../../../lib/playbooks';
+import { CLAIMED_MA } from '../../../lib/claimed';
+import { SITE } from '../../../config';
+
+export function getStaticPaths() {
+  return PLAYBOOKS.map((playbook) => ({
+    params: { slug: playbook.slug },
+    props: { playbook, industry: INDUSTRIES.find((i) => i.slug === playbook.slug)! },
+  }));
+}
+
+const { playbook, industry } = Astro.props;
+const money = (n: number) => '$' + n.toLocaleString('en-US');
+const leak = leakPerMonth(playbook.math);
+const missedLeads = Math.round(playbook.math.leadsPerMonth * playbook.math.missedShare);
+const lostJobs = Math.round(missedLeads * playbook.math.closeRate * 10) / 10;
+const lower = industry.name.toLowerCase();
+const now = new Date();
+const thisMonth = now.getMonth();
+
+const title = `The ${industry.name} Playbook — Season, Numbers, Scripts | ICS`;
+const description = `The operating playbook for ${lower} on the South Shore: the twelve-month season, the five numbers worth tracking with baselines and targets, the intake questions, the exact text scripts the system sends, the first thirty days, and the math behind the revenue leak. Free, printable, shareable.`;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: `The ${industry.name} Playbook`,
+    description,
+    author: { '@type': 'Person', name: SITE.founder },
+    publisher: { '@id': `${SITE.url}/#business` },
+    about: industry.name,
+    url: `${SITE.url}/industries/${playbook.slug}/playbook/`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: playbook.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `The first thirty days for a ${lower} business`,
+    step: playbook.firstThirty.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, text: s })),
+  },
+];
+
+const others = PLAYBOOKS.filter((p) => p.slug !== playbook.slug)
+  .map((p) => INDUSTRIES.find((i) => i.slug === p.slug)!)
+  .slice(0, 11);
+---
+
+<Base title={title} description={description} schema={schema} ogType="article">
+  <section class="bg-navy-950 print:bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 print:py-6">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300 print:text-navy-900">
+        Playbook · <a href={`/industries/${industry.slug}/`} class="hover:text-brass-200">{industry.name}</a> · South Shore MA
+      </p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl print:text-navy-900" style="--reveal-delay: 100ms">
+        The {industry.name.replace(/ & /, ' and ')} playbook.
+      </h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90 print:text-ink-700" style="--reveal-delay: 200ms">
+        {playbook.promise} The season, the five numbers, the intake, the scripts, and the first thirty days: everything the
+        {lower} install is tuned around, written down so you can run it with us or without us.
+      </p>
+      <div class="reveal mt-8 flex flex-wrap items-center gap-3 print:hidden" style="--reveal-delay: 300ms">
+        <a href="/start/" class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-lg transition-colors hover:bg-teal-700">Find your system in 45 seconds</a>
+        <button type="button" id="pb-print" class="rounded-md border border-white/25 px-5 py-3 font-semibold text-white transition-colors hover:border-teal-400 hover:text-teal-400">Print the playbook</button>
+        <ShareKit what={`the ${industry.name} playbook`} compact dark />
+      </div>
+    </div>
+  </section>
+
+  <!-- The leak, in this trade's numbers -->
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6" id="leak">
+    <div class="grid gap-6 lg:grid-cols-5">
+      <div class="reveal rounded-2xl border border-navy-100 bg-white p-6 shadow-sm lg:col-span-3 sm:p-8">
+        <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">The leak, in your numbers</p>
+        <h2 class="mt-2 font-display text-2xl font-bold text-navy-900 sm:text-3xl">
+          About <span class="text-teal-600">{money(leak)}</span> a month walks out while nobody picks up.
+        </h2>
+        <p class="mt-3 text-sm leading-relaxed text-ink-700">
+          For a typical single-location {lower} business: {playbook.math.leadsPerMonth} inquiries a month, {Math.round(playbook.math.missedShare * 100)}% of
+          them missed or answered too late, a {Math.round(playbook.math.closeRate * 100)}% close rate when they are answered promptly, and an
+          {playbook.math.ticketLabel} of {money(playbook.math.avgTicket)}. That is {missedLeads} missed inquiries and roughly {lostJobs}
+          lost {playbook.math.avgTicket > 2000 ? 'jobs' : 'sales'} every month, before a dollar of advertising.
+        </p>
+        <dl class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {[
+            ['Inquiries / mo', String(playbook.math.leadsPerMonth)],
+            ['Missed today', `${Math.round(playbook.math.missedShare * 100)}%`],
+            ['Close rate', `${Math.round(playbook.math.closeRate * 100)}%`],
+            [playbook.math.ticketLabel.replace(/^average /, 'Avg. ').replace(/^(\w)/, (c) => c.toUpperCase()), money(playbook.math.avgTicket)],
+          ].map(([k, v]) => (
+            <div class="rounded-lg bg-paper p-3">
+              <dt class="font-mono text-[10px] font-bold uppercase tracking-wider text-ink-500">{k}</dt>
+              <dd class="mt-1 text-lg font-bold text-navy-900">{v}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="mt-5 text-sm text-ink-500 print:hidden">
+          Your numbers are different. <a href={`/payback/?value=${Math.max(50, Math.round(playbook.math.avgTicket / 50) * 50)}&inc=${Math.min(20, Math.max(1, Math.round(lostJobs)))}&now=${Math.round(playbook.math.leadsPerMonth * (1 - playbook.math.missedShare) * playbook.math.closeRate)}`} class="font-semibold text-teal-600 hover:text-teal-700">Run them in the Payback Calculator →</a>
+        </p>
+      </div>
+      <div class="reveal rounded-2xl border border-teal-500/30 bg-navy-950 p-6 text-white lg:col-span-2 sm:p-8" style="--reveal-delay: 120ms">
+        <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-400">What closes it</p>
+        <ol class="mt-4 space-y-4">
+          {industry.installs.map((inst, i) => (
+            <li class="flex gap-3">
+              <span class="font-mono text-xs font-bold text-teal-400">0{i + 1}</span>
+              <div>
+                <p class="font-semibold">{inst.system}</p>
+                <p class="mt-0.5 text-sm leading-relaxed text-navy-100/75">{inst.why}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <p class="mt-5 text-sm text-navy-100/70 print:hidden"><a href="/pricing/" class="font-semibold text-teal-400 hover:text-teal-500">Published pricing →</a> <span class="mx-2">·</span> <a href="/guarantees/" class="font-semibold text-teal-400 hover:text-teal-500">Written guarantees →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Five numbers -->
+  <section class="bg-paper" id="numbers">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+      <SectionHeading eyebrow="The five numbers" heading={`What a ${lower} business should know every Monday`} body="Where most operators start, where the install takes them, and why each number is on the list. The baseline is set from your own data at kickoff, in writing." align="center" />
+      <div class="mt-10 overflow-x-auto rounded-2xl border border-navy-100 bg-white shadow-sm">
+        <table class="w-full min-w-[640px] text-left text-sm">
+          <thead class="bg-navy-950 text-white">
+            <tr>
+              <th class="px-5 py-3 font-mono text-[11px] font-bold uppercase tracking-wider">Metric</th>
+              <th class="px-5 py-3 font-mono text-[11px] font-bold uppercase tracking-wider">Typical baseline</th>
+              <th class="px-5 py-3 font-mono text-[11px] font-bold uppercase tracking-wider text-teal-400">90-day target</th>
+              <th class="px-5 py-3 font-mono text-[11px] font-bold uppercase tracking-wider">Why it is on the list</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-navy-100">
+            {playbook.kpis.map((k) => (
+              <tr class="align-top">
+                <td class="px-5 py-4 font-semibold text-navy-900">{k.name}</td>
+                <td class="px-5 py-4 text-ink-700">{k.baseline}</td>
+                <td class="px-5 py-4 font-semibold text-teal-700">{k.target}</td>
+                <td class="px-5 py-4 text-ink-700">{k.why}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-center text-sm text-ink-500 print:hidden">These five are the first page of <a href="/monthly-report/sample/" class="font-semibold text-teal-600 hover:text-teal-700">the monthly report →</a></p>
+    </div>
+  </section>
+
+  <!-- Season -->
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6" id="season">
+    <SectionHeading eyebrow="The season" heading={`Twelve months of ${lower} on the South Shore`} body="When the phone rings, when it does not, and what the system should be doing in each. The current month is marked." align="center" />
+    <div class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {playbook.season.map((m, i) => (
+        <div class={`reveal rounded-xl border p-4 ${i === thisMonth ? 'border-teal-500 bg-teal-100/40' : 'border-navy-100 bg-white'}`} style={`--reveal-delay: ${(i % 3) * 60}ms`} data-month={i}>
+          <p class="flex items-center justify-between font-mono text-[11px] font-bold uppercase tracking-wider text-ink-500">
+            <span>{m.month}</span>
+            {i === thisMonth && <span class="rounded bg-teal-600 px-1.5 py-0.5 text-[10px] text-white">now</span>}
+          </p>
+          <p class="mt-2 text-sm leading-relaxed text-ink-700">{m.note}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Intake + scripts -->
+  <section class="bg-navy-950 text-white" id="scripts">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <SectionHeading eyebrow="Intake and scripts" heading="What the system asks, and what it sends" body="The intake runs on every call, text, and form, in this order, and routes the answer to the right place. The scripts are the actual messages, in your name; copy them and use them tomorrow if you like." align="center" dark />
+      <div class="mt-12 grid gap-8 lg:grid-cols-5">
+        <div class="lg:col-span-2">
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-400">The intake, in order</p>
+          <ol class="mt-4 space-y-3">
+            {playbook.intake.map((q, i) => (
+              <li class="flex gap-3 rounded-lg border border-white/10 bg-navy-900 p-3 text-sm leading-relaxed text-navy-100/90">
+                <span class="font-mono text-xs font-bold text-teal-400">{i + 1}</span>
+                <span>{q}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div class="space-y-4 lg:col-span-3">
+          {playbook.scripts.map((s) => (
+            <article class="rounded-xl border border-white/10 bg-navy-900 p-5">
+              <div class="flex flex-wrap items-baseline justify-between gap-2">
+                <h3 class="font-semibold text-white">{s.name}</h3>
+                <p class="font-mono text-[11px] text-brass-300">{s.when}</p>
+              </div>
+              <p class="pb-script mt-3 rounded-lg bg-navy-950 p-4 font-mono text-[13px] leading-relaxed text-navy-100/90">{s.text}</p>
+              <button type="button" class="pb-copy mt-3 rounded-md border border-white/20 px-3 py-1.5 text-xs font-semibold text-white hover:border-teal-400 hover:text-teal-400 print:hidden" data-text={s.text}>Copy script</button>
+            </article>
+          ))}
+          <p class="text-xs text-navy-100/60">Bracketed fields are filled by the system from the inquiry and your account. Marketing texts go only to people who opted in, with opt-out honored automatically.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- First thirty + mistakes -->
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6" id="thirty">
+    <div class="grid gap-8 md:grid-cols-2">
+      <div class="reveal rounded-2xl border border-navy-100 bg-white p-6 shadow-sm sm:p-8">
+        <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-600">The first thirty days</p>
+        <h2 class="mt-2 font-display text-2xl font-bold text-navy-900">Live in this order</h2>
+        <ol class="mt-5 space-y-3">
+          {playbook.firstThirty.map((s, i) => (
+            <li class="flex gap-3 text-sm leading-relaxed text-ink-700"><span class="font-mono text-xs font-bold text-teal-600">{String(i + 1).padStart(2, '0')}</span><span>{s}</span></li>
+          ))}
+        </ol>
+        <p class="mt-5 text-sm text-ink-500 print:hidden">Week by week, with the guarantees attached: <a href="/first-90-days/" class="font-semibold text-teal-600 hover:text-teal-700">The First 90 Days →</a></p>
+      </div>
+      <div class="reveal rounded-2xl border border-navy-100 bg-paper p-6 sm:p-8" style="--reveal-delay: 120ms">
+        <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">The four mistakes</p>
+        <h2 class="mt-2 font-display text-2xl font-bold text-navy-900">What we see in nearly every {lower} shop before the install</h2>
+        <ul class="mt-5 space-y-3">
+          {playbook.mistakes.map((m) => (
+            <li class="flex gap-3 text-sm leading-relaxed text-ink-700"><span class="font-mono text-sm font-bold text-brass-600">✕</span><span>{m}</span></li>
+          ))}
+        </ul>
+        <p class="mt-5 text-sm text-ink-500 print:hidden">Score your own shop in two minutes: <a href="/ai-readiness/" class="font-semibold text-teal-600 hover:text-teal-700">the AI Readiness check →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-paper" id="faq">
+    <div class="mx-auto max-w-4xl px-4 py-14 sm:px-6">
+      <SectionHeading eyebrow="Asked by owners" heading={`Questions ${lower} owners ask on the first call`} align="center" />
+      <div class="mt-8 space-y-4">
+        {playbook.faqs.map((f) => (
+          <details class="group rounded-xl border border-navy-100 bg-white p-5 open:shadow-sm" open>
+            <summary class="cursor-pointer list-none font-semibold text-navy-900">{f.q}</summary>
+            <p class="mt-3 text-sm leading-relaxed text-ink-700">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="print:hidden">
+  <TerritoryStatus claimed={CLAIMED_MA} boardHref="/territories/" state="MA" industry={{ slug: industry.slug, name: industry.name }} />
+  </div>
+
+  <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6 print:hidden">
+    <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-ink-500">Other playbooks</p>
+    <div class="mt-3 flex flex-wrap gap-2">
+      {others.map((o) => (
+        <a href={`/industries/${o.slug}/playbook/`} class="rounded-full border border-navy-100 bg-white px-3 py-1.5 text-sm font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700">{o.name}</a>
+      ))}
+    </div>
+  </section>
+
+  <div class="print:hidden">
+  <FounderCard heading="Written by the person who installs it" line={`Every ${lower} playbook comes from installs, not theory: the season from the call logs, the scripts from what got replies, the numbers from the monthly reports. ${SITE.founder} runs every engagement personally.`} />
+  <CtaSection heading={`Bring this playbook to a call.`} body={`Twenty minutes on your ${lower} business: which of the five numbers is furthest from target, which system closes the gap, and what ninety days should produce, in writing if we proceed.`} />
+  </div>
+</Base>
+
+<style is:global>
+  @media print {
+    html:has(#pb-print) main section { padding-top: 0.6rem !important; padding-bottom: 0.6rem !important; break-inside: auto; }
+    html:has(#pb-print) main section > div { padding-top: 0 !important; padding-bottom: 0 !important; }
+    html:has(#pb-print) .bg-navy-950, html:has(#pb-print) .bg-navy-900, html:has(#pb-print) .bg-paper { background: #fff !important; color: #0b1a33 !important; }
+    html:has(#pb-print) .text-white, html:has(#pb-print) .text-navy-100\/90, html:has(#pb-print) .text-navy-100\/80, html:has(#pb-print) .text-navy-100\/75, html:has(#pb-print) .text-navy-100\/70, html:has(#pb-print) .text-navy-100\/60 { color: #0b1a33 !important; }
+    html:has(#pb-print) .text-teal-400 { color: #0f766e !important; }
+    html:has(#pb-print) .border-white\/10, html:has(#pb-print) .border-white\/20 { border-color: #d6dde8 !important; }
+    html:has(#pb-print) .reveal { opacity: 1 !important; transform: none !important; }
+    html:has(#pb-print) h1 { font-size: 1.9rem !important; }
+    html:has(#pb-print) h2 { font-size: 1.15rem !important; margin-top: 0.25rem !important; }
+    html:has(#pb-print) p, html:has(#pb-print) li, html:has(#pb-print) td, html:has(#pb-print) dd, html:has(#pb-print) summary { font-size: 10.5px !important; line-height: 1.4 !important; }
+    html:has(#pb-print) .pb-script { font-size: 10px !important; padding: 0.5rem !important; }
+    html:has(#pb-print) #season .grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; gap: 0.4rem !important; }
+    html:has(#pb-print) #season .grid > div, html:has(#pb-print) #scripts li, html:has(#pb-print) #scripts article { padding: 0.45rem !important; }
+    html:has(#pb-print) #scripts .grid, html:has(#pb-print) #thirty .grid, html:has(#pb-print) #leak .grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 0.75rem !important; }
+    html:has(#pb-print) #scripts .space-y-4 > * + *, html:has(#pb-print) #scripts .space-y-3 > * + * { margin-top: 0.35rem !important; }
+    html:has(#pb-print) table { font-size: 10px !important; }
+    html:has(#pb-print) td, html:has(#pb-print) th { padding: 0.35rem 0.5rem !important; }
+    html:has(#pb-print) #faq details, html:has(#pb-print) #season .grid > div, html:has(#pb-print) #scripts article { break-inside: avoid; }
+    html:has(#pb-print) #faq .space-y-4 > * + * { margin-top: 0.4rem !important; }
+    html:has(#pb-print) body > header, html:has(#pb-print) body > footer, html:has(#pb-print) nav { display: none !important; }
+  }
+</style>
+
+<script>
+  function init() {
+    const printBtn = document.getElementById('pb-print');
+    if (!printBtn || printBtn.dataset.ready) return;
+    printBtn.dataset.ready = '1';
+    printBtn.addEventListener('click', () => window.print());
+    document.querySelectorAll<HTMLButtonElement>('.pb-copy').forEach((b) => {
+      b.addEventListener('click', async () => {
+        const t = b.dataset.text || '';
+        try {
+          await navigator.clipboard.writeText(t);
+          const was = b.textContent;
+          b.textContent = 'Copied';
+          setTimeout(() => (b.textContent = was), 1400);
+        } catch {
+          const r = document.createRange();
+          const p = b.previousElementSibling as HTMLElement;
+          r.selectNodeContents(p);
+          const sel = window.getSelection();
+          sel?.removeAllRanges();
+          sel?.addRange(r);
+        }
+      });
+    });
+  }
+  document.addEventListener('astro:page-load', init);
+  init();
+</script>
