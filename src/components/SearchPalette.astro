@@ -221,6 +221,7 @@ const INTENTS = {
       contact: /\b(call|phone|talk|book|contact|email|reach|meet)\b/,
       map: /\bmap\b/,
       quiz: /\b(quiz|fluency|test me|vocabulary|how fluent)\b/,
+      sell: /\b(sell(ing)? (my|our|the|a) (building|property|plaza|warehouse|garage|lot|land)|sale[- ]leaseback|list my building|what is my building worth|seller brief|put (it|the building) on the market)\b/,
       alt: /\b(angi|home ?advisor|thumbtack|yelp ads|lead ?gen|buying leads|shared leads|answering service|virtual receptionist|call center|hire a marketer|marketing hire|in-house marketer|franchise|franchisor|hubspot|go ?high ?level|crm subscription|zapier|freelancer|my nephew|my cousin|web designer)\b/,
       clause: /\b(clause|clauses|guaranty|guarantee|holdover|estoppel|snda|subordination|assignment|sublet|subletting|escalation|escalations|abatement|cam|pass[- ]?through|exclusive use|co-?tenancy|relocation|indemnif|my lease says|in my lease|lease says|fine print)\b/,
     };
@@ -285,6 +286,9 @@ const INTENTS = {
     }
     if (!out.length && has(V.contact) && !has(QUESTION_WORDS)) {
       out.push({ eyebrow: 'Talk to Daniel', title: 'One call, a straight answer', body: 'He answers his own phone and email. A written quote follows within 48 hours.', links: [['Contact →', '/contact/'], ['Call (508) 942-8259', 'tel:+15089428259']] });
+    }
+    if (has(V.sell)) {
+      out.push({ eyebrow: 'Seller Brief', title: ma.length ? `Selling in ${names(ma)}? Build the plan.` : 'Selling a building? Build the plan.', body: 'Ten answers and the page writes the 120-day timeline with dates, the file to assemble, how it will be priced, and the first three moves.', links: [['Build a seller brief →', `/seller-brief/${ma.length ? '?t=' + ma[0].s : ''}`], ['Free building valuation', '/building-worth/'], ['Seller net sheet', '/seller-net/']] });
     }
     if (has(V.alt)) {
       const pick = /angi|home ?advisor|thumbtack|yelp ads|lead ?gen|buying leads|shared leads/.test(q) ? ['buying-leads', 'buying shared leads'] : /answering service|virtual receptionist|call center/.test(q) ? ['answering-service', 'an answering service'] : /hire a marketer|marketing hire|in-house/.test(q) ? ['hiring-in-house', 'hiring a marketing person'] : /franchis/.test(q) ? ['franchise-marketing', 'the franchise marketing program'] : /hubspot|high ?level|crm subscription|zapier/.test(q) ? ['software-subscription', 'buying the software yourself'] : ['freelancer', 'a freelancer or a friend'];
