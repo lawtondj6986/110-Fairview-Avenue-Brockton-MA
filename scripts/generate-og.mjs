@@ -106,6 +106,12 @@ function collectPages() {
   }
   pages.push(['/buyer-brief/', 'buyer-brief', 'FREE TOOL · BUYER BRIEF · SOUTH SHORE MA', 'Tell us the building. We hunt off-market for it.']);
 
+  // Head-to-head comparisons
+  const altSrc = readFileSync(rel('src/lib/alternatives.ts'), 'utf8');
+  for (const m of altSrc.matchAll(/slug: '([^']+)',\s*\n\s*name: '([^']+)'/g)) {
+    pages.push([`/compare/${m[1]}/`, `compare-${m[1]}`, 'THE HONEST COMPARISON · SOUTH SHORE MA', `ICS vs. ${m[2].toLowerCase()}.`]);
+  }
+
   // Industries from the data file (same slug/name shape as towns)
   const indSrc = readFileSync(rel('src/lib/industries.ts'), 'utf8');
   for (const m of indSrc.matchAll(/slug: '([^']+)',\s*\n\s*name: '([^']+)'/g)) {

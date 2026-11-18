@@ -1,0 +1,142 @@
+---
+import Base from '../../layouts/Base.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import FounderCard from '../../components/FounderCard.astro';
+import ShareKit from '../../components/ShareKit.astro';
+import { ALTERNATIVES } from '../../lib/alternatives';
+import { SITE } from '../../config';
+
+export function getStaticPaths() {
+  return ALTERNATIVES.map((alt) => ({ params: { slug: alt.slug }, props: { alt } }));
+}
+const { alt } = Astro.props;
+
+const title = `ICS vs. ${alt.name} — An Honest Comparison | ICS`;
+const description = `${alt.headline} ${alt.intro.split('. ').slice(0, 2).join('. ')}. Costs, coverage, who owns what, when the alternative is the right call, and a worked South Shore example with numbers.`;
+
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'Article', headline: `ICS vs. ${alt.name}`, description, author: { '@type': 'Person', name: SITE.founder }, publisher: { '@id': `${SITE.url}/#business` }, url: `${SITE.url}/compare/${alt.slug}/` },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: alt.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+const others = ALTERNATIVES.filter((a) => a.slug !== alt.slug);
+---
+
+<Base title={title} description={description} schema={schema} ogType="article">
+  <section class="bg-navy-950">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">{alt.eyebrow} · <a href="/compare/" class="hover:text-brass-200">All comparisons</a></p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">{alt.headline}</h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">{alt.intro}</p>
+      <div class="reveal mt-6 print:hidden" style="--reveal-delay: 300ms"><ShareKit what={`ICS vs. ${alt.name.toLowerCase()}`} compact dark /></div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <div class="grid gap-6 md:grid-cols-2">
+      <div class="reveal rounded-2xl border border-navy-100 bg-white p-6 shadow-sm">
+        <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-ink-500">{alt.name}</p>
+        <p class="mt-1 text-sm text-ink-500">{alt.aka}</p>
+        <p class="mt-4 text-sm leading-relaxed text-ink-700">{alt.whatItIs}</p>
+        <p class="mt-4 rounded-lg bg-paper p-3 text-sm"><span class="font-semibold text-navy-900">Typical cost:</span> <span class="text-ink-700">{alt.theirCost}</span></p>
+      </div>
+      <div class="reveal rounded-2xl border border-teal-500/30 bg-navy-950 p-6 text-white" style="--reveal-delay: 100ms">
+        <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-400">The ICS side · {alt.icsSystem}</p>
+        <p class="mt-4 text-sm leading-relaxed text-navy-100/85">Built and run by one accountable advisor under four written guarantees: a 21-day launch for JobSite, a 60-second response, a 90-day measurable result or no monthly fee until it lands, and ownership of code, accounts, and data in writing.</p>
+        <p class="mt-4 rounded-lg bg-navy-900 p-3 text-sm"><span class="font-semibold">Published price:</span> <span class="text-navy-100/85">{alt.icsCost}</span></p>
+        <p class="mt-3 text-sm"><a href="/pricing/" class="font-semibold text-teal-400 hover:text-teal-500">Full pricing →</a> <span class="mx-2 text-navy-100/40">·</span> <a href="/guarantees/" class="font-semibold text-teal-400 hover:text-teal-500">The guarantees →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pb-12 sm:px-6">
+    <SectionHeading eyebrow="Side by side" heading="Where the two actually differ" align="center" />
+    <div class="mt-8 overflow-x-auto rounded-2xl border border-navy-100 bg-white shadow-sm">
+      <table class="w-full min-w-[720px] text-left text-sm">
+        <thead>
+          <tr class="border-b border-navy-100">
+            <th class="px-5 py-4 font-display text-xs font-bold uppercase tracking-wider text-navy-900"></th>
+            <th class="px-5 py-4 font-display text-xs font-bold uppercase tracking-wider text-ink-500">{alt.name}</th>
+            <th class="bg-navy-900 px-5 py-4 font-display text-xs font-bold uppercase tracking-wider text-teal-400">ICS · {alt.icsSystem}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {alt.rows.map(([dim, them, ics]) => (
+            <tr class="border-b border-navy-100 align-top last:border-0">
+              <td class="px-5 py-3.5 font-semibold text-navy-900">{dim}</td>
+              <td class="px-5 py-3.5 text-ink-500">{them}</td>
+              <td class="bg-navy-900/[0.03] px-5 py-3.5 font-medium text-navy-900">{ics}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-sm text-ink-500">Figures for the alternative are market-typical ranges, not claims about any specific company. The ICS column links to <a href="/pricing/" class="font-semibold text-teal-600 hover:text-teal-700">published pricing</a>, <a href="/guarantees/" class="font-semibold text-teal-600 hover:text-teal-700">written guarantees</a>, and the <a href="/scoreboard/" class="font-semibold text-teal-600 hover:text-teal-700">scoreboard</a>.</p>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+      <SectionHeading eyebrow="Straight steering" heading="Both are right for someone" align="center" />
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        <div class="reveal rounded-2xl border border-navy-100 bg-white p-6">
+          <h3 class="font-display text-xl font-bold text-navy-900">Choose {alt.name.toLowerCase()} if…</h3>
+          <ul class="mt-4 space-y-3">{alt.chooseThem.map((c) => <li class="flex gap-3 text-sm leading-relaxed text-ink-700"><span class="font-mono text-xs font-bold text-ink-500">→</span><span>{c}</span></li>)}</ul>
+        </div>
+        <div class="reveal rounded-2xl border border-teal-500/40 bg-white p-6" style="--reveal-delay: 100ms">
+          <h3 class="font-display text-xl font-bold text-navy-900">Choose ICS if…</h3>
+          <ul class="mt-4 space-y-3">{alt.chooseIcs.map((c) => <li class="flex gap-3 text-sm leading-relaxed text-ink-700"><span class="font-mono text-xs font-bold text-teal-600">→</span><span>{c}</span></li>)}</ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+    <div class="grid gap-8 lg:grid-cols-5">
+      <div class="reveal rounded-2xl border border-navy-100 bg-white p-6 shadow-sm lg:col-span-3 sm:p-8">
+        <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">A worked example</p>
+        <h2 class="mt-2 font-display text-2xl font-bold text-navy-900">{alt.example.setup}</h2>
+        <div class="mt-5 grid gap-4 sm:grid-cols-2">
+          <div class="rounded-lg border border-navy-100 p-4"><p class="font-mono text-[10px] font-bold uppercase tracking-wider text-ink-500">{alt.name}</p><p class="mt-2 text-sm leading-relaxed text-ink-700">{alt.example.them}</p></div>
+          <div class="rounded-lg border border-teal-500/40 bg-teal-100/30 p-4"><p class="font-mono text-[10px] font-bold uppercase tracking-wider text-teal-700">ICS</p><p class="mt-2 text-sm leading-relaxed text-ink-700">{alt.example.ics}</p></div>
+        </div>
+        <p class="mt-5 border-l-4 border-brass-500 pl-4 text-sm font-medium leading-relaxed text-navy-900">{alt.example.verdict}</p>
+        <p class="mt-5 text-sm text-ink-500">Composite of real installs; the numbers are typical, not a promise. <a href={alt.tool.href} class="font-semibold text-teal-600 hover:text-teal-700">{alt.tool.label} →</a></p>
+      </div>
+      <div class="space-y-6 lg:col-span-2">
+        <div class="reveal rounded-2xl border border-navy-100 bg-paper p-6" style="--reveal-delay: 100ms">
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">The costs that do not show on the invoice</p>
+          <ul class="mt-4 space-y-2">{alt.hiddenCosts.map((h) => <li class="flex gap-2 text-sm leading-relaxed text-ink-700"><span class="font-mono text-xs font-bold text-brass-600">✕</span><span>{h}</span></li>)}</ul>
+        </div>
+        <div class="reveal rounded-2xl border border-navy-100 bg-white p-6" style="--reveal-delay: 160ms">
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-teal-700">Ask them these. Ask us too.</p>
+          <ol class="mt-4 list-decimal space-y-2 pl-5">{alt.questions.map((q) => <li class="text-sm leading-relaxed text-ink-700">{q}</li>)}</ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-4xl px-4 py-14 sm:px-6">
+      <SectionHeading eyebrow="Decision questions" heading="Straight answers" align="center" />
+      <div class="mt-8 space-y-4">
+        {alt.faqs.map((f) => (
+          <details class="rounded-xl border border-navy-100 bg-white p-5" open>
+            <summary class="cursor-pointer list-none font-semibold text-navy-900">{f.q}</summary>
+            <p class="mt-3 text-sm leading-relaxed text-ink-700">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-ink-500">Other comparisons</p>
+    <div class="mt-3 flex flex-wrap gap-2">
+      <a href="/compare/" class="rounded-full border border-navy-100 bg-white px-3 py-1.5 text-sm font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700">DIY vs. agency vs. ICS</a>
+      {others.map((o) => <a href={`/compare/${o.slug}/`} class="rounded-full border border-navy-100 bg-white px-3 py-1.5 text-sm font-semibold text-navy-900 hover:border-teal-500 hover:text-teal-700">vs. {o.name.toLowerCase()}</a>)}
+    </div>
+  </section>
+
+  <FounderCard heading="Who is making the comparison" line="Every one of these alternatives has been on the other side of a call with us, and in several cases we told the owner to keep it. The comparison is written to be fair enough that you could send it to the vendor." />
+  <CtaSection heading="Bring the alternative to a call." body="Tell us what you are paying for today and what it produces. You will get a straight read on whether to keep it, replace it, or run both for a quarter, with the numbers." />
+</Base>

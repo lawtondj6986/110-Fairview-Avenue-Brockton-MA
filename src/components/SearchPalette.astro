@@ -221,6 +221,7 @@ const INTENTS = {
       contact: /\b(call|phone|talk|book|contact|email|reach|meet)\b/,
       map: /\bmap\b/,
       quiz: /\b(quiz|fluency|test me|vocabulary|how fluent)\b/,
+      alt: /\b(angi|home ?advisor|thumbtack|yelp ads|lead ?gen|buying leads|shared leads|answering service|virtual receptionist|call center|hire a marketer|marketing hire|in-house marketer|franchise|franchisor|hubspot|go ?high ?level|crm subscription|zapier|freelancer|my nephew|my cousin|web designer)\b/,
       clause: /\b(clause|clauses|guaranty|guarantee|holdover|estoppel|snda|subordination|assignment|sublet|subletting|escalation|escalations|abatement|cam|pass[- ]?through|exclusive use|co-?tenancy|relocation|indemnif|my lease says|in my lease|lease says|fine print)\b/,
     };
     const ma = places.filter((p) => p.m === 'MA');
@@ -284,6 +285,10 @@ const INTENTS = {
     }
     if (!out.length && has(V.contact) && !has(QUESTION_WORDS)) {
       out.push({ eyebrow: 'Talk to Daniel', title: 'One call, a straight answer', body: 'He answers his own phone and email. A written quote follows within 48 hours.', links: [['Contact →', '/contact/'], ['Call (508) 942-8259', 'tel:+15089428259']] });
+    }
+    if (has(V.alt)) {
+      const pick = /angi|home ?advisor|thumbtack|yelp ads|lead ?gen|buying leads|shared leads/.test(q) ? ['buying-leads', 'buying shared leads'] : /answering service|virtual receptionist|call center/.test(q) ? ['answering-service', 'an answering service'] : /hire a marketer|marketing hire|in-house/.test(q) ? ['hiring-in-house', 'hiring a marketing person'] : /franchis/.test(q) ? ['franchise-marketing', 'the franchise marketing program'] : /hubspot|high ?level|crm subscription|zapier/.test(q) ? ['software-subscription', 'buying the software yourself'] : ['freelancer', 'a freelancer or a friend'];
+      out.push({ eyebrow: 'Honest comparison', title: `ICS vs. ${pick[1]}`, body: 'Costs, coverage, who owns what, when the alternative is the right call, and a worked South Shore example with numbers.', links: [['Read the comparison →', `/compare/${pick[0]}/`], ['All six comparisons', '/compare/']] });
     }
     if (has(V.clause)) {
       out.push({ eyebrow: 'Lease Clause Decoder', title: 'What that clause means, and what to ask for', body: 'Thirty-eight commercial lease clauses in plain English: both chairs, the red flags, sample language, the ask. Tick the ones in your lease and it writes the list for your attorney.', links: [['Open the decoder →', `/lease-clauses/?${leaseSeat(q)}`], ['The rent math', '/lease-analyzer/']] });
