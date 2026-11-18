@@ -1,10 +1,21 @@
 ---
+import { TOWNS } from '../lib/towns';
+import { BROWARD_CITIES } from '../lib/broward';
+import { PALM_BEACH_CITIES } from '../lib/palm-beach';
+import { INDUSTRIES } from '../lib/industries';
+import { CLAIMED_MA, CLAIMED_FL, CLAIMED_PB } from '../lib/claimed';
 import Base from '../layouts/Base.astro';
 import { SITE } from '../config';
 
 const title = 'Start Here — Find Your System in 45 Seconds | Innovative Commercial Strategies';
 const description =
   'Three questions, 45 seconds: get matched to the right ICS system — JobSite, Lead Engine, Market Lock, a retail platform, CRE advisory, or private-client service — with the published price range and the proof to check.';
+const fitPlaces = [
+  ...TOWNS.map((t) => ({ s: t.slug, n: t.name, m: 'south-shore', b: '/south-shore/' })),
+  ...BROWARD_CITIES.map((c) => ({ s: c.slug, n: c.name, m: 'broward', b: '/broward/' })),
+  ...PALM_BEACH_CITIES.map((c) => ({ s: c.slug, n: c.name, m: 'broward', b: '/palm-beach/' })),
+];
+const fitHeld = [...CLAIMED_MA.map((c) => `/south-shore/${c.place}/${c.industry}/`), ...CLAIMED_FL.map((c) => `/broward/${c.place}/${c.industry}/`), ...CLAIMED_PB.map((c) => `/palm-beach/${c.place}/${c.industry}/`)].join(',');
 ---
 
 <Base title={title} description={description}>
@@ -38,7 +49,7 @@ const description =
       <fieldset class="fit-panel mt-5" data-step="0">
         <legend class="text-xl font-bold text-navy-900">Where is the business?</legend>
         <div class="mt-4 grid gap-3 sm:grid-cols-3">
-          <button type="button" class="fit-opt" data-q="where" data-v="south-shore">South Shore, MA <span>Brockton and 28 towns — in person</span></button>
+          <button type="button" class="fit-opt" data-q="where" data-v="south-shore">South Shore, MA <span>Brockton and 40 more towns — in person</span></button>
           <button type="button" class="fit-opt" data-q="where" data-v="broward">South Florida <span>Broward &amp; Palm Beach Counties — seasonal</span></button>
           <button type="button" class="fit-opt" data-q="where" data-v="elsewhere">Somewhere else <span>The systems run remotely anywhere</span></button>
         </div>
@@ -88,6 +99,15 @@ const description =
         <p id="fit-price" class="mt-1 font-mono text-sm font-semibold text-teal-600"></p>
         <p id="fit-pitch" class="mt-3 text-sm leading-relaxed text-ink-700"></p>
         <p id="fit-market" class="mt-3 rounded-md border border-navy-100 bg-paper px-3 py-2 text-xs leading-relaxed text-ink-700"></p>
+        <div id="fit-territory" class="mt-5 hidden rounded-lg border border-teal-500/40 bg-white p-4" data-held={fitHeld}>
+          <p class="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-teal-700">Your territory</p>
+          <div class="mt-2 grid gap-2 sm:grid-cols-2">
+            <label class="block"><span class="sr-only">Town or city</span><select id="fit-place" class="w-full rounded-md border border-navy-100 bg-white px-3 py-2 text-sm text-navy-900 focus:border-teal-500 focus:outline-none">{fitPlaces.map((pl) => <option value={pl.s} data-m={pl.m} data-b={pl.b}>{pl.n}</option>)}</select></label>
+            <label class="block"><span class="sr-only">Trade</span><select id="fit-trade" class="w-full rounded-md border border-navy-100 bg-white px-3 py-2 text-sm text-navy-900 focus:border-teal-500 focus:outline-none">{INDUSTRIES.map((ind) => <option value={ind.slug}>{ind.name}</option>)}</select></label>
+          </div>
+          <p class="mt-3 text-sm"><a id="fit-terr-link" href="/territories/" class="font-semibold text-teal-600 hover:text-teal-700"></a> <span id="fit-terr-status" class="ml-1 rounded-full px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider"></span></p>
+          <p class="mt-1 text-xs text-ink-500">One business per category per town, in writing. The page has the local read, the install, the season this month, and the neighbors.</p>
+        </div>
         <div class="mt-5 rounded-lg border border-navy-100 bg-paper p-4 text-sm">
           <span class="text-ink-500">The proof to check first:</span>
           <a id="fit-proof" href="/case-studies/" class="ml-1 font-semibold text-teal-600 hover:text-teal-700"></a>
@@ -321,6 +341,37 @@ const description =
       email.textContent = urgency;
       const body = `Hi Daniel,%0D%0A%0D%0AThe Fit Finder matched me with: ${encodeURIComponent(s.name)}%0D%0A%0D%0AAbout me — location: ${answers.where}, type: ${answers.biz}, bottleneck: ${answers.pain}, timeline: ${answers.when}.%0D%0A%0D%0AMy business: %0D%0AName: %0D%0APhone: `;
       email.href = `mailto:${SITE.email}?subject=${encodeURIComponent('Fit Finder — ' + s.name)}&body=${body}`;
+
+      // Your territory: a town and a trade turn the match into the exact page.
+      const terr = document.getElementById('fit-territory')!;
+      const inMarket = answers.where === 'south-shore' || answers.where === 'broward';
+      terr.classList.toggle('hidden', !(isSystem && inMarket));
+      if (isSystem && inMarket) {
+        const placeSel = document.getElementById('fit-place') as HTMLSelectElement;
+        const tradeSel = document.getElementById('fit-trade') as HTMLSelectElement;
+        const held = new Set((terr.dataset.held || '').split(',').filter(Boolean));
+        Array.from(placeSel.options).forEach((o) => { o.hidden = o.dataset.m !== answers.where; });
+        if (placeSel.selectedOptions[0]?.hidden) placeSel.value = Array.from(placeSel.options).find((o) => !o.hidden)!.value;
+        const guess: Record<string, string> = { service: 'trades-home-services', practice: 'medical-dental', retail: 'restaurants-food' };
+        if (!tradeSel.dataset.touched && guess[answers.biz]) tradeSel.value = guess[answers.biz];
+        const paint = () => {
+          const o = placeSel.selectedOptions[0];
+          const href = `${o.dataset.b}${o.value}/${tradeSel.value}/`;
+          const link = document.getElementById('fit-terr-link') as HTMLAnchorElement;
+          link.href = href;
+          link.textContent = `${tradeSel.selectedOptions[0].textContent} in ${o.textContent}: the page →`;
+          const st = document.getElementById('fit-terr-status')!;
+          const isHeld = held.has(href);
+          st.textContent = isHeld ? 'held' : 'open';
+          st.className = `ml-1 rounded-full px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${isHeld ? 'bg-red-100 text-red-700' : 'bg-teal-100 text-teal-700'}`;
+        };
+        if (!terr.dataset.wired) {
+          terr.dataset.wired = '1';
+          placeSel.addEventListener('change', paint);
+          tradeSel.addEventListener('change', () => { tradeSel.dataset.touched = '1'; paint(); });
+        }
+        paint();
+      }
 
       result.classList.remove('hidden');
       result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
