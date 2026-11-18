@@ -6,7 +6,7 @@ import FounderCard from '../../../components/FounderCard.astro';
 import ShareKit from '../../../components/ShareKit.astro';
 import TerritoryStatus from '../../../components/TerritoryStatus.astro';
 import { INDUSTRIES } from '../../../lib/industries';
-import { PLAYBOOKS, leakPerMonth } from '../../../lib/playbooks';
+import { PLAYBOOKS, leakPerMonth, seasonFor } from '../../../lib/playbooks';
 import { CLAIMED_MA } from '../../../lib/claimed';
 import { SITE } from '../../../config';
 
@@ -160,18 +160,25 @@ const others = PLAYBOOKS.filter((p) => p.slug !== playbook.slug)
 
   <!-- Season -->
   <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6" id="season">
-    <SectionHeading eyebrow="The season" heading={`Twelve months of ${lower} on the South Shore`} body="When the phone rings, when it does not, and what the system should be doing in each. The current month is marked." align="center" />
-    <div class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {playbook.season.map((m, i) => (
-        <div class={`reveal rounded-xl border p-4 ${i === thisMonth ? 'border-teal-500 bg-teal-100/40' : 'border-navy-100 bg-white'}`} style={`--reveal-delay: ${(i % 3) * 60}ms`} data-month={i}>
-          <p class="flex items-center justify-between font-mono text-[11px] font-bold uppercase tracking-wider text-ink-500">
-            <span>{m.month}</span>
-            {i === thisMonth && <span class="rounded bg-teal-600 px-1.5 py-0.5 text-[10px] text-white">now</span>}
-          </p>
-          <p class="mt-2 text-sm leading-relaxed text-ink-700">{m.note}</p>
-        </div>
-      ))}
+    <SectionHeading eyebrow="The season" heading={`Twelve months of ${lower}`} body="When the phone rings, when it does not, and what the system should be doing in each. The current month is marked. The South Florida year runs the other way round: season is November to April and June opens hurricane watch." align="center" />
+    <div class="mt-6 flex justify-center gap-1 rounded-md print:hidden" role="group" aria-label="Choose the market">
+      <button type="button" class="pb-market rounded-md border border-navy-100 bg-white px-4 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500 aria-pressed:border-teal-600 aria-pressed:bg-navy-900 aria-pressed:text-white" data-market="MA" aria-pressed="true">South Shore, MA</button>
+      <button type="button" class="pb-market rounded-md border border-navy-100 bg-white px-4 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500 aria-pressed:border-teal-600 aria-pressed:bg-navy-900 aria-pressed:text-white" data-market="FL" aria-pressed="false">Broward and Palm Beach, FL</button>
     </div>
+    {(['MA', 'FL'] as const).map((mk) => (
+      <div class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-season={mk} hidden={mk === 'FL'}>
+        {seasonFor(playbook.slug, mk).map((m, i) => (
+          <div class={`${mk === 'MA' ? 'reveal ' : ''}rounded-xl border p-4 ${i === thisMonth ? 'border-teal-500 bg-teal-100/40' : 'border-navy-100 bg-white'}`} style={`--reveal-delay: ${(i % 3) * 60}ms`} data-month={mk === 'MA' ? i : undefined}>
+            <p class="flex items-center justify-between font-mono text-[11px] font-bold uppercase tracking-wider text-ink-500">
+              <span>{m.month}</span>
+              {i === thisMonth && <span class="rounded bg-teal-600 px-1.5 py-0.5 text-[10px] text-white">now</span>}
+            </p>
+            <p class="mt-2 text-sm leading-relaxed text-ink-700">{m.note}</p>
+          </div>
+        ))}
+      </div>
+    ))}
+    <p class="mt-4 text-center text-xs text-ink-500">Florida work is systems only. Real estate brokerage is Massachusetts-licensed; a Florida property matter is handled alongside a licensed Florida broker.</p>
   </section>
 
   <!-- Intake + scripts -->
@@ -298,6 +305,17 @@ const others = PLAYBOOKS.filter((p) => p.slug !== playbook.slug)
     if (!printBtn || printBtn.dataset.ready) return;
     printBtn.dataset.ready = '1';
     printBtn.addEventListener('click', () => window.print());
+    const marketBtns = document.querySelectorAll<HTMLButtonElement>('.pb-market');
+    const setMarket = (mk: string) => {
+      marketBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.market === mk)));
+      document.querySelectorAll<HTMLElement>('[data-season]').forEach((g) => (g.hidden = g.dataset.season !== mk));
+      const u = new URL(location.href);
+      if (mk === 'FL') u.searchParams.set('market', 'fl');
+      else u.searchParams.delete('market');
+      history.replaceState(null, '', u.pathname + u.search + u.hash);
+    };
+    marketBtns.forEach((b) => b.addEventListener('click', () => setMarket(b.dataset.market!)));
+    if (new URLSearchParams(location.search).get('market') === 'fl') setMarket('FL');
     document.querySelectorAll<HTMLButtonElement>('.pb-copy').forEach((b) => {
       b.addEventListener('click', async () => {
         const t = b.dataset.text || '';
