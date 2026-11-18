@@ -70,17 +70,32 @@ if (isMA) {
 const W = 760;
 const H = compact ? 560 : 700;
 const PAD = 70;
-const lons = geo.map((t) => t.lon);
-const lats = geo.map((t) => t.lat);
-const minLon = Math.min(...lons);
-const maxLon = Math.max(...lons);
-const minLat = Math.min(...lats);
-const maxLat = Math.max(...lats);
-const midLat = (minLat + maxLat) / 2;
-const aspect = 1 / Math.cos((midLat * Math.PI) / 180);
-const scale = Math.min((W - 2 * PAD) / (maxLon - minLon), (H - 2 * PAD) / ((maxLat - minLat) * aspect));
-const x = (lon: number) => PAD + (lon - minLon) * scale;
-const y = (lat: number) => PAD + (maxLat - lat) * scale * aspect;
+// Web Mercator in world units [0,1], the same projection as the imagery tiles, so the overlay sits on the ground truth.
+const wx = (lon: number) => (lon + 180) / 360;
+const wy = (lat: number) => {
+  const r = (lat * Math.PI) / 180;
+  return (1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2;
+};
+const xs = geo.map((t) => wx(t.lon));
+const ys = geo.map((t) => wy(t.lat));
+const minX = Math.min(...xs);
+const maxX = Math.max(...xs);
+const minY = Math.min(...ys);
+const maxY = Math.max(...ys);
+const scale = Math.min((W - 2 * PAD) / (maxX - minX), (H - 2 * PAD) / (maxY - minY));
+const x = (lon: number) => PAD + (wx(lon) - minX) * scale;
+const y = (lat: number) => PAD + (wy(lat) - minY) * scale;
+// Imagery tiles (Esri World Imagery, the same source QuoteBrain measures on). Zoom picked so a tile paints at roughly
+// 100 to 200 map pixels, which is crisp on a retina screen. Loaded only when the viewer switches the satellite layer on.
+const Z = Math.min(13, Math.max(8, Math.ceil(Math.log2(scale / 200))));
+const N = 2 ** Z;
+const tileSize = scale / N;
+const tx0 = Math.floor((minX - PAD / scale) * N);
+const tx1 = Math.floor((minX + (W - PAD) / scale) * N);
+const ty0 = Math.floor((minY - PAD / scale) * N);
+const ty1 = Math.floor((minY + (H - PAD) / scale) * N);
+const tiles: { href: string; x: number; y: number }[] = [];
+for (let ty = ty0; ty <= ty1; ty++) for (let tx = tx0; tx <= tx1; tx++) tiles.push({ href: `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${Z}/${ty}/${tx}`, x: PAD + (tx / N - minX) * scale, y: PAD + (ty / N - minY) * scale });
 const pts = places.map((p) => ({ ...p, X: x(p.lon), Y: y(p.lat), worked: worked.has(p.slug) }));
 const byslug = Object.fromEntries(pts.map((p) => [p.slug, p]));
 const paths = corridors.map((c, i) => ({
@@ -124,6 +139,7 @@ const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
         <button type="button" data-layer="open" class="mm-layer rounded px-2.5 py-1 text-xs font-semibold text-navy-100/80">Open territories</button>
         {isMA && <button type="button" data-layer="worked" class="mm-layer rounded px-2.5 py-1 text-xs font-semibold text-navy-100/80">Where we've worked</button>}
       </div>
+      <button type="button" data-sat-toggle aria-pressed="false" class="mm-sat-toggle rounded-md border border-white/15 px-2.5 py-1.5 text-xs font-semibold text-navy-100/80 hover:border-teal-400 hover:text-white" title="Lay the overlay on satellite imagery">Satellite</button>
     </div>
     <svg viewBox={`0 0 ${W} ${H}`} class="h-auto w-full" role="img" aria-labelledby={`${mapId}-title ${mapId}-desc`}>
       <title id={`${mapId}-title`}>Schematic map of the {places.length} {isMA ? 'South Shore towns' : `${CFG.county} cities`} ICS serves</title>
@@ -132,9 +148,14 @@ const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
         <pattern id={`${mapId}-grid`} width="40" height="40" patternUnits="userSpaceOnUse">
           <path d="M40 0H0V40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
         </pattern>
+        <clipPath id={`${mapId}-clip`}><rect width={W} height={H} rx="12" /></clipPath>
       </defs>
       <rect width={W} height={H} fill={`url(#${mapId}-grid)`} />
-      <text x={W - 16} y={H - 14} text-anchor="end" fill="rgba(219,228,240,0.45)" font-size="11" font-family="ui-monospace, monospace">Atlantic → · schematic, positions approximate</text>
+      <g class="mm-sat" data-sat hidden clip-path={`url(#${mapId}-clip)`} aria-hidden="true">
+        {tiles.map((t) => <image data-href={t.href} x={t.x.toFixed(2)} y={t.y.toFixed(2)} width={(tileSize + 0.5).toFixed(2)} height={(tileSize + 0.5).toFixed(2)} preserveAspectRatio="none" />)}
+        <rect width={W} height={H} fill="#06132a" opacity="0.42" />
+      </g>
+      <text x={W - 16} y={H - 14} text-anchor="end" fill="rgba(219,228,240,0.6)" font-size="11" font-family="ui-monospace, monospace" paint-order="stroke" stroke="#06132a" stroke-width="3" data-sat-caption data-schematic="Atlantic → · schematic, positions approximate" data-satellite="Imagery © Esri, Maxar, Earthstar Geographics · overlay schematic, positions approximate">Atlantic → · schematic, positions approximate</text>
 
       {paths.map((p) => (
         <g class:list={['mm-corridor', p.route === highlight && 'is-lit']} data-corridor={p.id} data-route={p.route} data-names={p.names} data-towns={p.towns.join(',')} tabindex="0" role="button" aria-label={`${p.route}: ${p.names}`}>
@@ -199,6 +220,9 @@ const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
   .market-map.layer-worked .mm-place[data-worked='0'] .mm-dot { fill: rgba(20,184,166,0.25); }
   .market-map.layer-worked .mm-place[data-worked='1'] .mm-dot { fill: #f8fafc; r: 9; }
   .market-map .mm-layer.is-on { background: rgba(255,255,255,0.12); color: #fff; }
+  .market-map .mm-sat-toggle[aria-pressed='true'] { background: #0f766e; border-color: #0f766e; color: #fff; }
+  .market-map .mm-sat image { opacity: 0; transition: opacity 0.4s ease; }
+  .market-map .mm-sat image.is-in { opacity: 1; }
 </style>
 
 <script>
@@ -353,8 +377,35 @@ const placeNounPlural = noun === 'town' ? 'towns' : 'cities';
         })
       );
 
+      // Satellite layer: imagery tiles load only when asked for, and the choice is remembered on the device.
+      const satToggle = root.querySelector<HTMLButtonElement>('[data-sat-toggle]');
+      const satGroup = root.querySelector<SVGGElement>('[data-sat]');
+      const satCaption = root.querySelector<SVGTextElement>('[data-sat-caption]');
+      const SAT_KEY = 'ics-map-satellite';
+      const setSat = (on: boolean, remember = true) => {
+        if (!satToggle || !satGroup) return;
+        satToggle.setAttribute('aria-pressed', String(on));
+        satToggle.textContent = on ? 'Satellite on' : 'Satellite';
+        if (on) {
+          satGroup.querySelectorAll<SVGImageElement>('image[data-href]').forEach((img) => {
+            if (!img.getAttribute('href')) {
+              img.addEventListener('load', () => img.classList.add('is-in'), { once: true });
+              img.setAttribute('href', img.dataset.href!);
+            }
+          });
+          satGroup.removeAttribute('hidden');
+        } else satGroup.setAttribute('hidden', '');
+        if (satCaption) satCaption.textContent = on ? satCaption.dataset.satellite! : satCaption.dataset.schematic!;
+        if (remember) try { localStorage.setItem(SAT_KEY, on ? '1' : '0'); } catch {}
+      };
+      satToggle?.addEventListener('click', () => setSat(satToggle.getAttribute('aria-pressed') !== 'true'));
+      const params = new URLSearchParams(location.search);
+      let satWanted = params.get('view') === 'satellite';
+      if (!satWanted) try { satWanted = localStorage.getItem(SAT_KEY) === '1'; } catch {}
+      if (satWanted) setSat(true, false);
+
       // Deep link.
-      const want = new URLSearchParams(location.search).get('town');
+      const want = params.get('town');
       const target = want ? root.querySelector<HTMLElement>(`.mm-place[data-slug="${want}"]`) : null;
       if (target) show(target);
     });
