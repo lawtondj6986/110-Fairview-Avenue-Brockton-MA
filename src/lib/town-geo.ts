@@ -1,5 +1,5 @@
 /**
- * Approximate centroids for the 29 South Shore towns and the schematic
+ * Approximate centroids for the 41 South Shore towns and the schematic
  * corridor polylines drawn through them. This powers the hub map; it is a
  * schematic, not a survey. Label offsets keep neighbors legible.
  */
@@ -14,7 +14,7 @@ export interface TownGeo {
 }
 
 export const TOWN_GEO: TownGeo[] = [
-  { slug: 'quincy', lat: 42.253, lon: -71.002, anchor: 'end', dx: -10, dy: 4 },
+  { slug: 'quincy', lat: 42.253, lon: -71.002, anchor: 'start', dx: 10, dy: -8 },
   { slug: 'braintree', lat: 42.204, lon: -71.0, anchor: 'end', dx: -10, dy: 4 },
   { slug: 'weymouth', lat: 42.221, lon: -70.94, anchor: 'start', dx: 10, dy: -6 },
   { slug: 'hingham', lat: 42.242, lon: -70.89, anchor: 'start', dx: 10, dy: 4 },
@@ -27,7 +27,7 @@ export const TOWN_GEO: TownGeo[] = [
   { slug: 'holbrook', lat: 42.155, lon: -71.009, anchor: 'end', dx: -10, dy: 4 },
   { slug: 'randolph', lat: 42.163, lon: -71.041, anchor: 'end', dx: -10, dy: -6 },
   { slug: 'avon', lat: 42.131, lon: -71.042, anchor: 'end', dx: -10, dy: 4 },
-  { slug: 'stoughton', lat: 42.125, lon: -71.102, anchor: 'end', dx: -10, dy: 4 },
+  { slug: 'stoughton', lat: 42.125, lon: -71.102, anchor: 'middle', dx: 0, dy: 17 },
   { slug: 'brockton', lat: 42.083, lon: -71.018, anchor: 'end', dx: -13, dy: 5 },
   { slug: 'whitman', lat: 42.081, lon: -70.936, anchor: 'end', dx: -10, dy: 14 },
   { slug: 'hanson', lat: 42.075, lon: -70.88, anchor: 'start', dx: 10, dy: 4 },
@@ -43,6 +43,18 @@ export const TOWN_GEO: TownGeo[] = [
   { slug: 'plympton', lat: 41.952, lon: -70.814, anchor: 'start', dx: 10, dy: 10 },
   { slug: 'middleborough', lat: 41.893, lon: -70.911, anchor: 'end', dx: -10, dy: 4 },
   { slug: 'plymouth', lat: 41.958, lon: -70.667, anchor: 'start', dx: 10, dy: 4 },
+  { slug: 'hull', lat: 42.302, lon: -70.908, anchor: 'start', dx: 10, dy: 4 },
+  { slug: 'milton', lat: 42.25, lon: -71.066, anchor: 'end', dx: -10, dy: 4 },
+  { slug: 'dedham', lat: 42.242, lon: -71.166, anchor: 'end', dx: -10, dy: 4 },
+  { slug: 'canton', lat: 42.158, lon: -71.145, anchor: 'end', dx: -10, dy: 4 },
+  { slug: 'sharon', lat: 42.124, lon: -71.179, anchor: 'end', dx: -10, dy: 4 },
+  { slug: 'mansfield', lat: 42.033, lon: -71.219, anchor: 'end', dx: -10, dy: 4 },
+  { slug: 'norton', lat: 41.967, lon: -71.187, anchor: 'end', dx: -10, dy: 4 },
+  { slug: 'taunton', lat: 41.9, lon: -71.09, anchor: 'end', dx: -10, dy: 4 },
+  { slug: 'raynham', lat: 41.949, lon: -71.051, anchor: 'end', dx: -10, dy: -6 },
+  { slug: 'lakeville', lat: 41.846, lon: -70.95, anchor: 'end', dx: -10, dy: 12 },
+  { slug: 'carver', lat: 41.883, lon: -70.763, anchor: 'start', dx: 10, dy: 12 },
+  { slug: 'wareham', lat: 41.762, lon: -70.72, anchor: 'start', dx: 10, dy: 4 },
 ];
 
 /** Schematic corridors: each is a route label and the towns it threads, in order. */
@@ -57,11 +69,16 @@ export interface Corridor {
 export const CORRIDORS: Corridor[] = [
   { route: 'Route 3', towns: ['braintree', 'weymouth', 'hingham', 'norwell', 'hanover', 'pembroke', 'kingston', 'plymouth'], tone: 'teal' },
   { route: 'Route 3A', towns: ['quincy', 'weymouth', 'hingham', 'cohasset', 'scituate', 'marshfield', 'duxbury', 'kingston', 'plymouth'], tone: 'teal' },
-  { route: 'Route 24', towns: ['randolph', 'avon', 'brockton', 'west-bridgewater', 'bridgewater'], tone: 'brass' },
-  { route: 'Route 28', towns: ['randolph', 'avon', 'brockton', 'west-bridgewater', 'middleborough'], tone: 'brass' },
+  { route: 'Route 24', towns: ['randolph', 'avon', 'brockton', 'west-bridgewater', 'bridgewater', 'raynham', 'taunton'], tone: 'brass', labelAt: 6 },
+  { route: 'Route 28', towns: ['milton', 'randolph', 'avon', 'brockton', 'west-bridgewater', 'middleborough', 'wareham'], tone: 'brass' },
   { route: 'Route 18', towns: ['weymouth', 'abington', 'whitman', 'east-bridgewater', 'bridgewater'], tone: 'brass' },
   { route: 'Route 139', towns: ['stoughton', 'holbrook', 'abington', 'rockland', 'hanover', 'pembroke', 'marshfield'], tone: 'brass' },
-  { route: 'Route 106', towns: ['easton', 'west-bridgewater', 'east-bridgewater', 'halifax', 'plympton', 'kingston'], tone: 'brass' },
+  { route: 'Route 106', towns: ['mansfield', 'easton', 'west-bridgewater', 'east-bridgewater', 'halifax', 'plympton', 'kingston'], tone: 'brass', labelAt: 1 },
+  { route: 'Route 138', towns: ['milton', 'canton', 'stoughton', 'easton', 'raynham', 'taunton'], tone: 'brass', labelAt: 4 },
+  { route: 'Route 44', towns: ['taunton', 'raynham', 'middleborough', 'carver', 'plymouth'], tone: 'brass', labelAt: 4 },
+  { route: 'Route 140', towns: ['mansfield', 'norton', 'taunton', 'lakeville'], tone: 'brass', labelAt: 2 },
+  { route: 'I-93 / 128', towns: ['dedham', 'canton', 'milton', 'randolph'], tone: 'teal', labelAt: 1 },
+  { route: 'Route 228', towns: ['hull', 'hingham', 'norwell', 'rockland'], tone: 'teal', labelAt: 1 },
 ];
 
 /** Broward County, FL — approximate centroids for the 24 cities on the Broward board. */

@@ -71,7 +71,7 @@ export const TOWNS: Town[] = [
       'Between the university population and the commuter base, Bridgewater businesses see more search volume than most towns their size — and the industrial-park tenants (contractors, fabricators, distributors) are classic high-ticket operators running on spreadsheets and voicemail. Both profiles convert quickly once real lead systems are installed.',
     angle:
       'If you\'re a trade business hunting for a building with a yard near Route 24, tell us before you scroll listings — that inventory moves through relationships, and we hunt off-market.',
-    neighbors: ['west-bridgewater', 'east-bridgewater', 'middleborough', 'halifax'],
+    neighbors: ['west-bridgewater', 'east-bridgewater', 'middleborough', 'halifax', 'raynham'],
   },
   {
     slug: 'west-bridgewater',
@@ -85,7 +85,7 @@ export const TOWNS: Town[] = [
       'The town\'s business mix skews commercial-industrial: equipment dealers, building suppliers, contractors, and the service businesses that feed off that daytime traffic. These are exactly the operators whose quoting and follow-up processes leak the most revenue — and who see the fastest payback from automation.',
     angle:
       'We\'ve worked this corridor as operators, not just brokers. When a Manley Street property whispers, we hear it early.',
-    neighbors: ['brockton', 'bridgewater', 'east-bridgewater', 'easton'],
+    neighbors: ['brockton', 'bridgewater', 'east-bridgewater', 'easton', 'raynham'],
   },
   {
     slug: 'east-bridgewater',
@@ -113,7 +113,7 @@ export const TOWNS: Town[] = [
       'High traffic means high competition: Stoughton businesses fight for attention against regional chains in a way smaller towns don\'t. The local operators who win pair the corridor\'s drive-by volume with digital systems that capture and convert — because here, an unanswered lead doesn\'t wait, it just drives to the next option on the strip.',
     angle:
       'On a corridor with this much traffic, marketing isn\'t decoration — it\'s the multiple on your building\'s value when you sell. We price listings like that matters, because it does.',
-    neighbors: ['randolph', 'easton', 'brockton', 'avon'],
+    neighbors: ['randolph', 'easton', 'brockton', 'avon', 'canton', 'sharon'],
   },
   {
     slug: 'easton',
@@ -127,7 +127,7 @@ export const TOWNS: Town[] = [
       'The business mix skews professional and consumer-service: medical, dental, wellness, boutique fitness and food, plus the college community around Stonehill. These are high-ticket-relationship businesses where a polished digital presence isn\'t optional — Easton customers research before they call, and they judge the website like they judge the waiting room.',
     angle:
       'Easton clients expect polish. Your building, your brand, and your booking flow should all pass the same inspection — we build all three to that standard.',
-    neighbors: ['stoughton', 'brockton', 'west-bridgewater'],
+    neighbors: ['stoughton', 'brockton', 'west-bridgewater', 'sharon', 'mansfield', 'norton', 'raynham', 'taunton'],
   },
   {
     slug: 'middleborough',
@@ -141,7 +141,7 @@ export const TOWNS: Town[] = [
       'The trade area is big and spread out, which makes digital reach matter more here than anywhere else we serve — your service radius is measured in towns, not neighborhoods. Contractors and agricultural-adjacent businesses (this is cranberry country) with real booking and quoting systems can profitably serve a 30-minute circle that word-of-mouth alone will never cover.',
     angle:
       'When clients outgrow their yard in Brockton or Bridgewater, Middleborough is usually the answer we underwrite first. Land plus highway access is the growth formula.',
-    neighbors: ['bridgewater', 'plympton', 'halifax'],
+    neighbors: ['bridgewater', 'plympton', 'halifax', 'taunton', 'raynham', 'lakeville', 'carver'],
   },
   {
     slug: 'plympton',
@@ -155,7 +155,7 @@ export const TOWNS: Town[] = [
       'With a small local population, every Plympton business lives on regional reach: trades and specialty operators here serve Plymouth, Kingston, Middleborough and beyond. That makes search visibility across the whole radius — not just the town line — the entire marketing problem, and it\'s a very solvable one.',
     angle:
       'Nobody is fighting over Plympton yet. For a trades operator who needs a yard and works a 25-mile radius, that\'s precisely the point.',
-    neighbors: ['middleborough', 'halifax', 'kingston', 'plymouth'],
+    neighbors: ['middleborough', 'halifax', 'kingston', 'plymouth', 'carver'],
   },
   {
     slug: 'plymouth',
@@ -169,7 +169,7 @@ export const TOWNS: Town[] = [
       "Plymouth businesses play to two audiences at once: a large year-round population and a seasonal tourist wave that rewards whoever owns the searches that visitors make — 'best seafood near Plymouth waterfront' is a revenue stream with a ranking. Away from the waterfront, the trades, medical, and service operators here compete across a huge radius, where systematic lead capture and review velocity decide who grows.",
     angle:
       "Big market, big noise. In Plymouth you don't win by being present — you win by being the answer to specific searches. That's an engineering problem, and it's our favorite kind.",
-    neighbors: ['kingston', 'plympton'],
+    neighbors: ['kingston', 'plympton', 'carver', 'wareham'],
   },
   {
     slug: 'kingston',
@@ -183,7 +183,7 @@ export const TOWNS: Town[] = [
       'The retail and service businesses here draw from Plymouth, Duxbury, and the whole mid-South Shore — a customer base that researches online before driving. For restaurants, fitness, medical, and home-service operators, Kingston rewards polished digital presence the way its anchor district rewards good signage: visibly and immediately.',
     angle:
       "Corridors in transition are where the deals live. Kingston's retail district is repricing in real time — we track it, and our clients hear about openings before the listing portals do.",
-    neighbors: ['duxbury', 'pembroke', 'plymouth', 'plympton', 'halifax'],
+    neighbors: ['duxbury', 'pembroke', 'plymouth', 'plympton', 'halifax', 'carver'],
   },
   {
     slug: 'halifax',
@@ -253,7 +253,7 @@ export const TOWNS: Town[] = [
       "Randolph is one of the most diverse towns in the state, and its business base shows it: a dense layer of immigrant-owned restaurants, markets, salons, and service firms that often run on word-of-mouth and under-invest in search. That is a wide-open lane — the first operator in each category to own its Google Business Profile and answer the phone in under a minute pulls demand from Route 28 traffic that was already driving past.",
     angle:
       "Randolph rewards the basics done relentlessly. Ten minutes from our office, we can walk a Route 28 storefront and have the lead system scoped the same afternoon.",
-    neighbors: ['avon', 'stoughton', 'holbrook', 'braintree'],
+    neighbors: ['avon', 'stoughton', 'holbrook', 'braintree', 'milton', 'canton'],
   },
   {
     slug: 'holbrook',
@@ -309,7 +309,7 @@ export const TOWNS: Town[] = [
       "Hingham customers research before they buy and they expect polish: a practice or service business here with a weak website or slow follow-up is leaving money to competitors who look the part. The good news is that the same quality bar rewards whoever clears it — review velocity and answer-engine visibility carry real weight with an audience that asks their phone for recommendations.",
     angle:
       "Hingham is a market where the intelligence side of our practice earns its place alongside the brokerage — know the building and the counterparty cold before you commit. We do both.",
-    neighbors: ['cohasset', 'scituate', 'weymouth', 'norwell', 'rockland'],
+    neighbors: ['cohasset', 'scituate', 'weymouth', 'norwell', 'rockland', 'hull'],
   },
   {
     slug: 'hanover',
@@ -365,7 +365,7 @@ export const TOWNS: Town[] = [
       "Quincy's business base is as diverse as its population — one of the largest Asian-American communities in Massachusetts runs a dense layer of restaurants, markets, and services alongside the professional and medical firms downtown and the neighborhood trades. Competition here is city-grade: a business is measured against everything a Red Line ride away. The operators that win own their searches, answer in seconds, and look as credible online as the firms with ten times their headcount.",
     angle:
       "We bring published pricing and an operator's cost discipline to a market used to Boston rates. A Quincy storefront or practice gets the same institutional-grade build — at a Brockton firm's overhead.",
-    neighbors: ['braintree', 'weymouth'],
+    neighbors: ['braintree', 'weymouth', 'milton'],
   },
   {
     slug: 'marshfield',
@@ -421,7 +421,175 @@ export const TOWNS: Town[] = [
       "A high-value, high-expectation customer base that asks its phone for recommendations and trusts the reviews it finds. For the practices, contractors, and marine operators serving Cohasset, polish and response time are the whole pitch — and answer-engine visibility matters more here than almost anywhere, because that's how this clientele shortlists.",
     angle:
       "Cohasset rewards the operators who look like the quality they deliver. We make sure the search finds you first, and the diligence on the building holds up.",
-    neighbors: ['hingham', 'scituate'],
+    neighbors: ['hingham', 'scituate', 'hull'],
+  },
+  {
+    slug: 'hull',
+    name: 'Hull',
+    county: 'Plymouth',
+    position: 'A peninsula town at the end of Route 228 — Nantasket Beach, the ferry, and a year-round community behind a summer economy.',
+    corridors: ['Nantasket Avenue', 'Route 228 (George Washington Blvd)', 'Hull Shore Drive', 'Pemberton Point and the ferry'],
+    propertyMix:
+      "Hull's commercial stock is a strip: Nantasket Avenue's restaurants, bars, and seasonal retail facing the beach, a handful of mixed-use blocks in the village, marine uses on the bay side, and the ferry terminal at Pemberton. Buildings trade rarely and almost always off-market, because the owners are local and the alternatives are few. A buyer is buying a season and a view; the diligence is flood zone, parking, and what the town will permit.",
+    businessMix:
+      "A summer economy with a year-round town behind it: restaurants and hospitality that live on twelve weekends, and the home services, contractors, and small practices that serve a peninsula of older houses the rest of the year. Reputation is everything on a street this short. The operator who answers in winter owns the summer.",
+    angle:
+      'Hull is a one-road market. Be the name on that road in your category, keep the reviews coming between seasons, and the ferry crowd finds you too.',
+    neighbors: ['hingham', 'cohasset'],
+  },
+  {
+    slug: 'milton',
+    name: 'Milton',
+    county: 'Norfolk',
+    position: 'The affluent town between Quincy and the Blue Hills — East Milton Square, Milton Village, and professional practices on the Route 28 line.',
+    corridors: ['East Milton Square (Granite Ave / Adams St)', 'Milton Village (Adams St / Eliot St)', 'Route 28 (Randolph Ave / Blue Hill Ave)', 'Route 138 (Blue Hill Ave)', 'I-93 at Granite Avenue'],
+    propertyMix:
+      "Milton has very little commercial property and guards what it has: the storefronts and professional offices of East Milton Square, the small village cluster at Milton Village and Lower Mills across the river from Boston, and a few office and medical buildings on the Randolph Avenue and Blue Hill Avenue corridors. There is no industrial. What exists is held for decades, trades quietly to the right buyer, and commands a premium for the address.",
+    businessMix:
+      "A high-income residential base with Boston-level expectations and almost no tolerance for a slow callback: medical, dental, and orthodontic practices, law and financial advisors, tutoring and enrichment, premium home services, and the restaurants of the two squares. The customers here search, read every review, and expect to be answered in a minute. Polish converts.",
+    angle:
+      'Milton is where a premium practice earns a premium. The system here is proof, response, and being the name the assistant recommends when a Milton family asks.',
+    neighbors: ['quincy', 'randolph', 'canton', 'dedham'],
+  },
+  {
+    slug: 'canton',
+    name: 'Canton',
+    county: 'Norfolk',
+    position: 'A corporate and industrial address at the I-93 and I-95 junction — Route 138, Cobbs Corner, and the parks off Royall Street and Turnpike Street.',
+    corridors: ['Route 138 (Washington St / Turnpike St)', 'Cobbs Corner', 'Royall Street and the Shawmut Road office parks', 'Route 27 toward Stoughton', 'I-93 / I-95 interchange', 'Canton Center'],
+    propertyMix:
+      "Canton carries real commercial depth for a town its size: corporate campuses and office buildings on Royall Street and along Route 138, industrial and flex in the parks near the interstates, the Cobbs Corner retail node it shares with Stoughton and Sharon, and a traditional town center on Washington Street. Flex and industrial here price on highway access, and the access is the best on the South Shore. Owner-users compete with investors for anything with a dock inside a mile of the ramps.",
+    businessMix:
+      "Two customer bases at once: the corporate daytime population in the parks, which buys lunch, services, and B2B support, and an affluent residential town that buys medical, trades, fitness, and childcare. B2B service companies here win on being found by a procurement search and answering like a professional; consumer businesses win on reviews and speed.",
+    angle:
+      'Canton is highway access with a town attached. If your business needs to reach the whole metro from one building, this is the junction; if it serves Canton households, the categories are deeper than they look.',
+    neighbors: ['stoughton', 'randolph', 'milton', 'sharon', 'dedham'],
+  },
+  {
+    slug: 'sharon',
+    name: 'Sharon',
+    county: 'Norfolk',
+    position: 'A quiet, family-centered town around Lake Massapoag — Post Office Square, the Route 1 edge, and professional practices serving a loyal residential base.',
+    corridors: ['Post Office Square and Sharon Center', 'Route 27 (South Main St)', 'Route 1 at the Walpole and Foxborough line', 'Cobbs Corner (shared with Canton and Stoughton)', 'Route 95 / Sharon commuter rail'],
+    propertyMix:
+      "Sharon's commercial property is small and scarce: the storefronts and offices of Post Office Square, a few plazas and medical buildings on South Main Street, and the edge of the Route 1 corridor at the town line. Industrial is nearly absent; the town has chosen to be residential, which keeps commercial rents firm and vacancies short. A buyer here is usually an owner-user practice looking for the right small building in the right block.",
+    businessMix:
+      "Pediatricians, dentists, orthodontists, tutoring and music, childcare, veterinary, and the home services of a town of well-kept houses. Sharon families are organized, research everything, and talk to each other; a strong review profile and same-day response produce referrals that compound for years.",
+    angle:
+      'Sharon is a referral town. Be the practice the parents name in the group chat, and keep the response under a minute so the referral becomes a booking.',
+    neighbors: ['stoughton', 'canton', 'easton', 'mansfield'],
+  },
+  {
+    slug: 'mansfield',
+    name: 'Mansfield',
+    county: 'Bristol',
+    position: 'The crossroads of I-95, I-495, and Route 140 — industrial parks, the Xfinity Center, and a downtown rebuilt around the train.',
+    corridors: ['Route 140 (Chauncy St / Copeland Dr)', 'Route 106 (Eastman St / Pratt St)', 'Cabot Business Park and the I-495 industrial corridor', 'Downtown Mansfield (North Main St) and the commuter rail', 'I-95 / I-495 interchange', 'Route 123 toward Norton'],
+    propertyMix:
+      "Mansfield is one of the deepest industrial and flex markets south of Boston: Cabot Business Park and the parks along I-495 hold distribution, manufacturing, lab, and corporate space, and the Route 140 corridor carries plazas, hotels, restaurants, and auto. Downtown has small mixed-use buildings and professional offices near the station. Flex with highway access here draws buyers from the whole region; an owner-user looking for 10,000 to 50,000 feet near three interstates should start in Mansfield.",
+    businessMix:
+      "A workforce of thousands in the parks by day, a growing residential base by night, and event crowds at the amphitheater in season. Logistics, fleet, and industrial services sell to the parks; restaurants and quick service feed them; medical, trades, fitness, and childcare serve the neighborhoods. B2B operators here benefit most from being findable by a facilities manager's search.",
+    angle:
+      'Mansfield is where the region keeps its inventory. If you need a building near three interstates, we hunt the parks owner by owner; if you serve the businesses in them, be the vendor that answers first.',
+    neighbors: ['easton', 'norton', 'sharon'],
+  },
+  {
+    slug: 'norton',
+    name: 'Norton',
+    county: 'Bristol',
+    position: 'A college town on Route 123 and Route 140 — Wheaton College, the TPC golf course, and trades and small retail serving a spread-out residential base.',
+    corridors: ['Route 123 (West Main St / East Main St)', 'Route 140 (Taunton Ave / Mansfield Ave)', 'Norton Center and Wheaton College', 'Route 495 at Route 123', 'Bay Road toward Easton'],
+    propertyMix:
+      "Norton's commercial buildings are scattered along Routes 123 and 140: strip retail and service buildings, contractor shops and yards, a few small plazas near the center, and flex near the I-495 ramp. The stock is practical and reasonably priced for a town between Mansfield's parks and Taunton's city, which makes it a good hunting ground for a trades business that wants a yard and highway access without Mansfield's rents.",
+    businessMix:
+      "Contractors, landscapers, and excavators serving a wide ring of towns from Norton yards; auto and equipment repair; restaurants and pizza near the college; the medical, dental, and childcare practices of a growing family town; and the seasonal economy around the golf tournament. Response time wins here because most competitors still run on voicemail.",
+    angle:
+      'Norton is yard country with a college in the middle. A contractor with a Norton yard and a phone that gets answered covers five towns from one address.',
+    neighbors: ['mansfield', 'easton', 'taunton'],
+  },
+  {
+    slug: 'taunton',
+    name: 'Taunton',
+    county: 'Bristol',
+    position: 'The Silver City — a downtown rebuilding, the Myles Standish Industrial Park, and the Route 44 and Route 138 corridors that carry its retail and auto.',
+    corridors: ['Myles Standish Industrial Park (Route 495 / John Hancock Rd)', 'Route 44 (Winthrop St / Cape Hwy)', 'Route 138 (Broadway / Somerset Ave)', 'Downtown Taunton (Main St / Taunton Green)', 'Route 140 (County St)', 'Route 24 at Route 140 and Route 44'],
+    propertyMix:
+      "Taunton is a city market: one of the largest industrial parks in Massachusetts at Myles Standish, big-box and strip retail along Route 44 and Route 140, auto dealers and repair on Broadway and Route 138, downtown mixed-use blocks around the Green, and medical office around the hospital. Prices run below Brockton for comparable product, inventory is deeper, and the park draws distribution, manufacturing, and food production tenants from across the region. For an owner-user who needs real square footage, Taunton is often the answer.",
+    businessMix:
+      "A city of roughly 60,000 with a broad working economy: manufacturers and distributors in the park and the vendors that serve them, trades and fleet services, restaurants, salons, medical and dental practices, and the retail of two long corridors. Digital expectations have risen faster than most local businesses have moved; the first in each category to answer in sixty seconds and show recent reviews takes a city-sized share.",
+    angle:
+      'Taunton is where the square footage is. We hunt the park and the corridors owner by owner, and we install the response system the city\'s competitors have not gotten around to.',
+    neighbors: ['raynham', 'norton', 'easton', 'middleborough', 'lakeville'],
+  },
+  {
+    slug: 'raynham',
+    name: 'Raynham',
+    county: 'Bristol',
+    position: 'The retail and highway town between Taunton and Bridgewater — Route 44, Route 138, Route 24, and the plazas built where they meet.',
+    corridors: ['Route 44 (New State Hwy)', 'Route 138 (Broadway)', 'Route 24 at Route 44', 'Raynham Woods Commerce Center', 'Route 104 toward Bridgewater'],
+    propertyMix:
+      "Raynham is a corridor town: big-box and strip retail on Route 44, restaurants and auto on Broadway, the Raynham Woods commerce park with office, flex, and distribution near Route 24, and the former dog track site awaiting its next life. Retail pads with Route 44 frontage and flex near the Route 24 ramps are the two products buyers chase; both move through relationships before they are listed.",
+    businessMix:
+      "Retail and restaurants drawing from a dozen towns, auto sales and service, fleet and distribution in the park, and the home services, medical, and fitness businesses of a suburban base. A business on Route 44 competes with every plaza on the road; the one that is found first and answers first wins the car in the parking lot.",
+    angle:
+      'Raynham sells to the whole region from two roads. Own your category on Route 44 or Route 138 and the drive-by traffic does the rest.',
+    neighbors: ['taunton', 'bridgewater', 'easton', 'middleborough', 'west-bridgewater'],
+  },
+  {
+    slug: 'lakeville',
+    name: 'Lakeville',
+    county: 'Plymouth',
+    position: 'Lakes, cranberry country, and a Route 18 and Route 105 crossroads — the commuter rail at the Middleborough line and a growing residential base.',
+    corridors: ['Route 18 (Bedford St / Main St)', 'Route 105', 'Route 79 and the Assawompset Pond area', 'Route 140 toward Taunton', 'the Middleborough / Lakeville commuter rail station', 'Route 495 at Route 18'],
+    propertyMix:
+      "Lakeville's commercial stock is light: service and retail buildings along Routes 18 and 105, small office and medical near the hospital campus redevelopment, contractor yards on the rural roads, and flex near the I-495 ramp. The town is mostly lakes, bogs, and single-family lots, which keeps commercial supply tight and makes a well-located building on Route 18 valuable to whoever gets to it first.",
+    businessMix:
+      "Home services for a spread-out town of new and old houses, landscape and excavation, marine and powersports for the lakes, veterinary and large-animal practices, auto repair, and the medical and family services of a town adding rooftops. Service areas are wide here; the business that handles a call from three towns over in sixty seconds gets the job.",
+    angle:
+      'Lakeville is a wide service area with thin competition. The first contractor or practice to run a real response and review system here is the only one most residents will ever call.',
+    neighbors: ['middleborough', 'taunton', 'carver'],
+  },
+  {
+    slug: 'carver',
+    name: 'Carver',
+    county: 'Plymouth',
+    position: 'The cranberry capital — Route 58 and Route 44, bogs and gravel, and the trades and agricultural businesses that work them.',
+    corridors: ['Route 58 (Main St / Tremont St)', 'Route 44 toward Plymouth and Middleborough', 'North Carver and the Route 44 interchange', 'Edaville and the South Carver bogs', 'Route 495 via Middleborough'],
+    propertyMix:
+      "Carver's commercial property is agricultural and industrial by nature: cranberry operations and their support buildings, sand and gravel, contractor yards, equipment dealers, and a modest strip of retail and services on Route 58 near the center. Land is the asset here, with zoning and wetlands deciding what any parcel can become. A buyer looking for acreage with a building and highway access through Route 44 finds more of it in Carver than anywhere east of Middleborough.",
+    businessMix:
+      "Growers and the agricultural services around them, excavation and site work, equipment and truck repair, landscape and tree companies, and the home services of a rural town that commutes to Plymouth and Route 3. Most of these businesses are known by name and reached by a cell phone that rings in a truck. The missed-call text-back alone changes their month.",
+    angle:
+      'Carver runs on trucks and bogs. A trades or equipment business here wins by never missing the call it cannot answer from the cab.',
+    neighbors: ['plymouth', 'middleborough', 'lakeville', 'plympton', 'wareham', 'kingston'],
+  },
+  {
+    slug: 'wareham',
+    name: 'Wareham',
+    county: 'Plymouth',
+    position: 'The gateway to the Cape — Cranberry Highway, the Wareham Crossing retail, the Onset and Wareham Village waterfronts, and a marine economy at the head of Buzzards Bay.',
+    corridors: ['Cranberry Highway (Route 28 / Route 6)', 'Wareham Crossing and the Route 25 interchange', 'Main Street, Wareham Village', 'Onset Avenue and the Onset waterfront', 'Route 195 at Route 28', 'Route 25 to the Bourne Bridge'],
+    propertyMix:
+      "Wareham has the deepest commercial inventory on the way to the Cape: regional retail at Wareham Crossing, miles of freestanding retail, auto, and service buildings on Cranberry Highway, marine uses and boatyards on the harbors, mixed-use blocks in Wareham Village and Onset, and industrial and flex near the Route 25 and Route 195 ramps. Prices are lower than the Plymouth coast for comparable frontage, and the summer traffic to the bridges passes every door on Route 28.",
+    businessMix:
+      "A year-round working town with a summer surge: marine services, boatyards, and marinas; restaurants and hospitality in Onset and the village; auto and trades along the highway; medical and dental serving a large retiree population; and the home services of a town of modest houses and summer cottages. Seasonality rewards the business that books the summer in April and answers in the winter.",
+    angle:
+      'Wareham is the Cape\'s front door with South Shore prices. Marine and highway-frontage businesses here can own the gateway category for years if they take the digital side seriously before their competitors do.',
+    neighbors: ['carver', 'plymouth'],
+  },
+  {
+    slug: 'dedham',
+    name: 'Dedham',
+    county: 'Norfolk',
+    position: 'The Route 1 and Route 128 retail hub — Legacy Place, Dedham Square, and the office and medical buildings along Providence Highway.',
+    corridors: ['Route 1 (Providence Hwy) and Legacy Place', 'Dedham Square (High St / Washington St)', 'Route 128 / I-95 at Route 1', 'Route 109 (High St) toward Westwood', 'East Dedham and Milton Street', 'the Dedham Corporate Center'],
+    propertyMix:
+      "Dedham is a regional retail and office address: Legacy Place and the Route 1 corridor carry national retail, restaurants, auto dealers, and hotels; the Dedham Corporate Center and the buildings along Route 128 hold office and medical; and Dedham Square keeps a walkable mix of storefronts, restaurants, and professional offices in historic buildings. Industrial is limited to pockets in East Dedham. Rents reflect Route 128; buyers are usually investors or well-capitalized owner-users.",
+    businessMix:
+      "Daytime office workers, Route 1 shoppers from half the metro, and an established residential town: professional and financial services, medical and dental, restaurants at every price, fitness, salons, and the home services of older neighborhoods. Competition is dense and sophisticated. Answer-engine visibility and a complete review profile decide who gets the call among a dozen qualified options.",
+    angle:
+      'Dedham is a crowded, capable market. The business that is the recommended answer, not just a listed option, takes the share; that is a systems problem we know how to solve.',
+    neighbors: ['milton', 'canton'],
   },
 ];
 

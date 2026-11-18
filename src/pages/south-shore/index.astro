@@ -31,16 +31,16 @@ const schema = [
         We don't "cover" the South Shore. We work it.
       </h1>
       <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
-        Twenty-nine towns, in person — property walks, listing shoots, and on-site strategy sessions from Brockton out. Every
+        Forty-one towns, in person — property walks, listing shoots, and on-site strategy sessions from Brockton out. Every
         market below has its own page because every market below actually reads differently on the ground.
       </p>
     </div>
   </section>
 
   <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-    <SectionHeading eyebrow="The map" heading="Twenty-nine towns, the corridors that connect them, and the read on each" body="Hover a town for its market read and how many Market Lock categories are still open there. Hover a route to light up the towns on it, type to find a town, switch layers. Brockton is home." align="center" />
+    <SectionHeading eyebrow="The map" heading="Forty-one towns, the corridors that connect them, and the read on each" body="Hover a town for its market read and how many Market Lock categories are still open there. Hover a route to light up the towns on it, type to find a town, switch layers. Brockton is home." align="center" />
     <div class="mt-10"><MarketMap market="MA" /></div>
-    <p class="mt-6 text-center text-sm text-ink-700"><span class="font-semibold text-navy-900">By corridor:</span> {CORRIDOR_GUIDES.filter((g) => g.market === 'MA').map((g, i) => <><a href={`/corridors/${g.slug}/`} class="font-semibold text-teal-600 hover:text-teal-700">{g.route}</a>{i < 6 ? ' · ' : ''}</>)} <a href="/corridors/" class="text-ink-500 hover:text-teal-700">(all corridor guides)</a></p>
+    <p class="mt-6 text-center text-sm text-ink-700"><span class="font-semibold text-navy-900">By corridor:</span> {CORRIDOR_GUIDES.filter((g) => g.market === 'MA').map((g, i) => <><a href={`/corridors/${g.slug}/`} class="font-semibold text-teal-600 hover:text-teal-700">{g.route}</a>{i < 11 ? ' · ' : ''}</>)} <a href="/corridors/" class="text-ink-500 hover:text-teal-700">(all corridor guides)</a></p>
   </section>
 
   <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">

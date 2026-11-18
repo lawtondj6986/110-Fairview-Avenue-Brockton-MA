@@ -52,6 +52,18 @@ export const SITE = {
     'Duxbury',
     'Scituate',
     'Cohasset',
+    'Hull',
+    'Milton',
+    'Canton',
+    'Sharon',
+    'Mansfield',
+    'Norton',
+    'Taunton',
+    'Raynham',
+    'Lakeville',
+    'Carver',
+    'Wareham',
+    'Dedham',
   ],
 
   social: {

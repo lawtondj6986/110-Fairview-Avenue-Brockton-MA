@@ -9,7 +9,7 @@ import { SITE } from '../../config';
 
 const title = 'Town Compare — Any Two South Shore Towns, Side by Side | Free ICS Tool';
 const description =
-  'Pick any two of the 29 South Shore towns and compare them side by side: the commercial corridors, what the buildings are, what the businesses are, the operator’s read on each, and the neighbors. Site selection starts with the right town. Free, no email, shareable link.';
+  'Pick any two of the 41 South Shore towns and compare them side by side: the commercial corridors, what the buildings are, what the businesses are, the operator’s read on each, and the neighbors. Site selection starts with the right town. Free, no email, shareable link.';
 
 const sorted = [...TOWNS].sort((a, b) => a.name.localeCompare(b.name));
 const cards = TOWNS.map((t) => ({ ...t, neighborTowns: t.neighbors.map((n) => TOWNS.find((x) => x.slug === n)).filter(Boolean) as typeof TOWNS }));
@@ -58,7 +58,7 @@ const schema = [
 <Base title={title} description={description} schema={schema}>
   <section class="bg-navy-950">
     <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
-      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Free tool · Town Compare · 29 towns</p>
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Free tool · Town Compare · 41 towns</p>
       <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">
         Any two South Shore towns, side by side.
       </h1>
@@ -109,7 +109,7 @@ const schema = [
     </div>
   </section>
 
-  <FounderCard heading="The person behind every one of these reads" line="Twenty-nine towns, written corridor by corridor by the licensed advisor who works them. When two towns are close on paper, the call is what separates them." />
+  <FounderCard heading="The person behind every one of these reads" line="Forty-one towns, written corridor by corridor by the licensed advisor who works them. When two towns are close on paper, the call is what separates them." />
   <CtaSection heading="Narrowed it to two?" body="Bring both towns to a call. You will leave with a straight read on zoning for your use, parking, what is quietly for sale, and which one we would pick." />
 </Base>
 

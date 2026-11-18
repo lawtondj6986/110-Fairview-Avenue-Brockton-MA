@@ -55,7 +55,7 @@ export const CORRIDOR_GUIDES: CorridorGuide[] = [
     market: 'MA',
     route: 'Route 24',
     name: 'Route 24, the industrial expressway',
-    tagline: 'Where the South Shore\'s flex, logistics, and contractor economy lives: Randolph to Bridgewater.',
+    tagline: 'Where the South Shore\'s flex, logistics, and contractor economy lives: Randolph to Bridgewater, Raynham, and Taunton.',
     read: [
       'Route 24 is the working corridor. The Avon industrial park, Brockton\'s Westgate and Route 123 exits, the West Bridgewater interchange with Route 106, and the Bridgewater parks off Route 104 hold most of the clear-span, loading-dock, and yard product on this side of the South Shore. It is the inventory every growing contractor, distributor, and fabricator within twenty minutes wants, and it almost never reaches a listing portal.',
       'Businesses on this corridor are high-ticket operators running on spreadsheets and voicemail: paving, roofing, HVAC, electrical, fleet services, and the distributors that supply them. The first one in each trade to answer in sixty seconds and quote the same day takes a disproportionate share of a very large pie.',
@@ -68,7 +68,7 @@ export const CORRIDOR_GUIDES: CorridorGuide[] = [
     market: 'MA',
     route: 'Route 28',
     name: 'Route 28, the Main Street spine',
-    tagline: 'North Main to South Main: the freestanding-retail and auto corridor through Randolph, Avon, Brockton, and West Bridgewater.',
+    tagline: 'Blue Hill Avenue to Cranberry Highway: the freestanding-retail and auto corridor from Milton through Randolph, Avon, Brockton, and West Bridgewater to Middleborough and Wareham.',
     read: [
       'Route 28 is Main Street for five towns in a row. It runs as North Main Street through Randolph and Avon, becomes Brockton\'s Main Street through Montello, downtown, and Campello, crosses Route 106 in West Bridgewater, and continues south toward Middleborough. The buildings are freestanding retail pads, auto dealers and repair shops, restaurants, and converted houses holding professional offices, with downtown Brockton\'s mixed-use blocks in the middle.',
       'This is drive-by commerce. Visibility, signage, and a curb cut do real work, and the businesses that pair that frontage with a site that converts and a phone that gets answered own their category for miles in either direction.',
@@ -107,13 +107,79 @@ export const CORRIDOR_GUIDES: CorridorGuide[] = [
     market: 'MA',
     route: 'Route 106',
     name: 'Route 106, the crossroads corridor',
-    tagline: 'Easton to Kingston through West Bridgewater, East Bridgewater, Halifax, and Plympton: the trades road.',
+    tagline: 'Mansfield and Easton to Kingston through West Bridgewater, East Bridgewater, Halifax, and Plympton: the trades road.',
     read: [
       'Route 106 is an east-west road through working towns. It leaves Easton\'s industrial pockets, crosses Route 24 and Route 28 in West Bridgewater (the crossroads the trades know), runs through East Bridgewater\'s center, and continues through Halifax and Plympton to Kingston and Route 3A. The commercial stock is contractor yards, small industrial, farm-and-feed, auto, and the plazas at each center.',
       'This is where the South Shore\'s contractors keep their equipment and their offices. The customer base is spread across a dozen towns, the work is high-ticket, and almost none of it is marketed with anything more than a truck sign. A real quoting and follow-up system is a competitive weapon on this road.',
     ],
     businesses: ['contractors, excavators, and landscape companies with yards', 'small industrial and fabrication', 'agricultural, equine, and feed suppliers', 'auto and truck repair', 'convenience retail at the centers', 'veterinary and large-animal practices'],
     note: 'The West Bridgewater crossroads is the single most useful address on the South Shore for a contractor who works everywhere. Yard product there is hunted, not found.',
+  },
+
+  {
+    slug: 'route-138',
+    market: 'MA',
+    route: 'Route 138',
+    name: 'Route 138, Blue Hill Avenue to Broadway',
+    tagline: 'Milton to Taunton through Canton, Stoughton, Easton, and Raynham: the old turnpike that still carries the trade.',
+    read: [
+      'Route 138 is the inland spine west of Brockton. It leaves Boston as Blue Hill Avenue through Milton, becomes Washington Street and Turnpike Street through Canton and Stoughton, crosses Easton as Washington Street past the Five Corners area, and runs south as Broadway through Raynham into downtown Taunton. Along the way it threads Cobbs Corner, Stoughton center, Easton\'s industrial pockets, and the auto and retail strips of Raynham and Taunton.',
+      'It is a working road with affluent ends. Milton and Canton households buy premium services at the north; Raynham and Taunton carry the auto dealers, trades, and regional retail at the south; Stoughton and Easton in the middle have both. A business on 138 serves two or three towns without trying, which makes the territory question the first one to answer.',
+    ],
+    businesses: ['auto sales, repair, and body shops along Broadway', 'medical, dental, and professional practices in Milton, Canton, and Easton', 'contractors and industrial services in Stoughton, Easton, and Raynham', 'restaurants and quick service at the centers', 'premium home services at the northern end', 'fitness, childcare, and youth programs'],
+    note: 'Decide which towns on 138 you want to own before a competitor on the next block does. Under Market Lock the road is six territories, and the northern three price at a premium for good reason.',
+  },
+  {
+    slug: 'route-44',
+    market: 'MA',
+    route: 'Route 44',
+    name: 'Route 44, the cross-county highway',
+    tagline: 'Taunton to Plymouth through Raynham, Middleborough, and Carver: the regional retail road and the way to the Cape bridges.',
+    read: [
+      'Route 44 crosses the bottom of the South Shore east to west: downtown Taunton, the big-box and plaza retail of Raynham, the Route 24 and Route 495 interchanges, Middleborough\'s rotary and commercial strip, the cranberry country of Carver, and Plymouth\'s Colony Place and the Route 3 interchange. For a large part of Plymouth and Bristol counties, this is the shopping trip and the commute.',
+      'The corridor is built for the car: freestanding pads, plazas, auto dealers, and highway-adjacent flex. A business here competes with every plaza on the road, and the one that is found first and answers first takes the car already in the parking lot. For owner-users, flex near the Route 24 and Route 495 ramps is the prize.',
+    ],
+    businesses: ['regional and big-box retail at Raynham and Plymouth', 'auto sales, service, and tires', 'restaurants, quick service, and hotels', 'flex, distribution, and fleet services near the interchanges', 'agricultural and equipment businesses in Carver and Middleborough', 'medical and dental practices at the town ends'],
+    note: 'Frontage on Route 44 with a left-turn lane is worth more than the building on it. Buy for the turn, and check the signage rules before you fall for the facade.',
+  },
+  {
+    slug: 'route-140',
+    market: 'MA',
+    route: 'Route 140',
+    name: 'Route 140, Mansfield to Lakeville',
+    tagline: 'The industrial-park road: Cabot Business Park, Norton, Taunton\'s Myles Standish, and the Route 495 belt.',
+    read: [
+      'Route 140 runs from Mansfield south through Norton into Taunton and on to Lakeville, and it strings together the deepest industrial inventory in southeastern Massachusetts: Mansfield\'s parks along Route 495, Norton\'s flex and yards, the Myles Standish Industrial Park in Taunton, and the Route 140 and Route 495 interchange corridor toward Lakeville and New Bedford. It is also the plaza road for Mansfield and Taunton\'s retail.',
+      'Buyers on this corridor are companies that need square footage and highway access: distribution, manufacturing, food production, fleet. The product moves through brokers and owners who know each other, and the best buildings are spoken for before a sign goes up. Businesses that serve the parks win by being findable by a facilities manager\'s search and answering like a professional.',
+    ],
+    businesses: ['distribution, logistics, and light manufacturing in the parks', 'fleet, truck, and equipment services', 'B2B vendors: IT, facilities, staffing, and supplies', 'restaurants and lunch trade serving the parks', 'retail plazas at Mansfield and Taunton', 'contractors with yards in Norton'],
+    note: 'If your business needs 10,000 to 50,000 feet near three interstates, start on Route 140. We hunt the parks owner by owner, and the clock matters: this product does not wait for a listing.',
+  },
+  {
+    slug: 'route-128-i-93',
+    market: 'MA',
+    route: 'I-93 / 128',
+    name: 'Route 128 and I-93, the belt',
+    tagline: 'Dedham, Canton, Milton, and Randolph: the metro ring road and the corporate, medical, and regional-retail addresses on it.',
+    read: [
+      'The southern arc of Route 128 and I-93 is where the South Shore meets the Boston metro: Dedham\'s Route 1 retail and the Dedham Corporate Center, Canton\'s corporate campuses and industrial parks at the I-93 and I-95 junction, Milton\'s affluent squares, and Randolph\'s plazas and parks where Route 24 begins. Everything on the belt prices on access to the whole region.',
+      'The customers are corporate by day and affluent by night. B2B service companies sell to the campuses; medical, dental, financial, and premium home services sell to households that research everything and expect an answer in a minute. Competition is dense and capable; being the recommended answer, not just a listed option, is the whole game.',
+    ],
+    businesses: ['corporate office vendors and B2B services', 'medical, dental, and specialty practices', 'regional retail, restaurants, and hotels on Route 1', 'law, finance, and professional services', 'premium home services for Milton and Canton', 'flex and industrial near the junctions'],
+    note: 'On the belt the buyers are sophisticated and so are the sellers. Bring the underwriting before the tour, and expect to compete with investors for anything with a dock inside a mile of the ramps.',
+  },
+  {
+    slug: 'route-228',
+    market: 'MA',
+    route: 'Route 228',
+    name: 'Route 228, Hull to Rockland',
+    tagline: 'From Nantasket Beach through Hingham and Norwell to Rockland: the road that ties the peninsula to the Route 3 towns.',
+    read: [
+      'Route 228 starts at the water in Hull, runs the length of the peninsula past Nantasket Beach, crosses into Hingham as Hull Street and Main Street through the historic center and the Derby Street area, continues through Norwell\'s Queen Anne\'s Corner retail node at Route 53, and ends in Rockland. It is the way a Hull resident reaches a dentist, a hardware store, and the highway.',
+      'The corridor runs from a seasonal beach economy to some of the most affluent neighborhoods on the South Shore to a practical trades town, which means a business on it can choose its customer. Hull rewards the operator who answers in winter; Hingham and Norwell reward polish and proof; Rockland rewards speed and price.',
+    ],
+    businesses: ['restaurants, hospitality, and seasonal retail in Hull', 'medical, dental, and professional practices in Hingham', 'premium home services and landscape for the estates', 'retail and services at Queen Anne\'s Corner', 'marine services on the Hull and Hingham waterfronts', 'trades and auto in Rockland'],
+    note: 'A Hull business should think of Route 228 as its supply line and Hingham as its second market. One phone that gets answered serves both.',
   },
 
   // ---------------------------------------------------------------- Broward County, FL
