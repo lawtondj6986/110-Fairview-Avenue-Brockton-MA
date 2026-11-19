@@ -98,6 +98,23 @@ const placesInArticle = PLACE_INDEX.map((pl) => ({ ...pl, at: bodyText.search(ne
   .slice(0, 12);
 const tools = Object.entries(TOOL_NAMES).filter(([href]) => linked.has(href));
 
+// Search results cut titles near sixty characters. The headline on the page stays as written;
+// the <title> uses the part before the first colon or comma when that part can stand alone.
+const searchTitle = (() => {
+  if (title.length <= 62) return title;
+  const q = title.indexOf('? ');
+  if (q >= 19 && q <= 61) return title.slice(0, q + 1);
+  for (const sep of [': ', ' — ', ', and ', ', ']) {
+    const head = title.split(sep)[0];
+    if (head.length >= 22 && head.length <= 62) return head;
+  }
+  const STOP = new Set(['a', 'an', 'the', 'and', 'or', 'of', 'on', 'in', 'to', 'for', 'with', 'what', 'that', 'like', 'is', 'at', 'by', 'from', 'how', 'who', 'you', 'your', 'are', 'it', 'as', 'before', 'after', 'when', 'why', 'we', 'every', 'any', 'starts', 'run', 'describe']);
+  if (title.length <= 72) return title;
+  const words = title.slice(0, 72).split(' ').slice(0, -1);
+  while (words.length > 4 && STOP.has(words[words.length - 1].toLowerCase().replace(/[^a-z]/g, ''))) words.pop();
+  return words.join(' ').replace(/\s*\([^)]*$/, '').replace(/[,;:—-]+$/, '').trim();
+})();
+
 const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
 const schema: object[] = [
@@ -125,7 +142,7 @@ if (faqs && faqs.length) {
 }
 ---
 
-<Base title={`${title} | ICS Insights`} description={description} schema={schema} ogType="article">
+<Base title={searchTitle.length > 52 ? `${searchTitle} | ICS` : `${searchTitle} | ICS Insights`} description={description} schema={schema} ogType="article">
   <article>
     <header class="bg-navy-900">
       <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
