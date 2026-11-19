@@ -43,12 +43,20 @@ const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month:
       </div>
       <span class="shrink-0 text-sm font-semibold text-teal-400">Open the glossary →</span>
     </a>
-    <div class="space-y-6">
+    <div class="mb-6 flex flex-wrap items-center gap-2" id="ins-filter">
+      <button type="button" class="ins-chip rounded-full border border-navy-100 bg-white px-3 py-1.5 text-sm font-semibold text-navy-900 hover:border-teal-500 aria-pressed:border-teal-600 aria-pressed:bg-teal-600 aria-pressed:text-white" data-cat="all" aria-pressed="true">All {posts.length}</button>
+      {Object.entries(categoryLabels).map(([k, l]) => <button type="button" class="ins-chip rounded-full border border-navy-100 bg-white px-3 py-1.5 text-sm font-semibold text-navy-900 hover:border-teal-500 aria-pressed:border-teal-600 aria-pressed:bg-teal-600 aria-pressed:text-white" data-cat={k} aria-pressed="false">{l} {posts.filter((p) => p.data.category === k).length}</button>)}
+      <label class="ml-auto min-w-[12rem] flex-1 sm:flex-none"><span class="sr-only">Search the Insights</span><input id="ins-q" type="search" placeholder="Search: lease, reviews, Route 24…" autocomplete="off" class="w-full rounded-md border border-navy-100 bg-white px-3 py-1.5 text-sm text-navy-900 placeholder:text-ink-500 focus:border-teal-500 focus:outline-none" /></label>
+    </div>
+    <p id="ins-empty" class="mb-6 hidden text-sm text-ink-500">Nothing matches. Try a shorter word, or ask in the search bar at the top of the site.</p>
+    <div class="space-y-6" id="ins-list">
       {
         posts.map((post) => (
           <a
             href={`/insights/${post.id}/`}
-            class="lift group block rounded-xl border border-navy-100 bg-white p-6 shadow-sm sm:p-8"
+            class="ins-card lift group block rounded-xl border border-navy-100 bg-white p-6 shadow-sm sm:p-8"
+            data-cat={post.data.category}
+            data-text={`${post.data.title} ${post.data.description}`.toLowerCase()}
           >
             <p class="text-xs font-semibold uppercase tracking-widest text-teal-600">
               {categoryLabels[post.data.category]} · {fmt(post.data.date)}
@@ -72,3 +80,37 @@ const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month:
     secondaryHref="/workshops/"
   />
 </Base>
+
+<script>
+  function initInsightsFilter() {
+    const bar = document.getElementById('ins-filter');
+    if (!bar || bar.dataset.ready) return;
+    bar.dataset.ready = '1';
+    const q = document.getElementById('ins-q') as HTMLInputElement;
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.ins-card'));
+    const chips = Array.from(bar.querySelectorAll<HTMLElement>('.ins-chip'));
+    let cat = new URLSearchParams(location.search).get('cat') || 'all';
+    if (!chips.some((c) => c.dataset.cat === cat)) cat = 'all';
+    q.value = new URLSearchParams(location.search).get('q') || '';
+    const apply = () => {
+      const term = q.value.trim().toLowerCase();
+      let shown = 0;
+      cards.forEach((c) => {
+        const on = (cat === 'all' || c.dataset.cat === cat) && (!term || (c.dataset.text || '').includes(term));
+        c.hidden = !on;
+        if (on) shown++;
+      });
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.cat === cat)));
+      document.getElementById('ins-empty')!.classList.toggle('hidden', shown > 0);
+      const u = new URL(location.href);
+      cat === 'all' ? u.searchParams.delete('cat') : u.searchParams.set('cat', cat);
+      term ? u.searchParams.set('q', term) : u.searchParams.delete('q');
+      history.replaceState(null, '', u.pathname + u.search);
+    };
+    chips.forEach((c) => c.addEventListener('click', () => { cat = c.dataset.cat!; apply(); }));
+    q.addEventListener('input', apply);
+    apply();
+  }
+  initInsightsFilter();
+  document.addEventListener('astro:page-load', initInsightsFilter);
+</script>
