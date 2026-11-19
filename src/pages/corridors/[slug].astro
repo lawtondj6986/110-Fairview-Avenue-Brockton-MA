@@ -31,8 +31,8 @@ const siblings = CORRIDOR_GUIDES.filter((g) => g.market === guide.market && g.sl
 const briefHref = `/buyer-brief/?towns=${geo.towns.join(',')}`;
 const boardHref = `${spec.boardHref}?place=${geo.towns[0]}`;
 
-const title = `${guide.name} — Commercial Corridor Guide, ${spec.label} | ICS`;
-const description = `${guide.tagline} The ${places.length} ${spec.noun === 'town' ? 'towns' : 'cities'} on ${guide.route} (${names.join(', ')}), who does business along it, the advisor's note, Market Lock status by ${spec.noun}, and the market sheet for each.`;
+const title = `${guide.name}: Corridor Guide, ${spec.label} | ICS`;
+const description = `${guide.tagline} ${places.length} ${spec.noun === 'town' ? 'towns' : 'cities'} on ${guide.route}, who does business along it, and which trades are still open.`;
 
 const faqs = [
   {

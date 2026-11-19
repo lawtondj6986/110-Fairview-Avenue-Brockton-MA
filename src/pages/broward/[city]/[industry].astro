@@ -16,8 +16,8 @@ const { city, industry } = Astro.props;
 const places = BROWARD_CITIES.map((c) => ({ slug: c.slug, name: c.name, county: 'Broward County', position: c.position, corridors: c.corridors, businessMix: Array.isArray(c.businessMix) ? c.businessMix.join(' ') : String(c.businessMix), angle: c.angle, neighbors: c.neighbors }));
 const place = places.find((p) => p.slug === city.slug)!;
 const locked = isLocked(CLAIMED_FL, city.slug, industry.slug);
-const title = `${industry.name} in ${city.name}, FL — AI Systems, Market Lock Status, the Local Read | ICS`;
-const description = `${industry.name} in ${city.name}, Broward County: the Market Lock territory is ${locked ? 'held' : 'open'} as of this build. The city's business read, the corridors that carry the trade, the install with published prices, what the South Florida season is doing this month, and the questions a ${city.name} owner asks first. Systems only in Florida; one business per category per city, in writing.`;
+const title = `${industry.name} in ${city.name}, FL: Market Lock ${locked ? 'Held' : 'Open'} | ICS`;
+const description = `${industry.name} in ${city.name}: the territory is ${locked ? 'held' : 'open'}. The local read, the install with published prices, this month's season, and the cities next door. Systems only in Florida.`;
 ---
 
 <Base title={title} description={description}>

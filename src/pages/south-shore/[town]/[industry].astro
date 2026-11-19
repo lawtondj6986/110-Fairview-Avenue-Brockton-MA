@@ -16,8 +16,8 @@ const { town, industry } = Astro.props;
 const places = TOWNS.map((t) => ({ slug: t.slug, name: t.name, county: `${t.county} County`, position: t.position, corridors: t.corridors, businessMix: t.businessMix, angle: t.angle, neighbors: t.neighbors, propertyMix: t.propertyMix }));
 const place = places.find((p) => p.slug === town.slug)!;
 const locked = isLocked(CLAIMED_MA, town.slug, industry.slug);
-const title = `${industry.name} in ${town.name}, MA — AI Systems, Market Lock Status, the Local Read | ICS`;
-const description = `${industry.name} in ${town.name}: the Market Lock territory is ${locked ? 'held' : 'open'} as of this build. The town's business read, the corridors that carry the trade, the install with published prices, what the season is doing this month, and the questions a ${town.name} owner asks first. One business per category per town, in writing.`;
+const title = `${industry.name} in ${town.name}, MA: Market Lock ${locked ? 'Held' : 'Open'} | ICS`;
+const description = `${industry.name} in ${town.name}: the territory is ${locked ? 'held' : 'open'}. The local read, the install with published prices, this month's season, and the towns next door.`;
 ---
 
 <Base title={title} description={description}>
