@@ -300,7 +300,7 @@ const INTENTS = {
       out.push({ eyebrow: 'Honest comparison', title: `ICS vs. ${pick[1]}`, body: 'Costs, coverage, who owns what, when the alternative is the right call, and a worked South Shore example with numbers.', links: [['Read the comparison →', `/compare/${pick[0]}/`], ['All six comparisons', '/compare/']] });
     }
     if (has(V.clause)) {
-      out.push({ eyebrow: 'Lease Clause Decoder', title: 'What that clause means, and what to ask for', body: 'Thirty-eight commercial lease clauses in plain English: both chairs, the red flags, sample language, the ask. Tick the ones in your lease and it writes the list for your attorney.', links: [['Open the decoder →', `/lease-clauses/?${leaseSeat(q)}`], ['The rent math', '/lease-analyzer/']] });
+      out.push({ eyebrow: 'Lease Clause Decoder', title: 'What that clause means, and what to ask for', body: 'Fifty-six commercial lease clauses in plain English: both chairs, the red flags, sample language, the ask. Tick the ones in your lease and it writes the list for your attorney.', links: [['Open the decoder →', `/lease-clauses/?${leaseSeat(q)}`], ['The rent math', '/lease-analyzer/']] });
     }
     if (has(V.month) && !has(V.lease) && !has(V.hunt)) {
       out.push({ eyebrow: 'This month', title: 'What every trade should be doing this month', body: 'The current month for all twelve industries, South Shore and South Florida, from the playbooks: when the phone rings, when it does not, and what the system should be running.', links: [['Open this month →', '/this-month/'], ['The marketing calendar', '/insights/south-shore-small-business-marketing-calendar/']] });

@@ -5,6 +5,10 @@ import FounderCard from '../components/FounderCard.astro';
 import ShareKit from '../components/ShareKit.astro';
 import { LEASE_CLAUSES, GROUPS } from '../lib/lease-clauses';
 import { SITE } from '../config';
+import { getCollection } from 'astro:content';
+
+// Only link glossary terms that exist, so a clause can name a term before its entry is written.
+const glossaryIds = new Set((await getCollection('glossary', ({ data }) => !data.draft)).map((g) => g.id));
 
 const title = 'Lease Clause Decoder — Every Clause in a Commercial Lease, in Plain English | Free ICS Tool';
 const description = `${LEASE_CLAUSES.length} clauses that show up in a South Shore commercial lease, decoded: what each one does, what the tenant wants, what the landlord wants, the red flags, sample language you can recognize on the page, and the exact ask. Tick the clauses in your lease and the page builds the list of questions to take to your attorney. Free, no email, shareable.`;
@@ -104,7 +108,7 @@ const chip = 'lc-chip rounded-full border border-navy-100 bg-white px-3 py-1.5 t
                       <p class="lc-ask mt-1 rounded-lg border border-teal-500/30 bg-teal-100/30 p-3 text-sm leading-relaxed text-navy-900">{c.ask}</p>
                       <div class="mt-2 flex flex-wrap gap-2 print:hidden">
                         <button type="button" class="lc-copy rounded-md border border-navy-100 bg-white px-3 py-1.5 text-xs font-semibold text-navy-900 hover:border-teal-500" data-text={c.ask}>Copy the ask</button>
-                        {c.glossary.map((s) => <a href={`/glossary/${s}/`} class="rounded-md px-2 py-1.5 text-xs font-semibold text-teal-700 hover:underline">{s.replace(/-/g, ' ')} →</a>)}
+                        {c.glossary.filter((s) => glossaryIds.has(s)).map((s) => <a href={`/glossary/${s}/`} class="rounded-md px-2 py-1.5 text-xs font-semibold text-teal-700 hover:underline">{s.replace(/-/g, ' ')} →</a>)}
                       </div>
                     </div>
                   </div>

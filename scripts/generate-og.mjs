@@ -49,7 +49,7 @@ function collectPages() {
     ['/cap-rate/', 'cap-rate', 'FREE CALCULATOR · 1 MINUTE', 'Does the building pencil? Cap rate, cash-on-cash, DSCR.'],
     ['/lease-analyzer/', 'lease-analyzer', 'FREE CALCULATOR · 1 MINUTE', 'The face rent is not the rent. Net effective rent, both chairs.'],
     ['/deal-tools/', 'deal-tools', 'EIGHT FREE CRE TOOLS · NO EMAIL', 'Every seat at the table has a number. Run yours first.'],
-    ['/lease-clauses/', 'lease-clauses', 'FREE TOOL · LEASE CLAUSE DECODER · 40 CLAUSES', 'Every clause in your lease, in plain English. With the ask.'],
+    ['/lease-clauses/', 'lease-clauses', 'FREE TOOL · LEASE CLAUSE DECODER · 56 CLAUSES', 'Every clause in your lease, in plain English. With the ask.'],
     ['/territories/', 'territories', 'MARKET LOCK · THE TERRITORY BOARD', 'One business per category, per town. Whoever locks it first, keeps it.'],
     ['/platforms/', 'platforms', 'CUSTOM PLATFORMS · YOU OWN THE CODE', 'When the business is the software, we build the business.'],
     ['/partners/', 'partners', 'PARTNERS · REFERRALS · WHITE-LABEL', "We'd rather split a deal with you than compete for it."],
