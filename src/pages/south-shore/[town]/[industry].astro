@@ -13,7 +13,7 @@ export function getStaticPaths() {
   return TOWNS.flatMap((town) => INDUSTRIES.map((industry) => ({ params: { town: town.slug, industry: industry.slug }, props: { town, industry } })));
 }
 const { town, industry } = Astro.props;
-const places = TOWNS.map((t) => ({ slug: t.slug, name: t.name, county: `${t.county} County`, position: t.position, corridors: t.corridors, businessMix: t.businessMix, angle: t.angle, neighbors: t.neighbors }));
+const places = TOWNS.map((t) => ({ slug: t.slug, name: t.name, county: `${t.county} County`, position: t.position, corridors: t.corridors, businessMix: t.businessMix, angle: t.angle, neighbors: t.neighbors, propertyMix: t.propertyMix }));
 const place = places.find((p) => p.slug === town.slug)!;
 const locked = isLocked(CLAIMED_MA, town.slug, industry.slug);
 const title = `${industry.name} in ${town.name}, MA — AI Systems, Market Lock Status, the Local Read | ICS`;
