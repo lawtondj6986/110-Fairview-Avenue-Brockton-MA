@@ -20,4 +20,4 @@ Minutes show what was said before anyone knew it would matter. A developer's pro
 
 ## In practice
 
-A buyer is looking at a 2-acre parcel in Hanover. We pull 6 years of planning board and zoning board minutes and find the parcel discussed at 4 meetings, including a prior owner's withdrawn application after neighbors raised drainage concerns. The buyer's engineer knows what to study before the due diligence period ends. Cost of the records: $0.
+A buyer is looking at a 2-acre parcel in Hanover. We pull 6 years of planning board and zoning board minutes and find the parcel discussed at 4 meetings, including a prior owner's withdrawn application after neighbors raised drainage concerns. The buyer's engineer knows what to study before the due diligence period ends. Cost of the records: $0. Where the written minutes ran to a single line, the meeting video filled in what the neighbors actually said.

@@ -20,4 +20,4 @@ They are dated, first-hand observations by a public official with no stake in th
 
 ## In practice
 
-A buyer is under agreement on a restaurant in Quincy for $325,000. We request 5 years of health and fire inspection reports. They show 11 inspections, with the same refrigeration temperature violation cited 4 times and a hood suppression system flagged twice. The buyer gets an equipment quote of $18,000 and renegotiates. The records cost nothing and arrived in 8 business days.
+A buyer is under agreement on a restaurant in Quincy for $325,000. We request 5 years of health and fire inspection reports. They show 11 inspections, with the same refrigeration temperature violation cited 4 times and a hood suppression system flagged twice. The buyer gets an equipment quote of $18,000 and renegotiates. The records cost nothing and arrived in 8 business days. The seller had described the kitchen as fully up to code, which was true only on the day of the latest re-inspection.

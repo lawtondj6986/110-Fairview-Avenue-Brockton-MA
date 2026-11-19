@@ -20,4 +20,4 @@ A dossier is a snapshot. Deals and campaigns keep moving after it is delivered. 
 
 ## In practice
 
-A client has a 60-day due diligence period on a Plymouth retail property whose seller is in a partnership dispute. We check the Superior Court docket twice a week. On day 41, a motion for a preliminary injunction over the sale proceeds appears. The client's attorney has it within 24 hours and extends the closing date instead of finding out at the table.
+A client has a 60-day due diligence period on a Plymouth retail property whose seller is in a partnership dispute. We check the Superior Court docket twice a week. On day 41, a motion for a preliminary injunction over the sale proceeds appears. The client's attorney has it within 24 hours and extends the closing date instead of finding out at the table. Each check is logged with the date and time, including the 11 checks that found nothing new, so the record shows the docket was actually watched.

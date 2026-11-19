@@ -7,7 +7,7 @@ faqs:
   - q: "What is the difference between an upsell and a cross-sell?"
     a: "An upsell moves the customer to a higher version of what they are buying, such as a longer warranty or a better grade of material. A cross-sell adds a related item, such as gutter guards with a roof. Both raise the average ticket, and many businesses use the word upsell for both."
   - q: "How do I upsell without being pushy?"
-    a: "Present options in writing, with prices, before the work starts, and let the customer choose. Good, better, best on the estimate does the selling without pressure. Only offer what actually fits the job. An add-on the customer later regrets costs more in reviews than it earned."
+    a: "Present options in writing, with prices, before the work starts, and let the customer choose. Good, better, best on the estimate does the selling without pressure. Only offer what actually fits the job, because an add-on the customer later regrets costs more in reviews than it earned."
 ---
 
 ## What it means

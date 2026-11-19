@@ -6,7 +6,7 @@ related: ["service-area-page", "trade-area", "territory-exclusivity", "local-seo
 tool: { label: "Territory board", href: "/territories/" }
 faqs:
   - q: "Should I set my service radius in miles or drive time?"
-    a: "Drive time. Ten miles from Brockton to Easton is twenty minutes, while ten miles toward Quincy at 4 p.m. can be forty-five. A drive-time boundary, adjusted for the roads you actually use, reflects what a job costs you. Miles are only a rough stand-in."
+    a: "Drive time, because ten miles from Brockton to Easton is twenty minutes while ten miles toward Quincy in the late afternoon can be forty-five. A drive-time boundary, adjusted for the roads you actually use, reflects what a job costs you, and miles are only a rough stand-in."
   - q: "Does a bigger service area help my Google ranking?"
     a: "Not by itself. Listing forty towns on your Google Business Profile does not make you rank in all of them, because proximity to the searcher carries a lot of weight. You rank farther out by earning reviews and building real service area pages for the towns you want."
 ---

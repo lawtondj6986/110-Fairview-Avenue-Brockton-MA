@@ -20,4 +20,4 @@ Property records are organized by name, not by a single owner ID. To find everyt
 
 ## In practice
 
-We search one principal and 4 related LLCs across Plymouth and Norfolk counties. The index returns 63 instruments. Sorting them shows 9 parcels acquired, 3 sold, 11 mortgages, 7 discharges, and 1 recorded attachment for $85,000. The attachment appeared only under the grantor name, with a middle initial the other records lacked. Total time: about 3 hours.
+We search one principal and 4 related LLCs across Plymouth and Norfolk counties. The index returns 63 instruments. Sorting them shows 9 parcels acquired, 3 sold, 11 mortgages, 7 discharges, and 1 recorded attachment for $85,000. The attachment appeared only under the grantor name, with a middle initial the other records lacked. Total time: about 3 hours. The report lists every search string used, so a second researcher could repeat the work and get the same 63 results.

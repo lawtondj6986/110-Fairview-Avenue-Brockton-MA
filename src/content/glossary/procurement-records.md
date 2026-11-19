@@ -20,4 +20,4 @@ Process is where the questions are. Who else bid? Was the low bidder passed over
 
 ## In practice
 
-A client bidding on a town's 3-year facilities contract lost the last round. We request the prior procurement file. The town responds in 9 business days with 140 pages at no charge. The winner bid $412,000 against our client's $455,000, and scored higher on references. The client knows exactly where to sharpen the next proposal.
+A client bidding on a town's 3-year facilities contract lost the last round. We request the prior procurement file. The town responds in 9 business days with 140 pages at no charge. The winner bid $412,000 against our client's $455,000, and scored higher on references. The client knows exactly where to sharpen the next proposal. The evaluation sheets show the client lost 8 of 100 points on references alone, which is fixable. Nothing in the file required anything beyond a written request to the town.

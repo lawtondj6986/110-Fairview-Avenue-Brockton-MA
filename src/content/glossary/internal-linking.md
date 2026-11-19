@@ -7,7 +7,7 @@ faqs:
   - q: "How many internal links should a page have?"
     a: "Enough to be useful and no more. A service page should link to its related services, the towns it serves, and a contact or booking page. A practical floor: every important page should be reachable within three clicks of the home page and should have at least a few other pages linking to it."
   - q: "What is an orphan page?"
-    a: "A page that no other page on the site links to. Visitors cannot reach it by browsing, and search engines may crawl it rarely or not at all. Orphans are common after a redesign or when town pages are added in bulk. The fix is to link them from a relevant hub page."
+    a: "A page that no other page on the site links to. Visitors cannot reach it by browsing, and search engines may crawl it rarely or not at all. Orphans are common after a redesign or when town pages are added in bulk, and the fix is to link them from a relevant hub page."
 ---
 
 ## What it means

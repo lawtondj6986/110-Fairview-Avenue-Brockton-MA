@@ -5,7 +5,7 @@ short: "Asking a website visitor's permission before setting tracking cookies on
 related: ["first-party-data", "retargeting", "conversion-tracking", "google-analytics-4"]
 faqs:
   - q: "Does a small local business website need a cookie banner?"
-    a: "It depends on who visits, what the site tracks, and which laws apply. European visitors trigger strict consent rules, and a growing list of US states have privacy laws with their own thresholds and opt-out rights. A site with no advertising or analytics cookies may need nothing. Ask your attorney before deciding."
+    a: "It depends on who visits, what the site tracks, and which laws apply. European visitors trigger strict consent rules, and a growing list of US states have privacy laws with their own thresholds and opt-out rights. A site with no advertising or analytics cookies may need nothing, so ask your attorney before deciding."
   - q: "What happens to my analytics when visitors decline cookies?"
     a: "You see less. Visitors who decline are not counted in the usual way, so traffic and conversion numbers run low and ad platforms have less to work with. That is a reason to rely on data the customer gives you directly, such as form submissions, calls, and bookings."
 ---

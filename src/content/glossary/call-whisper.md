@@ -5,7 +5,7 @@ short: "A brief recorded message the business hears before a tracked call connec
 related: ["call-tracking", "lead-source", "attribution", "lead-routing"]
 faqs:
   - q: "Does the caller hear the call whisper?"
-    a: "No. The whisper plays only to the person answering, in the second or two before the call connects. The caller hears normal ringing. That is what makes it useful: staff know the source and can adjust how they answer without the customer noticing anything."
+    a: "No: the whisper plays only to the person answering, in the second or two before the call connects. The caller hears normal ringing. That is what makes it useful: staff know the source and can adjust how they answer without the customer noticing anything."
   - q: "What should a call whisper say?"
     a: "Keep it to three or four words that name the source: \"Google Ads call\", \"website call\", or \"yard sign, Weymouth\". Long whispers delay the pickup. If the business runs one phone for two brands or two service lines, the whisper should name which one so the greeting matches."
 ---

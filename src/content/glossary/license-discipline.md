@@ -20,4 +20,4 @@ A license is a claim that can be checked. Is it active? Has it ever lapsed? Has 
 
 ## In practice
 
-A medical practice in Hanover is considering a merger with a 2-doctor group. License lookups for both physicians show active status. One has a 9-year-old board action: a reprimand and a $5,000 fine over recordkeeping, with no further action since. The practice's attorney gets the order itself, 6 pages, and the principals discuss it openly before proceeding.
+A medical practice in Hanover is considering a merger with a 2-doctor group. License lookups for both physicians show active status. One has a 9-year-old board action: a reprimand and a $5,000 fine over recordkeeping, with no further action since. The practice's attorney gets the order itself, 6 pages, and the principals discuss it openly before proceeding. We also check the 2 other states where the physician previously held licenses, and both show no public action. The merger moves ahead with full information on the table.

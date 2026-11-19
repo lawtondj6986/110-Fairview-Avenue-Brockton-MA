@@ -20,4 +20,4 @@ Awards show who actually gets paid with public money, and how much of a vendor's
 
 ## In practice
 
-A paving company tells a prospective buyer that municipal work is 40 percent of revenue. We pull award records from 5 South Shore towns for 3 fiscal years and find $1.9 million in contracts, about 22 percent of the stated revenue, with 2 contracts expiring within 12 months. The buyer adjusts the valuation question before signing a letter of intent.
+A paving company tells a prospective buyer that municipal work is 40 percent of revenue. We pull award records from 5 South Shore towns for 3 fiscal years and find $1.9 million in contracts, about 22 percent of the stated revenue, with 2 contracts expiring within 12 months. The buyer adjusts the valuation question before signing a letter of intent. Every figure in the memo traces to a posted award or a signed contract, listed by town and fiscal year in the appendix.

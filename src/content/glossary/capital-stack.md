@@ -21,4 +21,4 @@ Most deals here have a simple stack: one bank loan and the owner's cash. It stil
 
 ## In practice
 
-A $2,000,000 flex building in Hanover is bought with a $1,300,000 bank loan (65 percent), a $300,000 seller note in second position (15 percent), and $400,000 of buyer equity (20 percent). If value drops 20 percent to $1,600,000, both loans are still covered on paper. The buyer's $400,000 is gone.
+A $2,000,000 flex building in Hanover is bought with a $1,300,000 bank loan (65 percent), a $300,000 seller note in second position (15 percent), and $400,000 of buyer equity (20 percent). If value drops 20 percent to $1,600,000, both loans are still covered on paper. The buyer's $400,000 is gone, because equity takes the first loss.

@@ -5,7 +5,7 @@ short: "The live view of which technician is on which job, when, and what is sti
 related: ["capacity-planning", "on-my-way-text", "service-radius", "crm"]
 faqs:
   - q: "Does a small business need a dispatch board?"
-    a: "Once you have more than two people in the field, yes. Below that, a shared calendar works. Above it, the owner becomes the board, answering every call about who is where, and jobs get double-booked or forgotten. A simple digital board pays for itself in avoided drive time."
+    a: "Once you have more than two people in the field, yes. Below that, a shared calendar works, but above it the owner becomes the board, answering every call about who is where, and jobs get double-booked or forgotten."
   - q: "What should a dispatch board show?"
     a: "Each technician's jobs in time order, the status of each job, the address, and the unassigned queue. Useful extras are skill tags, so the right person gets the right job, and a map view. If it does not update when a job runs long, it is a calendar, not a dispatch board."
 ---

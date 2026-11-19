@@ -7,7 +7,7 @@ faqs:
   - q: "How does a local business get backlinks?"
     a: "From real relationships. Chamber of commerce listings, supplier and manufacturer dealer pages, trade associations, sponsorships of local teams and events, and local news coverage all produce legitimate links. Ten links from real local organizations usually do more than a hundred from unrelated directories."
   - q: "Should I buy backlinks?"
-    a: "No. Paid link schemes violate search engine guidelines and the links tend to come from low-quality sites that add nothing or get discounted entirely. In the worst case they trigger a penalty that takes months to undo. Spend the money on work that earns links: a sponsorship, a useful local guide, a case study."
+    a: "No: paid link schemes violate search engine guidelines and the links tend to come from low-quality sites that add nothing or get discounted entirely. In the worst case they trigger a penalty that takes months to undo. Spend the money on work that earns links: a sponsorship, a useful local guide, a case study."
 ---
 
 ## What it means

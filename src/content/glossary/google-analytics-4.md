@@ -7,7 +7,7 @@ faqs:
   - q: "What is the difference between Google Analytics 4 and Search Console?"
     a: "Analytics measures what visitors do once they reach your site, from every source: pages viewed, time spent, forms submitted. Search Console covers only Google search and shows what happened before the click: which searches showed your pages and how often people clicked. Most businesses need both."
   - q: "What should a small business actually track in GA4?"
-    a: "The actions that lead to revenue: phone taps, form submissions, booking completions, and quote requests, each marked as a key event. Then look at those by traffic source. Sessions and page views are context. Leads by source is the report an owner can make decisions from."
+    a: "The actions that lead to revenue: phone taps, form submissions, booking completions, and quote requests, each marked as a key event. Then look at those by traffic source. Sessions and page views are context, while leads by source is the report an owner can make decisions from."
 ---
 
 ## What it means

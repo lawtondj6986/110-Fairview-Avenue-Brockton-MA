@@ -5,9 +5,9 @@ short: "The information box search engines show beside results for a known busin
 related: ["google-business-profile", "entity-seo", "nap-consistency", "branded-search"]
 faqs:
   - q: "How do I get a knowledge panel for my business?"
-    a: "For a local business, the panel people see is driven by a claimed and verified business profile. Fill it out completely, keep hours and categories accurate, add photos, and collect reviews. You cannot buy or request one directly. Search engines build it from information they trust."
+    a: "For a local business, the panel people see is driven by a claimed and verified business profile. Fill it out completely, keep hours and categories accurate, add photos, and collect reviews. You cannot buy or request one directly, because search engines build it from information they trust."
   - q: "Can I change what my knowledge panel shows?"
-    a: "Partly. You control what is in your business profile: hours, phone, services, photos, and posts. You do not control reviews, photos customers upload, or facts pulled from other sites. If something is wrong, correct it at the source and use the suggest-an-edit or feedback option."
+    a: "Partly: you control what is in your business profile: hours, phone, services, photos, and posts. You do not control reviews, photos customers upload, or facts pulled from other sites. If something is wrong, correct it at the source and use the suggest-an-edit or feedback option."
 ---
 
 ## What it means

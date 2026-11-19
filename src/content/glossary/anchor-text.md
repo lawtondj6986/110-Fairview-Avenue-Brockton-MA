@@ -7,7 +7,7 @@ faqs:
   - q: "Why does anchor text matter for SEO?"
     a: "Search engines use the words in a link as a clue about the page it points to. A link that says \"roof repair in Rockland\" tells them more than one that says \"click here\". Clear, descriptive anchor text helps the right page rank for the right search and helps visitors know where they are going."
   - q: "Can you overdo keyword anchor text?"
-    a: "Yes. If every link pointing at a page uses the identical keyword phrase, it looks manufactured, especially on links from other websites. Natural link profiles are mixed: the business name, the bare web address, descriptive phrases, and a few generic ones. Write links for the reader first."
+    a: "Yes: if every link pointing at a page uses the identical keyword phrase, it looks manufactured, especially on links from other websites. Natural link profiles are mixed: the business name, the bare web address, descriptive phrases, and a few generic ones. Write links for the reader first."
 ---
 
 ## What it means

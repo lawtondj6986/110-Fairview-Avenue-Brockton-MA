@@ -7,7 +7,7 @@ faqs:
   - q: "How long does it take to grow organic traffic?"
     a: "Usually months, not weeks. A new or rebuilt local site often takes three to six months to show steady gains, because search engines need time to crawl, index, and trust the pages. Results come faster for specific local searches with little competition and slower for broad ones."
   - q: "Is organic traffic really free?"
-    a: "The clicks are free. The work is not. Building useful pages, earning reviews and links, and keeping the site fast all take time or money. The difference from ads is that the result keeps paying: a page that ranks this month can still bring calls next year without a per-click charge."
+    a: "The clicks are free, but the work is not. Building useful pages, earning reviews and links, and keeping the site fast all take time or money. The difference from ads is that the result keeps paying: a page that ranks this month can still bring calls next year without a per-click charge."
 ---
 
 ## What it means

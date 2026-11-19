@@ -7,7 +7,7 @@ faqs:
   - q: "How do I measure first-call resolution without a call center?"
     a: "Count how many customers contact you again about the same issue within seven days. If 100 people called this week and 22 called back about the same thing, first-call resolution is about 78 percent. Call tracking and a shared inbox make this easy to see by phone number."
   - q: "Is first-call resolution the same as booking on the first call?"
-    a: "Not exactly. Booking on the first call is one kind of resolution, for sales calls. First-call resolution also covers service questions: a reschedule, an invoice copy, a warranty question. The test is whether the customer got what they called for without having to chase you."
+    a: "Not exactly: booking on the first call is one kind of resolution, for sales calls. First-call resolution also covers service questions: a reschedule, an invoice copy, a warranty question. The test is whether the customer got what they called for without having to chase you."
 ---
 
 ## What it means

@@ -20,4 +20,4 @@ Local papers cover what no database indexes: the 2009 select board fight, the ri
 
 ## In practice
 
-Researching a developer active on the South Shore, we search 20 years of regional coverage and find 47 articles. Six mention a stalled condominium project from 2011. That lead takes us to the registry and the Superior Court, where the foreclosure and 2 contractor suits are documented. The dossier cites the court records, with the articles listed as how they were found.
+Researching a developer active on the South Shore, we search 20 years of regional coverage and find 47 articles. Six mention a stalled condominium project from 2011. That lead takes us to the registry and the Superior Court, where the foreclosure and 2 contractor suits are documented. The dossier cites the court records, with the articles listed as how they were found. Three of the 47 stories carried later corrections, which we note, and none of those three is used to support a finding.

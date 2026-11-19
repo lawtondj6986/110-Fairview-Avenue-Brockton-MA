@@ -20,4 +20,4 @@ Plenty of owners in Brockton, Weymouth, and Quincy bought their buildings 15 or 
 
 ## In practice
 
-An owner's Rockland building appraises at $1,800,000 with $500,000 still owed. The bank lends 70 percent, or $1,260,000. After paying off the $500,000 and about $25,000 of costs, the owner nets roughly $735,000. The new payment has to clear the bank's coverage test, often around 1.25 times.
+An owner's Rockland building appraises at $1,800,000 with $500,000 still owed. The bank lends 70 percent, or $1,260,000. After paying off the $500,000 and about $25,000 of costs, the owner nets roughly $735,000. The new payment has to clear the bank's coverage test, often around 1.25 times. If the building's net income is $120,000, annual payments cannot exceed $96,000.

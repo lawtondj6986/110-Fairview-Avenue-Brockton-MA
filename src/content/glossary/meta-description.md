@@ -5,7 +5,7 @@ short: "The short page summary that search engines may show under the title in r
 related: ["title-tag", "click-through-rate", "open-graph-tags", "search-console"]
 faqs:
   - q: "Does the meta description affect rankings?"
-    a: "Not directly. Search engines do not use it as a ranking signal. Its job is to earn the click once the page is already showing. A clear description with the service, the town, and a reason to choose you can lift click-through rate, which means more visitors from the same position."
+    a: "Not directly: search engines do not use it as a ranking signal. Its job is to earn the click once the page is already showing. A clear description with the service, the town, and a reason to choose you can lift click-through rate, which means more visitors from the same position."
   - q: "Why is Google showing different text than the meta description I wrote?"
     a: "Search engines often rewrite the snippet, pulling a passage from the page that better matches the specific search. It happens more when the description is missing, too short, duplicated across pages, or unrelated to the query. Writing a specific description for each page reduces it but does not prevent it."
 ---

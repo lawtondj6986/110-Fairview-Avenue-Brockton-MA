@@ -5,7 +5,7 @@ short: "A longer, more specific search phrase with lower volume but clearer inte
 related: ["intent-keywords", "service-area-page", "local-seo", "voice-search"]
 faqs:
   - q: "Why target long-tail keywords instead of the big ones?"
-    a: "Because they are easier to rank for and the searcher is closer to buying. Someone typing \"roofer\" could want anything. Someone typing \"flat rubber roof leak repair Brockton\" has a specific problem and a location. Fewer people search it, but a far higher share of them call."
+    a: "Because they are easier to rank for and the searcher is closer to buying. Someone typing \"roofer\" could want anything, while someone typing \"flat rubber roof leak repair Brockton\" has a specific problem and a location. Fewer people search it, but a far higher share of them call."
   - q: "How do I find long-tail keywords for my business?"
     a: "Start with what customers actually say. Look at the search queries report in Search Console, the questions in your call notes and chat transcripts, and the suggestions search engines show as you type. Combine a specific service, a specific problem, and a town."
 ---

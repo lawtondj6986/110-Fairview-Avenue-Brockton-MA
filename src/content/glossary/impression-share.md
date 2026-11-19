@@ -6,7 +6,7 @@ related: ["paid-media", "cost-per-click", "local-services-ads", "market-lock"]
 tool: { label: "Territory board", href: "/territories/" }
 faqs:
   - q: "Why is my impression share low?"
-    a: "Ad platforms report two causes: budget and rank. Lost to budget means the daily spend ran out before the searches did. Lost to rank means bids, ad relevance, or landing page quality were too weak to win the auction. The fix is different for each, so check which one dominates."
+    a: "Ad platforms report two causes, budget and rank: lost to budget means the daily spend ran out before the searches did, and lost to rank means bids, ad relevance, or landing page quality were too weak to win the auction. The fix is different for each, so check which one dominates."
   - q: "Should a local business aim for 100% impression share?"
     a: "Rarely. The last 20 to 30 points usually cost far more per click than the first 70. A better target is high impression share on a tight set of high-intent searches in your real service area, and none on the broad, curious searches that do not turn into calls."
 ---

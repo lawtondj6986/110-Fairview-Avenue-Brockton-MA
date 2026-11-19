@@ -20,4 +20,4 @@ A decree is a public, court-stamped document with obligations that may still be 
 
 ## In practice
 
-A buyer is evaluating an auto repair business near Route 18. The search turns up a consent judgment from 6 years ago with the state over waste handling: a $45,000 payment and 3 years of reporting. The docket shows the reporting period closed without further action. That fact goes to the buyer's attorney and environmental consultant, who fold it into the Phase I scope.
+A buyer is evaluating an auto repair business near Route 18. The search turns up a consent judgment from 6 years ago with the state over waste handling: a $45,000 payment and 3 years of reporting. The docket shows the reporting period closed without further action. That fact goes to the buyer's attorney and environmental consultant, who fold it into the Phase I scope. The dossier attaches the judgment itself, 14 pages, so nobody has to rely on our summary.

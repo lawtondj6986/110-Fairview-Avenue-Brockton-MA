@@ -21,4 +21,4 @@ Landlords in softer segments, such as suburban office in Quincy and Braintree, o
 
 ## In practice
 
-A tenant leases 4,000 square feet for 5 years at $20 a square foot with 4 months free. Total rent is $400,000 less $26,667, or $373,333. Divide by 5 years and 4,000 feet: $18.67 effective. A competing offer at $19 with no free rent costs more, even though its face rate is lower.
+A tenant leases 4,000 square feet for 5 years at $20 a square foot with 4 months free. Total rent is $400,000 less $26,667, or $373,333. Divide by 5 years and 4,000 feet: $18.67 effective. A competing offer at $19 with no free rent costs more, even though its face rate is lower. Over the term the difference is about $6,700.

@@ -20,4 +20,4 @@ Agendas are an early warning system built from public notices. A zoning hearing 
 
 ## In practice
 
-For a client holding 3 commercial properties, we check agendas for the planning board, zoning board, conservation commission, and select board in 2 towns each week: 8 boards, about 30 minutes. In month 4, a zoning board agenda lists a special permit hearing for a drive-through 200 feet from one property. The client attends, with counsel, 6 days later.
+For a client holding 3 commercial properties, we check agendas for the planning board, zoning board, conservation commission, and select board in 2 towns each week: 8 boards, about 30 minutes. In month 4, a zoning board agenda lists a special permit hearing for a drive-through 200 feet from one property. The client attends, with counsel, 6 days later. Without the weekly check, the first notice would have been a construction fence. Each week's review is logged, including the weeks with nothing to report.

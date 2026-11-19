@@ -20,4 +20,4 @@ Comment records show how a fight actually went. A company's own letter to a regu
 
 ## In practice
 
-A client plans a 40-unit mixed-use proposal in Weymouth. We pull the comment files from 2 similar projects heard in the last 5 years: 86 letters and 3 hearing videos. Traffic comes up in 61 percent of comments, building height in 34 percent. The client commissions a traffic study before filing and drops a story from the design.
+A client plans a 40-unit mixed-use proposal in Weymouth. We pull the comment files from 2 similar projects heard in the last 5 years: 86 letters and 3 hearing videos. Traffic comes up in 61 percent of comments, building height in 34 percent. The client commissions a traffic study before filing and drops a story from the design. Only applicants, officials, and organized groups are named in our summary. Individual residents are counted by topic and not identified.

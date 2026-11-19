@@ -20,4 +20,4 @@ A filing is not a character judgment. Plenty of good operators went through one.
 
 ## In practice
 
-An investor is asked to put $250,000 into a restaurant group expanding to Quincy. The PACER search finds a prior entity, same principal, that filed Chapter 7 four years ago listing 31 unsecured creditors and $410,000 in debt. The pitch deck did not mention it. PACER charges were under $15. The investor asks the question directly and gets to weigh the answer.
+An investor is asked to put $250,000 into a restaurant group expanding to Quincy. The PACER search finds a prior entity, same principal, that filed Chapter 7 four years ago listing 31 unsecured creditors and $410,000 in debt. The pitch deck did not mention it. PACER charges were under $15. The investor asks the question directly and gets to weigh the answer. A hit is where the reading starts, not where it ends.

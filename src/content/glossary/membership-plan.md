@@ -7,7 +7,7 @@ faqs:
   - q: "How is a membership plan different from a maintenance agreement?"
     a: "A maintenance agreement is tied to servicing specific equipment on a schedule, such as a furnace or generator. A membership plan is broader: a monthly fee for a bundle of benefits, such as unlimited car washes, a dental savings plan, or member pricing. Many businesses blend the two."
   - q: "Is a dental membership plan the same as insurance?"
-    a: "No. An in-house membership plan is a direct arrangement between the practice and the patient for specified services and discounts. It is not insurance, and it should not be described as insurance. Rules on these plans vary by state, so have your attorney review the plan before you offer it."
+    a: "No, an in-house membership plan is a direct arrangement between the practice and the patient for specified services and discounts. It is not insurance, and it should not be described as insurance. Rules on these plans vary by state, so have your attorney review the plan before you offer it."
 ---
 
 ## What it means

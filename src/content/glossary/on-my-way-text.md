@@ -5,7 +5,7 @@ short: "An automatic message telling the customer the technician has left and wh
 related: ["two-way-texting", "dispatch-board", "tcpa-compliance", "review-velocity"]
 faqs:
   - q: "What should an on-my-way text include?"
-    a: "The technician's first name, the company name, an estimated arrival time, and a number to reply to. A photo of the tech is a good addition for residential work. Keep it to two sentences. The customer needs to know who is coming and when, nothing more."
+    a: "The technician's first name, the company name, an estimated arrival time, and a number to reply to. A photo of the tech is a good addition for residential work. Keep it to two sentences, because the customer needs to know who is coming and when, nothing more."
   - q: "Do I need consent to send on-my-way texts?"
     a: "Appointment notices to a customer who gave you their number for that job are generally treated as transactional messages, not marketing. Do not add promotions to them, honor opt-out requests, and have your attorney confirm your consent language. Mixing a coupon into a service text changes how the rules apply."
 ---

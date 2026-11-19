@@ -20,4 +20,4 @@ Ownership history answers questions that a current owner's name cannot. How long
 
 ## In practice
 
-A client is negotiating to buy a 12,000 square foot industrial building in Rockland. The chain shows the seller's LLC took title 14 months ago for $1.1 million from an estate. The asking price is $1.85 million. The $750,000 spread is a fair question for the seller, and the building permit history shows only $60,000 of permitted work since. The client negotiates with that in hand.
+A client is negotiating to buy a 12,000 square foot industrial building in Rockland. The chain shows the seller's LLC took title 14 months ago for $1.1 million from an estate. The asking price is $1.85 million. The $750,000 spread is a fair question for the seller, and the building permit history shows only $60,000 of permitted work since. The client negotiates with that in hand. We present the chain as a one-page table: date, parties, price, and book and page for each transfer.

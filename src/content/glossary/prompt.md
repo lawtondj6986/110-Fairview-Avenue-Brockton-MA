@@ -5,7 +5,7 @@ short: "The written instructions and context given to an AI system to shape its 
 related: ["ai-chat-agent", "ai-hallucination", "ai-receptionist", "chat-handoff"]
 faqs:
   - q: "What makes a good prompt?"
-    a: "Specifics. A good prompt says who the AI is speaking for, who it is speaking to, what facts it may use, what tone to take, and what it must never do. \"Answer customer questions\" is weak. A page of real prices, hours, service towns, and handoff rules is strong."
+    a: "Specifics: a good prompt says who the AI is speaking for, who it is speaking to, what facts it may use, what tone to take, and what it must never do. \"Answer customer questions\" is weak, while a page of real prices, hours, service towns, and handoff rules is strong."
   - q: "Do I need to write prompts to use an AI chat agent for my business?"
     a: "Not if it is set up properly. The standing instructions are written once during setup from your real business details and then tested. Your job is to keep the facts current: tell whoever maintains it when prices, hours, staff, or services change."
 ---

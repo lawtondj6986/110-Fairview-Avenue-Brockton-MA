@@ -54,6 +54,8 @@ A split can be simple:
 
 Now every catering contact is tagged from the first second. You can count them, time the response, and treat them as a priority. A reservation question can wait three minutes. A 60-person order should not.
 
+Make sure the profile, the website, and the printed menu all show the same catering number. A customer who finds two different numbers calls neither.
+
 ## The 30-second text and the one-hour proposal
 
 When a catering call is missed during service, this goes out within 30 seconds:

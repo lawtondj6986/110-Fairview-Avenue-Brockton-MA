@@ -20,4 +20,4 @@ Local banks here mostly lend with full personal guaranties, so carve-outs show u
 
 ## In practice
 
-An owner closes a $6,000,000 non-recourse loan on a Weymouth retail center. Two years later a partner records a $400,000 second mortgage without lender consent. The loan documents treat that as a full-recourse event, so the guarantor is now personally exposed to the whole $6,000,000 balance, over a $400,000 decision.
+An owner closes a $6,000,000 non-recourse loan on a Weymouth retail center. Two years later a partner records a $400,000 second mortgage without lender consent. The loan documents treat that as a full-recourse event, so the guarantor is now personally exposed to the whole $6,000,000 balance, over a $400,000 decision. A consent request to the servicer first would have avoided it.

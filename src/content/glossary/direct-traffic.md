@@ -5,7 +5,7 @@ short: "Website visits that arrive with no recorded source, such as typed addres
 related: ["utm-parameters", "attribution", "branded-search", "organic-traffic"]
 faqs:
   - q: "Is direct traffic only people typing in my web address?"
-    a: "No. Direct is the bucket analytics uses when it cannot tell where a visit came from. Typed addresses and bookmarks are part of it, but so are clicks from text messages, many email apps, PDFs, and some mobile apps. A good share of direct traffic is really untagged marketing."
+    a: "No: direct is the bucket analytics uses when it cannot tell where a visit came from. Typed addresses and bookmarks are part of it, but so are clicks from text messages, many email apps, PDFs, and some mobile apps. A good share of direct traffic is really untagged marketing."
   - q: "How do I reduce unexplained direct traffic?"
     a: "Tag every link you control. Add UTM parameters to links in texts, emails, QR codes, social profiles, and business listings so those visits show up under their real source. What remains in direct after that is much closer to true word of mouth and repeat customers."
 ---

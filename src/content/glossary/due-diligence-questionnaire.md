@@ -20,4 +20,4 @@ It is the lawful, direct way to get information that is not public. We never obt
 
 ## In practice
 
-A client plans to bring a partner into a $2 million Taunton redevelopment. The partner's DDQ lists 3 prior entities and answers "none" for litigation in the last 10 years. Our search finds a fourth entity and 2 civil suits, one ending in a $90,000 judgment. The client raises it. The partner's explanation, and how fast it arrives, becomes part of the decision.
+A client plans to bring a partner into a $2 million Taunton redevelopment. The partner's DDQ lists 3 prior entities and answers "none" for litigation in the last 10 years. Our search finds a fourth entity and 2 civil suits, one ending in a $90,000 judgment. The client raises it. The partner's explanation, and how fast it arrives, becomes part of the decision. Both the signed questionnaire and the court dockets go into the file, side by side, so the client's attorney can draft representations that match the facts.

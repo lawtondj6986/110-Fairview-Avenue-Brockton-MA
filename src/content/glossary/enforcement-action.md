@@ -20,4 +20,4 @@ Regulators leave a paper trail that lawsuits do not. A business can have a clean
 
 ## In practice
 
-Before leasing 8,000 square feet in Brockton to a metal finishing tenant, a landlord asks for a background brief. Agency searches return 2 state environmental notices over 7 years, both resolved, with penalties totaling $12,500, and no federal actions. The landlord's attorney adds an environmental indemnity and a larger security deposit to the lease instead of walking away.
+Before leasing 8,000 square feet in Brockton to a metal finishing tenant, a landlord asks for a background brief. Agency searches return 2 state environmental notices over 7 years, both resolved, with penalties totaling $12,500, and no federal actions. The landlord's attorney adds an environmental indemnity and a larger security deposit to the lease instead of walking away. The brief lists each notice with its date, agency, case number, and final status, so the tenant can respond to specifics.

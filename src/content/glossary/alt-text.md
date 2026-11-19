@@ -5,7 +5,7 @@ short: "A short written description of an image, read by screen readers and sear
 related: ["web-accessibility", "local-seo", "structured-data", "title-tag"]
 faqs:
   - q: "What should alt text say?"
-    a: "It should describe what is in the image in one plain sentence, the way you would describe it to someone on the phone. \"Finished cedar deck with black railings in Hanover\" works. \"Image123\" or a string of keywords does not. Purely decorative images should have empty alt text so screen readers skip them."
+    a: "It should describe what is in the image in one plain sentence, the way you would describe it to someone on the phone. \"Finished cedar deck with black railings in Hanover\" works, while \"Image123\" or a string of keywords does not. Purely decorative images should have empty alt text so screen readers skip them."
   - q: "Does alt text help with search rankings?"
     a: "It helps search engines understand an image, which supports image search and gives the page more context. It is a small factor, not a shortcut. The main job of alt text is accessibility: people using screen readers rely on it, and missing alt text is one of the most common accessibility failures."
 ---

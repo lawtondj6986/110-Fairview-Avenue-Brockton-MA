@@ -20,4 +20,4 @@ A docket turns "they have been sued" into something useful. It shows who sued wh
 
 ## In practice
 
-A search on a South Shore contractor returns 5 civil cases over 8 years in Plymouth County. Reading each docket: 2 were suits the contractor filed to collect unpaid invoices, 2 were dismissed by agreement within 6 months, and 1 ended in a $38,000 judgment against the company. The headline "5 lawsuits" would have misled the client. The dockets did not.
+A search on a South Shore contractor returns 5 civil cases over 8 years in Plymouth County. Reading each docket: 2 were suits the contractor filed to collect unpaid invoices, 2 were dismissed by agreement within 6 months, and 1 ended in a $38,000 judgment against the company. The headline "5 lawsuits" would have misled the client. The dockets did not. Each case is listed in the report with its docket number, so anyone can pull the same record.

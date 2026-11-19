@@ -20,4 +20,4 @@ It is the starting point for figuring out who is behind an LLC. The formation da
 
 ## In practice
 
-A Brockton mixed-use building is owned by an LLC with a generic name. The certificate, filed 9 years ago, lists one manager and one real estate signatory at a Rockland office address. Searching that signatory by individual name returns 7 more LLCs. Matching those to registry records takes about 2 hours and produces a sourced portfolio map.
+A Brockton mixed-use building is owned by an LLC with a generic name. The certificate, filed 9 years ago, lists one manager and one real estate signatory at a Rockland office address. Searching that signatory by individual name returns 7 more LLCs. Matching those to registry records takes about 2 hours and produces a sourced portfolio map. Each link in that map cites a filing number or a book and page, so the client's attorney can check it.

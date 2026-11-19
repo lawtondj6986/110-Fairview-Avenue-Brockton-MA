@@ -20,4 +20,4 @@ For construction, manufacturing, and trades businesses, safety history is operat
 
 ## In practice
 
-An owner planning a $1.4 million renovation in Brockton shortlists 3 general contractors. OSHA searches show 2 with no inspections in 10 years. The third has 4 inspections and 6 citations, including 2 classified as serious for fall protection, with final penalties of $21,000. The owner asks all 3 for their safety programs and weighs the answers.
+An owner planning a $1.4 million renovation in Brockton shortlists 3 general contractors. OSHA searches show 2 with no inspections in 10 years. The third has 4 inspections and 6 citations, including 2 classified as serious for fall protection, with final penalties of $21,000. The owner asks all 3 for their safety programs and weighs the answers. Each citation is listed with its inspection number and current status, so the contractor can address the specifics and not a rumor.
