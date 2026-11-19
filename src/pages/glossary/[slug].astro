@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { LEASE_CLAUSES } from '../../lib/lease-clauses';
 import Base from '../../layouts/Base.astro';
 import CtaSection from '../../components/CtaSection.astro';
 import FounderCard from '../../components/FounderCard.astro';
@@ -17,6 +18,12 @@ const { term, category, short, related, tool, faqs } = entry.data;
 
 const all = await getCollection('glossary', ({ data }) => !data.draft);
 const relatedEntries = related.map((slug) => all.find((t) => t.id === slug)).filter(Boolean) as typeof all;
+// Where the term shows up elsewhere on the site: lease clauses that cite it, articles that use it, and terms that point back to it.
+const clauses = LEASE_CLAUSES.filter((c) => c.glossary.includes(entry.id));
+const needle = term.replace(/\s*\(.*?\)\s*/g, ' ').trim();
+const termRe = new RegExp(`\\b${needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+const articles = needle.length >= 5 ? (await getCollection('insights', ({ data }) => !data.draft)).filter((p) => termRe.test(p.body ?? '') || (p.body ?? '').includes(`/glossary/${entry.id}/`)).sort((x, y) => y.data.date.valueOf() - x.data.date.valueOf()).slice(0, 4) : [];
+const backlinks = all.filter((t) => t.id !== entry.id && t.data.related.includes(entry.id) && !related.includes(t.id)).slice(0, 8);
 
 const CAT = {
   cre: { name: 'Commercial real estate', href: '/commercial-real-estate/', cta: 'Talk to a licensed advisor about your deal' },
@@ -114,6 +121,26 @@ const schema = [
                 </li>
               ))}
             </ul>
+          </section>
+        )
+      }
+
+      {
+        (clauses.length > 0 || articles.length > 0 || backlinks.length > 0) && (
+          <section class="mt-12 rounded-xl border border-navy-100 bg-paper p-5" aria-label="Where this term shows up">
+            <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-teal-700">Where this term shows up</h2>
+            {clauses.length > 0 && (
+              <p class="mt-4 text-sm text-ink-700"><span class="font-semibold text-navy-900">In a lease:</span> {clauses.map((c, i) => <span>{i > 0 && ' · '}<a href={`/lease-clauses/#${c.slug}`} class="font-semibold text-teal-600 hover:text-teal-700">{c.name}</a></span>)} <span class="text-ink-500">(Lease Clause Decoder)</span></p>
+            )}
+            {articles.length > 0 && (
+              <div class="mt-4">
+                <p class="text-sm font-semibold text-navy-900">In the Insights:</p>
+                <ul class="mt-1 space-y-1">{articles.map((p) => <li><a href={`/insights/${p.id}/`} class="text-sm text-teal-600 hover:text-teal-700 hover:underline">{p.data.title}</a></li>)}</ul>
+              </div>
+            )}
+            {backlinks.length > 0 && (
+              <p class="mt-4 text-sm text-ink-700"><span class="font-semibold text-navy-900">Terms that point here:</span> {backlinks.map((t, i) => <span>{i > 0 && ' · '}<a href={`/glossary/${t.id}/`} class="font-semibold text-teal-600 hover:text-teal-700">{t.data.term}</a></span>)}</p>
+            )}
           </section>
         )
       }
