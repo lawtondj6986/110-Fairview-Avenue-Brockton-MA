@@ -284,6 +284,24 @@ const description =
     </div>
   </section>
 
+  <!-- THIS MONTH — the page changes with the calendar -->
+  <section class="border-y border-navy-100 bg-paper">
+    <div class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-4 py-8 sm:px-6 lg:flex-row lg:items-center">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-teal-600">This month · twelve trades · two markets</p>
+        <p class="mt-2 max-w-2xl text-xl font-bold leading-snug text-navy-900">What should your trade be doing in <span data-this-month>this month</span>?</p>
+        <p class="mt-1 text-sm text-ink-500">One line per industry from the playbooks: when the phone rings, when it does not, and what the system should be running. South Shore and South Florida.</p>
+      </div>
+      <a href="/this-month/" class="shrink-0 rounded-md bg-navy-900 px-6 py-3 font-semibold text-white transition-colors hover:bg-teal-600">See this month →</a>
+    </div>
+  </section>
+  <script is:inline>
+    (function () {
+      var set = function () { var el = document.querySelector('[data-this-month]'); if (el) el.textContent = new Date().toLocaleDateString('en-US', { month: 'long' }); };
+      set(); document.addEventListener('astro:page-load', set);
+    })();
+  </script>
+
   <!-- THE TERRITORY BOARD — scarcity, front and center -->
   <section class="bg-navy-950">
     <div class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center">
