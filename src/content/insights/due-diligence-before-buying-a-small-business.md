@@ -38,11 +38,11 @@ Search the entity's exact name, then each variation, then the owner's name for a
 - **The secured party.** A bank, an equipment lender, a supplier. A filing made by a service company "as representative" hides the lender's name and is common with merchant cash advances.
 - **The date.** Recent filings in clusters are the signal.
 
-Then run a [lien search](/glossary/lien-search/) for state and federal tax liens and for any recorded [judgment lien](/glossary/judgment-lien/). Every lien has to be paid or released at closing, with a payoff letter, or the asset you bought still has someone else's name on it.
+Then run a [lien search](/glossary/lien-search/) for state and federal tax liens and for any recorded judgment lien. Every lien has to be paid or released at closing, with a payoff letter, or the asset you bought still has someone else's name on it.
 
 ## Courts and regulators: the last five years
 
-Search the entity and its principals, in their business capacity, across the state trial court's public case system for Plymouth, Norfolk, and Bristol counties, and the federal docket including bankruptcy. A [litigation search](/glossary/litigation-search/) is looking for patterns, not a single case:
+Search the entity and its principals, in their business capacity, across the state trial court's public case system for Plymouth, Norfolk, and Bristol counties, and the federal docket including bankruptcy. A litigation search is looking for patterns, not a single case:
 
 - **Suppliers suing for payment.** Cash is tight.
 - **Customers suing over work.** Quality or warranty problems the reviews may not show.
@@ -71,7 +71,7 @@ The buyer's response in this example: payoff letters for all three liens at clos
 
 Many small businesses are worth what their location is worth, and the buyer rarely owns it. Pull the deed and the recorded documents for the building at the county registry, the same search described in our guide to [researching a landlord](/insights/how-to-research-a-landlord-before-you-sign/).
 
-Then read the lease for four things: the remaining term, the renewal options and whether they survive a transfer, the assignment clause, and any personal guaranty the seller signed. Most commercial leases require the landlord's consent to assign, and some let the landlord take the space back or reset the rent when asked. A business with fourteen months of lease left and no option is a business with a fourteen-month horizon, whatever the earnings say. Run the rent, term, and escalations through the free [Lease Analyzer](/lease-analyzer/) to see the full occupancy cost you are inheriting.
+Then read the lease for four things: the remaining term, the renewal options and whether they survive a transfer, the assignment clause, and any personal guaranty the seller signed. Most commercial leases require the landlord's consent to assign, and some let the landlord take the space back or reset the rent when asked. A business with fourteen months of lease left and no option is a business with a fourteen-month horizon, whatever the earnings say. Add up the rent, term, and escalations to see the full occupancy cost you are inheriting.
 
 Check zoning and the certificate of occupancy too. A use that has run for thirty years may be a lawful nonconforming use that carries conditions, or one that was never permitted at all.
 
@@ -88,4 +88,4 @@ ICS does this research by lawful public-records methods only. We do not pretext:
 3. Search the entity in the state and federal court systems for the past five years.
 4. List every license the business needs to operate and whose name is on each.
 5. Ask the seller for the lease and read the assignment clause before anything else.
-6. Run the lease terms through the [Lease Analyzer](/lease-analyzer/) and bring the result to your attorney.
+6. Run the lease terms through the free [Lease Analyzer](/lease-analyzer/) and bring the result to your attorney.

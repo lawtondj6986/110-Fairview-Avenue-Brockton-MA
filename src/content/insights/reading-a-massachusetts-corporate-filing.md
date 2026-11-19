@@ -39,7 +39,7 @@ The top of the record carries the facts that matter most.
 - **Date of organization.** How old the entity is. A contractor claiming twenty years in business under an LLC formed in March has an explanation to give. Often a good one: owners reorganize.
 - **Jurisdiction.** A "foreign" entity was formed in another state, commonly Delaware, and is registered to do business here. Its formation documents are in the home state.
 - **Principal office.** Where the company says it operates.
-- **Resident agent.** The person or service that accepts lawsuits and official notices. See [registered agent](/glossary/registered-agent/). An agent who is the owner at a home address is a small operation. An agent that is a commercial service tells you nothing either way.
+- **Resident agent.** The person or service that accepts lawsuits and official notices. An agent who is the owner at a home address is a small operation. An agent that is a commercial service tells you nothing either way.
 - **Status.** Active, or some form of dissolved, withdrawn, or revoked, with a date.
 
 Compare the principal office and agent address with what the company told you. Mismatches are common and usually innocent. They are still worth one question.
