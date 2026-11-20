@@ -56,7 +56,6 @@ Under federal law, bona fide residence is not a matter of declaration. Since a 2
 law, a person must generally meet three tests for the tax year: a presence test based on days
 physically spent in the territory, a requirement of no tax home outside the territory, and a
 requirement of no closer connection to the United States or a foreign country than to the territory.
-The regulations give detailed rules and alternatives for each.
 
 ## What it does not do
 
@@ -67,21 +66,11 @@ under ordinary principles is not treated as territorial income. Compensation for
 generally sourced where the services are performed. A person who lives in a territory but earns fees
 for work performed on the mainland does not convert those fees into low-taxed territorial income.
 
-They do not shelter gains that built up before the move. Special rules address appreciated property
-owned before a person became a territorial resident.
-
-They do not remove a person from the federal tax system. Residents remain subject to federal tax on
-income from outside the territory, and to federal reporting rules. Corporations and partnerships
-organized in a territory face their own classification rules for federal purposes.
-
 They do not, in themselves, indicate wrongdoing. These are lawful programs created by statute and
 intended to attract investment and jobs to economies that have struggled. Taking part in one is not
 evidence of impropriety. The legal questions are whether the participant really resides in the
 territory, whether the income really arises there, and whether the commitments in the grant are
 kept.
-
-They do not make the details public. Lists of approved beneficiaries are published in some places,
-and less so in others. Individual tax returns are confidential.
 
 ## How it is enforced
 
@@ -92,21 +81,12 @@ The Internal Revenue Service enforces the federal residence and sourcing rules. 
 or ends bona fide residence in a territory must generally file an information statement with the
 Service. The Service has examined participants in these programs and has identified them as a
 compliance priority. Where it concludes that a taxpayer was not a bona fide resident, or that income
-was United States source, it can assess federal tax, interest and penalties. Disputes go to the
-federal courts. The coordination statutes also provide for exchange of information between the
-Service and territorial tax authorities.
+was United States source, it can assess federal tax, interest and penalties.
 
 ## Common misreadings
 
 It is often said that moving to a territory makes a person's income tax-free. The benefit is limited
 to qualifying income from sources within the territory, earned by a genuine resident.
-
-Territorial programs are sometimes described as offshore tax havens. The territories are part of the
-United States, their residents are within the federal tax system in the ways described, and the
-programs operate under rules Congress wrote.
-
-A business's address in a territory is sometimes taken as proof of where its income is earned.
-Source depends on where the work is done and where the income-producing activity takes place.
 
 ## Where to read it
 

@@ -46,9 +46,6 @@ commission of a federal offense, or an offense in the District of Columbia. If t
 18, incompetent, incapacitated or deceased, a guardian, family member or other representative may
 assert the rights. A person accused of the crime may not act as such a representative.
 
-The Act applies in federal criminal cases. It also applies, in modified form, to certain federal
-habeas corpus proceedings arising from state convictions.
-
 ## What it does not do
 
 The Act does not apply to state prosecutions. Most crimes are prosecuted by states, and victims in
@@ -65,11 +62,6 @@ veto.
 
 It does not create a cause of action for damages. A victim cannot sue the United States or its
 officers for money for a breach of these rights. The statute says so expressly.
-
-It does not allow a new trial on the ground that a right was denied. A victim may move to reopen a
-plea or sentence only under narrow conditions set out in the statute, including that the right was
-asserted before or during the proceeding and that the defendant did not plead to the highest offense
-charged.
 
 One question has been heavily contested: whether the rights, particularly the right to confer and
 the right to be treated with fairness, apply before any charges have been filed, for example while
@@ -103,12 +95,6 @@ information.
 It is sometimes thought to apply to campus disciplinary proceedings. It applies to the federal
 criminal process. Rights in campus proceedings come from Title IX rules, the Clery Act and
 institutional policy.
-
-It is sometimes thought to entitle a victim to see the prosecution's file. It contains no general
-right of access to investigative materials.
-
-It is sometimes confused with victim compensation programs. Those are funded and administered under
-other laws.
 
 ## Where to read it
 

@@ -41,9 +41,6 @@ Among the commitments set out in the statute and regulation are that the institu
 - on written request, disclose to the alleged victim of a crime of violence or a non-forcible sex
   offense the results of any disciplinary proceeding the institution conducted against the student
   alleged to have committed it;
-- adopt a code of conduct governing its dealings with education lenders;
-- meet requirements on voter registration forms, on copyright infringement policies, and on other
-  matters Congress has added over time.
 
 The list has grown with each reauthorization and with later rulemaking, so the current regulation
 should be read for the full set.
@@ -53,9 +50,6 @@ should be read for the full set.
 Every institution that participates in a Title IV program has signed an agreement. That includes
 public, private nonprofit and for-profit institutions, from community colleges to research
 universities, and it includes foreign institutions that enroll American students with federal loans.
-
-The agreement binds the institution as a whole. Where an institution contracts with an outside
-company to administer aid, that third-party servicer shares responsibility for violations.
 
 ## What it does not do
 
@@ -69,12 +63,6 @@ separate statute, the False Claims Act, has been used by the government and by w
 an institution is alleged to have knowingly made false promises of compliance in order to receive
 federal funds. Whether a particular promise can support such a claim is a contested and technical
 question.
-
-It does not apply to an institution that takes no Title IV funds. A small number of institutions
-decline federal student aid in order to avoid these and other conditions.
-
-It does not make every campus policy a federal matter. The agreement reaches the listed conditions.
-It does not reach a university's general decisions about fundraising, appointments or governance.
 
 ## How it is enforced
 
@@ -107,9 +95,6 @@ under one and face problems under the other.
 It is sometimes assumed that civil rights laws such as Title IX are enforced through this agreement.
 They apply because the institution receives federal financial assistance, but they are separate
 statutes with their own enforcement office and procedures.
-
-Accreditation and Title IV certification are different things. An institution needs both, from
-different bodies.
 
 ## Where to read it
 

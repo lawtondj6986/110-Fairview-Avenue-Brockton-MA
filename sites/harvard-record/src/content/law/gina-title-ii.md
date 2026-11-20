@@ -100,10 +100,6 @@ employees are outside it, though state law may cover them. In Massachusetts, the
 discrimination statute lists genetic information as a protected category and reaches smaller
 employers.
 
-A workplace research study raises its own questions. If an employer that is also a research
-institution invites its employees to join a genetic study, both this law and the human-subjects
-rules bear on how the invitation and the data are handled.
-
 ## Where to read it
 
 The statute begins at 42 U.S.C. § 2000ff. The Commission's regulations are at 29 C.F.R. Part 1635,

@@ -40,9 +40,6 @@ Its main elements are these.
 - Public notification. Jurisdictions must post most registrant information on a public website, with
   certain items withheld.
 
-Later amendments added a requirement that registrants report planned international travel in
-advance.
-
 ## Who it covers
 
 The Act imposes duties on two groups. The first is jurisdictions, which are expected to conform
@@ -75,9 +72,6 @@ matter of the institution's policies and of any applicable state law.
 It does not require registration for an arrest, a charge or a civil finding. Registration follows a
 conviction, or a qualifying juvenile adjudication.
 
-It does not ensure that every public registry entry is current or complete. Registries depend on
-information registrants provide and on agency resources.
-
 ## How it is enforced
 
 Against jurisdictions, the tool is financial. A jurisdiction that the Department of Justice finds
@@ -100,9 +94,6 @@ It is often assumed that tier labels mean the same thing everywhere. SORNA's tie
 offense of conviction. Some states use the same words for classifications based on an individual
 risk assessment. Massachusetts, for example, classifies by level through a state board. A tier or
 level in one system cannot be translated directly into another.
-
-It is often assumed that the public website shows every registrant. Jurisdictions may withhold some
-categories from public view.
 
 A registry entry shows that a person was convicted of a registrable offense and is, or was, subject
 to registration. It does not describe the facts of the offense in detail, and it says nothing about

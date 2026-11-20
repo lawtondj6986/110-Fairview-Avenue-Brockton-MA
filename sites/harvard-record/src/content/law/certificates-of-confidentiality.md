@@ -38,8 +38,6 @@ where there is at least a very small risk that some combination of the informati
 it, and other available data sources could be used to deduce the individual's identity. Genomic data
 can fall within this definition even when names have been removed.
 
-The protection lasts indefinitely for information collected while the certificate was in effect.
-
 ## Who it covers
 
 For research funded by the National Institutes of Health that collects or uses identifiable,
@@ -73,18 +71,9 @@ It does not protect information that was not collected for the research. Records
 independently, such as a person's ordinary medical records held by a clinic, are not shielded merely
 because the person joined a study.
 
-It does not prevent the funding agency from auditing or evaluating the project.
-
 It does not substitute for data security. A certificate is a legal bar on disclosure by the people
 it binds. It does nothing against a breach or against re-identification by someone who obtains the
 data from another source.
-
-It does not cover research that has no certificate. Privately funded studies whose investigators did
-not apply for one are outside the protection.
-
-It is not a guarantee tested in every setting. Court decisions applying certificates are relatively
-few. They have generally respected the protection, but the reach of some exceptions has had limited
-judicial examination.
 
 ## How it is enforced
 
@@ -102,19 +91,10 @@ participants.
 
 ## Common misreadings
 
-A certificate is sometimes thought to make research data secret from everyone. It permits sharing
-for other compliant research, which is how large genomic data repositories operate.
-
 It is sometimes thought to be the same as HIPAA. HIPAA governs health care organizations and allows
 a number of disclosures, including some to law enforcement and in litigation. A certificate, where
 it applies, is stricter on those points and binds researchers whether or not they are covered by
 HIPAA.
-
-It is sometimes thought to block mandatory reporting. Reports required by law, such as those for
-suspected child abuse, are permitted.
-
-It is sometimes assumed that every study has one. Coverage depends on the funder and on whether the
-investigators applied.
 
 ## Where to read it
 

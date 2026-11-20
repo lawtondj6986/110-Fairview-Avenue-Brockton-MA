@@ -40,10 +40,6 @@ The law covers records made or received by officers and employees of state agenc
 offices, boards, commissions and authorities, and of cities, towns, counties and districts. That
 includes public colleges and universities and municipal police departments.
 
-The Legislature and the judiciary are largely outside the law, by statutory text and court
-decisions. The scope of coverage of the Governor's office has also been limited by case law and has
-been a recurring subject of reform proposals.
-
 ## What it does not do
 
 The law does not apply to private organizations. A private college or university is not a government
@@ -64,13 +60,6 @@ does not open the department's incident reports, investigative files or internal
 
 Bills to bring private campus police more fully under the public records law have been filed
 repeatedly. Check whether the law has changed.
-
-The federal Clery Act independently requires a campus police or security department to keep a daily
-crime log open for public inspection. The federal and state log requirements overlap but are not the
-same.
-
-The public records law also does not require a custodian to create a record or answer questions, and
-it does not apply to federal agencies.
 
 ## How it is enforced
 
@@ -98,9 +87,6 @@ municipal licensing board, can be requested from that agency or city.
 
 The police log exception is sometimes overstated as making campus police fully subject to the law.
 It concerns the log.
-
-The 10 business day deadline is sometimes read as a deadline for producing records. It is a deadline
-for a response.
 
 ## Where to read it
 

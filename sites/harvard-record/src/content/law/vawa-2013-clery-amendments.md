@@ -66,10 +66,6 @@ They do not define the offenses by reference to the institution's own code. For 
 the regulations supply definitions drawn from federal law and from the FBI's crime reporting
 programs. The institution's policy definitions, and the criminal law of the state, may differ.
 
-They do not require an institution to investigate every off-campus incident. The written explanation
-of rights must be given regardless of location, but the crime statistics still follow Clery
-geography.
-
 The advisor provision does not guarantee that an advisor can speak. An institution may restrict how
 far an advisor participates in a proceeding, so long as the limits apply equally to both parties. It
 may not limit the choice of advisor.

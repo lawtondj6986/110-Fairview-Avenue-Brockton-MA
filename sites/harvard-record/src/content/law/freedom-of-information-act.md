@@ -74,10 +74,6 @@ search for existing records.
 
 It does not guarantee speed. Backlogs are common.
 
-It does not let an agency confirm or deny the existence of every record. In some situations,
-especially where acknowledging a record would itself reveal protected information about a person or
-an investigation, an agency may refuse to confirm or deny.
-
 ## How it is enforced
 
 A requester who is denied, in whole or in part, may file an administrative appeal within the agency.
@@ -104,9 +100,6 @@ the wording of the request both matter.
 
 Redactions are sometimes read as concealment of wrongdoing. Most redactions in records about
 institutions protect the privacy of named individuals, including complainants, and are routine.
-
-The Privacy Act is a different law. It governs how agencies handle records about individuals and
-gives people access to records about themselves.
 
 ## Where to read it
 

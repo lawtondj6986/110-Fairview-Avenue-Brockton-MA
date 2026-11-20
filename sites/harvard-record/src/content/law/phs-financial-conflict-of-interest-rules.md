@@ -13,9 +13,8 @@ links:
 
 Subpart F of 42 C.F.R. Part 50 is titled "Promoting Objectivity in Research." Its aim is to give a
 reasonable expectation that the design, conduct and reporting of research funded by the Public
-Health Service will be free from bias caused by an investigator's financial interests. A parallel
-rule at 45 C.F.R. Part 94 applies to research contracts. The rules were substantially revised in
-2011.
+Health Service will be free from bias caused by an investigator's financial interests. The rules
+were substantially revised in 2011.
 
 The system has three steps.
 
@@ -58,9 +57,6 @@ mainly from the National Institutes of Health, and through them to investigators
 anyone responsible for the design, conduct or reporting of the research, whatever their title. That
 can include collaborators and consultants.
 
-Other federal research funders have their own conflict of interest policies, with different
-thresholds and procedures.
-
 ## What it does not do
 
 The rule is about the personal financial interests of individual investigators. That focus sets its
@@ -89,9 +85,6 @@ managed, not eliminated.
 It does not make the investigator's disclosures to the institution public. Only identified conflicts
 of senior and key personnel on funded projects fall within the public access provision.
 
-It does not cover non-financial interests such as personal relationships, intellectual commitments
-or reputational stakes.
-
 ## How it is enforced
 
 Enforcement runs through the funding agency. If an investigator fails to disclose, or the
@@ -99,25 +92,10 @@ institution fails to review or manage an interest in time, the institution must 
 retrospective review of the research to determine whether it was biased, document the review, and,
 if bias is found, notify the agency and submit a mitigation report.
 
-The agency may ask for records at any time. It may impose special award conditions, suspend funding,
-or take other enforcement action available under grant rules. For clinical research testing the
-safety or effectiveness of a drug, device or treatment, where a conflicted investigator did not have
-the conflict managed or reported, the institution must require the investigator to disclose the
-conflict in each public presentation of the results and to request an addendum to earlier
-presentations.
-
-Knowing false statements to a federal agency can carry separate civil or criminal consequences under
-other laws.
-
 ## Common misreadings
 
 A disclosed interest is not a conflict. A conflict exists only after the institution determines that
 the interest could directly and significantly affect the research.
-
-A managed conflict is not a violation. It is the system working as designed.
-
-A disclosure line in a journal article follows the journal's policy, which is usually broader than
-this rule.
 
 The thresholds given here are those in the 2011 rule. Confirm them against the current text.
 

@@ -73,8 +73,6 @@ history, quality improvement and public health surveillance.
 It does not govern who may fund a study, who may visit a laboratory, or how a gift to an institution
 is accepted. Those are matters of institutional policy and other law.
 
-It does not give research subjects a right to sue for violations.
-
 ## How it is enforced
 
 The Office for Human Research Protections oversees compliance for research supported by the
@@ -98,9 +96,6 @@ is a question regulators have said they will keep under review.
 
 Exempt does not mean unregulated. Exempt studies are still subject to institutional policy, and some
 exemptions require a limited IRB review of privacy protections.
-
-The Common Rule and the Food and Drug Administration's rules are separate, and a study can be under
-one, both or neither.
 
 ## Where to read it
 

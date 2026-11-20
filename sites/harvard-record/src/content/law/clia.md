@@ -95,10 +95,7 @@ different ways.
 A second misreading is that a CLIA certificate means a test is approved by the government as
 medically valid. The certificate is about the laboratory's processes.
 
-A third is that CLIA applies only to laboratories that bill Medicare. It applies to all laboratories
-that do covered testing.
-
-A fourth is that direct-to-consumer genetic tests are outside CLIA. If the test gives health-related
+A third is that direct-to-consumer genetic tests are outside CLIA. If the test gives health-related
 results on an individual's specimen, the laboratory that runs it generally needs a certificate.
 
 ## Where to read it

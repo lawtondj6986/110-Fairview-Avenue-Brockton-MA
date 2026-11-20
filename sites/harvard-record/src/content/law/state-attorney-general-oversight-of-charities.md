@@ -53,9 +53,6 @@ organizations are commonly exempt. Some states exempt educational institutions, 
 very small charities. An exemption from filing does not remove the attorney general's underlying
 authority over charitable assets.
 
-Public universities are state bodies overseen in other ways. Their affiliated fundraising
-foundations are usually private charities subject to this oversight.
-
 ## What it does not do
 
 The attorney general does not run charities and does not review their ordinary decisions. Under the
@@ -66,22 +63,10 @@ The attorney general does not approve or screen gifts. Whether to accept a donat
 what recognition to give, are board and management decisions. Oversight comes into play if a
 decision involves a breach of fiduciary duty, a misuse of restricted funds or deception of donors.
 
-The office is not a general complaint forum for students, employees or alumni who disagree with an
-institution. It acts on behalf of the public interest in charitable assets, not on behalf of
-individual complainants, and it has discretion over which matters to pursue.
-
 Its authority does not create standing for the public. In most states members of the public, and
 often donors themselves, cannot sue to enforce a charity's obligations. Courts recognize exceptions,
 for instance for persons with a special interest, and a few states have expanded donor standing by
 statute or decision. This varies considerably.
-
-Its investigations are not necessarily public. Charity regulators typically have power to demand
-documents and testimony, and investigative files are often confidential while a matter is open. Many
-matters end in negotiated agreements. Some of those are filed in court and public, and some are not.
-
-Finally, resources are limited. Charity sections in many states are small relative to the number of
-organizations they oversee. An absence of enforcement action is weak evidence that an organization's
-conduct was reviewed and approved.
 
 ## How it is enforced
 
@@ -107,9 +92,6 @@ general is usually the more relevant authority.
 It is often assumed that a donor who is unhappy with how a gift was used can simply sue. In many
 states the donor's remedy is to bring the matter to the attorney general, unless the gift agreement
 or state law provides otherwise.
-
-It is sometimes assumed that state charity filings contain donor names. Annual reports generally
-follow the federal return, and donor identities on a public charity's return are not public.
 
 ## Where to read it
 

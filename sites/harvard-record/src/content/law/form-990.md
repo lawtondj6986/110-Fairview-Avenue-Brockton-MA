@@ -37,11 +37,9 @@ university's return:
 - Schedule D: supplemental financial statements, including endowment funds, with beginning and
   ending balances, contributions, investment return and spending.
 - Schedule F: activities outside the United States.
-- Schedule I: grants and assistance to organizations and individuals in the United States.
 - Schedule J: detailed compensation for the highest paid people.
 - Schedule L: transactions with interested persons, such as loans to or business dealings with
   officers, trustees and their families.
-- Schedule M: noncash contributions, by type.
 - Schedule R: related organizations and unrelated partnerships.
 
 ## Who it covers
@@ -101,9 +99,6 @@ than one year. Read the schedule's columns and notes.
 A third is that the absence of a Schedule L entry shows that no insider dealings took place. The
 schedule has thresholds and definitions. It captures specific kinds of transactions with specific
 categories of people.
-
-A fourth is that the most recent return describes the present. Returns are filed many months after
-the fiscal year ends, and extensions are routine.
 
 ## Where to read it
 

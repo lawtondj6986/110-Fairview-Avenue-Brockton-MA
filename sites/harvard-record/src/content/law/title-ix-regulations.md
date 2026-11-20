@@ -88,9 +88,6 @@ force then. A document from before August 2020 reflects earlier guidance, which 
 Do not assume that a procedure described in an older record matches the present rule, or the
 reverse.
 
-A second misreading is that the regulation's definition of harassment limits what a school may
-punish. It limits what must go through the federal grievance process.
-
 ## Where to read it
 
 Read the current text on the Electronic Code of Federal Regulations, which shows the regulation as

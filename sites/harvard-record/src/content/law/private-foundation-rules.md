@@ -75,9 +75,6 @@ value to a disqualified person, such as event tickets or benefits that come with
 self-dealing. Regulations also treat a foundation's payment of a disqualified person's own legally
 binding pledge as self-dealing, because it relieves that person of a debt.
 
-They do not make every foundation record public. Board minutes, grant correspondence and gift
-agreements are not part of the return.
-
 ## How it is enforced
 
 Enforcement is by excise tax. For self-dealing, an initial tax is imposed on the disqualified person
@@ -96,16 +93,9 @@ foundations to send their returns to the relevant state officials.
 Self-dealing is often understood as any conflict of interest. In this setting it is a defined tax
 term covering listed transactions with listed persons.
 
-The five percent payout is often described as five percent of assets given to charities. Qualifying
-distributions include reasonable administrative expenses for charitable work and some other items,
-and the base excludes assets used directly for charitable purposes.
-
 Form 990-PF is often overlooked as a source. For a reader tracing a gift, it is frequently the only
 public document that names both the giver and the recipient. It shows the amount paid in the year
 and a short purpose description. It does not show the terms.
-
-Finally, a grant listed on a foundation's return is evidence that the foundation reported paying it.
-Confirming receipt and purpose may need the recipient's records.
 
 ## Where to read it
 

@@ -33,7 +33,6 @@ standard clauses. The main ones are:
   was made with government support and that the government has certain rights;
 - to grant the government a nonexclusive, nontransferable, irrevocable, paid-up license to practice
   the invention, or have it practiced, for or on behalf of the United States;
-- to report on efforts to put the invention to use;
 - to give preference to small businesses in licensing, where feasible;
 - in exclusive licenses to use or sell in the United States, to require that products be
   manufactured substantially in the United States, unless the agency grants a waiver.
@@ -66,9 +65,6 @@ It does not apply to inventions made without federal funds. Ownership of inventi
 industry-sponsored or donor-funded research depends on institutional policy and on the terms of the
 sponsorship or gift.
 
-It does not cover copyrights, data, or biological materials as such, though funding agreements and
-agency policies address those separately.
-
 It does not regulate the price of products based on federally funded inventions. Whether the
 government's reserved rights could be used in response to high prices has been debated for decades.
 Agencies have, up to now, declined petitions to use the rights in that way. Check current agency
@@ -98,15 +94,9 @@ Members of the public have no right to sue to enforce the Act's conditions.
 A common statement is that taxpayers own what they fund. Under this Act the institution usually owns
 the patent, and the government holds a license for its own purposes.
 
-Another is that the government's license lets anyone use the invention. The license is for use by or
-for the United States government.
-
-A third is that every university patent is a product of federal funding. Institutions also own
+Another is that every university patent is a product of federal funding. Institutions also own
 inventions funded from other sources, under their own policies. The government-support statement in
 a patent is the place to check.
-
-A fourth is that royalty income goes into general funds without restriction. For subject inventions,
-a nonprofit's use of net royalty income is limited by the Act.
 
 ## Where to read it
 

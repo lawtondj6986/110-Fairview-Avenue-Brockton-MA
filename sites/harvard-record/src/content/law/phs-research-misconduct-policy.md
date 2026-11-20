@@ -44,9 +44,6 @@ secure the research records, give the respondent notice and a chance to comment,
 confidentiality of those involved as far as possible, and guard complainants, witnesses and
 committee members against retaliation.
 
-The same definition, drawn from a government-wide policy issued in 2000, is used by other federal
-research agencies in their own rules.
-
 ## Who it covers
 
 The rule applies to institutions that apply for or receive Public Health Service support for
@@ -70,9 +67,6 @@ loose sense. Part 93 does not cover:
 
 Each of these may violate other rules or institutional policies. Institutions may also adopt broader
 definitions for their own internal purposes.
-
-The rule does not apply to research with no Public Health Service connection, though other agencies'
-rules or institutional policy may.
 
 It has a time limit. It generally applies only to misconduct occurring within six years of the date
 the allegation is received, with exceptions, for example where the respondent has continued to use
@@ -99,9 +93,6 @@ The Office publishes case summaries that name respondents when findings of misco
 administrative actions are imposed. It can also take compliance action against an institution that
 fails to follow the rule.
 
-Separately, false statements in grant applications or reports can lead to civil liability under the
-False Claims Act or to criminal prosecution. Those matters are handled by other offices.
-
 ## Common misreadings
 
 A retraction is not a finding of misconduct. Journals retract papers for many reasons, including
@@ -112,10 +103,6 @@ that no inquiry took place. Only cases that end in a federal finding are publish
 
 The six-year limit is sometimes read as immunity for older work. Journals and institutions can still
 correct the literature regardless of the limit.
-
-An institutional finding and a federal finding are separate. An institution may find misconduct
-under its own policy in a case where the federal office makes no finding, and the reverse is
-possible.
 
 ## Where to read it
 

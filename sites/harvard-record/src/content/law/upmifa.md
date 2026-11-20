@@ -22,19 +22,15 @@ UPMIFA does three things.
 First, it sets the standard of conduct for managing and investing institutional funds. Those
 responsible must act in good faith and with the care an ordinarily prudent person in a like position
 would exercise under similar circumstances. They must consider the charitable purposes of the
-institution and of the fund. The Act lists factors to weigh, such as general economic conditions,
-the effects of inflation or deflation, expected total return, the institution's other resources, and
-the need to make distributions and preserve capital. Investment decisions are judged in the context
-of the whole portfolio, costs must be reasonable, and the institution may delegate investment
-management to outside agents if it selects and monitors them prudently.
+institution and of the fund. Investment decisions are judged in the context of the whole portfolio,
+costs must be reasonable, and the institution may delegate investment management to outside agents
+if it selects and monitors them prudently.
 
 Second, it governs spending from endowment funds. An endowment fund, in the Act's terms, is a fund
 that under the terms of a gift instrument is not wholly expendable by the institution on a current
 basis. Subject to the donor's intent as expressed in the gift instrument, the institution may spend
 or accumulate as much of an endowment fund as it determines is prudent for the uses, benefits,
-purposes and duration for which the fund was established. The Act lists factors to be considered,
-including the duration and preservation of the fund, the purposes of the institution and the fund,
-economic conditions, expected return, other resources and the institution's investment policy.
+purposes and duration for which the fund was established. The Act lists factors to be considered.
 
 This replaced an older rule that barred spending below a fund's historic dollar value, meaning the
 amount originally given. Under UPMIFA an institution may prudently spend from a fund whose market
@@ -65,10 +61,6 @@ including nonprofit colleges and universities, and to government bodies to the e
 funds for charitable purposes. It applies to funds the institution holds for its own charitable
 purposes.
 
-It generally does not apply to assets held primarily to carry out the institution's programs, such
-as campus buildings, or to funds held by a trustee that is not itself a charitable institution,
-which fall under trust law.
-
 ## What it does not do
 
 UPMIFA does not tell an institution whether to accept a gift or what terms to agree to. It applies
@@ -79,10 +71,6 @@ its own rule. General words such as "spend only the income" or "preserve the pri
 as creating an endowment of permanent duration, not as a different spending rule, unless the
 instrument says more.
 
-It does not require a particular payout rate. Many institutions adopt a spending policy that takes a
-percentage of a moving average of market value, but that is a choice made under the prudence
-standard.
-
 It does not cover funds that the governing board, and not a donor, has chosen to set aside as
 endowment. Those board-designated or quasi-endowment funds can be spent at the board's discretion.
 
@@ -90,16 +78,11 @@ It does not, in its uniform text, give donors a right to sue to enforce their re
 Enforcement has traditionally belonged to the state attorney general. Whether a donor or a donor's
 heirs have standing depends on state law and on the gift agreement, and states differ.
 
-It does not address returning a gift or removing a donor's name. Those questions turn on the gift
-agreement, institutional policy and general charity law.
-
 ## How it is enforced
 
 The state attorney general, as the official responsible for protecting charitable assets, may
 investigate and sue for imprudent management or for failure to honor restrictions. Courts supervise
-modifications. In practice much oversight is indirect. Auditors review how restricted funds are
-classified in financial statements, and accounting standards require institutions to disclose their
-endowment spending policies and any funds whose value has fallen below the original gift amount.
+modifications.
 
 ## Common misreadings
 
@@ -108,10 +91,6 @@ thousands of separate funds, many restricted to stated purposes.
 
 "Restricted" is often taken to mean permanently fixed. Restrictions can be changed by the routes
 above, but not by the institution acting alone, except for small, old funds.
-
-A donor's wishes expressed outside the gift instrument, in conversation or correspondence, may not
-be binding restrictions. The Act looks to the gift instrument, which includes records in existence
-when the gift was made, such as an institutional solicitation.
 
 ## Where to read it
 

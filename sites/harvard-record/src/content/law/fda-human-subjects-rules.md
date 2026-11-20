@@ -71,9 +71,6 @@ although it may be under the Common Rule or institutional policy.
 They do not regulate ordinary medical practice, including a physician's decision to use an approved
 product for an unapproved purpose in treating a patient.
 
-They do not decide whether a product is safe or effective. That is the function of FDA's review of
-marketing applications.
-
 They do not give subjects a private right to sue.
 
 ## How it is enforced
@@ -98,11 +95,6 @@ studies of drugs and devices that is wrong.
 It is also assumed that one IRB approval settles compliance under both regimes. An IRB reviewing a
 study under both must apply both sets of criteria, and where they differ the stricter requirement
 governs in practice.
-
-A laboratory-developed genetic test used only in research is sometimes assumed to be outside FDA's
-reach. Whether such a test is an investigational device depends on how it is used, especially
-whether results are returned and used in care. That question is technical and has been the subject
-of changing FDA policy and litigation, so check current sources.
 
 ## Where to read it
 

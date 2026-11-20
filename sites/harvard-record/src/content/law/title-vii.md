@@ -42,14 +42,11 @@ sexual orientation or gender identity.
 ## Who it covers
 
 Title VII covers employers with 15 or more employees, including private employers, state and local
-governments, employment agencies and labor organizations. Federal employees are covered by a
-separate section.
+governments, employment agencies and labor organizations.
 
 A university is an employer under Title VII. Faculty, staff and administrators are protected.
 Students who are also employees, such as teaching or research assistants, may be protected as to
 their employment, though whether a particular student role counts as employment can be contested.
-Religious institutions have limited exemptions relating to employment of members of their own
-religion.
 
 ## What it does not do
 

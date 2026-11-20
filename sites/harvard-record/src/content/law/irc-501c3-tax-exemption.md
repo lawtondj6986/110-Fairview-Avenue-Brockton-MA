@@ -58,16 +58,11 @@ state law, and its judgment.
 It does not require any particular governance structure, board size or conflict of interest policy,
 although the annual information return asks whether the organization has such policies.
 
-It does not give donors or the public a right to sue the organization for departing from its
-mission.
-
 It does not exempt all income. Income from a regularly carried on trade or business that is not
 substantially related to the exempt purpose is subject to the unrelated business income tax. Since
 2017, certain private colleges and universities with large endowments per student have also been
 subject to an excise tax on net investment income. The terms of that tax have been amended, so check
 the current text.
-
-It does not address state or local taxes. Property tax and sales tax exemptions come from state law.
 
 ## How it is enforced
 

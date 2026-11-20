@@ -68,12 +68,6 @@ because they are students, treatment records made by health professionals and us
 student's treatment, and records created after a person is no longer a student that do not relate to
 their time as a student, such as most alumni fundraising records.
 
-FERPA does not give a student the right to see everything. A student has no right under FERPA to see
-parents' financial records, or confidential recommendation letters if the student has waived access.
-
-FERPA does not apply to what someone knows from personal observation. A staff member who witnessed
-an event is not disclosing an education record by describing what they saw.
-
 FERPA does not give a right to sue. The Supreme Court has held that the statute creates no private
 right of action.
 
@@ -97,9 +91,6 @@ FERPA is often cited as a reason campus police reports cannot be released. Recor
 enforcement unit creates for law enforcement purposes are not education records. Whether they are
 public depends on other law, such as the Clery Act's crime log requirement and state public records
 law.
-
-FERPA is often thought to protect the privacy of faculty and staff. It protects student records.
-Employee privacy comes from other sources.
 
 FERPA is sometimes thought to bar a school from releasing anything about any student. Directory
 information and the other exceptions show it does not. The exceptions permit disclosure. Most do not

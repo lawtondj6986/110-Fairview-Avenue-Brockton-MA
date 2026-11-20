@@ -69,11 +69,6 @@ the organization, which must have control over the funds. A payment to a univers
 tuition for a named student, or support for a named person chosen by the donor, is not a deductible
 gift.
 
-They do not allow a deduction for the value of a donor's time or services.
-
-A specific rule once allowed a deduction for most of a payment that bought the right to purchase
-athletic seating at a college. Congress repealed that allowance for payments made after 2017.
-
 ## How it is enforced
 
 The Internal Revenue Service enforces section 170 on the donor's side by examining returns and
@@ -96,11 +91,6 @@ It is often assumed that a donor who receives access, introductions or influence
 return benefit that the tax law measures. The tax rules look for goods or services with an
 ascertainable market value. Informal access is rarely valued or disclosed, which is one reason tax
 records say little about it.
-
-Pledges are sometimes treated as gifts. A pledge is not deductible until it is paid.
-
-The phrase quid pro quo has a different meaning here than in harassment law. In tax law it simply
-means a payment that is partly a gift and partly a purchase.
 
 ## Where to read it
 

@@ -59,9 +59,6 @@ harassment of students by educational institutions.
 Like federal law, Chapter 151B is not a general code of workplace civility. Conduct must meet the
 statutory definition and be connected to a protected characteristic.
 
-It does not protect people who are not employees or applicants, such as true independent
-contractors, although other Massachusetts laws may apply to them.
-
 It does not displace federal law. A person may have claims under both, and the two are often filed
 together. But the laws are not identical, and Massachusetts courts do not always follow federal
 interpretations. Three differences are often noted. Massachusetts courts have held employers
@@ -91,23 +88,10 @@ sooner with a commissioner's consent, the complainant may bring a civil action i
 Court, and must do so within three years of the alleged act. In court a jury trial is available, and
 the court may award actual damages, punitive damages and attorney's fees.
 
-Because of a work-sharing arrangement, a complaint filed with the state Commission is generally also
-treated as filed with the federal Equal Employment Opportunity Commission where federal law applies.
-
 ## Common misreadings
 
 It is often assumed that the federal and state standards are the same. The differences on supervisor
 liability, individual liability and damages can change the outcome.
-
-It is often assumed that a policy on paper satisfies the law. The policy requirement is one duty.
-Liability for harassment that actually occurs is a separate matter.
-
-It is sometimes assumed that complaints to the Commission are public from the start. Investigative
-files are generally not open during the investigation, and many matters settle without a public
-decision. Public hearing decisions are published.
-
-It is sometimes assumed that the 300-day period runs from when the person left the job. It runs from
-the discriminatory act.
 
 ## Where to read it
 

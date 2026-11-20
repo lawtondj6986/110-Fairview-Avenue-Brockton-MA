@@ -33,10 +33,6 @@ State genetic laws fall into several broad types. A given state may have several
   below.
 - Comprehensive consumer privacy laws. A number of states have general data privacy statutes that
   classify genetic data as sensitive and require consent or an opt-out for its processing.
-- Research and biobank provisions. Some states regulate consent for genetic research, the retention
-  of samples, or the use of newborn screening blood spots.
-- Law enforcement limits. A few states restrict police use of consumer genetic databases for
-  investigative genealogy.
 
 The consumer genetic testing laws typically require a company to publish a clear privacy policy, to
 obtain express consent before collecting and using genetic data, and to obtain separate express
@@ -72,13 +68,6 @@ code.
 Most state laws do not reach data that have been de-identified, and definitions of de-identified
 differ.
 
-State laws generally do not control what federal agencies do, and they may be displaced in part by
-federal law in particular fields, such as employer-sponsored benefit plans.
-
-Most do not address what happens to a company's genetic database if the company is sold or becomes
-insolvent, though some states have begun to legislate on that point, and attorneys general have
-asserted consumer protection authority in such situations.
-
 ## How it is enforced
 
 Enforcement varies as much as the substance. Insurance provisions are enforced by the state
@@ -98,10 +87,6 @@ is a company's statement and can change. A statute is binding. Where both exist,
 
 It is often assumed that these laws regulate university research. Most consumer genetic privacy
 statutes exclude research conducted under federal human-subjects rules.
-
-It is sometimes assumed that deleting an account destroys the sample and withdraws data from
-research already under way. Statutes and company policies treat these as separate steps, and data
-already used in completed research generally cannot be withdrawn.
 
 ## Where to read it
 

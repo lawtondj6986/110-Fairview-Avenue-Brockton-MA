@@ -92,9 +92,6 @@ A reported contract is sometimes read as a gift. The data include contracts, suc
 agreements with foreign governments for sponsored students, research agreements and licensing deals.
 These are exchanges, not donations.
 
-The country shown is sometimes read as the country of the money's ultimate origin. It reflects the
-foreign source as reported, which may be an intermediary entity's place of organization.
-
 A report is sometimes read as evidence of wrongdoing. Reporting is what the law requires. A failure
 to report is the potential violation.
 
