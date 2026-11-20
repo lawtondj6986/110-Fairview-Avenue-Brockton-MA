@@ -9,8 +9,8 @@ related: ["footnote", "attribution", "link-rot", "archive-snapshot", "bates-numb
 A citation is a pointer from a statement to its source. Its job is practical: a reader should be
 able to find the exact item, and ideally the exact passage, that supports the claim. A complete
 citation normally identifies the author or issuing body, the title, the publisher or publication,
-the date, and a locator such as a page, paragraph, section, docket entry or document number. For
-online material it adds the web address and often the date of access.
+the date, and a locator such as a page, paragraph, section, docket entry or document number. Online
+material adds the web address.
 
 Different fields use different formats, and legal citation has its own conventions for statutes,
 regulations and cases. The format matters less than precision. Citing a 300-page report as a whole

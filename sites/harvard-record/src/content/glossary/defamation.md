@@ -21,6 +21,5 @@ called actual malice. Private individuals usually face a lower bar, often neglig
 privileges protect certain kinds of statement, such as fair reports of official proceedings.
 
 For readers, the practical points concern careful writing: separating fact from allegation,
-attributing claims, avoiding implication by juxtaposition, and including responses. Repeating
-someone else's defamatory statement can itself give rise to liability. This entry is a general
-description. It is not legal advice, and the law differs between states and countries.
+attributing claims, avoiding implication by juxtaposition, and including responses. This entry is a
+general description. It is not legal advice, and the law differs between states and countries.

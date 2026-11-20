@@ -19,8 +19,7 @@ mark is used as is necessary (the plain name, for instance, and not a logo, seal
 design), and whether anything suggests sponsorship or endorsement by the mark's owner. A clear
 statement of independence helps, though it is not decisive by itself.
 
-The concept explains how news reports, scholarship, commentary and independent reference works can
-name the institutions they discuss. It has limits. It does not permit imitating an institution's
-visual identity or implying official status, and institutions may have separate policies on the use
-of their names by their own members. It is also a trademark doctrine only. It does not address
-defamation, privacy or copyright. This is a general description, not legal advice.
+The concept explains how news reports, scholarship and independent reference works can name the
+institutions they discuss. It does not permit imitating an institution's visual identity or implying
+official status . It is also a trademark doctrine only. It does not address defamation, privacy or
+copyright. This is a general description, not legal advice.

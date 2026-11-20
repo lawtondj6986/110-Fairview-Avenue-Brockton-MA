@@ -8,9 +8,8 @@ related: ["defamation", "court-record", "official-record", "attribution", "publi
 
 The fair report privilege is a defense in defamation law. It protects someone who publishes a fair
 and accurate account of an official proceeding or official record from liability for defamatory
-statements contained in that proceeding or record. Its rationale is that the public has an interest
-in knowing what happens in courts, legislatures and government agencies, and that reporters act as
-the public's eyes there.
+statements contained in that proceeding or record. Its rationale is the public's interest in knowing
+what happens in courts, legislatures and government agencies.
 
 In general terms the privilege has two conditions. The source must be of a qualifying kind, such as
 a judicial proceeding, a legislative hearing, or an official report or action of a government body.

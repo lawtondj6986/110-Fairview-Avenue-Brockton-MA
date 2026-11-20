@@ -12,11 +12,11 @@ that anything followed. Documented activity means that a record shows a concrete
 payment made, a visit logged, a sample shipped, an order placed. Verified implementation means that
 an official finding or an independent result confirms the activity and what it produced.
 
-The distinction matters because the levels are easy to blur. People describe plans in confident
-terms. Emails propose projects that are never funded. Funded projects are never carried out, and
-completed projects do not produce what was claimed. A statement such as "they planned to sequence
-his genome" (intent) differs from "an invoice shows sequencing was ordered" (activity), and both
-differ from "a report confirms the sequencing was done and the data delivered" (verified).
+The distinction matters because the levels are easy to blur. Emails propose projects that are never
+funded. Funded projects are never carried out, and completed projects do not produce what was
+claimed. A statement such as "they planned to sequence his genome" (intent) differs from "an invoice
+shows sequencing was ordered" (activity), and both differ from "a report confirms the sequencing was
+done and the data delivered" (verified).
 
 This site assigns each claim one of these evidence states, or "nothing on record", as set out at
 `/methodology/`. A claim moves up a level only when a source supports the move. A thoroughly

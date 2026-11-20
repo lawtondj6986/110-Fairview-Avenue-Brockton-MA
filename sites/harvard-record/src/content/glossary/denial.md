@@ -15,8 +15,8 @@ comment is not a denial, and it is not an admission either.
 
 Careful reporting records a denial accurately. It notes who made it, whether it came from the person
 or a representative, when, and exactly what it covered. It quotes the wording where precision
-matters, and it places the denial close to the claim it answers. This site's rules require that
-denials and responses be included wherever a person or institution has made one.
+matters. This site's rules require that denials and responses be included wherever a person or
+institution has made one.
 
 A denial is a fact about what someone said. It does not settle the truth of the matter in either
 direction. It neither disproves a documented claim nor counts as evidence of guilt. Where a claim

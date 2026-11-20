@@ -11,12 +11,12 @@ looking: within the material examined, nothing was found that shows X. "Evidence
 positive finding that X did not occur, for example a record placing a person somewhere else on the
 date in question.
 
-Official reports use the first form often and with care. A sentence such as "the review found no
-evidence that funds were used for that purpose" is bounded by what the reviewers examined. Its
-weight depends on the scope of the review, the records and witnesses available, and whether the kind
-of event in question would be expected to leave a trace. A thorough search of complete records that
-finds nothing is fairly strong. A limited review with missing records and unavailable witnesses is
-much weaker. Good reports state these limits.
+Official reports often use the first form. A sentence such as "the review found no evidence that
+funds were used for that purpose" is bounded by what the reviewers examined. Its weight depends on
+the scope of the review, the records and witnesses available, and whether the kind of event in
+question would be expected to leave a trace. A thorough search of complete records that finds
+nothing is fairly strong. A limited review with missing records and unavailable witnesses is much
+weaker. Good reports state these limits.
 
 Errors run in both directions. One is to read "found no evidence" as a declaration that the thing
 never happened, which is to treat a bounded search as exoneration. The other is to read it as

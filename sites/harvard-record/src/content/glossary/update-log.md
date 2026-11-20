@@ -8,8 +8,7 @@ related: ["correction", "verification-date", "retraction", "footnote", "link-rot
 
 An update log is a running record of what changed in a publication and when. Each entry normally
 gives the date, the page or section affected, a short description of the change, and the reason,
-such as a newly released document, a correction or a response received from a person discussed. The
-practice is borrowed from software, where a changelog lists the changes in each version.
+such as a newly released document, a correction or a response received from a person discussed.
 
 For a reference work that is revised over time, the log does several things. It lets returning
 readers see what is new without rereading everything. It makes corrections visible, which is the

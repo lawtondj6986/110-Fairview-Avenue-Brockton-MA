@@ -13,8 +13,8 @@ the thing were true, and on how thoroughly anyone looked.
 
 If an event would certainly have produced a record in a place that was fully searched, finding
 nothing is meaningful. If the event would probably have left no trace, or the relevant records are
-private, destroyed, redacted or were never examined, finding nothing shows very little. Public
-records are a small and uneven part of what exists. Most private activity never enters them.
+private, destroyed, redacted or were never examined, finding nothing shows very little. Most private
+activity never enters the public record.
 
 This site uses a specific label, "nothing on record", for claims on which it found no public record,
 and states that this is not proof of absence. The principle applies in both directions. A missing

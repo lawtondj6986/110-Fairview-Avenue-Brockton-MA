@@ -20,6 +20,6 @@ a meeting request is routine in university life, and its presence in a file is w
 anything unusual.
 
 Base rates are often unknown, and a reference work should not invent them. The useful habit is to
-ask the question: compared with what? This site's `/comparison/` page exists for that reason. A base
-rate does not explain away a specific documented fact. It calibrates how much weight an ambiguous
-one can bear.
+ask the question: compared with what? See `/comparison/` for context of that kind. A base rate does
+not explain away a specific documented fact. It calibrates how much weight an ambiguous one can
+bear.

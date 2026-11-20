@@ -8,7 +8,7 @@ related: ["update-log", "archive-snapshot", "link-rot", "correction", "reliabili
 
 A verification date records when someone last confirmed that a cited source says what it is cited
 for. It differs from the publication date of the source and from the date a page was written or last
-edited. The "accessed on" date in a conventional citation is a simple form of the same idea.
+edited. The "accessed on" date in a conventional citation is a simple form of it.
 
 The date matters because sources change. Web pages are edited or removed, court dockets gain new
 entries, articles receive corrections, and reports are superseded. A claim that was accurately
@@ -22,4 +22,4 @@ summaries of the source. Details are at `/methodology/` and `/sources/`.
 
 A verification date is a limited assurance. It means the citation was checked against the source on
 that day. It does not mean the source is correct, and it does not cover anything that has happened
-since. A recent date is also no substitute for following the citation oneself.
+since.
