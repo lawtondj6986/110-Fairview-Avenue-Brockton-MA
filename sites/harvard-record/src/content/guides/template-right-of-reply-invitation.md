@@ -6,16 +6,24 @@ series: "Templates"
 order: 20
 ---
 
-Right of reply means giving a person or institution a fair opportunity to respond to what you intend to publish about them. It improves accuracy, because the subject often knows something the documents do not show, and it is basic fairness. Send an invitation whenever you plan to publish a significant factual claim about a named living person or a named organization.
+Right of reply means giving a person or institution a fair opportunity to respond to what you intend
+to publish about them. It improves accuracy, because the subject often knows something the documents
+do not show, and it is basic fairness. Send an invitation whenever you plan to publish a significant
+factual claim about a named living person or a named organization.
 
-This template is for a written invitation sent through a public, professional channel. Guidance on fair treatment of named people is in the Research methods series under `/guides/`.
+This template is for a written invitation sent through a public, professional channel. Guidance on
+fair treatment of named people is in the Research methods series under `/guides/`.
 
 ## Before you send it
 
-- Finish your checking first. Each claim you put to the subject should already be in your claim ledger with its source, grade and evidence state.
-- Decide whether a reply is needed at all. If the person appears only as a bystander, the better choice may be to leave their name out.
-- Find a proper channel: a press office, a published professional email address, or a lawyer or representative on record. Do not use personal accounts, home addresses or family members.
-- Do not send this to a victim or alleged victim. See the ethics guide in the Research methods series.
+- Finish your checking first. Each claim you put to the subject should already be in your claim
+  ledger with its source, grade and evidence state.
+- Decide whether a reply is needed at all. If the person appears only as a bystander, the better
+  choice may be to leave their name out.
+- Find a proper channel: a press office, a published professional email address, or a lawyer or
+  representative on record. Do not use personal accounts, home addresses or family members.
+- Do not send this to a victim or alleged victim. See the ethics guide in the Research methods
+  series.
 
 ## The template
 
@@ -82,29 +90,47 @@ Yours sincerely,
 
 ## Notes on adapting it
 
-Be specific. Put the actual claims to the subject, in the words you plan to use, with their sources. A vague request for "comment on your role" does not give a fair chance to answer. You do not need to send your whole draft.
+Be specific. Put the actual claims to the subject, in the words you plan to use, with their sources.
+A vague request for "comment on your role" does not give a fair chance to answer. You do not need to
+send your whole draft.
 
-Describe the subject neutrally. The subject line and opening should not characterize the person or prejudge the matter.
+Describe the subject neutrally. The subject line and opening should not characterize the person or
+prejudge the matter.
 
-Give a real deadline. How long is reasonable depends on the complexity and age of the material and on how serious the claims are. Old or complicated matters need longer, and institutions typically need time to consult records. If you are asked for a modest extension, grant it where you can.
+Give a real deadline. How long is reasonable depends on the complexity and age of the material and
+on how serious the claims are. Old or complicated matters need longer, and institutions typically
+need time to consult records. If you are asked for a modest extension, grant it where you can.
 
-Say who you are. State your name and the nature of your project truthfully. Never obscure your purpose to draw someone out.
+Say who you are. State your name and the nature of your project truthfully. Never obscure your
+purpose to draw someone out.
 
-Identify allegations as allegations. If your source is a complaint or similar filing, say so in the letter, as the template does.
+Identify allegations as allegations. If your source is a complaint or similar filing, say so in the
+letter, as the template does.
 
-Set the terms plainly. "On the record" means the reply can be published and attributed. If a subject asks to speak on other terms, agree them in writing before the conversation, or decline. Do not accept conditions you cannot honor.
+Set the terms plainly. "On the record" means the reply can be published and attributed. If a subject
+asks to speak on other terms, agree them in writing before the conversation, or decline. Do not
+accept conditions you cannot honor.
 
-Send it once. One invitation and, if there is no answer, one short reminder before the deadline. Further messages risk becoming pressure.
+Send it once. One invitation and, if there is no answer, one short reminder before the deadline.
+Further messages risk becoming pressure.
 
 ## Handling the reply
 
 - If the reply shows an error, check it against the source and correct your draft. Thank the sender.
-- If the reply disputes a claim without a document, include the denial next to the claim, in their words where practical. A denial does not by itself remove a well-sourced claim, and it should not be buried.
+- If the reply disputes a claim without a document, include the denial next to the claim, in their
+  words where practical. A denial does not by itself remove a well-sourced claim, and it should not
+  be buried.
 - If the reply supplies new documents, verify them like any other source before relying on them.
-- If the reply is long, you may summarize it fairly, quoting the key sentence. Do not edit it in a way that changes its meaning.
-- If a lawyer replies, read the letter carefully and consider getting advice of your own. This guide is not legal advice.
-- If there is no reply, say so accurately: "[Name] was invited to comment on [date] and had not replied by the time of publication." Silence is not an admission and should not be described as one.
+- If the reply is long, you may summarize it fairly, quoting the key sentence. Do not edit it in a
+  way that changes its meaning.
+- If a lawyer replies, read the letter carefully and consider getting advice of your own. This guide
+  is not legal advice.
+- If there is no reply, say so accurately: "[Name] was invited to comment on [date] and had not
+  replied by the time of publication." Silence is not an admission and should not be described as
+  one.
 
 ## Keep a record
 
-File the invitation, the date sent, the channel used and any reply with the relevant rows of your claim ledger. If a response arrives after publication, add it promptly, note the addition in your update log, and change the page's review date.
+File the invitation, the date sent, the channel used and any reply with the relevant rows of your
+claim ledger. If a response arrives after publication, add it promptly, note the addition in your
+update log, and change the page's review date.

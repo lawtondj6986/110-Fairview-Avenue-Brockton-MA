@@ -6,13 +6,20 @@ series: "Templates"
 order: 10
 ---
 
-Use this letter when a publisher has stated something that a document shows to be wrong, such as a date, a figure, a name, a title or an attribution. It works for news outlets, institutional websites, reference sites and independent researchers, including this site. It is designed for factual errors. It is not suited to disagreements about emphasis or opinion, and it is not a legal demand.
+Use this letter when a publisher has stated something that a document shows to be wrong, such as a
+date, a figure, a name, a title or an attribution. It works for news outlets, institutional
+websites, reference sites and independent researchers, including this site. It is designed for
+factual errors. It is not suited to disagreements about emphasis or opinion, and it is not a legal
+demand.
 
 ## Before you write
 
-1. Confirm the error yourself. Open the primary document and find the passage that shows the correct fact. If you cannot point to a source, you have a disagreement, not a correction.
-2. Check whether the publisher has already corrected it. Look at the foot of the article and at any corrections page.
-3. Find the right address. Many publishers list a corrections contact or a standards editor. Otherwise write to the editor, or to the author with the editor copied.
+1. Confirm the error yourself. Open the primary document and find the passage that shows the correct
+   fact. If you cannot point to a source, you have a disagreement, not a correction.
+2. Check whether the publisher has already corrected it. Look at the foot of the article and at any
+   corrections page.
+3. Find the right address. Many publishers list a corrections contact or a standards editor.
+   Otherwise write to the editor, or to the author with the editor copied.
 4. Save a copy of the page as it stands, with the date, and make an archived capture if you can.
 
 ## The template
@@ -69,36 +76,59 @@ Thank you for your attention to this.
 
 ## Notes on adapting it
 
-One error per numbered item. If there are several errors, list them as items 1, 2 and 3, each with its own quotation and source. A long narrative is harder to act on than a list.
+One error per numbered item. If there are several errors, list them as items 1, 2 and 3, each with
+its own quotation and source. A long narrative is harder to act on than a list.
 
-Quote exactly. Copy the publisher's words and the source's words without paraphrase. Editors will compare them side by side, and an inexact quotation weakens the request.
+Quote exactly. Copy the publisher's words and the source's words without paraphrase. Editors will
+compare them side by side, and an inexact quotation weakens the request.
 
-Lead with the strongest source. A primary official record, such as a filed court document, a published official report or a statute, is the most persuasive. Other reporting that contradicts the item is weaker, since the editor cannot tell which outlet is right. See `/methodology/` for how this site grades sources.
+Lead with the strongest source. A primary official record, such as a filed court document, a
+published official report or a statute, is the most persuasive. Other reporting that contradicts the
+item is weaker, since the editor cannot tell which outlet is right. See `/methodology/` for how this
+site grades sources.
 
-Propose wording. Offering a corrected sentence makes the request easy to grant. Keep it neutral and limited to the fact in question.
+Propose wording. Offering a corrected sentence makes the request easy to grant. Keep it neutral and
+limited to the fact in question.
 
-Disclose your interest. If you are the subject, or act for the subject, say so. Editors will ask, and openness helps.
+Disclose your interest. If you are the subject, or act for the subject, say so. Editors will ask,
+and openness helps.
 
-Keep the tone flat. State the error, the evidence and the request. Leave out speculation about motives, general criticism of the piece and anything resembling a threat. A request that reads as hostile is slower to resolve.
+Keep the tone flat. State the error, the evidence and the request. Leave out speculation about
+motives, general criticism of the piece and anything resembling a threat. A request that reads as
+hostile is slower to resolve.
 
-Set a reasonable date. Allow more time for a complex point than for a simple one such as a misspelled name or a wrong year.
+Set a reasonable date. Allow more time for a complex point than for a simple one such as a
+misspelled name or a wrong year.
 
 ## Variations
 
-For an error about yourself. Say that you are the person described, state the fact, and supply a document where one exists. If the matter concerns something that was never true and for which no document exists, say so directly, and state what you are able to confirm.
+For an error about yourself. Say that you are the person described, state the fact, and supply a
+document where one exists. If the matter concerns something that was never true and for which no
+document exists, say so directly, and state what you are able to confirm.
 
-For an outdated statement. If the item was accurate when published but events have moved on, for example a case has since been dismissed, ask for an update and supply the later record. Publishers differ on whether they update old items. Asking politely, with the document attached, is the most that can be done.
+For an outdated statement. If the item was accurate when published but events have moved on, for
+example a case has since been dismissed, ask for an update and supply the later record. Publishers
+differ on whether they update old items. Asking politely, with the document attached, is the most
+that can be done.
 
-For a missing response. If the item reports a claim about you or your organization and omits a response you gave, or you were not asked, say so and provide the response you would like on the record.
+For a missing response. If the item reports a claim about you or your organization and omits a
+response you gave, or you were not asked, say so and provide the response you would like on the
+record.
 
 ## If you receive no reply
 
-Send one follow-up after your stated date, attaching the original message. If the publisher has a public editor, reader representative or standards desk, write there next. Some countries and industries have independent press complaints bodies, and their remit and procedures vary.
+Send one follow-up after your stated date, attaching the original message. If the publisher has a
+public editor, reader representative or standards desk, write there next. Some countries and
+industries have independent press complaints bodies, and their remit and procedures vary.
 
-Keep a record of what you sent and when. In your own work, you may accurately note that the item says one thing, that the primary record says another, and that you requested a correction on a given date. Do not characterize the publisher's silence.
+Keep a record of what you sent and when. In your own work, you may accurately note that the item
+says one thing, that the primary record says another, and that you requested a correction on a given
+date. Do not characterize the publisher's silence.
 
-If the error is seriously damaging to you, the question of legal remedies is one for a lawyer. This template is not legal advice.
+If the error is seriously damaging to you, the question of legal remedies is one for a lawyer. This
+template is not legal advice.
 
 ## When you are the publisher
 
-If you receive a letter like this, the guide on correcting your own work in the Research methods series under `/guides/` describes how to respond.
+If you receive a letter like this, the guide on correcting your own work in the Research methods
+series under `/guides/` describes how to respond.

@@ -6,15 +6,26 @@ series: "Templates"
 order: 60
 ---
 
-A gift acceptance policy is a written set of rules an institution uses to decide which donations it will take, on what terms, and who has authority to approve them. Many universities have one. Some publish it and some do not. Alumni are well placed to ask, because institutions pay attention to the people they hope will give.
+A gift acceptance policy is a written set of rules an institution uses to decide which donations it
+will take, on what terms, and who has authority to approve them. Many universities have one. Some
+publish it and some do not. Alumni are well placed to ask, because institutions pay attention to the
+people they hope will give.
 
-This template is a courteous request for information about policy. It does not allege anything. A private university has no general legal duty to answer, so the letter relies on clarity and goodwill. For background on how gifts reach a university, see `/donor-pathways/`, and for terms used here, see `/glossary/`.
+This template is a courteous request for information about policy. It does not allege anything. A
+private university has no general legal duty to answer, so the letter relies on clarity and
+goodwill. For background on how gifts reach a university, see `/donor-pathways/`, and for terms used
+here, see `/glossary/`.
 
 ## Before you write
 
-- Look for what is already public. Search the university's website for "gift acceptance policy", "gift policy" and "naming policy". Check the development or advancement office pages and the governing board's policy pages.
-- Decide who should receive it. A vice president for development or advancement, the alumni association, or the secretary to the governing board are typical choices. Copying the alumni association can help a letter get routed.
-- Keep your purpose in view. You are asking how decisions are made. Questions about a specific donor are less likely to be answered, since institutions commonly treat donor records as confidential.
+- Look for what is already public. Search the university's website for "gift acceptance policy",
+  "gift policy" and "naming policy". Check the development or advancement office pages and the
+  governing board's policy pages.
+- Decide who should receive it. A vice president for development or advancement, the alumni
+  association, or the secretary to the governing board are typical choices. Copying the alumni
+  association can help a letter get routed.
+- Keep your purpose in view. You are asking how decisions are made. Questions about a specific donor
+  are less likely to be answered, since institutions commonly treat donor records as confidential.
 
 ## The template
 
@@ -96,23 +107,37 @@ Yours sincerely,
 
 ## Notes on adapting it
 
-Shorten it. Thirteen questions is the full set. A letter with the five that matter most to you is more likely to get a substantive answer. Questions 1, 4, 5, 6 and 12 cover the core.
+Shorten it. Thirteen questions is the full set. A letter with the five that matter most to you is
+more likely to get a substantive answer. Questions 1, 4, 5, 6 and 12 cover the core.
 
-Keep it about process. The letter is strongest when it cannot be read as an accusation. Do not refer to particular people or events. If your interest arises from something in the news, you can say so in general terms.
+Keep it about process. The letter is strongest when it cannot be read as an accusation. Do not refer
+to particular people or events. If your interest arises from something in the news, you can say so
+in general terms.
 
-Be accurate about yourself. Give your real degree and year. Do not overstate your giving or your standing.
+Be accurate about yourself. Give your real degree and year. Do not overstate your giving or your
+standing.
 
-Write as one person. A letter from an individual is answered differently from a campaign. If several alumni wish to ask, a single jointly signed letter is better than many identical ones.
+Write as one person. A letter from an individual is answered differently from a campaign. If several
+alumni wish to ask, a single jointly signed letter is better than many identical ones.
 
-Adapt for public universities. A public university is usually subject to its state's public records law, so its policies and some gift records may be obtainable by a formal request. See the public records request template in this series. Rules on donor confidentiality at public universities and their affiliated foundations vary by state.
+Adapt for public universities. A public university is usually subject to its state's public records
+law, so its policies and some gift records may be obtainable by a formal request. See the public
+records request template in this series. Rules on donor confidentiality at public universities and
+their affiliated foundations vary by state.
 
 ## Reading the reply
 
-- A link to a published policy is a good answer. Read the policy for who decides, what triggers review, and whether the review covers intermediaries.
-- A general assurance with no document tells you that a policy may exist, not what it says. A polite follow-up asking only for the policy document is reasonable.
-- A policy describes what is supposed to happen. It is evidence of stated intent, in the terms used at `/methodology/`. Whether it is followed is a separate question that a policy cannot answer.
-- No reply is not evidence of anything. Offices lose letters. One follow-up after your stated date is appropriate.
+- A link to a published policy is a good answer. Read the policy for who decides, what triggers
+  review, and whether the review covers intermediaries.
+- A general assurance with no document tells you that a policy may exist, not what it says. A polite
+  follow-up asking only for the policy document is reasonable.
+- A policy describes what is supposed to happen. It is evidence of stated intent, in the terms used
+  at `/methodology/`. Whether it is followed is a separate question that a policy cannot answer.
+- No reply is not evidence of anything. Offices lose letters. One follow-up after your stated date
+  is appropriate.
 
 ## What to do with what you learn
 
-If the policy is public, you can compare it with those of other institutions. See `/comparison/` for the approach this site takes. If you intend to publish the reply, tell the university so in your letter or ask before doing so, and quote it accurately and in context.
+If the policy is public, you can compare it with those of other institutions. See `/comparison/` for
+the approach this site takes. If you intend to publish the reply, tell the university so in your
+letter or ask before doing so, and quote it accurately and in context.

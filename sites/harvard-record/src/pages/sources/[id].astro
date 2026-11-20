@@ -52,7 +52,7 @@ const host = s.url ? new URL(s.url).hostname.replace(/^www\./, '') : undefined;
         <tbody>
           {supported.map((c) => (
             <tr>
-              <th><a href={`/ledger/#${c.id}`}>{c.id}</a></th>
+              <th style="white-space:nowrap"><a href={`/ledger/#${c.id}`}>{c.id}</a></th>
               <td data-label="Claim">{c.claim}{c.caveat && <span class="small muted" style="display:block;margin-top:.25rem">{c.caveat}</span>}</td>
               <td data-label="Evidence state"><State s={c.state} /></td>
             </tr>

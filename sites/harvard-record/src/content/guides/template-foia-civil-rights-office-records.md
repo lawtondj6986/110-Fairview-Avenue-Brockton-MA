@@ -6,9 +6,17 @@ series: "Templates"
 order: 40
 ---
 
-Federal agencies that fund educational institutions have civil-rights offices that receive complaints, open investigations and conduct compliance reviews. For colleges and universities, the best known is the Office for Civil Rights at the U.S. Department of Education, which enforces several federal civil-rights laws, including Title IX, against institutions that receive the department's funding. Other departments have civil-rights offices with their own responsibilities.
+Federal agencies that fund educational institutions have civil-rights offices that receive
+complaints, open investigations and conduct compliance reviews. For colleges and universities, the
+best known is the Office for Civil Rights at the U.S. Department of Education, which enforces
+several federal civil-rights laws, including Title IX, against institutions that receive the
+department's funding. Other departments have civil-rights offices with their own responsibilities.
+The structure of federal offices can change, so confirm on the agency's current website which office
+handles the matter you are interested in.
 
-These offices create records about named institutions, and those records can be requested under the Freedom of Information Act (FOIA), 5 U.S.C. § 552. This template adapts a general FOIA request to that purpose. Follow the agency's current FOIA instructions, which govern. This is not legal advice.
+These offices create records about named institutions, and those records can be requested under the
+Freedom of Information Act (FOIA), 5 U.S.C. § 552. This template adapts a general FOIA request to
+that purpose. Follow the agency's current FOIA instructions, which govern. This is not legal advice.
 
 ## Check what is already published
 
@@ -16,9 +24,11 @@ Before filing, look on the civil-rights office's own website. Offices commonly p
 
 - resolution letters and resolution agreements from concluded cases;
 - lists or search tools showing institutions with open investigations;
-- policy guidance and case processing manuals, which explain the stages of a case and the names of the documents each stage produces.
+- policy guidance and case processing manuals, which explain the stages of a case and the names of
+  the documents each stage produces.
 
-If the documents you need are posted, download and cite them. If they are not, use what you learned there to describe your request precisely. Explanations of the underlying laws are at `/law/`.
+If the documents you need are posted, download and cite them. If they are not, use what you learned
+there to describe your request precisely. Explanations of the underlying laws are at `/law/`.
 
 ## The template
 
@@ -98,28 +108,46 @@ Sincerely,
 
 ## Notes on adapting it
 
-Name the institution exactly. Use the full legal name and location. Large universities have separate schools and affiliated hospitals that may appear in case records under their own names. List the ones you mean.
+Name the institution exactly. Use the full legal name and location. Large universities have separate
+schools and affiliated hospitals that may appear in case records under their own names. List the
+ones you mean.
 
-Ask for the log first. Item 1 is quick for an office to produce and tells you what cases exist. If you are unsure of the scope, file item 1 alone, then file a second request for the documents of specific cases by number.
+Ask for the log first. Item 1 is quick for an office to produce and tells you what cases exist. If
+you are unsure of the scope, file item 1 alone, then file a second request for the documents of
+specific cases by number.
 
-Use the office's vocabulary. Document names differ between agencies and change over time. Take the terms from the office's published case processing manual.
+Use the office's vocabulary. Document names differ between agencies and change over time. Take the
+terms from the office's published case processing manual.
 
-Set a sensible date range. A decade of records for a large institution can run to many thousands of pages. Narrow by years, by statute or by issue.
+Set a sensible date range. A decade of records for a large institution can run to many thousands of
+pages. Narrow by years, by statute or by issue.
 
-Volunteer the privacy redactions. Personal information about complainants, students and witnesses will be withheld under FOIA's privacy exemptions whatever you write. Saying at the outset that you do not want it removes a point of friction, and it is the right position ethically.
+Volunteer the privacy redactions. Personal information about complainants, students and witnesses
+will be withheld under FOIA's privacy exemptions whatever you write. Saying at the outset that you
+do not want it removes a point of friction, and it is the right position ethically.
 
-Expect limits on open cases. Records of a pending investigation are often withheld in whole or in part under the exemption for law enforcement proceedings. You can ask again after the case closes.
+Expect limits on open cases. Records of a pending investigation are often withheld in whole or in
+part under the exemption for law enforcement proceedings. You can ask again after the case closes.
 
-Fee category and waiver. The notes in the general federal FOIA template in this series apply here unchanged.
+Fee category and waiver. The notes in the general federal FOIA template in this series apply here
+unchanged.
 
 ## Reading what you receive
 
-- An open case is not a finding. That a complaint was received, or an investigation opened, shows only that. Many are dismissed or closed with no violation found.
-- A resolution agreement is an agreement. Institutions often enter them without admitting a violation, and the document usually says so. Read the resolution letter alongside it to see what the office did and did not conclude.
-- A complaint is an allegation. If a complaint is released, it records what the complainant asserted.
-- Dates matter. Distinguish the date of the conduct alleged, the date the complaint was filed, the date the case was opened and the date it was resolved.
-- "No responsive records" describes the search. It does not show that no complaint was ever made, since complaints can also be made to other agencies, to state bodies or to the institution itself.
+- An open case is not a finding. That a complaint was received, or an investigation opened, shows
+  only that. Many are dismissed or closed with no violation found.
+- A resolution agreement is an agreement. Institutions often enter them without admitting a
+  violation, and the document usually says so. Read the resolution letter alongside it to see what
+  the office did and did not conclude.
+- A complaint is an allegation. If a complaint is released, it records what the complainant
+  asserted.
+- Dates matter. Distinguish the date of the conduct alleged, the date the complaint was filed, the
+  date the case was opened and the date it was resolved.
+- "No responsive records" describes the search. It does not show that no complaint was ever made,
+  since complaints can also be made to other agencies, to state bodies or to the institution itself.
 
 ## What these records cannot show
 
-They reflect only matters that reached that federal office. They say nothing about incidents that were never reported to it, and they are not a measure of how safe or fair an institution is. See `/campus-safety/` for the other kinds of records that exist.
+They reflect only matters that reached that federal office. They say nothing about incidents that
+were never reported to it, and they are not a measure of how safe or fair an institution is. See
+`/campus-safety/` for the other kinds of records that exist.

@@ -105,7 +105,7 @@ small, .small { font-size: 0.875rem; }
 .masthead .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 2rem; padding-top: 1rem; padding-bottom: 0.9rem; }
 .wordmark { display: inline-flex; flex-direction: column; text-decoration: none; color: var(--ink); }
 .wordmark strong { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; }
-.wordmark span { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.wordmark span { font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 
 .nav { font-family: var(--sans); font-size: 0.875rem; }
 .nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.15rem 1.15rem; padding: 0; margin: 0; }
@@ -143,7 +143,7 @@ small, .small { font-size: 0.875rem; }
   .toc { position: sticky; top: 1.5rem; order: 2; }
 }
 .toc { font-family: var(--sans); font-size: 0.85rem; border: 1px solid var(--rule); background: var(--surface); border-radius: 4px; padding: 1rem 1.1rem; }
-.toc h2 { all: unset; display: block; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 0.5rem; }
+.toc h2 { all: unset; display: block; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 0.5rem; }
 .toc ol { list-style: none; padding: 0; margin: 0; }
 .toc li { margin: 0; }
 .toc a { display: block; padding: 0.3rem 0; color: var(--ink); text-decoration: none; line-height: 1.35; }
@@ -168,7 +168,7 @@ sup.cite + sup.cite::before { content: ', '; color: var(--muted); }
 
 /* ---------- Grade and state badges ---------- */
 .grade {
-  display: inline-block; font-family: var(--sans); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;
+  display: inline-block; font-family: var(--sans); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em;
   line-height: 1; padding: 0.22rem 0.36rem; border-radius: 3px; vertical-align: 0.1em; white-space: nowrap;
   border: 1px solid var(--navy-2); text-decoration: none;
 }
@@ -188,7 +188,7 @@ sup.cite + sup.cite::before { content: ', '; color: var(--muted); }
 /* ---------- Callouts, key figures ---------- */
 .callout { background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 4px; padding: 1rem 1.2rem; margin: 1.75rem 0; font-size: 0.97rem; }
 .callout > :last-child { margin-bottom: 0; }
-.callout .callout-title { font-family: var(--sans); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin: 0 0 0.4rem; }
+.callout .callout-title { font-family: var(--sans); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin: 0 0 0.4rem; }
 .callout.plain { border-left-color: var(--navy-2); }
 .callout.plain .callout-title { color: var(--muted); }
 
@@ -202,7 +202,7 @@ sup.cite + sup.cite::before { content: ', '; color: var(--muted); }
 table { border-collapse: collapse; width: 100%; font-size: 0.93rem; line-height: 1.45; }
 caption { caption-side: top; text-align: left; font-family: var(--sans); font-size: 0.8rem; color: var(--muted); padding: 0.75rem 0.9rem; border-bottom: 1px solid var(--rule); }
 th, td { text-align: left; vertical-align: top; padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--rule); }
-thead th { font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: var(--tint); font-weight: 600; white-space: nowrap; }
+thead th { font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: var(--tint); font-weight: 600; white-space: nowrap; }
 tbody th { font-weight: 600; }
 tbody tr:last-child > * { border-bottom: 0; }
 
@@ -216,7 +216,7 @@ tbody tr:last-child > * { border-bottom: 0; }
   table.stack th, table.stack td { border: 0; padding: 0.4rem 0.9rem; }
   table.stack tbody th { font-size: 1.02rem; padding-top: 0.7rem; }
   table.stack td[data-label]::before {
-    content: attr(data-label); display: block; font-family: var(--sans); font-size: 0.68rem;
+    content: attr(data-label); display: block; font-family: var(--sans); font-size: 0.75rem;
     letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 0.1rem;
   }
 }
@@ -262,7 +262,7 @@ tbody tr:last-child > * { border-bottom: 0; }
 .footer { background: var(--navy); color: #cfd6e2; font-family: var(--sans); font-size: 0.85rem; line-height: 1.6; padding: 2.5rem 0 3rem; margin-top: 2rem; }
 .footer a { color: #fff; }
 .footer .cols { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
-.footer h2 { all: unset; display: block; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #9fabbe; font-weight: 600; margin-bottom: 0.6rem; }
+.footer h2 { all: unset; display: block; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #9fabbe; font-weight: 600; margin-bottom: 0.6rem; }
 .footer ul { list-style: none; padding: 0; margin: 0; }
 .footer li { margin-bottom: 0.3rem; }
 .footer .legal { border-top: 1px solid #2c3f60; margin-top: 2rem; padding-top: 1.25rem; font-size: 0.78rem; color: #a9b4c6; max-width: 80ch; }
@@ -287,7 +287,7 @@ dl.terms dd { margin: 0.15rem 0 0; font-size: 0.93rem; color: var(--muted); }
 .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 3rem 0 1rem; font-family: var(--sans); font-size: 0.95rem; }
 .pager a { border: 1px solid var(--rule); border-radius: 4px; padding: 0.8rem 1rem; background: var(--surface); text-decoration: none; color: var(--link); font-weight: 600; }
 .pager a:hover { border-color: var(--navy-2); }
-.pager a span { display: block; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.pager a span { display: block; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
 .pager .next { text-align: right; }
 @media (max-width: 36rem) { .pager { grid-template-columns: 1fr; } .pager .next { text-align: left; } }
 pre { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 1rem 1.1rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; }
@@ -295,7 +295,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fo
 :not(pre) > code { background: var(--tint); padding: 0.1em 0.3em; border-radius: 3px; }
 .search-results { list-style: none; padding: 0; margin: 1.5rem 0; }
 .search-results li { padding: 0.9rem 0; border-bottom: 1px solid var(--rule); margin: 0; }
-.search-results .kind { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.search-results .kind { font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
 .search-results a { font-weight: 600; font-size: 1.08rem; }
 .search-results p { margin: 0.2rem 0 0; font-size: 0.93rem; color: var(--muted); }
 details.faq { border-bottom: 1px solid var(--rule); padding: 0.9rem 0; }
@@ -308,7 +308,7 @@ details.faq > :last-child { margin-bottom: 0.3rem; }
 .named h3 { margin: 0 0 0.6rem; }
 .named dl { margin: 0; }
 .named dl > div { display: grid; grid-template-columns: 13rem minmax(0, 1fr); gap: 0.2rem 1.25rem; padding: 0.5rem 0; border-top: 1px solid var(--rule); }
-.named dt { font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding-top: 0.2rem; }
+.named dt { font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding-top: 0.2rem; }
 .named dd { margin: 0; font-size: 0.97rem; }
 .named:target { border-color: var(--accent); }
 @media (max-width: 40rem) { .named dl > div { grid-template-columns: 1fr; } }

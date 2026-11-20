@@ -6,15 +6,22 @@ series: "Templates"
 order: 30
 ---
 
-The Freedom of Information Act (FOIA), 5 U.S.C. § 552, lets any person request records from federal executive branch agencies. This template is a general starting point. Each agency publishes its own FOIA regulations and submission instructions, and those govern. Check the agency's FOIA page before sending. This is not legal advice.
+The Freedom of Information Act (FOIA), 5 U.S.C. § 552, lets any person request records from federal
+executive branch agencies. This template is a general starting point. Each agency publishes its own
+FOIA regulations and submission instructions, and those govern. Check the agency's FOIA page before
+sending. This is not legal advice.
 
-FOIA does not reach Congress, the federal courts, state or local bodies, or private institutions. For state and municipal agencies, see the public records request template in this series.
+FOIA does not reach Congress, the federal courts, state or local bodies, or private institutions.
+For state and municipal agencies, see the public records request template in this series.
 
 ## Before you file
 
-1. Search first. Check the agency's website, its FOIA reading room and its FOIA log. The guide on federal agency records in the Research methods series under `/guides/` describes a search order.
-2. Identify the right component. Large departments process requests office by office. A request sent to the wrong one is delayed.
-3. Find the submission method. Many agencies accept requests through an online portal or by email. The government's central site at `https://www.foia.gov/` lists agency FOIA offices.
+1. Search first. Check the agency's website, its FOIA reading room and its FOIA log. The guide on
+   federal agency records in the Research methods series under `/guides/` describes a search order.
+2. Identify the right component. Large departments process requests office by office. A request sent
+   to the wrong one is delayed.
+3. Find the submission method. Many agencies accept requests through an online portal or by email.
+   The government's central site at `https://www.foia.gov/` lists agency FOIA offices.
 
 ## The template
 
@@ -87,28 +94,49 @@ Sincerely,
 
 ## Notes on adapting it
 
-Describe records, not questions. FOIA gives access to existing records. It does not require an agency to answer questions, write explanations or create new documents. "All records showing why the agency decided X" is weaker than "the decision memorandum, and correspondence between Office A and Organization B, concerning X, dated between [date] and [date]".
+Describe records, not questions. FOIA gives access to existing records. It does not require an
+agency to answer questions, write explanations or create new documents. "All records showing why the
+agency decided X" is weaker than "the decision memorandum, and correspondence between Office A and
+Organization B, concerning X, dated between [date] and [date]".
 
-Be narrow. The law requires a request to reasonably describe the records sought. Requests for "any and all records relating to" a broad subject are slow and are often sent back for narrowing. Name document types, offices and a date range. You can file a second request later.
+Be narrow. The law requires a request to reasonably describe the records sought. Requests for "any
+and all records relating to" a broad subject are slow and are often sent back for narrowing. Name
+document types, offices and a date range. You can file a second request later.
 
-Use what you already know. Titles, dates, case numbers and names of offices drawn from public documents let staff search precisely. If an earlier request on the same subject appears in the agency's FOIA log, cite its number.
+Use what you already know. Titles, dates, case numbers and names of offices drawn from public
+documents let staff search precisely. If an earlier request on the same subject appears in the
+agency's FOIA log, cite its number.
 
-Choose the fee category honestly. Agencies charge different combinations of search, review and duplication fees depending on the category of requester. The agency's fee schedule is in its FOIA regulations. Do not guess at amounts. State a limit you are prepared to pay and ask to be contacted before it is exceeded.
+Choose the fee category honestly. Agencies charge different combinations of search, review and
+duplication fees depending on the category of requester. The agency's fee schedule is in its FOIA
+regulations. Do not guess at amounts. State a limit you are prepared to pay and ask to be contacted
+before it is exceeded.
 
-Support any fee waiver. A waiver is not automatic. Explain concretely how the records bear on government operations and how you will share what you learn. A bare assertion is usually refused.
+Support any fee waiver. A waiver is not automatic. Explain concretely how the records bear on
+government operations and how you will share what you learn. A bare assertion is usually refused.
 
-Expedited processing. The statute allows faster handling in limited circumstances involving a compelling need, as defined in the law and the agency's regulations. If you believe you qualify, add a short paragraph explaining why and follow the agency's instructions for certifying it.
+Expedited processing. The statute allows faster handling in limited circumstances involving a
+compelling need, as defined in the law and the agency's regulations. If you believe you qualify, add
+a short paragraph explaining why and follow the agency's instructions for certifying it.
 
-Requests about people. Records about living individuals are often withheld or redacted under the privacy exemptions. A request for records about yourself may involve the Privacy Act and usually requires proof of identity. Follow the agency's instructions.
+Requests about people. Records about living individuals are often withheld or redacted under the
+privacy exemptions. A request for records about yourself may involve the Privacy Act and usually
+requires proof of identity. Follow the agency's instructions.
 
 ## After you file
 
 - The agency should acknowledge the request and assign a tracking number. Keep it.
-- The statute gives agencies 20 working days to make a determination, with extensions in certain circumstances. In practice many requests take considerably longer.
+- The statute gives agencies 20 working days to make a determination, with extensions in certain
+  circumstances. In practice many requests take considerably longer.
 - Staff may contact you to clarify or narrow the request. Prompt, cooperative answers help.
-- The response may be a full release, a partial release with redactions, a denial, or a statement that no responsive records were found.
-- If you are dissatisfied, the response letter explains how to file an administrative appeal and the deadline. The agency's FOIA public liaison can help resolve disputes, and the Office of Government Information Services at the National Archives offers mediation.
+- The response may be a full release, a partial release with redactions, a denial, or a statement
+  that no responsive records were found.
+- If you are dissatisfied, the response letter explains how to file an administrative appeal and the
+  deadline. The agency's FOIA public liaison can help resolve disputes, and the Office of Government
+  Information Services at the National Archives offers mediation.
 
 ## Using what you receive
 
-Keep the release letter with the records. It states what was searched, what was released and what was withheld. Cite released records by agency, request number, release date and page. Read "no responsive records" as a statement about the search conducted, not as proof that nothing exists.
+Keep the release letter with the records. It states what was searched, what was released and what
+was withheld. Cite released records by agency, request number, release date and page. Read "no
+responsive records" as a statement about the search conducted, not as proof that nothing exists.

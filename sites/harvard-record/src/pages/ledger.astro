@@ -38,7 +38,7 @@ const pending = claims.filter((c) => !c.checked).length;
           <tbody>
             {claims.filter((c) => c.topic === t).map((c) => (
               <tr id={c.id}>
-                <th>{c.id}</th>
+                <th style="white-space:nowrap">{c.id}</th>
                 <td data-label="Claim">
                   {c.claim}
                   {c.caveat && <span class="small muted" style="display:block;margin-top:.3rem">Caveat: {c.caveat}</span>}

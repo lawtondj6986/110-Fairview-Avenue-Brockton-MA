@@ -61,7 +61,8 @@ for (const [label, viewport] of [['phone', { width: 390, height: 800 }], ['deskt
       const cites = [...document.querySelectorAll('sup.cite a')];
       const refs = [...document.querySelectorAll('.refs li')];
       const lum = (c) => { const [r, g, b] = c.match(/\d+(\.\d+)?/g).slice(0, 3).map((v) => { v = v / 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
-      const p = document.querySelector('main p');
+      // Body copy only: skip the eyebrow, lede and small print.
+      const p = document.querySelector('article.prose p:not([class])') ?? document.querySelector('article.prose');
       const fg = p ? lum(getComputedStyle(p).color) : 0, bg = lum(getComputedStyle(document.body).backgroundColor);
       return {
         overflow: document.documentElement.scrollWidth > innerWidth + 1,
