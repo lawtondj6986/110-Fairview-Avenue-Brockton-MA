@@ -118,5 +118,5 @@ incomplete. A total "identified" in a review is the total found.
 - Counting facilitated gifts as the facilitator's own money, or leaving them out without saying so.
 - Treating "to the university" as including every affiliate.
 
-This site's /methodology/ page explains how donation figures are labeled by period, source and
-scope.
+This site's /donor-pathways/ page shows these distinctions applied to one set of figures, and
+/methodology/ explains how sources are graded.

@@ -135,6 +135,6 @@ their affiliated foundations vary by state.
 
 ## What to do with what you learn
 
-If the policy is public, you can compare it with those of other institutions. See `/comparison/` for
-the approach this site takes. If you intend to publish the reply, tell the university so in your
+If the policy is public, you can compare it with those of other institutions. The guide to reading a gift
+acceptance policy under `/guides/` lists what to look for. If you intend to publish the reply, tell the university so in your
 letter or ask before doing so, and quote it accurately and in context.

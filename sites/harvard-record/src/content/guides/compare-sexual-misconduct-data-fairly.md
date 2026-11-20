@@ -95,5 +95,5 @@ student's experience will be. It cannot tell you why a number differs without fu
 - Ignoring differences in the wording of survey questions.
 - Reading a one-year change as a trend.
 
-This site's /comparison/ page sets out its own rules for placing institutions side by side, and
-/methodology/ explains how figures are labeled.
+This site's /comparison/ page shows one way of placing institutions side by side, using the same
+questions for each, and /methodology/ explains how sources are graded.
