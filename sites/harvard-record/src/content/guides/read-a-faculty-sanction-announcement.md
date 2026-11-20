@@ -53,14 +53,12 @@ a dean acting for one school. See the guide on who decides what in /guides/.
 Sanctions range widely. Common terms, in rough order of severity:
 
 - Reprimand or letter of censure. A formal written rebuke placed in the file.
-- Required training or monitoring.
 - Restrictions on duties: no teaching, no undergraduate teaching, no advising of new students, no
   supervisory role, removal from committees.
 - Restrictions on contact or access: limits on meeting students alone, on presence in particular
   buildings, or on campus generally.
 - Loss of title or position: removal as chair or center director, or loss of a named professorship.
   A person can lose an administrative post or an endowed chair and remain a tenured professor.
-- Loss of resources: salary reduction, loss of research funds or space.
 - Suspension, with or without pay, for a stated period.
 - Loss of emeritus status. Emeritus is an honorary title for retired faculty. It can be revoked,
   usually along with associated privileges.
@@ -78,7 +76,6 @@ Translate the sanctions into practical terms.
 - Is the person still employed? Still tenured?
 - May they teach, advise or supervise? Whom?
 - May they be on campus?
-- Do they keep their laboratory, their grants and their research staff?
 - What has been arranged for their current students and trainees?
 
 The last question is often unanswered, and it matters a great deal to the people affected.
@@ -88,11 +85,8 @@ The last question is often unanswered, and it matters a great deal to the people
 - The underlying facts. Announcements rarely describe the conduct in any detail.
 - The identities and number of complainants, which are protected.
 - The investigation report. It is almost never published.
-- Whether there was an agreement. A departure may follow negotiated terms that are confidential.
 - Related matters elsewhere: other institutions, funders, journals, professional societies or
-  licensing bodies may conduct their own processes and reach their own conclusions. Federal research
-  funders have their own rules requiring notice of certain findings and actions, which have changed
-  over time.
+  licensing bodies may conduct their own processes and reach their own conclusions.
 
 Privacy law, employment law and fairness to complainants and respondents all limit disclosure. A
 sparse announcement is not in itself evidence that the institution is hiding something. It does
@@ -104,7 +98,6 @@ leave open questions, and it is reasonable to ask the process questions that can
 2. Has the process concluded, and is an appeal available or pending?
 3. Who imposed the sanction?
 4. How long does it last, and who reviews it?
-5. What support is being offered to affected students and staff?
 
 ## What an announcement can tell you
 
@@ -117,17 +110,13 @@ leave open questions, and it is reasonable to ask the process questions that can
 - What happened, in any detail.
 - Whether the sanction was proportionate. That requires facts the announcement omits.
 - Whether a court or another body would reach the same conclusion.
-- Whether the sanction will be enforced or will remain in place.
 
 ## Common mistakes
 
 - Reading administrative leave as a finding.
 - Reading a resignation as an admission, or as an exoneration.
 - Assuming a sanctioned professor has been dismissed. Most sanctions fall short of that.
-- Merging different policies, for example describing a professional conduct violation as a
-  harassment finding.
 - Describing an institutional finding as a legal verdict.
-- Assuming that removal from a title means removal from the faculty.
 - Not checking back. Sanctions are appealed, modified, lifted and sometimes extended. See the guide
   on following up on promises.
 

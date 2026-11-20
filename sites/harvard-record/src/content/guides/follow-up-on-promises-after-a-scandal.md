@@ -118,5 +118,5 @@ Keep one table with these columns: commitment (quoted), source and date, respons
 deadline, evidence found, evidence source and date, status, date last checked. Update it once or
 twice a year.
 
-This site's /updates/ page and /sources/ page follow the same discipline of dated entries tied to
+This site's /sources/ page follows the same discipline of dated entries tied to
 documents, and /methodology/ explains the labels used.

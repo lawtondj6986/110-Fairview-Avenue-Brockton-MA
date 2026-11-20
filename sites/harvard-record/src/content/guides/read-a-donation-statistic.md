@@ -23,8 +23,6 @@ what period, from whom, and to whom.
   years from being realized.
 - Gift in kind. Property, equipment, securities, artwork or services, counted at an appraised or
   estimated value.
-- Matching funds. Money from an employer or another donor that is triggered by a gift. Check whether
-  the figure includes it.
 - Sponsored research and contracts. Payments for agreed work. These are not gifts, though they are
   sometimes mixed into totals of "funding" or "support."
 
@@ -43,11 +41,6 @@ necessarily "gifts."
   before. A statement about giving "between" two dates is silent on both sides.
 - Date of what. A gift may be pledged in one year, paid across several, and announced in another.
   Figures dated by pledge and figures dated by payment will not align.
-- Nominal amounts. Totals spanning decades add together dollars of different value. Check whether
-  any inflation adjustment was made. Usually none is.
-
-When a statement gives a total and a period, check that the period covers the whole relationship and
-not a selected part.
 
 ## From whom
 
@@ -59,7 +52,6 @@ A donor is not always one legal person.
 - A company the individual owns or controls.
 - A donor-advised fund. This is an account at a sponsoring charity. The donor recommends grants, and
   the payment comes from the sponsor, so the recipient's records may show the sponsor's name.
-- A trust or estate.
 - Intermediaries and associates. Gifts made by others at a person's suggestion or introduction are
   sometimes described as "facilitated," "arranged," "directed" or "secured" by that person. That
   money did not come from the person.
@@ -76,7 +68,6 @@ A recipient is not always one legal entity either.
 - The university as a whole, or its central administration.
 - One school, department, center or laboratory.
 - An affiliated but legally separate body, such as a hospital, research institute or foundation.
-- A faculty member's research fund held by the university.
 - An outside organization associated with a faculty member, which is not the university at all.
 
 A figure for gifts "to the university" may leave out affiliates. A figure in news coverage may
@@ -90,7 +81,6 @@ gather them all together. Check the scope before comparing.
 - A tax filing. A private foundation's annual return lists its grants by recipient and amount. A
   public charity's return gives total contributions but not donor names in the public copy. See the
   guide to reading a Form 990.
-- An internal review. Covers its defined scope and the records it could find.
 - A news report. Check which of the above it relies on.
 
 Institutional gift records, especially older ones and those kept by individual units, can be
@@ -118,7 +108,6 @@ incomplete. A total "identified" in a review is the total found.
 - What the donor received in return, such as access, titles or recognition. See /donor-pathways/.
 - Why the gift was made or accepted.
 - Who knew about it.
-- How the money was spent.
 - Gifts that left no record, or records that were not searched.
 
 ## Common mistakes
@@ -128,9 +117,6 @@ incomplete. A total "identified" in a review is the total found.
 - Comparing a lifetime total with an annual figure.
 - Counting facilitated gifts as the facilitator's own money, or leaving them out without saying so.
 - Treating "to the university" as including every affiliate.
-- Reading a figure limited to a period as the total.
-- Dropping "at least."
-- Citing a rounded number from a headline when the source gives a precise one with caveats.
 
 This site's /methodology/ page explains how donation figures are labeled by period, source and
 scope.

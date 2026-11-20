@@ -18,7 +18,7 @@ exist, such as an official docket number, a statutory citation or a persistent i
 journal article, to record the title, author, publisher and date so the item can be found again, to
 save an archive snapshot, and to note the date on which the link was last checked.
 
-A dead link does not mean the source was invented or retracted. Most link rot results from ordinary
-website maintenance. It also does not mean that the claim it supported is now unsupported, only that
-the source must be found another way. When a page is deliberately removed or altered, that is a
-distinct fact, and it should be established with evidence such as dated snapshots.
+A dead link does not mean the source was invented. Most link rot results from ordinary website
+maintenance. It also does not mean that the claim it supported is now unsupported, only that the
+source must be found another way. When a page is deliberately removed or altered, that is a distinct
+fact, and it should be established with evidence such as dated snapshots.

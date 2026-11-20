@@ -55,11 +55,8 @@ rules require statements on several of them.
 - Future use. Whether your samples and data, with identifiers removed, may be used for other
   research or shared with other researchers without asking you again. Some forms offer a choice.
   Others say it will happen.
-- Broad consent. Some studies ask for permission to store identifiable samples for a wide range of
-  future research not yet specified.
 - Commercial use. Whether samples may be used to develop products for profit and whether you will
   share in any profit. The usual answer is that you will not.
-- Whole genome sequencing. Whether the research will or might include it.
 - Return of results. Whether findings relevant to your health will be given to you, and under what
   conditions. Many studies return nothing. Research laboratories are often not certified to produce
   clinical results.
@@ -67,8 +64,6 @@ rules require statements on several of them.
   access is open or controlled.
 - Re-identification. Removing a name does not make genetic data anonymous in a strict sense, because
   a genome is unique to a person. Good forms acknowledge this.
-- Relatives. Genetic information about you is also partly information about your family, who are not
-  signing the form.
 - Withdrawal. What happens to samples and data if you leave. Unused samples can usually be
   destroyed. Data already analyzed or shared generally cannot be recalled.
 - Legal protections. Forms may mention a Certificate of Confidentiality, which limits compelled
@@ -79,7 +74,6 @@ rules require statements on several of them.
 ## Who is asking, and who pays
 
 - Find the name of the principal investigator, the institution, and the sponsor or funder.
-- Look for any statement of financial interest held by the researchers or the institution.
 - Consider your relationship to the person inviting you. A student asked by a professor, an employee
   asked by a supervisor, or a patient asked by their own doctor may feel less free to refuse. The
   rules call for extra care in such situations. You are entitled to say no, and to take the form
@@ -89,12 +83,10 @@ rules require statements on several of them.
 
 1. What exactly will be collected from me, and how many times?
 2. Who will have access to my identifiable information?
-3. Where will my samples be stored, for how long, and who controls them?
-4. Will my data or samples go to other institutions or to companies?
-5. Will I be told about results that matter for my health?
-6. If I withdraw, what can be destroyed and what cannot?
-7. Who reviewed and approved this study, and how do I reach them?
-8. May I have a copy of the signed form?
+3. Will my data or samples go to other institutions or to companies?
+4. Will I be told about results that matter for my health?
+5. If I withdraw, what can be destroyed and what cannot?
+6. Who reviewed and approved this study, and how do I reach them?
 
 ## What a consent form can tell you
 
@@ -109,14 +101,12 @@ rules require statements on several of them.
 - Whether the study was conducted as described.
 - Whether research took place without a form at all. Some research is exempt from these rules, and
   some activity is not classed as research.
-- The scientific merit of the study.
 
 ## Common mistakes
 
 - Treating the signature as the consent. Consent is the whole process, including the conversation.
 - Assuming "de-identified" means untraceable.
 - Assuming research participation includes medical care or individual results.
-- Skipping the sections on future use because the present study seems harmless.
 - Believing a signature waives legal rights. Federal rules bar consent forms from including language
   that waives a participant's legal rights.
 

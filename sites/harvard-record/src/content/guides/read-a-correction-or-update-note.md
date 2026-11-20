@@ -96,9 +96,7 @@ If you keep a public record of your own, the same standards apply.
 
 - Fix the error promptly.
 - Leave a dated note stating what was wrong and what is now right.
-- Do not restate a damaging error in more detail than needed to identify it.
 - Distinguish corrections from updates.
-- Keep a log of changes in one place.
 
 This site's /methodology/ page describes how its own corrections and updates are recorded.
 
@@ -118,5 +116,3 @@ the fix.
 - Treating an update as a correction.
 - Assuming that an article with no correction note contains no errors.
 - Overlooking a retraction notice on a scholarly article because the original remains online.
-- Failing to save a copy of a page that later changed.
-- Quoting from memory or from a secondary quotation after the source was revised.

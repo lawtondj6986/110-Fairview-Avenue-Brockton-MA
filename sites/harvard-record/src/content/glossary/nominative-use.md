@@ -21,5 +21,5 @@ statement of independence helps, though it is not decisive by itself.
 
 The concept explains how news reports, scholarship and independent reference works can name the
 institutions they discuss. It does not permit imitating an institution's visual identity or implying
-official status . It is also a trademark doctrine only. It does not address defamation, privacy or
+official status. It is also a trademark doctrine only. It does not address defamation, privacy or
 copyright. This is a general description, not legal advice.
