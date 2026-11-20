@@ -69,9 +69,6 @@ behind a paywall, say so.
 Nonprofit filings. Give the organization's legal name, its Employer Identification Number, the form
 type, the fiscal year end and the part or schedule.
 
-Records obtained by request. Give the agency, the request number, the date of the release letter and
-the page. Where possible, publish the released records so readers can see them.
-
 Archived web pages. Give the original address, the archived address and the capture date.
 
 ## Cite what you actually read

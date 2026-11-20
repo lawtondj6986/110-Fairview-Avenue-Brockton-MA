@@ -120,9 +120,6 @@ was changed.
 Apologize where harm was done. One direct sentence is enough. Do not apologize in a way that
 restates the claim.
 
-Do not blame. Leave out references to who reported the error or who made it, unless the person who
-reported it asks to be credited.
-
 Date everything. Use the date the change was published. If a page is corrected more than once, keep
 each notice, newest first.
 
@@ -148,9 +145,3 @@ Fixing a typo, repairing a broken link or adjusting layout does not change meani
 no notice. Decide this rule in advance and write it down. If an edit changes a name, a number, a
 date, a quotation, an attribution, an evidence state or a grade, it is substantive and gets a
 notice, however small it looks.
-
-## Adapting the template
-
-A small project can keep the log as a single dated list using the compact form. A larger one should
-keep the full entry privately and publish the compact form. In either case, the public log should
-let a reader see every substantive change the work has undergone, in date order, without asking.

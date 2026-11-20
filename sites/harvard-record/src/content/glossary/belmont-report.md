@@ -10,8 +10,8 @@ links:
 
 The Belmont Report is a short statement of ethical principles for research involving people. It was
 issued in 1979 by a national commission that Congress created in 1974, after public disclosure of
-abusive research practices, most prominently a decades-long U.S. government study in which Black men
-with syphilis were left untreated.
+serious abuses in research, including studies in which participants were deceived or denied
+available treatment.
 
 The report identifies three principles and links each to a practical requirement. Respect for
 persons means treating individuals as autonomous and protecting those with diminished autonomy. It

@@ -7,8 +7,7 @@ related: ["primary-source", "secondary-source", "corroboration", "stated-intent-
 ---
 
 A reliability grade is a short label attached to a source that tells the reader how strong that kind
-of source is. Grading schemes are used in intelligence analysis, in evidence-based medicine and in
-some reference works. Their purpose is to make the basis of each claim visible and to stop weak
+of source is. The purpose of grading is to make the basis of each claim visible and to stop weak
 material from being presented with the same confidence as strong material.
 
 This site uses four grades, set out in full at `/methodology/`. In summary, A1 is a primary official

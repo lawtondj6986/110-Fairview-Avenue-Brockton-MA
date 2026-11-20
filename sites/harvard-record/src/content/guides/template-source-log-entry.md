@@ -122,9 +122,6 @@ depends on it as provisional.
 For a spreadsheet, turn each field into a column and keep one row per source. The long fields
 (summary, key passages, notes) can live in a linked document named by source ID.
 
-For a small project, a shorter entry will serve: ID, title, issuer, date, formal identifier,
-address, archived copy, grade with reason, and last checked. Do not drop the last three.
-
 For a large document release, log the release as one source with its own entry, and log each
 document you rely on as a separate entry that names the release as its parent and gives the page
 identifiers.

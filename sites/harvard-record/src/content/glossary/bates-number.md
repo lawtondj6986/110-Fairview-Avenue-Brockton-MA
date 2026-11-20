@@ -14,12 +14,10 @@ with zeros that increases by one with each page.
 
 Bates numbers are standard in litigation and investigations, where parties exchange thousands or
 millions of pages. They allow lawyers, witnesses and courts to be certain they are looking at the
-same page. A document is cited by its range, from the first page's number to the last. Government
-and congressional releases often carry similar control numbers.
-
-For a reader of released records, the number is the most reliable way to cite and find a specific
-page, and it helps to detect duplicates, since the same email may appear under several numbers. Its
-limits should be understood. A Bates number identifies a page within a production. It says nothing
-about the document's truth or importance. Gaps in a sequence may reflect withheld or privileged
-material, a different release, or nothing more than numbering practice. The prefix indicates who
-produced a document, which is not always who wrote it.
+same page. A document is cited by its range, from the first page's number to the last. For a reader
+of released records, the number is the most reliable way to cite and find a specific page, and it
+helps to detect duplicates, since the same email may appear under several numbers. Its limits should
+be understood. A Bates number identifies a page within a production. It says nothing about the
+document's truth or importance. Gaps in a sequence may reflect withheld or privileged material, a
+different release, or nothing more than numbering practice. The prefix indicates who produced a
+document, which is not always who wrote it.

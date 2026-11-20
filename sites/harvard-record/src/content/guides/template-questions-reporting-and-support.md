@@ -28,9 +28,6 @@ is at `/campus-safety/`.
 - The campus safety or police department is responsible for the annual security report and the crime
   log.
 
-Most of the answers should already be published. Asking tests whether staff can explain the process
-clearly, which matters on the day someone needs it.
-
 ## The template
 
 ```text
@@ -116,34 +113,21 @@ Choose your questions. Twenty-two is the full list. For a campus visit or a shor
 or six. Questions 5, 6, 8, 11 and 18 often reveal the most about how well a process is understood by
 the people who run it.
 
-Ask in person as well. At a visit or an information session, asking one or two of these aloud is
-reasonable. The questions concern policy, and you do not need to explain why you are asking.
-
 Do not share personal details. This template is for learning about process. Do not include details
 of any incident in a general enquiry. Some staff are required to pass on what they are told about an
 incident, which is why question 5 comes early. If you need to talk about something that happened,
 start with a confidential resource.
 
-Adapt the terms. Institutions use different names for offices and roles. Use the ones on the
-institution's own website.
-
-Graduate and professional students. Add a question on how the process works where the other person
-supervises your research, funding or clinical placement, and what interim arrangements protect your
-academic progress.
-
 ## Reading the answers
 
 - Specific and consistent answers are a good sign. Compare what you are told with the published
   policy. Differences are worth a follow-up question.
-- A link is an acceptable answer if the linked page answers the question.
 - A policy describes what is supposed to happen. In the terms used at `/methodology/`, it is stated
   intent. It does not show how cases are handled in practice.
 - Statistics need context. Published crime figures count reports that fall within defined categories
   and locations. A low number can reflect few incidents or few reports. A higher number can reflect
   a campus where people feel able to report. Guides in the Reading documents series under `/guides/`
   cover how to read a security report.
-- Slow or vague replies tell you something about responsiveness, though a busy office at a peak time
-  of year may simply be slow.
 
 ## What these questions cannot tell you
 

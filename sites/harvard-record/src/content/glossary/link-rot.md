@@ -12,12 +12,11 @@ related problem is content drift: the address still works, but the page now says
 from what it said when it was cited.
 
 Studies of scholarly articles, court opinions and news sites have repeatedly found that a
-substantial share of links stop working within a few years. The practical consequence is that a
-citation consisting only of a web address is fragile. Standard countermeasures are to cite stable
-identifiers where they exist, such as an official docket number, a statutory citation or a
-persistent identifier for a journal article, to record the title, author, publisher and date so the
-item can be found again, to save an archive snapshot, and to note the date on which the link was
-last checked.
+substantial share of links stop working within a few years. A citation consisting only of a web
+address is therefore fragile. Standard countermeasures are to cite stable identifiers where they
+exist, such as an official docket number, a statutory citation or a persistent identifier for a
+journal article, to record the title, author, publisher and date so the item can be found again, to
+save an archive snapshot, and to note the date on which the link was last checked.
 
 A dead link does not mean the source was invented or retracted. Most link rot is the ordinary result
 of website maintenance. It also does not mean that the claim it supported is now unsupported, only

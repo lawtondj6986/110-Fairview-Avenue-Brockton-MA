@@ -116,12 +116,6 @@ Ask for the log first. Item 1 is quick for an office to produce and tells you wh
 you are unsure of the scope, file item 1 alone, then file a second request for the documents of
 specific cases by number.
 
-Use the office's vocabulary. Document names differ between agencies and change over time. Take the
-terms from the office's published case processing manual.
-
-Set a sensible date range. A decade of records for a large institution can run to many thousands of
-pages. Narrow by years, by statute or by issue.
-
 Volunteer the privacy redactions. Personal information about complainants, students and witnesses
 will be withheld under FOIA's privacy exemptions whatever you write. Saying at the outset that you
 do not want it removes a point of friction, and it is the right position ethically.
@@ -139,10 +133,6 @@ unchanged.
 - A resolution agreement is an agreement. Institutions often enter them without admitting a
   violation, and the document usually says so. Read the resolution letter alongside it to see what
   the office did and did not conclude.
-- A complaint is an allegation. If a complaint is released, it records what the complainant
-  asserted.
-- Dates matter. Distinguish the date of the conduct alleged, the date the complaint was filed, the
-  date the case was opened and the date it was resolved.
 - "No responsive records" describes the search. It does not show that no complaint was ever made,
   since complaints can also be made to other agencies, to state bodies or to the institution itself.
 

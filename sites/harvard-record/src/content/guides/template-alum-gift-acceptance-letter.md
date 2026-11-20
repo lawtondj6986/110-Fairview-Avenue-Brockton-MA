@@ -117,9 +117,6 @@ in general terms.
 Be accurate about yourself. Give your real degree and year. Do not overstate your giving or your
 standing.
 
-Write as one person. A letter from an individual is answered differently from a campaign. If several
-alumni wish to ask, a single jointly signed letter is better than many identical ones.
-
 Adapt for public universities. A public university is usually subject to its state's public records
 law, so its policies and some gift records may be obtainable by a formal request. See the public
 records request template in this series. Rules on donor confidentiality at public universities and

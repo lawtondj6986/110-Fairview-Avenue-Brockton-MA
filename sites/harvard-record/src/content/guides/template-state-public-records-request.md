@@ -129,17 +129,7 @@ investigations, attorney-client communications and internal deliberations. Feder
 law also restricts what public colleges may release about identifiable students. The details are
 state-specific.
 
-Keep it narrow. A request for one contract, or for correspondence between two named offices over six
-months, is answered far faster than "all records concerning" a subject.
-
 ## After you send it
-
-- Note the date sent and the response date the law sets.
-- If the deadline passes, send a short, polite reminder citing your original request.
-- If you receive a denial or heavy redactions, the response should cite the exemption. Appeal routes
-  differ: some states have an administrative appeal to a state official or commission, and others
-  require going to court. The agency's response or the state's guidance will say which.
-- Keep the agency's cover letter with the records and cite both.
 
 ## Using the records
 

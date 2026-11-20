@@ -110,14 +110,6 @@ Unticked boxes are information. Leave a box empty when a check was not done or c
 and say why in the open questions field. A checklist with every box ticked by habit is worth less
 than one with honest gaps.
 
-Section C is a screen, not a proof. Internal consistency catches careless forgeries and mislabeled
-documents. A consistent document may still be inauthentic, and an authentic one may contain oddities
-with ordinary explanations, such as a letter printed later on newer letterhead.
-
-Treat metadata carefully. Record exactly which fields you read. Creation and modification dates
-often reflect when a paper original was scanned or a file was converted. Author fields often name
-whoever owns the software. Draw no conclusion from metadata alone.
-
 Section E separates authenticity from meaning. A genuine complaint is still a set of allegations. A
 genuine draft is still a draft. Deciding what kind of record you hold, and the highest evidence
 state it can support, prevents an authentic document from being used for more than it shows. The
@@ -131,18 +123,6 @@ The three decisions lead to different citations. An authenticated document is ci
 its formal identifier. A document you could not trace is not cited as a document: cite the
 established reporting that describes it, at the grade of that reporting. An unverified document is
 not cited at all.
-
-## Adapting the template
-
-- Court filings: add the court, the case number and the docket entry number, and check the filing's
-  later history (amended, struck, sealed, or ruled on).
-- Emails: add fields for sender, recipients, copied recipients, time zone and position in the
-  thread, and check whether a fuller version of the thread exists.
-- Financial and tax filings: add the entity's legal name and identifying number, the period covered
-  and whether an amended filing exists.
-- Web pages: add the capture date and note whether the page has changed since.
-- Batches: for a large release, complete section A once for the release as a whole, then sections B
-  to G for each document you rely on.
 
 ## Filing
 

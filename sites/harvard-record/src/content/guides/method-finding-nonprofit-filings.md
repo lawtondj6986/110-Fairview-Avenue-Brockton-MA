@@ -87,8 +87,6 @@ The limits are significant, and they matter most for research on donors.
 - Intermediaries obscure origins. A gift routed through a donor-advised fund (an account at a
   sponsoring charity from which a donor recommends grants) appears as a grant from the sponsor,
   without the donor's name.
-- Categories are broad and self-reported. Organizations classify their own expenses, and practices
-  differ.
 - The data is late. Returns are due months after the fiscal year ends, extensions are common, and
   publication takes longer still. The most recent available return may describe a period two or more
   years past.

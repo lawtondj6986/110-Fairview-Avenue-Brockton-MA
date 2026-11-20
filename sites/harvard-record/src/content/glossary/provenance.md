@@ -5,10 +5,10 @@ category: "Records and sourcing"
 related: ["authenticity-vs-accuracy", "metadata", "sample-custody", "document-release", "mirror-site"]
 ---
 
-Provenance is the record of where something came from and how it got here. The term comes from
-archives and the art trade. For a document, provenance covers who created it and when, in what
-system or file it was kept, who has had custody since, and by what route, such as a court filing, an
-official release or a leak, it became available.
+Provenance is the record of where something came from and how it got here. For a document,
+provenance covers who created it and when, in what system or file it was kept, who has had custody
+since, and by what route, such as a court filing, an official release or a leak, it became
+available.
 
 Provenance supports judgments about authenticity and meaning. A document obtained from the official
 website of the body that released it has clear provenance. The same text copied on an anonymous site

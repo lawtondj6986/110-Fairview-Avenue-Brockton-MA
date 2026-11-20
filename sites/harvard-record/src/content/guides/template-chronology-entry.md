@@ -62,14 +62,6 @@ Date checked:       [YYYY-MM-DD the source was opened and compared; or
 Notes:              [anything a later reader needs]
 ```
 
-For a spreadsheet, use these column headings:
-
-```text
-ID | Event date | Precision | What happened | Kind | State | Who |
-Source and pinpoint | Document date | Made public | Grade |
-Conflicts | Linked entries | Date checked
-```
-
 ## Worked examples
 
 These use invented, generic facts.
@@ -157,11 +149,3 @@ the entry is used.
   only the significant filings and rulings carried across.
 - For long periods with few records, add a scope note to the chronology stating which document sets
   it draws on, so that empty stretches are not read as periods when nothing happened.
-- For published timelines, show the precision and the evidence state to readers, not only in your
-  working file.
-
-## Maintenance
-
-Reread the whole chronology in date order after every batch of new entries. Impossible sequences,
-such as a reply dated before the message it answers, usually reveal a misread date. Never delete an
-entry. Mark it withdrawn or superseded, with the date and reason.

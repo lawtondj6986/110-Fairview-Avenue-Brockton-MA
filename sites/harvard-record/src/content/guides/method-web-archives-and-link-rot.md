@@ -51,9 +51,6 @@ When a link is dead or a page has changed:
 - if the exact address has no captures, try the site's home page or parent section from the same
   period and navigate within the archive.
 
-If you have only a description of the page, search for a distinctive phrase in quotation marks. The
-content may have moved to a new address on the same site.
-
 ## What a capture does and does not prove
 
 A capture is good evidence that a page at that address displayed that content when the archive's
