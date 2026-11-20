@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import Cite from '../components/Cite.astro';
+import Grade from '../components/Grade.astro';
+import { comparison } from '../data/comparison';
+---
+<Base
+  title="Cross-institutional comparison"
+  description="Harvard’s Program for Evolutionary Dynamics, the MIT Media Lab and Harvard Medical School compared on funding, access, DNA activity and institutional response."
+  eyebrow="Comparison"
+  lede="Three places, one donor, three different patterns. The table uses the same questions for each so the differences are visible."
+  reviewed="2026-11-20"
+  basis="Harvard’s 2020 report; MIT’s 2020 report; CNN and STAT"
+  toc={false}
+>
+  <div class="table-wrap full">
+    <table class="stack">
+      <caption>Each cell is sourced. On a phone, the table becomes one card per question.</caption>
+      <thead>
+        <tr><th>Element</th>{comparison.columns.map((c) => <th>{c}</th>)}</tr>
+      </thead>
+      <tbody>
+        {comparison.rows.map((r) => (
+          <tr>
+            <th>{r.element}</th>
+            {r.cells.map((cell, i) => (
+              <td data-label={comparison.columns[i]}>
+                <Fragment set:html={cell.text} />{cell.cites.map((id) => <Cite id={id} />)}
+                {cell.grade && <> <Grade g={cell.grade} /></>}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="reading">Reading the table</h2>
+  <ul>
+    <li><strong>Harvard’s program</strong> is the deepest relationship: the largest gift, the most visits, and the only one with standing physical access. It involved no direct money after 2008 and no genetic activity.</li>
+    <li><strong>MIT’s Media Lab</strong> is smaller in every measure but is the only one of the three that accepted his own money after the conviction, with the knowledge of senior administrators.</li>
+    <li><strong>Harvard Medical School</strong> is where the genetics contact sits. The one confirmed sequencing job was invoiced by a hospital physician who was not a Harvard employee.</li>
+  </ul>
+  <p>
+    Both institutional reports were written before the 2026 document release. Each university has since faced reporting
+    that its review was incomplete, and Harvard’s second review had not reported when this page was last
+    checked.<Cite id="crimson-2026-hms-rating" /><Cite id="tech-2026-mit" />
+  </p>
+</Base>

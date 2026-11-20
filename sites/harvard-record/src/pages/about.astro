@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config';
+---
+<Base
+  title="About, disclaimer and corrections"
+  description="Who publishes this site, its independence from Harvard University, and how to request a correction."
+  eyebrow="About"
+  lede="An independent reference on what public records show about donor influence and institutional access at Harvard University."
+  reviewed="2026-11-20"
+>
+  <h2 id="disclaimer">Non-affiliation disclaimer</h2>
+  <p><strong>{site.disclaimerLong}</strong></p>
+  <p>
+    This is not the website of the Harvard Alumni Association or of any alumni club. Harvard’s official alumni site is
+    alumni.harvard.edu. The site does not use Harvard’s shield, seal, colours or typefaces, and it does not solicit
+    donations, membership or personal information.
+  </p>
+
+  <h2 id="purpose">Purpose</h2>
+  <p>
+    Universities publish a great deal about themselves. Official reviews, court filings and document releases are
+    harder to find and to read together. This site gathers that record on one subject so that prospective students,
+    students, alumni and researchers can read it in one place, with the strength of each source made visible.
+  </p>
+  <p>It takes no position on what any reader should conclude about the University or any person named.</p>
+
+  <h2 id="who">Publisher</h2>
+  <p>
+    Published by {site.publisher}. The site carries no advertising and receives no funding from Harvard University or
+    from any person or organisation discussed on it.
+  </p>
+
+  <h2 id="corrections">Corrections policy</h2>
+  <p>
+    If something here is wrong, incomplete or unfair, write to
+    <a href={`mailto:${site.correctionsEmail}`}>{site.correctionsEmail}</a>. Please include the page, the sentence, and
+    a public source we can check.
+  </p>
+  <ul>
+    <li>Every request is read. Requests from people named on the site are handled first.</li>
+    <li>Confirmed errors are corrected on the page and recorded in the <a href="/updates/">update log</a> with a description of what changed.</li>
+    <li>A person or institution discussed here may send a response for inclusion. Responses are added alongside the relevant passage.</li>
+    <li>Material is removed where it cannot be supported by a public source at grade A2 or above.</li>
+  </ul>
+
+  <h2 id="people">A note on people named</h2>
+  <p>
+    Many people appear in the underlying records for ordinary reasons: they received a gift, attended a meeting, or
+    were mentioned in someone else’s email. Appearing in a document, or on this site, is not evidence of wrongdoing.
+    Where an institution has made a finding about a person, the finding is quoted and attributed. Where it has not,
+    the site says so.
+  </p>
+
+  <h2 id="legal">Use of names and marks</h2>
+  <p>
+    “Harvard” and related names are trademarks of the President and Fellows of Harvard College. They are used here
+    only to identify the institution under discussion. Quotations are brief and attributed. Links to third-party sites
+    are provided for verification, and this site is not responsible for their content.
+  </p>
+</Base>

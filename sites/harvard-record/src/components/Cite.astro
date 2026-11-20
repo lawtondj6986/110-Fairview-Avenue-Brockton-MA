@@ -1,0 +1,11 @@
+---
+/**
+ * Inline citation marker. The layout numbers these per page in order of first
+ * appearance and builds the reference list from them, so an editor only ever
+ * writes <Cite id="source-id" /> (optionally with loc="p. 12").
+ * An id that is not in src/data/sources.ts fails the build.
+ */
+interface Props { id: string; loc?: string }
+const { id, loc } = Astro.props;
+---
+<sup data-cite={id} data-loc={loc}></sup>

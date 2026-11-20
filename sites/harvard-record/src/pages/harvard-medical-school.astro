@@ -1,0 +1,140 @@
+---
+import Base from '../layouts/Base.astro';
+import Cite from '../components/Cite.astro';
+import Grade from '../components/Grade.astro';
+import State from '../components/State.astro';
+import Callout from '../components/Callout.astro';
+import Timeline from '../components/Timeline.astro';
+import { hms } from '../data/timelines';
+---
+<Base
+  title="Harvard Medical School, George Church and Joseph Thakuria"
+  description="What public records show about introduced-donor gifts to George Church, Epstein’s enrolment in the Personal Genome Project, the 2013 tissue-sample dispute and the June 2014 sequencing invoice."
+  eyebrow="Harvard Medical School · Genetics"
+  lede="The medical school is where the record comes closest to genetics. It shows gifts from introduced donors, enrolment as a research subject, a 2013 dispute over a tissue sample, and one small sequencing job. The larger proposals on the same invoice were never funded."
+  reviewed="2026-11-20"
+  basis="Harvard’s 2020 report; CNN and STAT reporting on Justice Department records"
+>
+  <h2 id="summary">Summary</h2>
+  <p>
+    Professor George Church leads a genetics laboratory at Harvard Medical School and founded the Personal Genome
+    Project, a study in which volunteers share their genomes and tissue for research. Epstein’s foundation supported
+    his lab before the 2008 conviction, and Professor Church stayed in contact afterward. He apologised publicly for
+    that in 2019.<Cite id="stat-2019-church" />
+  </p>
+  <p>
+    Harvard’s 2020 report records that donors Epstein had introduced gave $2 million for Professor Church’s work
+    between 2010 and 2015.<Cite id="harvard-2020-report" /> Documents released by the Justice Department in 2026 added
+    three things: Epstein had been enrolled as a research subject, a 2013 attempt to prioritise his sample caused a
+    dispute inside the lab, and a physician colleague sent him a priced list of genetic services in
+    2014.<Cite id="stat-2026-tissue" /><Cite id="cnn-2026-thakuria" />
+  </p>
+
+  <h2 id="timeline">Timeline</h2>
+  <Timeline events={hms} id="hms" label="Harvard Medical School timeline" />
+
+  <h2 id="tissue">The 2013 tissue-sample dispute</h2>
+  <p>
+    STAT reported that in 2013 there was a push in the Church lab to move one person’s tissue sample ahead of samples
+    that had waited years for sequencing. When lab members learned whose it was, they objected, and the objections
+    stopped any special treatment. Professor Church confirmed the episode, said he had not personally pressed for
+    priority, and said he “made the wrong call” on conflicting information.<Cite id="stat-2026-tissue" />
+  </p>
+  <p>
+    A follow-up reported that cell lines containing Epstein’s DNA were created in 2013, that the present whereabouts of
+    those cells are unknown, and that the consent date on the study profile believed to be his was altered on 31 January
+    2026 by a person not identified.<Cite id="stat-2026-mystery" /> These points rest on one outlet’s reporting and are
+    graded accordingly.
+  </p>
+
+  <h2 id="invoice">The June 2014 invoice</h2>
+  <p>
+    Dr Joseph Thakuria was then a senior physician at Massachusetts General Hospital and a colleague of Professor
+    Church. A Harvard representative told CNN he was not directly employed by Harvard or its Wyss Institute. He said
+    Professor Church introduced Epstein to him as a potential Personal Genome Project research subject.<Cite id="cnn-2026-thakuria" />
+  </p>
+  <p>
+    The invoice he sent in June 2014 is one document with two very different parts. The table separates them.
+  </p>
+  <div class="table-wrap full">
+    <table class="stack">
+      <caption>Line items on the June 2014 invoice, as reported from the Justice Department release</caption>
+      <thead><tr><th>Item</th><th>Amount</th><th>Evidence state</th><th>What the record shows</th><th>Grade</th></tr></thead>
+      <tbody>
+        <tr>
+          <th>Exome sequencing from a saliva sample</th>
+          <td data-label="Amount">$1,000</td>
+          <td data-label="Evidence state"><State s="activity" /></td>
+          <td data-label="What the record shows">Part of the initial $2,000. Dr Thakuria told CNN a $2,000 cheque covered DNA sequencing.<Cite id="cnn-2026-thakuria" /></td>
+          <td data-label="Grade"><Grade g="A2" /></td>
+        </tr>
+        <tr>
+          <th>Sequencing of fibroblasts already in storage</th>
+          <td data-label="Amount">$1,000</td>
+          <td data-label="Evidence state"><State s="activity" /></td>
+          <td data-label="What the record shows">The second half of the initial $2,000.<Cite id="cnn-2026-thakuria" /></td>
+          <td data-label="Grade"><Grade g="A2" /></td>
+        </tr>
+        <tr>
+          <th>Stem-cell line creation</th>
+          <td data-label="Amount">From $10,000</td>
+          <td data-label="Evidence state"><State s="intent" /></td>
+          <td data-label="What the record shows">Priced on the invoice. CNN found no record of payment.<Cite id="cnn-2026-thakuria" /></td>
+          <td data-label="Grade"><Grade g="A2" /></td>
+        </tr>
+        <tr>
+          <th>“Personalized longevity studies” using gene editing</th>
+          <td data-label="Amount">Priced</td>
+          <td data-label="Evidence state"><State s="intent" /></td>
+          <td data-label="What the record shows">A proposal to use gene editing on cells. No record that it was funded or performed.<Cite id="cnn-2026-thakuria" /></td>
+          <td data-label="Grade"><Grade g="A2" /></td>
+        </tr>
+        <tr>
+          <th>“The Venus Project”</th>
+          <td data-label="Amount">$160,000</td>
+          <td data-label="Evidence state"><State s="intent" /></td>
+          <td data-label="What the record shows">The largest single item. Dr Thakuria called it a preliminary idea of Epstein’s that “never went anywhere” and was never funded.<Cite id="cnn-2026-thakuria" /></td>
+          <td data-label="Grade"><Grade g="A2" /></td>
+        </tr>
+        <tr>
+          <th>All proposed work together</th>
+          <td data-label="Amount">$193,400</td>
+          <td data-label="Evidence state"><State s="intent" /></td>
+          <td data-label="What the record shows">The total had everything been commissioned. Only the first $2,000 is supported by any statement of payment.<Cite id="cnn-2026-thakuria" /></td>
+          <td data-label="Grade"><Grade g="A2" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <Callout title="How firm is the $2,000?">
+    <p>
+      The payment rests on Dr Thakuria’s own statement that a $2,000 cheque covered sequencing. CNN reported that it
+      found no record of Epstein paying for the proposed services beyond that. We therefore mark the sequencing as
+      documented activity and everything else on the invoice as stated intent. No source reviewed here describes the
+      results of the sequencing or any use made of them.
+    </p>
+  </Callout>
+  <p>
+    Massachusetts General Hospital said it has no record of approving Dr Thakuria for the studies described in the
+    emails, and that he left the hospital in 2022. Neither he nor Professor Church is accused of wrongdoing in the
+    reporting.<Cite id="cnn-2026-thakuria" />
+  </p>
+
+  <h2 id="rating">The 2012 donor rating</h2>
+  <p>
+    In May 2026 the Crimson reported that Harvard Medical School’s development system generated a $75 million “active”
+    donor rating for Epstein in July 2012, four years after Harvard had stopped accepting his gifts, and that the rating
+    did not appear in the 2020 report.<Cite id="crimson-2026-hms-rating" /> A rating of this kind is an estimate of
+    giving capacity. It does not show that a gift was sought or received. The report rests on a single outlet, and
+    Harvard declined to comment.
+  </p>
+
+  <h2 id="limits">What the record does not show</h2>
+  <ul>
+    <li>No gift from Epstein to Harvard Medical School after 2008.</li>
+    <li>No evidence that the stem-cell, gene-editing or “Venus” proposals were carried out.</li>
+    <li>No published results from the 2014 sequencing and no documented downstream use.</li>
+    <li>No disciplinary finding against Professor Church or Dr Thakuria.</li>
+  </ul>
+  <p>For how this fits with the other DNA-related material, see the <a href="/dna-genetics/">DNA and genetics record</a>.</p>
+</Base>

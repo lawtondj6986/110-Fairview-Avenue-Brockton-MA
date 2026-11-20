@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import { updates } from '../data/updates';
+---
+<Base title="Update log" description="A public record of every edition, update and correction made to this site." eyebrow="Standards" lede="Every substantive change to the site is listed here, newest first. Corrections state what was wrong." toc={false}>
+  <div class="table-wrap full">
+    <table class="stack">
+      <thead><tr><th>Date</th><th>Type</th><th>Change</th></tr></thead>
+      <tbody>{updates.map((u) => (<tr><th><time datetime={u.date}>{u.date}</time></th><td data-label="Type">{u.kind}</td><td data-label="Change">{u.text}</td></tr>))}</tbody>
+    </table>
+  </div>
+</Base>

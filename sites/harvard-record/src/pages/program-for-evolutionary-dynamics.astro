@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import Cite from '../components/Cite.astro';
+import Grade from '../components/Grade.astro';
+import State from '../components/State.astro';
+import Callout from '../components/Callout.astro';
+import Timeline from '../components/Timeline.astro';
+import { ped } from '../data/timelines';
+---
+<Base
+  title="Program for Evolutionary Dynamics"
+  description="Timeline of Jeffrey Epstein’s funding of and access to Harvard’s Program for Evolutionary Dynamics, and the University’s response, sourced mainly to Harvard’s own 2020 review."
+  eyebrow="Harvard · Faculty of Arts and Sciences"
+  lede="Epstein’s $6.5 million gift founded this research program in 2003. Harvard took no money from him after 2008, yet he kept a key card and the use of an office, and visited more than 40 times before 2018. Harvard closed the program in 2021."
+  reviewed="2026-11-20"
+  basis="Harvard’s 2020 General Counsel report"
+>
+  <ul class="figures full">
+    <li><span class="num">$6.5M</span><span class="lbl">Founding gift, 2003<Cite id="harvard-2020-report" /></span></li>
+    <li><span class="num">40+</span><span class="lbl">Visits to the Program’s offices, 2010 to 2018<Cite id="harvard-2020-report" /></span></li>
+    <li><span class="num">$7.5M</span><span class="lbl">From introduced donors for Professor Nowak’s work, 2010 to 2015<Cite id="harvard-2020-report" /></span></li>
+    <li><span class="num">2021</span><span class="lbl">Program closed by the Faculty of Arts and Sciences<Cite id="crimson-2021-nowak" /></span></li>
+  </ul>
+
+  <h2 id="summary">Summary</h2>
+  <p>
+    The Program for Evolutionary Dynamics was a mathematical biology group led by Professor Martin Nowak. It was
+    established with a $6.5 million gift from Epstein in 2003 and worked from a private office building at One Brattle
+    Square in Harvard Square.<Cite id="harvard-2020-report" />
+  </p>
+  <p>
+    Harvard’s review counted $9.1 million in gifts from Epstein to the whole University between 1998 and 2008. After
+    his 2008 conviction, President Drew Faust decided that Harvard would accept nothing further from him, and the review
+    found that it did not.<Cite id="harvard-2020-report" /><Cite id="hm-2020-report" /> The Program is where the
+    relationship continued in other forms: physical access, a presence on the Program’s website, and gifts from donors
+    he had introduced.
+  </p>
+
+  <Callout title="A figure that is often misread">
+    <p>
+      The $9.1 million is the total of Epstein’s gifts to Harvard, all received by 2008. It is not the amount given to
+      this Program, and none of it arrived after the conviction. Some coverage gives the total as $9,179,000 or
+      “nearly $9.2 million”; the difference is rounding.<Cite id="crimson-2020-report" />
+      The money that reached Professor Nowak’s work after 2008 came from other donors.
+    </p>
+  </Callout>
+
+  <h2 id="timeline">Timeline: funding, access and response</h2>
+  <Timeline events={ped} id="ped" label="Program for Evolutionary Dynamics timeline" />
+
+  <h2 id="access">What the access consisted of</h2>
+  <p>Harvard’s review describes four things.<Cite id="harvard-2020-report" /></p>
+  <ul>
+    <li><strong>Visits.</strong> The records are imprecise. The review understood that he came to the Program’s offices more than 40 times between 2010 and 2018.</li>
+    <li><strong>Entry.</strong> He had a visitor key card, the passcode, and a key to an individual office.</li>
+    <li><strong>An office.</strong> The Program informally called one room “Jeffrey’s Office.” Professor Nowak told reviewers that other visitors used it too.</li>
+    <li><strong>A web presence.</strong> The Program’s site linked to his foundation’s websites from 2013 and carried a page about him in 2014, until a complaint led to its removal.</li>
+  </ul>
+  <p>
+    The review said he used the visits mainly to meet prominent academics from the Cambridge area. It reported that it
+    “did not find evidence” that he engaged with undergraduate students during the visits or as a Visiting
+    Fellow.<Cite id="harvard-2020-report" /> That sentence is limited to undergraduates and to what the review could find.
+    The Crimson’s account of the report notes that he attended one of Professor Nowak’s undergraduate
+    classes.<Cite id="crimson-2020-report" />
+  </p>
+
+  <h2 id="contact">Volume of contact</h2>
+  <p>
+    After the 2026 Justice Department release, reporters searching the public database found Professor Nowak’s name in
+    more than 4,000 results.<Cite id="ihe-2026-names" /> Outlets describe the unit differently (documents, results,
+    appearances), and search hits include duplicates and forwarded threads. The number shows that contact was
+    frequent. It is not a count of messages, and it says nothing by itself about their content.
+  </p>
+
+  <h2 id="response">Institutional response</h2>
+  <div class="table-wrap full">
+    <table class="stack">
+      <caption>What Harvard did, and when</caption>
+      <thead><tr><th>Date</th><th>Action</th><th>Status</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><th>2008</th><td data-label="Action">No further gifts accepted from Epstein</td><td data-label="Status"><State s="verified" /></td><td data-label="Source"><Grade g="A1" /><Cite id="harvard-2020-report" /></td></tr>
+        <tr><th>2010 to 2018</th><td data-label="Action">Physical access to the Program continued; the review found no evidence that University leadership knew of the website page</td><td data-label="Status"><State s="verified" /></td><td data-label="Source"><Grade g="A1" /><Cite id="harvard-2020-report" /></td></tr>
+        <tr><th>May 2020</th><td data-label="Action">Report published; Professor Nowak placed on paid leave; unspent $200,937 redirected to survivor organisations</td><td data-label="Status"><State s="verified" /></td><td data-label="Source"><Grade g="A1" /><Cite id="bacow-2020" /></td></tr>
+        <tr><th>March 2021</th><td data-label="Action">Policy violations found; two-year restrictions; Program closed</td><td data-label="Status"><State s="verified" /></td><td data-label="Source"><Grade g="A2" /><Cite id="crimson-2021-nowak" /></td></tr>
+        <tr><th>March 2023</th><td data-label="Action">Restrictions lifted</td><td data-label="Status"><State s="activity" /></td><td data-label="Source"><Grade g="A2" /><Cite id="crimson-2023-nowak" /></td></tr>
+        <tr><th>February 2026</th><td data-label="Action">Second paid leave pending a formal investigation; outcome not published</td><td data-label="Status"><State s="activity" /></td><td data-label="Source"><Grade g="A2" /><Cite id="crimson-2026-nowak-leave" /></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="limits">What the record does not show</h2>
+  <ul>
+    <li>No genetic or DNA-related activity is tied to the Program in any source reviewed here.</li>
+    <li>The 2021 findings concerned professional conduct, campus access and endorsement policies. We found no published finding, either way, on research misconduct.</li>
+    <li>Professor Nowak is not accused of a crime. He has said he did not know of Epstein’s crimes and regrets the connection.<Cite id="hm-2026-nowak" /></li>
+    <li>The outcome of the investigation opened in 2026 was not public when this page was last reviewed.</li>
+  </ul>
+</Base>

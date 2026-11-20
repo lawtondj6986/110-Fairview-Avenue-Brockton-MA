@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+import Cite from '../components/Cite.astro';
+import Grade from '../components/Grade.astro';
+import State from '../components/State.astro';
+import Callout from '../components/Callout.astro';
+---
+<Base
+  title="Donor influence and introduced funding pathways"
+  description="How $9.5 million reached two Harvard faculty members from donors Jeffrey Epstein introduced after Harvard stopped accepting his own gifts, with a comparison to MIT."
+  eyebrow="Funding pathways"
+  lede="Harvard refused Epstein’s own money after 2008. Between 2010 and 2015, donors he had introduced gave $9.5 million to the same two faculty members. This page sets out what is documented about that route and what is not."
+  reviewed="2026-11-20"
+  basis="Harvard’s 2020 report; MIT’s 2020 Goodwin Procter report"
+>
+  <h2 id="pattern">The pattern</h2>
+  <p>A gift can reach a university by three routes. Harvard’s rules after 2008 closed only the first.</p>
+  <div class="table-wrap full">
+    <table class="stack">
+      <caption>Three routes, and what Harvard’s review found for each</caption>
+      <thead><tr><th>Route</th><th>After 2008</th><th>Evidence state</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><th>Direct gift from Epstein</th><td data-label="After 2008">None accepted. The total of $9.1 million was all received between 1998 and 2008.</td><td data-label="Evidence state"><State s="verified" /></td><td data-label="Source"><Grade g="A1" /><Cite id="harvard-2020-report" /></td></tr>
+        <tr><th>Gift from a donor he introduced</th><td data-label="After 2008">$7.5 million for Professor Nowak’s work and $2 million for Professor Church’s, 2010 to 2015.</td><td data-label="Evidence state"><State s="verified" /></td><td data-label="Source"><Grade g="A1" /><Cite id="harvard-2020-report" /></td></tr>
+        <tr><th>Non-financial standing</th><td data-label="After 2008">Key card, office use and website presence at one program; meetings with faculty.</td><td data-label="Evidence state"><State s="verified" /></td><td data-label="Source"><Grade g="A1" /><Cite id="harvard-2020-report" /></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    The review recorded that the introduced donors denied Epstein had directed their gifts, and it found no evidence
+    that he had. It also noted that his staff acted as intermediaries on some of them.<Cite id="harvard-2020-report" /><Cite id="crimson-2020-report" />
+    An introduction is therefore documented. Direction of the money is not.
+  </p>
+
+  <h2 id="black">The Leon Black pathway</h2>
+  <p>
+    The clearest example in the record is the financier Leon Black. Reporting on the 2020 review attributes $7 million
+    in unrestricted gifts for Professor Nowak’s work to Mr Black, his wife and their family foundation between 2011 and
+    2015.<Cite id="axios-2020-black" /> That $7 million sits inside the review’s $7.5 million total for all introduced
+    donors to Professor Nowak. A representative confirmed that Epstein introduced Mr Black to the research and said the
+    funds were not provided by Epstein.<Cite id="axios-2020-black" />
+  </p>
+  <Callout title="Two figures of $7.5 million that are not the same thing">
+    <p>
+      The $7.5 million in Harvard’s review is the sum given by all introduced donors for Professor Nowak’s work.
+      Separately, in 2018 the Debra and Leon Black Family Foundation gave $7.5 million to fund fellowships for veterans
+      and serving military at Harvard Kennedy School and other Harvard schools.<Cite id="hks-2018-black" /> We found no
+      public record connecting the fellowship gift to Epstein, and this site does not treat it as part of the
+      introduced-donor pathway.
+    </p>
+  </Callout>
+  <p>
+    Reporting in 2026 from the Justice Department release described further contacts around donations, including a 2014
+    biotechnology investment venture discussed between Epstein and Professor Church.<Cite id="cnn-2026-donations" /><Cite id="globe-2026-spotlight" />
+    A June 2026 letter from the ranking member of the House Judiciary Committee asserts that Harvard development staff
+    knew of and encouraged Epstein’s role in the Black gifts.<Cite id="raskin-2026" /> That is an assertion by the
+    letter’s authors. Harvard has not published a finding on it.
+  </p>
+
+  <h2 id="mit">Comparison: MIT Media Lab</h2>
+  <p>
+    MIT’s commissioned review, by the law firm Goodwin Procter, found a different route to a similar end. MIT did take
+    Epstein’s money after his conviction: of ten gifts totalling $850,000 between 2002 and 2017, nine came after 2008,
+    $525,000 to the Media Lab and $225,000 to Professor Seth Lloyd.<Cite id="mit-2020-report" /> Three vice-presidents
+    learned of the gifts in 2013 and allowed them to continue on informal conditions, including
+    anonymity.<Cite id="mit-2020-report" /><Cite id="techreview-2020-mit" /> He visited the campus nine times between
+    2013 and 2017.<Cite id="mit-2020-report" />
+  </p>
+  <p>
+    The Media Lab’s director, Joi Ito, resigned in September 2019. Professor Lloyd was placed on paid leave and later
+    disciplined, and continued to teach.<Cite id="mit-2020-lloyd" /> In 2026, MIT’s student newspaper reported that
+    the newly released emails pointed to donor connections the 2020 review had not covered.<Cite id="tech-2026-mit" />
+  </p>
+  <div class="table-wrap full">
+    <table class="stack">
+      <caption>How the two institutions differed</caption>
+      <thead><tr><th>Question</th><th>Harvard</th><th>MIT</th></tr></thead>
+      <tbody>
+        <tr><th>Direct gifts after 2008?</th><td data-label="Harvard">No</td><td data-label="MIT">Yes, nine gifts</td></tr>
+        <tr><th>Introduced-donor gifts?</th><td data-label="Harvard">$9.5 million documented</td><td data-label="MIT">Outside the 2020 report’s findings; raised in 2026 reporting</td></tr>
+        <tr><th>Who knew?</th><td data-label="Harvard">Review found no evidence that University leadership knew of the Program’s website page about him</td><td data-label="MIT">Three vice-presidents knew from 2013</td></tr>
+        <tr><th>Physical access</th><td data-label="Harvard">Key card and office; more than 40 visits</td><td data-label="MIT">Nine visits, as a guest</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="why">Why this matters to a reader</h2>
+  <p>
+    For a prospective student or an alumnus, the useful question is how a university’s controls work in practice. In
+    both cases a central rule or decision existed, and the relationship continued at the level of an individual
+    laboratory. Harvard’s review responded by recommending clearer gift policies and donor vetting.<Cite id="bacow-2020" />
+    Whether those changes are sufficient is a judgement this site leaves to the reader.
+  </p>
+</Base>

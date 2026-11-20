@@ -1,0 +1,130 @@
+---
+import Base from '../layouts/Base.astro';
+import Cite from '../components/Cite.astro';
+import Grade from '../components/Grade.astro';
+import State from '../components/State.astro';
+import Callout from '../components/Callout.astro';
+---
+<Base
+  title="The DNA and genetics record"
+  description="A claim-by-claim ledger of the DNA-related material in the public record: the 2014 sequencing, 23andMe kits, the Southern Trust informatics claim and the Zorro Ranch account, each marked as stated intent, documented activity or verified implementation."
+  eyebrow="DNA and genetics continuum"
+  lede="Several DNA-related items appear in the record. Read together without care, they can look like a programme. Read one at a time, they are a small sequencing job, some consumer test kits, a business description later alleged to be false, and a second-hand account of an idea."
+  reviewed="2026-11-20"
+  basis="Justice Department releases as reported; U.S. Virgin Islands filings"
+>
+  <h2 id="discipline">The three-state discipline</h2>
+  <p>Each item on this page is placed in one of three states, and never promoted without a source.</p>
+  <ul>
+    <li><State s="intent" />: something was proposed or said.</li>
+    <li><State s="activity" />: a record shows something was done.</li>
+    <li><State s="verified" />: an official finding or independent result confirms the act and its outcome.</li>
+  </ul>
+  <p>No DNA-related item in this record reaches the third state.</p>
+
+  <h2 id="ledger">Ledger</h2>
+  <div class="table-wrap full">
+    <table class="stack">
+      <caption>DNA-related items in the public record</caption>
+      <thead><tr><th>Item</th><th>Date</th><th>Evidence state</th><th>What the record supports</th><th>Grade</th></tr></thead>
+      <tbody>
+        <tr><th>Exome and fibroblast sequencing</th><td data-label="Date">June 2014</td><td data-label="Evidence state"><State s="activity" /></td><td data-label="What the record supports">A $2,000 initial charge on an invoice from Dr Joseph Thakuria, who says a cheque for that amount was paid.<Cite id="cnn-2026-thakuria" /></td><td data-label="Grade"><Grade g="A2" /></td></tr>
+        <tr><th>Stem-cell, gene-editing and “Venus” proposals</th><td data-label="Date">June 2014</td><td data-label="Evidence state"><State s="intent" /></td><td data-label="What the record supports">Priced on the same invoice, to a total of $193,400. No record of payment or performance.<Cite id="cnn-2026-thakuria" /></td><td data-label="Grade"><Grade g="A2" /></td></tr>
+        <tr><th>Cell lines from a tissue sample</th><td data-label="Date">2013</td><td data-label="Evidence state"><State s="activity" /></td><td data-label="What the record supports">Created within a research study in which he was enrolled as a subject; current whereabouts unknown.<Cite id="stat-2026-mystery" /></td><td data-label="Grade"><Grade g="A2" /></td></tr>
+        <tr><th>23andMe kits for Woody Allen and Soon-Yi Previn</th><td data-label="Date">September 2016</td><td data-label="Evidence state"><State s="activity" /></td><td data-label="What the record supports">An email says kits arrived and would be delivered. Epstein replied “great.”<Cite id="nypost-2026-kits" /></td><td data-label="Grade"><Grade g="A2" /></td></tr>
+        <tr><th>23andMe kits for Noam and Valeria Chomsky</th><td data-label="Date">April 2017</td><td data-label="Evidence state"><State s="activity" /></td><td data-label="What the record supports">A request from Karyna Shuliak; two kits bought on Amazon and shipped.<Cite id="nypost-2026-kits" /></td><td data-label="Grade"><Grade g="A2" /></td></tr>
+        <tr><th>Bulk 23andMe order linked to Sultan Ahmed bin Sulayem</th><td data-label="Date">Summer 2017</td><td data-label="Evidence state"><State s="activity" /></td><td data-label="What the record supports">An order placed by an assistant; the company queried its size and cancelled it under its U.S.-use terms.<Cite id="sfgate-2026-kits" /></td><td data-label="Grade"><Grade g="A2" /></td></tr>
+        <tr><th>Southern Trust “biomedical and financial informatics”</th><td data-label="Date">November 2012</td><td data-label="Evidence state"><State s="intent" /></td><td data-label="What the record supports">A description given to a tax-incentive commission. The government later alleged the company did no such work.<Cite id="usvi-complaint" /></td><td data-label="Grade"><Grade g="A1" /></td></tr>
+        <tr><th>Zorro Ranch insemination idea</th><td data-label="Date">Early 2000s onward</td><td data-label="Evidence state"><State s="intent" /></td><td data-label="What the record supports">Reported as something he told people. The fullest account is second-hand. The Times reported no evidence it was acted on.<Cite id="nyt-2019-seed" /></td><td data-label="Grade"><Grade g="B2" /></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="sequencing">Limited personal sequencing</h2>
+  <p>
+    The only place the record shows genetic analysis of Epstein’s own material is the June 2014 invoice. Two items,
+    $1,000 each, covered sequencing of his exome and of stored fibroblasts.<Cite id="cnn-2026-thakuria" /> The
+    <a href="/harvard-medical-school/#invoice">Harvard Medical School page</a> sets out the full invoice and the
+    statements of those involved.
+  </p>
+
+  <h2 id="kits">Commercial test kits</h2>
+  <p>
+    The Justice Department release contains emails in which Epstein’s staff buy and send 23andMe consumer kits as gifts.
+    The best known is from April 2017, written by Karyna Shuliak:
+  </p>
+  <blockquote>
+    <p>“Jeffrey would like to send 2 genetic kits from 23 and me to Noam and Valeria Chomsky, please. Could you please arrange that? I believe we have extra kits in the oval room closet, right?”</p>
+    <footer>Email of April 2017, as quoted from the Justice Department release<Cite id="nypost-2026-kits" /></footer>
+  </blockquote>
+  <p>
+    The reply said two kits bought on Amazon had been shipped. An accountant, Bella Klein, asked that Epstein’s email be
+    kept as backup for reimbursement.<Cite id="nypost-2026-kits" />
+  </p>
+  <p>
+    In summer 2017 an assistant, Lesley Groff, placed a much larger order connected to Sultan Ahmed bin Sulayem and
+    explained that he wanted kits for colleagues. 23andMe’s support staff questioned the volume and cancelled the order
+    because its terms required use in the United States. Later correspondence says kits were nonetheless put on a flight
+    to Dubai.<Cite id="sfgate-2026-kits" /> Accounts differ on the size of the order, from “over two dozen” to thirty
+    kits costing a little over $6,000.
+  </p>
+  <Callout title="What the kit emails do and do not show" plain>
+    <p>
+      They show staff buying and posting an ordinary retail product. They do not describe a research protocol, the
+      collection or pooling of results, or any link to the 2014 sequencing or to Southern Trust. Nothing in them shows
+      whether a recipient used a kit, and receiving one implies nothing about the recipient.
+    </p>
+  </Callout>
+
+  <h2 id="southern-trust">Southern Trust Company</h2>
+  <p>
+    In November 2012 Epstein and his lawyer appeared before the U.S. Virgin Islands Economic Development Commission and
+    described Southern Trust Company as providing consulting in “biomedical and financial informatics.” In 2013 the
+    company received a ten-year package of tax incentives.<Cite id="source-2022-settlement" />
+  </p>
+  <p>
+    In its lawsuit against the estate, the territory’s Attorney General alleged that Southern Trust made fraudulent
+    misrepresentations to obtain those benefits, and that it appeared to have had no clients and performed no visible
+    informatics services.<Cite id="usvi-complaint" /> The case settled in November 2022 for more than $105 million.
+    The government said the settlement would also return more than $80 million in tax benefits.<Cite id="usvi-2022-settlement" />
+  </p>
+  <p>
+    These are allegations in a complaint that ended in a settlement. No court ruled on them. For present purposes the
+    relevant point is narrower: there is no public output, paper, product or dataset showing that Southern Trust
+    did genetic work of any kind.
+  </p>
+
+  <h2 id="zorro">The Zorro Ranch account</h2>
+  <p>
+    In July 2019 the New York Times reported that Epstein had told scientists and others of a wish to have women
+    inseminated at his New Mexico ranch. The most specific version came from the author Jaron Lanier, who was relaying
+    what a scientist had told him at a dinner. He did not hear it from Epstein. The Times reported that there was no
+    evidence the idea came to anything.<Cite id="nyt-2019-seed" />
+  </p>
+  <p>We grade the newspaper’s reporting A2 and the relayed account B2. It is evidence of something said.</p>
+
+  <h2 id="calibration">Outside calibration</h2>
+  <p>
+    How much weight should a stated plan carry? One reference point is the Repository for Germinal Choice, a California
+    sperm bank that opened in 1980 with the stated aim of producing gifted children, and to which the Times account
+    compared the ranch idea. The journalist David Plotz traced its history and found that it produced about 215
+    children and did not produce what its founder promised.<Cite id="plotz-2005" /> Even an implemented plan of this
+    kind did not do what its author said it would. An unimplemented one deserves less weight still.
+  </p>
+
+  <h2 id="law">The legal boundary: GINA</h2>
+  <p>
+    The Genetic Information Nondiscrimination Act of 2008 bars health insurers and employers with fifteen or more
+    employees from using genetic information in coverage or employment decisions.<Cite id="gina-statute" /> It does not
+    extend to life, disability or long-term-care insurance, and it does not create a general right of privacy in
+    genetic data.<Cite id="nsgc-gina" /> It would bear on the material here only if a covered insurer or employer used
+    someone’s results against them. No source reviewed alleges that.
+  </p>
+
+  <h2 id="assessment">Assessment</h2>
+  <p>
+    The items sit side by side and do not connect. The record shows no shared database, no research output and no
+    operational programme. It shows one $2,000 sequencing job, proposals that went unfunded, retail kits sent as gifts,
+    a business description that drew a fraud allegation, and a reported remark.
+  </p>
+</Base>

@@ -1,0 +1,9 @@
+---
+import { grades, type Grade } from '../data/grades';
+interface Props { g: Grade; link?: boolean }
+const { g, link = true } = Astro.props;
+const title = `${g}: ${grades[g].label}`;
+---
+{link
+  ? <a class={`grade grade-${g}`} href={`/methodology/#grade-${g.toLowerCase()}`} title={title}><span class="visually-hidden">Reliability grade </span>{g}</a>
+  : <span class={`grade grade-${g}`} title={title}><span class="visually-hidden">Reliability grade </span>{g}</span>}

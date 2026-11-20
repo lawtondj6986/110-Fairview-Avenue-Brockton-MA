@@ -1,0 +1,127 @@
+---
+import Base from '../layouts/Base.astro';
+import Cite from '../components/Cite.astro';
+import Grade from '../components/Grade.astro';
+import Callout from '../components/Callout.astro';
+---
+<Base
+  title="Campus safety and sexual misconduct: the public record"
+  description="A neutral, sourced summary of Harvard University’s public record on sexual assault and harassment: federal findings, climate surveys, Clery statistics and the documented outcomes of faculty cases."
+  eyebrow="Campus safety"
+  lede="This page summarises what official records and established reporting show about sexual misconduct at Harvard and how the University has responded. It is a reference for people weighing institutional culture. It is separate from the donor material elsewhere on this site."
+  reviewed="2026-11-20"
+  basis="Federal civil-rights records; Harvard’s own surveys and reports"
+>
+  <Callout title="How this page treats individuals" plain>
+    <p>
+      Only institutional findings, announced sanctions and court outcomes are reported, each attributed to its source.
+      An allegation is labelled as an allegation. Where a person has denied the claims, that is stated. Nothing here
+      is a finding by this site.
+    </p>
+  </Callout>
+
+  <h2 id="where">Where to find current numbers</h2>
+  <p>Figures change every year. These are the primary sources to read directly.</p>
+  <ul>
+    <li><strong>Annual Security Report.</strong> Federal law (the Clery Act) requires Harvard’s police department to publish campus crime statistics each October, including reported rape and fondling.<Cite id="hupd-asr" /> Counts depend on which locations are included, so read the tables and their notes together.</li>
+    <li><strong>Student surveys.</strong> Harvard took part in national surveys in 2015 and 2019 and ran a comparable survey in 2024.<Cite id="harvard-2024-hesma" /></li>
+    <li><strong>Complaint data.</strong> Harvard publishes annual figures on disclosures and formal complaints. The office responsible has been reorganised more than once, so check the University’s site for the current publisher.</li>
+  </ul>
+
+  <h2 id="surveys">What students reported</h2>
+  <div class="table-wrap full">
+    <table class="stack">
+      <caption>Headline results as reported. Measures differ between years; use Harvard’s own tables for exact comparison.</caption>
+      <thead><tr><th>Survey</th><th>Participation</th><th>Headline result</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><th>2015 (Association of American Universities)</th><td data-label="Participation">Above 50 percent</td><td data-label="Headline result">About 31 percent of senior undergraduate women reported some form of nonconsensual sexual contact during their time at Harvard; 16 percent reported completed or attempted penetration.</td><td data-label="Source"><Grade g="A2" /><Cite id="hm-2015-aau" /></td></tr>
+        <tr><th>2019 (Association of American Universities)</th><td data-label="Participation">About 36 percent</td><td data-label="Headline result">About a third of undergraduate women surveyed reported some form of nonconsensual sexual contact.</td><td data-label="Source"><Grade g="A2" /><Cite id="crimson-2019-aau" /></td></tr>
+        <tr><th>2024 (Harvard survey)</th><td data-label="Participation">Above 35 percent</td><td data-label="Headline result">Harvard reported a statistically significant decline since 2019 and described prevalence as still “alarmingly high.”</td><td data-label="Source"><Grade g="A1" /><Cite id="harvard-2024-hesma" /></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    The 2015 figure describes seniors and the 2019 figure describes all undergraduate women surveyed, so the two are
+    not a like-for-like trend.
+  </p>
+
+  <h2 id="federal">Federal civil-rights findings</h2>
+  <h3>Harvard Law School, 2014</h3>
+  <p>
+    On 30 December 2014 the U.S. Department of Education’s Office for Civil Rights announced that Harvard Law School
+    had violated Title IX in how it responded to complaints of sexual harassment and assault. The findings included
+    that its procedures did not meet the requirement of a prompt and equitable response and that it had used a standard
+    of proof higher than the Department then required.<Cite id="ocr-2014-letter" /> The school signed a resolution
+    agreement committing it to revise its policies, train staff and review earlier complaint files.<Cite id="ocr-2014-agreement" /><Cite id="crimson-2014-ocr" />
+  </p>
+  <h3>Harvard College, opened 2014</h3>
+  <p>
+    A separate federal investigation into Harvard College’s handling of sexual assault complaints opened in April 2014
+    and was still reported as open in 2018.<Cite id="crimson-2018-college-ocr" /> We have not located a public record
+    of how it was resolved.
+  </p>
+
+  <h2 id="cases">Faculty cases with documented institutional outcomes</h2>
+  <p>Three cases produced public findings or sanctions by Harvard. They are summarised from the University’s announcements and contemporaneous reporting.</p>
+
+  <h3>Jorge Domínguez (Government)</h3>
+  <p>
+    In February 2018 the Chronicle of Higher Education reported allegations of sexual harassment against Professor
+    Domínguez spanning decades, and that Harvard had disciplined him for misconduct in 1983.<Cite id="chronicle-2018-dominguez" />
+    He was placed on leave and retired. In May 2019 the Faculty of Arts and Sciences announced that a Title IX
+    investigation had found unwelcome sexual conduct toward several individuals over nearly four decades. It revoked his
+    emeritus status and barred him from the campus.<Cite id="hm-2019-dominguez" /> His own public responses are recorded
+    in the cited reporting.
+  </p>
+  <p>
+    Harvard then commissioned an External Review Committee. Its 2021 report concluded that pronounced power
+    disparities, inadequate reporting mechanisms and a permissive culture had allowed the conduct to continue, and that
+    keeping the 1983 sanction confidential may have deterred later reports. It made recommendations including central
+    vetting of personnel records before appointments.<Cite id="erc-2021" /> A year later the Crimson reported that
+    three of nine recommendations had not yet been carried out.<Cite id="crimson-2022-recs" />
+  </p>
+
+  <h3>Roland Fryer (Economics)</h3>
+  <p>
+    In July 2019 the Dean of the Faculty of Arts and Sciences announced that, following complaints of unwelcome sexual
+    conduct in his research lab, Professor Fryer would be placed on administrative leave for two years, his lab would
+    close, and conditions would apply on his return.<Cite id="gay-2019-fryer" /><Cite id="hm-2019-fryer" /> He denied
+    engaging in discrimination or harassment. He returned to teaching and research in 2021 under
+    conditions.<Cite id="crimson-2021-fryer" />
+  </p>
+
+  <h3>John Comaroff (Anthropology and African and African American Studies)</h3>
+  <p>
+    In January 2022 Harvard placed Professor Comaroff on unpaid leave and restricted his teaching and advising after
+    internal reviews found that he had engaged in verbal conduct that violated its sexual harassment and professional
+    conduct policies.<Cite id="harvard-2022-statement" /><Cite id="crimson-2022-comaroff" /> He has denied the
+    allegations against him.
+  </p>
+  <p>
+    In February 2022 three graduate students sued the University in federal court, alleging that it had ignored years
+    of complaints. Professor Comaroff was not a defendant. The court largely declined to dismiss the case in 2023. It
+    ended in August 2024 with a voluntary dismissal after mediation, on undisclosed terms, and without any ruling on the
+    merits.<Cite id="crimson-2024-comaroff-suit" /> He retired in June 2024.<Cite id="crimson-2024-comaroff-retires" />
+  </p>
+
+  <h2 id="policy">Policy changes</h2>
+  <ul>
+    <li>After the 2021 external review, Harvard’s president said the University accepted its recommendations and would centralise the review of personnel records.<Cite id="erc-2021" /></li>
+    <li>Federal Title IX rules changed in 2020, and a 2024 revision was struck down in January 2025. Harvard has operated under interim policies adopted in 2020 and revised their definitions in February 2025.<Cite id="crimson-2025-titleix" /></li>
+  </ul>
+
+  <h2 id="epstein">The connection to the rest of this site</h2>
+  <p>
+    Harvard’s 2020 review of Epstein’s access said it “did not find evidence” that he engaged with undergraduate
+    students during his campus visits or as a Visiting Fellow.<Cite id="harvard-2020-report" /> That statement is
+    limited to undergraduates and to what the review could establish. No source reviewed here documents an assault or
+    harassment complaint at Harvard arising from his visits.
+  </p>
+
+  <h2 id="help">If you need support</h2>
+  <p>
+    This site is a research reference and cannot advise on individual situations. In the United States, the National
+    Sexual Assault Hotline is available at 800-656-4673 and at rainn.org. Harvard students and staff can find the
+    University’s current confidential resources on its own website.
+  </p>
+</Base>

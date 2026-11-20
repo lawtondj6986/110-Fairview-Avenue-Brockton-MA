@@ -1,0 +1,201 @@
+---
+import '@fontsource-variable/source-serif-4';
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import { site, nav } from '../config';
+import { sources } from '../data/sources';
+import { grades } from '../data/grades';
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow?: string;
+  lede?: string;
+  reviewed?: string;      // ISO date this page was last reviewed against its sources
+  basis?: string;         // one line: what the page mainly rests on
+  toc?: boolean;
+  article?: boolean;
+}
+const { title, description, eyebrow, lede, reviewed, basis, toc = true, article = true } = Astro.props;
+
+const path = Astro.url.pathname;
+const canonical = new URL(path, site.url).href;
+const isHome = path === '/';
+const fullTitle = isHome ? `${site.name} | Independent public-source review` : `${title} | ${site.name}`;
+
+// ---- Render the page body, then number citations and build the reference list ----
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+let body = await Astro.slots.render('default');
+
+const order: string[] = [];
+const uses: Record<string, number> = {};
+body = body.replace(/<sup\b[^>]*\bdata-cite="([^"]+)"[^>]*><\/sup>/g, (tag: string, id: string) => {
+  const src = sources[id];
+  if (!src) throw new Error(`Unknown source id "${id}" cited on ${path}. Add it to src/data/sources.ts.`);
+  if (!order.includes(id)) order.push(id);
+  const n = order.indexOf(id) + 1;
+  uses[id] = (uses[id] ?? 0) + 1;
+  const loc = tag.match(/data-loc="([^"]*)"/)?.[1];
+  const label = `Source ${n}: ${src.title}${loc ? ', ' + loc : ''}. Grade ${src.grade}.`;
+  return `<sup class="cite"><a href="#ref-${n}" id="cite-${n}-${uses[id]}" title="${esc(label)}" aria-label="${esc(label)}">${n}${loc ? `<span class="visually-hidden">, ${loc}</span>` : ''}</a></sup>`;
+});
+
+const headings = toc
+  ? [...body.matchAll(/<h2\b[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g)].map((m) => ({
+      id: m[1],
+      text: m[2].replace(/<sup[\s\S]*?<\/sup>/g, '').replace(/<[^>]+>/g, '').trim(),
+    }))
+  : [];
+if (order.length && toc) headings.push({ id: 'references', text: 'References' });
+const showToc = headings.length > 2;
+
+const fmt = (iso?: string) => {
+  if (!iso) return '';
+  const [y, m, d] = iso.split('-').map(Number);
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  return d ? `${d} ${months[m - 1]} ${y}` : m ? `${months[m - 1]} ${y}` : `${y}`;
+};
+
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@type': article && !isHome ? 'Article' : 'WebSite',
+  ...(article && !isHome
+    ? { headline: title, dateModified: reviewed, mainEntityOfPage: canonical, author: { '@type': 'Organization', name: site.name }, publisher: { '@type': 'Organization', name: site.name } }
+    : { name: site.name, url: site.url }),
+  description,
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#14233b" />
+    <meta property="og:type" content={isHome ? 'website' : 'article'} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="notice" role="note" aria-label="Non-affiliation notice">
+      <div class="wrap">{site.disclaimerShort} <a href="/about/#disclaimer">Read the full disclaimer</a>.</div>
+    </div>
+    <header class="masthead">
+      <div class="wrap">
+        <a class="wordmark" href="/">
+          <strong>{site.name}</strong>
+          <span>Independent · Public sources only</span>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <details open id="site-nav">
+            <summary>Sections</summary>
+            <ul>
+              {nav.map((n) => (
+                <li><a href={n.href} aria-current={path === n.href ? 'page' : undefined} title={n.long}>{n.label}</a></li>
+              ))}
+            </ul>
+          </details>
+          <script is:inline>
+            // Collapsed by default on small screens; without JavaScript the list simply stays open.
+            if (matchMedia('(max-width: 61.99rem)').matches) document.getElementById('site-nav').removeAttribute('open');
+          </script>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="wrap">
+        <header class="page-head">
+          {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+          <h1>{title}</h1>
+          {lede && <p class="lede">{lede}</p>}
+          {(reviewed || basis) && (
+            <ul class="meta">
+              {reviewed && <li><b>Last reviewed</b> <time datetime={reviewed}>{fmt(reviewed)}</time></li>}
+              {basis && <li><b>Rests mainly on</b> {basis}</li>}
+              <li><a href="/about/#corrections">Report an error</a></li>
+            </ul>
+          )}
+        </header>
+
+        <div class:list={['layout', { 'has-toc': showToc }]}>
+          {showToc && (
+            <nav class="toc" aria-label="On this page">
+              <h2>On this page</h2>
+              <ol>{headings.map((h) => <li><a href={`#${h.id}`}>{h.text}</a></li>)}</ol>
+            </nav>
+          )}
+          <div>
+            <article class="prose"><Fragment set:html={body} /></article>
+
+            {order.length > 0 && (
+              <section class="refs prose" aria-labelledby="references">
+                <h2 id="references">References</h2>
+                <p class="small muted sans">
+                  Each source carries a reliability grade. See <a href="/methodology/">how sources are graded</a>.
+                  Entries marked “pending check” were compiled from published summaries and have not yet been re-read against the original page.
+                </p>
+                <ol class="full">
+                  {order.map((id, i) => {
+                    const s = sources[id];
+                    return (
+                      <li id={`ref-${i + 1}`}>
+                        <span class="n">{i + 1}.</span>
+                        <span>
+                          <a class={`grade grade-${s.grade}`} href={`/methodology/#grade-${s.grade.toLowerCase()}`} title={`${s.grade}: ${grades[s.grade].label}`}>{s.grade}</a>{' '}
+                          {s.url ? <a class="src-title" href={s.url} rel="noopener external">{s.title}</a> : <span class="src-title">{s.title}</span>}
+                          <span class="back" aria-label="Back to text">
+                            {Array.from({ length: uses[id] }, (_, k) => <a href={`#cite-${i + 1}-${k + 1}`} aria-label={`Back to citation ${k + 1}`}>↑{uses[id] > 1 ? String.fromCharCode(97 + k) : ''}</a>)}
+                          </span>
+                          <span class="src-meta">
+                            {[s.author, s.publisher, fmt(s.date)].filter(Boolean).join(' · ')}
+                            {!s.checked && ' · pending check'}
+                          </span>
+                          {s.note && <span class="src-note">{s.note}</span>}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ol>
+              </section>
+            )}
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="cols">
+          <div>
+            <h2>{site.name}</h2>
+            <p>{site.tagline}</p>
+          </div>
+          <div>
+            <h2>Sections</h2>
+            <ul>{nav.slice(1).map((n) => <li><a href={n.href}>{n.long ?? n.label}</a></li>)}</ul>
+          </div>
+          <div>
+            <h2>Standards</h2>
+            <ul>
+              <li><a href="/methodology/">How sources are graded</a></li>
+              <li><a href="/sources/">Full source register</a></li>
+              <li><a href="/updates/">Update log</a></li>
+              <li><a href="/about/#corrections">Corrections policy</a></li>
+              <li><a href={`mailto:${site.correctionsEmail}`}>{site.correctionsEmail}</a></li>
+            </ul>
+          </div>
+        </div>
+        <p class="legal" id="site-disclaimer">{site.disclaimerLong}</p>
+      </div>
+    </footer>
+  </body>
+</html>

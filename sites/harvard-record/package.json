@@ -1,0 +1,18 @@
+{
+  "name": "harvard-public-record",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Independent public-source review of donor influence and institutional access at Harvard University. Not affiliated with Harvard University.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "@fontsource-variable/inter": "^5.2.8",
+    "@fontsource-variable/source-serif-4": "^5.2.8",
+    "astro": "^5.1.0"
+  }
+}

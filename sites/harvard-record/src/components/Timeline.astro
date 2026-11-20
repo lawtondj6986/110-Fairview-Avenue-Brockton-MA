@@ -1,0 +1,50 @@
+---
+import Cite from './Cite.astro';
+import State from './State.astro';
+import type { TimelineEvent } from '../data/timelines';
+interface Props { events: TimelineEvent[]; id: string; label: string }
+const { events, id, label } = Astro.props;
+const kinds = { funding: 'Funding', access: 'Access', response: 'Institutional response', record: 'Record release' } as const;
+const present = (Object.keys(kinds) as (keyof typeof kinds)[]).filter((k) => events.some((e) => e.kind === k));
+---
+<div class="full" data-timeline={id}>
+  <div class="tl-filter" role="group" aria-label={`Filter ${label}`} hidden>
+    <button type="button" data-filter="all" aria-pressed="true">All</button>
+    {present.map((k) => <button type="button" data-filter={k} aria-pressed="false">{kinds[k]}</button>)}
+  </div>
+  <ul class="tl-legend" aria-hidden="true">
+    {present.map((k) => <li class={`k-${k}`}><i></i>{kinds[k]}</li>)}
+  </ul>
+  <ol class="timeline" aria-label={label}>
+    {events.map((e) => (
+      <li data-kind={e.kind}>
+        <time datetime={e.iso}>{e.date}</time>
+        <h3>{e.title}</h3>
+        <p>
+          <Fragment set:html={e.body} />
+          {e.cites.map((c) => <Cite id={c.id} loc={c.loc} />)}
+        </p>
+        <div class="tl-tags">
+          <span class="tl-kind">{kinds[e.kind]}</span>
+          {e.state && <State s={e.state} />}
+        </div>
+      </li>
+    ))}
+  </ol>
+</div>
+<script>
+  // Progressive enhancement: the full timeline is readable without this.
+  document.querySelectorAll<HTMLElement>('[data-timeline]').forEach((root) => {
+    const bar = root.querySelector<HTMLElement>('.tl-filter');
+    if (!bar) return;
+    bar.hidden = false;
+    const items = root.querySelectorAll<HTMLElement>('.timeline > li');
+    bar.addEventListener('click', (ev) => {
+      const btn = (ev.target as HTMLElement).closest('button');
+      if (!btn) return;
+      const f = btn.dataset.filter;
+      bar.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      items.forEach((li) => { li.hidden = f !== 'all' && li.dataset.kind !== f; });
+    });
+  });
+</script>

@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+import Grade from '../components/Grade.astro';
+import State from '../components/State.astro';
+import Callout from '../components/Callout.astro';
+import { grades, states, type Grade as G, type EvidenceState } from '../data/grades';
+import { sources } from '../data/sources';
+const order: G[] = ['A1', 'A2', 'B1', 'B2'];
+const stateOrder: EvidenceState[] = ['intent', 'activity', 'verified', 'none'];
+const primary = ['harvard-2020-report', 'mit-2020-report', 'usvi-complaint', 'usvi-2022-settlement', 'raskin-2026', 'cnn-2026-thakuria', 'stat-2026-tissue', 'nyt-2019-seed', 'plotz-2005', 'gina-statute', 'ocr-2014-letter', 'erc-2021'];
+---
+<Base
+  title="Methodology and sourcing standards"
+  description="How this site grades its sources from A1 to B2, how it separates stated intent from documented activity and verified implementation, and the primary sources it relies on."
+  eyebrow="Standards"
+  lede="Every claim on this site carries a source, and every source carries a grade. This page explains the grades, the rules for writing about people, and what the site will not do."
+  reviewed="2026-11-20"
+>
+  <h2 id="grades">Reliability grades</h2>
+  <p>A grade describes the kind of source. It is not a judgement of the people a source discusses.</p>
+  <div class="table-wrap full">
+    <table class="stack">
+      <thead><tr><th>Grade</th><th>Meaning</th><th>Definition</th></tr></thead>
+      <tbody>
+        {order.map((g) => (
+          <tr id={`grade-${g.toLowerCase()}`}>
+            <th><Grade g={g} link={false} /></th>
+            <td data-label="Meaning"><strong>{grades[g].label}</strong></td>
+            <td data-label="Definition">{grades[g].definition}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p>Three rules follow from the grades.</p>
+  <ul>
+    <li>A factual claim about a named living person needs an A1 or A2 source.</li>
+    <li>A primary record of an allegation, such as a complaint or a congressional letter, is graded A1 for what it says and is always described as an allegation or assertion.</li>
+    <li>When a well-sourced article relays a weaker account, the weaker grade applies to that account.</li>
+  </ul>
+
+  <h2 id="states">Evidence states</h2>
+  <p>Separately from the grade of the source, each claim is placed in an evidence state.</p>
+  <div class="table-wrap full">
+    <table class="stack">
+      <thead><tr><th>State</th><th>Definition</th></tr></thead>
+      <tbody>
+        {stateOrder.map((s) => (<tr><th><State s={s} /></th><td data-label="Definition">{states[s].definition}</td></tr>))}
+      </tbody>
+    </table>
+  </div>
+  <p>
+    A claim moves up a state only when a source supports the move. A well-documented proposal is still a proposal.
+  </p>
+
+  <h2 id="checks">Verification status</h2>
+  <p>
+    Each entry in the <a href="/sources/">source register</a> records the date on which a maintainer last opened the
+    original document and checked the cited facts against it. Entries without a date are labelled “pending check”
+    wherever they are cited. They were compiled from published summaries of the source and should be treated as
+    provisional until checked.
+  </p>
+  <Callout title="First edition">
+    <p>
+      In this first edition most entries are pending check. Figures that differ between outlets are noted in the text
+      where we found them.
+    </p>
+  </Callout>
+
+  <h2 id="rules">Editorial rules</h2>
+  <ul>
+    <li><strong>Public sources only.</strong> No leaked, private or paywalled-only material that a reader cannot trace.</li>
+    <li><strong>No inference of coordination.</strong> Two facts side by side are not presented as connected unless a source connects them.</li>
+    <li><strong>Denials and responses are included</strong> where a person or institution has made one.</li>
+    <li><strong>Absence is stated as absence.</strong> “No record found” means we did not find one.</li>
+    <li><strong>Unofficial document mirrors and wikis are not cited.</strong> Where a document from the Justice Department release is discussed, it is cited through established reporting until the original can be linked.</li>
+    <li><strong>People named only as recipients or bystanders</strong> are named when the cited reporting names them, and the text says plainly that no wrongdoing is implied.</li>
+  </ul>
+
+  <h2 id="primary">Principal sources</h2>
+  <div class="table-wrap full">
+    <table class="stack">
+      <thead><tr><th>Source</th><th>Publisher</th><th>Grade</th></tr></thead>
+      <tbody>
+        {primary.map((id) => {
+          const s = sources[id];
+          return (<tr><th>{s.url ? <a href={s.url} rel="noopener external">{s.title}</a> : s.title}</th><td data-label="Publisher">{s.publisher}</td><td data-label="Grade"><Grade g={s.grade} /></td></tr>);
+        })}
+      </tbody>
+    </table>
+  </div>
+  <p>The <a href="/sources/">full register</a> lists every source cited anywhere on the site.</p>
+
+  <h2 id="updating">How the site is updated</h2>
+  <p>
+    When a new public document appears, it is added to the register with a grade, the affected pages are revised, each
+    page’s “last reviewed” date is changed, and the change is recorded in the <a href="/updates/">update log</a>.
+    Corrections follow the same path and are never made silently.
+  </p>
+</Base>

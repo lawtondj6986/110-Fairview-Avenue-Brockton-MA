@@ -1,0 +1,6 @@
+---
+import { states, type EvidenceState } from '../data/grades';
+interface Props { s: EvidenceState }
+const { s } = Astro.props;
+---
+<span class={`state state-${s}`} title={states[s].definition}><i aria-hidden="true"></i>{states[s].label}</span>

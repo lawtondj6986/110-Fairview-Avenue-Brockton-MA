@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.harvarduniversityalumni.com/sitemap-index.xml

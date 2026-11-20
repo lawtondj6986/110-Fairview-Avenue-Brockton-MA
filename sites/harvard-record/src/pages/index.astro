@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+import Cite from '../components/Cite.astro';
+import State from '../components/State.astro';
+import Callout from '../components/Callout.astro';
+import { site } from '../config';
+---
+<Base
+  title="What the public record shows about donor influence and access at Harvard"
+  description="An independent, public-source review of donor influence, introduced funding, post-conviction campus access and campus safety at Harvard University. Every claim is cited and graded."
+  eyebrow="Independent public-source review"
+  lede="This site collects what official reports, court filings and established reporting document about one donor’s access to Harvard after a criminal conviction, the money that followed his introductions, and how the University responded. It is written for prospective students, students, alumni and researchers who want the record without the noise."
+  reviewed="2026-11-20"
+  toc={false}
+  article={false}
+>
+  <ul class="figures full" aria-label="Headline figures from Harvard’s own review">
+    <li><span class="num">$9.1M</span><span class="lbl">Epstein gifts to Harvard, 1998 to 2008<Cite id="harvard-2020-report" /></span></li>
+    <li><span class="num">$0</span><span class="lbl">Gifts Harvard accepted from him after the 2008 conviction<Cite id="harvard-2020-report" /></span></li>
+    <li><span class="num">40+</span><span class="lbl">Visits to one research program’s offices, 2010 to 2018<Cite id="harvard-2020-report" /></span></li>
+    <li><span class="num">$9.5M</span><span class="lbl">Given by donors he introduced, 2010 to 2015<Cite id="harvard-2020-report" /></span></li>
+  </ul>
+
+  <h2 id="scope">Scope</h2>
+  <p>
+    Jeffrey Epstein was convicted in Florida in 2008. Harvard stopped taking his money that year. Its own 2020 review
+    found that he nonetheless kept physical access to a research program he had funded, visited it dozens of times, and
+    introduced other donors whose gifts reached the same faculty.<Cite id="harvard-2020-report" /> A large Department of
+    Justice document release in early 2026 added detail and prompted Harvard to reopen and widen its review.<Cite id="hm-2026-probe" />
+  </p>
+  <p>
+    The pages below set out that record section by section. They cover what happened at Harvard, how it compares with
+    the Massachusetts Institute of Technology, and, separately, the University’s public record on sexual misconduct and campus safety.
+  </p>
+
+  <h2 id="how-to-read">How to read this site</h2>
+  <p>Three rules apply on every page.</p>
+  <ol>
+    <li><strong>Every factual claim has a numbered source.</strong> Sources carry a reliability grade from A1 (primary official record) to B2 (thin or unverified). The <a href="/methodology/">methodology</a> explains the grades.</li>
+    <li>
+      <strong>Three states are kept apart.</strong> A plan is not an act, and an act is not a result.
+      <span style="display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin-top:.5rem"><State s="intent" /><State s="activity" /><State s="verified" /></span>
+    </li>
+    <li><strong>Nothing goes beyond the public record.</strong> Where the record is silent, the page says so. Being named here does not imply wrongdoing unless a cited record says so.</li>
+  </ol>
+
+  <h2 id="findings">Key findings</h2>
+  <ul class="cards full">
+    <li><a class="card" href="/program-for-evolutionary-dynamics/"><h3>Program for Evolutionary Dynamics</h3><p>A $6.5 million founding gift, a key card and an office, more than 40 visits after the conviction, and a program that Harvard closed in 2021.</p><span class="more">Timeline and sources</span></a></li>
+    <li><a class="card" href="/harvard-medical-school/"><h3>Harvard Medical School, Church and Thakuria</h3><p>Introduced-donor gifts, enrolment in a genome study, a 2013 dispute over a tissue sample, and a 2014 invoice whose larger proposals were never carried out.</p><span class="more">Confirmed activity and unexecuted proposals</span></a></li>
+    <li><a class="card" href="/donor-pathways/"><h3>Donor influence and introduced funding</h3><p>How $9.5 million reached two faculty members from donors Epstein introduced after Harvard had stopped accepting his own gifts.</p><span class="more">The introduced-donor pattern</span></a></li>
+    <li><a class="card" href="/dna-genetics/"><h3>DNA and genetics record</h3><p>One small sequencing job, consumer test kits sent as gifts, a business description later alleged to be false, and a second-hand account of a plan never carried out.</p><span class="more">Claim-by-claim ledger</span></a></li>
+    <li><a class="card" href="/campus-safety/"><h3>Campus safety and sexual misconduct</h3><p>Federal findings, climate surveys, crime statistics and the documented outcomes of faculty cases, with where to find the current numbers.</p><span class="more">Public-record summary</span></a></li>
+    <li><a class="card" href="/comparison/"><h3>Cross-institutional comparison</h3><p>Harvard’s program, MIT’s Media Lab and Harvard Medical School side by side on funding, access, DNA activity and institutional response.</p><span class="more">Comparison table</span></a></li>
+  </ul>
+
+  <Callout title="What this site does not claim" plain>
+    <p>
+      The public record does not show a joint research output, a shared genetic database, or any operational
+      programme built on the DNA-related material. It shows access, introduced money and stated interest. The pages
+      here are written to keep that distinction visible.
+    </p>
+  </Callout>
+
+  <h2 id="status">Status of this edition</h2>
+  <p>
+    This is a first edition. Source entries marked “pending check” were compiled from published summaries and are
+    being re-read against the original documents. If you find an error, <a href="/about/#corrections">tell us</a>;
+    corrections are logged publicly on the <a href="/updates/">update log</a>.
+  </p>
+  <p class="small muted sans">{site.disclaimerShort}</p>
+</Base>
