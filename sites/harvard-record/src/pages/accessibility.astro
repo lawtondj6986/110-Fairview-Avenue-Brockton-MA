@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config';
+---
+<Base title="Accessibility" description="How this site is built to be usable by everyone, what has been tested, and how to report a barrier." eyebrow="About" lede="The site is built to be read by anyone, on any device, with or without assistive technology." reviewed="2026-11-20" toc={false}>
+  <h2 id="built-in">What is built in</h2>
+  <ul>
+    <li><strong>Structure.</strong> Every page has one main heading, ordered subheadings, landmark regions and a link to skip to the content.</li>
+    <li><strong>Keyboard.</strong> Everything can be reached and operated from the keyboard, with a visible focus outline.</li>
+    <li><strong>Meaning without color.</strong> Reliability grades and evidence states are carried by text labels and shapes. No information depends on color alone.</li>
+    <li><strong>Contrast.</strong> Body text meets a contrast ratio of at least 7 to 1 in both light and dark appearance.</li>
+    <li><strong>Reflow.</strong> Pages work at phone width without sideways scrolling. Wide tables turn into stacked cards with each value labeled.</li>
+    <li><strong>Citations.</strong> Each citation link announces the source it points to and its grade, and each reference links back to where it was cited.</li>
+    <li><strong>Motion.</strong> There is no animation. Smooth scrolling is turned off when your system asks for reduced motion.</li>
+    <li><strong>Without JavaScript.</strong> All content is readable with scripts turned off. Scripts add only the timeline filter, the glossary filter and search.</li>
+    <li><strong>Print.</strong> Pages print cleanly, with the address of each source written out in the reference list.</li>
+  </ul>
+
+  <h2 id="tested">What has been tested</h2>
+  <p>
+    Automated checks run on every build: one main heading per page, unique element identifiers, working internal
+    links and anchors, text alternatives, no sideways scrolling at phone width, and readable contrast. Automated
+    checks do not catch everything. The site has not yet had an independent audit or testing with screen-reader
+    users, and it does not claim formal conformance with a published standard.
+  </p>
+
+  <h2 id="known-limits">Known limits</h2>
+  <ul>
+    <li>Linked source documents are published by others. Many are scanned PDFs that are hard to read with assistive technology.</li>
+    <li>Long tables on the claim ledger are dense. The same data is offered as a download for use in your own tools.</li>
+  </ul>
+
+  <h2 id="report">Report a barrier</h2>
+  <p>
+    If something on this site is hard to use, write to
+    <a href={`mailto:${site.correctionsEmail}`}>{site.correctionsEmail}</a> with the page and what happened. Barriers
+    are treated like errors: fixed, and recorded in the <a href="/updates/">update log</a>.
+  </p>
+</Base>

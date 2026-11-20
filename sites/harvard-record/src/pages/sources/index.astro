@@ -1,7 +1,7 @@
 ---
-import Base from '../layouts/Base.astro';
-import Grade from '../components/Grade.astro';
-import { sources, type Source } from '../data/sources';
+import Base from '../../layouts/Base.astro';
+import Grade from '../../components/Grade.astro';
+import { sources, type Source } from '../../data/sources';
 const topics = [...new Set(Object.values(sources).map((s) => s.topic))];
 const fmt = (iso?: string) => iso ?? 'undated';
 const entries = Object.entries(sources) as [string, Source][];
@@ -10,9 +10,10 @@ const entries = Object.entries(sources) as [string, Source][];
   title="Source register"
   description="Every source cited on this site, with publisher, date, reliability grade and verification status."
   eyebrow="Standards"
-  lede={`All ${entries.length} sources cited on the site, grouped by subject. Each links to the original.`}
+  lede={`All ${entries.length} sources cited on the site, grouped by subject. Each entry opens a page with the link to the original, its grade, and every place it is cited.`}
   reviewed="2026-11-20"
 >
+  <p class="small sans">Download the register: <a href="/sources.json">JSON</a> · <a href="/sources.bib">BibTeX</a> · <a href="/sources.csv">CSV</a></p>
   {topics.map((t) => (
     <>
       <h2 id={t.toLowerCase().replace(/[^a-z]+/g, '-')}>{t}</h2>
@@ -22,7 +23,7 @@ const entries = Object.entries(sources) as [string, Source][];
           <tbody>
             {entries.filter(([, s]) => s.topic === t).map(([id, s]) => (
               <tr id={id}>
-                <th>{s.url ? <a href={s.url} rel="noopener external">{s.title}</a> : s.title}{s.note && <span class="small muted" style="display:block;font-weight:400;margin-top:.25rem">{s.note}</span>}</th>
+                <th><a href={`/sources/${id}/`}>{s.title}</a>{s.note && <span class="small muted" style="display:block;font-weight:400;margin-top:.25rem">{s.note}</span>}</th>
                 <td data-label="Publisher">{s.publisher}</td>
                 <td data-label="Date">{fmt(s.date)}</td>
                 <td data-label="Grade"><Grade g={s.grade} /></td>

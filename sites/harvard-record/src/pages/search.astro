@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Search" description="Search the site’s pages, glossary, law explainers, guides, claims and sources." eyebrow="Reference" toc={false} article={false}>
+  <form role="search" class="full" onsubmit="return false">
+    <label class="sans small" for="q" style="display:block;font-weight:600;margin-bottom:.3rem">Search the site</label>
+    <input id="q" name="q" type="search" class="filter-input" autocomplete="off" placeholder="For example: capacity rating, Clery, exome" />
+  </form>
+  <p id="status" class="sans small muted" aria-live="polite">Type at least two characters.</p>
+  <ol id="results" class="search-results full"></ol>
+  <noscript><p>Search needs JavaScript. You can browse instead from the <a href="/reference/">reference page</a>.</p></noscript>
+  <script>
+    type Doc = { t: string; u: string; k: string; d: string; x: string };
+    const input = document.getElementById('q') as HTMLInputElement;
+    const list = document.getElementById('results')!;
+    const status = document.getElementById('status')!;
+    let docs: Doc[] | null = null;
+
+    async function load() {
+      if (!docs) docs = await (await fetch('/search-index.json')).json();
+      return docs!;
+    }
+    function score(d: Doc, terms: string[]) {
+      let s = 0;
+      const t = d.t.toLowerCase(), desc = d.d.toLowerCase();
+      for (const term of terms) {
+        if (t === term) s += 12;
+        else if (t.startsWith(term)) s += 8;
+        else if (t.includes(term)) s += 5;
+        if (desc.includes(term)) s += 2;
+        if (d.x.includes(term)) s += 1;
+        else if (!t.includes(term) && !desc.includes(term)) return 0; // every term must appear somewhere
+      }
+      return s;
+    }
+    async function run() {
+      const v = input.value.trim().toLowerCase();
+      history.replaceState(null, '', v ? `?q=${encodeURIComponent(v)}` : location.pathname);
+      list.replaceChildren();
+      if (v.length < 2) { status.textContent = 'Type at least two characters.'; return; }
+      const terms = v.split(/\s+/).filter(Boolean);
+      const hits = (await load()).map((d) => [score(d, terms), d] as const).filter(([s]) => s > 0).sort((a, b) => b[0] - a[0]).slice(0, 40);
+      status.textContent = hits.length ? `${hits.length}${hits.length === 40 ? '+' : ''} results` : 'No results. Try a shorter or different word.';
+      for (const [, d] of hits) {
+        const li = document.createElement('li');
+        const kind = document.createElement('span'); kind.className = 'kind'; kind.textContent = d.k;
+        const a = document.createElement('a'); a.href = d.u; a.textContent = d.t;
+        const p = document.createElement('p'); p.textContent = d.d;
+        li.append(kind, document.createElement('br'), a, p);
+        list.append(li);
+      }
+    }
+    input.addEventListener('input', run);
+    const initial = new URLSearchParams(location.search).get('q');
+    if (initial) { input.value = initial; run(); }
+  </script>
+</Base>

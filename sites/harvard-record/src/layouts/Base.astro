@@ -5,6 +5,7 @@ import '../styles/global.css';
 import { site, nav } from '../config';
 import { sources } from '../data/sources';
 import { grades } from '../data/grades';
+import { processCitations, formatDate, slugify } from '../lib/citations';
 
 interface Props {
   title: string;
@@ -24,37 +25,14 @@ const isHome = path === '/';
 const fullTitle = isHome ? `${site.name} | Independent public-source review` : `${title} | ${site.name}`;
 
 // ---- Render the page body, then number citations and build the reference list ----
-const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-let body = await Astro.slots.render('default');
-
-const order: string[] = [];
-const uses: Record<string, number> = {};
-body = body.replace(/<sup\b[^>]*\bdata-cite="([^"]+)"[^>]*><\/sup>/g, (tag: string, id: string) => {
-  const src = sources[id];
-  if (!src) throw new Error(`Unknown source id "${id}" cited on ${path}. Add it to src/data/sources.ts.`);
-  if (!order.includes(id)) order.push(id);
-  const n = order.indexOf(id) + 1;
-  uses[id] = (uses[id] ?? 0) + 1;
-  const loc = tag.match(/data-loc="([^"]*)"/)?.[1];
-  const label = `Source ${n}: ${src.title}${loc ? ', ' + loc : ''}. Grade ${src.grade}.`;
-  return `<sup class="cite"><a href="#ref-${n}" id="cite-${n}-${uses[id]}" title="${esc(label)}" aria-label="${esc(label)}">${n}${loc ? `<span class="visually-hidden">, ${loc}</span>` : ''}</a></sup>`;
-});
-
-const headings = toc
-  ? [...body.matchAll(/<h2\b[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g)].map((m) => ({
-      id: m[1],
-      text: m[2].replace(/<sup[\s\S]*?<\/sup>/g, '').replace(/<[^>]+>/g, '').trim(),
-    }))
-  : [];
+let rendered = await Astro.slots.render('default');
+// Markdown content carries no heading ids we control, so make sure every h2 has one.
+rendered = rendered.replace(/<h2>([\s\S]*?)<\/h2>/g, (_m: string, inner: string) => `<h2 id="${slugify(inner.replace(/<[^>]+>/g, ''))}">${inner}</h2>`);
+const { html: body, order, uses, headings: found } = processCitations(rendered, sources, path);
+const headings = toc ? [...found] : [];
 if (order.length && toc) headings.push({ id: 'references', text: 'References' });
 const showToc = headings.length > 2;
-
-const fmt = (iso?: string) => {
-  if (!iso) return '';
-  const [y, m, d] = iso.split('-').map(Number);
-  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  return d ? `${d} ${months[m - 1]} ${y}` : m ? `${months[m - 1]} ${y}` : `${y}`;
-};
+const fmt = formatDate;
 
 const jsonld = {
   '@context': 'https://schema.org',
@@ -73,6 +51,7 @@ const jsonld = {
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="Update log" href="/updates.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#14233b" />
     <meta property="og:type" content={isHome ? 'website' : 'article'} />
@@ -99,7 +78,7 @@ const jsonld = {
             <summary>Sections</summary>
             <ul>
               {nav.map((n) => (
-                <li><a href={n.href} aria-current={path === n.href ? 'page' : undefined} title={n.long}>{n.label}</a></li>
+                <li><a href={n.href} aria-current={path === n.href ? 'page' : (n.href === '/reference/' && /^\/(glossary|law|guides|ledger|faq|search|sources|updates|named)\//.test(path)) ? 'true' : undefined} title={n.long}>{n.label}</a></li>
               ))}
             </ul>
           </details>
@@ -188,6 +167,12 @@ const jsonld = {
             <ul>
               <li><a href="/methodology/">How sources are graded</a></li>
               <li><a href="/sources/">Full source register</a></li>
+              <li><a href="/ledger/">Claim ledger</a></li>
+              <li><a href="/faq/">Questions and answers</a></li>
+              <li><a href="/named/">People and bodies named</a></li>
+              <li><a href="/search/">Search</a></li>
+              <li><a href="/privacy/">Privacy</a></li>
+              <li><a href="/accessibility/">Accessibility</a></li>
               <li><a href="/updates/">Update log</a></li>
               <li><a href="/about/#corrections">Corrections policy</a></li>
               <li><a href={`mailto:${site.correctionsEmail}`}>{site.correctionsEmail}</a></li>

@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { updates } from '../data/updates';
 ---
 <Base title="Update log" description="A public record of every edition, update and correction made to this site." eyebrow="Standards" lede="Every substantive change to the site is listed here, newest first. Corrections state what was wrong." toc={false}>
+  <p class="small sans">Subscribe: <a href="/updates.xml">RSS feed</a></p>
   <div class="table-wrap full">
     <table class="stack">
       <thead><tr><th>Date</th><th>Type</th><th>Change</th></tr></thead>

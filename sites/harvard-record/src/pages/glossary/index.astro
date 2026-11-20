@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const terms = (await getCollection('glossary')).sort((a, b) => a.data.term.localeCompare(b.data.term));
+const cats = [...new Set(terms.map((t) => t.data.category))].sort();
+const slug = (t: string) => t.toLowerCase().replace(/[^a-z]+/g, '-');
+---
+<Base
+  title="Glossary"
+  description="Plain-language definitions of the legal, fundraising, governance, genetics and sourcing terms used on this site."
+  eyebrow="Reference"
+  lede={`${terms.length} terms in plain language, grouped by subject. Definitions are general reference and describe how these things usually work in the United States.`}
+>
+  <p class="full">
+    <label class="sans small" for="gq" style="display:block;font-weight:600;margin-bottom:.3rem">Filter terms</label>
+    <input id="gq" type="search" placeholder="Type to filter, for example “consent”" autocomplete="off" class="filter-input" />
+    <span id="gcount" class="sans small muted" aria-live="polite"></span>
+  </p>
+  {cats.map((c) => (
+    <section data-cat>
+      <h2 id={slug(c)}>{c}</h2>
+      <dl class="terms full">
+        {terms.filter((t) => t.data.category === c).map((t) => (
+          <div data-term={`${t.data.term} ${t.data.aliases.join(' ')} ${t.data.short}`.toLowerCase()}>
+            <dt><a href={`/glossary/${t.id}/`}>{t.data.term}</a></dt>
+            <dd>{t.data.short}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  ))}
+  <script>
+    const q = document.getElementById('gq') as HTMLInputElement | null;
+    const out = document.getElementById('gcount');
+    const rows = [...document.querySelectorAll<HTMLElement>('[data-term]')];
+    q?.addEventListener('input', () => {
+      const v = q.value.trim().toLowerCase();
+      let n = 0;
+      rows.forEach((r) => { const hit = !v || r.dataset.term!.includes(v); r.hidden = !hit; if (hit) n++; });
+      document.querySelectorAll<HTMLElement>('[data-cat]').forEach((s) => { s.hidden = !s.querySelector('[data-term]:not([hidden])'); });
+      if (out) out.textContent = v ? `${n} of ${rows.length} terms` : '';
+    });
+  </script>
+</Base>

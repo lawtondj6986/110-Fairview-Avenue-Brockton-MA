@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import Callout from '../components/Callout.astro';
+import { named, roleLabels, type Named } from '../data/named';
+import { pageTitles } from '../lib/usage';
+const roles = Object.keys(roleLabels) as Named['role'][];
+const sorted = [...named].sort((a, b) => a.sort.localeCompare(b.sort));
+const slug = (s: string) => s.toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+---
+<Base
+  title="People and bodies named on this site"
+  description="An index of every person and organisation named on the site: why each appears, what the cited record says, what it does not say, and any response."
+  eyebrow="Reference"
+  lede="Many names appear in the underlying records for ordinary reasons. This index states, for each one, why it appears here, the strongest thing the cited record says, and what the record does not say."
+  reviewed="2026-11-20"
+>
+  <Callout title="Read this first">
+    <p>
+      Appearing in a document, or on this site, is not evidence of wrongdoing. Several people below are named only
+      because someone sent them a gift or mentioned them in an email. Entries add nothing beyond the
+      <a href="/ledger/">claim ledger</a>, and every statement here is pending the same source checks as the ledger.
+      To request a correction or add a response, see the <a href="/about/#corrections">corrections policy</a>.
+    </p>
+  </Callout>
+
+  {roles.filter((r) => sorted.some((n) => n.role === r)).map((r) => (
+    <>
+      <h2 id={slug(roleLabels[r])}>{roleLabels[r]}</h2>
+      {sorted.filter((n) => n.role === r).map((n) => (
+        <section class="named full" id={slug(n.sort)}>
+          <h3>{n.name}</h3>
+          <dl>
+            <div><dt>Why the name appears</dt><dd>{n.why}</dd></div>
+            <div><dt>What the cited record says</dt><dd>{n.recordSays}</dd></div>
+            <div><dt>What the record does not say</dt><dd>{n.recordDoesNotSay}</dd></div>
+            {n.response && <div><dt>Response</dt><dd>{n.response}</dd></div>}
+            <div>
+              <dt>Where</dt>
+              <dd class="sans small">
+                {n.pages.map((p, i) => <>{i > 0 && ' · '}<a href={p}>{pageTitles[p] ?? p}</a></>)}
+                {' · Ledger: '}{n.claims.map((c, i) => <>{i > 0 && ', '}<a href={`/ledger/#${c}`}>{c}</a></>)}
+              </dd>
+            </div>
+          </dl>
+        </section>
+      ))}
+    </>
+  ))}
+</Base>

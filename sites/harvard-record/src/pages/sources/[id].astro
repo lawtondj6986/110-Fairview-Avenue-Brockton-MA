@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+import Grade from '../../components/Grade.astro';
+import State from '../../components/State.astro';
+import Callout from '../../components/Callout.astro';
+import { sources } from '../../data/sources';
+import { grades } from '../../data/grades';
+import { claims } from '../../data/claims';
+import { buildUsage } from '../../lib/usage';
+import { formatDate } from '../../lib/citations';
+
+export function getStaticPaths() {
+  return Object.keys(sources).map((id) => ({ params: { id } }));
+}
+const { id } = Astro.params as { id: string };
+const s = sources[id];
+const usage = buildUsage()[id] ?? [];
+const supported = claims.filter((c) => c.sources.includes(id));
+const host = s.url ? new URL(s.url).hostname.replace(/^www\./, '') : undefined;
+---
+<Base
+  title={s.title}
+  description={`Source record: ${s.title}. ${s.publisher}. Reliability grade ${s.grade}.`}
+  eyebrow={`Source record · ${s.topic}`}
+  reviewed={s.checked}
+  toc={false}
+>
+  <div class="table-wrap full">
+    <table class="stack">
+      <tbody>
+        <tr><th>Publisher</th><td>{s.publisher}</td></tr>
+        {s.author && <tr><th>Author</th><td>{s.author}</td></tr>}
+        <tr><th>Date</th><td>{formatDate(s.date) || 'Undated or recurring'}</td></tr>
+        <tr><th>Grade</th><td><Grade g={s.grade} /> {grades[s.grade].label}</td></tr>
+        <tr><th>Original</th><td>{s.url ? <a href={s.url} rel="noopener external">Open the original at {host}</a> : 'No link recorded'}</td></tr>
+        <tr><th>Verification</th><td>{s.checked ? `Checked against the original on ${formatDate(s.checked)}` : 'Pending check: compiled from published summaries and not yet re-read against the original.'}</td></tr>
+      </tbody>
+    </table>
+  </div>
+  {s.note && <Callout title="Note on this source" plain><p>{s.note}</p></Callout>}
+
+  <h2 id="cited-on">Where it is cited</h2>
+  {usage.length ? (
+    <ul>{usage.map((u) => <li><a href={u.path}>{u.title}</a> <span class="muted sans small">({u.count} {u.count === 1 ? 'citation' : 'citations'})</span></li>)}</ul>
+  ) : <p>This source is in the register but is not currently cited on a page.</p>}
+
+  <h2 id="claims">Claims that rest on it</h2>
+  {supported.length ? (
+    <div class="table-wrap full">
+      <table class="stack">
+        <thead><tr><th>Ref.</th><th>Claim</th><th>Evidence state</th></tr></thead>
+        <tbody>
+          {supported.map((c) => (
+            <tr>
+              <th><a href={`/ledger/#${c.id}`}>{c.id}</a></th>
+              <td data-label="Claim">{c.claim}{c.caveat && <span class="small muted" style="display:block;margin-top:.25rem">{c.caveat}</span>}</td>
+              <td data-label="Evidence state"><State s={c.state} /></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  ) : <p>No ledger claim lists this source directly. It is used for context or corroboration.</p>}
+
+  <p class="small sans"><a href="/sources/">Back to the full register</a></p>
+</Base>

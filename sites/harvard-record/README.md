@@ -65,21 +65,39 @@ The site was populated from the research baseline, then corrected where public s
 |---|---|
 | `src/config.ts` | Site name, domain, disclaimer text, navigation. |
 | `src/data/sources.ts` | The source register: every citation, with grade and verification date. |
-| `src/data/timelines.ts` | Timeline events for the Program and the medical school. |
-| `src/data/comparison.ts` | The cross-institutional table. |
-| `src/data/updates.ts` | The public update log. |
-| `src/pages/*.astro` | One file per page. Prose is edited directly. |
+| `src/data/claims.ts` | The claim ledger: one row per factual claim, with state, grade, sources and caveats. |
+| `src/data/named.ts` | Index of people and bodies named, with what the record does and does not say. |
+| `src/data/timelines.ts`, `comparison.ts` | Timeline events and the cross-institutional table. |
+| `src/data/faq.ts`, `updates.ts` | Questions and answers; the public update log. |
+| `src/content/glossary/` | Glossary terms, one Markdown file each. |
+| `src/content/law/` | Law explainers. |
+| `src/content/guides/` | Guides and templates, in four series. |
+| `src/pages/` | One file per page; folders for generated sections. |
 | `src/layouts/Base.astro` | Page shell. Numbers citations and builds each page's reference list. |
+| `src/lib/` | Citation processing and data export, unit-tested. |
+| `scripts/` | Audit, built-site checker, link checker, browser smoke test, worksheet generator. |
+| `tests/` | Unit tests, data-integrity tests and the editorial lint. |
+| `docs/` | Maintainer manual, style guide, launch checklist, writer's brief, verification worksheets, progress reports. |
 
-## Updating content
+## Working on it
 
-**Cite something.** Add the source to `sources.ts`, then write `<Cite id="the-id" />` after the sentence.
-Numbering and the reference list are generated. An unknown id fails the build, so a citation cannot point at nothing.
+Read `docs/MAINTAINING.md` first. In short:
 
-**Add a timeline event.** Append an object to the array in `timelines.ts` with `kind`
-(`funding`, `access`, `response`, `record`), an optional evidence `state`, and its `cites`.
+```bash
+npm test          # unit tests, data integrity, editorial lint
+npm run check     # tests + build + every internal link and anchor
+npm run smoke     # headless browser pass at phone and desktop widths
+npm run audit     # verification status and which sources to check first
+```
 
-**Mark strength of evidence.** `<Grade g="A1" />` for the source grade; `<State s="intent" />`,
-`"activity"` or `"verified"` for the three-state discipline.
+**Cite something.** Add the source to `sources.ts`, then write `<Cite id="the-id" />` after the sentence (or
+`[@the-id]` in Markdown). Numbering and the reference list are generated. An unknown id fails the build.
+
+**Record the claim.** Add a row to `claims.ts`. The tests reject a claim graded above its best source, an
+absence without a caveat, or an allegation marked as verified.
+
+**Check a source.** Open its worksheet in `docs/verification/`, read the original, then set `checked`.
 
 **After any edit.** Change the page's `reviewed` date and add a line to `updates.ts`.
+
+Style rules are in `docs/STYLE.md`. The steps before going public are in `docs/LAUNCH-CHECKLIST.md`.

@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+const paths = [
+  {
+    id: 'prospective-students', who: 'Prospective students and families',
+    intro: 'You are deciding whether a university is somewhere you want to spend several years. The useful question is how the institution behaves when something goes wrong.',
+    steps: [
+      ['/campus-safety/', 'Campus safety: the public record', 'Federal findings, survey results and where to find current crime statistics.'],
+      ['/guides/', 'Guides: evaluating an institution', 'How to compare safety data fairly and what to ask on a visit.'],
+      ['/program-for-evolutionary-dynamics/', 'Program for Evolutionary Dynamics', 'A worked example of how a central rule and local practice came apart.'],
+      ['/faq/', 'Questions and answers', 'Short answers, including why higher reported numbers are not simply worse.'],
+    ],
+  },
+  {
+    id: 'students', who: 'Current students',
+    intro: 'You already know the place. These pages add the documentary record and explain the rules that govern it.',
+    steps: [
+      ['/campus-safety/', 'Campus safety: the public record', 'What has been found, what was promised, and what has been reported since.'],
+      ['/law/', 'Law explainers', 'What Title IX, the Clery Act and privacy law do and do not require.'],
+      ['/guides/', 'Guides', 'Reading a sanction announcement, a climate survey, and how research labs are funded.'],
+      ['/glossary/', 'Glossary', 'The vocabulary of complaints, findings and resolutions.'],
+    ],
+  },
+  {
+    id: 'alumni', who: 'Alumni',
+    intro: 'You may be asked to give, or to vouch. These pages set out how money and access moved in one documented case, and what was done about it.',
+    steps: [
+      ['/donor-pathways/', 'Donor influence and introduced funding', 'The three routes a gift can take, and which one the rules closed.'],
+      ['/comparison/', 'Cross-institutional comparison', 'How the same donor’s relationship differed at two universities.'],
+      ['/guides/', 'Guides', 'How to read a gift acceptance policy, and what alumni can reasonably ask for.'],
+      ['/updates/', 'Update log', 'What has changed on the site and when.'],
+    ],
+  },
+  {
+    id: 'researchers', who: 'Researchers and journalists',
+    intro: 'You want to check the work and reuse it. Start with the structured material and work back to the prose.',
+    steps: [
+      ['/ledger/', 'Claim ledger', 'One row per claim with state, grade, sources and caveats. Downloadable.'],
+      ['/sources/', 'Source register', 'Every source, with a record page listing where it is cited.'],
+      ['/methodology/', 'Methodology', 'The grading scheme, the three evidence states and the editorial rules.'],
+      ['/named/', 'People and bodies named', 'Why each name appears and what the record does not say.'],
+      ['/dna-genetics/', 'The DNA and genetics record', 'The three-state method applied item by item.'],
+    ],
+  },
+];
+---
+<Base title="Start here" description="Reading paths through the site for prospective students, current students, alumni and researchers." eyebrow="Overview" lede="Four short reading paths, depending on why you are here. Each takes about fifteen minutes." article={false}>
+  {paths.map((p) => (
+    <>
+      <h2 id={p.id}>{p.who}</h2>
+      <p>{p.intro}</p>
+      <ol class="path full">
+        {p.steps.map(([href, title, note]) => <li><a href={href}>{title}</a><span>{note}</span></li>)}
+      </ol>
+    </>
+  ))}
+</Base>

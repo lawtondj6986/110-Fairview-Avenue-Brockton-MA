@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import { faq } from '../data/faq';
+const slug = (t: string) => t.toLowerCase().replace(/[^a-z]+/g, '-');
+const strip = (h: string) => h.replace(/<[^>]+>/g, '').trim();
+const ld = {
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faq.flatMap((s) => s.items).map((i) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: strip(i.a) } })),
+};
+---
+<Base title="Frequently asked questions" description="Answers to common questions about this site, how to read its evidence grades, what the record shows, and how to request a correction." eyebrow="Reference" lede="Short answers to the questions readers ask most, with links to the pages that carry the detail." reviewed="2026-11-20" article={false}>
+  {faq.map((s) => (
+    <>
+      <h2 id={slug(s.section)}>{s.section}</h2>
+      {s.items.map((i) => (
+        <details class="faq"><summary>{i.q}</summary><Fragment set:html={i.a} /></details>
+      ))}
+    </>
+  ))}
+  <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+</Base>

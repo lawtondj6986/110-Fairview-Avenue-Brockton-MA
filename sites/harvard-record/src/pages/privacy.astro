@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config';
+---
+<Base title="Privacy" description="What this site collects about its readers: nothing beyond standard server logs. No cookies, no analytics, no advertising." eyebrow="About" lede="This site does not track its readers." reviewed="2026-11-20" toc={false}>
+  <h2 id="what-we-collect">What the site collects</h2>
+  <ul>
+    <li><strong>No cookies.</strong> The site sets none.</li>
+    <li><strong>No analytics or advertising scripts.</strong> No third-party code runs on any page.</li>
+    <li><strong>No accounts, forms or newsletters.</strong> The site never asks for your name or email address.</li>
+    <li><strong>Fonts and scripts are served from this site.</strong> Reading a page does not contact any other company’s servers.</li>
+  </ul>
+
+  <h2 id="server-logs">Server logs</h2>
+  <p>
+    Like every website, the hosting provider records basic request information such as the time, the page requested
+    and the requesting address, in order to operate the service and protect it from abuse. The publisher does not use
+    these logs to identify readers.
+  </p>
+
+  <h2 id="search">Search</h2>
+  <p>
+    The search page works entirely in your browser. What you type is matched against an index file downloaded from
+    this site and is not sent anywhere.
+  </p>
+
+  <h2 id="email">If you write to us</h2>
+  <p>
+    If you email <a href={`mailto:${site.correctionsEmail}`}>{site.correctionsEmail}</a>, your message and address are
+    used only to handle your request. A correction is described in the <a href="/updates/">update log</a> without
+    naming the person who asked for it, unless they ask to be named.
+  </p>
+
+  <h2 id="external-links">Links to other sites</h2>
+  <p>
+    Source links lead to third-party sites with their own privacy practices. Following a link tells that site you
+    arrived from here unless your browser withholds it.
+  </p>
+
+  <h2 id="people-named">Information about people named on the site</h2>
+  <p>
+    The site reports only material already published in official records and established reporting. It does not
+    publish home addresses, contact details, family information or other private data, and it does not name people
+    who made complaints. See the <a href="/about/#corrections">corrections policy</a> to raise a concern.
+  </p>
+</Base>

@@ -26,6 +26,7 @@ export const nav = [
   { href: '/dna-genetics/', label: 'DNA record', long: 'DNA and genetics continuum' },
   { href: '/campus-safety/', label: 'Campus safety', long: 'Campus safety and sexual misconduct record' },
   { href: '/comparison/', label: 'Comparison', long: 'Cross-institutional comparison' },
+  { href: '/reference/', label: 'Reference', long: 'Glossary, law explainers, guides and claim ledger' },
   { href: '/methodology/', label: 'Methodology', long: 'Methodology and sourcing standards' },
   { href: '/about/', label: 'About', long: 'About, disclaimer and corrections' },
 ];

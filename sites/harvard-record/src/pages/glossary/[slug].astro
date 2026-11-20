@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+export async function getStaticPaths() {
+  const all = await getCollection('glossary');
+  return all.map((entry) => ({ params: { slug: entry.id }, props: { entry, all } }));
+}
+const { entry, all } = Astro.props;
+const { Content } = await render(entry);
+const byId = new Map(all.map((e) => [e.id, e]));
+const related = entry.data.related.map((r: string) => byId.get(r)).filter(Boolean);
+// Terms that point here but are not already listed.
+const inbound = all.filter((e) => e.data.related.includes(entry.id) && !entry.data.related.includes(e.id));
+---
+<Base title={entry.data.term} description={entry.data.short} eyebrow={`Glossary · ${entry.data.category}`} lede={entry.data.short} toc={false}>
+  {entry.data.aliases.length > 0 && <p class="small sans muted">Also called: {entry.data.aliases.join(', ')}</p>}
+  <Content />
+  {entry.data.links.length > 0 && (
+    <>
+      <h2 id="official-text">Official text</h2>
+      <ul>{entry.data.links.map((l: { label: string; url: string }) => <li><a href={l.url} rel="noopener external">{l.label}</a></li>)}</ul>
+    </>
+  )}
+  {(related.length > 0 || inbound.length > 0) && (
+    <>
+      <h2 id="related">Related terms</h2>
+      <ul>{[...related, ...inbound].map((r: any) => <li><a href={`/glossary/${r.id}/`}>{r.data.term}</a>: {r.data.short}</li>)}</ul>
+    </>
+  )}
+  <p class="small sans muted">General reference, not legal or medical advice. <a href="/glossary/">All terms</a></p>
+</Base>
