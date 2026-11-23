@@ -223,6 +223,7 @@ const INTENTS = {
       quiz: /\b(quiz|fluency|test me|vocabulary|how fluent)\b/,
       month: /\b(this month|this week|right now|what should (i|we) (do|run|post)|seasonal|season(ality)?|calendar|what month)\b/,
       tour: /\b(tour(ing)?|walk[- ]?through|walking (a|the) building|scorecard|score (a|the|this) building|showing|site visit|inspect(ing)? (a|the) building)\b/,
+      retainer: /\b(retainer|retain you|retain ics|onboard(ing)?|train (my|our) (team|staff|office|firm)|ai training|set ?up (my|our) (office|firm|practice))\b/,
       sell: /\b(sell(ing)? (my|our|the|a) (building|property|plaza|warehouse|garage|lot|land)|sale[- ]leaseback|list my building|what is my building worth|seller brief|put (it|the building) on the market)\b/,
       alt: /\b(angi|home ?advisor|thumbtack|yelp ads|lead ?gen|buying leads|shared leads|answering service|virtual receptionist|call center|hire a marketer|marketing hire|in-house marketer|franchise|franchisor|hubspot|go ?high ?level|crm subscription|zapier|freelancer|my nephew|my cousin|web designer)\b/,
       clause: /\b(clause|clauses|guaranty|guarantee|holdover|estoppel|snda|subordination|assignment|sublet|subletting|escalation|escalations|abatement|cam|pass[- ]?through|exclusive use|co-?tenancy|relocation|indemnif|my lease says|in my lease|lease says|fine print)\b/,
@@ -291,6 +292,9 @@ const INTENTS = {
     }
     if (has(V.tour)) {
       out.push({ eyebrow: 'Tour Scorecard', title: 'Walking a building? Score it as you go.', body: 'Twenty-three items weighted for your use, up to three buildings side by side, the weak items named and the seller questions written. Built for a phone in a parking lot.', links: [['Open the scorecard →', '/tour-scorecard/'], ['Before the tour: Buyer Brief', '/buyer-brief/']] });
+    }
+    if (has(V.retainer)) {
+      out.push({ eyebrow: 'Retainer Agreement', title: 'Retain ICS to train and set up your office', body: 'One retainer covers 30 days of onboarding and training plus two more months of service; a law office is $5,000. Then a monthly fee set in writing by scope. The full agreement is published.', links: [['Read the agreement →', '/retainer/'], ['Talk to Daniel', '/contact/']] });
     }
     if (has(V.sell)) {
       out.push({ eyebrow: 'Seller Brief', title: ma.length ? `Selling in ${names(ma)}? Build the plan.` : 'Selling a building? Build the plan.', body: 'Ten answers and the page writes the 120-day timeline with dates, the file to assemble, how it will be priced, and the first three moves.', links: [['Build a seller brief →', `/seller-brief/${ma.length ? '?t=' + ma[0].s : ''}`], ['Free building valuation', '/building-worth/'], ['Seller net sheet', '/seller-net/']] });

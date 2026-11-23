@@ -1,0 +1,237 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+import FounderCard from '../components/FounderCard.astro';
+import ShareKit from '../components/ShareKit.astro';
+import { RETAINER, PRACTICES } from '../lib/retainer';
+import { SITE, FOUNDER } from '../config';
+
+const money = (n: number) => '$' + n.toLocaleString('en-US');
+const title = 'Retainer Agreement — AI Onboarding and Training, Priced in the Open | ICS';
+const description = `How ICS is retained to set up and train an office on AI: a one-time retainer that covers ${RETAINER.onboardingDays} days of onboarding and training plus ${RETAINER.includedMonths} more months of service, then a monthly fee set in writing from the scope of work. A law office is ${money(RETAINER.exampleAmount)}. The full agreement is on this page, printable, before you ever call.`;
+
+const faqs = [
+  { q: 'What does the retainer cover?', a: `Onboarding and training for your office, running within ${RETAINER.onboardingDays} days, plus ${RETAINER.includedMonths} additional months of service at no further charge. That is three months in all. For a law office the retainer is ${money(RETAINER.exampleAmount)}.` },
+  { q: 'What happens after the three months?', a: 'Service continues on a monthly fee. The fee depends on the scope of work your office needs, and it is put in writing before the included months end, so you decide with the number in front of you. There is no automatic increase and no surprise invoice.' },
+  { q: 'Is the retainer the same for every business?', a: `No. It varies with the size of the office and the training and onboarding the work requires. The law-office figure of ${money(RETAINER.exampleAmount)} is published as the example. Every other retainer is quoted in writing before anything is signed.` },
+  { q: 'Does ICS give legal or medical advice?', a: 'No. ICS trains your people and sets up your systems. The professional judgment stays with the licensed professionals in your office, and every workflow ICS builds includes a human review step.' },
+  { q: 'Who owns the accounts and the work?', a: 'You do. Accounts are opened in your name, your data stays yours, and the written policies and workflows ICS produces are yours to keep whether or not you continue.' },
+];
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'Service', name: 'AI Onboarding and Training Retainer', serviceType: 'AI systems onboarding, training, and ongoing support', provider: { '@id': `${SITE.url}/#business` }, description, url: `${SITE.url}/retainer/`, offers: { '@type': 'Offer', name: 'Law office retainer', price: String(RETAINER.exampleAmount), priceCurrency: 'USD', description: `${RETAINER.onboardingDays} days of onboarding and training plus ${RETAINER.includedMonths} additional months of service` } },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+const input = 'w-full rounded-md border border-navy-100 bg-white px-3 py-2 text-sm text-navy-900 focus:border-teal-500 focus:outline-none';
+const label = 'font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-ink-500';
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="bg-navy-950 print:hidden">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <p class="reveal text-xs font-semibold uppercase tracking-[0.25em] text-brass-300">Retainer agreement · published in full · no surprises</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl" style="--reveal-delay: 100ms">One retainer. Your office trained and running on AI in {RETAINER.onboardingDays} days.</h1>
+      <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-navy-100/90" style="--reveal-delay: 200ms">
+        {FOUNDER.firstName} comes in, trains your people, sets up the systems, and stays with you. The retainer covers onboarding and training plus {RETAINER.includedMonths} more months of service. After that, a monthly fee set in writing from the work you actually need. The whole agreement is on this page.
+      </p>
+      <div class="reveal mt-8 flex flex-wrap gap-3" style="--reveal-delay: 300ms">
+        <a href="#agreement" class="rounded-md bg-teal-600 px-6 py-3 font-semibold text-white shadow-lg hover:bg-teal-700">Read the agreement</a>
+        <a href={`/contact/?${new URLSearchParams({ interest: 'AI systems & marketing', message: 'I would like to talk about the AI onboarding retainer.\n\nMy office: \nNumber of people: \nBest time to call: ' }).toString()}`} class="rounded-md border border-white/25 px-6 py-3 font-semibold text-white hover:border-teal-400 hover:text-teal-400">Talk to {FOUNDER.firstName}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6 print:hidden">
+    <p class="text-sm font-semibold uppercase tracking-widest text-teal-600">How the retainer works</p>
+    <h2 class="mt-2 font-display text-3xl font-bold text-navy-900">Three months for one fee. Then you decide, with the number in writing.</h2>
+    <div class="mt-8 grid gap-5 md:grid-cols-3">
+      {[
+        [`Days 1 to ${RETAINER.onboardingDays}`, 'Onboarding and training', 'On-site working sessions with your people, the systems set up in your accounts, and a written AI policy for the office. The goal is hours saved in the first month.', 'Covered by the retainer'],
+        [`Months 2 and ${RETAINER.includedMonths + 1}`, 'Service, included', 'Support, adjustments, refresher training, and new workflows as your team finds more to hand off. No additional charge.', 'Covered by the retainer'],
+        [`Month ${RETAINER.includedMonths + 2} onward`, 'Monthly service', 'A monthly fee based on the scope of work your office needs, put in writing before the included months end. You choose whether to continue.', 'Set in writing, by scope'],
+      ].map(([when, name, text, tag], i) => (
+        <div class="reveal flex flex-col rounded-2xl border border-navy-100 bg-white p-6 shadow-sm" style={`--reveal-delay: ${i * 80}ms`}>
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-brass-600">{when}</p>
+          <h3 class="mt-1 text-xl font-bold text-navy-900">{name}</h3>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-700">{text}</p>
+          <p class="mt-4 inline-block self-start rounded-full bg-teal-100 px-3 py-1 text-xs font-semibold text-teal-700">{tag}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-paper print:hidden">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+      <p class="text-sm font-semibold uppercase tracking-widest text-teal-600">By kind of office</p>
+      <h2 class="mt-2 font-display text-3xl font-bold text-navy-900">What onboarding covers, and what the retainer is</h2>
+      <p class="mt-3 max-w-2xl text-sm text-ink-700">The retainer varies with the office and the training the work requires. The law-office figure is published as the example. Every other retainer is quoted in writing before anything is signed.</p>
+      <div class="mt-8 grid gap-5 md:grid-cols-2">
+        {PRACTICES.map((p, i) => (
+          <article class="reveal flex flex-col rounded-2xl border border-navy-100 bg-white p-6 shadow-sm" style={`--reveal-delay: ${(i % 2) * 80}ms`}>
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="text-xl font-bold text-navy-900">{p.name}</h3>
+                <p class="text-sm text-ink-500">{p.who}</p>
+              </div>
+              <p class="shrink-0 text-right">
+                <span class="block font-display text-2xl font-bold text-navy-900">{p.amount ? money(p.amount) : 'Quoted'}</span>
+                <span class="block text-xs text-ink-500">{p.amount ? 'retainer' : 'in writing, before you sign'}</span>
+              </p>
+            </div>
+            <ul class="mt-4 flex-1 space-y-2">{p.onboarding.map((o) => <li class="flex gap-2 text-sm leading-relaxed text-ink-700"><span class="font-mono text-xs font-bold text-teal-600">✓</span><span>{o}</span></li>)}</ul>
+            <p class="mt-4 border-t border-navy-100 pt-3 text-xs leading-relaxed text-ink-500">{p.care}</p>
+            <a href="#agreement" data-pick={p.key} class="rt-pick mt-4 text-sm font-semibold text-teal-600 hover:text-teal-700">Prepare this agreement →</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6" id="agreement">
+    <div class="grid gap-8 lg:grid-cols-[1fr_1.5fr]">
+      <form class="space-y-4 print:hidden" id="rt-form" autocomplete="off">
+        <p class="text-sm font-semibold uppercase tracking-widest text-teal-600">Prepare the agreement</p>
+        <p class="text-sm text-ink-700">Fill in what you know. The document on the right updates as you type, and prints on its own. Nothing here is sent anywhere.</p>
+        <label class="block"><span class={label}>Client (office or company)</span><input id="rt-client" class={`mt-1 ${input}`} placeholder="Name of the office" maxlength="80" /></label>
+        <label class="block"><span class={label}>Kind of office</span><select id="rt-kind" class={`mt-1 ${input}`}>{PRACTICES.map((p) => <option value={p.key} data-amount={p.amount ?? ''} data-name={p.name}>{p.name}</option>)}</select></label>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="block"><span class={label}>Retainer ($)</span><input id="rt-amount" type="number" min="0" step="250" value={RETAINER.exampleAmount} class={`mt-1 ${input}`} /></label>
+          <label class="block"><span class={label}>Start date</span><input id="rt-start" type="date" class={`mt-1 ${input}`} /></label>
+        </div>
+        <label class="block"><span class={label}>Monthly fee after month {RETAINER.includedMonths + 1} ($, if known)</span><input id="rt-monthly" type="number" min="0" step="50" class={`mt-1 ${input}`} placeholder="Leave blank: set in writing by scope" /></label>
+        <label class="block"><span class={label}>Scope notes (optional)</span><textarea id="rt-scope" rows="3" class={`mt-1 ${input}`} placeholder="What the office wants handled first" maxlength="400"></textarea></label>
+        <div class="flex flex-wrap gap-2 pt-2">
+          <button type="button" id="rt-print" class="rounded-md bg-navy-900 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-600">Print the agreement</button>
+          <button type="button" id="rt-link" class="rounded-md border border-navy-100 bg-white px-4 py-2 text-sm font-semibold text-navy-900 hover:border-teal-500">Copy a link to this version</button>
+        </div>
+        <ShareKit what="the ICS retainer agreement" compact />
+      </form>
+
+      <article class="rounded-2xl border border-navy-100 bg-white p-6 shadow-sm sm:p-10 print:border-0 print:p-0 print:shadow-none" id="rt-doc">
+        <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-brass-600">{SITE.name}</p>
+        <h2 class="mt-2 font-display text-3xl font-bold text-navy-900">Retainer Agreement</h2>
+        <p class="mt-1 text-sm text-ink-500">AI onboarding, training, and service</p>
+
+        <dl class="mt-6 grid gap-x-6 gap-y-3 border-y border-navy-100 py-4 text-sm sm:grid-cols-2">
+          <div><dt class={label}>Client</dt><dd class="mt-0.5 font-semibold text-navy-900" data-o="client">________________________</dd></div>
+          <div><dt class={label}>Kind of office</dt><dd class="mt-0.5 font-semibold text-navy-900" data-o="kind">Law office</dd></div>
+          <div><dt class={label}>Retainer</dt><dd class="mt-0.5 font-semibold text-navy-900" data-o="amount">{money(RETAINER.exampleAmount)}</dd></div>
+          <div><dt class={label}>Start date</dt><dd class="mt-0.5 font-semibold text-navy-900" data-o="start">________________</dd></div>
+          <div><dt class={label}>Onboarding complete by</dt><dd class="mt-0.5 font-semibold text-navy-900" data-o="d30">30 days after the start date</dd></div>
+          <div><dt class={label}>Included service through</dt><dd class="mt-0.5 font-semibold text-navy-900" data-o="d90">the end of month 3</dd></div>
+        </dl>
+
+        <ol class="mt-6 space-y-4 text-sm leading-relaxed text-ink-700">
+          <li><span class="font-semibold text-navy-900">1. The engagement.</span> The Client retains {SITE.name} ("ICS"), through {FOUNDER.name}, to train the Client's people and set up the Client's AI business systems, and to keep them working.</li>
+          <li><span class="font-semibold text-navy-900">2. What the retainer covers.</span> The retainer of <span class="font-semibold text-navy-900" data-o="amount2">{money(RETAINER.exampleAmount)}</span> covers (a) onboarding and training, with the office running on the new systems within {RETAINER.onboardingDays} days of the start date, and (b) {RETAINER.includedMonths} additional months of service at no further charge.</li>
+          <li><span class="font-semibold text-navy-900">3. Onboarding and training.</span> <span data-o="onboarding"></span></li>
+          <li data-o-wrap="scope" hidden><span class="font-semibold text-navy-900">Scope notes.</span> <span data-o="scope"></span></li>
+          <li><span class="font-semibold text-navy-900">4. Monthly service after the included months.</span> <span data-o="monthly">Service continues on a monthly fee based on the scope of work the Client needs. ICS will put that fee in writing before the included months end, and it takes effect only if the Client accepts it.</span></li>
+          <li><span class="font-semibold text-navy-900">5. Payment.</span> The retainer is due at signing, by check payable to {SITE.name}. Monthly fees, if the Client continues, are due on the first of each month.</li>
+          <li><span class="font-semibold text-navy-900">6. What the Client provides.</span> A point of contact, time for the training sessions, and access to the accounts and systems the work touches. Subscriptions to third-party software are opened in the Client's name and paid by the Client.</li>
+          <li><span class="font-semibold text-navy-900">7. Ownership.</span> The Client owns its accounts, its data, and the written policies and workflows ICS produces under this agreement.</li>
+          <li><span class="font-semibold text-navy-900">8. Confidentiality.</span> ICS keeps the Client's information confidential and uses it only to do this work. <span data-o="care"></span></li>
+          <li><span class="font-semibold text-navy-900">9. No professional advice.</span> ICS provides training and systems. It does not provide legal, medical, tax, or other licensed professional advice, and every workflow keeps a qualified person's review in place.</li>
+          <li><span class="font-semibold text-navy-900">10. Ending the engagement.</span> After the included months, either party may end monthly service on {RETAINER.noticeDays} days' written notice. The Client keeps everything described in section 7.</li>
+          <li><span class="font-semibold text-navy-900">11. The whole agreement.</span> This document is the whole agreement on this subject, may be changed only in writing signed by both parties, and is governed by the laws of the Commonwealth of Massachusetts.</li>
+        </ol>
+
+        <div class="mt-10 grid gap-8 text-sm sm:grid-cols-2">
+          <div><p class="border-t border-navy-900 pt-2 font-semibold text-navy-900">Client</p><p class="mt-6 text-ink-500">Name and title: ____________________</p><p class="mt-3 text-ink-500">Date: ______________</p></div>
+          <div><p class="border-t border-navy-900 pt-2 font-semibold text-navy-900">{SITE.name}</p><p class="mt-6 text-ink-500">{FOUNDER.name}, {FOUNDER.title}</p><p class="mt-3 text-ink-500">Date: ______________</p></div>
+        </div>
+        <p class="mt-8 text-xs text-ink-500">{SITE.name} · {SITE.phone} · icsgroup.ai/retainer</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="bg-paper print:hidden">
+    <div class="mx-auto max-w-4xl px-4 py-14 sm:px-6">
+      <h2 class="text-center font-display text-2xl font-bold text-navy-900">Asked before the check is written</h2>
+      <div class="mt-8 space-y-4">
+        {faqs.map((f) => (
+          <details class="rounded-xl border border-navy-100 bg-white p-5" open>
+            <summary class="cursor-pointer list-none font-semibold text-navy-900">{f.q}</summary>
+            <p class="mt-3 text-sm leading-relaxed text-ink-700">{f.a}</p>
+          </details>
+        ))}
+      </div>
+      <p class="mt-8 text-center text-sm text-ink-500">Want a system built and run for you instead of training your team? <a href="/pricing/" class="font-semibold text-teal-600 hover:text-teal-700">The done-for-you systems have their own published prices →</a></p>
+    </div>
+  </section>
+
+  <div class="print:hidden">
+    <FounderCard heading="Who you are retaining" line={`${FOUNDER.name} does the training and the setup personally. No account manager, no handoff. The same person who signs the agreement is the one in your office.`} />
+    <CtaSection heading="Ready to see what thirty days does?" body="One call. You will leave with the retainer for your office in writing, what the first month covers, and an honest read on whether it will pay for itself." />
+  </div>
+</Base>
+
+<script define:vars={{ PRACTICES, RETAINER }}>
+  function initRetainer() {
+    const form = document.getElementById('rt-form');
+    if (!form || form.dataset.ready) return;
+    form.dataset.ready = '1';
+    const $ = (id) => document.getElementById(id);
+    const set = (k, v) => document.querySelectorAll(`[data-o="${k}"]`).forEach((el) => (el.textContent = v));
+    const money = (n) => '$' + Number(n).toLocaleString('en-US');
+    const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    const q = new URLSearchParams(location.search);
+    if (q.get('client')) $('rt-client').value = q.get('client').slice(0, 80);
+    if (q.get('kind') && PRACTICES.some((p) => p.key === q.get('kind'))) $('rt-kind').value = q.get('kind');
+    if (q.get('amount') && !isNaN(+q.get('amount'))) $('rt-amount').value = q.get('amount');
+    if (q.get('monthly') && !isNaN(+q.get('monthly'))) $('rt-monthly').value = q.get('monthly');
+    if (q.get('start')) $('rt-start').value = q.get('start');
+    let amountTouched = !!q.get('amount');
+
+    function render(push = true) {
+      const p = PRACTICES.find((x) => x.key === $('rt-kind').value) || PRACTICES[0];
+      const amt = $('rt-amount').value;
+      set('client', $('rt-client').value.trim() || '________________________');
+      set('kind', p.name);
+      set('amount', amt ? money(amt) : '$____________');
+      set('amount2', amt ? money(amt) : '$____________');
+      set('onboarding', p.onboarding.join('. ') + '.');
+      set('care', p.care);
+      const start = $('rt-start').value ? new Date($('rt-start').value + 'T12:00:00') : null;
+      if (start) {
+        const d30 = new Date(start); d30.setDate(d30.getDate() + RETAINER.onboardingDays);
+        const d90 = new Date(start); d90.setMonth(d90.getMonth() + 1 + RETAINER.includedMonths); d90.setDate(d90.getDate() - 1);
+        set('start', fmt(start)); set('d30', fmt(d30)); set('d90', fmt(d90));
+      } else { set('start', '________________'); set('d30', `${RETAINER.onboardingDays} days after the start date`); set('d90', `the end of month ${RETAINER.includedMonths + 1}`); }
+      const m = $('rt-monthly').value;
+      set('monthly', m ? `Service continues at ${money(m)} per month, beginning the month after the included months end. Any change to that fee is made in writing and takes effect only if the Client accepts it.` : 'Service continues on a monthly fee based on the scope of work the Client needs. ICS will put that fee in writing before the included months end, and it takes effect only if the Client accepts it.');
+      const scope = $('rt-scope').value.trim();
+      document.querySelector('[data-o-wrap="scope"]').hidden = !scope;
+      set('scope', scope);
+      if (push) {
+        const u = new URL(location.href);
+        const put = (k, v) => (v ? u.searchParams.set(k, v) : u.searchParams.delete(k));
+        put('client', $('rt-client').value.trim()); put('kind', p.key === PRACTICES[0].key ? '' : p.key); put('amount', amt && +amt !== RETAINER.exampleAmount ? amt : ''); put('monthly', m); put('start', $('rt-start').value);
+        history.replaceState(null, '', u.pathname + u.search + u.hash);
+      }
+    }
+    $('rt-kind').addEventListener('change', () => {
+      const a = $('rt-kind').selectedOptions[0].dataset.amount;
+      if (!amountTouched) $('rt-amount').value = a || '';
+      render();
+    });
+    $('rt-amount').addEventListener('input', () => { amountTouched = true; render(); });
+    ['rt-client', 'rt-start', 'rt-monthly', 'rt-scope'].forEach((id) => $(id).addEventListener('input', () => render()));
+    document.querySelectorAll('.rt-pick').forEach((a) => a.addEventListener('click', () => { $('rt-kind').value = a.dataset.pick; $('rt-kind').dispatchEvent(new Event('change')); }));
+    $('rt-print').addEventListener('click', () => window.print());
+    $('rt-link').addEventListener('click', async () => { const b = $('rt-link'); try { await navigator.clipboard.writeText(location.href); b.textContent = 'Link copied'; } catch { b.textContent = 'Copy the address bar'; } setTimeout(() => (b.textContent = 'Copy a link to this version'), 1600); });
+    if (!amountTouched) { const a = $('rt-kind').selectedOptions[0].dataset.amount; $('rt-amount').value = a || ''; }
+    render(false);
+  }
+  initRetainer();
+  document.addEventListener('astro:page-load', initRetainer);
+</script>
+
+<style is:global>
+  @media print {
+    html:has(#rt-doc) body > header, html:has(#rt-doc) body > footer { display: none !important; }
+    html:has(#rt-doc) #agreement { padding: 0 !important; }
+    html:has(#rt-doc) #agreement > .grid { display: block !important; }
+    html:has(#rt-doc) #rt-doc li, html:has(#rt-doc) #rt-doc dd { font-size: 11.5px !important; line-height: 1.45 !important; }
+    html:has(#rt-doc) #rt-doc ol > li + li { margin-top: 0.5rem !important; }
+  }
+</style>
