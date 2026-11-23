@@ -13,7 +13,8 @@ const description = `How ICS is retained to set up and train an office on AI: a 
 const faqs = [
   { q: 'What does the retainer cover?', a: `Onboarding and training for your office, running within ${RETAINER.onboardingDays} days, plus ${RETAINER.includedMonths} additional months of service at no further charge. That is three months in all. For a law office the retainer is ${money(RETAINER.exampleAmount)}.` },
   { q: 'What happens after the three months?', a: 'Service continues on a monthly fee. The fee depends on the scope of work your office needs, and it is put in writing before the included months end, so you decide with the number in front of you. There is no automatic increase and no surprise invoice.' },
-  { q: 'Is the retainer the same for every business?', a: `No. It varies with the size of the office and the training and onboarding the work requires. The law-office figure of ${money(RETAINER.exampleAmount)} is published as the example. Every other retainer is quoted in writing before anything is signed.` },
+  { q: 'Is the retainer the same for every business?', a: `No. It is based on the scope of the onboarding: how many employees are being trained, what the work covers, and how intensive it will be. The law-office figure of ${money(RETAINER.exampleAmount)} is published as the example. Every other retainer is quoted in writing before anything is signed.` },
+  { q: 'Is the retainer refundable?', a: 'No. The retainer is non-refundable. It reserves the time and covers the onboarding, the training, and the two included months of service, which is why the scope and the figure are put in writing before you sign.' },
   { q: 'Does ICS give legal or medical advice?', a: 'No. ICS trains your people and sets up your systems. The professional judgment stays with the licensed professionals in your office, and every workflow ICS builds includes a human review step.' },
   { q: 'Who owns the accounts and the work?', a: 'You do. Accounts are opened in your name, your data stays yours, and the written policies and workflows ICS produces are yours to keep whether or not you continue.' },
 ];
@@ -63,7 +64,12 @@ const label = 'font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-i
     <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
       <p class="text-sm font-semibold uppercase tracking-widest text-teal-600">By kind of office</p>
       <h2 class="mt-2 font-display text-3xl font-bold text-navy-900">What onboarding covers, and what the retainer is</h2>
-      <p class="mt-3 max-w-2xl text-sm text-ink-700">The retainer varies with the office and the training the work requires. The law-office figure is published as the example. Every other retainer is quoted in writing before anything is signed.</p>
+      <p class="mt-3 max-w-2xl text-sm text-ink-700">The retainer is based on the scope of the onboarding: how many employees are being trained, what the work actually covers, and how intensive it will be. The law-office figure is published as the example. Every other retainer is quoted in writing before anything is signed.</p>
+      <div class="mt-6 grid gap-3 sm:grid-cols-3">
+        {[['How many employees', 'Every person trained is time in the room and time in follow-up. A three-person office and a twenty-person office are different engagements.'], ['The scope of work', 'Which systems are set up and which workflows are built: intake, scheduling, drafting, follow-up, reporting.'], ['How intensive it is', 'How much is new to the team, how many systems connect, and how much hands-on time the first thirty days will take.']].map(([h, t]) => (
+          <div class="rounded-xl border border-navy-100 bg-white p-4"><p class="text-sm font-bold text-navy-900">{h}</p><p class="mt-1 text-xs leading-relaxed text-ink-500">{t}</p></div>
+        ))}
+      </div>
       <div class="mt-8 grid gap-5 md:grid-cols-2">
         {PRACTICES.map((p, i) => (
           <article class="reveal flex flex-col rounded-2xl border border-navy-100 bg-white p-6 shadow-sm" style={`--reveal-delay: ${(i % 2) * 80}ms`}>
@@ -122,11 +128,11 @@ const label = 'font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-i
 
         <ol class="mt-6 space-y-4 text-sm leading-relaxed text-ink-700">
           <li><span class="font-semibold text-navy-900">1. The engagement.</span> The Client retains {SITE.name} ("ICS"), through {FOUNDER.name}, to train the Client's people and set up the Client's AI business systems, and to keep them working.</li>
-          <li><span class="font-semibold text-navy-900">2. What the retainer covers.</span> The retainer of <span class="font-semibold text-navy-900" data-o="amount2">{money(RETAINER.exampleAmount)}</span> covers (a) onboarding and training, with the office running on the new systems within {RETAINER.onboardingDays} days of the start date, and (b) {RETAINER.includedMonths} additional months of service at no further charge.</li>
+          <li><span class="font-semibold text-navy-900">2. What the retainer covers.</span> The retainer of <span class="font-semibold text-navy-900" data-o="amount2">{money(RETAINER.exampleAmount)}</span> covers (a) onboarding and training, with the office running on the new systems within {RETAINER.onboardingDays} days of the start date, and (b) {RETAINER.includedMonths} additional months of service at no further charge. The retainer is based on the scope of the onboarding: the number of employees trained, the work covered, and how intensive it is.</li>
           <li><span class="font-semibold text-navy-900">3. Onboarding and training.</span> <span data-o="onboarding"></span></li>
           <li data-o-wrap="scope" hidden><span class="font-semibold text-navy-900">Scope notes.</span> <span data-o="scope"></span></li>
           <li><span class="font-semibold text-navy-900">4. Monthly service after the included months.</span> <span data-o="monthly">Service continues on a monthly fee based on the scope of work the Client needs. ICS will put that fee in writing before the included months end, and it takes effect only if the Client accepts it.</span></li>
-          <li><span class="font-semibold text-navy-900">5. Payment.</span> The retainer is due at signing, by check payable to {SITE.name}. Monthly fees, if the Client continues, are due on the first of each month.</li>
+          <li><span class="font-semibold text-navy-900">5. Payment.</span> The retainer is due at signing, by check payable to {SITE.name}, and is non-refundable. Monthly fees, if the Client continues, are due on the first of each month.</li>
           <li><span class="font-semibold text-navy-900">6. What the Client provides.</span> A point of contact, time for the training sessions, and access to the accounts and systems the work touches. Subscriptions to third-party software are opened in the Client's name and paid by the Client.</li>
           <li><span class="font-semibold text-navy-900">7. Ownership.</span> The Client owns its accounts, its data, and the written policies and workflows ICS produces under this agreement.</li>
           <li><span class="font-semibold text-navy-900">8. Confidentiality.</span> ICS keeps the Client's information confidential and uses it only to do this work. <span data-o="care"></span></li>
