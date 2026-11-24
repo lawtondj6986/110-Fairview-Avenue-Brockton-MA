@@ -78,14 +78,15 @@ Guidelines:
   full.
 - An apology is appropriate where an error caused harm to someone. Keep it direct.
 
-Template wording for notices and log entries is in the Templates series under `/guides/`.
+Template wording for notices and log entries is in the
+[update-log and correction notice template](/guides/template-update-log-and-correction-notice/).
 
 ## Where the notice goes
 
 Place the notice on the page where the error appeared, close to the corrected passage or at the foot
 of the page, and change the page's "last reviewed" or "last updated" date. Also record it in a
 central update log, so that a reader can see every change in one place. This site records each
-change in its update log and describes the process at `/methodology/`.
+change in its update log and describes the process on the [methodology page](/methodology/).
 
 If the erroneous claim was spread beyond the page, for example in a summary sent to others, send the
 correction to the same audience by the same route.

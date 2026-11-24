@@ -105,4 +105,4 @@ The acronym is HIPAA, with one P.
 The Privacy Rule is in 45 C.F.R. Part 160 and Subparts A and E of Part 164. The research provisions
 are mainly in § 164.512(i) and the de-identification standard is in § 164.514. The Department of
 Health and Human Services publishes summaries and answers to common questions on its HIPAA pages.
-See also the Common Rule explainer in `/law/`.
+See also the [Common Rule explainer](/law/common-rule/).

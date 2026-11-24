@@ -94,4 +94,5 @@ The federal provisions are 26 U.S.C. § 932 (Virgin Islands coordination), § 93
 income), § 934 (limits on reduction of Virgin Islands tax) and § 937 (residence and source rules),
 with regulations under each. The Internal Revenue Service publishes a tax guide for individuals with
 income from United States territories. The incentive programs themselves are in territorial statutes
-and agency rules. See `/donor-pathways/` and `/glossary/` on this site.
+and agency rules. See the [donor pathways page](/donor-pathways/) and
+the [glossary](/glossary/) on this site.

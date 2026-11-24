@@ -84,8 +84,8 @@ compare them side by side, and an inexact quotation weakens the request.
 
 Lead with the strongest source. A primary official record, such as a filed court document, a
 published official report or a statute, is the most persuasive. Other reporting that contradicts the
-item is weaker, since the editor cannot tell which outlet is right. See `/methodology/` for how this
-site grades sources.
+item is weaker, since the editor cannot tell which outlet is right. See the [methodology
+page](/methodology/) for how this site grades sources.
 
 Propose wording. Offering a corrected sentence makes the request easy to grant. Keep it neutral and
 limited to the fact in question.
@@ -130,5 +130,5 @@ template is not legal advice.
 
 ## When you are the publisher
 
-If you receive a letter like this, the guide on correcting your own work in the Research methods
-series under `/guides/` describes how to respond.
+If you receive a letter like this, [the guide on correcting your own
+work](/guides/method-correcting-your-own-work/) describes how to respond.

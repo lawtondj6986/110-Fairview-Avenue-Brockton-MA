@@ -1,0 +1,41 @@
+---
+/**
+ * Horizontal bar chart of documented funding, drawn as a real table so it
+ * reads correctly to screen readers, in print, and with styles turned off.
+ * One measure, one hue: values are printed beside every bar, so no legend.
+ */
+import Cite from './Cite.astro';
+import { funding } from '../data/funding';
+interface Props { caption?: string }
+const { caption = 'Documented funding by route and period, in US dollars. Every bar uses the same scale.' } = Astro.props;
+const max = Math.max(...funding.map((r) => r.amount));
+const pct = (n: number) => `${((n / max) * 100).toFixed(1)}%`;
+const groups = ['Harvard', 'MIT'] as const;
+---
+<div class="table-wrap full funding">
+  <table>
+    <caption>{caption}</caption>
+    <thead>
+      <tr><th scope="col">Route</th><th scope="col">Period</th><th scope="col">Amount</th></tr>
+    </thead>
+    {groups.map((g) => (
+      <tbody>
+        <tr class="fc-group"><th scope="rowgroup" colspan="3">{g}</th></tr>
+        {funding.filter((r) => r.institution === g).map((r) => (
+          <tr class="fc-row">
+            <th scope="row">
+              {r.route}
+              {r.note && <span class="fc-note">{r.note}</span>}
+            </th>
+            <td class="fc-period">{r.period}{r.after && <span class="fc-flag">After conviction</span>}</td>
+            <td class="fc-amount">
+              <span class="fc-track" aria-hidden="true">{r.amount > 0 && <span class="fc-bar" style={`width:${pct(r.amount)}`}></span>}</span>
+              <span class="fc-value">{r.display}{r.cites.map((id) => <Cite id={id} />)}</span>
+              <a class="fc-claim" href={`/ledger/#${r.claim}`}>Ledger {r.claim}</a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    ))}
+  </table>
+</div>

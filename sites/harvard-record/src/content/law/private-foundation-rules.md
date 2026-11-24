@@ -101,4 +101,5 @@ and a short purpose description. It does not show the terms.
 
 The definition is in 26 U.S.C. § 509 and the excise tax rules are in §§ 4940 to 4946. The Internal
 Revenue Service publishes Form 990-PF with instructions, and returns are available through its Tax
-Exempt Organization Search. See `/donor-pathways/` and `/methodology/` on this site.
+Exempt Organization Search. See the [donor pathways page](/donor-pathways/)
+and the [methodology page](/methodology/) on this site.

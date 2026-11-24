@@ -12,7 +12,7 @@ links:
 ## What it does
 
 The Genetic Information Nondiscrimination Act of 2008 (GINA) has two main parts. Title I deals with
-health insurance. Title II deals with employment and has its own explainer in `/law/`.
+health insurance. Title II deals with employment and has [its own explainer](/law/gina-title-ii/).
 
 Title I is not a single section of the U.S. Code. It works by amending older laws that already
 regulate health coverage: the Employee Retirement Income Security Act, the Public Health Service
@@ -51,8 +51,8 @@ information counts as genetic information about them.
 
 Title I applies only to health coverage. It does not apply to life insurance, disability insurance
 or long-term care insurance. Whether an insurer in those lines may ask about or use genetic test
-results depends on state law, which varies. See the explainer on state genetic privacy laws in
-`/law/`.
+results depends on state law, which varies. See [the explainer on state genetic privacy
+laws](/law/state-genetic-privacy-laws/).
 
 It does not protect against the use of a manifested condition. If a person has been diagnosed with a
 disease, GINA does not stop a health plan from taking the disease itself into account. Other federal
@@ -101,4 +101,5 @@ A final point: GINA sets a federal minimum. States may give greater protection, 
 The Act is Public Law 110-233. Title I's provisions are spread across Title 29, Title 42 and Title
 26 of the U.S. Code, which makes them hard to read in one place. The joint regulations of the three
 departments, and the summaries those departments publish, are easier starting points. For how
-genetic topics appear on this site, see `/dna-genetics/`.
+genetic topics appear on this site, see the [DNA and
+genetics page](/dna-genetics/).

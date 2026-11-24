@@ -29,15 +29,47 @@ const pending = claims.filter((c) => !c.checked).length;
   </Callout>
   <p class="small sans">Download: <a href="/claims.csv">CSV</a> · <a href="/claims.json">JSON</a>. How to read the columns: <a href="/methodology/">methodology</a>.</p>
 
+  <form class="ledger-filter full" data-ledger-filter hidden onsubmit="return false" aria-label="Filter the claims">
+    <div>
+      <label for="lf-q">Search claims</label>
+      <input id="lf-q" type="search" class="filter-input" placeholder="A word, name or figure" autocomplete="off" />
+    </div>
+    <div>
+      <label for="lf-state">Evidence state</label>
+      <select id="lf-state">
+        <option value="">All states</option>
+        <option value="verified">Verified implementation</option>
+        <option value="activity">Documented activity</option>
+        <option value="intent">Stated intent or allegation</option>
+        <option value="none">Statement of absence</option>
+      </select>
+    </div>
+    <div>
+      <label for="lf-grade">Grade</label>
+      <select id="lf-grade">
+        <option value="">All grades</option>
+        {['A1', 'A2', 'B1', 'B2'].map((g) => <option value={g}>{g}</option>)}
+      </select>
+    </div>
+    <div>
+      <label for="lf-topic">Topic</label>
+      <select id="lf-topic">
+        <option value="">All topics</option>
+        {topics.map((t) => <option value={slug(t)}>{t}</option>)}
+      </select>
+    </div>
+    <p class="lf-count" aria-live="polite"></p>
+  </form>
+
   {topics.map((t) => (
-    <>
+    <section data-topic-section={slug(t)}>
       <h2 id={slug(t)}>{t}</h2>
       <div class="table-wrap full">
         <table class="stack">
           <thead><tr><th>Ref.</th><th>Claim</th><th>State</th><th>Grade</th><th>Sources</th><th>Checked</th></tr></thead>
           <tbody>
             {claims.filter((c) => c.topic === t).map((c) => (
-              <tr id={c.id}>
+              <tr id={c.id} data-claim data-state={c.state} data-grade={c.grade} data-topic={slug(t)} data-text={`${c.id} ${c.claim} ${c.caveat ?? ''} ${c.sources.map((id) => sources[id].publisher).join(' ')}`.toLowerCase()}>
                 <th style="white-space:nowrap">{c.id}</th>
                 <td data-label="Claim">
                   {c.claim}
@@ -55,6 +87,53 @@ const pending = claims.filter((c) => !c.checked).length;
           </tbody>
         </table>
       </div>
-    </>
+    </section>
   ))}
+  <p class="lf-empty" hidden>No claims match these filters.</p>
+
+  <script>
+    // Progressive enhancement: without JavaScript the full ledger is shown.
+    const form = document.querySelector<HTMLFormElement>('[data-ledger-filter]');
+    if (form) {
+      form.hidden = false;
+      const q = form.querySelector<HTMLInputElement>('#lf-q')!;
+      const st = form.querySelector<HTMLSelectElement>('#lf-state')!;
+      const gr = form.querySelector<HTMLSelectElement>('#lf-grade')!;
+      const tp = form.querySelector<HTMLSelectElement>('#lf-topic')!;
+      const count = form.querySelector<HTMLElement>('.lf-count')!;
+      const empty = document.querySelector<HTMLElement>('.lf-empty')!;
+      const rows = [...document.querySelectorAll<HTMLElement>('[data-claim]')];
+      const sections = [...document.querySelectorAll<HTMLElement>('[data-topic-section]')];
+      const params = new URLSearchParams(location.search);
+      q.value = params.get('q') ?? '';
+      st.value = params.get('state') ?? '';
+      gr.value = params.get('grade') ?? '';
+      tp.value = params.get('topic') ?? '';
+      const apply = () => {
+        const terms = q.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+        let n = 0;
+        for (const r of rows) {
+          const d = r.dataset;
+          const hit = (!st.value || d.state === st.value) && (!gr.value || d.grade === gr.value)
+            && (!tp.value || d.topic === tp.value) && terms.every((t) => d.text!.includes(t));
+          r.hidden = !hit;
+          if (hit) n++;
+        }
+        for (const s of sections) s.hidden = !s.querySelector('[data-claim]:not([hidden])');
+        const active = Boolean(terms.length || st.value || gr.value || tp.value);
+        count.textContent = active ? `Showing ${n} of ${rows.length} claims` : `${rows.length} claims`;
+        empty.hidden = n > 0;
+        const next = new URLSearchParams();
+        if (q.value.trim()) next.set('q', q.value.trim());
+        if (st.value) next.set('state', st.value);
+        if (gr.value) next.set('grade', gr.value);
+        if (tp.value) next.set('topic', tp.value);
+        const qs = next.toString();
+        history.replaceState(null, '', qs ? `?${qs}${location.hash}` : location.pathname + location.hash);
+      };
+      form.addEventListener('input', apply);
+      form.addEventListener('change', apply);
+      apply();
+    }
+  </script>
 </Base>

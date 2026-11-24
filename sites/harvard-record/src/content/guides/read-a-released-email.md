@@ -84,8 +84,8 @@ more care.
 ## Redactions and withholding
 
 Parts may be blacked out, and whole messages may be withheld for privilege or privacy. A privilege
-log, where available, lists withheld documents by date, author and recipients. See the guide to
-reading a redacted document.
+log, where available, lists withheld documents by date, author and recipients. See [the guide to
+reading a redacted document](/guides/read-a-redacted-document/).
 
 ## What a released email can tell you
 
@@ -113,5 +113,5 @@ reading a redacted document.
 
 Give the date, the sender and recipients as shown, the source of the release, and the Bates or
 exhibit number. Quote exactly, indicate omissions, and describe the message in terms it supports:
-"wrote," "told," "proposed," "said he planned." This site's /methodology/ page describes how
-released correspondence is labeled.
+"wrote," "told," "proposed," "said he planned." This site's [methodology page](/methodology/)
+describes how released correspondence is labeled.

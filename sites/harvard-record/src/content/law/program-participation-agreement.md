@@ -101,4 +101,5 @@ statutes with their own enforcement office and procedures.
 The statutory requirements are in 20 U.S.C. § 1094. The regulation is 34 C.F.R. § 668.14. The fine,
 limitation, suspension and termination procedures are in Subpart G of 34 C.F.R. Part 668. The
 Federal Student Aid office publishes final program review determinations and fine actions for many
-institutions. See the Clery Act explainer in `/law/` and `/campus-safety/` on this site.
+institutions. See the [Clery Act explainer](/law/clery-act/) and the
+[campus safety page](/campus-safety/) on this site.

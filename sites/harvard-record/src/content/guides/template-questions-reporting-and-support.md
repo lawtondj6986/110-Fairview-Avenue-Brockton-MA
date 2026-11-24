@@ -9,13 +9,13 @@ order: 70
 Prospective students, current students and families are entitled to ask a college how it handles
 reports of sexual harassment, assault and other misconduct, and what support it gives to people
 affected. Colleges that receive federal funding have obligations in this area under federal law,
-including Title IX and the Clery Act, which are explained at `/law/`. The details of those rules
-have changed more than once in recent years, so this template asks the institution to describe its
-current practice instead of assuming one.
+including [Title IX](/law/title-ix/) and the [Clery Act](/law/clery-act/), which are explained in
+the [law explainers](/law/). The details of those rules have changed more than once in recent years,
+so this template asks the institution to describe its current practice instead of assuming one.
 
 The questions are general. They are not legal advice, and they are not a substitute for help in an
 urgent situation. Anyone in immediate danger should contact emergency services. General orientation
-is at `/campus-safety/`.
+is on the [campus safety page](/campus-safety/).
 
 ## Who to ask
 
@@ -122,16 +122,16 @@ start with a confidential resource.
 
 - Specific and consistent answers are a good sign. Compare what you are told with the published
   policy. Differences are worth a follow-up question.
-- A policy describes what is supposed to happen. In the terms used at `/methodology/`, it is stated
-  intent. It does not show how cases are handled in practice.
+- A policy describes what is supposed to happen. In the terms used on the [methodology
+  page](/methodology/), it is stated intent. It does not show how cases are handled in practice.
 - Statistics need context. Published crime figures count reports that fall within defined categories
   and locations. A low number can reflect few incidents or few reports. A higher number can reflect
-  a campus where people feel able to report. Guides in the Reading documents series under `/guides/`
-  cover how to read a security report.
+  a campus where people feel able to report. A guide in the Reading documents series covers
+  [how to read a security report](/guides/read-a-campus-security-report/).
 
 ## What these questions cannot tell you
 
 They cannot tell you how any individual case would be handled, or whether an institution is safe.
 They establish what the institution says its process is, and whether its staff can explain it. For
-the federal record of complaints and resolutions involving an institution, see the civil-rights
-records request template in this series.
+the federal record of complaints and resolutions involving an institution, see the [civil-rights
+records request template](/guides/template-foia-civil-rights-office-records/) in this series.

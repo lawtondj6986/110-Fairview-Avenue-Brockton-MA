@@ -103,4 +103,5 @@ The thresholds given here are those in the 2011 rule. Confirm them against the c
 
 The rule is at 42 C.F.R. Part 50, Subpart F. The National Institutes of Health publishes answers to
 common questions about it. An institution's own policy, which must be posted publicly, shows how it
-applies the rule. See `/donor-pathways/` and `/glossary/` on this site.
+applies the rule. See the [donor pathways page](/donor-pathways/) and
+the [glossary](/glossary/) on this site.

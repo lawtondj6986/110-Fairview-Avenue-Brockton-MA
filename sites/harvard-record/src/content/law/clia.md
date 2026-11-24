@@ -102,4 +102,5 @@ results on an individual's specimen, the laboratory that runs it generally needs
 
 The statute is 42 U.S.C. § 263a. The regulations are at 42 C.F.R. Part 493, with the exceptions in §
 493.3. The Centers for Medicare & Medicaid Services keeps a public lookup of certified laboratories.
-See `/dna-genetics/` and `/glossary/` for related material on this site.
+See the [DNA and genetics page](/dna-genetics/) and the [glossary](/glossary/) for related material
+on this site.

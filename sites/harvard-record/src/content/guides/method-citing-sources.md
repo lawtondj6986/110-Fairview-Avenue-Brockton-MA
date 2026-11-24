@@ -76,8 +76,8 @@ Archived web pages. Give the original address, the archived address and the capt
 If you read a newspaper's description of a court filing and did not read the filing, cite the
 newspaper. Do not cite the filing as though you had opened it. The honest form is "as reported by"
 or "quoted in". This keeps the source grade accurate, since reporting and a primary record are
-graded differently (see `/methodology/`), and it tells the reader where a transcription error could
-have entered.
+graded differently (see the [methodology page](/methodology/)), and it tells the reader where a
+transcription error could have entered.
 
 When you later obtain the original, upgrade the citation and change the date checked.
 
@@ -106,8 +106,8 @@ archived copy for web pages. Link to the official origin, not to an unofficial m
 
 Maintain one list of every source you cite, each with a short identifier, full details, a grade and
 the date checked. Cite by identifier in your working files, so that correcting a source's details in
-one place fixes it everywhere. This site keeps such a register at `/sources/`. A fill-in source log
-entry is in the Templates series under `/guides/`.
+one place fixes it everywhere. This site keeps such a register on its [sources page](/sources/). A
+fill-in source log entry is in the [source log entry template](/guides/template-source-log-entry/).
 
 ## What a citation does not do
 

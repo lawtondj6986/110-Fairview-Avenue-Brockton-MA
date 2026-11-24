@@ -99,5 +99,5 @@ Read Chapter 151B on the Legislature's website. The definitions, including that 
 harassment, are in section 1. The main prohibitions are in section 4, the policy requirement is in
 section 3A, the Commission's procedure is in section 5, and the court action is in section 9. The
 Commission's regulations are in title 804 of the Code of Massachusetts Regulations, and the
-Commission publishes guidelines on sexual harassment in the workplace. See the Title VII explainer
-in `/law/`.
+Commission publishes guidelines on sexual harassment in the workplace. See the [Title VII
+explainer](/law/title-vii/).

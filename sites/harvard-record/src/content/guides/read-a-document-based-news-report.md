@@ -32,13 +32,13 @@ a single article may mix them.
 
 A claim "based on documents" is only as strong as the type of document.
 
-- An allegation in a lawsuit is one party's unproven claim. See the guide to reading a civil
-  complaint.
+- An allegation in a lawsuit is one party's unproven claim. See [the guide to reading a civil
+  complaint](/guides/read-a-civil-complaint/).
 - A finding in a court judgment or an agency decision is a conclusion reached after a process.
-- An email shows what someone wrote. See the guide to reading an email released in a document
-  production.
-- An invoice or proposal shows what was priced or billed. See the guide to reading an invoice or
-  proposal as evidence.
+- An email shows what someone wrote. See [the guide to reading an email released in a
+  document production](/guides/read-a-released-email/).
+- An invoice or proposal shows what was priced or billed. See [the guide to reading an invoice
+  or proposal as evidence](/guides/read-an-invoice-or-proposal/).
 - An internal report reflects its scope and its author.
 - A draft is not a final version.
 
@@ -72,14 +72,15 @@ verb is attached to which claim.
   refusal to comment are three different things.
 - What the outlet could not verify. Careful reports say so. That candor is a mark of reliability.
 - Date. The article reflects what was known when it was published. Check for later updates and
-  corrections. See the guide to reading a correction or an update note.
+  corrections. See [the guide to reading a correction or an update
+  note](/guides/read-a-correction-or-update-note/).
 
 ## Trace the document
 
 1. Look for a link, an embedded file or a named source. Many outlets publish the documents they rely
    on.
 2. If the source is a court case, find the case name, court and number in the article, then look up
-   the docket. See the guide to reading a court docket.
+   the docket. See [the guide to reading a court docket](/guides/read-a-court-docket/).
 3. If the source is an agency or a congressional committee, check its website for the release.
 4. If the document is an institutional report, look on the institution's site.
 5. If you cannot find it, note that. The claim then rests on the outlet's reading alone.
@@ -126,5 +127,6 @@ set may be partial. Good reporting says what it can about provenance and seeks t
 ## How to cite one
 
 Give the outlet, headline, date and web address. Describe the claim with the same degree of
-certainty the article used, and name the kind of document behind it. This site's /sources/ page
-separates primary documents from reporting about them, and /methodology/ explains why.
+certainty the article used, and name the kind of document behind it. This site's [sources
+page](/sources/) separates primary documents from reporting about them, and the [methodology
+page](/methodology/) explains why.

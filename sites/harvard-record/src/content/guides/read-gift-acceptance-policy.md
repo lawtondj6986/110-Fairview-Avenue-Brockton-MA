@@ -42,8 +42,8 @@ responsible for meeting targets has a built-in conflict.
 
 Note whether the policy applies to the whole university or only to the central development office.
 In a decentralized university, individual schools, centers and faculty members also receive money.
-If the policy does not clearly bind them, it has a gap. See the guide on who decides what in a
-decentralized university.
+If the policy does not clearly bind them, it has a gap. See [the guide on who decides what in a
+decentralized university](/guides/who-decides-in-a-decentralized-university/).
 
 ### Due diligence
 
@@ -111,5 +111,5 @@ problem came to light describes the intended future, not the past.
 - Treating the absence of a public policy as proof that none exists. Many are internal. Asking for
   it is reasonable.
 
-This site's /donor-pathways/ page describes the routes by which money and access can move, and
-/glossary/ defines fundraising terms.
+This site's [donor pathways page](/donor-pathways/) describes the routes by which money and access
+can move, and the [glossary](/glossary/) defines fundraising terms.

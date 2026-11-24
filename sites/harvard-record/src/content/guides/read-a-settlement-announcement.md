@@ -81,8 +81,8 @@ These are often more informative than the sum.
 ## Where to find the actual terms
 
 1. The court docket. Look for a motion for approval (in class actions), the agreement attached as an
-   exhibit, a consent decree, or a stipulation of dismissal. See the guide to reading a court
-   docket.
+   exhibit, a consent decree, or a stipulation of dismissal. See [the guide to reading a court
+   docket](/guides/read-a-court-docket/).
 2. Dismissal terms. "With prejudice" means the claims cannot be filed again. "Without prejudice"
    means they can.
 3. The agency's website, for government settlements.
@@ -104,8 +104,8 @@ When the agreement itself is available, read it in preference to any announcemen
 - Why each side settled.
 - What individual claimants received, in most cases.
 - Terms kept confidential.
-- Whether agreed changes were carried out. That requires follow-up. See the guide on following up on
-  promises in /guides/.
+- Whether agreed changes were carried out. That requires follow-up. See [the guide on following up
+  on promises](/guides/follow-up-on-promises-after-a-scandal/).
 
 ## Common mistakes
 
@@ -122,4 +122,4 @@ State who settled with whom, when, and for how much if known. Say what the claim
 attribution. Say that the defendant did not admit wrongdoing, if that is the case, and that no court
 ruled on the merits. Describe any agreed changes. Note what is not public.
 
-Definitions of consent decree, release and related terms are in /glossary/.
+Definitions of consent decree, release and related terms are in the [glossary](/glossary/).

@@ -78,7 +78,8 @@ Naming is the most visible exchange and usually the best documented.
 
 ## How to assess a particular institution
 
-1. Read the gift acceptance and naming policies. See the guide on reading a gift acceptance policy.
+1. Read the gift acceptance and naming policies. See [the guide on reading
+   a gift acceptance policy](/guides/read-gift-acceptance-policy/).
 2. Check whether policies cover affiliations and titles, not only money.
 3. Look for a rule that all gifts, including those to individual labs, are recorded centrally.
 4. Ask whether donors or their representatives sit on bodies that make academic or admissions
@@ -104,4 +105,4 @@ limited, and presence of contact does not by itself show that anything improper 
 - Treating a meeting or a photograph as proof of a transaction.
 - Overlooking gifts made to individual faculty or labs because the central office reported nothing.
 
-This site's /donor-pathways/ page maps these routes in more detail.
+This site's [donor pathways page](/donor-pathways/) maps these routes in more detail.

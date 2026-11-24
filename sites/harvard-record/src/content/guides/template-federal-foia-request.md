@@ -12,12 +12,14 @@ FOIA regulations and submission instructions, and those govern. Check the agency
 sending. This is not legal advice.
 
 FOIA does not reach Congress, the federal courts, state or local bodies, or private institutions.
-For state and municipal agencies, see the public records request template in this series.
+For state and municipal agencies, see the [public records request
+template](/guides/template-state-public-records-request/) in this series.
 
 ## Before you file
 
-1. Search first. Check the agency's website, its FOIA reading room and its FOIA log. The guide on
-   federal agency records in the Research methods series under `/guides/` describes a search order.
+1. Search first. Check the agency's website, its FOIA reading room and its FOIA log. [The guide on
+   federal agency records](/guides/method-federal-agency-records-and-foia-reading-rooms/) describes a
+   search order.
 2. Identify the right component. Large departments process requests office by office. A request sent
    to the wrong one is delayed.
 3. Find the submission method. Many agencies accept requests through an online portal or by email.

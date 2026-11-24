@@ -53,10 +53,12 @@ For each fact, ask what nearby question it does not answer.
 
 - "We will" with a date and an owner is a commitment.
 - "We are reviewing," "we will examine" and "we are committed to" describe a process or an attitude.
-- "We have asked" someone to conduct a review raises the questions covered in the guide on whether a
-  review was independent: who, with what scope, and whether the result will be published.
+- "We have asked" someone to conduct a review raises the questions covered in [the guide on whether
+  a review was independent](/guides/was-an-internal-review-independent/): who, with what scope, and
+  whether the result will be published.
 
-Record each commitment with its date. See the guide on following up on promises.
+Record each commitment with its date. See [the guide on following up on
+promises](/guides/follow-up-on-promises-after-a-scandal/).
 
 ## Recognize common framing
 

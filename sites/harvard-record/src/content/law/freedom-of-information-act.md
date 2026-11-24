@@ -105,5 +105,6 @@ institutions protect the privacy of named individuals, including complainants, a
 
 The statute is 5 U.S.C. § 552. Each agency has its own FOIA regulations and an online reading room
 of released records, which is worth searching before filing. The Department of Justice publishes a
-detailed guide to the Act, and the government's central site has a request portal. See `/guides/`
-for a request template and `/sources/` for how this site uses released records.
+detailed guide to the Act, and the government's central site has a request portal. See the guides for a
+[request template](/guides/template-federal-foia-request/) and the [sources page](/sources/) for how
+this site uses released records.

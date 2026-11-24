@@ -11,8 +11,9 @@ to publish about them. It improves accuracy, because the subject often knows som
 do not show, and it is basic fairness. Send an invitation whenever you plan to publish a significant
 factual claim about a named living person or a named organization.
 
-This template is for a written invitation sent through a public, professional channel. Guidance on
-fair treatment of named people is in the Research methods series under `/guides/`.
+This template is for a written invitation sent through a public, professional channel. [Guidance
+on fair treatment of named people](/guides/method-writing-about-named-people/) is in the Research
+methods series.
 
 ## Before you send it
 
@@ -22,8 +23,8 @@ fair treatment of named people is in the Research methods series under `/guides/
   choice may be to leave their name out.
 - Find a proper channel: a press office, a published professional email address, or a lawyer or
   representative on record. Do not use personal accounts, home addresses or family members.
-- Do not send this to a victim or alleged victim. See the ethics guide in the Research methods
-  series.
+- Do not send this to a victim or alleged victim. See [the ethics
+  guide](/guides/method-ethics-and-limits/) in the Research methods series.
 
 ## The template
 

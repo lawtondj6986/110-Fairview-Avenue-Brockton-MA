@@ -121,4 +121,5 @@ extent the cited source supports it.
 
 Name the signers and their roles, give the date, and attribute: "the letter states," "the senators
 wrote," "the committee asked." Where the letter relies on a primary document, cite the document.
-This site's /sources/ page lists oversight materials separately from findings for this reason.
+This site's [sources page](/sources/) lists oversight materials separately from findings for this
+reason.

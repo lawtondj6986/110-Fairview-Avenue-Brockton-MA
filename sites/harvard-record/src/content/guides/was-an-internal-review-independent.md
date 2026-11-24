@@ -82,7 +82,8 @@ account, not the reviewer's.
 
 - Did the report make recommendations, and did the institution accept them publicly?
 - Was someone assigned to carry them out, with a timeline?
-- Was there any later public accounting? See the guide on following up on promises.
+- Was there any later public accounting? See [the guide on following
+  up on promises](/guides/follow-up-on-promises-after-a-scandal/).
 
 ## A short scoring list
 
@@ -119,5 +120,5 @@ not the same as a finding that something did not happen.
 - Reading the executive summary only. Qualifications tend to sit in the body and the footnotes.
 - Overlooking the scope and then faulting, or crediting, the report for matters it never examined.
 
-See the guide to reading an institutional fact-finding report in /guides/ for how to work through
-the document itself.
+See [the guide to reading an institutional fact-finding report](/guides/read-a-fact-finding-report/)
+for how to work through the document itself.

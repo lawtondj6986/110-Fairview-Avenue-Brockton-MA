@@ -51,9 +51,9 @@ the allegation was made. It is not a source for the truth of the allegation.
 
 Decide in advance what quality of source a claim about a named living person requires, and hold to
 it. On this site, such a claim needs a primary official record or established reporting that tracks
-the record (grades A1 and A2 at `/methodology/`). Thin or unverified material is not used for claims
-about named people. If the only support for a claim about a person is a single uncorroborated
-account, the fair course is usually not to publish it.
+the record (grades A1 and A2 on the [methodology page](/methodology/)). Thin or unverified material
+is not used for claims about named people. If the only support for a claim about a person is a
+single uncorroborated account, the fair course is usually not to publish it.
 
 ## Include denials and responses
 
@@ -88,9 +88,10 @@ about them. It is a standard of practice in journalism and a sound one for any r
 4. Publish the substance of any reply, and correct anything the reply shows to be wrong.
 5. Keep a record of the invitation and any answer.
 
-A template invitation is in the Templates series under `/guides/`. Contact should be a single,
-courteous letter with perhaps one reminder. Repeated or personal approaches become harassment. Do
-not contact victims, and do not approach family members to reach a subject.
+A [template invitation](/guides/template-right-of-reply-invitation/) is in the Templates series.
+Contact should be a single, courteous letter with perhaps one reminder. Repeated or personal
+approaches become harassment. Do not contact victims, and do not approach family members to reach a
+subject.
 
 ## Time, proportion and the dead
 

@@ -95,4 +95,5 @@ the labor or civil rights code, and the consumer protection or health code for "
 attorneys general and insurance departments often publish summaries. The National Human Genome
 Research Institute has maintained a public database of state genome statutes. Because this area
 changes every legislative session, treat any summary, including this one, as a starting point and
-confirm against current law. See `/dna-genetics/` on this site.
+confirm against current law. See the [DNA and genetics page](/dna-genetics/) on this
+site.

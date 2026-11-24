@@ -8,8 +8,8 @@ order: 120
 
 Published research needs two things for handling change: a notice on the affected page, and an entry
 in a central log that lists every change in one place. This page gives fill-in wording for both. The
-reasoning is in the guide on correcting your own work in the Research methods series under
-`/guides/`. This site's own process is described at `/methodology/`.
+reasoning is in [the guide on correcting your own work](/guides/method-correcting-your-own-work/).
+This site's own process is described on the [methodology page](/methodology/).
 
 Use the right label. A correction fixes something that was wrong. A clarification fixes something
 accurate that could be misread. An update records that the facts have moved on since publication. A

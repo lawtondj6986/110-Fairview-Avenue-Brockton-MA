@@ -97,8 +97,8 @@ After these checks, place the document in one of three groups.
    but you have not obtained an official copy. Cite the reporting, and say so.
 3. Unverified: origin unknown or checks failed. Do not rely on it. Keep it as a lead.
 
-Write down what you checked, when, and the result. A checklist for this is in the Templates series
-under `/guides/`.
+Write down what you checked, when, and the result. A [checklist for
+this](/guides/template-document-verification-checklist/) is in the Templates series.
 
 ## What authenticity does not establish
 

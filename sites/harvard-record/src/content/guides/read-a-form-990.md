@@ -115,5 +115,6 @@ match line for line.
 - Missing a foundation's Form 990-PF, which may show a gift the recipient's return does not itemize.
 
 Separate federal rules require colleges to report certain foreign gifts and contracts to the
-Department of Education. That reporting is distinct from the Form 990. See /law/ for the explainer,
-and /glossary/ for terms such as donor-advised fund.
+Department of Education. That reporting is distinct from the Form 990. See the [Section 117
+explainer](/law/higher-education-act-section-117/), and the [glossary](/glossary/) for terms such as
+donor-advised fund.

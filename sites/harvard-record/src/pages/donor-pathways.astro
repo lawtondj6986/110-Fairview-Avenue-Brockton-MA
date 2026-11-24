@@ -4,8 +4,10 @@ import Cite from '../components/Cite.astro';
 import Grade from '../components/Grade.astro';
 import State from '../components/State.astro';
 import Callout from '../components/Callout.astro';
+import FundingChart from '../components/FundingChart.astro';
 ---
 <Base
+  terms
   title="Donor influence and introduced funding pathways"
   description="How $9.5 million reached two Harvard faculty members from donors Jeffrey Epstein introduced after Harvard stopped accepting his own gifts, with a comparison to MIT."
   eyebrow="Funding pathways"
@@ -13,6 +15,14 @@ import Callout from '../components/Callout.astro';
   reviewed="2026-11-20"
   basis="Harvard’s 2020 report; MIT’s 2020 Goodwin Procter report"
 >
+  <h2 id="money">Where the documented money went</h2>
+  <p>
+    Every figure below comes from an institutional report or reporting on one, and all bars share one scale.
+    The chart shows money that a record documents. It does not show influence, and it does not show that
+    anyone directed a gift.
+  </p>
+  <FundingChart />
+
   <h2 id="pattern">The pattern</h2>
   <p>A gift can reach a university by three routes. Harvard’s rules after 2008 closed only the first.</p>
   <div class="table-wrap full">

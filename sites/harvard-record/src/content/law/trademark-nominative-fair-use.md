@@ -94,5 +94,5 @@ The Lanham Act is at 15 U.S.C. § 1051 and following. Infringement of registered
 Unregistered marks and cybersquatting are addressed in § 1125, which also covers dilution of famous
 marks. Statutory defenses are in § 1115. Nominative fair use is found mainly in court decisions, so
 the law of the relevant federal circuit must be consulted. This explainer describes general
-principles and is not advice on any particular use. See `/methodology/` for this site's statement of
-independence.
+principles and is not advice on any particular use. See the [methodology page](/methodology/) for
+this site's statement of independence.

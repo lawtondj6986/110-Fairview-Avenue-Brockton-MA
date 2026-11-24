@@ -28,7 +28,8 @@ Before filing, look on the civil-rights office's own website. Offices commonly p
   the documents each stage produces.
 
 If the documents you need are posted, download and cite them. If they are not, use what you learned
-there to describe your request precisely. Explanations of the underlying laws are at `/law/`.
+there to describe your request precisely. Explanations of the underlying laws are in the
+[law explainers](/law/).
 
 ## The template
 
@@ -123,8 +124,8 @@ do not want it removes a point of friction, and it is the right position ethical
 Expect limits on open cases. Records of a pending investigation are often withheld in whole or in
 part under the exemption for law enforcement proceedings. You can ask again after the case closes.
 
-Fee category and waiver. The notes in the general federal FOIA template in this series apply here
-unchanged.
+Fee category and waiver. The notes in the [general federal FOIA
+template](/guides/template-federal-foia-request/) in this series apply here unchanged.
 
 ## Reading what you receive
 
@@ -140,4 +141,4 @@ unchanged.
 
 They reflect only matters that reached that federal office. They say nothing about incidents that
 were never reported to it, and they are not a measure of how safe or fair an institution is. See
-`/campus-safety/` for the other kinds of records that exist.
+the [campus safety page](/campus-safety/) for the other kinds of records that exist.

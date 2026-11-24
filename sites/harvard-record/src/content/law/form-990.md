@@ -89,8 +89,8 @@ the rules that govern those matters.
 A common assumption is that a determined reader can find a university's donor list in its tax
 filings. For a public charity, that is not so. The place where a donor's gift may be visible is the
 donor's side. If the donor gave through a private foundation, the foundation's Form 990-PF lists its
-grants and recipients, and that return is public in full. See the explainer on private foundation
-rules in `/law/`.
+grants and recipients, and that return is public in full. See [the explainer on private
+foundation rules](/law/private-foundation-rules/).
 
 A second assumption is that compensation figures are simple salaries. Schedule J reports several
 components, including deferred compensation and benefits, and some amounts can be reported in more
@@ -105,5 +105,5 @@ categories of people.
 The filing requirement is in 26 U.S.C. § 6033 and the public inspection rule is in § 6104. The form,
 its schedules and their instructions are on the Internal Revenue Service website, and the
 instructions are the best guide to what each line means. Returns can be found through the Service's
-Tax Exempt Organization Search. See `/guides/` for a walk through a return and `/sources/` for how
-this site cites filings.
+Tax Exempt Organization Search. See [the guide to reading a Form 990](/guides/read-a-form-990/) for a
+walk through a return and the [sources page](/sources/) for how this site cites filings.

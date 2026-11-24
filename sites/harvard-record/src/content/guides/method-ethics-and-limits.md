@@ -71,7 +71,8 @@ statements or established reporting, and cite it with care.
 
 Do not name a victim who has not chosen to be named. Do not publish details that would identify one.
 If a person approaches you about their own experience, be respectful and point them to appropriate
-support and reporting channels. This site's page at `/campus-safety/` gives general orientation.
+support and reporting channels. This site's [campus safety page](/campus-safety/) gives general
+orientation.
 
 ## Respect sealed and restricted material
 
@@ -92,14 +93,14 @@ relevant.
 Ethics also governs what you write.
 
 - Keep each claim at the level its evidence supports. Definitions of the evidence states and source
-  grades this site uses are at `/methodology/`.
+  grades this site uses are on the [methodology page](/methodology/).
 - Separate findings from allegations.
 - Do not imply connections that no source establishes.
 - State absences as absences.
 - Include denials and responses.
 - Correct errors openly.
 
-These are covered in the other guides in this series under `/guides/`.
+These are covered in the other guides in this series, listed in the [guides section](/guides/).
 
 ## Know where this method stops
 

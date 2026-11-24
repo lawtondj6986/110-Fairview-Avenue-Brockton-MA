@@ -100,4 +100,5 @@ to report is the potential violation.
 The statute is 20 U.S.C. § 1011f. Congress has considered bills to lower the threshold and expand
 the required detail, and the law or its implementation may have changed, so read the current text
 and the Department of Education's Section 117 page before relying on the figures given here. For how
-this site approaches donor records, see `/donor-pathways/` and `/methodology/`.
+this site approaches donor records, see the [donor pathways page](/donor-pathways/) and
+the [methodology page](/methodology/).

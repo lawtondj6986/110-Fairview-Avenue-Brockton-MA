@@ -41,7 +41,7 @@ Do not compare figures as they appear in summaries. For each one:
    footnote.
 3. Write down what it counts: whose money, to whom, over what period, pledged or received.
 4. Note the date the figure was stated and whether the source has since revised it.
-5. Grade the source. Definitions of the grades are at `/methodology/`.
+5. Grade the source. Definitions of the grades are on the [methodology page](/methodology/).
 
 Often this exercise resolves the conflict. The two figures turn out to describe different things,
 and both are correct. Then say so: give each figure with its definition.
@@ -106,7 +106,8 @@ difference where the figure appears, not only in a footnote. This site notes dif
 the text where they were found.
 
 If a publisher appears to have made an error, such as a transposed digit, you can ask them to
-correct it. A correction request template is in the Templates series under `/guides/`.
+correct it. A [correction request
+template](/guides/template-correction-request/) is in the Templates series.
 
 ## What a figure cannot tell you
 

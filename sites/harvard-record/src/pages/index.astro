@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Cite from '../components/Cite.astro';
 import State from '../components/State.astro';
 import Callout from '../components/Callout.astro';
+import FundingChart from '../components/FundingChart.astro';
 import { site } from '../config';
 ---
 <Base
@@ -21,7 +22,7 @@ import { site } from '../config';
     <li><span class="num">$9.5M</span><span class="lbl">Given by donors he introduced, 2010 to 2015<Cite id="harvard-2020-report" /></span></li>
   </ul>
 
-  <p class="sans small"><a href="/start/">Start here: reading paths for prospective students, students, alumni and researchers</a></p>
+  <p class="sans small"><a href="/start/">Start here: reading paths for prospective students, students, alumni and researchers</a> · <a href="/briefing/">The record on one page</a></p>
 
   <h2 id="scope">Scope</h2>
   <p>
@@ -34,6 +35,14 @@ import { site } from '../config';
     The pages below set out that record section by section. They cover what happened at Harvard, how it compares with
     the Massachusetts Institute of Technology, and, separately, the University’s public record on sexual misconduct and campus safety.
   </p>
+
+  <h2 id="money">The documented money, on one scale</h2>
+  <p>
+    Harvard stopped taking Epstein’s money in 2008. What continued came through other donors he had
+    introduced. MIT, by contrast, accepted gifts directly after the conviction. Caveats are on the
+    <a href="/donor-pathways/">donor pathways</a> page.
+  </p>
+  <FundingChart />
 
   <h2 id="how-to-read">How to read this site</h2>
   <p>Three rules apply on every page.</p>

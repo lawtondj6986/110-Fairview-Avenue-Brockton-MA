@@ -8,7 +8,7 @@ order: 20
 
 A grade describes the kind of source you are holding. It is not a verdict on the people the source
 discusses, and it is not a measure of how interesting the source is. This site uses four grades,
-defined at `/methodology/`. This guide shows how to apply them consistently.
+defined on the [methodology page](/methodology/). This guide shows how to apply them consistently.
 
 ## The four grades
 
@@ -86,7 +86,8 @@ intent, not activity.
   you find the original.
 - Press releases are official but partial. A release is A1 for what the issuer announced. It is not
   independent confirmation of the facts announced.
-- Wikis and unofficial mirrors are leads. A separate guide in this series explains why.
+- Wikis and unofficial mirrors are leads. A [separate guide in this
+  series](/guides/method-mirrors-and-wikis-are-leads/) explains why.
 
 ## What follows from a grade
 

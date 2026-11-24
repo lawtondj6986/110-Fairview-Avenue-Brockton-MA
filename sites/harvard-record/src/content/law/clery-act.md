@@ -100,5 +100,5 @@ The statute is 20 U.S.C. § 1092(f). The regulations are at 34 C.F.R. § 668.46,
 rules at § 668.49. Congress has amended the Act several times, most recently in late 2024 to add
 requirements on hazing, so read the current text. Each institution's annual security report is on
 its website. The Department of Education's campus safety data tool has the statistics for all
-institutions. See `/campus-safety/` for how this site uses these records, and `/guides/` for help
-reading a report.
+institutions. See the [campus safety page](/campus-safety/) for how this site uses these records, and
+the [guide to reading a campus security report](/guides/read-a-campus-security-report/) for help.

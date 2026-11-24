@@ -120,5 +120,5 @@ was sensitive beyond the label given.
 - Treating the presence of redactions as evidence of wrongdoing.
 - Missing withheld pages because the page numbers were not checked.
 
-The explainers in /law/ cover the public records statutes, and /glossary/ defines privilege and
-related terms.
+The [law explainers](/law/) cover the public records statutes, and the [glossary](/glossary/)
+defines privilege and related terms.

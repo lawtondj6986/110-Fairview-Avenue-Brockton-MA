@@ -96,4 +96,5 @@ above, but not by the institution acting alone, except for small, old funds.
 
 The uniform text and official comments are published by the Uniform Law Commission. The binding text
 is the version in your state's code. An institution's audited financial statements describe its
-endowment and spending policy in the notes. See `/donor-pathways/` and `/glossary/` on this site.
+endowment and spending policy in the notes. See the [donor pathways page](/donor-pathways/) and
+the [glossary](/glossary/) on this site.

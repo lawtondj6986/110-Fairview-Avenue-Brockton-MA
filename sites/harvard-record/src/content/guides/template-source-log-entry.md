@@ -12,7 +12,8 @@ Claims and chronology entries then point to the source by its identifier, so det
 place and corrected in one place.
 
 Fill in an entry the first time you open a source, while the details are in front of you. This
-site's own register is at `/sources/`, and the grades are defined at `/methodology/`.
+site's own register is on the [sources page](/sources/), and the grades are defined on the
+[methodology page](/methodology/).
 
 ## The template
 
@@ -103,8 +104,8 @@ known limits, and grade the individual claims in the claim ledger.
 Rests on. This field shows dependence. If three of your sources all rest on the same underlying
 document, they are one line of evidence, not three.
 
-Authenticity check. Record the result of your verification. A checklist for this is in this
-Templates series.
+Authenticity check. Record the result of your verification. A [checklist for
+this](/guides/template-document-verification-checklist/) is in this Templates series.
 
 Known limits. Write what the source says about its own scope, for example the years it covers and
 the materials its authors could not see. Note whether a filing was later amended or an article later

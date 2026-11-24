@@ -90,7 +90,8 @@ performance. Avoid attaching a line item to a named individual unless the docume
 - Technical items. A line item for a laboratory test, for example, describes a category of service.
   It does not show whose sample was tested, or that any sample was received.
 - Authorship and authenticity. Establish where the document came from, whether it is complete, and
-  whether other copies differ. See the guide to reading an email released in a document production.
+  whether other copies differ. See [the guide to reading an email
+  released in a document production](/guides/read-a-released-email/).
 
 ## What commercial documents can and cannot tell you
 
@@ -109,5 +110,6 @@ unproven.
 - Treating every line on a proposal as something that happened.
 - Dropping the caveat when the claim is repeated later in the same piece.
 
-This site's /dna-genetics/ page applies these distinctions to specific records, and /methodology/
-sets out the labels it uses for priced, paid and performed items.
+This site's [DNA and genetics page](/dna-genetics/) applies these distinctions to specific records,
+and the [methodology page](/methodology/) sets out the labels it uses for priced, paid and performed
+items.

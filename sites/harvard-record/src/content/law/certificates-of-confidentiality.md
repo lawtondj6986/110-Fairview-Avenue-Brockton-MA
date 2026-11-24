@@ -101,4 +101,5 @@ HIPAA.
 The statute is subsection (d) of 42 U.S.C. § 241, which is section 301(d) of the Public Health
 Service Act. The National Institutes of Health publishes its policy and answers to common questions.
 A study's consent form should say whether a certificate applies and describe its limits. See the
-Common Rule explainer in `/law/` and `/dna-genetics/` on this site.
+[Common Rule explainer](/law/common-rule/) and the [DNA and genetics page](/dna-genetics/) on this
+site.

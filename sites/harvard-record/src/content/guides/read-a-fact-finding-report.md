@@ -22,8 +22,8 @@ produced for a client. Both things are true, and a careful reading keeps both in
 4. The standard. What the conduct was measured against: written policy in force at the time, law, or
    a general sense of good practice.
 
-The guide on judging whether a review was independent, in /guides/, covers how to assess the first
-three. Here the question is how to read the text.
+[The guide on judging whether a review was independent](/guides/was-an-internal-review-independent/)
+covers how to assess the first three. Here the question is how to read the text.
 
 ## Read in this order
 
@@ -130,5 +130,5 @@ been understated.
   be checked.
 - Assuming the report is the last word.
 
-This site's /methodology/ page explains how it labels statements drawn from institutional reports,
-and /sources/ lists the reports it relies on.
+This site's [methodology page](/methodology/) explains how it labels statements drawn from
+institutional reports, and the [sources page](/sources/) lists the reports it relies on.

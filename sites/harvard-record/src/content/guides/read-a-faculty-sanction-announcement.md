@@ -46,7 +46,8 @@ Look for three things.
 Faculty discipline often involves several steps: an investigating office, a faculty committee, a
 dean, and for the most serious sanctions the provost, president or governing board. The announcement
 usually comes from the person who imposed the sanction. In a decentralized university this is often
-a dean acting for one school. See the guide on who decides what in /guides/.
+a dean acting for one school. See [the guide on who decides
+what](/guides/who-decides-in-a-decentralized-university/).
 
 ## What the sanctions mean
 
@@ -117,12 +118,12 @@ leave open questions, and it is reasonable to ask the process questions that can
 - Reading a resignation as an admission, or as an exoneration.
 - Assuming a sanctioned professor has been dismissed. Most sanctions fall short of that.
 - Describing an institutional finding as a legal verdict.
-- Not checking back. Sanctions are appealed, modified, lifted and sometimes extended. See the guide
-  on following up on promises.
+- Not checking back. Sanctions are appealed, modified, lifted and sometimes extended. See [the guide
+  on following up on promises](/guides/follow-up-on-promises-after-a-scandal/).
 
 ## How to describe one
 
 State who announced what, on which date, under which policy, and at what stage. Use the
 institution's terms for the finding and the sanction. Include the faculty member's public response
-if there is one. Say what is not known. /glossary/ defines terms such as emeritus, tenure and
-administrative leave.
+if there is one. Say what is not known. The [glossary](/glossary/) defines terms such as emeritus,
+tenure and administrative leave.

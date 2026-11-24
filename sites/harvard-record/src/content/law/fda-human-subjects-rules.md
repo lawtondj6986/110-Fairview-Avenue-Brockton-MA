@@ -99,5 +99,5 @@ governs in practice.
 ## Where to read it
 
 Read Parts 50 and 56 on the Electronic Code of Federal Regulations. FDA publishes guidance for IRBs,
-investigators and sponsors, including a comparison of its rules with the Common Rule. See the Common
-Rule and CLIA explainers in `/law/`.
+investigators and sponsors, including a comparison of its rules with the Common Rule. See the
+[Common Rule](/law/common-rule/) and [CLIA](/law/clia/) explainers.

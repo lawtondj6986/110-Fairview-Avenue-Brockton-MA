@@ -93,5 +93,5 @@ It concerns the log.
 Read Chapter 66, section 10 and the sections around it, and Chapter 4, section 7, clause 26, on the
 Legislature's website. The daily log requirement is in Chapter 41, section 98F. The Secretary of the
 Commonwealth publishes a guide to the law and posts the Supervisor's appeal determinations. Confirm
-current text before relying on details given here. See `/campus-safety/` and `/sources/` on this
-site.
+current text before relying on details given here. See the [campus safety page](/campus-safety/)
+and the [sources page](/sources/) on this site.

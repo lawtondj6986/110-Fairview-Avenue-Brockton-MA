@@ -1,0 +1,66 @@
+---
+/**
+ * A one-page briefing built from the claim ledger. It adds no new claims: each
+ * point is a ledger row, shown with its evidence state, caveat and sources.
+ * Change the selection below, not the wording; wording lives in the ledger.
+ */
+import Base from '../layouts/Base.astro';
+import Cite from '../components/Cite.astro';
+import State from '../components/State.astro';
+import Callout from '../components/Callout.astro';
+import { claims } from '../data/claims';
+
+const sections: { id: string; title: string; ids: string[] }[] = [
+  { id: 'money', title: 'Money', ids: ['F-01', 'F-02', 'F-03', 'D-01', 'D-02', 'D-03', 'M-02'] },
+  { id: 'access', title: 'Access', ids: ['A-01', 'A-02', 'A-04', 'A-06'] },
+  { id: 'genetics', title: 'Genetics', ids: ['G-01', 'G-03', 'G-04', 'G-05'] },
+  { id: 'response', title: 'What the institutions did', ids: ['R-02', 'R-03', 'R-05', 'R-06', 'M-05'] },
+  { id: 'absent', title: 'What the record does not show', ids: ['G-10', 'D-06', 'S-14', 'L-03'] },
+];
+const byId = new Map(claims.map((c) => [c.id, c]));
+const missing = sections.flatMap((s) => s.ids).filter((id) => !byId.has(id));
+if (missing.length) throw new Error(`Briefing refers to unknown ledger claims: ${missing.join(', ')}`);
+const total = sections.reduce((n, s) => n + s.ids.length, 0);
+---
+<Base
+  title="The record on one page"
+  description="A printable one-page briefing: the key documented facts about donor influence and access at Harvard, each with its evidence state, caveat and source."
+  eyebrow="Briefing"
+  lede={`${total} points from the claim ledger, chosen to give the shape of the record quickly. Each keeps its evidence state and its caveat. Nothing here goes beyond the ledger.`}
+  reviewed="2026-11-24"
+  terms
+>
+  <p class="sans small no-print">
+    <button type="button" class="print-btn" onclick="window.print()">Print or save as PDF</button>
+    For the full record, see the <a href="/ledger/">claim ledger</a>.
+  </p>
+
+  <Callout title="Before you rely on this" plain>
+    <p>
+      Every point here is pending a check against its original document. Being named in the record is not
+      evidence of wrongdoing; see <a href="/named/">people and bodies named</a> for what the record does and
+      does not say about each person.
+    </p>
+  </Callout>
+
+  {sections.map((s) => (
+    <section class="briefing-section">
+      <h2 id={s.id}>{s.title}</h2>
+      <ol class="briefing full">
+        {s.ids.map((id) => {
+          const c = byId.get(id)!;
+          return (
+            <li>
+              <p class="b-claim">{c.claim}{c.sources.map((sid) => <Cite id={sid} />)}</p>
+              <p class="b-meta">
+                <State s={c.state} />
+                <a href={`/ledger/#${c.id}`}>Ledger {c.id}</a>
+              </p>
+              {c.caveat && <p class="b-caveat">{c.caveat}</p>}
+            </li>
+          );
+        })}
+      </ol>
+    </section>
+  ))}
+</Base>

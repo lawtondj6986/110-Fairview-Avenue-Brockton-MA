@@ -110,5 +110,6 @@ rules require statements on several of them.
 - Believing a signature waives legal rights. Federal rules bar consent forms from including language
   that waives a participant's legal rights.
 
-This guide explains a type of document and is not advice about any particular study. The Common Rule
-explainer is in /law/, and this site's /dna-genetics/ page covers related background.
+This guide explains a type of document and is not advice about any particular study. See the [Common
+Rule explainer](/law/common-rule/), and this site's [DNA and genetics page](/dna-genetics/) covers
+related background.

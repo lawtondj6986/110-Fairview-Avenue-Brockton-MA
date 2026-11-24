@@ -30,14 +30,15 @@ A minimal ledger has these columns.
 - ID. A short stable identifier, such as C-014. Never reuse an ID.
 - Wording. The claim exactly as published, or as you intend to publish it.
 - State. Stated intent, documented activity, verified implementation, or nothing on record.
-- Grade. A1, A2, B1 or B2, describing the source. Definitions are at `/methodology/`.
+- Grade. A1, A2, B1 or B2, describing the source. Definitions are on the [methodology
+  page](/methodology/).
 - Source. Enough detail for a stranger to find the passage: title, author or issuing body, date,
   page or paragraph, and a link where a stable one exists.
 - Date checked. The date you personally opened the source and compared it with the wording.
 
 Useful additions are a column for where the claim appears in your work, a column for any response or
 denial on record, and a notes column for conflicts between sources. A fill-in row is in the
-Templates series under `/guides/`.
+[claim ledger row template](/guides/template-claim-ledger-row/).
 
 ## How to fill a row
 

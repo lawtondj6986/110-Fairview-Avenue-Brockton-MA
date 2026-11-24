@@ -104,5 +104,5 @@ hidden.
 
 The statute is 20 U.S.C. § 1232g. The regulations are at 34 C.F.R. Part 99, with the definitions in
 § 99.3 and the exceptions in § 99.31. The Department of Education's student privacy website has
-guidance and model notices. See `/glossary/` for related terms and `/sources/` for how this site
-treats records.
+guidance and model notices. See the [glossary](/glossary/) for related terms and the [sources
+page](/sources/) for how this site treats records.

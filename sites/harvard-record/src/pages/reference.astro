@@ -8,6 +8,7 @@ const [g, l, gu] = await Promise.all([getCollection('glossary'), getCollection('
 ---
 <Base title="Reference" description="Glossary, law explainers, practical guides, the claim ledger and the source register." eyebrow="Reference" lede="The working material behind the site, and general reference to help you read any university’s public record." toc={false} article={false}>
   <ul class="cards full">
+    <li><a class="card" href="/briefing/"><h3>The record on one page</h3><p>The key documented points with their evidence states and caveats, ready to print.</p><span class="more">Printable briefing</span></a></li>
     <li><a class="card" href="/ledger/"><h3>Claim ledger</h3><p>Every factual claim the site makes, with its evidence state, grade, sources and caveats.</p><span class="more">{claims.length} claims</span></a></li>
     <li><a class="card" href="/sources/"><h3>Source register</h3><p>Every source cited, with a record page showing where it is used and what rests on it.</p><span class="more">{Object.keys(sources).length} sources</span></a></li>
     <li><a class="card" href="/named/"><h3>People and bodies named</h3><p>Why each name appears, what the cited record says, and what it does not say.</p><span class="more">Fairness index</span></a></li>

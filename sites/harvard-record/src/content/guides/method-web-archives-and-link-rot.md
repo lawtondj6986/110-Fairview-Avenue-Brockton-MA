@@ -106,4 +106,5 @@ ordinary web addresses.
 Do not use archives to get around access controls, to retrieve material a court has sealed, or to
 republish private information that a site removed for good reason. If a page was taken down because
 it exposed personal details of a private individual, the fact that a capture survives does not make
-it appropriate to cite. The ethics guide in this series sets out these limits.
+it appropriate to cite. [The ethics guide](/guides/method-ethics-and-limits/) in this
+series sets out these limits.

@@ -100,4 +100,5 @@ institutional policy.
 
 The Act is a single section, 18 U.S.C. § 3771, and it is short enough to read in full. The Attorney
 General's guidelines on victim and witness assistance describe how federal prosecutors and agents
-are instructed to apply it. See `/glossary/` for related terms of legal procedure.
+are instructed to apply it. See the [glossary](/glossary/) for related terms of legal
+procedure.

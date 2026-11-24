@@ -110,4 +110,4 @@ The rule is at 42 C.F.R. Part 93. It was first issued in 2005. A revised version
 2024, with changes to procedures and definitions taking effect over the following period. Read the
 current text, and check which version governed at the time of any proceeding you are reading about.
 The Office of Research Integrity's website has the rule, guidance and case summaries. See
-`/methodology/` and `/glossary/` on this site.
+the [methodology page](/methodology/) and the [glossary](/glossary/) on this site.

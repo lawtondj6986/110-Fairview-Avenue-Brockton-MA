@@ -13,8 +13,8 @@ people they hope will give.
 
 This template is a courteous request for information about policy. It does not allege anything. A
 private university has no general legal duty to answer, so the letter relies on clarity and
-goodwill. For background on how gifts reach a university, see `/donor-pathways/`, and for terms used
-here, see `/glossary/`.
+goodwill. For background on how gifts reach a university, see the [donor pathways
+page](/donor-pathways/), and for terms used here, see the [glossary](/glossary/).
 
 ## Before you write
 
@@ -118,9 +118,9 @@ Be accurate about yourself. Give your real degree and year. Do not overstate you
 standing.
 
 Adapt for public universities. A public university is usually subject to its state's public records
-law, so its policies and some gift records may be obtainable by a formal request. See the public
-records request template in this series. Rules on donor confidentiality at public universities and
-their affiliated foundations vary by state.
+law, so its policies and some gift records may be obtainable by a formal request. See the [public
+records request template](/guides/template-state-public-records-request/) in this series. Rules on
+donor confidentiality at public universities and their affiliated foundations vary by state.
 
 ## Reading the reply
 
@@ -129,12 +129,14 @@ their affiliated foundations vary by state.
 - A general assurance with no document tells you that a policy may exist, not what it says. A polite
   follow-up asking only for the policy document is reasonable.
 - A policy describes what is supposed to happen. It is evidence of stated intent, in the terms used
-  at `/methodology/`. Whether it is followed is a separate question that a policy cannot answer.
+  on the [methodology page](/methodology/). Whether it is followed is a separate question that a
+  policy cannot answer.
 - No reply is not evidence of anything. Offices lose letters. One follow-up after your stated date
   is appropriate.
 
 ## What to do with what you learn
 
-If the policy is public, you can compare it with those of other institutions. The guide to reading a gift
-acceptance policy under `/guides/` lists what to look for. If you intend to publish the reply, tell the university so in your
-letter or ask before doing so, and quote it accurately and in context.
+If the policy is public, you can compare it with those of other institutions. [The guide to reading
+a gift acceptance policy](/guides/read-gift-acceptance-policy/) lists what to look for. If you intend
+to publish the reply, tell the university so in your letter or ask before doing so, and quote it
+accurately and in context.

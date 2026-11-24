@@ -57,8 +57,8 @@ last revised.
 - Are support services available at night, on weekends, and during breaks?
 - Do students studying abroad, living off campus, or working in a lab or clinical placement have the
   same access?
-- For graduate students: who can a student go to if the problem involves their own adviser? See the
-  guide on adviser power in /guides/.
+- For graduate students: who can a student go to if the problem involves their own adviser? See [the
+  guide on adviser power](/guides/graduate-program-adviser-power/).
 
 ## Questions about transparency
 

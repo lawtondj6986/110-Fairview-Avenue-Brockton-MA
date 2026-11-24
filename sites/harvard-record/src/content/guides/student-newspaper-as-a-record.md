@@ -47,8 +47,8 @@ chronology and a useful pointer to primary documents.
 4. Bracket your dates. Search the weeks around a known event, then a year later for follow-up.
 5. Check for a digitized print archive for older material. University libraries and archives often
    hold these, sometimes as scanned pages with imperfect text search.
-6. Look for a corrections page or correction notes on individual articles. See the guide to reading
-   a correction or update note.
+6. Look for a corrections page or correction notes on individual articles. See [the guide to
+   reading a correction or update note](/guides/read-a-correction-or-update-note/).
 7. Save what you find with its web address and the date you retrieved it. A public web archive may
    hold earlier versions.
 
@@ -93,8 +93,8 @@ The student newspaper is most useful alongside other sources.
 - Use the newspaper to see how an announcement was received and what questions were asked.
 - Use court dockets, agency records and published reports to check claims about legal or regulatory
   matters.
-- Use the newspaper's follow-up coverage when checking whether commitments were kept. See the guide
-  on following up on promises.
+- Use the newspaper's follow-up coverage when checking whether commitments were kept. See [the guide
+  on following up on promises](/guides/follow-up-on-promises-after-a-scandal/).
 
 ## What the archive can and cannot tell you
 
@@ -113,5 +113,5 @@ covered. A story that was never written is not a finding that nothing occurred.
 - Dismissing student journalism wholesale. On campus matters it is often first, and sometimes the
   only record.
 
-This site's /sources/ page lists the types of sources it relies on, and /methodology/ explains how
-each type is weighed.
+This site's [sources page](/sources/) lists the types of sources it relies on, and the
+[methodology page](/methodology/) explains how each type is weighed.

@@ -77,8 +77,8 @@ record is silent. The work may have been done without announcement.
 
 For items with no public evidence, ask the institution. A short, specific request works best: quote
 the commitment, give its date and source, and ask what was done and where it is documented. Address
-it to the office that made the commitment or to the communications office. See the guide on
-transparency requests for how to frame it.
+it to the office that made the commitment or to the communications office. See [the guide on
+transparency requests](/guides/alumni-transparency-requests/) for how to frame it.
 
 Record the reply, or the absence of one, with dates.
 
@@ -86,8 +86,8 @@ Record the reply, or the absence of one, with dates.
 
 - Durability. A new office that was quietly merged or left unfilled two years later was not a
   lasting change.
-- Reach. A policy adopted by the central administration may not bind every school. See the guide on
-  decentralized universities.
+- Reach. A policy adopted by the central administration may not bind every school. See [the guide
+  on decentralized universities](/guides/who-decides-in-a-decentralized-university/).
 - Substance. Compare the adopted policy with the recommendation that prompted it. Recommendations
   are sometimes accepted "in principle" and adopted in weaker form.
 - Measurement. Check whether the institution set any way to tell if the change worked, such as a
@@ -118,5 +118,5 @@ Keep one table with these columns: commitment (quoted), source and date, respons
 deadline, evidence found, evidence source and date, status, date last checked. Update it once or
 twice a year.
 
-This site's /sources/ page follows the same discipline of dated entries tied to
-documents, and /methodology/ explains the labels used.
+This site's [sources page](/sources/) follows the same discipline of dated entries tied to
+documents, and the [methodology page](/methodology/) explains the labels used.

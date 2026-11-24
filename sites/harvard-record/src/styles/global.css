@@ -317,3 +317,56 @@ ol.path li { counter-increment: step; display: grid; grid-template-columns: 2.2r
 ol.path li::before { content: counter(step); grid-row: span 2; font-family: var(--sans); font-weight: 700; color: var(--accent); padding-top: 0.1rem; }
 ol.path a { font-weight: 600; }
 ol.path span { grid-column: 2; font-size: 0.93rem; color: var(--muted); }
+
+/* ---------- Glossary term links ---------- */
+a.term { color: inherit; text-decoration: underline dotted var(--muted); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+a.term:hover, a.term:focus-visible { color: var(--link); text-decoration-style: solid; text-decoration-color: var(--link); }
+@media print { a.term { text-decoration: none; } a.term::after { content: none !important; } }
+
+/* ---------- Funding chart ---------- */
+:root { --bar: #24395c; --track: #ebe7de; }
+@media (prefers-color-scheme: dark) { :root { --bar: #8fa9d6; --track: #262d38; } }
+.funding table { table-layout: fixed; }
+.funding thead th:nth-child(1) { width: 42%; }
+.funding thead th:nth-child(2) { width: 20%; }
+.funding .fc-group th { background: var(--tint); font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.funding tbody th[scope='row'] { font-weight: 600; }
+.fc-note { display: block; font-weight: 400; font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
+.fc-period { font-family: var(--sans); font-size: 0.85rem; }
+.fc-flag { display: block; margin-top: 0.25rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; color: var(--accent); }
+.fc-track { display: block; height: 0.9rem; background: var(--track); border-radius: 0 4px 4px 0; margin: 0.15rem 0 0.4rem; }
+.fc-bar { display: block; height: 100%; background: var(--bar); border-radius: 0 4px 4px 0; min-width: 3px; }
+.fc-value { font-family: var(--sans); font-weight: 700; font-size: 1rem; }
+.fc-claim { display: block; font-family: var(--sans); font-size: 0.75rem; margin-top: 0.15rem; }
+@media (max-width: 47.99rem) {
+  .funding table, .funding thead, .funding tbody, .funding tr, .funding th, .funding td { display: block; width: 100% !important; }
+  .funding caption { display: block; }
+  .funding thead { position: absolute; width: 1px !important; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .funding thead tr, .funding thead th { width: auto !important; padding: 0; }
+  .funding tr.fc-row { padding: 0.5rem 0; border-bottom: 1px solid var(--rule); }
+  .funding tr.fc-row > * { border: 0; padding: 0.25rem 0.9rem; }
+}
+@media print { .fc-bar { background: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+
+/* ---------- Ledger filter ---------- */
+.ledger-filter { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 0.75rem 1rem; align-items: end; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 1rem 1.1rem; margin: 1.5rem 0 0.5rem; font-family: var(--sans); }
+.ledger-filter label { display: block; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 0.3rem; }
+.ledger-filter .filter-input, .ledger-filter select { width: 100%; max-width: none; font: inherit; font-size: 0.95rem; padding: 0.55rem 0.7rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--paper); color: var(--ink); }
+.ledger-filter .lf-count { grid-column: 1 / -1; margin: 0; font-size: 0.85rem; color: var(--muted); }
+.lf-empty { font-family: var(--sans); color: var(--muted); padding: 1.5rem 0; }
+@media (max-width: 47.99rem) { .ledger-filter { grid-template-columns: 1fr 1fr; } .ledger-filter > div:first-child { grid-column: 1 / -1; } }
+
+/* ---------- Briefing ---------- */
+ol.briefing { list-style: none; padding: 0; margin: 0.5rem 0 1rem; }
+ol.briefing li { padding: 0.8rem 0; border-bottom: 1px solid var(--rule); margin: 0; }
+ol.briefing p { margin: 0; }
+.b-claim { font-size: 1.02rem; }
+.b-meta { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; align-items: center; font-family: var(--sans); font-size: 0.8rem; margin-top: 0.35rem !important; }
+.b-caveat { font-size: 0.9rem; color: var(--muted); margin-top: 0.3rem !important; }
+.print-btn { font: inherit; font-weight: 600; cursor: pointer; padding: 0.45rem 0.9rem; margin-right: 0.75rem; border: 1px solid var(--navy-2); border-radius: 4px; background: var(--navy-2); color: #fff; }
+@media print {
+  .no-print, .print-btn { display: none !important; }
+  .briefing-section { break-inside: avoid-page; }
+  ol.briefing li { break-inside: avoid; padding: 0.4rem 0; }
+  .page-head { padding: 0 0 0.5rem; }
+}

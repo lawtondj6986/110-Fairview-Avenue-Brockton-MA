@@ -64,8 +64,8 @@ structure, by people who are not thinking about the institution as a whole.
 - Information stays local. A center director may know a visitor well while the central
   administration has never heard the name. Central records can be accurate and still incomplete.
 - "The university" is ambiguous. A statement that the university did or did not do something may be
-  true of the central administration and silent about a school, a center or an affiliate. See the
-  guide on reading a crisis statement.
+  true of the central administration and silent about a school, a center or an affiliate. See [the
+  guide on reading a crisis statement](/guides/read-a-crisis-statement/).
 - Money is not all one pot. Each school and many centers manage their own funds. A gift declined by
   one part can be offered to another.
 - Responsibility diffuses. When several offices each hold part of a decision, each can reasonably
@@ -107,5 +107,6 @@ structure, which may differ from the one in place when the events occurred.
 - Applying one school's policy to another.
 - Confusing an affiliated hospital or institute with the university itself.
 
-The /program-for-evolutionary-dynamics/ and /harvard-medical-school/ pages on this site show why the
-unit in question matters when reading a record.
+The [evolutionary dynamics program](/program-for-evolutionary-dynamics/) and [medical
+school](/harvard-medical-school/) pages on this site show why the unit in question matters when
+reading a record.

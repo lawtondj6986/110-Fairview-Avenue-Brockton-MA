@@ -88,8 +88,8 @@ a party formally admits a fact.
 ## A reading routine
 
 1. Note the court, the filing date and the case number.
-2. Check the docket for later filings and the current status. See the guide to reading a court
-   docket.
+2. Check the docket for later filings and the current status. See [the guide to reading a court
+   docket](/guides/read-a-court-docket/).
 3. Read the counts and the relief sought.
 4. Read the factual allegations, marking each "upon information and belief."
 5. Read any exhibits separately from the complaint's description of them.
@@ -112,5 +112,5 @@ a party formally admits a fact.
 - Assuming that a named defendant did what is alleged because a court accepted the filing. Courts
   accept filings without assessing their merit.
 
-This site's /methodology/ page describes how allegations are labeled and kept separate from
-findings.
+This site's [methodology page](/methodology/) describes how allegations are labeled and kept
+separate from findings.

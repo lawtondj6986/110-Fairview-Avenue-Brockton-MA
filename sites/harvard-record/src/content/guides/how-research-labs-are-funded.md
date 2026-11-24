@@ -58,7 +58,8 @@ Faculty who bring in large grants often have corresponding standing.
   connected to the lab's work. Universities require such interests to be disclosed and managed. A
   student should know whether their project touches the adviser's outside interests.
 - Dependence. When one person controls the money that pays a student's stipend, tuition and research
-  costs, that person holds considerable power. See the guide on adviser power.
+  costs, that person holds considerable power. See [the guide on
+  adviser power](/guides/graduate-program-adviser-power/).
 - Donors. A lab supported by a private donor may host that donor for visits, updates and events, and
   students may be asked to present their work. This is ordinary stewardship. A student is entitled
   to know who funds the lab and to raise concerns through the department or an ombuds office if an

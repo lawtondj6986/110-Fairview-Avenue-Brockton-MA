@@ -99,5 +99,6 @@ for religious institutions, that have no counterpart in Title VI.
 
 The statute is at 42 U.S.C. §§ 2000d to 2000d-7. The Department of Education's regulations are at 34
 C.F.R. Part 100. Other agencies have their own. The Department of Justice coordinates enforcement
-across agencies and publishes a legal manual on Title VI. See the Title IX and Title VII explainers
-in `/law/`, and `/comparison/` for how this site sets different frameworks side by side.
+across agencies and publishes a legal manual on Title VI. See the [Title IX](/law/title-ix/) and
+[Title VII](/law/title-vii/) explainers, and the [comparison page](/comparison/) for how this site
+sets different frameworks side by side.

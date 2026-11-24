@@ -92,6 +92,6 @@ dismissal or settlement.
 
 There is no single text. The Restatement (Second) of Torts summarizes the common law rules,
 including the fair report privilege in section 611, and many state courts cite it. A state's own
-cases and statutes control. This site describes its own sourcing and attribution practices at
-`/methodology/` and lists its sources at `/sources/`. This explainer describes general principles
-and is not advice on any publication.
+cases and statutes control. This site describes its own sourcing and attribution practices on the
+[methodology page](/methodology/) and lists its sources on the [sources page](/sources/). This
+explainer describes general principles and is not advice on any publication.

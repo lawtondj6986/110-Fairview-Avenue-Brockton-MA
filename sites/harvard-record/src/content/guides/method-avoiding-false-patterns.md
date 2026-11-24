@@ -94,8 +94,8 @@ no document connecting the two." The last sentence matters. It tells the reader 
 stops the juxtaposition from doing unspoken work. If the facts are not both relevant on their own
 terms, leave one out.
 
-This site's editorial rule, set out at `/methodology/`, is that two facts side by side are not
-presented as connected unless a source connects them.
+This site's editorial rule, set out on the [methodology page](/methodology/), is that two facts side
+by side are not presented as connected unless a source connects them.
 
 ## Fairness to people
 

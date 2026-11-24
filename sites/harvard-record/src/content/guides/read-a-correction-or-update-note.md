@@ -98,7 +98,8 @@ If you keep a public record of your own, the same standards apply.
 - Leave a dated note stating what was wrong and what is now right.
 - Distinguish corrections from updates.
 
-This site's /methodology/ page describes how its own corrections and updates are recorded.
+This site's [methodology page](/methodology/) describes how its own corrections and updates are
+recorded.
 
 ## What a note can and cannot tell you
 

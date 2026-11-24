@@ -34,7 +34,8 @@ and not private interests. Benefit to private parties must be incidental to the 
 
 Exemption has two main consequences. The organization generally pays no federal income tax on income
 related to its purposes. And, under a different section of the Code, donors may deduct their gifts.
-See the explainer on charitable contribution rules in `/law/`.
+See [the explainer on charitable contribution
+rules](/law/charitable-contribution-deduction-and-quid-pro-quo/).
 
 ## Who it covers
 
@@ -79,8 +80,8 @@ Courts have also upheld the denial of exemption to an educational institution wh
 violate fundamental public policy, in a decision concerning racial discrimination. The Service
 requires private schools to adopt and publicize a racially nondiscriminatory policy.
 
-State attorneys general have separate authority over charitable assets under state law. See the
-explainer on state oversight of charities in `/law/`.
+State attorneys general have separate authority over charitable assets under state law. See [the
+explainer on state oversight of charities](/law/state-attorney-general-oversight-of-charities/).
 
 ## Common misreadings
 
@@ -106,4 +107,5 @@ operated.
 The text is in 26 U.S.C. § 501(c)(3). The regulations are at 26 C.F.R. § 1.501(c)(3)-1. The excess
 benefit rules are in 26 U.S.C. § 4958. The Internal Revenue Service publishes plain-language
 material for exempt organizations on its website. For how to read an institution's public tax
-filings, see the Form 990 explainer in `/law/` and the material in `/guides/`.
+filings, see the [Form 990 explainer](/law/form-990/) and [the guide to reading a Form
+990](/guides/read-a-form-990/).

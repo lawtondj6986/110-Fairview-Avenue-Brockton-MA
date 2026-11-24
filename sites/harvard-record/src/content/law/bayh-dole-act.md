@@ -102,4 +102,5 @@ a patent is the place to check.
 
 The Act is at 35 U.S.C. §§ 200 to 212. The implementing regulations, with the standard patent rights
 clauses, are at 37 C.F.R. Part 401. A university's patent policy and its technology licensing
-office's public materials show how it applies these rules. See `/glossary/` for related terms.
+office's public materials show how it applies these rules. See the [glossary](/glossary/) for related
+terms.

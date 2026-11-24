@@ -230,3 +230,20 @@ test('named index: a recorded denial in the ledger is carried into the entry as 
     if (denies) assert.ok(n.response, `${n.name}: ledger records a denial but the entry has no response`);
   }
 });
+
+// ---------------------------------------------------------------- Funding chart
+import { funding } from '../src/data/funding.ts';
+
+test('funding chart rows point at real claims and sources, and agree with the ledger', () => {
+  const byId = new Map(claims.map((c) => [c.id, c]));
+  for (const r of funding) {
+    const c = byId.get(r.claim);
+    assert.ok(c, `${r.route}: unknown claim ${r.claim}`);
+    for (const id of r.cites) assert.ok(ids.includes(id), `${r.route}: unknown source ${id}`);
+    assert.ok(r.cites.some((id) => c!.sources.includes(id)), `${r.route}: shares no source with ledger ${r.claim}`);
+    assert.ok(r.amount >= 0, `${r.route}: negative amount`);
+  }
+  // Each non-zero figure must appear in words in the claim it restates.
+  const words: Record<string, string> = { 'F-01': '$9.1 million', 'D-01': '$7.5 million', 'D-02': '$2 million', 'M-02': '$525,000' };
+  for (const r of funding) if (words[r.claim]) assert.ok(byId.get(r.claim)!.claim.includes(words[r.claim]), `${r.claim}: ledger wording no longer matches the chart`);
+});

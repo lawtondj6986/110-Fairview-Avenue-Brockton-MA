@@ -109,5 +109,5 @@ closure letter, ask the institution, or check the agency's current list of open 
 - Citing the press release instead of the letter. Press summaries from either side compress and
   emphasize.
 
-The explainers in /law/ describe the statutes involved, and /glossary/ defines terms such as
-resolution agreement and compliance review.
+The [law explainers](/law/) describe the statutes involved, and the [glossary](/glossary/) defines
+terms such as resolution agreement and compliance review.

@@ -104,4 +104,5 @@ employers.
 
 The statute begins at 42 U.S.C. § 2000ff. The Commission's regulations are at 29 C.F.R. Part 1635,
 and the Commission publishes plain-language guidance on its website. For related entries see
-`/glossary/`, and for how genetic topics appear on this site see `/dna-genetics/`.
+the [glossary](/glossary/), and for how genetic topics appear on this site see the
+[DNA and genetics page](/dna-genetics/).

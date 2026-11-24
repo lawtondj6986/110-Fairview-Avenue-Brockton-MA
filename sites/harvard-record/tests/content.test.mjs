@@ -31,7 +31,7 @@ const CATEGORIES = [
 const SERIES = ['Evaluating an institution', 'Reading documents', 'Research methods', 'Templates'];
 const AUDIENCES = ['Prospective students', 'Students', 'Alumni', 'Researchers', 'Everyone'];
 const LAW_SECTIONS = ['What it does', 'Who it covers', 'What it does not do', 'How it is enforced', 'Common misreadings', 'Where to read it'];
-const SITE_PATHS = /^\/(methodology|program-for-evolutionary-dynamics|harvard-medical-school|donor-pathways|dna-genetics|campus-safety|comparison|sources|glossary|law|guides|ledger|faq|about|updates|reference|search)\//;
+const SITE_PATHS = /^\/(methodology|program-for-evolutionary-dynamics|harvard-medical-school|donor-pathways|dna-genetics|campus-safety|comparison|sources|glossary|law|guides|ledger|faq|about|updates|reference|search|named|briefing)\//;
 
 const where = (e) => `${e.collection}/${e.file}`;
 

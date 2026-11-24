@@ -99,4 +99,5 @@ absence of public charges tells a reader little.
 
 The statute begins at 42 U.S.C. § 2000e. The main prohibitions are in § 2000e-2 and the retaliation
 provision is in § 2000e-3. The Commission's regulations and its enforcement guidance on harassment
-are on its website. For the Massachusetts counterpart, see the Chapter 151B explainer in `/law/`.
+are on its website. For the Massachusetts counterpart, see the [Chapter 151B
+explainer](/law/massachusetts-chapter-151b/).

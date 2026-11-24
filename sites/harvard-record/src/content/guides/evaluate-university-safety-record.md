@@ -30,8 +30,8 @@ usually works.
 
 1. The annual security report. Federal law (the Clery Act) requires colleges that take part in
    federal student aid programs to publish one each year. It contains three years of crime
-   statistics and a set of policy statements. See the guide to reading a campus security report in
-   /guides/.
+   statistics and a set of policy statements. See [the guide to reading a campus security
+   report](/guides/read-a-campus-security-report/).
 2. The daily crime log, if the campus has a police or security department. It lists recent reported
    incidents and must be open to the public.
 3. The most recent campus climate survey, if one exists. This is an anonymous survey of students
@@ -44,7 +44,8 @@ usually works.
 6. Federal enforcement records. The U.S. Department of Education publishes Clery crime data for all
    reporting institutions in a searchable tool, publishes Clery program review findings, and its
    Office for Civil Rights publishes lists of open investigations and many resolution agreements.
-7. The student newspaper's archive. See the guide on using the student newspaper as a record.
+7. The student newspaper's archive. See [the guide on using the student newspaper as a
+   record](/guides/student-newspaper-as-a-record/).
 
 ## Read them in a useful order
 
@@ -90,8 +91,9 @@ None of these proves a problem. Each is a reason to ask the institution directly
 - A finding or an agreement describes a past period. It does not describe current practice.
 - An absence of public enforcement records does not show that nothing went wrong. Many complaints
   are never filed with an outside agency.
-- Comparisons between institutions are difficult. See the guide to comparing two universities' data
-  fairly before drawing conclusions from differences.
+- Comparisons between institutions are difficult. See [the guide to comparing two universities' data
+  fairly](/guides/compare-sexual-misconduct-data-fairly/) before drawing conclusions from
+  differences.
 
 ## Common mistakes
 
@@ -102,5 +104,5 @@ None of these proves a problem. Each is a reason to ask the institution directly
   institution has committed to do.
 - Relying on a single year.
 
-This site's /campus-safety/ and /comparison/ pages show how these kinds of documents are used in
-practice, and /glossary/ defines the terms.
+This site's [campus safety](/campus-safety/) and [comparison](/comparison/) pages show how these
+kinds of documents are used in practice, and the [glossary](/glossary/) defines the terms.

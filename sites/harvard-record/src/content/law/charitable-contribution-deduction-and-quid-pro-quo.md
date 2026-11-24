@@ -96,5 +96,5 @@ records say little about it.
 
 The statutes are 26 U.S.C. §§ 170, 6115 and 6714 (the penalty). The regulations are at 26 C.F.R. §
 1.170A-1 and following, and § 1.6115-1. The Internal Revenue Service publishes guides for donors and
-for charities on substantiation and disclosure. See `/donor-pathways/` and `/glossary/` for related
-material on this site.
+for charities on substantiation and disclosure. See the [donor pathways page](/donor-pathways/)
+and the [glossary](/glossary/) for related material on this site.

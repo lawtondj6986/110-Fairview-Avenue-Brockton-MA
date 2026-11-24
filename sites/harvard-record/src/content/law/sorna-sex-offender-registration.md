@@ -103,4 +103,5 @@ conduct for which there was no conviction.
 
 The Act is at 34 U.S.C. § 20901 and the sections that follow. The Department of Justice's
 regulations and its national guidelines explain how the standards apply. State registration law is
-in each state's code. See `/campus-safety/` and `/glossary/` on this site.
+in each state's code. See the [campus safety page](/campus-safety/) and
+the [glossary](/glossary/) on this site.

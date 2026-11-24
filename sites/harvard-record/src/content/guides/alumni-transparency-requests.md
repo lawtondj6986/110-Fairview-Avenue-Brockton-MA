@@ -103,5 +103,5 @@ question from the one you asked. Note that and ask again.
 - Assuming a private university has the same disclosure duties as a public one.
 - Failing to keep copies and dates.
 
-Ready-to-adapt request letters are in the Templates series in /guides/, and /law/ explains the
-statutes mentioned here.
+Ready-to-adapt request letters are in the Templates series in the [guides section](/guides/), and the
+[law explainers](/law/) explain the statutes mentioned here.

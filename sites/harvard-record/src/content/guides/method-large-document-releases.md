@@ -81,8 +81,8 @@ When a person appears in a release, say in what capacity. Useful distinctions ar
 recipient, copied recipient, person mentioned by others, and name appearing in an attached or
 third-party document. Being mentioned in a document, or receiving one, is not evidence of wrongdoing
 or of any relationship beyond what the page shows. Where you name someone who appears only as a
-recipient or bystander, say plainly that no wrongdoing is implied. The guide on writing about named
-people in this series covers this further.
+recipient or bystander, say plainly that no wrongdoing is implied. [The guide on writing about
+named people](/guides/method-writing-about-named-people/) in this series covers this further.
 
 ## Keep each item at its evidence state
 
@@ -90,7 +90,7 @@ A release mostly contains communications, and communications mostly show stated 
 offers, requests, invitations. An invitation is not attendance. A request is not agreement. A draft
 is not a signed document. Move a claim to documented activity only when a page records the act, and
 to verified implementation only when an official finding or independent result confirms it.
-Definitions are at `/methodology/`.
+Definitions are on the [methodology page](/methodology/).
 
 ## Wording for counts and scope
 

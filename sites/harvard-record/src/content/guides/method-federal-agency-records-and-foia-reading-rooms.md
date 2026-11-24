@@ -104,6 +104,7 @@ for agencies to respond, but backlogs are common and many requests take much lon
 denied in whole or in part, the response letter explains how to appeal within the agency and by
 when. Agencies also have FOIA public liaisons who can help with a stalled request.
 
-Templates for a general federal request and for a request to a civil-rights office are in the
-Templates series under `/guides/`. They are starting points, not legal advice, and each agency's own
+Templates for [a general federal request](/guides/template-federal-foia-request/) and for [a request
+to a civil-rights office](/guides/template-foia-civil-rights-office-records/) are in the Templates
+series. They are starting points, not legal advice, and each agency's own
 FOIA page states its current requirements.

@@ -24,8 +24,8 @@ university enrolls students who use federal aid, nearly every one is covered.
 
 Courts and agencies have long read sex discrimination to include sexual harassment and sexual
 violence, because harassment can deny a person equal access to education. The statute itself does
-not use those words. The detailed duties come from regulations and court decisions. See the separate
-explainer on the Title IX regulations in `/law/`.
+not use those words. The detailed duties come from regulations and court decisions. See [the separate
+explainer on the Title IX regulations](/law/title-ix-regulations/).
 
 ## Who it covers
 
@@ -104,4 +104,5 @@ Private institutions are not exempt because they are private. Coverage follows f
 The statute is at 20 U.S.C. §§ 1681 to 1688. The Department of Education's regulations are at 34
 C.F.R. Part 106. Other agencies have their own parallel regulations. The Office for Civil Rights
 publishes resolution agreements and guidance on the Department's website. For terms used here, see
-`/glossary/`. For how this site uses such records, see `/methodology/`.
+the [glossary](/glossary/). For how this site uses such records, see the [methodology
+page](/methodology/).

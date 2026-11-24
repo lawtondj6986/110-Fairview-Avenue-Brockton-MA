@@ -83,9 +83,9 @@ mention publicly, the honest form is to say that an unverified claim circulates 
 not confirm it. Even that should be avoided where a named living person is concerned, because
 repeating an unverified claim still spreads it.
 
-On this site's grading scale, set out at `/methodology/`, untraced material is at best B2 (thin or
-unverified), and a factual claim about a named living person needs A1 or A2. In practice this means
-that nothing from a mirror or wiki alone can support such a claim.
+On this site's grading scale, set out on the [methodology page](/methodology/), untraced material is
+at best B2 (thin or unverified), and a factual claim about a named living person needs A1 or A2. In
+practice this means that nothing from a mirror or wiki alone can support such a claim.
 
 ## Reference works in general
 

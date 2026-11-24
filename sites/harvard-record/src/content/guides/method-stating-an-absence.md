@@ -25,7 +25,8 @@ Keep these apart. They support different sentences.
   establishes it by itself.
 
 The principle used on this site is that absence of a record is not proof of absence. The evidence
-state "nothing on record", defined at `/methodology/`, means only that no public record was found.
+state "nothing on record", defined on the [methodology page](/methodology/), means only that no
+public record was found.
 
 ## Why records go missing
 
@@ -102,7 +103,7 @@ exist (a legal filing requirement, a written policy, a numbered sequence with a 
 search that covered the place it should be, and a statement of both. Even then, report the gap and
 the reason for expecting the record. Leave the explanation open unless a source supplies it. Where a
 public body ought to hold the record, a records request may settle the question. Templates for
-requests are in the Templates series under `/guides/`.
+requests are in the Templates series in the [guides section](/guides/).
 
 ## Record it in the ledger
 

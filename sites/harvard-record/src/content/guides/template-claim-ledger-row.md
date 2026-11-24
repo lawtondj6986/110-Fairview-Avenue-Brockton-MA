@@ -8,12 +8,13 @@ order: 90
 
 A claim ledger holds one row for each factual claim in your work. The row ties the published wording
 to a specific passage in a specific source and records how strong the support is. The method is
-described in the guide on keeping a claim ledger in the Research methods series under `/guides/`.
+described in [the guide on keeping a claim ledger](/guides/method-keeping-a-claim-ledger/).
 This page provides the row itself.
 
 Two values are recorded separately for each claim. The evidence state says how far the record goes:
 stated intent, documented activity, verified implementation, or nothing on record. The grade says
-what kind of source supports it: A1, A2, B1 or B2. Both are defined at `/methodology/`.
+what kind of source supports it: A1, A2, B1 or B2. Both are defined on the [methodology
+page](/methodology/).
 
 ## The template
 

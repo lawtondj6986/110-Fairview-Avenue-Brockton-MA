@@ -10,7 +10,7 @@ Most errors in public-record research are not invented facts. They are true fact
 further along than the record supports. A plan becomes an event. A payment becomes a program. The
 three-state discipline is a habit of sorting each claim by how far the evidence goes, and of writing
 the claim at that level and no higher. This site uses it throughout, and the definitions are set out
-at `/methodology/`.
+on the [methodology page](/methodology/).
 
 ## The three states, and a fourth
 
@@ -27,8 +27,8 @@ what came of it. Examples include an institutional review that traced the money 
 was spent, a court finding, an audit, or a published result that an independent party has confirmed.
 
 A fourth label matters as much as the other three: nothing on record. It means you looked and found
-no public record. It does not mean the thing did not happen. A separate guide in this series covers
-how to state an absence.
+no public record. It does not mean the thing did not happen. A [separate guide in this
+series](/guides/method-stating-an-absence/) covers how to state an absence.
 
 ## How to assign a state
 

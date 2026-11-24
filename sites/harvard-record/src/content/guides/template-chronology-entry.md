@@ -8,7 +8,7 @@ order: 100
 
 A chronology is a list of dated events, each tied to a document. This template is the record for one
 event. The method, including how to handle uncertain dates and why sequence does not show cause, is
-covered in the guide on building a chronology in the Research methods series under `/guides/`.
+covered in [the guide on building a chronology](/guides/method-building-a-chronology/).
 
 The most important feature of the template is that it keeps three dates apart: when the event
 happened, when the document recording it was created, and when that document became public.
@@ -124,8 +124,8 @@ later receipt of money are two entries. If you have a document for only one, the
 entry, and the gap is itself informative.
 
 In the third example, the filing of an allegation is treated as a statement by the party who filed
-it, which is why it is recorded at stated intent. The definitions at `/methodology/` describe that
-state as covering what was proposed, pitched or said.
+it, which is why it is recorded at stated intent. The definitions on the [methodology
+page](/methodology/) describe that state as covering what was proposed, pitched or said.
 
 People and bodies. Record each person's capacity. Being copied on a message or mentioned in it is
 not the same as writing it.

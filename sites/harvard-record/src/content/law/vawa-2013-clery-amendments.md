@@ -100,5 +100,5 @@ this notice does not violate the federal student privacy law, FERPA.
 The statutory text is in 20 U.S.C. § 1092(f). The regulations are in 34 C.F.R. § 668.46, especially
 paragraphs (j) and (k) on prevention programs and disciplinary procedures. Paragraph lettering can
 change when rules are revised, so check the current text. An institution's own statements appear in
-its annual security report. See the explainer on the Clery Act in `/law/` and the terms in
-`/glossary/`.
+its annual security report. See [the explainer on the Clery Act](/law/clery-act/) and the terms in
+the [glossary](/glossary/).

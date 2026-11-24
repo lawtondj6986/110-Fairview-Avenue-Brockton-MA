@@ -8,8 +8,8 @@ order: 110
 
 Use this checklist once for each document you intend to rely on. It records what you did to
 establish that the document is what it appears to be, and what the document can and cannot support.
-The reasoning behind each step is in the guide on verifying a document's authenticity in the
-Research methods series under `/guides/`.
+The reasoning behind each step is in [the guide on verifying a document's
+authenticity](/guides/method-verifying-document-authenticity/).
 
 A completed checklist does not prove a document genuine. It shows what was checked, when, by whom
 and with what result, so that a later reader can judge the decision.
@@ -113,11 +113,11 @@ than one with honest gaps.
 Section E separates authenticity from meaning. A genuine complaint is still a set of allegations. A
 genuine draft is still a draft. Deciding what kind of record you hold, and the highest evidence
 state it can support, prevents an authentic document from being used for more than it shows. The
-states and grades are defined at `/methodology/`.
+states and grades are defined on the [methodology page](/methodology/).
 
 Section F is not optional. If a document contains private information, sealed material or text that
 appears to have been released by mistake, the question is no longer only whether it is authentic.
-See the ethics guide in the Research methods series.
+See [the ethics guide](/guides/method-ethics-and-limits/) in the Research methods series.
 
 The three decisions lead to different citations. An authenticated document is cited directly, with
 its formal identifier. A document you could not trace is not cited as a document: cite the

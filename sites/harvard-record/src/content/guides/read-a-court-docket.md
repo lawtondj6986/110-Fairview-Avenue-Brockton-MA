@@ -55,8 +55,8 @@ Some points about the text.
 The most important skill is distinguishing the parties' requests and arguments from the court's
 decisions.
 
-- Complaint, answer, counterclaim: the parties' pleadings. See the guide to reading a civil
-  complaint.
+- Complaint, answer, counterclaim: the parties' pleadings. See [the guide to reading a civil
+  complaint](/guides/read-a-civil-complaint/).
 - Motion: a request that the court do something. A motion is followed by an opposition (or response)
   and often a reply. None of these is a ruling.
 - Declaration or affidavit: a sworn statement submitted in support of a filing, often with exhibits
@@ -117,4 +117,4 @@ and is not in itself a sign of anything improper.
 - Reading a terminated party as having won. Parties are terminated for many reasons, including
   settlement and voluntary dismissal.
 
-Terms such as motion, order and stipulation are defined in /glossary/.
+Terms such as motion, order and stipulation are defined in the [glossary](/glossary/).

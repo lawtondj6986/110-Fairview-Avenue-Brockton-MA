@@ -102,8 +102,8 @@ The most actionable results are often not the headline figures.
 - Across institutions: valid mainly where both used the same instrument in the same period.
   Different question wording alone can produce large differences.
 - Against official statistics: a survey estimate and a count of reported crimes measure different
-  things. The gap between them is itself informative. See the guide on comparing two universities'
-  data fairly.
+  things. The gap between them is itself informative. See [the guide on comparing two
+  universities' data fairly](/guides/compare-sexual-misconduct-data-fairly/).
 
 ## What a climate survey can tell you
 
@@ -129,5 +129,5 @@ The most actionable results are often not the headline figures.
 - Reading only the institution's summary. Summaries select. The full tables and the questionnaire
   are where the detail is.
 
-This site's /campus-safety/ page shows survey figures alongside their definitions, and /glossary/
-explains terms such as prevalence and response rate.
+This site's [campus safety page](/campus-safety/) shows survey figures alongside their definitions,
+and the [glossary](/glossary/) explains terms such as prevalence and response rate.

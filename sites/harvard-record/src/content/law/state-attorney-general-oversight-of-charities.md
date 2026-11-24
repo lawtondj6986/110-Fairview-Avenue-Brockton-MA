@@ -99,4 +99,5 @@ Each state attorney general's website has a charities section with the registrat
 usually a searchable database of filings. The state's nonprofit corporation act, charitable trust
 statutes and solicitation act contain the governing text. For Massachusetts, see the General Laws
 provisions on public charities in Chapter 12 and on solicitation in Chapter 68, and confirm current
-text. See also the UPMIFA and Form 990 explainers in `/law/`.
+text. See also the [UPMIFA](/law/upmifa/) and [Form 990](/law/form-990/)
+explainers.

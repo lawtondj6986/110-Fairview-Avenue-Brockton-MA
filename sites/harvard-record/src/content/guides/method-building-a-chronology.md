@@ -23,7 +23,7 @@ pulling out one entry per event. Each entry should hold:
   verified implementation);
 - the date you opened the source and checked it.
 
-A fill-in version is in the Templates series under `/guides/`.
+A fill-in version is in the [chronology entry template](/guides/template-chronology-entry/).
 
 ## Three dates that are often confused
 
@@ -73,8 +73,8 @@ alleging...") and, if you include the underlying event at all, under the alleged
 Laying events in order invites the reader to see one causing the next. The chronology itself does
 not show that. Two entries a week apart may be unrelated. Before writing "after", "following" or "in
 response to" in any prose drawn from the chronology, check whether a document actually connects the
-two events. If none does, state the two facts separately and let the dates speak. The guide on
-avoiding false patterns in this series goes further.
+two events. If none does, state the two facts separately and let the dates speak. [The guide on
+avoiding false patterns](/guides/method-avoiding-false-patterns/) in this series goes further.
 
 Be equally careful with gaps. A year with no entries may mean nothing happened, or that records from
 that year were not released, or that you have not found them. Say which, if you know.

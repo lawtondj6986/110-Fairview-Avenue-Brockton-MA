@@ -79,8 +79,8 @@ gather them all together. Check the scope before comparing.
   recipient's definitions.
 - The donor's statement. May reflect intentions or totals across many recipients.
 - A tax filing. A private foundation's annual return lists its grants by recipient and amount. A
-  public charity's return gives total contributions but not donor names in the public copy. See the
-  guide to reading a Form 990.
+  public charity's return gives total contributions but not donor names in the public copy. See [the
+  guide to reading a Form 990](/guides/read-a-form-990/).
 - A news report. Check which of the above it relies on.
 
 Institutional gift records, especially older ones and those kept by individual units, can be
@@ -105,7 +105,8 @@ incomplete. A total "identified" in a review is the total found.
 
 ## What it cannot tell you
 
-- What the donor received in return, such as access, titles or recognition. See /donor-pathways/.
+- What the donor received in return, such as access, titles or recognition. See the [donor pathways
+  page](/donor-pathways/).
 - Why the gift was made or accepted.
 - Who knew about it.
 - Gifts that left no record, or records that were not searched.
@@ -118,5 +119,5 @@ incomplete. A total "identified" in a review is the total found.
 - Counting facilitated gifts as the facilitator's own money, or leaving them out without saying so.
 - Treating "to the university" as including every affiliate.
 
-This site's /donor-pathways/ page shows these distinctions applied to one set of figures, and
-/methodology/ explains how sources are graded.
+This site's [donor pathways page](/donor-pathways/) shows these distinctions applied to one set of
+figures, and the [methodology page](/methodology/) explains how sources are graded.

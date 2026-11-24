@@ -115,10 +115,11 @@ with students matter.
 
 - Choosing on the adviser's reputation for research alone.
 - Assuming the university-wide policy tells you how the department operates. Practice is local. See
-  the guide on decentralized universities.
+  [the guide on decentralized universities](/guides/who-decides-in-a-decentralized-university/).
 - Speaking only with the students an adviser selects.
 - Treating the absence of formal complaints as evidence that there are no problems.
 - Leaving questions about funding guarantees until after accepting.
 
-The guide on how research labs are funded covers the money side in more detail, and /glossary/
-defines terms such as ombuds and principal investigator.
+[The guide on how research labs are funded](/guides/how-research-labs-are-funded/) covers the money
+side in more detail, and the [glossary](/glossary/) defines terms such as ombuds and principal
+investigator.

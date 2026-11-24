@@ -113,11 +113,11 @@ tallied separately.
 - Adding the housing column to the on-campus column, which double counts.
 - Reading zero as proof of safety. At a large residential campus, several years of zero reported sex
   offenses more plausibly indicates that reports are not reaching officials.
-- Reading an increase as a rise in crime. It may reflect better reporting. See the guide on
-  comparing two universities' data fairly.
+- Reading an increase as a rise in crime. It may reflect better reporting. See [the guide on
+  comparing two universities' data fairly](/guides/compare-sexual-misconduct-data-fairly/).
 - Comparing raw counts between campuses of different size, setting and housing pattern.
 - Treating the report as the institution's full record on sexual misconduct. Complaint offices
   handle a wider range of conduct and places.
 
-The Clery Act explainer in /law/ covers the statute and how it is enforced, and this site's
-/campus-safety/ page shows these figures in use.
+The [Clery Act explainer](/law/clery-act/) covers the statute and how it is enforced, and this
+site's [campus safety page](/campus-safety/) shows these figures in use.

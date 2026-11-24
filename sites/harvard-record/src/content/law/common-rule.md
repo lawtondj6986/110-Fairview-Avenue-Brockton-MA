@@ -100,5 +100,6 @@ exemptions require a limited IRB review of privacy protections.
 ## Where to read it
 
 The text is at 45 C.F.R. Part 46. The Office for Human Research Protections publishes guidance,
-decision charts and determination letters on its website. See `/dna-genetics/` for how these rules
-bear on topics covered by this site, and `/glossary/` for terms.
+decision charts and determination letters on its website. See the [DNA and genetics
+page](/dna-genetics/) for how these rules bear on topics covered by this site, and the
+[glossary](/glossary/) for terms.
