@@ -1,0 +1,15 @@
+---
+/** The privacy statement every tool page carries. */
+interface Props { remember?: boolean }
+const { remember = false } = Astro.props;
+---
+<aside class="callout plain">
+  <p class="callout-title">Runs in your browser</p>
+  <p>
+    Everything this tool does happens on this page, in your browser. Nothing you enter is sent anywhere: the page
+    makes no network requests with your answers, sets no cookies, and has no analytics.
+    {remember
+      ? 'If you tick “Remember my answers on this device”, your answers are kept in this browser’s local storage so they are still here next time. Untick it, or press “Clear answers”, to delete them.'
+      : 'Your entries are not stored, so they are gone when you leave the page.'}
+  </p>
+</aside>

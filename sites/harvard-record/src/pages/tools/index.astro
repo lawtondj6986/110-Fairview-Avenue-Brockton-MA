@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import { tools } from '../../lib/tools/list';
+---
+<Base
+  title="Tools"
+  description="Interactive tools for grading sources, placing claims in an evidence state, reading gift policies and institutional reviews, calculating campus rates, and building citations and ledger rows."
+  eyebrow="Reference"
+  lede="Small tools that apply this site’s standards to your own research. Each one explains what it does, where it stops, and how it works."
+  toc={false}
+  article={false}
+>
+  <p>
+    The tools apply the definitions on the <a href="/methodology/">methodology page</a> and the rules in the
+    <a href="/guides/">guides</a>. They suggest; they do not decide. Every tool runs in your browser and sends
+    nothing anywhere. Without JavaScript, the questionnaires still work as printable checklists.
+  </p>
+  <ul class="cards full">
+    {tools.map((t) => (
+      <li><a class="card" href={t.href}><h3>{t.title}</h3><p>{t.summary}</p><span class="more">{t.kind}</span></a></li>
+    ))}
+  </ul>
+</Base>

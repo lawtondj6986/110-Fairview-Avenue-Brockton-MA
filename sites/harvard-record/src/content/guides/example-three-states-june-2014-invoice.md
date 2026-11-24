@@ -47,12 +47,11 @@ documented activity. The caveat on Ledger G-03 says so in plain terms: payment r
 statement. The activity therefore rests on one person's account, carried by one outlet, and the
 sentence on the page should let the reader see that.
 
-Now take everything else. For those lines the record shows a price and nothing after it. Ledger
-G-04 is stated intent, and its caveat reads: no record of payment or performance. Dr Thakuria
-described the idea as preliminary and unfunded [@cnn-2026-thakuria]. In his own account, as the
-site's [index of names](/named/) records it, he said the $2,000 check covered sequencing, that
-Epstein was a research subject, and that the larger project was a preliminary idea that never went
-anywhere.
+Now take everything else. For those lines the record shows a price and nothing after it. Ledger G-04
+is stated intent, and its caveat reads: no record of payment or performance. Dr Thakuria described
+the idea as preliminary and unfunded [@cnn-2026-thakuria]. In his own account, as the site's [index
+of names](/named/) records it, he said the $2,000 check covered sequencing, that Epstein was a
+research subject, and that the larger project was a preliminary idea that never went anywhere.
 
 A priced proposal is not a payment. A $160,000 line on an invoice is a figure someone wrote down. It
 is not $160,000 of work, and it is not evidence that work began.

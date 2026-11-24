@@ -114,17 +114,19 @@ changed.
 
 ## A worked hypothetical
 
-A regional news site receives, from an anonymous source, a scanned letter in which a foundation
-appears to promise a gift on conditions. The reporters compare the letterhead and signature with
-letters the foundation filed in a public court case. They find a reference in the letter to a board
-meeting and confirm the date from the foundation's public filings. A former employee, who did not
-see the leaked copy, confirms that such a letter was discussed. The reporters send the foundation a
-detailed request for comment. The foundation declines to comment on the letter's authenticity.
+A regional news site receives, from an anonymous source, a scanned letter in which a manufacturing
+company appears to ask a state university lab to delay publishing test results on one of its
+products. The reporters compare the letterhead and signature with letters the company filed in a
+public regulatory proceeding. They find a reference in the letter to a project review meeting and
+confirm the date from the lab's published sponsored-research agreement, which a records request
+produced. A former lab employee, who did not see the leaked copy, confirms that such a letter was
+discussed. The reporters send the company and the university detailed requests for comment. The
+company declines to comment on the letter's authenticity.
 
 The published story says the site "reviewed" the letter and describes the checks. It says the
-foundation declined to comment. A day later the foundation says the letter was a draft never sent.
-The site adds a time-stamped update with that statement and changes a sentence that had said the
-letter "was sent," with a correction note explaining the change.
+company declined to comment. A day later the company says the letter was a draft never sent. The
+site adds a time-stamped update with that statement and changes a sentence that had said the letter
+"was sent," with a correction note explaining the change.
 
 ## What the documents look like
 

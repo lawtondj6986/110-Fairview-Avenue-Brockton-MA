@@ -68,8 +68,8 @@ Ledger F-06 records that before 2008, Epstein's foundation gave $686,000 to supp
 research [@stat-2019-church]. Its caveat says the figure is attributed to a footnote of the report
 and must be checked in the PDF. [Ledger D-02](/ledger/#D-02) records that between 2010 and 2015,
 introduced donors gave $2 million for Professor Church's work [@harvard-2020-report]. The donors
-denied that Epstein directed their gifts, and the review found no evidence that he did (Ledger
-D-03).
+denied that Epstein directed their gifts, and the review found no evidence that he did
+(Ledger D-03).
 
 Those rows describe gifts given. D-08 describes an estimate of capacity. The three figures should
 never be added together, and the $75 million should never appear in a sentence about amounts given.

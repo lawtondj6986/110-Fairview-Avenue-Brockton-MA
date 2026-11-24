@@ -29,9 +29,9 @@ Laid out by date, the items are these.
 - September 2016 to summer 2017. Emails describe 23andMe consumer kits sent or ordered as gifts
   (Ledger G-06, G-07, G-08) [@nypost-2026-kits]. Documented activity. The caveats say receiving a
   kit implies nothing about the recipient.
-- Undated. Epstein told people of a wish to have women inseminated at his New Mexico ranch (Ledger
-  G-09) [@nyt-2019-seed]. Stated intent, graded B2 because the fullest account is second-hand. The
-  newspaper reported no evidence the idea was acted on.
+- Undated. Epstein told people of a wish to have women inseminated at his New Mexico ranch
+  (Ledger G-09) [@nyt-2019-seed]. Stated intent, graded B2 because the fullest account is
+  second-hand. The newspaper reported no evidence the idea was acted on.
 
 ## Step 2: ask what the items share
 

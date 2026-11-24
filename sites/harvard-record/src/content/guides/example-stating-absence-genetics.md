@@ -53,11 +53,11 @@ that the priced work was paid for or carried out. The person who sent the invoic
 described the idea as preliminary and unfunded. That statement is his account, and it sits in the
 same row as the absence.
 
-The third is an absence of later knowledge about something that is documented. [Ledger
-G-02](/ledger/#G-02) records that cell lines containing Epstein's DNA were created in 2013, and that
-their present whereabouts are unknown [@stat-2026-mystery]. The creation is documented activity,
-from a single outlet. "Unknown" is the reported state of knowledge. It does not mean the cells were
-destroyed, kept or used, and a sentence that implied any of those would add a fact.
+The third is an absence of later knowledge about something that is documented.
+[Ledger G-02](/ledger/#G-02) records that cell lines containing Epstein's DNA were created in 2013,
+and that their present whereabouts are unknown [@stat-2026-mystery]. The creation is documented
+activity, from a single outlet. "Unknown" is the reported state of knowledge. It does not mean the
+cells were destroyed, kept or used, and a sentence that implied any of those would add a fact.
 
 ## Step 4: notice absences carried in caveats
 
