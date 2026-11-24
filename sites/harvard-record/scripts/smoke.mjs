@@ -28,7 +28,7 @@ const urls = [...readFileSync(root + 'dist/sitemap-0.xml', 'utf8').matchAll(/<lo
 // The core pages always; a sample of the generated ones unless --all.
 const core = urls.filter((u) => u.split('/').filter(Boolean).length <= 1);
 const generated = urls.filter((u) => !core.includes(u));
-const sample = all ? generated : ['glossary', 'law', 'guides', 'sources'].flatMap((s) => generated.filter((u) => u.startsWith(`/${s}/`)).filter((_, i, a) => i === 0 || i === Math.floor(a.length / 2) || i === a.length - 1));
+const sample = all ? generated : ['glossary', 'law', 'guides', 'sources', 'tools'].flatMap((s) => generated.filter((u) => u.startsWith(`/${s}/`)).filter((_, i, a) => i === 0 || i === Math.floor(a.length / 2) || i === a.length - 1));
 const targets = [...core, ...sample];
 
 const server = spawn('npx', ['astro', 'preview', '--port', String(PORT)], { cwd: root, stdio: 'ignore' });

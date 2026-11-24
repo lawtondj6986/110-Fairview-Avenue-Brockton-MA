@@ -7,19 +7,19 @@ statutes or agency pages. This register lists every sentence that makes a checka
 (a number, date, dollar threshold, deadline, legal citation, recent change or absolute claim) and every
 external link. Work from the top: the list is ordered by risk, and law explainers weigh most.
 
-**Scope:** 410 files; 199 have something to check; 424 flagged statements; 101 links.
+**Scope:** 513 files; 258 have something to check; 530 flagged statements; 115 links.
 
 | Flag | Statements |
 |---|---|
-| Legal citation | 73 |
+| Legal citation | 79 |
 | Dollar amount | 9 |
-| Percentage or rate | 3 |
+| Percentage or rate | 8 |
 | Deadline or period | 16 |
 | Threshold or count | 9 |
-| Date or year | 102 |
-| Recent change (may be out of date) | 18 |
-| Absolute statement | 118 |
-| Other number | 284 |
+| Date or year | 130 |
+| Recent change (may be out of date) | 22 |
+| Absolute statement | 154 |
+| Other number | 351 |
 
 | # | File | Group | Statements | Links | Risk |
 |---|---|---|---|---|---|
@@ -52,173 +52,232 @@ external link. Work from the top: the list is ordered by risk, and law explainer
 | 27 | [law/territorial-tax-incentive-programs](law/territorial-tax-incentive-programs.md) | Other | 3 | 2 | 46 |
 | 28 | [law/certificates-of-confidentiality](law/certificates-of-confidentiality.md) | Federal | 3 | 1 | 44 |
 | 29 | [law/form-990](law/form-990.md) | Federal | 7 | 2 | 40 |
-| 30 | [law/state-attorney-general-oversight-of-charities](law/state-attorney-general-oversight-of-charities.md) | Other | 6 | 0 | 33 |
-| 31 | [law/gina-title-i](law/gina-title-i.md) | Federal | 4 | 1 | 32 |
-| 32 | [law/upmifa](law/upmifa.md) | Other | 3 | 1 | 32 |
-| 33 | [glossary/higher-education-act](glossary/higher-education-act.md) | Law and compliance | 4 | 1 | 20 |
-| 34 | [glossary/common-rule](glossary/common-rule.md) | Law and compliance | 3 | 1 | 16 |
-| 35 | [glossary/quid-pro-quo-contribution](glossary/quid-pro-quo-contribution.md) | Law and compliance | 2 | 0 | 16 |
-| 36 | [glossary/clery-act](glossary/clery-act.md) | Campus safety | 3 | 2 | 15 |
-| 37 | [glossary/heritability](glossary/heritability.md) | Genetics and biomedical research | 3 | 0 | 14 |
-| 38 | [glossary/section-117](glossary/section-117.md) | Law and compliance | 2 | 1 | 14 |
-| 39 | [guides/method-stating-an-absence](guides/method-stating-an-absence.md) | Research methods | 4 | 0 | 14 |
-| 40 | [glossary/preponderance-of-the-evidence](glossary/preponderance-of-the-evidence.md) | Law and compliance | 3 | 0 | 13 |
-| 41 | [guides/method-federal-agency-records-and-foia-reading-rooms](guides/method-federal-agency-records-and-foia-reading-rooms.md) | Research methods | 2 | 2 | 13 |
-| 42 | [guides/method-finding-nonprofit-filings](guides/method-finding-nonprofit-filings.md) | Research methods | 9 | 2 | 13 |
-| 43 | [guides/template-federal-foia-request](guides/template-federal-foia-request.md) | Templates | 2 | 1 | 13 |
-| 44 | [law/state-genetic-privacy-laws](law/state-genetic-privacy-laws.md) | Other | 1 | 0 | 12 |
-| 45 | [guides/read-a-form-990](guides/read-a-form-990.md) | Reading documents | 6 | 0 | 11 |
-| 46 | [glossary/tax-exempt-status](glossary/tax-exempt-status.md) | Law and compliance | 3 | 1 | 10 |
-| 47 | [guides/read-a-correction-or-update-note](guides/read-a-correction-or-update-note.md) | Reading documents | 4 | 0 | 10 |
-| 48 | [law/defamation-and-fair-report-privilege](law/defamation-and-fair-report-privilege.md) | Other | 2 | 0 | 9 |
-| 49 | [glossary/crispr](glossary/crispr.md) | Genetics and biomedical research | 2 | 0 | 8 |
-| 50 | [glossary/ferpa](glossary/ferpa.md) | Law and compliance | 1 | 2 | 8 |
-| 51 | [glossary/interim-measures](glossary/interim-measures.md) | Campus safety | 2 | 0 | 8 |
-| 52 | [glossary/responsible-employee](glossary/responsible-employee.md) | Law and compliance | 2 | 0 | 8 |
-| 53 | [glossary/title-ix](glossary/title-ix.md) | Law and compliance | 1 | 2 | 8 |
-| 54 | [glossary/vawa-amendments](glossary/vawa-amendments.md) | Campus safety | 2 | 0 | 8 |
-| 55 | [guides/read-a-civil-rights-findings-letter](guides/read-a-civil-rights-findings-letter.md) | Reading documents | 2 | 0 | 8 |
-| 56 | [guides/template-foia-civil-rights-office-records](guides/template-foia-civil-rights-office-records.md) | Templates | 2 | 0 | 8 |
-| 57 | [guides/was-an-internal-review-independent](guides/was-an-internal-review-independent.md) | Evaluating an institution | 4 | 0 | 8 |
-| 58 | [glossary/annual-security-report](glossary/annual-security-report.md) | Campus safety | 2 | 0 | 7 |
-| 59 | [guides/read-a-campus-security-report](guides/read-a-campus-security-report.md) | Reading documents | 3 | 0 | 7 |
-| 60 | [glossary/belmont-report](glossary/belmont-report.md) | Research ethics | 1 | 1 | 6 |
-| 61 | [glossary/clia-laboratory](glossary/clia-laboratory.md) | Genetics and biomedical research | 1 | 1 | 6 |
-| 62 | [glossary/declaration-of-helsinki](glossary/declaration-of-helsinki.md) | Research ethics | 1 | 1 | 6 |
-| 63 | [glossary/discovery](glossary/discovery.md) | Legal procedure | 2 | 1 | 6 |
-| 64 | [glossary/formal-complaint](glossary/formal-complaint.md) | Law and compliance | 2 | 0 | 6 |
-| 65 | [glossary/gift-acceptance-committee](glossary/gift-acceptance-committee.md) | Fundraising and development | 2 | 0 | 6 |
-| 66 | [glossary/gina](glossary/gina.md) | Law and compliance | 1 | 1 | 6 |
-| 67 | [glossary/hipaa](glossary/hipaa.md) | Law and compliance | 1 | 1 | 6 |
-| 68 | [glossary/office-for-civil-rights](glossary/office-for-civil-rights.md) | Law and compliance | 1 | 0 | 6 |
-| 69 | [glossary/sex-offender-registration](glossary/sex-offender-registration.md) | Law and compliance | 2 | 0 | 6 |
-| 70 | [glossary/title-vii](glossary/title-vii.md) | Law and compliance | 1 | 1 | 6 |
-| 71 | [guides/alumni-transparency-requests](guides/alumni-transparency-requests.md) | Evaluating an institution | 3 | 0 | 6 |
-| 72 | [guides/evaluate-university-safety-record](guides/evaluate-university-safety-record.md) | Evaluating an institution | 3 | 0 | 6 |
-| 73 | [guides/method-finding-court-records](guides/method-finding-court-records.md) | Research methods | 1 | 2 | 6 |
-| 74 | [guides/method-grading-a-source](guides/method-grading-a-source.md) | Research methods | 3 | 0 | 6 |
-| 75 | [guides/template-correction-request](guides/template-correction-request.md) | Templates | 2 | 0 | 6 |
-| 76 | [guides/method-citing-sources](guides/method-citing-sources.md) | Research methods | 3 | 0 | 5 |
-| 77 | [guides/method-figures-that-differ](guides/method-figures-that-differ.md) | Research methods | 2 | 0 | 5 |
-| 78 | [guides/read-a-donation-statistic](guides/read-a-donation-statistic.md) | Reading documents | 3 | 0 | 5 |
-| 79 | [glossary/absence-of-evidence](glossary/absence-of-evidence.md) | Records and sourcing | 2 | 0 | 4 |
-| 80 | [glossary/academic-freedom](glossary/academic-freedom.md) | University governance | 1 | 0 | 4 |
-| 81 | [glossary/active-prospect](glossary/active-prospect.md) | Fundraising and development | 1 | 0 | 4 |
-| 82 | [glossary/class-action](glossary/class-action.md) | Legal procedure | 1 | 1 | 4 |
-| 83 | [glossary/clear-and-convincing-evidence](glossary/clear-and-convincing-evidence.md) | Law and compliance | 1 | 0 | 4 |
-| 84 | [glossary/dating-violence](glossary/dating-violence.md) | Campus safety | 1 | 0 | 4 |
-| 85 | [glossary/dear-colleague-letter](glossary/dear-colleague-letter.md) | Law and compliance | 1 | 0 | 4 |
-| 86 | [glossary/deliberate-indifference](glossary/deliberate-indifference.md) | Law and compliance | 1 | 0 | 4 |
-| 87 | [glossary/development-office](glossary/development-office.md) | Fundraising and development | 2 | 0 | 4 |
-| 88 | [glossary/domestic-violence](glossary/domestic-violence.md) | Campus safety | 1 | 0 | 4 |
-| 89 | [glossary/exome](glossary/exome.md) | Genetics and biomedical research | 1 | 0 | 4 |
-| 90 | [glossary/family-foundation](glossary/family-foundation.md) | Fundraising and development | 2 | 1 | 4 |
-| 91 | [glossary/freedom-of-information-request](glossary/freedom-of-information-request.md) | Records and sourcing | 0 | 2 | 4 |
-| 92 | [glossary/general-counsel](glossary/general-counsel.md) | University governance | 2 | 0 | 4 |
-| 93 | [glossary/hostile-environment](glossary/hostile-environment.md) | Law and compliance | 1 | 0 | 4 |
-| 94 | [glossary/induced-pluripotent-stem-cell](glossary/induced-pluripotent-stem-cell.md) | Genetics and biomedical research | 1 | 0 | 4 |
-| 95 | [glossary/informal-resolution](glossary/informal-resolution.md) | Law and compliance | 1 | 0 | 4 |
-| 96 | [glossary/prompt-and-equitable](glossary/prompt-and-equitable.md) | Law and compliance | 1 | 0 | 4 |
-| 97 | [glossary/quid-pro-quo-harassment](glossary/quid-pro-quo-harassment.md) | Law and compliance | 1 | 0 | 4 |
-| 98 | [glossary/re-identification-risk](glossary/re-identification-risk.md) | Genetics and biomedical research | 2 | 0 | 4 |
-| 99 | [glossary/shared-governance](glossary/shared-governance.md) | University governance | 1 | 0 | 4 |
-| 100 | [glossary/stalking](glossary/stalking.md) | Campus safety | 1 | 0 | 4 |
-| 101 | [glossary/stated-intent-vs-documented-activity](glossary/stated-intent-vs-documented-activity.md) | Records and sourcing | 2 | 0 | 4 |
-| 102 | [glossary/supportive-measures](glossary/supportive-measures.md) | Law and compliance | 1 | 0 | 4 |
-| 103 | [glossary/tenure](glossary/tenure.md) | University governance | 1 | 0 | 4 |
-| 104 | [glossary/title-ix-coordinator](glossary/title-ix-coordinator.md) | Law and compliance | 1 | 0 | 4 |
-| 105 | [glossary/unrestricted-gift](glossary/unrestricted-gift.md) | Fundraising and development | 2 | 0 | 4 |
-| 106 | [guides/method-avoiding-false-patterns](guides/method-avoiding-false-patterns.md) | Research methods | 1 | 0 | 4 |
-| 107 | [guides/method-correcting-your-own-work](guides/method-correcting-your-own-work.md) | Research methods | 1 | 0 | 4 |
-| 108 | [guides/method-three-state-discipline](guides/method-three-state-discipline.md) | Research methods | 2 | 0 | 4 |
-| 109 | [guides/method-web-archives-and-link-rot](guides/method-web-archives-and-link-rot.md) | Research methods | 1 | 1 | 4 |
-| 110 | [guides/method-writing-about-named-people](guides/method-writing-about-named-people.md) | Research methods | 2 | 0 | 4 |
-| 111 | [guides/read-a-campus-climate-survey](guides/read-a-campus-climate-survey.md) | Reading documents | 2 | 0 | 4 |
-| 112 | [guides/read-a-court-docket](guides/read-a-court-docket.md) | Reading documents | 1 | 0 | 4 |
-| 113 | [guides/read-a-crisis-statement](guides/read-a-crisis-statement.md) | Evaluating an institution | 1 | 0 | 4 |
-| 114 | [guides/read-gift-acceptance-policy](guides/read-gift-acceptance-policy.md) | Evaluating an institution | 1 | 0 | 4 |
-| 115 | [guides/student-newspaper-as-a-record](guides/student-newspaper-as-a-record.md) | Evaluating an institution | 2 | 0 | 4 |
-| 116 | [glossary/corporate-foundation](glossary/corporate-foundation.md) | Fundraising and development | 2 | 0 | 3 |
-| 117 | [glossary/indirect-costs](glossary/indirect-costs.md) | Fundraising and development | 1 | 1 | 3 |
-| 118 | [glossary/allegation](glossary/allegation.md) | Legal procedure | 1 | 0 | 2 |
-| 119 | [glossary/ancestry-test](glossary/ancestry-test.md) | Genetics and biomedical research | 1 | 0 | 2 |
-| 120 | [glossary/archive-snapshot](glossary/archive-snapshot.md) | Records and sourcing | 1 | 0 | 2 |
-| 121 | [glossary/authenticity-vs-accuracy](glossary/authenticity-vs-accuracy.md) | Records and sourcing | 1 | 0 | 2 |
-| 122 | [glossary/bates-number](glossary/bates-number.md) | Records and sourcing | 1 | 0 | 2 |
-| 123 | [glossary/civil-vs-criminal](glossary/civil-vs-criminal.md) | Legal procedure | 1 | 0 | 2 |
-| 124 | [glossary/confirmation-bias](glossary/confirmation-bias.md) | Records and sourcing | 1 | 0 | 2 |
-| 125 | [glossary/correction](glossary/correction.md) | Records and sourcing | 1 | 0 | 2 |
-| 126 | [glossary/cultivation](glossary/cultivation.md) | Fundraising and development | 1 | 0 | 2 |
-| 127 | [glossary/de-identification](glossary/de-identification.md) | Genetics and biomedical research | 0 | 1 | 2 |
-| 128 | [glossary/denial](glossary/denial.md) | Records and sourcing | 1 | 0 | 2 |
-| 129 | [glossary/document-production](glossary/document-production.md) | Legal procedure | 1 | 0 | 2 |
-| 130 | [glossary/duplicate-and-thread](glossary/duplicate-and-thread.md) | Records and sourcing | 1 | 0 | 2 |
-| 131 | [glossary/emergency-notification](glossary/emergency-notification.md) | Campus safety | 1 | 0 | 2 |
-| 132 | [glossary/exempt-research](glossary/exempt-research.md) | Research ethics | 0 | 1 | 2 |
-| 133 | [glossary/exhibit](glossary/exhibit.md) | Legal procedure | 1 | 0 | 2 |
-| 134 | [glossary/form-990](glossary/form-990.md) | Law and compliance | 2 | 0 | 2 |
-| 135 | [glossary/fundraising-ethics-codes](glossary/fundraising-ethics-codes.md) | Fundraising and development | 0 | 1 | 2 |
-| 136 | [glossary/genetic-database](glossary/genetic-database.md) | Genetics and biomedical research | 1 | 0 | 2 |
-| 137 | [glossary/genotype-vs-phenotype](glossary/genotype-vs-phenotype.md) | Genetics and biomedical research | 1 | 0 | 2 |
-| 138 | [glossary/gift-counting-standards](glossary/gift-counting-standards.md) | Fundraising and development | 0 | 1 | 2 |
-| 139 | [glossary/gift-grant-sponsored-research](glossary/gift-grant-sponsored-research.md) | Fundraising and development | 1 | 0 | 2 |
-| 140 | [glossary/governing-board](glossary/governing-board.md) | University governance | 1 | 0 | 2 |
-| 141 | [glossary/human-subjects-research](glossary/human-subjects-research.md) | Research ethics | 0 | 1 | 2 |
-| 142 | [glossary/in-kind-gift](glossary/in-kind-gift.md) | Fundraising and development | 1 | 0 | 2 |
-| 143 | [glossary/informed-consent](glossary/informed-consent.md) | Research ethics | 0 | 1 | 2 |
-| 144 | [glossary/institutional-memory](glossary/institutional-memory.md) | University governance | 1 | 0 | 2 |
-| 145 | [glossary/institutional-review-board](glossary/institutional-review-board.md) | Research ethics | 0 | 1 | 2 |
-| 146 | [glossary/motion-to-dismiss](glossary/motion-to-dismiss.md) | Legal procedure | 0 | 1 | 2 |
-| 147 | [glossary/no-evidence-of-vs-evidence-of-no](glossary/no-evidence-of-vs-evidence-of-no.md) | Records and sourcing | 1 | 0 | 2 |
-| 148 | [glossary/notice-and-comment-rulemaking](glossary/notice-and-comment-rulemaking.md) | Law and compliance | 0 | 1 | 2 |
-| 149 | [glossary/plaintiff-and-defendant](glossary/plaintiff-and-defendant.md) | Legal procedure | 1 | 0 | 2 |
-| 150 | [glossary/plea-agreement](glossary/plea-agreement.md) | Law and compliance | 0 | 1 | 2 |
-| 151 | [glossary/preemption](glossary/preemption.md) | Law and compliance | 1 | 0 | 2 |
-| 152 | [glossary/prevalence-vs-reported-incidents](glossary/prevalence-vs-reported-incidents.md) | Campus safety | 1 | 0 | 2 |
-| 153 | [glossary/private-foundation](glossary/private-foundation.md) | Law and compliance | 2 | 0 | 2 |
-| 154 | [glossary/public-record](glossary/public-record.md) | Records and sourcing | 1 | 0 | 2 |
-| 155 | [glossary/quid-pro-quo-fundraising](glossary/quid-pro-quo-fundraising.md) | Fundraising and development | 0 | 1 | 2 |
-| 156 | [glossary/reliability-grade](glossary/reliability-grade.md) | Records and sourcing | 1 | 0 | 2 |
-| 157 | [glossary/research-conflict-of-interest](glossary/research-conflict-of-interest.md) | Research ethics | 0 | 1 | 2 |
-| 158 | [glossary/research-misconduct](glossary/research-misconduct.md) | Research ethics | 0 | 1 | 2 |
-| 159 | [glossary/retaliation](glossary/retaliation.md) | Law and compliance | 1 | 0 | 2 |
-| 160 | [glossary/safe-harbor](glossary/safe-harbor.md) | Law and compliance | 1 | 0 | 2 |
-| 161 | [glossary/second-hand-account](glossary/second-hand-account.md) | Records and sourcing | 1 | 0 | 2 |
-| 162 | [glossary/sexual-assault-clery](glossary/sexual-assault-clery.md) | Campus safety | 0 | 1 | 2 |
-| 163 | [glossary/single-source-reporting](glossary/single-source-reporting.md) | Records and sourcing | 1 | 0 | 2 |
-| 164 | [glossary/standing](glossary/standing.md) | Legal procedure | 1 | 0 | 2 |
-| 165 | [glossary/statute-of-limitations](glossary/statute-of-limitations.md) | Law and compliance | 1 | 0 | 2 |
-| 166 | [glossary/student-newspaper-as-record](glossary/student-newspaper-as-record.md) | University governance | 1 | 0 | 2 |
-| 167 | [glossary/subpoena](glossary/subpoena.md) | Legal procedure | 0 | 1 | 2 |
-| 168 | [glossary/summary-judgment](glossary/summary-judgment.md) | Legal procedure | 0 | 1 | 2 |
-| 169 | [glossary/title-vi](glossary/title-vi.md) | Law and compliance | 0 | 1 | 2 |
-| 170 | [glossary/vacatur](glossary/vacatur.md) | Law and compliance | 0 | 1 | 2 |
-| 171 | [glossary/voluntary-dismissal](glossary/voluntary-dismissal.md) | Legal procedure | 0 | 1 | 2 |
-| 172 | [guides/campus-visit-questions-reporting-support](guides/campus-visit-questions-reporting-support.md) | Evaluating an institution | 1 | 0 | 2 |
-| 173 | [guides/compare-sexual-misconduct-data-fairly](guides/compare-sexual-misconduct-data-fairly.md) | Evaluating an institution | 1 | 0 | 2 |
-| 174 | [guides/graduate-program-adviser-power](guides/graduate-program-adviser-power.md) | Evaluating an institution | 1 | 0 | 2 |
-| 175 | [guides/how-research-labs-are-funded](guides/how-research-labs-are-funded.md) | Evaluating an institution | 1 | 0 | 2 |
-| 176 | [guides/method-ethics-and-limits](guides/method-ethics-and-limits.md) | Research methods | 1 | 0 | 2 |
-| 177 | [guides/read-a-civil-complaint](guides/read-a-civil-complaint.md) | Reading documents | 1 | 0 | 2 |
-| 178 | [guides/read-a-congressional-oversight-letter](guides/read-a-congressional-oversight-letter.md) | Reading documents | 1 | 0 | 2 |
-| 179 | [guides/read-a-document-based-news-report](guides/read-a-document-based-news-report.md) | Reading documents | 1 | 0 | 2 |
-| 180 | [guides/read-a-fact-finding-report](guides/read-a-fact-finding-report.md) | Reading documents | 1 | 0 | 2 |
-| 181 | [guides/read-a-faculty-sanction-announcement](guides/read-a-faculty-sanction-announcement.md) | Reading documents | 1 | 0 | 2 |
-| 182 | [guides/read-a-released-email](guides/read-a-released-email.md) | Reading documents | 1 | 0 | 2 |
-| 183 | [guides/read-an-invoice-or-proposal](guides/read-an-invoice-or-proposal.md) | Reading documents | 1 | 0 | 2 |
-| 184 | [guides/template-chronology-entry](guides/template-chronology-entry.md) | Templates | 1 | 0 | 2 |
-| 185 | [guides/template-right-of-reply-invitation](guides/template-right-of-reply-invitation.md) | Templates | 1 | 0 | 2 |
-| 186 | [guides/template-source-log-entry](guides/template-source-log-entry.md) | Templates | 1 | 0 | 2 |
-| 187 | [guides/template-state-public-records-request](guides/template-state-public-records-request.md) | Templates | 1 | 0 | 2 |
-| 188 | [guides/template-update-log-and-correction-notice](guides/template-update-log-and-correction-notice.md) | Templates | 1 | 0 | 2 |
-| 189 | [guides/who-decides-in-a-decentralized-university](guides/who-decides-in-a-decentralized-university.md) | Evaluating an institution | 1 | 0 | 2 |
-| 190 | [glossary/citation](glossary/citation.md) | Records and sourcing | 1 | 0 | 1 |
-| 191 | [glossary/cryopreservation](glossary/cryopreservation.md) | Genetics and biomedical research | 1 | 0 | 1 |
-| 192 | [glossary/dna](glossary/dna.md) | Genetics and biomedical research | 1 | 0 | 1 |
-| 193 | [glossary/gene](glossary/gene.md) | Genetics and biomedical research | 1 | 0 | 1 |
-| 194 | [glossary/genome](glossary/genome.md) | Genetics and biomedical research | 1 | 0 | 1 |
-| 195 | [glossary/whistleblower-policy](glossary/whistleblower-policy.md) | University governance | 1 | 0 | 1 |
-| 196 | [guides/method-keeping-a-claim-ledger](guides/method-keeping-a-claim-ledger.md) | Research methods | 1 | 0 | 1 |
-| 197 | [guides/method-large-document-releases](guides/method-large-document-releases.md) | Research methods | 1 | 0 | 1 |
-| 198 | [guides/template-alum-gift-acceptance-letter](guides/template-alum-gift-acceptance-letter.md) | Templates | 1 | 0 | 1 |
-| 199 | [guides/template-questions-reporting-and-support](guides/template-questions-reporting-and-support.md) | Templates | 1 | 0 | 1 |
+| 30 | [guides/primer-sexual-misconduct-complaint-process](guides/primer-sexual-misconduct-complaint-process.md) | Primers | 10 | 0 | 40 |
+| 31 | [law/state-attorney-general-oversight-of-charities](law/state-attorney-general-oversight-of-charities.md) | Other | 6 | 0 | 33 |
+| 32 | [law/gina-title-i](law/gina-title-i.md) | Federal | 4 | 1 | 32 |
+| 33 | [law/upmifa](law/upmifa.md) | Other | 3 | 1 | 32 |
+| 34 | [glossary/higher-education-act](glossary/higher-education-act.md) | Law and compliance | 4 | 1 | 20 |
+| 35 | [glossary/cross-examination-title-ix](glossary/cross-examination-title-ix.md) | Campus safety | 3 | 0 | 18 |
+| 36 | [glossary/common-rule](glossary/common-rule.md) | Law and compliance | 3 | 1 | 16 |
+| 37 | [glossary/quid-pro-quo-contribution](glossary/quid-pro-quo-contribution.md) | Law and compliance | 2 | 0 | 16 |
+| 38 | [glossary/clery-act](glossary/clery-act.md) | Campus safety | 3 | 2 | 15 |
+| 39 | [glossary/confidence-interval](glossary/confidence-interval.md) | Records and sourcing | 3 | 0 | 15 |
+| 40 | [guides/primer-gift-acceptance-and-vetting](guides/primer-gift-acceptance-and-vetting.md) | Primers | 6 | 0 | 15 |
+| 41 | [glossary/heritability](glossary/heritability.md) | Genetics and biomedical research | 3 | 0 | 14 |
+| 42 | [glossary/live-hearing](glossary/live-hearing.md) | Campus safety | 3 | 1 | 14 |
+| 43 | [glossary/section-117](glossary/section-117.md) | Law and compliance | 2 | 1 | 14 |
+| 44 | [guides/method-stating-an-absence](guides/method-stating-an-absence.md) | Research methods | 4 | 0 | 14 |
+| 45 | [glossary/preponderance-of-the-evidence](glossary/preponderance-of-the-evidence.md) | Law and compliance | 3 | 0 | 13 |
+| 46 | [guides/method-federal-agency-records-and-foia-reading-rooms](guides/method-federal-agency-records-and-foia-reading-rooms.md) | Research methods | 2 | 2 | 13 |
+| 47 | [guides/method-finding-nonprofit-filings](guides/method-finding-nonprofit-filings.md) | Research methods | 9 | 2 | 13 |
+| 48 | [guides/primer-prospect-research-and-ratings](guides/primer-prospect-research-and-ratings.md) | Primers | 6 | 0 | 13 |
+| 49 | [guides/template-federal-foia-request](guides/template-federal-foia-request.md) | Templates | 2 | 1 | 13 |
+| 50 | [law/state-genetic-privacy-laws](law/state-genetic-privacy-laws.md) | Other | 1 | 0 | 12 |
+| 51 | [glossary/office-of-research-integrity](glossary/office-of-research-integrity.md) | Research ethics | 3 | 2 | 11 |
+| 52 | [guides/read-a-form-990](guides/read-a-form-990.md) | Reading documents | 6 | 0 | 11 |
+| 53 | [glossary/margin-of-error](glossary/margin-of-error.md) | Records and sourcing | 2 | 0 | 10 |
+| 54 | [glossary/tax-exempt-status](glossary/tax-exempt-status.md) | Law and compliance | 3 | 1 | 10 |
+| 55 | [guides/course-03-finding-the-documents](guides/course-03-finding-the-documents.md) | Course | 5 | 0 | 10 |
+| 56 | [guides/read-a-correction-or-update-note](guides/read-a-correction-or-update-note.md) | Reading documents | 4 | 0 | 10 |
+| 57 | [law/defamation-and-fair-report-privilege](law/defamation-and-fair-report-privilege.md) | Other | 2 | 0 | 9 |
+| 58 | [glossary/fiscal-year](glossary/fiscal-year.md) | Fundraising and development | 4 | 0 | 9 |
+| 59 | [guides/primer-how-a-gift-moves](guides/primer-how-a-gift-moves.md) | Primers | 3 | 0 | 9 |
+| 60 | [glossary/advisor-of-choice](glossary/advisor-of-choice.md) | Campus safety | 2 | 0 | 8 |
+| 61 | [glossary/crispr](glossary/crispr.md) | Genetics and biomedical research | 2 | 0 | 8 |
+| 62 | [glossary/decision-maker](glossary/decision-maker.md) | Campus safety | 2 | 0 | 8 |
+| 63 | [glossary/excess-benefit-transaction](glossary/excess-benefit-transaction.md) | Law and compliance | 1 | 1 | 8 |
+| 64 | [glossary/ferpa](glossary/ferpa.md) | Law and compliance | 1 | 2 | 8 |
+| 65 | [glossary/interim-measures](glossary/interim-measures.md) | Campus safety | 2 | 0 | 8 |
+| 66 | [glossary/responsible-employee](glossary/responsible-employee.md) | Law and compliance | 2 | 0 | 8 |
+| 67 | [glossary/self-dealing](glossary/self-dealing.md) | Law and compliance | 1 | 1 | 8 |
+| 68 | [glossary/title-ix](glossary/title-ix.md) | Law and compliance | 1 | 2 | 8 |
+| 69 | [glossary/vawa-amendments](glossary/vawa-amendments.md) | Campus safety | 2 | 0 | 8 |
+| 70 | [guides/primer-campus-crime-statistics](guides/primer-campus-crime-statistics.md) | Primers | 4 | 0 | 8 |
+| 71 | [guides/read-a-civil-rights-findings-letter](guides/read-a-civil-rights-findings-letter.md) | Reading documents | 2 | 0 | 8 |
+| 72 | [guides/template-foia-civil-rights-office-records](guides/template-foia-civil-rights-office-records.md) | Templates | 2 | 0 | 8 |
+| 73 | [guides/was-an-internal-review-independent](guides/was-an-internal-review-independent.md) | Evaluating an institution | 4 | 0 | 8 |
+| 74 | [glossary/annual-security-report](glossary/annual-security-report.md) | Campus safety | 2 | 0 | 7 |
+| 75 | [guides/read-a-campus-security-report](guides/read-a-campus-security-report.md) | Reading documents | 3 | 0 | 7 |
+| 76 | [glossary/belmont-report](glossary/belmont-report.md) | Research ethics | 1 | 1 | 6 |
+| 77 | [glossary/clia-laboratory](glossary/clia-laboratory.md) | Genetics and biomedical research | 1 | 1 | 6 |
+| 78 | [glossary/declaration-of-helsinki](glossary/declaration-of-helsinki.md) | Research ethics | 1 | 1 | 6 |
+| 79 | [glossary/discovery](glossary/discovery.md) | Legal procedure | 2 | 1 | 6 |
+| 80 | [glossary/foia-exemption](glossary/foia-exemption.md) | Law and compliance | 1 | 1 | 6 |
+| 81 | [glossary/formal-complaint](glossary/formal-complaint.md) | Law and compliance | 2 | 0 | 6 |
+| 82 | [glossary/gift-acceptance-committee](glossary/gift-acceptance-committee.md) | Fundraising and development | 2 | 0 | 6 |
+| 83 | [glossary/gina](glossary/gina.md) | Law and compliance | 1 | 1 | 6 |
+| 84 | [glossary/hipaa](glossary/hipaa.md) | Law and compliance | 1 | 1 | 6 |
+| 85 | [glossary/mandatory-arbitration](glossary/mandatory-arbitration.md) | Legal procedure | 1 | 1 | 6 |
+| 86 | [glossary/office-for-civil-rights](glossary/office-for-civil-rights.md) | Law and compliance | 1 | 0 | 6 |
+| 87 | [glossary/sex-offender-registration](glossary/sex-offender-registration.md) | Law and compliance | 2 | 0 | 6 |
+| 88 | [glossary/title-vii](glossary/title-vii.md) | Law and compliance | 1 | 1 | 6 |
+| 89 | [guides/alumni-transparency-requests](guides/alumni-transparency-requests.md) | Evaluating an institution | 3 | 0 | 6 |
+| 90 | [guides/evaluate-university-safety-record](guides/evaluate-university-safety-record.md) | Evaluating an institution | 3 | 0 | 6 |
+| 91 | [guides/method-finding-court-records](guides/method-finding-court-records.md) | Research methods | 1 | 2 | 6 |
+| 92 | [guides/method-grading-a-source](guides/method-grading-a-source.md) | Research methods | 3 | 0 | 6 |
+| 93 | [guides/primer-federal-civil-rights-enforcement](guides/primer-federal-civil-rights-enforcement.md) | Primers | 1 | 0 | 6 |
+| 94 | [guides/primer-government-document-releases](guides/primer-government-document-releases.md) | Primers | 3 | 0 | 6 |
+| 95 | [guides/primer-how-newsrooms-verify-documents](guides/primer-how-newsrooms-verify-documents.md) | Primers | 3 | 0 | 6 |
+| 96 | [guides/template-correction-request](guides/template-correction-request.md) | Templates | 2 | 0 | 6 |
+| 97 | [guides/method-citing-sources](guides/method-citing-sources.md) | Research methods | 3 | 0 | 5 |
+| 98 | [guides/method-figures-that-differ](guides/method-figures-that-differ.md) | Research methods | 2 | 0 | 5 |
+| 99 | [guides/read-a-donation-statistic](guides/read-a-donation-statistic.md) | Reading documents | 3 | 0 | 5 |
+| 100 | [glossary/absence-of-evidence](glossary/absence-of-evidence.md) | Records and sourcing | 2 | 0 | 4 |
+| 101 | [glossary/academic-freedom](glossary/academic-freedom.md) | University governance | 1 | 0 | 4 |
+| 102 | [glossary/active-prospect](glossary/active-prospect.md) | Fundraising and development | 1 | 0 | 4 |
+| 103 | [glossary/biospecimen](glossary/biospecimen.md) | Research ethics | 1 | 0 | 4 |
+| 104 | [glossary/class-action](glossary/class-action.md) | Legal procedure | 1 | 1 | 4 |
+| 105 | [glossary/clear-and-convincing-evidence](glossary/clear-and-convincing-evidence.md) | Law and compliance | 1 | 0 | 4 |
+| 106 | [glossary/dating-violence](glossary/dating-violence.md) | Campus safety | 1 | 0 | 4 |
+| 107 | [glossary/dear-colleague-letter](glossary/dear-colleague-letter.md) | Law and compliance | 1 | 0 | 4 |
+| 108 | [glossary/deliberate-indifference](glossary/deliberate-indifference.md) | Law and compliance | 1 | 0 | 4 |
+| 109 | [glossary/development-office](glossary/development-office.md) | Fundraising and development | 2 | 0 | 4 |
+| 110 | [glossary/disciplinary-appeal](glossary/disciplinary-appeal.md) | Campus safety | 1 | 0 | 4 |
+| 111 | [glossary/domestic-violence](glossary/domestic-violence.md) | Campus safety | 1 | 0 | 4 |
+| 112 | [glossary/exome](glossary/exome.md) | Genetics and biomedical research | 1 | 0 | 4 |
+| 113 | [glossary/family-foundation](glossary/family-foundation.md) | Fundraising and development | 2 | 1 | 4 |
+| 114 | [glossary/foia-reading-room](glossary/foia-reading-room.md) | Law and compliance | 1 | 1 | 4 |
+| 115 | [glossary/freedom-of-information-request](glossary/freedom-of-information-request.md) | Records and sourcing | 0 | 2 | 4 |
+| 116 | [glossary/general-counsel](glossary/general-counsel.md) | University governance | 2 | 0 | 4 |
+| 117 | [glossary/hostile-environment](glossary/hostile-environment.md) | Law and compliance | 1 | 0 | 4 |
+| 118 | [glossary/induced-pluripotent-stem-cell](glossary/induced-pluripotent-stem-cell.md) | Genetics and biomedical research | 1 | 0 | 4 |
+| 119 | [glossary/informal-resolution](glossary/informal-resolution.md) | Law and compliance | 1 | 0 | 4 |
+| 120 | [glossary/nondisclosure-agreement](glossary/nondisclosure-agreement.md) | Legal procedure | 1 | 0 | 4 |
+| 121 | [glossary/prompt-and-equitable](glossary/prompt-and-equitable.md) | Law and compliance | 1 | 0 | 4 |
+| 122 | [glossary/quid-pro-quo-harassment](glossary/quid-pro-quo-harassment.md) | Law and compliance | 1 | 0 | 4 |
+| 123 | [glossary/re-identification-risk](glossary/re-identification-risk.md) | Genetics and biomedical research | 2 | 0 | 4 |
+| 124 | [glossary/reference-genome](glossary/reference-genome.md) | Genetics and biomedical research | 1 | 0 | 4 |
+| 125 | [glossary/research-misconduct-inquiry](glossary/research-misconduct-inquiry.md) | Research ethics | 1 | 0 | 4 |
+| 126 | [glossary/shared-governance](glossary/shared-governance.md) | University governance | 1 | 0 | 4 |
+| 127 | [glossary/stalking](glossary/stalking.md) | Campus safety | 1 | 0 | 4 |
+| 128 | [glossary/stated-intent-vs-documented-activity](glossary/stated-intent-vs-documented-activity.md) | Records and sourcing | 2 | 0 | 4 |
+| 129 | [glossary/supportive-measures](glossary/supportive-measures.md) | Law and compliance | 1 | 0 | 4 |
+| 130 | [glossary/tenure](glossary/tenure.md) | University governance | 1 | 0 | 4 |
+| 131 | [glossary/title-ix-coordinator](glossary/title-ix-coordinator.md) | Law and compliance | 1 | 0 | 4 |
+| 132 | [glossary/unrestricted-gift](glossary/unrestricted-gift.md) | Fundraising and development | 2 | 0 | 4 |
+| 133 | [guides/course-05-reading-money](guides/course-05-reading-money.md) | Course | 3 | 0 | 4 |
+| 134 | [guides/method-avoiding-false-patterns](guides/method-avoiding-false-patterns.md) | Research methods | 1 | 0 | 4 |
+| 135 | [guides/method-correcting-your-own-work](guides/method-correcting-your-own-work.md) | Research methods | 1 | 0 | 4 |
+| 136 | [guides/method-three-state-discipline](guides/method-three-state-discipline.md) | Research methods | 2 | 0 | 4 |
+| 137 | [guides/method-web-archives-and-link-rot](guides/method-web-archives-and-link-rot.md) | Research methods | 1 | 1 | 4 |
+| 138 | [guides/method-writing-about-named-people](guides/method-writing-about-named-people.md) | Research methods | 2 | 0 | 4 |
+| 139 | [guides/read-a-campus-climate-survey](guides/read-a-campus-climate-survey.md) | Reading documents | 2 | 0 | 4 |
+| 140 | [guides/read-a-court-docket](guides/read-a-court-docket.md) | Reading documents | 1 | 0 | 4 |
+| 141 | [guides/read-a-crisis-statement](guides/read-a-crisis-statement.md) | Evaluating an institution | 1 | 0 | 4 |
+| 142 | [guides/read-gift-acceptance-policy](guides/read-gift-acceptance-policy.md) | Evaluating an institution | 1 | 0 | 4 |
+| 143 | [guides/student-newspaper-as-a-record](guides/student-newspaper-as-a-record.md) | Evaluating an institution | 2 | 0 | 4 |
+| 144 | [glossary/corporate-foundation](glossary/corporate-foundation.md) | Fundraising and development | 2 | 0 | 3 |
+| 145 | [glossary/hash-value](glossary/hash-value.md) | Records and sourcing | 2 | 0 | 3 |
+| 146 | [glossary/indirect-costs](glossary/indirect-costs.md) | Fundraising and development | 1 | 1 | 3 |
+| 147 | [glossary/office-for-human-research-protections](glossary/office-for-human-research-protections.md) | Research ethics | 1 | 1 | 3 |
+| 148 | [guides/primer-who-governs](guides/primer-who-governs.md) | Primers | 3 | 0 | 3 |
+| 149 | [glossary/allegation](glossary/allegation.md) | Legal procedure | 1 | 0 | 2 |
+| 150 | [glossary/ancestry-test](glossary/ancestry-test.md) | Genetics and biomedical research | 1 | 0 | 2 |
+| 151 | [glossary/archive-snapshot](glossary/archive-snapshot.md) | Records and sourcing | 1 | 0 | 2 |
+| 152 | [glossary/authenticity-vs-accuracy](glossary/authenticity-vs-accuracy.md) | Records and sourcing | 1 | 0 | 2 |
+| 153 | [glossary/bates-number](glossary/bates-number.md) | Records and sourcing | 1 | 0 | 2 |
+| 154 | [glossary/civil-vs-criminal](glossary/civil-vs-criminal.md) | Legal procedure | 1 | 0 | 2 |
+| 155 | [glossary/claim-ledger](glossary/claim-ledger.md) | Records and sourcing | 1 | 0 | 2 |
+| 156 | [glossary/confirmation-bias](glossary/confirmation-bias.md) | Records and sourcing | 1 | 0 | 2 |
+| 157 | [glossary/consent-withdrawal](glossary/consent-withdrawal.md) | Research ethics | 1 | 0 | 2 |
+| 158 | [glossary/contemporaneous-record](glossary/contemporaneous-record.md) | Records and sourcing | 1 | 0 | 2 |
+| 159 | [glossary/contemporaneous-written-acknowledgment](glossary/contemporaneous-written-acknowledgment.md) | Fundraising and development | 0 | 1 | 2 |
+| 160 | [glossary/correction](glossary/correction.md) | Records and sourcing | 1 | 0 | 2 |
+| 161 | [glossary/cultivation](glossary/cultivation.md) | Fundraising and development | 1 | 0 | 2 |
+| 162 | [glossary/de-identification](glossary/de-identification.md) | Genetics and biomedical research | 0 | 1 | 2 |
+| 163 | [glossary/denial](glossary/denial.md) | Records and sourcing | 1 | 0 | 2 |
+| 164 | [glossary/document-production](glossary/document-production.md) | Legal procedure | 1 | 0 | 2 |
+| 165 | [glossary/duplicate-and-thread](glossary/duplicate-and-thread.md) | Records and sourcing | 1 | 0 | 2 |
+| 166 | [glossary/emergency-notification](glossary/emergency-notification.md) | Campus safety | 1 | 0 | 2 |
+| 167 | [glossary/exempt-research](glossary/exempt-research.md) | Research ethics | 0 | 1 | 2 |
+| 168 | [glossary/exhibit](glossary/exhibit.md) | Legal procedure | 1 | 0 | 2 |
+| 169 | [glossary/faculty-handbook](glossary/faculty-handbook.md) | University governance | 1 | 0 | 2 |
+| 170 | [glossary/federal-student-aid](glossary/federal-student-aid.md) | Law and compliance | 0 | 1 | 2 |
+| 171 | [glossary/federalwide-assurance](glossary/federalwide-assurance.md) | Research ethics | 0 | 1 | 2 |
+| 172 | [glossary/fee-waiver](glossary/fee-waiver.md) | Law and compliance | 0 | 1 | 2 |
+| 173 | [glossary/form-990](glossary/form-990.md) | Law and compliance | 2 | 0 | 2 |
+| 174 | [glossary/fundraising-ethics-codes](glossary/fundraising-ethics-codes.md) | Fundraising and development | 0 | 1 | 2 |
+| 175 | [glossary/genetic-database](glossary/genetic-database.md) | Genetics and biomedical research | 1 | 0 | 2 |
+| 176 | [glossary/genotype-vs-phenotype](glossary/genotype-vs-phenotype.md) | Genetics and biomedical research | 1 | 0 | 2 |
+| 177 | [glossary/gift-counting-standards](glossary/gift-counting-standards.md) | Fundraising and development | 0 | 1 | 2 |
+| 178 | [glossary/gift-grant-sponsored-research](glossary/gift-grant-sponsored-research.md) | Fundraising and development | 1 | 0 | 2 |
+| 179 | [glossary/governing-board](glossary/governing-board.md) | University governance | 1 | 0 | 2 |
+| 180 | [glossary/hate-crime-clery](glossary/hate-crime-clery.md) | Campus safety | 0 | 1 | 2 |
+| 181 | [glossary/human-subjects-research](glossary/human-subjects-research.md) | Research ethics | 0 | 1 | 2 |
+| 182 | [glossary/in-kind-gift](glossary/in-kind-gift.md) | Fundraising and development | 1 | 0 | 2 |
+| 183 | [glossary/informed-consent](glossary/informed-consent.md) | Research ethics | 0 | 1 | 2 |
+| 184 | [glossary/institutional-memory](glossary/institutional-memory.md) | University governance | 1 | 0 | 2 |
+| 185 | [glossary/institutional-review-board](glossary/institutional-review-board.md) | Research ethics | 0 | 1 | 2 |
+| 186 | [glossary/irs-determination-letter](glossary/irs-determination-letter.md) | Law and compliance | 2 | 0 | 2 |
+| 187 | [glossary/meeting-minutes](glossary/meeting-minutes.md) | Records and sourcing | 1 | 0 | 2 |
+| 188 | [glossary/motion-to-dismiss](glossary/motion-to-dismiss.md) | Legal procedure | 0 | 1 | 2 |
+| 189 | [glossary/no-evidence-of-vs-evidence-of-no](glossary/no-evidence-of-vs-evidence-of-no.md) | Records and sourcing | 1 | 0 | 2 |
+| 190 | [glossary/notice-and-comment-rulemaking](glossary/notice-and-comment-rulemaking.md) | Law and compliance | 0 | 1 | 2 |
+| 191 | [glossary/plaintiff-and-defendant](glossary/plaintiff-and-defendant.md) | Legal procedure | 1 | 0 | 2 |
+| 192 | [glossary/plea-agreement](glossary/plea-agreement.md) | Law and compliance | 0 | 1 | 2 |
+| 193 | [glossary/preemption](glossary/preemption.md) | Law and compliance | 1 | 0 | 2 |
+| 194 | [glossary/prevalence-vs-reported-incidents](glossary/prevalence-vs-reported-incidents.md) | Campus safety | 1 | 0 | 2 |
+| 195 | [glossary/private-foundation](glossary/private-foundation.md) | Law and compliance | 2 | 0 | 2 |
+| 196 | [glossary/public-record](glossary/public-record.md) | Records and sourcing | 1 | 0 | 2 |
+| 197 | [glossary/quid-pro-quo-fundraising](glossary/quid-pro-quo-fundraising.md) | Fundraising and development | 0 | 1 | 2 |
+| 198 | [glossary/reliability-grade](glossary/reliability-grade.md) | Records and sourcing | 1 | 0 | 2 |
+| 199 | [glossary/research-conflict-of-interest](glossary/research-conflict-of-interest.md) | Research ethics | 0 | 1 | 2 |
+| 200 | [glossary/research-misconduct](glossary/research-misconduct.md) | Research ethics | 0 | 1 | 2 |
+| 201 | [glossary/retaliation](glossary/retaliation.md) | Law and compliance | 1 | 0 | 2 |
+| 202 | [glossary/safe-harbor](glossary/safe-harbor.md) | Law and compliance | 1 | 0 | 2 |
+| 203 | [glossary/screenshot](glossary/screenshot.md) | Records and sourcing | 1 | 0 | 2 |
+| 204 | [glossary/second-hand-account](glossary/second-hand-account.md) | Records and sourcing | 1 | 0 | 2 |
+| 205 | [glossary/sexual-assault-clery](glossary/sexual-assault-clery.md) | Campus safety | 0 | 1 | 2 |
+| 206 | [glossary/single-source-reporting](glossary/single-source-reporting.md) | Records and sourcing | 1 | 0 | 2 |
+| 207 | [glossary/standing](glossary/standing.md) | Legal procedure | 1 | 0 | 2 |
+| 208 | [glossary/statute-of-limitations](glossary/statute-of-limitations.md) | Law and compliance | 1 | 0 | 2 |
+| 209 | [glossary/student-newspaper-as-record](glossary/student-newspaper-as-record.md) | University governance | 1 | 0 | 2 |
+| 210 | [glossary/subpoena](glossary/subpoena.md) | Legal procedure | 0 | 1 | 2 |
+| 211 | [glossary/summary-judgment](glossary/summary-judgment.md) | Legal procedure | 0 | 1 | 2 |
+| 212 | [glossary/title-vi](glossary/title-vi.md) | Law and compliance | 0 | 1 | 2 |
+| 213 | [glossary/unfounded-crime-report](glossary/unfounded-crime-report.md) | Campus safety | 1 | 0 | 2 |
+| 214 | [glossary/vacatur](glossary/vacatur.md) | Law and compliance | 0 | 1 | 2 |
+| 215 | [glossary/voluntary-dismissal](glossary/voluntary-dismissal.md) | Legal procedure | 0 | 1 | 2 |
+| 216 | [guides/campus-visit-questions-reporting-support](guides/campus-visit-questions-reporting-support.md) | Evaluating an institution | 1 | 0 | 2 |
+| 217 | [guides/compare-sexual-misconduct-data-fairly](guides/compare-sexual-misconduct-data-fairly.md) | Evaluating an institution | 1 | 0 | 2 |
+| 218 | [guides/course-01-what-a-public-record-is](guides/course-01-what-a-public-record-is.md) | Course | 1 | 0 | 2 |
+| 219 | [guides/course-02-proposal-act-result](guides/course-02-proposal-act-result.md) | Course | 1 | 0 | 2 |
+| 220 | [guides/graduate-program-adviser-power](guides/graduate-program-adviser-power.md) | Evaluating an institution | 1 | 0 | 2 |
+| 221 | [guides/how-research-labs-are-funded](guides/how-research-labs-are-funded.md) | Evaluating an institution | 1 | 0 | 2 |
+| 222 | [guides/method-ethics-and-limits](guides/method-ethics-and-limits.md) | Research methods | 1 | 0 | 2 |
+| 223 | [guides/primer-campus-access](guides/primer-campus-access.md) | Primers | 1 | 0 | 2 |
+| 224 | [guides/primer-civil-lawsuit-stages](guides/primer-civil-lawsuit-stages.md) | Primers | 1 | 0 | 2 |
+| 225 | [guides/primer-faculty-discipline](guides/primer-faculty-discipline.md) | Primers | 1 | 0 | 2 |
+| 226 | [guides/read-a-civil-complaint](guides/read-a-civil-complaint.md) | Reading documents | 1 | 0 | 2 |
+| 227 | [guides/read-a-congressional-oversight-letter](guides/read-a-congressional-oversight-letter.md) | Reading documents | 1 | 0 | 2 |
+| 228 | [guides/read-a-document-based-news-report](guides/read-a-document-based-news-report.md) | Reading documents | 1 | 0 | 2 |
+| 229 | [guides/read-a-fact-finding-report](guides/read-a-fact-finding-report.md) | Reading documents | 1 | 0 | 2 |
+| 230 | [guides/read-a-faculty-sanction-announcement](guides/read-a-faculty-sanction-announcement.md) | Reading documents | 1 | 0 | 2 |
+| 231 | [guides/read-a-released-email](guides/read-a-released-email.md) | Reading documents | 1 | 0 | 2 |
+| 232 | [guides/read-an-invoice-or-proposal](guides/read-an-invoice-or-proposal.md) | Reading documents | 1 | 0 | 2 |
+| 233 | [guides/template-chronology-entry](guides/template-chronology-entry.md) | Templates | 1 | 0 | 2 |
+| 234 | [guides/template-right-of-reply-invitation](guides/template-right-of-reply-invitation.md) | Templates | 1 | 0 | 2 |
+| 235 | [guides/template-source-log-entry](guides/template-source-log-entry.md) | Templates | 1 | 0 | 2 |
+| 236 | [guides/template-state-public-records-request](guides/template-state-public-records-request.md) | Templates | 1 | 0 | 2 |
+| 237 | [guides/template-update-log-and-correction-notice](guides/template-update-log-and-correction-notice.md) | Templates | 1 | 0 | 2 |
+| 238 | [guides/who-decides-in-a-decentralized-university](guides/who-decides-in-a-decentralized-university.md) | Evaluating an institution | 1 | 0 | 2 |
+| 239 | [glossary/audited-financial-statements](glossary/audited-financial-statements.md) | Records and sourcing | 1 | 0 | 1 |
+| 240 | [glossary/citation](glossary/citation.md) | Records and sourcing | 1 | 0 | 1 |
+| 241 | [glossary/cryopreservation](glossary/cryopreservation.md) | Genetics and biomedical research | 1 | 0 | 1 |
+| 242 | [glossary/dna](glossary/dna.md) | Genetics and biomedical research | 1 | 0 | 1 |
+| 243 | [glossary/employer-identification-number](glossary/employer-identification-number.md) | Law and compliance | 1 | 0 | 1 |
+| 244 | [glossary/gene](glossary/gene.md) | Genetics and biomedical research | 1 | 0 | 1 |
+| 245 | [glossary/genome](glossary/genome.md) | Genetics and biomedical research | 1 | 0 | 1 |
+| 246 | [glossary/per-capita-rate](glossary/per-capita-rate.md) | Records and sourcing | 1 | 0 | 1 |
+| 247 | [glossary/private-inurement](glossary/private-inurement.md) | Law and compliance | 1 | 0 | 1 |
+| 248 | [glossary/schedule-a](glossary/schedule-a.md) | Law and compliance | 1 | 0 | 1 |
+| 249 | [glossary/schedule-l](glossary/schedule-l.md) | Law and compliance | 1 | 0 | 1 |
+| 250 | [glossary/schedule-o](glossary/schedule-o.md) | Law and compliance | 1 | 0 | 1 |
+| 251 | [glossary/separation-agreement](glossary/separation-agreement.md) | Legal procedure | 1 | 0 | 1 |
+| 252 | [glossary/statistical-significance](glossary/statistical-significance.md) | Records and sourcing | 1 | 0 | 1 |
+| 253 | [glossary/whistleblower-policy](glossary/whistleblower-policy.md) | University governance | 1 | 0 | 1 |
+| 254 | [guides/course-04-reading-numbers](guides/course-04-reading-numbers.md) | Course | 1 | 0 | 1 |
+| 255 | [guides/method-keeping-a-claim-ledger](guides/method-keeping-a-claim-ledger.md) | Research methods | 1 | 0 | 1 |
+| 256 | [guides/method-large-document-releases](guides/method-large-document-releases.md) | Research methods | 1 | 0 | 1 |
+| 257 | [guides/template-alum-gift-acceptance-letter](guides/template-alum-gift-acceptance-letter.md) | Templates | 1 | 0 | 1 |
+| 258 | [guides/template-questions-reporting-and-support](guides/template-questions-reporting-and-support.md) | Templates | 1 | 0 | 1 |
