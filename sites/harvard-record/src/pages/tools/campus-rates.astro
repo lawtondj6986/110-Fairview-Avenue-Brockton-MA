@@ -1,0 +1,151 @@
+---
+import Base from '../../layouts/Base.astro';
+import ToolPrivacy from '../../components/ToolPrivacy.astro';
+import ToolOthers from '../../components/ToolOthers.astro';
+const years = [1, 2, 3];
+---
+<Base
+  title="Campus data rate calculator"
+  description="Turn up to three years of reported campus incident counts into rates per 1,000 students, with the caveats on reporting, Clery geography and comparison that must travel with them."
+  eyebrow="Tools"
+  lede="Enter counts of reported incidents for up to three years and an enrollment figure. The tool gives rates per 1,000 students, and the caveats that go with them."
+>
+  <h2 id="what-it-does">What it does</h2>
+  <p>
+    Campus safety figures, such as those in an Annual Security Report under the Clery Act, are counts. A count is
+    hard to read on its own: 30 reports means something different at a college of 2,000 students than at one of
+    30,000. This tool divides each year’s count by enrollment and multiplies by 1,000, so the years can be read on the
+    same scale.
+  </p>
+  <div class="tool-caveats" role="note" aria-labelledby="cr-caveats-title">
+    <p id="cr-caveats-title">Read before using the numbers</p>
+    <ul>
+      <li>Reported incidents depend on reporting. A rise can mean more incidents, more confidence in reporting, a new reporting channel, or a change in how cases are counted. A fall can mean the reverse.</li>
+      <li>Clery counts cover a defined geography: campus, certain non-campus buildings, and adjacent public property. Incidents elsewhere, including many off-campus residences, are not counted.</li>
+      <li>Do not compare raw counts, or these rates, across institutions. Geography, reporting cultures, student populations and recording practices differ.</li>
+      <li>Climate surveys measure prevalence (how many students say something happened to them), usually by survey sample and over a different period. Survey figures and reported counts measure different things and do not check each other.</li>
+      <li>Enrollment is only a rough denominator. Counts include incidents involving staff, visitors and people with no link to the institution.</li>
+    </ul>
+  </div>
+  <p>More context: the <a href="/campus-safety/">campus safety record</a> and the <a href="/law/">law explainers</a>.</p>
+  <ToolPrivacy />
+
+  <h2 id="calculator">The calculator</h2>
+  <p data-no-js class="tool-nojs">
+    JavaScript is off, so the calculator is hidden. To work out a rate by hand: divide the count by enrollment and
+    multiply by 1,000. For example, 30 reports at an enrollment of 20,000 is 30 ÷ 20,000 × 1,000 = 1.5 per 1,000 students.
+  </p>
+  <form class="tool" id="cr-form" data-js-only hidden novalidate aria-label="Rate calculator">
+    <fieldset class="tool-fields">
+      <legend>What you are counting</legend>
+      <div class="tool-field">
+        <label for="cr-category">Category (optional)</label>
+        <input id="cr-category" name="category" type="text" autocomplete="off" placeholder="For example: rape, Clery, on campus" />
+      </div>
+      <div class="tool-field">
+        <label for="cr-enrollment">Enrollment</label>
+        <input id="cr-enrollment" name="enrollment" type="text" inputmode="numeric" autocomplete="off" aria-describedby="cr-enrollment-hint" required />
+        <span class="hint" id="cr-enrollment-hint">Total students, from the same institution and a matching year.</span>
+      </div>
+    </fieldset>
+    <fieldset class="tool-fields">
+      <legend>Reported incidents, up to three years</legend>
+      {years.map((n) => (
+        <>
+          <div class="tool-field">
+            <label for={`cr-year-${n}`}>Year {n}</label>
+            <input id={`cr-year-${n}`} name={`year-${n}`} type="text" inputmode="numeric" autocomplete="off" placeholder={String(2021 + n)} />
+          </div>
+          <div class="tool-field">
+            <label for={`cr-count-${n}`}>Count for year {n}</label>
+            <input id={`cr-count-${n}`} name={`count-${n}`} type="text" inputmode="numeric" autocomplete="off" />
+          </div>
+        </>
+      ))}
+      <p class="hint tool-field wide" style="margin:0">Leave a count blank to leave that year out. Enter 0 for a year with no reported incidents.</p>
+    </fieldset>
+    <div class="tool-actions">
+      <button type="reset" class="tool-btn">Clear</button>
+    </div>
+  </form>
+
+  <section class="tool-result" data-js-only hidden aria-labelledby="cr-result-title">
+    <h3 id="cr-result-title">Rates per 1,000 students</h3>
+    <p class="tool-status" role="status" aria-live="polite" id="cr-status">Enter an enrollment figure and at least one count.</p>
+    <div id="cr-detail"></div>
+    <div class="tool-output" id="cr-out" hidden>
+      <h4>As plain text</h4>
+      <pre id="cr-text" tabindex="0" aria-label="The rates as plain text"></pre>
+      <div class="tool-copy"><button type="button" class="tool-btn" data-copy="cr-text">Copy text</button><span data-copy-status aria-live="polite"></span></div>
+    </div>
+  </section>
+
+  <h2 id="how-this-works">How this works</h2>
+  <p>Rate per 1,000 students = reported incidents ÷ enrollment × 1,000, shown to two decimal places.</p>
+  <ul>
+    <li>Counts must be whole numbers of 0 or more. Commas are allowed (1,250). A blank count leaves the year out; a zero is kept, and shown as zero reported, not zero occurred.</li>
+    <li>Enrollment must be a whole number of at least 1. The same figure is used for every year, so if enrollment changed, run the calculator once for each year with that year’s enrollment.</li>
+    <li>Years are optional labels. Use a four-digit year or an academic year such as 2023–24.</li>
+    <li>The tool warns when counts are small (under 10), when a count exceeds enrollment, and when enrollment is under 1,000.</li>
+  </ul>
+  <p>The logic is in <code>src/lib/tools/campus-rates.ts</code> and is unit-tested.</p>
+  <ToolOthers current="/tools/campus-rates/" />
+
+  <script>
+    import { computeRates, formatRate, ratesReport } from '../../lib/tools/campus-rates';
+    import { enhance, readForm, h, list, render, wireCopy } from '../../scripts/tool-ui';
+
+    const form = document.querySelector<HTMLFormElement>('#cr-form');
+    const status = document.getElementById('cr-status');
+    const detail = document.getElementById('cr-detail');
+    const out = document.getElementById('cr-out');
+    const text = document.getElementById('cr-text');
+    if (form && status && detail && out && text) {
+      enhance();
+      wireCopy();
+      const inputs = [...form.querySelectorAll<HTMLInputElement>('input[name]')];
+      const run = () => {
+        const v = readForm(form);
+        const anyEntered = inputs.some((i) => i.name !== 'category' && i.value.trim());
+        const r = computeRates({ enrollment: v.enrollment ?? '', category: v.category, years: [1, 2, 3].map((n) => ({ label: v[`year-${n}`] ?? '', count: v[`count-${n}`] ?? '' })) });
+        const bad = new Set(r.errors.map((e) => e.field));
+        for (const i of inputs) {
+          const invalid = anyEntered && bad.has(i.name);
+          if (invalid) i.setAttribute('aria-invalid', 'true'); else i.removeAttribute('aria-invalid');
+        }
+        if (!anyEntered) {
+          status.textContent = 'Enter an enrollment figure and at least one count.';
+          render(detail); out.hidden = true; return;
+        }
+        if (r.errors.length) {
+          status.textContent = r.errors.length === 1 ? 'One entry needs fixing.' : `${r.errors.length} entries need fixing.`;
+          render(detail, list(r.errors.map((e) => e.message), 'tool-errors'));
+          out.hidden = true; return;
+        }
+        status.textContent = r.rows.map((x) => `${x.label}: ${formatRate(x.rate)} per 1,000`).join('; ') + '.';
+        render(detail,
+          h('div', { class: 'table-wrap tool-rates' }, h('table', {},
+            h('caption', {}, `Reported incidents per 1,000 students${v.category?.trim() ? `: ${v.category.trim()}` : ''}. Enrollment ${r.enrollment!.toLocaleString('en-US')}.`),
+            h('thead', {}, h('tr', {}, h('th', { scope: 'col' }, 'Year'), h('th', { scope: 'col' }, 'Reported'), h('th', { scope: 'col' }, 'Per 1,000'))),
+            h('tbody', {}, ...r.rows.map((x) => h('tr', {},
+              h('th', { scope: 'row' }, x.label),
+              h('td', {}, x.count.toLocaleString('en-US')),
+              h('td', {}, formatRate(x.rate)),
+            ))),
+          )),
+          list(r.rows.filter((x) => x.note).map((x) => `${x.label}: ${x.note}`)),
+          r.skipped.length ? h('p', { class: 'small' }, `Left out (no count entered): ${r.skipped.join(', ')}.`) : null,
+          r.warnings.length ? h('h4', {}, 'Check before using') : null,
+          list(r.warnings, 'tool-flags'),
+          h('p', { class: 'small' }, 'Reported incidents depend on reporting, and Clery counts cover a defined geography. Do not compare these rates across institutions.'),
+        );
+        text.textContent = ratesReport(r, v.category?.trim());
+        out.hidden = false;
+      };
+      form.addEventListener('input', run);
+      form.addEventListener('submit', (e) => { e.preventDefault(); run(); });
+      form.addEventListener('reset', () => setTimeout(run));
+      run();
+    }
+  </script>
+</Base>

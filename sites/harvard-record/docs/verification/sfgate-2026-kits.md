@@ -19,7 +19,7 @@
 
 ### G-08 · Documented activity · graded A2
 
-> In summer 2017 an assistant placed a bulk 23andMe order linked to Sultan Ahmed bin Sulayem, which the company queried and cancelled.
+> In summer 2017 an assistant placed a bulk 23andMe order that, according to the correspondence, was for colleagues of Sultan Ahmed bin Sulayem; the company queried it and cancelled it.
 
 Caveat that must travel with it: Accounts differ on the number of kits and on what became of them.
 
@@ -32,7 +32,7 @@ Caveat that must travel with it: Accounts differ on the number of kits and on wh
 
 **1. /dna-genetics/**
 
-> Bulk 23andMe order linked to Sultan Ahmed bin Sulayem Summer 2017 An order placed by an assistant; the company queried its size and cancelled it under its U.S.-use terms.
+> Bulk 23andMe order for colleagues of Sultan Ahmed bin Sulayem Summer 2017 An order placed by an assistant; the company queried its size and cancelled it under its U.S.-use terms.
 
 - [ ] Supported by the document as written.
 

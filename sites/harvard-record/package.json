@@ -14,7 +14,9 @@
     "check:links": "node scripts/check-links.mjs",
     "smoke": "node scripts/smoke.mjs",
     "progress": "node scripts/progress.mjs",
-    "factcheck": "node scripts/factcheck.mjs"
+    "factcheck": "node scripts/factcheck.mjs",
+    "verify:build": "node scripts/worksheets.mjs && node scripts/verify-console.mjs",
+    "verify:apply": "node scripts/apply-verification.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",

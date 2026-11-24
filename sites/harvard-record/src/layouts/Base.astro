@@ -88,7 +88,7 @@ const jsonld = {
             <summary>Sections</summary>
             <ul>
               {nav.map((n) => (
-                <li><a href={n.href} aria-current={path === n.href ? 'page' : (n.href === '/reference/' && /^\/(glossary|law|guides|ledger|faq|search|sources|updates|named|briefing)\//.test(path)) ? 'true' : undefined} title={n.long}>{n.label}</a></li>
+                <li><a href={n.href} aria-current={path === n.href ? 'page' : (n.href === '/reference/' && /^\/(glossary|law|guides|ledger|faq|search|sources|updates|named|briefing|tools)\//.test(path)) ? 'true' : undefined} title={n.long}>{n.label}</a></li>
               ))}
             </ul>
           </details>
@@ -180,6 +180,7 @@ const jsonld = {
               <li><a href="/status/">Verification status</a></li>
               <li><a href="/briefing/">The record on one page</a></li>
               <li><a href="/ledger/">Claim ledger</a></li>
+              <li><a href="/tools/">Tools</a></li>
               <li><a href="/faq/">Questions and answers</a></li>
               <li><a href="/named/">People and bodies named</a></li>
               <li><a href="/search/">Search</a></li>

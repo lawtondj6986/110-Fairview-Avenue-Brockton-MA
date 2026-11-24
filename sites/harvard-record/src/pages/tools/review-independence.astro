@@ -1,0 +1,102 @@
+---
+import Base from '../../layouts/Base.astro';
+import ToolQuestions from '../../components/ToolQuestions.astro';
+import ToolActions from '../../components/ToolActions.astro';
+import ToolPrivacy from '../../components/ToolPrivacy.astro';
+import ToolOthers from '../../components/ToolOthers.astro';
+import { reviewQuestions } from '../../lib/tools/review-independence';
+---
+<Base
+  title="Review independence checklist"
+  description="Questions about who commissioned and conducted an institutional review, its scope, access to records, publication and follow-up. Produces a factual profile, not a verdict."
+  eyebrow="Tools"
+  lede="Record how an institutional review was set up and published. The result is a factual profile of the review, with the open questions listed. It is not a verdict."
+>
+  <h2 id="what-it-does">What it does</h2>
+  <p>
+    When an institution reviews its own conduct, how the review was set up shapes what it could find. This checklist
+    records those facts in one place: who commissioned the review, who carried it out, what it covered, what it could
+    see, what was published and what happened next.
+  </p>
+  <p>Its limits:</p>
+  <ul>
+    <li>It gives no verdict. A review commissioned by a board and conducted by its regular counsel can still be thorough; one by an outside panel can still be narrow.</li>
+    <li>Answer from what the review or the institution has published. If a point is not stated, choose “Not stated or unclear”: it then appears as an open question.</li>
+    <li>It does not assess the findings themselves. Read them, and their sources, directly.</li>
+  </ul>
+  <ToolPrivacy remember />
+
+  <h2 id="questions">The questions</h2>
+  <p data-no-js class="tool-nojs">
+    JavaScript is off, so no profile is produced. Print the page and mark each question by hand.
+  </p>
+  <form class="tool" id="ri-form" aria-label="Review independence questions">
+    <div class="tool-field" style="margin-bottom:1rem">
+      <label for="ri-title">The review (optional)</label>
+      <input id="ri-title" name="title" type="text" autocomplete="off" placeholder="Title, institution and date" />
+    </div>
+    <ToolQuestions questions={reviewQuestions} prefix="ri" />
+    <ToolActions idPrefix="ri" />
+  </form>
+
+  <section class="tool-result" data-js-only hidden aria-labelledby="ri-result-title">
+    <h3 id="ri-result-title">Profile of the review</h3>
+    <p class="tool-status" role="status" aria-live="polite" id="ri-status">Answer the questions to build the profile.</p>
+    <div id="ri-detail"></div>
+    <div class="tool-output">
+      <h4>As plain text</h4>
+      <pre id="ri-text" tabindex="0" aria-label="The profile as plain text"></pre>
+      <div class="tool-copy"><button type="button" class="tool-btn" data-copy="ri-text">Copy text</button><button type="button" class="tool-btn" data-print>Print</button><span data-copy-status aria-live="polite"></span></div>
+    </div>
+  </section>
+
+  <h2 id="how-this-works">How this works</h2>
+  <p>
+    Each answer becomes one line of the profile, worded as a statement of fact: “Commissioned by: the governing
+    board or a board committee.” Answers of “Not stated or unclear”, and questions not yet answered, are collected
+    under “Open questions”. Those are the points to ask the institution about, or to look for in its later statements.
+  </p>
+  <p>
+    The tool does not weigh the answers or combine them into a rating. Independence is not a single quality a review
+    has or lacks. It is a set of facts about who chose the reviewer, whom the reviewer worked for, and what the
+    reviewer could see and publish. The profile sets those facts out so a reader can judge them.
+  </p>
+  <p>
+    The logic is in <code>src/lib/tools/review-independence.ts</code> and is unit-tested. For an example of a
+    published review, see the account of the 2020 report on the <a href="/program-for-evolutionary-dynamics/">Program for Evolutionary Dynamics</a> page.
+  </p>
+  <ToolOthers current="/tools/review-independence/" />
+
+  <script>
+    import { reviewProfile, reviewReport, reviewQuestions } from '../../lib/tools/review-independence';
+    import { wireTool, h, render, list } from '../../scripts/tool-ui';
+
+    const form = document.querySelector<HTMLFormElement>('#ri-form');
+    const status = document.getElementById('ri-status');
+    const detail = document.getElementById('ri-detail');
+    const text = document.getElementById('ri-text');
+    if (form && status && detail && text) {
+      wireTool(form, 'review-independence', (values) => {
+        const p = reviewProfile(values);
+        if (!p.answered) {
+          status.textContent = 'Answer the questions to build the profile.';
+          render(detail);
+          text.textContent = '';
+          return;
+        }
+        status.textContent = `Profile updated: ${p.answered} of ${reviewQuestions.length} questions answered, ${p.open.length} open.`;
+        render(detail,
+          values.title?.trim() ? h('p', {}, h('b', {}, 'Review: '), values.title.trim()) : null,
+          ...p.groups.flatMap((g) => [
+            h('h4', {}, g.topic),
+            h('dl', { class: 'tool-profile' }, ...g.lines.map((l) => h('div', {}, h('dt', {}, l.label), h('dd', {}, l.value)))),
+          ]),
+          p.open.length ? h('h4', {}, 'Open questions') : null,
+          list(p.open.map((l) => `${l.label} (${l.value.toLowerCase()})`), 'tool-flags'),
+          h('p', { class: 'small' }, 'A factual profile of how the review was set up and published. It is not a verdict on the review or its findings.'),
+        );
+        text.textContent = reviewReport(values, values.title?.trim());
+      });
+    }
+  </script>
+</Base>

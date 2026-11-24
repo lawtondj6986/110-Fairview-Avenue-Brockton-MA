@@ -23,7 +23,7 @@
 
 > Epstein’s gifts to Harvard totalled about $9.1 million between 1998 and 2008.
 
-Caveat that must travel with it: University-wide total. Some coverage gives $9,179,000 or “nearly $9.2 million.”
+Caveat that must travel with it: University-wide total. Some coverage gives $9,179,000 or “nearly $9.2 million”, which is more than rounding; confirm in the report.
 
 Also rests on: bacow-2020
 

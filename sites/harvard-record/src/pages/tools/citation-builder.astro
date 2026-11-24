@@ -1,0 +1,157 @@
+---
+import Base from '../../layouts/Base.astro';
+import ToolPrivacy from '../../components/ToolPrivacy.astro';
+import ToolOthers from '../../components/ToolOthers.astro';
+import { grades, type Grade } from '../../data/grades';
+import { SOURCE_TOPICS } from '../../lib/tools/citation';
+const order: Grade[] = ['A1', 'A2', 'B1', 'B2'];
+---
+<Base
+  title="Citation builder"
+  description="Enter a source’s title, publisher, author, date, URL and grade, and get a reference-list entry in this site’s style, a source-register entry and a BibTeX record, ready to copy."
+  eyebrow="Tools"
+  lede="Enter a source once. The tool writes it three ways: as this site prints it in a reference list, as an entry for the source register, and as BibTeX."
+>
+  <h2 id="what-it-does">What it does</h2>
+  <p>
+    Every citation on this site points at an entry in the <a href="/sources/">source register</a>. This tool turns
+    the details of a source into that entry, together with the reference-list line a reader sees and a BibTeX record
+    for reference managers (the same format as the site’s <a href="/sources.bib">BibTeX download</a>).
+  </p>
+  <p>Its limits:</p>
+  <ul>
+    <li>It formats what you enter. It does not look the source up or check that the URL works.</li>
+    <li>The suggested id is a starting point. Check it is not already used in the register.</li>
+    <li>The grade is yours to choose. The <a href="/tools/source-grader/">source grader</a> can help.</li>
+    <li>New register entries carry no <code>checked</code> date. Add one only after opening the original and checking the cited facts.</li>
+  </ul>
+  <ToolPrivacy />
+
+  <h2 id="builder">The builder</h2>
+  <p data-no-js class="tool-nojs">
+    JavaScript is off, so the builder is hidden. The formats are described under <a href="#how-this-works">How this works</a>.
+  </p>
+  <form class="tool" id="cb-form" data-js-only hidden novalidate aria-label="Citation builder">
+    <fieldset class="tool-fields">
+      <legend>The source</legend>
+      <div class="tool-field wide"><label for="cb-title">Title</label><input id="cb-title" name="title" type="text" autocomplete="off" required /></div>
+      <div class="tool-field"><label for="cb-publisher">Publisher</label><input id="cb-publisher" name="publisher" type="text" autocomplete="off" required aria-describedby="cb-publisher-hint" /><span class="hint" id="cb-publisher-hint">Outlet or body, then office if useful: “Harvard University, Office of the President”.</span></div>
+      <div class="tool-field"><label for="cb-author">Author (optional)</label><input id="cb-author" name="author" type="text" autocomplete="off" aria-describedby="cb-author-hint" /><span class="hint" id="cb-author-hint">Separate several authors with commas.</span></div>
+      <div class="tool-field"><label for="cb-date">Date</label><input id="cb-date" name="date" type="text" autocomplete="off" placeholder="YYYY-MM-DD" aria-describedby="cb-date-hint" /><span class="hint" id="cb-date-hint">YYYY, YYYY-MM or YYYY-MM-DD: only the precision the source supports.</span></div>
+      <div class="tool-field"><label for="cb-url">URL</label><input id="cb-url" name="url" type="url" inputmode="url" autocomplete="off" placeholder="https://" /></div>
+      <div class="tool-field">
+        <label for="cb-grade">Grade</label>
+        <select id="cb-grade" name="grade" required>
+          <option value="">Choose a grade</option>
+          {order.map((g) => <option value={g}>{g}: {grades[g].label}</option>)}
+        </select>
+      </div>
+      <div class="tool-field">
+        <label for="cb-topic">Register topic</label>
+        <select id="cb-topic" name="topic">
+          {SOURCE_TOPICS.map((t) => <option value={t}>{t}</option>)}
+        </select>
+      </div>
+      <div class="tool-field wide"><label for="cb-note">Note (optional)</label><textarea id="cb-note" name="note" rows="2" aria-describedby="cb-note-hint"></textarea><span class="hint" id="cb-note-hint">What the source is and what it is used for. Shown under the reference.</span></div>
+    </fieldset>
+    <fieldset class="tool-fields">
+      <legend>Register id</legend>
+      <div class="tool-field"><label for="cb-topicword">Topic word for the id (optional)</label><input id="cb-topicword" name="topicWord" type="text" autocomplete="off" placeholder="For example: report" /></div>
+      <div class="tool-field"><label for="cb-id">Id</label><input id="cb-id" name="id" type="text" autocomplete="off" spellcheck="false" aria-describedby="cb-id-hint" /><span class="hint" id="cb-id-hint">Suggested as publisher-year-topic. Edit it if you like; clear it to get the suggestion back.</span></div>
+    </fieldset>
+    <div class="tool-actions"><button type="reset" class="tool-btn">Clear</button></div>
+  </form>
+
+  <section class="tool-result" data-js-only hidden aria-labelledby="cb-result-title">
+    <h3 id="cb-result-title">Citation</h3>
+    <p class="tool-status" role="status" aria-live="polite" id="cb-status">Enter a title, publisher and grade.</p>
+    <div id="cb-messages"></div>
+    <div id="cb-outputs" hidden>
+      <div class="tool-output">
+        <h4>Reference-list entry</h4>
+        <pre id="cb-ref" tabindex="0" aria-label="Reference-list entry"></pre>
+        <div class="tool-copy"><button type="button" class="tool-btn" data-copy="cb-ref">Copy reference</button><span data-copy-status aria-live="polite"></span></div>
+      </div>
+      <div class="tool-output">
+        <h4>Source-register entry (src/data/sources.ts)</h4>
+        <pre id="cb-ts" tabindex="0" aria-label="Source-register entry"></pre>
+        <div class="tool-copy"><button type="button" class="tool-btn" data-copy="cb-ts">Copy entry</button><span data-copy-status aria-live="polite"></span></div>
+      </div>
+      <div class="tool-output">
+        <h4>BibTeX</h4>
+        <pre id="cb-bib" tabindex="0" aria-label="BibTeX record"></pre>
+        <div class="tool-copy"><button type="button" class="tool-btn" data-copy="cb-bib">Copy BibTeX</button><span data-copy-status aria-live="polite"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <h2 id="how-this-works">How this works</h2>
+  <ul>
+    <li>
+      The reference-list entry follows the order used at the foot of every page: grade, title, then author, publisher
+      and date separated by middle dots, with the date written out (1 May 2020), then the URL.
+    </li>
+    <li>
+      The register entry is a TypeScript object in the format of <code>src/data/sources.ts</code>: title, publisher,
+      optional author, date and URL, the grade, the register topic and an optional note. Quotation marks and
+      backslashes are escaped. It has no <code>checked</code> date, so the site labels it “pending check” until a maintainer adds one.
+    </li>
+    <li>
+      The suggested id is the publisher’s short name (a single word, the distinctive word of an institution’s name, or
+      the initials of a title such as The New York Times), the year, and a topic word: the one you enter, or the first
+      meaningful word of the title. Everything is lowercase and hyphenated, like <code>nyt-2019-seed</code>.
+    </li>
+    <li>BibTeX uses the same serialiser as the site’s download, escaping the characters BibTeX treats specially.</li>
+    <li>The tool warns about unofficial mirrors and wikis, which this site does not cite, about B2 sources, and about straight quotes.</li>
+  </ul>
+  <p>The logic is in <code>src/lib/tools/citation.ts</code> and is unit-tested.</p>
+  <ToolOthers current="/tools/citation-builder/" />
+
+  <script>
+    import { checkCitation, referenceText, sourceEntry, bibtexEntry, suggestId } from '../../lib/tools/citation';
+    import { enhance, readForm, list, render, wireCopy, h } from '../../scripts/tool-ui';
+
+    const form = document.querySelector<HTMLFormElement>('#cb-form');
+    const status = document.getElementById('cb-status');
+    const messages = document.getElementById('cb-messages');
+    const outputs = document.getElementById('cb-outputs');
+    const idInput = document.querySelector<HTMLInputElement>('#cb-id');
+    const ref = document.getElementById('cb-ref'), ts = document.getElementById('cb-ts'), bib = document.getElementById('cb-bib');
+    if (form && status && messages && outputs && idInput && ref && ts && bib) {
+      enhance();
+      wireCopy();
+      let idEdited = false;
+      const run = (e?: Event) => {
+        if (e?.target === idInput) idEdited = idInput.value.trim() !== '';
+        const v = readForm(form);
+        const s = { title: v.title ?? '', publisher: v.publisher ?? '', author: v.author, date: v.date, url: v.url, grade: v.grade ?? '', topic: v.topic, note: v.note };
+        const suggested = suggestId(s, v.topicWord);
+        if (!idEdited) idInput.value = suggested;
+        const id = idInput.value.trim();
+        const check = checkCitation({ ...s, id });
+        const ready = !check.errors.length && id;
+        if (!s.title.trim() && !s.publisher.trim()) {
+          status.textContent = 'Enter a title, publisher and grade.';
+          render(messages); outputs.hidden = true; return;
+        }
+        status.textContent = ready ? 'Citation ready to copy.' : `${check.errors.length || 1} thing${check.errors.length > 1 ? 's' : ''} to fix before the citation is ready.`;
+        render(messages,
+          list([...check.errors, ...(id ? [] : ['Enter an id, or a publisher so one can be suggested.'])], 'tool-errors'),
+          check.warnings.length ? h('h4', {}, 'Check') : null,
+          list(check.warnings, 'tool-flags'),
+        );
+        outputs.hidden = !ready;
+        if (ready) {
+          ref.textContent = referenceText(s);
+          ts.textContent = sourceEntry(id, s);
+          bib.textContent = bibtexEntry(id, s);
+        }
+      };
+      form.addEventListener('input', run);
+      form.addEventListener('change', run);
+      form.addEventListener('submit', (e) => { e.preventDefault(); run(); });
+      form.addEventListener('reset', () => { idEdited = false; setTimeout(run); });
+      run();
+    }
+  </script>
+</Base>

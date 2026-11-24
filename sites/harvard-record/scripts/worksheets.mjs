@@ -10,6 +10,7 @@
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { collectUses } from './lib/site-uses.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const outDir = join(root, 'docs', 'verification');
@@ -19,38 +20,7 @@ const { claims } = await import('../src/data/claims.ts');
 const { ped, hms } = await import('../src/data/timelines.ts');
 const { comparison } = await import('../src/data/comparison.ts');
 
-const strip = (s) => s
-  .replace(/<Cite[^>]*\/>/g, '')
-  .replace(/<(State|Grade)[^>]*\/>/g, '')
-  .replace(/<[^>]+>/g, ' ')
-  .replace(/\{[^{}]*\}/g, ' ')
-  .replace(/&[a-z]+;/g, ' ')
-  .replace(/\s+/g, ' ')
-  .trim();
-
-/** For each <Cite id="x"/> in a page, capture the text of the block it sits in. */
-const uses = {}; // id -> [{ where, text }]
-const push = (id, where, text) => { (uses[id] ??= []); if (text && !uses[id].some((u) => u.text === text)) uses[id].push({ where, text }); };
-
-const pagesDir = join(root, 'src', 'pages');
-for (const f of readdirSync(pagesDir).filter((f) => f.endsWith('.astro'))) {
-  const body = readFileSync(join(pagesDir, f), 'utf8').replace(/^---[\s\S]*?---/, '');
-  const page = f === 'index.astro' ? '/' : `/${f.replace('.astro', '')}/`;
-  // Split into blocks at the elements that hold a complete statement.
-  for (const block of body.split(/(?=<(?:p|li|tr|blockquote)\b)/)) {
-    const ids = [...block.matchAll(/<Cite\s+id="([^"]+)"/g)].map((m) => m[1]);
-    if (!ids.length) continue;
-    const end = block.search(/<\/(?:p|li|tr|blockquote)>/);
-    const text = strip(end > 0 ? block.slice(0, end) : block);
-    for (const id of new Set(ids)) push(id, page, text);
-  }
-}
-for (const [name, events, page] of [['Timeline', ped, '/program-for-evolutionary-dynamics/'], ['Timeline', hms, '/harvard-medical-school/']]) {
-  for (const e of events) for (const c of e.cites) push(c.id, `${page} (${name}: ${e.date})`, `${e.title}. ${strip(e.body)}`);
-}
-for (const row of comparison.rows) {
-  row.cells.forEach((cell, i) => cell.cites.forEach((id) => push(id, `/comparison/ (${row.element}; ${comparison.columns[i].split(':')[0]})`, strip(cell.text))));
-}
+const uses = collectUses(root, { ped, hms, comparison });
 
 if (existsSync(outDir)) rmSync(outDir, { recursive: true });
 mkdirSync(outDir, { recursive: true });

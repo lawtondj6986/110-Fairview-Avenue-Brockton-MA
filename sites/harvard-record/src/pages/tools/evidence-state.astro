@@ -1,0 +1,116 @@
+---
+import Base from '../../layouts/Base.astro';
+import State from '../../components/State.astro';
+import ToolQuestions from '../../components/ToolQuestions.astro';
+import ToolActions from '../../components/ToolActions.astro';
+import ToolPrivacy from '../../components/ToolPrivacy.astro';
+import ToolOthers from '../../components/ToolOthers.astro';
+import { states, type EvidenceState } from '../../data/grades';
+import { stateQuestions } from '../../lib/tools/evidence-state';
+const order: EvidenceState[] = ['none', 'intent', 'activity', 'verified'];
+const conditions: Record<EvidenceState, string> = {
+  none: 'No public record bearing on the claim was found, or none that shows a statement or an act.',
+  intent: 'A record shows that it was proposed, pitched, promised, alleged or said.',
+  activity: 'A record shows that it was done. An allegation that it was done is not enough.',
+  verified: 'An official finding or independent result confirms both that it was done and what it produced.',
+};
+---
+<Base
+  title="Evidence-state classifier"
+  description="Place a claim in one of four evidence states (stated intent, documented activity, verified implementation, nothing on record) without moving it further than the record allows."
+  eyebrow="Tools"
+  lede="Answer questions about what the record shows. The tool places the claim in an evidence state, and never moves it up a state unless the condition for that state is met."
+>
+  <h2 id="what-it-does">What it does</h2>
+  <p>
+    Separately from the grade of a source, every claim on this site sits in an
+    <a href="/methodology/#states">evidence state</a>. The state says how far the record goes: from something said,
+    to something done, to something confirmed. This tool asks the questions that decide it.
+  </p>
+  <p>Its limits:</p>
+  <ul>
+    <li>It classifies one claim at a time. Split a sentence that makes two claims.</li>
+    <li>It relies on your reading of the records. It cannot check them.</li>
+    <li>It says nothing about how reliable the source is. Use the <a href="/tools/source-grader/">source grader</a> for that.</li>
+  </ul>
+  <ToolPrivacy remember />
+
+  <h2 id="questions">The questions</h2>
+  <p data-no-js class="tool-nojs">
+    JavaScript is off, so the state is not calculated. Use the questions as a checklist, and the table under
+    <a href="#how-this-works">How this works</a> to place the claim by hand.
+  </p>
+  <form class="tool" id="es-form" aria-label="Evidence-state questions">
+    <div class="tool-field wide" style="margin-bottom:1rem">
+      <label for="es-claim">The claim (optional, for your own reference)</label>
+      <textarea id="es-claim" name="claim" rows="2" placeholder="One factual claim, in one sentence."></textarea>
+    </div>
+    <ToolQuestions questions={stateQuestions} prefix="es" />
+    <ToolActions idPrefix="es" />
+  </form>
+
+  <section class="tool-result" data-js-only hidden aria-labelledby="es-result-title">
+    <h3 id="es-result-title">Evidence state</h3>
+    <p class="tool-status" role="status" aria-live="polite" id="es-status">Answer the questions to place the claim.</p>
+    <div id="es-detail"></div>
+  </section>
+
+  <h2 id="how-this-works">How this works</h2>
+  <p>
+    The states form a ladder. A claim starts at the bottom and moves up one rung at a time, only when the condition
+    for the next rung is met. An “unclear” answer never moves a claim up. If a claim sits between two states, it takes
+    the weaker. A well-documented proposal is still a proposal.
+  </p>
+  <div class="table-wrap full">
+    <table class="stack">
+      <thead><tr><th>State</th><th>Definition</th><th>Condition the tool checks</th></tr></thead>
+      <tbody>
+        {order.map((s) => (
+          <tr>
+            <th><State s={s} /></th>
+            <td data-label="Definition">{states[s].definition}</td>
+            <td data-label="Condition">{conditions[s]}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Allegations need care. A complaint, a lawsuit or a legislator’s letter is a primary record of what it alleges, so
+    it can be graded A1. But what it alleges is not documented activity until another record shows the act. The
+    <a href="/ledger/">claim ledger</a> groups allegations with stated intent and words them “The complaint alleges that ...”.
+  </p>
+  <p>The logic is in <code>src/lib/tools/evidence-state.ts</code> and is unit-tested.</p>
+  <ToolOthers current="/tools/evidence-state/" />
+
+  <script>
+    import { classifyState, stateQuestions } from '../../lib/tools/evidence-state';
+    import { states } from '../../data/grades';
+    import { wireTool, h, list, render, stateBadge } from '../../scripts/tool-ui';
+
+    const form = document.querySelector<HTMLFormElement>('#es-form');
+    const status = document.getElementById('es-status');
+    const detail = document.getElementById('es-detail');
+    if (form && status && detail) {
+      wireTool(form, 'evidence-state', (values) => {
+        const r = classifyState(values);
+        if (!r.state) {
+          const n = stateQuestions.findIndex((q) => q.id === r.missing) + 1;
+          status.textContent = `Answer question ${n} to continue.`;
+          render(detail, r.reasons.length ? h('h4', {}, 'So far') : null, list(r.reasons));
+          return;
+        }
+        const s = states[r.state];
+        status.textContent = `Evidence state: ${s.label}.`;
+        render(detail,
+          h('p', { class: 'tool-badges' }, stateBadge(r.state, s.label, s.definition)),
+          h('p', { class: 'small' }, s.definition),
+          values.claim?.trim() ? h('p', {}, h('b', {}, 'Claim: '), values.claim.trim()) : null,
+          h('h4', {}, 'Reasoning'), list(r.reasons),
+          r.flags.length ? h('h4', {}, 'Points to watch') : null, list(r.flags, 'tool-flags'),
+          r.wording ? h('h4', {}, 'Suggested wording') : null, r.wording ? h('p', {}, r.wording) : null,
+        );
+      });
+    }
+  </script>
+</Base>

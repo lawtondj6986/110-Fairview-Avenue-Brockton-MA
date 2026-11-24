@@ -32,7 +32,7 @@ const CATEGORIES = [
   'Law and compliance', 'Campus safety', 'Fundraising and development', 'University governance',
   'Genetics and biomedical research', 'Research ethics', 'Records and sourcing', 'Legal procedure',
 ];
-const SERIES = ['Primers', 'Evaluating an institution', 'Reading documents', 'Research methods', 'Worked examples', 'Templates'];
+const SERIES = ['Course', 'Primers', 'Evaluating an institution', 'Reading documents', 'Research methods', 'Worked examples', 'Templates'];
 const AUDIENCES = ['Prospective students', 'Students', 'Alumni', 'Researchers', 'Everyone'];
 const LAW_SECTIONS = ['What it does', 'Who it covers', 'What it does not do', 'How it is enforced', 'Common misreadings', 'Where to read it'];
 const SITE_PATHS = /^\/(methodology|program-for-evolutionary-dynamics|harvard-medical-school|donor-pathways|dna-genetics|campus-safety|comparison|sources|glossary|law|guides|ledger|faq|about|updates|reference|search|named|briefing)\//;

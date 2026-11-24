@@ -18,7 +18,7 @@ let n = 0;
       const helpId = q.help ? `${prefix}-${q.id}-help` : undefined;
       return (
         <fieldset class="tq" id={`${prefix}-${q.id}`} aria-describedby={helpId}>
-          <legend><span class="tq-n">{n}.</span> {q.text}</legend>
+          <legend><span class="tq-n">{n}.</span>{' '}{q.text}</legend>
           {q.help && <p class="tq-help" id={helpId}>{q.help}</p>}
           <div class="tq-options">
             {optionsFor(q).map((o) => (

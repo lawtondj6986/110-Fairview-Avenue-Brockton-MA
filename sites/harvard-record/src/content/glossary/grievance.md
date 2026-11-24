@@ -3,7 +3,7 @@ term: "Grievance"
 short: "A formal complaint by an employee or student that an institution has violated its own policies or the terms of their appointment, handled through a defined internal procedure."
 category: "University governance"
 aliases: ["Grievance procedure", "Faculty grievance", "Staff grievance", "Grievance process"]
-related: ["faculty-handbook", "faculty-conduct-committee", "ombuds", "disciplinary-appeal", "retaliation", "collective-bargaining"]
+related: ["faculty-handbook", "faculty-conduct-committee", "ombuds", "disciplinary-appeal", "retaliation", "mandatory-arbitration"]
 ---
 
 A grievance is a complaint that someone has been treated in a way the institution's rules do not

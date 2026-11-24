@@ -1,0 +1,119 @@
+---
+import Base from '../../layouts/Base.astro';
+import ToolQuestions from '../../components/ToolQuestions.astro';
+import ToolActions from '../../components/ToolActions.astro';
+import ToolPrivacy from '../../components/ToolPrivacy.astro';
+import ToolOthers from '../../components/ToolOthers.astro';
+import { giftQuestions, giftTopics } from '../../lib/tools/gift-policy';
+---
+<Base
+  title="Gift acceptance policy checklist"
+  description="Twenty yes, no or unclear questions about what a written gift acceptance policy covers, grouped by topic. Produces a printable list of what the policy addresses and what it does not. No score."
+  eyebrow="Tools"
+  lede={`${giftQuestions.length} questions about what a written gift acceptance policy covers. The result lists what the policy addresses and what it does not. It is not a score.`}
+>
+  <h2 id="what-it-does">What it does</h2>
+  <p>
+    Read a gift acceptance policy (any institution’s) alongside this checklist and answer each question from the
+    text of the policy. The result is a plain record of what the written policy covers, grouped by topic, with the
+    gaps listed first. You can print it or copy it as text.
+  </p>
+  <p>Its limits:</p>
+  <ul>
+    <li>
+      It does not score or rank institutions. The number of questions a policy addresses says little
+      about how well it is applied. A short policy can work well; a long one can be ignored.
+    </li>
+    <li>It reads the written policy only. Practice, training, other policies and board minutes may cover what a policy leaves out.</li>
+    <li>“No” means the policy does not address the question. It does not mean the institution does the opposite.</li>
+    <li>Answer “unclear” when the text is ambiguous, or when it refers to another document you have not read.</li>
+  </ul>
+  <ToolPrivacy remember />
+
+  <h2 id="checklist">The checklist</h2>
+  <p data-no-js class="tool-nojs">
+    JavaScript is off, so no summary is produced. Print this page and mark each question by hand.
+  </p>
+  <form class="tool" id="gp-form" aria-label="Gift acceptance policy checklist">
+    <fieldset class="tool-fields">
+      <legend>The policy you are reading (optional)</legend>
+      <div class="tool-field"><label for="gp-name">Policy name and institution</label><input id="gp-name" name="name" type="text" autocomplete="off" /></div>
+      <div class="tool-field"><label for="gp-version">Version or date of the policy</label><input id="gp-version" name="version" type="text" autocomplete="off" /></div>
+      <div class="tool-field"><label for="gp-url">Where it is published</label><input id="gp-url" name="url" type="text" inputmode="url" autocomplete="off" /></div>
+      <div class="tool-field"><label for="gp-date">Date you completed this checklist</label><input id="gp-date" name="reviewedOn" type="date" /></div>
+    </fieldset>
+    <ToolQuestions questions={giftQuestions} prefix="gp" />
+    <ToolActions idPrefix="gp" />
+  </form>
+
+  <section class="tool-result" data-js-only hidden aria-labelledby="gp-result-title">
+    <h3 id="gp-result-title">What the policy addresses</h3>
+    <p class="tool-status" role="status" aria-live="polite" id="gp-status">Answer the questions to build the summary.</p>
+    <div id="gp-detail"></div>
+    <div class="tool-output">
+      <h4>As plain text</h4>
+      <pre id="gp-text" tabindex="0" aria-label="The checklist result as plain text"></pre>
+      <div class="tool-copy"><button type="button" class="tool-btn" data-copy="gp-text">Copy text</button><button type="button" class="tool-btn" data-print>Print</button><span data-copy-status aria-live="polite"></span></div>
+    </div>
+  </section>
+
+  <h2 id="how-this-works">How this works</h2>
+  <p>
+    The questions are grouped into {giftTopics.length} topics: {giftTopics.join(', ').toLowerCase()}. They follow the
+    points at which, in the public record discussed on this site, gifts were solicited, vetted, accepted, recorded,
+    and later reviewed or returned.
+  </p>
+  <p>
+    Each answer is sorted into one of four lists: addressed, not addressed, unclear from the text, and not yet
+    checked. The summary shows the gaps (not addressed and unclear) first, then each topic in full. The tool never
+    adds the answers up. There is no total, percentage or rating, so two institutions’ results cannot be placed in a
+    league table, and should not be.
+  </p>
+  <p>
+    The logic is in <code>src/lib/tools/gift-policy.ts</code> and is unit-tested. A test checks that the text
+    output contains no score.
+  </p>
+  <ToolOthers current="/tools/gift-policy-checklist/" />
+
+  <script>
+    import { summarizePolicy, policyGaps, policyReport, giftQuestions } from '../../lib/tools/gift-policy';
+    import { wireTool, h, list, render } from '../../scripts/tool-ui';
+
+    const form = document.querySelector<HTMLFormElement>('#gp-form');
+    const status = document.getElementById('gp-status');
+    const detail = document.getElementById('gp-detail');
+    const text = document.getElementById('gp-text');
+    if (form && status && detail && text) {
+      wireTool(form, 'gift-policy', (values) => {
+        const topics = summarizePolicy(values);
+        const gaps = policyGaps(values);
+        const unanswered = topics.reduce((n, t) => n + t.unanswered.length, 0);
+        if (unanswered === giftQuestions.length) {
+          status.textContent = 'Answer the questions to build the summary.';
+          render(detail);
+          text.textContent = '';
+          return;
+        }
+        status.textContent = gaps.length
+          ? `The policy does not clearly address ${gaps.length === 1 ? 'one question' : `${gaps.length} questions`}${unanswered ? `; ${unanswered} not yet checked` : ''}.`
+          : unanswered ? `No gaps so far; ${unanswered} not yet checked.` : 'The policy addresses every question on the checklist.';
+        render(detail,
+          values.name?.trim() ? h('p', {}, h('b', {}, 'Policy: '), values.name.trim()) : null,
+          h('h4', {}, 'Not addressed or unclear'),
+          gaps.length ? list(gaps.map((g) => `${g.answer === 'no' ? 'Not addressed' : 'Unclear'}: ${g.question.text}`), 'tool-flags') : h('p', {}, 'None so far.'),
+          h('div', { class: 'tool-summary' }, ...topics.map((t) => h('section', {},
+            h('h4', {}, t.topic),
+            list([
+              ...t.addressed.map((q) => `Addressed: ${q.text}`),
+              ...t.notAddressed.map((q) => `Not addressed: ${q.text}`),
+              ...t.unclear.map((q) => `Unclear: ${q.text}`),
+              ...(t.unanswered.length ? [`${t.unanswered.length} not yet checked`] : []),
+            ]),
+          ))),
+          h('p', { class: 'small' }, 'This lists what the written policy addresses. It is not a score and should not be used to rank institutions.'),
+        );
+        text.textContent = policyReport(values, { name: values.name?.trim(), version: values.version?.trim(), url: values.url?.trim(), reviewedOn: values.reviewedOn });
+      });
+    }
+  </script>
+</Base>

@@ -26,10 +26,33 @@ If any of the five fails, the sentence comes out until it passes.
 | `npm run smoke` | Opens the built site in a headless browser at phone and desktop widths. Run after layout changes. |
 | `npm run audit` | Prints verification status, coverage and the order in which to check sources. |
 | `npm run check:links` | Requests every external URL. Needs open network access. |
-| `node scripts/worksheets.mjs` | Regenerates the per-source verification worksheets in `docs/verification/`. |
+| `npm run verify:build` | Regenerates the verification worksheets and the console in `docs/verification/`. |
+| `npm run verify:apply -- file.json` | Applies results exported from the console (dry run unless `--write`). |
+| `npm run factcheck` | Regenerates the fact-check register for the reference content in `docs/factcheck/`. |
 | `npm run progress` | Lines added since a baseline commit, for the daily report. |
 
-## Checking a source
+## Checking sources with the console (recommended)
+
+The console is a single HTML file you open on your own computer. It needs ordinary internet access to open
+the source links, which the cloud build environment does not have.
+
+1. `npm run verify:build` writes `docs/verification/console.html`. Open that file in a browser.
+2. Sources are listed with those whose statements name people first, then by how much rests on each.
+3. For each source: open the original, tick that the link is the publisher's own copy, then mark every
+   claim and statement "Matches the original" or "Needs a change" with a note saying what the original says.
+4. Your answers are saved in that browser. Click **Export results** to download a JSON file at any point.
+5. `npm run verify:apply -- path/to/verification-YYYY-MM-DD.json` shows what the results allow (a dry run).
+6. Add `--write` to record them. This sets `checked` dates on fully confirmed sources and claims, updates
+   moved URLs, adds a line to the public update log, and writes `docs/verification/CHANGES-NEEDED.md`
+   listing every statement that did not match, with your note.
+7. Fix those statements by hand (page, ledger row and named-index entry together), run
+   `npm run verify:build` again, and confirm the new wording in the console.
+8. `npm run check`, review the diff, commit.
+
+A source is marked checked only when every statement resting on it is confirmed. A claim is marked checked
+only when every source behind it is. The script never edits prose.
+
+## Checking a source by hand
 
 This is the most important job before launch and after any new document appears.
 

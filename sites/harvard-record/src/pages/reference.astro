@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import { claims } from '../data/claims';
 import { sources } from '../data/sources';
 import { faq } from '../data/faq';
+import { tools } from '../lib/tools/list';
 const [g, l, gu] = await Promise.all([getCollection('glossary'), getCollection('law'), getCollection('guides')]);
 ---
 <Base title="Reference" description="Glossary, law explainers, practical guides, the claim ledger and the source register." eyebrow="Reference" lede="The working material behind the site, and general reference to help you read any university’s public record." toc={false} article={false}>
@@ -16,6 +17,7 @@ const [g, l, gu] = await Promise.all([getCollection('glossary'), getCollection('
     <li><a class="card" href="/law/"><h3>Law explainers</h3><p>What each statute does, who it covers, what it does not do, and how it is misread.</p><span class="more">{l.length} explainers</span></a></li>
     <li><a class="card" href="/guides/"><h3>Guides</h3><p>Evaluating an institution, reading official documents, research methods, and templates.</p><span class="more">{gu.length} guides</span></a></li>
     <li><a class="card" href="/faq/"><h3>Frequently asked questions</h3><p>Short answers about the site, the evidence grades and the record.</p><span class="more">{faq.flatMap((s) => s.items).length} questions</span></a></li>
+    <li><a class="card" href="/tools/"><h3>Tools</h3><p>Grade a source, place a claim in an evidence state, read a gift policy or a review, calculate campus rates, and build citations.</p><span class="more">{tools.length} tools</span></a></li>
     <li><a class="card" href="/search/"><h3>Search</h3><p>Search pages, glossary terms, explainers, guides, claims and sources.</p><span class="more">Whole site</span></a></li>
     <li><a class="card" href="/updates/"><h3>Update log</h3><p>Every edition, update and correction, newest first.</p><span class="more">Also available as a feed</span></a></li>
   </ul>

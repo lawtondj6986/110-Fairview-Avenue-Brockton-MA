@@ -1,0 +1,150 @@
+---
+import Base from '../../layouts/Base.astro';
+import ToolPrivacy from '../../components/ToolPrivacy.astro';
+import ToolOthers from '../../components/ToolOthers.astro';
+import { grades, states, type Grade } from '../../data/grades';
+import { CLAIM_TOPICS, CLAIM_STATES, CSV_HEADER } from '../../lib/tools/claim-row';
+import { nav } from '../../config';
+const order: Grade[] = ['A1', 'A2', 'B1', 'B2'];
+const pages = nav.map((n) => n.href).filter((h) => h !== '/');
+---
+<Base
+  title="Claim ledger row builder"
+  description="Draft a row for the claim ledger, check it against the ledger’s rules on punctuation, caveats and grades, and copy it as a TypeScript object or a CSV row."
+  eyebrow="Tools"
+  lede="Draft a row for the claim ledger. The tool checks it against the ledger’s rules and writes it out as TypeScript and as CSV."
+>
+  <h2 id="what-it-does">What it does</h2>
+  <p>
+    The <a href="/ledger/">claim ledger</a> holds one row for every factual claim the site makes. This tool takes the
+    same fields as a ledger row (id, topic, claim, evidence state, grade, sources, caveat and page), checks them, and
+    produces the row in the format of <code>src/data/claims.ts</code> and in the column order of the
+    <a href="/claims.csv">CSV download</a>.
+  </p>
+  <p>Its limits:</p>
+  <ul>
+    <li>It checks form, not truth. A row can pass every check and still misstate its sources.</li>
+    <li>It does not look sources up. It checks the grade against the source grades you type in.</li>
+    <li>It does not know which ids are already taken. Check the ledger before using an id.</li>
+    <li>New rows carry no <code>checked</code> date: the ledger shows them as pending until a maintainer has read every source.</li>
+  </ul>
+  <ToolPrivacy />
+
+  <h2 id="builder">The builder</h2>
+  <p data-no-js class="tool-nojs">
+    JavaScript is off, so the builder is hidden. The rules it applies are listed under <a href="#how-this-works">How this works</a>.
+  </p>
+  <form class="tool" id="cl-form" data-js-only hidden novalidate aria-label="Claim ledger row builder">
+    <fieldset class="tool-fields">
+      <legend>The claim</legend>
+      <div class="tool-field"><label for="cl-id">Id</label><input id="cl-id" name="id" type="text" autocomplete="off" spellcheck="false" placeholder="F-07" aria-describedby="cl-id-hint" /><span class="hint" id="cl-id-hint">Topic letter, hyphen, two digits.</span></div>
+      <div class="tool-field">
+        <label for="cl-topic">Topic</label>
+        <select id="cl-topic" name="topic"><option value="">Choose a topic</option>{CLAIM_TOPICS.map((t) => <option value={t}>{t}</option>)}</select>
+      </div>
+      <div class="tool-field wide"><label for="cl-claim">Claim</label><textarea id="cl-claim" name="claim" rows="3" aria-describedby="cl-claim-hint"></textarea><span class="hint" id="cl-claim-hint">One factual claim, as a full sentence ending in a full stop.</span></div>
+      <div class="tool-field">
+        <label for="cl-state">Evidence state</label>
+        <select id="cl-state" name="state"><option value="">Choose a state</option>{CLAIM_STATES.map((s) => <option value={s}>{states[s].label}</option>)}</select>
+      </div>
+      <div class="tool-field">
+        <label for="cl-grade">Grade</label>
+        <select id="cl-grade" name="grade"><option value="">Choose a grade</option>{order.map((g) => <option value={g}>{g}: {grades[g].label}</option>)}</select>
+      </div>
+      <div class="tool-field wide"><label for="cl-sources">Sources</label><textarea id="cl-sources" name="sources" rows="3" spellcheck="false" aria-describedby="cl-sources-hint" placeholder={'harvard-2020-report A1\nhm-2020-report A2'}></textarea><span class="hint" id="cl-sources-hint">One per line: the register id, then its grade. The grade lets the tool check the claim is not graded above its sources.</span></div>
+      <div class="tool-field wide"><label for="cl-caveat">Caveat</label><textarea id="cl-caveat" name="caveat" rows="2" aria-describedby="cl-caveat-hint"></textarea><span class="hint" id="cl-caveat-hint">Limits that must travel with the claim. Required for “nothing on record” and for B2.</span></div>
+      <div class="tool-field wide">
+        <label for="cl-page">Page</label>
+        <input id="cl-page" name="page" type="text" autocomplete="off" spellcheck="false" list="cl-pages" placeholder="/donor-pathways/" aria-describedby="cl-page-hint" />
+        <datalist id="cl-pages">{pages.map((p) => <option value={p} />)}</datalist>
+        <span class="hint" id="cl-page-hint">The page that makes the claim, starting and ending with a slash.</span>
+      </div>
+    </fieldset>
+    <div class="tool-actions"><button type="reset" class="tool-btn">Clear</button></div>
+  </form>
+
+  <section class="tool-result" data-js-only hidden aria-labelledby="cl-result-title">
+    <h3 id="cl-result-title">Ledger row</h3>
+    <p class="tool-status" role="status" aria-live="polite" id="cl-status">Fill in the fields to build the row.</p>
+    <div id="cl-messages"></div>
+    <div id="cl-outputs" hidden>
+      <div class="tool-output">
+        <h4>TypeScript (src/data/claims.ts)</h4>
+        <pre id="cl-ts" tabindex="0" aria-label="Ledger row as TypeScript"></pre>
+        <div class="tool-copy"><button type="button" class="tool-btn" data-copy="cl-ts">Copy TypeScript</button><span data-copy-status aria-live="polite"></span></div>
+      </div>
+      <div class="tool-output">
+        <h4>CSV row</h4>
+        <p class="small">Columns: {CSV_HEADER.join(', ')}.</p>
+        <pre id="cl-csv" tabindex="0" aria-label="Ledger row as CSV"></pre>
+        <div class="tool-copy"><button type="button" class="tool-btn" data-copy="cl-csv">Copy CSV</button><span data-copy-status aria-live="polite"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <h2 id="how-this-works">How this works</h2>
+  <p>The row must pass these checks before the tool writes it out:</p>
+  <ul>
+    <li>The id is a capital letter, a hyphen and a two- or three-digit number.</li>
+    <li>A topic, an evidence state and a grade are chosen from the ledger’s lists.</li>
+    <li>The claim ends with a full stop (a closing quotation mark after it is fine).</li>
+    <li>A caveat is given when the state is “nothing on record”, because absence of a record is not proof of absence, and when the grade is B2, because thin material is always flagged.</li>
+    <li>At least one source is listed, each as a register id.</li>
+    <li>The claim’s grade is not stronger than the best source grade entered. A claim cannot be better supported than its best source.</li>
+  </ul>
+  <p>
+    It also warns, without blocking, when the claim is graded weaker than its best source (the ledger normally uses
+    the grade of the strongest source that directly supports the claim), when a source has no grade entered, and
+    when the claim uses words the site’s style guide avoids, such as “proves”, “linked to”
+    or “connected to”, or em dashes and straight quotes.
+  </p>
+  <p>
+    The TypeScript output follows the layout of the existing rows. The CSV output escapes commas and quotation marks,
+    joins sources with spaces and puts “pending” in the checked column, as the download does. The logic is in
+    <code>src/lib/tools/claim-row.ts</code> and is unit-tested. To decide the state and grade in the first place, use
+    the <a href="/tools/evidence-state/">evidence-state classifier</a> and the <a href="/tools/source-grader/">source grader</a>.
+  </p>
+  <ToolOthers current="/tools/claim-row/" />
+
+  <script>
+    import { checkClaim, claimObject, claimCsvRow } from '../../lib/tools/claim-row';
+    import { enhance, readForm, list, render, wireCopy, h } from '../../scripts/tool-ui';
+
+    const form = document.querySelector<HTMLFormElement>('#cl-form');
+    const status = document.getElementById('cl-status');
+    const messages = document.getElementById('cl-messages');
+    const outputs = document.getElementById('cl-outputs');
+    const ts = document.getElementById('cl-ts'), csv = document.getElementById('cl-csv');
+    if (form && status && messages && outputs && ts && csv) {
+      enhance();
+      wireCopy();
+      const run = () => {
+        const v = readForm(form);
+        const d = { id: v.id ?? '', topic: v.topic ?? '', claim: v.claim ?? '', state: v.state ?? '', grade: v.grade ?? '', sources: v.sources ?? '', caveat: v.caveat, page: v.page ?? '' };
+        if (!Object.values(d).some((x) => (x ?? '').trim())) {
+          status.textContent = 'Fill in the fields to build the row.';
+          render(messages); outputs.hidden = true; return;
+        }
+        const r = checkClaim(d);
+        status.textContent = r.errors.length
+          ? `${r.errors.length} thing${r.errors.length > 1 ? 's' : ''} to fix before the row is ready.`
+          : r.warnings.length ? `Row ready, with ${r.warnings.length} point${r.warnings.length > 1 ? 's' : ''} to check.` : 'Row ready to copy.';
+        render(messages,
+          list(r.errors, 'tool-errors'),
+          r.warnings.length ? h('h4', {}, 'Check') : null,
+          list(r.warnings, 'tool-flags'),
+        );
+        outputs.hidden = r.errors.length > 0;
+        if (!r.errors.length) {
+          ts.textContent = claimObject(d, r.refs);
+          csv.textContent = claimCsvRow(d, r.refs);
+        }
+      };
+      form.addEventListener('input', run);
+      form.addEventListener('change', run);
+      form.addEventListener('submit', (e) => { e.preventDefault(); run(); });
+      form.addEventListener('reset', () => setTimeout(run));
+      run();
+    }
+  </script>
+</Base>

@@ -38,7 +38,7 @@ Also rests on: harvard-2020-report
 
 **2. /program-for-evolutionary-dynamics/**
 
-> The $9.1 million is the total of Epstein’s gifts to Harvard, all received by 2008. It is not the amount given to this Program, and none of it arrived after the conviction. Some coverage gives the total as $9,179,000 or “nearly $9.2 million”; the difference is rounding. The money that reached Professor Nowak’s work after 2008 came from other donors.
+> The $9.1 million is the total of Epstein’s gifts to Harvard, all received by 2008. It is not the amount given to this Program, and none of it arrived after the conviction. Some coverage gives the total as $9,179,000 or “nearly $9.2 million”. That figure would round to $9.2 million, so the sources do not simply differ by rounding. This site uses the University’s own “$9.1 million” until the report itself has been checked. The money that reached Professor Nowak’s work after 2008 came from other donors.
 
 - [ ] Supported by the document as written.
 

@@ -84,7 +84,7 @@ export function computeRates(input: { enrollment: string; years: YearInput[]; ca
     warnings.push('The same enrollment figure is used for every year. If enrollment changed, rates for other years are approximate.');
   }
   if (enr.value < 1000) {
-    warnings.push('Enrollment is under 1,000, so the rate per 1,000 students is larger than the count of students it describes. Report the count alongside the rate.');
+    warnings.push('Enrollment is under 1,000, so a rate per 1,000 students scales the count up. Report the count alongside the rate.');
   }
   return { enrollment: enr.value, rows, skipped, errors, warnings };
 }
