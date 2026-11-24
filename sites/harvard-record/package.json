@@ -13,7 +13,8 @@
     "check": "npm run test && npm run build && node scripts/check-dist.mjs",
     "check:links": "node scripts/check-links.mjs",
     "smoke": "node scripts/smoke.mjs",
-    "progress": "node scripts/progress.mjs"
+    "progress": "node scripts/progress.mjs",
+    "factcheck": "node scripts/factcheck.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",

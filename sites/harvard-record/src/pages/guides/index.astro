@@ -2,8 +2,10 @@
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 const guides = (await getCollection('guides')).sort((a, b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title));
-const series = ['Evaluating an institution', 'Reading documents', 'Research methods', 'Templates'].filter((s) => guides.some((g) => g.data.series === s));
+const series = ['Primers', 'Evaluating an institution', 'Reading documents', 'Research methods', 'Worked examples', 'Templates'].filter((s) => guides.some((g) => g.data.series === s));
 const blurbs: Record<string, string> = {
+  'Primers': 'How the machinery works: money, governance, complaints, research and records, explained from the ground up.',
+  'Worked examples': 'The site’s methods applied step by step to its own record, using only claims already in the ledger.',
   'Evaluating an institution': 'For prospective students, students and alumni weighing how a university handles safety, money and accountability.',
   'Reading documents': 'How to read the kinds of record this site relies on, and what each can and cannot tell you.',
   'Research methods': 'The working methods behind this site, written so that others can apply and check them.',

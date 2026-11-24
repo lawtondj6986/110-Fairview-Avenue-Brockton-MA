@@ -1,0 +1,126 @@
+---
+/**
+ * Verification status, computed at build time from the source register, the
+ * claim ledger and the reference content. Nothing here is entered by hand:
+ * set `checked` dates in the data files and this page follows.
+ */
+import Base from '../layouts/Base.astro';
+import Callout from '../components/Callout.astro';
+import Grade from '../components/Grade.astro';
+import { sources } from '../data/sources';
+import { claims } from '../data/claims';
+import { pageTitles } from '../lib/usage';
+import { getCollection } from 'astro:content';
+import { sentences, flags } from '../../scripts/lib/factcheck-rules.mjs';
+
+const srcList = Object.entries(sources);
+const srcChecked = srcList.filter(([, s]) => s.checked).length;
+const byGrade = (['A1', 'A2', 'B1', 'B2'] as const).map((g) => {
+  const all = srcList.filter(([, s]) => s.grade === g);
+  return { g, total: all.length, done: all.filter(([, s]) => s.checked).length };
+}).filter((r) => r.total);
+
+const pages = [...new Set(claims.map((c) => c.page))].map((p) => {
+  const mine = claims.filter((c) => c.page === p);
+  const srcIds = [...new Set(mine.flatMap((c) => c.sources))];
+  return {
+    path: p, title: pageTitles[p] ?? p,
+    claims: mine.length, claimsDone: mine.filter((c) => c.checked).length,
+    sources: srcIds.length, sourcesDone: srcIds.filter((id) => sources[id].checked).length,
+  };
+});
+const claimsDone = claims.filter((c) => c.checked).length;
+
+const [glossary, law, guides] = await Promise.all([getCollection('glossary'), getCollection('law'), getCollection('guides')]);
+const reference = [
+  { name: 'Law explainers', href: '/law/', entries: law },
+  { name: 'Glossary', href: '/glossary/', entries: glossary },
+  { name: 'Guides', href: '/guides/', entries: guides.filter((g) => g.data.series !== 'Worked examples') },
+].map((c) => {
+  const statements = c.entries.reduce((n, e) => n + sentences(e.body ?? '').filter((s: string) => flags(s).length).length, 0);
+  return { ...c, count: c.entries.length, statements };
+});
+
+const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
+---
+<Base
+  title="Verification status"
+  description="How much of this site has been checked against original documents: sources, claims by page, and the reference content's factual statements."
+  eyebrow="Standards"
+  lede="This page is computed from the site’s own records every time it is built. It shows how much has been checked against the original documents, and how much has not."
+>
+  <ul class="figures full">
+    <li><span class="num">{srcChecked} of {srcList.length}</span><span class="lbl">Sources checked against the original</span></li>
+    <li><span class="num">{claimsDone} of {claims.length}</span><span class="lbl">Ledger claims checked</span></li>
+    <li><span class="num">{reference.reduce((n, r) => n + r.statements, 0)}</span><span class="lbl">Factual statements in the reference content awaiting a check</span></li>
+  </ul>
+
+  {srcChecked === 0 && (
+    <Callout title="Current state">
+      <p>
+        No source has yet been re-read against its original document. Every page is a first edition
+        compiled from published summaries. Treat specific figures and wording as provisional until this page
+        shows them checked.
+      </p>
+    </Callout>
+  )}
+
+  <h2 id="sources">Sources by grade</h2>
+  <div class="table-wrap full">
+    <table class="stack meter-table">
+      <thead><tr><th>Grade</th><th>Checked</th><th>Progress</th></tr></thead>
+      <tbody>
+        {byGrade.map((r) => (
+          <tr>
+            <th><Grade g={r.g} /></th>
+            <td data-label="Checked">{r.done} of {r.total}</td>
+            <td data-label="Progress"><span class="meter" role="img" aria-label={`${pct(r.done, r.total)} percent checked`}><span style={`width:${pct(r.done, r.total)}%`}></span></span></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="pages">Record pages</h2>
+  <p>A page is ready when every claim on it, and every source behind those claims, has been checked.</p>
+  <div class="table-wrap full">
+    <table class="stack meter-table">
+      <thead><tr><th>Page</th><th>Claims checked</th><th>Sources checked</th><th>Progress</th></tr></thead>
+      <tbody>
+        {pages.map((p) => (
+          <tr>
+            <th><a href={p.path}>{p.title}</a></th>
+            <td data-label="Claims checked">{p.claimsDone} of {p.claims}</td>
+            <td data-label="Sources checked">{p.sourcesDone} of {p.sources}</td>
+            <td data-label="Progress"><span class="meter" role="img" aria-label={`${pct(p.claimsDone, p.claims)} percent of claims checked`}><span style={`width:${pct(p.claimsDone, p.claims)}%`}></span></span></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="reference">Reference content</h2>
+  <p>
+    The glossary, law explainers and guides explain how things generally work. They were written without
+    access to the statutes, so every sentence that states a number, date, threshold, deadline, citation or
+    absolute rule is queued for checking against an official text.
+  </p>
+  <div class="table-wrap full">
+    <table class="stack">
+      <thead><tr><th>Section</th><th>Entries</th><th>Statements to check</th></tr></thead>
+      <tbody>
+        {reference.map((r) => (
+          <tr><th><a href={r.href}>{r.name}</a></th><td data-label="Entries">{r.count}</td><td data-label="Statements to check">{r.statements}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="how">How checking works</h2>
+  <p>
+    A maintainer opens each original document, compares it with every sentence that relies on it, corrects
+    anything that does not match, and records the date. The method is on the
+    <a href="/methodology/#checks">methodology page</a>, and every change is listed in the
+    <a href="/updates/">update log</a>.
+  </p>
+</Base>

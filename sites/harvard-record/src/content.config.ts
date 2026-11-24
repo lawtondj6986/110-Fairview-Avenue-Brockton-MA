@@ -45,7 +45,7 @@ const guides = defineCollection({
     title: z.string(),
     description: z.string().max(280),
     audience: z.enum(['Prospective students', 'Students', 'Alumni', 'Researchers', 'Everyone']),
-    series: z.enum(['Evaluating an institution', 'Reading documents', 'Research methods', 'Templates']),
+    series: z.enum(['Primers', 'Evaluating an institution', 'Reading documents', 'Research methods', 'Worked examples', 'Templates']),
     order: z.number().default(50),
   }),
 });

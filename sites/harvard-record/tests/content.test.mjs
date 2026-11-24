@@ -12,6 +12,10 @@ const glossary = loadCollection(root, 'glossary');
 const law = loadCollection(root, 'law');
 const guides = loadCollection(root, 'guides');
 const all = [...glossary, ...law, ...guides];
+/** Worked examples discuss the site's own record by design; every other file is general reference. */
+const isWorked = (e) => e.collection === 'guides' && e.data.series === 'Worked examples';
+const general = all.filter((e) => !isWorked(e));
+const worked = guides.filter(isWorked);
 
 /**
  * Reference content must not discuss the people or bodies in the site's subject matter.
@@ -28,7 +32,7 @@ const CATEGORIES = [
   'Law and compliance', 'Campus safety', 'Fundraising and development', 'University governance',
   'Genetics and biomedical research', 'Research ethics', 'Records and sourcing', 'Legal procedure',
 ];
-const SERIES = ['Evaluating an institution', 'Reading documents', 'Research methods', 'Templates'];
+const SERIES = ['Primers', 'Evaluating an institution', 'Reading documents', 'Research methods', 'Worked examples', 'Templates'];
 const AUDIENCES = ['Prospective students', 'Students', 'Alumni', 'Researchers', 'Everyone'];
 const LAW_SECTIONS = ['What it does', 'Who it covers', 'What it does not do', 'How it is enforced', 'Common misreadings', 'Where to read it'];
 const SITE_PATHS = /^\/(methodology|program-for-evolutionary-dynamics|harvard-medical-school|donor-pathways|dna-genetics|campus-safety|comparison|sources|glossary|law|guides|ledger|faq|about|updates|reference|search|named|briefing)\//;
@@ -51,8 +55,8 @@ test('every content file has frontmatter and a lowercase hyphenated slug', () =>
   }
 });
 
-test('no content file names a person or body from the site’s subject matter', () => {
-  for (const e of all) {
+test('no general reference file names a person or body from the site’s subject matter', () => {
+  for (const e of general) {
     for (const name of SUBJECTS) {
       const re = new RegExp(`(^|[^A-Za-zÀ-ÿ])${name.replace(/ /g, '\\s+')}([^A-Za-zÀ-ÿ]|$)`);
       // "Epstein-Barr virus" is ordinary virology vocabulary, not a reference to a person on this site.
@@ -62,8 +66,8 @@ test('no content file names a person or body from the site’s subject matter', 
   }
 });
 
-test('no content file states facts about a named university', () => {
-  for (const e of all) {
+test('no general reference file states facts about a named university', () => {
+  for (const e of general) {
     for (const name of INSTITUTIONS) {
       const re = new RegExp(`(^|[^A-Za-z])${name}([^A-Za-z]|$)`);
       assert.ok(!re.test(e.body), `${where(e)}: mentions "${name}". Keep reference content institution-neutral.`);
@@ -131,7 +135,8 @@ test('guides: required fields, valid series and audience, sections, length', () 
     assert.ok((e.body.match(/^## /gm) ?? []).length >= 2, `${where(e)}: needs at least two sections`);
     const n = wordCount(e.body);
     const min = e.data.series === 'Templates' ? 150 : 450;
-    assert.ok(n >= min && n <= 1300, `${where(e)}: body is ${n} words`);
+    const max = e.data.series === 'Primers' ? 2100 : 1300;
+    assert.ok(n >= min && n <= max, `${where(e)}: body is ${n} words`);
   }
 });
 
@@ -152,5 +157,27 @@ test('guides: titles are unique', () => {
 test('reference content does not give individual advice', () => {
   for (const e of all) {
     assert.ok(!/\byou should (sue|press charges|not report)\b/i.test(e.body), `${where(e)}: reads as individual legal advice`);
+  }
+});
+
+// ---------------------------------------------------------------- Worked examples
+const { sources } = await import('../src/data/sources.ts');
+const { claims } = await import('../src/data/claims.ts');
+
+test('worked examples cite known sources and restate known ledger claims', () => {
+  const claimIds = new Set(claims.map((c) => c.id));
+  for (const e of worked) {
+    const cites = [...e.body.matchAll(/\[@([a-z0-9-]+)(?:,[^\]]*)?\]/g)].map((m) => m[1]);
+    assert.ok(cites.length >= 3, `${where(e)}: a worked example needs at least three [@source] citations`);
+    for (const id of cites) assert.ok(id in sources, `${where(e)}: cites unknown source ${id}`);
+    const refs = [...e.body.matchAll(/\bLedger ([A-Z]-\d{2})\b/g)].map((m) => m[1]);
+    assert.ok(refs.length >= 2, `${where(e)}: must point to at least two ledger claims ("Ledger G-03")`);
+    for (const id of refs) assert.ok(claimIds.has(id), `${where(e)}: unknown ledger claim ${id}`);
+  }
+});
+
+test('worked examples never upgrade an allegation or a proposal', () => {
+  for (const e of worked) {
+    assert.ok(!/\b(proves?|proven|reveals?|exposed?|confirms? that)\b/i.test(e.body), `${where(e)}: uses an overclaiming verb (see docs/STYLE.md)`);
   }
 });

@@ -370,3 +370,7 @@ ol.briefing p { margin: 0; }
   ol.briefing li { break-inside: avoid; padding: 0.4rem 0; }
   .page-head { padding: 0 0 0.5rem; }
 }
+
+/* ---------- Status meters ---------- */
+.meter { display: block; height: 0.7rem; min-width: 6rem; background: var(--track); border-radius: 4px; overflow: hidden; }
+.meter > span { display: block; height: 100%; background: var(--bar); border-radius: 0 4px 4px 0; }
