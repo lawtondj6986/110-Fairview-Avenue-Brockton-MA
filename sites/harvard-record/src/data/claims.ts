@@ -34,7 +34,7 @@ export const claims: Claim[] = [
     id: 'F-01', page: PED, topic: 'Funding',
     claim: 'Epstein’s gifts to Harvard totalled about $9.1 million between 1998 and 2008.',
     state: 'verified', grade: 'A1', sources: ['harvard-2020-report', 'bacow-2020'],
-    caveat: 'University-wide total. Some coverage gives $9,179,000 or “nearly $9.2 million.”',
+    caveat: 'University-wide total. Some coverage gives $9,179,000 or “nearly $9.2 million”, which is more than rounding; confirm in the report.',
   },
   {
     id: 'F-02', page: PED, topic: 'Funding',
@@ -258,7 +258,7 @@ export const claims: Claim[] = [
   },
   {
     id: 'G-08', page: DNA, topic: 'Genetics',
-    claim: 'In summer 2017 an assistant placed a bulk 23andMe order linked to Sultan Ahmed bin Sulayem, which the company queried and cancelled.',
+    claim: 'In summer 2017 an assistant placed a bulk 23andMe order that, according to the correspondence, was for colleagues of Sultan Ahmed bin Sulayem; the company queried it and cancelled it.',
     state: 'activity', grade: 'A2', sources: ['sfgate-2026-kits'],
     caveat: 'Accounts differ on the number of kits and on what became of them.',
   },

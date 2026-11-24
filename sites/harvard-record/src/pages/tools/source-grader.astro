@@ -1,0 +1,125 @@
+---
+import Base from '../../layouts/Base.astro';
+import Grade from '../../components/Grade.astro';
+import ToolQuestions from '../../components/ToolQuestions.astro';
+import ToolActions from '../../components/ToolActions.astro';
+import ToolPrivacy from '../../components/ToolPrivacy.astro';
+import ToolOthers from '../../components/ToolOthers.astro';
+import { grades, type Grade as G } from '../../data/grades';
+import { graderQuestions } from '../../lib/tools/source-grader';
+const order: G[] = ['A1', 'A2', 'B1', 'B2'];
+---
+<Base
+  title="Source grader"
+  description="Answer a short questionnaire about a source and get a suggested reliability grade from A1 to B2, with the reasoning and the methodology rules that apply."
+  eyebrow="Tools"
+  lede="Answer a few questions about a source. The tool suggests the grade this site would give it, explains why, and flags the rules that apply."
+>
+  <h2 id="what-it-does">What it does</h2>
+  <p>
+    The grader applies the four reliability grades on the <a href="/methodology/#grades">methodology page</a>. A grade
+    describes the kind of source. It is not a judgement of the people a source discusses, and it is not a
+    measure of whether the source is right.
+  </p>
+  <p>Its limits:</p>
+  <ul>
+    <li>It suggests a grade. A maintainer still reads the source and decides.</li>
+    <li>It grades a source and a single point taken from it. One article can support some points at A2 and others only at B2.</li>
+    <li>It cannot tell whether an outlet is “established” or a document is genuine. You answer those questions.</li>
+  </ul>
+  <ToolPrivacy remember />
+
+  <h2 id="questions">The questions</h2>
+  <p data-no-js class="tool-nojs">
+    JavaScript is off, so the grade is not calculated. The questions work as a printable checklist: read the
+    grade definitions and rules under <a href="#how-this-works">How this works</a> to reach a grade by hand.
+  </p>
+  <form class="tool" id="grader" aria-label="Source grader questions">
+    <ToolQuestions questions={graderQuestions} prefix="sg" />
+    <ToolActions idPrefix="sg" />
+  </form>
+
+  <section class="tool-result" data-js-only hidden aria-labelledby="sg-result-title">
+    <h3 id="sg-result-title">Suggested grade</h3>
+    <p class="tool-status" role="status" aria-live="polite" id="sg-status">Answer the questions to see a suggested grade.</p>
+    <div id="sg-detail"></div>
+  </section>
+
+  <h2 id="how-this-works">How this works</h2>
+  <p>The tool reads your answers in order and stops at the first definition that fits.</p>
+  <div class="table-wrap full">
+    <table class="stack">
+      <thead><tr><th>Grade</th><th>Meaning</th><th>Definition</th></tr></thead>
+      <tbody>
+        {order.map((g) => (
+          <tr>
+            <th><Grade g={g} /></th>
+            <td data-label="Meaning">{grades[g].label}</td>
+            <td data-label="Definition">{grades[g].definition}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <ol>
+    <li>An unofficial mirror, wiki or summary site gets no grade. Find the original.</li>
+    <li>An official document speaking for itself is A1.</li>
+    <li>Otherwise, established reporting that quotes or closely follows primary documents, or records an on-the-record statement, is A2.</li>
+    <li>Otherwise, secondary analysis with clear sourcing is B1.</li>
+    <li>Otherwise, the source is B2.</li>
+  </ol>
+  <p>
+    An “unclear” answer counts as no. A grade never rises on a condition that has not been met. The tool then applies
+    the three rules from the methodology:
+  </p>
+  <ul>
+    <li>A factual claim about a named living person needs an A1 or A2 source.</li>
+    <li>A primary record of an allegation, such as a complaint or a congressional letter, is graded A1 for what it says and is always described as an allegation or assertion.</li>
+    <li>When a well-sourced article relays a weaker account, the weaker grade applies to that account. The source keeps its own grade; the point you take from it does not.</li>
+  </ul>
+  <p>
+    The logic is in <code>src/lib/tools/source-grader.ts</code> and is unit-tested. See also the
+    <a href="/tools/evidence-state/">evidence-state classifier</a>, which answers a different question: not how
+    good the source is, but how far the record goes.
+  </p>
+  <ToolOthers current="/tools/source-grader/" />
+
+  <script>
+    import { gradeSource } from '../../lib/tools/source-grader';
+    import { graderQuestions } from '../../lib/tools/source-grader';
+    import { grades } from '../../data/grades';
+    import { wireTool, h, list, render, gradeBadge } from '../../scripts/tool-ui';
+
+    const form = document.querySelector<HTMLFormElement>('#grader');
+    const status = document.getElementById('sg-status');
+    const detail = document.getElementById('sg-detail');
+    if (form && status && detail) {
+      wireTool(form, 'source-grader', (values) => {
+        const r = gradeSource(values);
+        if (!r.citable) {
+          status.textContent = 'No grade: this is not a citable source.';
+          render(detail, h('h4', {}, 'Why'), list(r.reasons), h('h4', {}, 'What to do'), list(r.flags, 'tool-flags'));
+          return;
+        }
+        if (!r.sourceGrade || !r.pointGrade) {
+          const n = graderQuestions.findIndex((q) => q.id === r.missing) + 1;
+          status.textContent = `Answer question ${n} to see a suggested grade.`;
+          render(detail);
+          return;
+        }
+        const same = r.sourceGrade === r.pointGrade;
+        status.textContent = same
+          ? `Suggested grade: ${r.sourceGrade}, ${grades[r.sourceGrade].label}.`
+          : `Suggested grade: source ${r.sourceGrade}, but the point you want to cite is ${r.pointGrade}.`;
+        render(detail,
+          h('p', { class: 'tool-badges' },
+            h('span', {}, 'Source ', gradeBadge(r.sourceGrade, grades[r.sourceGrade].label)),
+            same ? null : h('span', {}, 'This point ', gradeBadge(r.pointGrade, grades[r.pointGrade].label))),
+          h('p', { class: 'small' }, grades[r.pointGrade].definition),
+          h('h4', {}, 'Reasoning'), list(r.reasons),
+          r.flags.length ? h('h4', {}, 'Rules that apply') : null, list(r.flags, 'tool-flags'),
+        );
+      });
+    }
+  </script>
+</Base>

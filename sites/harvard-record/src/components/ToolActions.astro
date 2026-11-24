@@ -1,0 +1,16 @@
+---
+/** Controls that only work with JavaScript: remember, clear, print. Hidden until the page's script runs. */
+interface Props { remember?: boolean; print?: boolean; idPrefix: string }
+const { remember = true, print = true, idPrefix } = Astro.props;
+---
+<div class="tool-actions" data-js-only hidden>
+  {remember && (
+    <label class="tool-remember" for={`${idPrefix}-remember`}>
+      <input type="checkbox" id={`${idPrefix}-remember`} data-remember /> Remember my answers on this device
+    </label>
+  )}
+  <div class="tool-buttons">
+    <button type="reset" class="tool-btn">Clear answers</button>
+    {print && <button type="button" class="tool-btn" data-print>Print</button>}
+  </div>
+</div>
