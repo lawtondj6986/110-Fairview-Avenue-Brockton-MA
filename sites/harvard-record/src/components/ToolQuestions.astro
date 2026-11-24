@@ -1,0 +1,32 @@
+---
+/**
+ * Renders a tool's questions as radio-button fieldsets, grouped by topic.
+ * Without JavaScript the same markup works as a printable checklist.
+ */
+import { groupByTopic, optionsFor, type Question } from '../lib/tools/common';
+interface Props { questions: Question[]; prefix: string; headingLevel?: 'h3' | 'h4' }
+const { questions, prefix, headingLevel = 'h3' } = Astro.props;
+const groups = groupByTopic(questions);
+const H = headingLevel;
+let n = 0;
+---
+{groups.map((g) => (
+  <div class="tq-group">
+    {g.topic && <H class="tq-topic">{g.topic}</H>}
+    {g.items.map((q) => {
+      n++;
+      const helpId = q.help ? `${prefix}-${q.id}-help` : undefined;
+      return (
+        <fieldset class="tq" id={`${prefix}-${q.id}`} aria-describedby={helpId}>
+          <legend><span class="tq-n">{n}.</span> {q.text}</legend>
+          {q.help && <p class="tq-help" id={helpId}>{q.help}</p>}
+          <div class="tq-options">
+            {optionsFor(q).map((o) => (
+              <label><input type="radio" name={q.id} value={o.value} /> <span>{o.label}</span></label>
+            ))}
+          </div>
+        </fieldset>
+      );
+    })}
+  </div>
+))}

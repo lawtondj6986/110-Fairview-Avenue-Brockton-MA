@@ -15,14 +15,20 @@ understand the record. They must be accurate, neutral and useful on their own.
 3. **Only write what you are confident is correct.** Prefer well-established, stable facts. Do not invent
    statistics, dollar thresholds, dates, section numbers or quotations. If a rule has changed recently or varies
    by state, say so and tell the reader to check the current text. Never guess a number.
-4. **Not legal or medical advice.** Explain; do not advise on an individual situation.
-5. **Links:** include a URL only if it is a stable, canonical official address you are confident exists
+4. **Hypotheticals must not echo the site's subject matter.** An invented example must not combine
+   details that resemble the record pages (a donor with a criminal conviction, gifts accepted on
+   condition of anonymity to avoid association, a donor or a donor's associates given office space, key
+   cards or campus visits, introduced donors, personal genetic testing for a donor). Readers will take
+   such an example as a veiled account of a real case. Use ordinary situations instead: a corporate
+   sponsor with a commercial interest, a naming dispute, a restricted-gift disagreement.
+5. **Not legal or medical advice.** Explain; do not advise on an individual situation.
+6. **Links:** include a URL only if it is a stable, canonical official address you are confident exists
    (for example a law.cornell.edu U.S. Code page, ecfr.gov, an agency's main topic page). When unsure, omit it.
-6. **Tone:** plain, calm, precise. Write for an intelligent reader who is not a lawyer or scientist. Define a
+7. **Tone:** plain, calm, precise. Write for an intelligent reader who is not a lawyer or scientist. Define a
    term the first time it appears. Short sentences. No hype, no rhetorical questions, no moralising.
-7. **Style:** American English. No em dashes; use commas, periods or parentheses. No bold for emphasis in
+8. **Style:** American English. No em dashes; use commas, periods or parentheses. No bold for emphasis in
    running text. Sentence-case headings. Hard-wrap lines at about 100 characters.
-8. **No padding.** Every sentence should tell the reader something. Length targets are ceilings as much as floors.
+9. **No padding.** Every sentence should tell the reader something. Length targets are ceilings as much as floors.
 
 ## File mechanics
 
