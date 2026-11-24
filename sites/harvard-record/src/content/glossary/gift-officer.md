@@ -14,9 +14,8 @@ cultivation, solicitation and stewardship.
 
 Gift officers often work with metrics set by their office, such as numbers of visits, proposals and
 gifts closed. They write contact reports after meetings, which are entered into the donor database,
-and they coordinate with faculty and senior leaders who may be invited to meet a prospect. When a
-record shows a faculty member being briefed before a meeting with a donor, a gift officer is often
-the person who arranged it.
+and they coordinate with faculty and senior leaders who may be invited to meet a prospect, for
+example a dean who is asked to describe a new scholarship program.
 
 A gift officer does not normally decide whether a gift is accepted. That decision usually rests with
 a gift acceptance policy, a review committee or senior officers. A gift officer's notes record what
