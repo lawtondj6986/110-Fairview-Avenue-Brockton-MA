@@ -28,6 +28,9 @@ If any of the five fails, the sentence comes out until it passes.
 | `npm run check:links` | Requests every external URL. Needs open network access. |
 | `npm run verify:build` | Regenerates the verification worksheets and the console in `docs/verification/`. |
 | `npm run verify:apply -- file.json` | Applies results exported from the console (dry run unless `--write`). |
+| `npm run review-pack` | Builds `docs/review-pack.html`: every claim-bearing page in one printable file with numbered paragraphs, for a lawyer or editor. |
+| `npm run right-of-reply` | Drafts a right-of-reply letter for each person and body named, in `docs/right-of-reply/`. Drafts only. |
+| `npm run prelaunch` | Everything that must pass before going public: checks, full smoke test, and a strict audit that fails while anything is unverified. |
 | `npm run factcheck` | Regenerates the fact-check register for the reference content in `docs/factcheck/`. |
 | `npm run progress` | Lines added since a baseline commit, for the daily report. |
 

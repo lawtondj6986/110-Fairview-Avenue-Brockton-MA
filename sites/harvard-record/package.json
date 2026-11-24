@@ -16,7 +16,10 @@
     "progress": "node scripts/progress.mjs",
     "factcheck": "node scripts/factcheck.mjs",
     "verify:build": "node scripts/worksheets.mjs && node scripts/verify-console.mjs",
-    "verify:apply": "node scripts/apply-verification.mjs"
+    "verify:apply": "node scripts/apply-verification.mjs",
+    "review-pack": "npm run build && node scripts/review-pack.mjs",
+    "right-of-reply": "node scripts/right-of-reply.mjs",
+    "prelaunch": "npm run check && node scripts/smoke.mjs --all && node scripts/audit.mjs --strict"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
